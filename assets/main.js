@@ -34,22 +34,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. SMART STICKY HEADER
+    // 3. SMART STICKY HEADER & SCROLL PROGRESS
     const header = document.querySelector('.header');
+    const progressBar = document.getElementById("myBar");
+    const progressContainer = document.getElementById("progressContainer");
     let lastScroll = 0;
+    let isScrolling = false;
 
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        if (currentScroll > 150) {
-            if (currentScroll > lastScroll) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        } else {
-            header.classList.remove('scrolled');
+        if (!isScrolling) {
+            window.requestAnimationFrame(() => {
+                const currentScroll = window.pageYOffset;
+                
+                // Header Sticky Logic
+                if (currentScroll > 150) {
+                    if (currentScroll > lastScroll) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    if (progressContainer) progressContainer.classList.add('active');
+                } else {
+                    header.classList.remove('scrolled');
+                    if (progressContainer) progressContainer.classList.remove('active');
+                }
+                lastScroll = currentScroll;
+
+                // Progress Bar Logic
+                if (progressBar) {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (height > 0) ? (winScroll / height) * 100 : 0;
+                    progressBar.style.width = scrolled + "%";
+                }
+
+                isScrolling = false;
+            });
+            isScrolling = true;
         }
-        lastScroll = currentScroll;
     });
 
     // 4. MOBILE SIDEBAR LOGIC
@@ -132,14 +154,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. SCROLL PROGRESS BAR
-    const progressBar = document.getElementById("myBar");
-    if (progressBar) {
-        window.addEventListener("scroll", () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            progressBar.style.width = scrolled + "%";
-        });
-    }
+    // Removed duplicate scroll progress bar logic
 });
