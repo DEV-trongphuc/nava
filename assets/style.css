@@ -1725,7 +1725,7 @@ ul {
 
     /* --- HEADER MOBILE REDESIGN (CLEAN & PRO) --- */
     .header {
-        position: sticky;
+        /* position: sticky; */
         top: 0;
     }
 
@@ -3197,16 +3197,33 @@ ul {
 
     /* Floating tech items - mobile: use dedicated scaled animation */
     @keyframes floatMobileItem1 {
-        0%, 100% { transform: scale(0.75) translateY(0px); }
-        50%       { transform: scale(0.75) translateY(-8px); }
+
+        0%,
+        100% {
+            transform: scale(0.75) translateY(0px);
+        }
+
+        50% {
+            transform: scale(0.75) translateY(-8px);
+        }
     }
+
     @keyframes floatMobileItem2 {
-        0%, 100% { transform: scale(0.75) translateY(0px); }
-        50%       { transform: scale(0.75) translateY(-8px); }
+
+        0%,
+        100% {
+            transform: scale(0.75) translateY(0px);
+        }
+
+        50% {
+            transform: scale(0.75) translateY(-8px);
+        }
     }
+
     .tech-float-item {
         display: flex;
-        animation: none; /* reset desktop animation */
+        animation: none;
+        /* reset desktop animation */
         transform: scale(0.75);
         padding: 8px 12px;
         font-size: 0.8rem;
@@ -3241,7 +3258,8 @@ ul {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 32px; /* space for dots + gap before subtitle */
+        margin-bottom: 32px;
+        /* space for dots + gap before subtitle */
     }
 
     .hero-3d {
