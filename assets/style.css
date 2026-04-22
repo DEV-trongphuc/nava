@@ -428,9 +428,10 @@ ul {
 .hero-title {
     font-size: 3rem;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.4;
     margin-bottom: 20px;
     letter-spacing: -1px;
+    white-space: nowrap;
 }
 
 .hero-title span {
