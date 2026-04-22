@@ -34,10 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. SMART STICKY HEADER & SCROLL PROGRESS
+    // 3. SMART STICKY HEADER & SCROLL PROGRESS & BACK TO TOP
     const header = document.querySelector('.header');
     const progressBar = document.getElementById("myBar");
     const progressContainer = document.getElementById("progressContainer");
+    const backToTopBtn = document.getElementById("backToTop");
     let lastScroll = 0;
     let isScrolling = false;
 
@@ -60,6 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 lastScroll = currentScroll;
 
+                // Back To Top Button Logic
+                if (backToTopBtn) {
+                    if (currentScroll > 500) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }
+
                 // Progress Bar Logic
                 if (progressBar) {
                     const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -73,6 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
             isScrolling = true;
         }
     });
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 
     // 4. MOBILE SIDEBAR LOGIC
     const menuToggle = document.querySelector('.mobile-menu-toggle');
