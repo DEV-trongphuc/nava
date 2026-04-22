@@ -131,4 +131,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // 7. SCROLL PROGRESS BAR
+    const progressBar = document.getElementById("myBar");
+    if (progressBar) {
+        window.addEventListener("scroll", () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
+    }
 });

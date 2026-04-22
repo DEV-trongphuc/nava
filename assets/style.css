@@ -3237,3 +3237,40 @@ ul {
         font-size: 0.9rem !important;
     }
 }
+
+/* --- SCROLL PROGRESS BAR --- */
+.scroll-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    z-index: 1000;
+}
+
+.header.scrolled .scroll-progress-container {
+    position: fixed;
+    top: 0;
+    bottom: auto;
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* --- MOBILE SPECIFIC FIXES --- */
+@media (max-width: 991px) {
+    .sidebar-header {
+        flex-direction: row-reverse !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .top-bar-container {
+        padding-bottom: 5px !important;
+    }
+}
