@@ -3171,12 +3171,17 @@ ul {
     }
 
     .energy-ring {
-        width: 300px;
-        height: 300px;
+        width: 240px;
+        height: 240px;
     }
 
     .hero-image {
-        height: 400px;
+        height: 320px;
+        overflow: hidden;
+    }
+
+    .hero-3d {
+        overflow: hidden;
     }
 
     /* 3. Product Slider Cards (Siêu Phẩm Công Nghệ) */
