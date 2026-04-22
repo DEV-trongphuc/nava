@@ -381,9 +381,30 @@ ul {
 }
 
 .hero-3d-container {
-    display: flex;
-    align-items: center;
-    gap: 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "head image"
+        "foot image";
+    gap: 0 60px;
+    align-items: start;
+}
+
+.hero-head {
+    grid-area: head;
+    align-self: end;
+    padding-bottom: 20px;
+}
+
+.hero-foot {
+    grid-area: foot;
+    align-self: start;
+}
+
+/* keep hero-image spanning 2 rows */
+.hero-image {
+    grid-area: image;
 }
 
 .hero-content {
@@ -3128,13 +3149,33 @@ ul {
     }
 
     .hero-3d {
-        padding: 150px 0 50px;
+        overflow: hidden;
+        padding: 120px 0 40px;
     }
 
     .hero-3d-container {
+        display: flex;
         flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 0;
+    }
+
+    .hero-head {
+        order: 1;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+    .hero-image {
+        order: 2;
+        height: 300px;
+        margin: 10px 0;
+    }
+
+    .hero-foot {
+        order: 3;
+        text-align: center;
+        padding-top: 10px;
     }
 
     .hero-cta {
