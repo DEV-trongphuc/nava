@@ -47,16 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
             window.requestAnimationFrame(() => {
                 const currentScroll = window.pageYOffset;
                 
-                // Header Sticky Logic
+                // Header Sticky Logic: hide on scroll down, show on scroll up
                 if (currentScroll > 150) {
                     if (currentScroll > lastScroll) {
                         // Scrolling DOWN → hide header
                         header.classList.add('scrolled');
+                    } else {
+                        // Scrolling UP → show header immediately
+                        header.classList.remove('scrolled');
                     }
-                    // Scrolling UP mid-page → do nothing (keep hidden)
                     if (progressContainer) progressContainer.classList.add('active');
                 } else {
-                    // Near top (< 150px) → always show header
+                    // Near top → always show header
                     header.classList.remove('scrolled');
                     if (progressContainer) progressContainer.classList.remove('active');
                 }
