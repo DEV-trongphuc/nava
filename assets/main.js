@@ -50,16 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Header Sticky Logic
                 if (currentScroll > 150) {
                     if (currentScroll > lastScroll) {
+                        // Scrolling DOWN → hide header
                         header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
                     }
+                    // Scrolling UP mid-page → do nothing (keep hidden)
                     if (progressContainer) progressContainer.classList.add('active');
                 } else {
+                    // Near top (< 150px) → always show header
                     header.classList.remove('scrolled');
                     if (progressContainer) progressContainer.classList.remove('active');
                 }
                 lastScroll = currentScroll;
+
 
                 // Calculate Scroll Percentage
                 const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
