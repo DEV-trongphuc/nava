@@ -43,52 +43,44 @@ document.addEventListener('DOMContentLoaded', () => {
     let isScrolling = false;
 
     window.addEventListener('scroll', () => {
-        if (!isScrolling) {
-            window.requestAnimationFrame(() => {
-                const currentScroll = window.pageYOffset;
-                
-                // Header Sticky Logic: hide on scroll down, show on scroll up
-                if (currentScroll > 150) {
-                    if (currentScroll > lastScroll) {
-                        // Scrolling DOWN → hide header
-                        header.classList.add('scrolled');
-                    } else {
-                        // Scrolling UP → show header immediately
-                        header.classList.remove('scrolled');
-                    }
-                    if (progressContainer) progressContainer.classList.add('active');
-                } else {
-                    // Near top → always show header
-                    header.classList.remove('scrolled');
-                    if (progressContainer) progressContainer.classList.remove('active');
-                }
-                lastScroll = currentScroll;
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-
-                // Calculate Scroll Percentage
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrollPercentage = (height > 0) ? (winScroll / height) * 100 : 0;
-
-                // Back To Top Button Logic
-                if (backToTopBtn) {
-                    if (scrollPercentage > 80) {
-                        backToTopBtn.classList.add('show');
-                    } else {
-                        backToTopBtn.classList.remove('show');
-                    }
-                }
-
-                // Progress Bar Logic
-                if (progressBar) {
-                    progressBar.style.width = scrollPercentage + "%";
-                }
-
-                isScrolling = false;
-            });
-            isScrolling = true;
+        // Header Sticky Logic: hide on scroll down, show on scroll up
+        if (currentScroll > 150) {
+            if (currentScroll > lastScroll + 5) {
+                // Scrolling DOWN (with 5px threshold to avoid flicker)
+                header.classList.add('scrolled');
+            } else if (currentScroll < lastScroll - 5) {
+                // Scrolling UP → show header immediately
+                header.classList.remove('scrolled');
+            }
+            if (progressContainer) progressContainer.classList.add('active');
+        } else {
+            // Near top → always show header
+            header.classList.remove('scrolled');
+            if (progressContainer) progressContainer.classList.remove('active');
         }
-    });
+
+        // Calculate Scroll Percentage
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercentage = (height > 0) ? (currentScroll / height) * 100 : 0;
+
+        // Back To Top Button Logic
+        if (backToTopBtn) {
+            if (scrollPercentage > 80) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }
+
+        // Progress Bar Logic
+        if (progressBar) {
+            progressBar.style.width = scrollPercentage + "%";
+        }
+
+        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+    }, { passive: true });
 
     if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {
