@@ -3195,42 +3195,45 @@ ul {
         flex-wrap: wrap;
     }
 
-    /* Tech Float Items scale down */
+    /* Hide floating items on mobile - they overlap text */
     .tech-float-item {
-        transform: scale(0.85);
-        padding: 8px 12px;
-    }
-
-    .tech-item-1 {
-        left: -10px;
-        top: 5%;
-    }
-
-    .tech-item-2 {
-        right: -10px;
-        bottom: 10%;
+        display: none !important;
     }
 
     .energy-ring {
-        width: 240px;
-        height: 240px;
+        display: none; /* hide on mobile - causes overflow */
     }
 
     .hero-image {
-        height: 320px;
-        /* NO overflow:hidden here - it clips the absolute-positioned slides */
+        order: 2;
+        width: 100%;
+        height: 300px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        /* NO overflow:hidden - it clips the absolute slides */
     }
 
     .hero-3d {
-        overflow: hidden; /* clips the ring at section level */
+        overflow: hidden;
     }
 
     .hero-slider {
-        height: 320px;
+        width: 100%;
+        height: 300px;
+        position: relative;
     }
 
     .hero-slide {
-        height: 320px;
+        height: 300px;
+    }
+
+    .floating-pc {
+        max-width: 75%;
+        max-height: 260px;
+        object-fit: contain;
     }
 
     /* 3. Product Slider Cards (Siêu Phẩm Công Nghệ) */
