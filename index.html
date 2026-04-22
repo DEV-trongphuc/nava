@@ -198,27 +198,52 @@
                 </div>
             </div>
 
-            <!-- Right: Floating Product Image -->
+            <!-- Right: Hero Product Slider -->
             <div class="hero-image reveal delay-1">
-                <!-- Vòng tròn năng lượng background -->
                 <div class="energy-ring"></div>
-                <!-- Hình ảnh sản phẩm bay lơ lửng -->
-                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082" alt="Mini PC" class="floating-pc">
-                
-                <!-- Tech Wow Elements -->
-                <div class="tech-float-item tech-item-1">
-                    <i class="ph-fill ph-cpu"></i>
-                    <div>
-                        <span>Core Ultra 9</span>
-                        <small>Xử lý đỉnh cao</small>
+
+                <!-- Slider images -->
+                <div class="hero-slider" id="heroSlider">
+                    <!-- Slide 1: Minisforum -->
+                    <div class="hero-slide active">
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082" alt="Minisforum UM890" class="floating-pc">
+                    </div>
+                    <!-- Slide 2: ASUS NUC -->
+                    <div class="hero-slide">
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082" alt="ASUS NUC" class="floating-pc">
+                    </div>
+                    <!-- Slide 3: eGPU NAVA -->
+                    <div class="hero-slide">
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082" alt="eGPU NAVA" class="floating-pc">
+                    </div>
+                    <!-- Slide 4: Beelink -->
+                    <div class="hero-slide">
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082" alt="Beelink SER8" class="floating-pc">
                     </div>
                 </div>
-                <div class="tech-float-item tech-item-2">
-                    <i class="ph-fill ph-lightning"></i>
+
+                <!-- Floating Tech Items (change per slide) -->
+                <div class="tech-float-item tech-item-1" id="floatItem1">
+                    <i class="ph-fill ph-cpu" id="floatIcon1"></i>
                     <div>
-                        <span>AI NPU</span>
-                        <small>Tích hợp sẵn</small>
+                        <span id="floatLabel1">Core Ultra 9</span>
+                        <small id="floatSub1">Xử lý đỉnh cao</small>
                     </div>
+                </div>
+                <div class="tech-float-item tech-item-2" id="floatItem2">
+                    <i class="ph-fill ph-lightning" id="floatIcon2"></i>
+                    <div>
+                        <span id="floatLabel2">AI NPU</span>
+                        <small id="floatSub2">Tích hợp sẵn</small>
+                    </div>
+                </div>
+
+                <!-- Slide Dots -->
+                <div class="hero-slide-dots" id="heroSlideDots">
+                    <button class="h-dot active" data-slide="0"></button>
+                    <button class="h-dot" data-slide="1"></button>
+                    <button class="h-dot" data-slide="2"></button>
+                    <button class="h-dot" data-slide="3"></button>
                 </div>
             </div>
         </div>
@@ -413,6 +438,152 @@
         </div>
     </section>
 
+    <!-- Tech Specs Ticker Section -->
+    <section class="tech-specs-section">
+        <div class="specs-ticker-wrapper" id="specsTicker">
+            <div class="specs-ticker-track" id="specsTrack">
+                <!-- Spec Items -->
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-memory"></i></span>
+                    <span class="spec-name">RAM LPDDR5X</span><span class="spec-value">Tốc độ 6400 MHz</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
+                    <span class="spec-name">USB4 / OCuLink</span><span class="spec-value">40 Gbps eGPU</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-wifi-high"></i></span>
+                    <span class="spec-name">Wi-Fi 7</span><span class="spec-value">46 Gbps lý thuyết</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-monitor"></i></span>
+                    <span class="spec-name">4 màn hình 4K</span><span class="spec-value">Đồng thời</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-thermometer"></i></span>
+                    <span class="spec-name">Thermal Design</span><span class="spec-value">&lt; 75°C full load</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-lightning"></i></span>
+                    <span class="spec-name">TDP</span><span class="spec-value">Chỉ 28W – 65W</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-cpu"></i></span>
+                    <span class="spec-name">NPU AI</span><span class="spec-value">50+ TOPS</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-hard-drive"></i></span>
+                    <span class="spec-name">NVMe SSD</span><span class="spec-value">PCIe 4.0 x4</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-bluetooth"></i></span>
+                    <span class="spec-name">Bluetooth 5.4</span><span class="spec-value">LE Audio</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-graphics-card"></i></span>
+                    <span class="spec-name">eGPU RTX 4090</span><span class="spec-value">Tương thích đầy đủ</span>
+                </div>
+                <!-- Duplicate for seamless loop -->
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-memory"></i></span>
+                    <span class="spec-name">RAM LPDDR5X</span><span class="spec-value">Tốc độ 6400 MHz</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
+                    <span class="spec-name">USB4 / OCuLink</span><span class="spec-value">40 Gbps eGPU</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-wifi-high"></i></span>
+                    <span class="spec-name">Wi-Fi 7</span><span class="spec-value">46 Gbps lý thuyết</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-monitor"></i></span>
+                    <span class="spec-name">4 màn hình 4K</span><span class="spec-value">Đồng thời</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-thermometer"></i></span>
+                    <span class="spec-name">Thermal Design</span><span class="spec-value">&lt; 75°C full load</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-lightning"></i></span>
+                    <span class="spec-name">TDP</span><span class="spec-value">Chỉ 28W – 65W</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-cpu"></i></span>
+                    <span class="spec-name">NPU AI</span><span class="spec-value">50+ TOPS</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-hard-drive"></i></span>
+                    <span class="spec-name">NVMe SSD</span><span class="spec-value">PCIe 4.0 x4</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-bluetooth"></i></span>
+                    <span class="spec-name">Bluetooth 5.4</span><span class="spec-value">LE Audio</span>
+                </div>
+                <div class="spec-item">
+                    <span class="spec-icon"><i class="ph-fill ph-graphics-card"></i></span>
+                    <span class="spec-name">eGPU RTX 4090</span><span class="spec-value">Tương thích đầy đủ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Bento Features Grid Section -->
+    <section class="bento-section">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">TRẢI NGHIỆM KHÁC BIỆT</h2>
+                <p class="bento-subtitle">Những công nghệ tối tân nhất được gói gọn trong thiết kế tinh giản</p>
+            </div>
+
+            <div class="bento-grid">
+                <!-- Large Box (Spans 2x2) -->
+                <div class="bento-box large reveal">
+                    <i class="ph-fill ph-cpu bento-bg-icon"></i>
+                    <div class="bento-content">
+                        <div class="bento-icon"><i class="ph-fill ph-cpu"></i></div>
+                        <h3 class="bento-title">Sức Mạnh Vượt Trội Từ NPU</h3>
+                        <p class="bento-desc">Trang bị bộ vi xử lý Ryzen AI và Intel Core Ultra thế hệ mới nhất. Khả
+                            năng tính toán hàng chục ngàn tỷ phép tính mỗi giây (TOPS) giúp xử lý mượt mà các mô hình
+                            ngôn ngữ lớn (LLMs) ngay trên máy mà không cần kết nối internet.</p>
+                    </div>
+                </div>
+
+                <!-- Standard Boxes -->
+                <div class="bento-box reveal delay-1">
+                    <i class="ph-fill ph-thermometer-cold bento-bg-icon"></i>
+                    <div class="bento-content">
+                        <div class="bento-icon"><i class="ph-fill ph-fan"></i></div>
+                        <h3 class="bento-title">Tản Nhiệt Kép</h3>
+                        <p class="bento-desc">Hệ thống tản nhiệt buồng hơi kết hợp kim loại lỏng đảm bảo nhiệt độ luôn
+                            dưới 75°C.</p>
+                    </div>
+                </div>
+
+                <div class="bento-box reveal delay-2">
+                    <i class="ph-fill ph-lightning bento-bg-icon"></i>
+                    <div class="bento-content">
+                        <div class="bento-icon"><i class="ph-fill ph-lightning"></i></div>
+                        <h3 class="bento-title">Tiết Kiệm Điện</h3>
+                        <p class="bento-desc">Tiêu thụ ít điện năng hơn đến 70% so với PC truyền thống, giảm chi phí vận
+                            hành.</p>
+                    </div>
+                </div>
+
+                <!-- Wide Box -->
+                <div class="bento-box wide reveal delay-1">
+                    <i class="ph-fill ph-hard-drives bento-bg-icon"></i>
+                    <div class="bento-content">
+                        <div class="bento-icon"><i class="ph-fill ph-hard-drives"></i></div>
+                        <h3 class="bento-title">Kết Nối eGPU Tiên Tiến</h3>
+                        <p class="bento-desc">Tích hợp cổng OCuLink và USB4 tốc độ 40Gbps, mở khóa sức mạnh đồ họa đỉnh
+                            cao khi cắm vào hệ thống eGPU NAVA S1/S2.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Brand Slider Section -->
     <section id="brands" class="brand-slider glass-section">
@@ -506,62 +677,42 @@
         </div>
     </section>
 
-    <!-- Bento Features Grid Section -->
-    <section class="bento-section">
+
+    <!-- ===== TECH STATS COUNTER SECTION ===== -->
+    <section class="stats-section">
         <div class="container">
-            <div class="section-header text-center mb-5">
-                <h2 class="section-title">TRẢI NGHIỆM KHÁC BIỆT</h2>
-                <p class="bento-subtitle">Những công nghệ tối tân nhất được gói gọn trong thiết kế tinh giản</p>
-            </div>
-
-            <div class="bento-grid">
-                <!-- Large Box (Spans 2x2) -->
-                <div class="bento-box large reveal">
-                    <i class="ph-fill ph-cpu bento-bg-icon"></i>
-                    <div class="bento-content">
-                        <div class="bento-icon"><i class="ph-fill ph-cpu"></i></div>
-                        <h3 class="bento-title">Sức Mạnh Vượt Trội Từ NPU</h3>
-                        <p class="bento-desc">Trang bị bộ vi xử lý Ryzen AI và Intel Core Ultra thế hệ mới nhất. Khả
-                            năng tính toán hàng chục ngàn tỷ phép tính mỗi giây (TOPS) giúp xử lý mượt mà các mô hình
-                            ngôn ngữ lớn (LLMs) ngay trên máy mà không cần kết nối internet.</p>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-icon"><i class="ph-fill ph-users-three"></i></div>
+                    <div class="stat-number" data-target="12500">0</div>
+                    <div class="stat-suffix">+</div>
+                    <div class="stat-label">Khách hàng tin dùng</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="width:92%"></div></div>
                 </div>
-
-                <!-- Standard Boxes -->
-                <div class="bento-box reveal delay-1">
-                    <i class="ph-fill ph-thermometer-cold bento-bg-icon"></i>
-                    <div class="bento-content">
-                        <div class="bento-icon"><i class="ph-fill ph-fan"></i></div>
-                        <h3 class="bento-title">Tản Nhiệt Kép</h3>
-                        <p class="bento-desc">Hệ thống tản nhiệt buồng hơi kết hợp kim loại lỏng đảm bảo nhiệt độ luôn
-                            dưới 75°C.</p>
-                    </div>
+                <div class="stat-card reveal delay-1">
+                    <div class="stat-icon"><i class="ph-fill ph-package"></i></div>
+                    <div class="stat-number" data-target="850">0</div>
+                    <div class="stat-suffix">+</div>
+                    <div class="stat-label">Sản phẩm chính hãng</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="width:78%"></div></div>
                 </div>
-
-                <div class="bento-box reveal delay-2">
-                    <i class="ph-fill ph-lightning bento-bg-icon"></i>
-                    <div class="bento-content">
-                        <div class="bento-icon"><i class="ph-fill ph-lightning"></i></div>
-                        <h3 class="bento-title">Tiết Kiệm Điện</h3>
-                        <p class="bento-desc">Tiêu thụ ít điện năng hơn đến 70% so với PC truyền thống, giảm chi phí vận
-                            hành.</p>
-                    </div>
+                <div class="stat-card reveal delay-2">
+                    <div class="stat-icon"><i class="ph-fill ph-star"></i></div>
+                    <div class="stat-number" data-target="4">0</div>
+                    <div class="stat-suffix">.9★</div>
+                    <div class="stat-label">Điểm đánh giá trung bình</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div>
                 </div>
-
-                <!-- Wide Box -->
-                <div class="bento-box wide reveal delay-1">
-                    <i class="ph-fill ph-hard-drives bento-bg-icon"></i>
-                    <div class="bento-content">
-                        <div class="bento-icon"><i class="ph-fill ph-hard-drives"></i></div>
-                        <h3 class="bento-title">Kết Nối eGPU Tiên Tiến</h3>
-                        <p class="bento-desc">Tích hợp cổng OCuLink và USB4 tốc độ 40Gbps, mở khóa sức mạnh đồ họa đỉnh
-                            cao khi cắm vào hệ thống eGPU NAVA S1/S2.</p>
-                    </div>
+                <div class="stat-card reveal delay-3">
+                    <div class="stat-icon"><i class="ph-fill ph-clock-countdown"></i></div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-suffix">+</div>
+                    <div class="stat-label">Năm kinh nghiệm</div>
+                    <div class="stat-bar"><div class="stat-bar-fill" style="width:65%"></div></div>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- About Story Section -->
     <section id="about" class="about-section relative">
@@ -613,6 +764,73 @@
             </div>
         </div>
     </section>
+
+    <!-- ===== PERFORMANCE BENCHMARK SECTION ===== -->
+    <section class="benchmark-section">
+        <div class="container">
+            <div class="benchmark-header reveal">
+                <div class="bench-badge"><i class="ph-fill ph-chart-bar"></i> HIỆU NĂNG THỰC TẾ</div>
+                <h2 class="section-title">Mini PC vs PC Truyền Thống</h2>
+                <p class="bench-subtitle">Kết quả benchmark thực tế từ phòng lab NAVA STORE</p>
+            </div>
+            <div class="benchmark-grid">
+                <div class="bench-col reveal">
+                    <div class="bench-label-row">
+                        <span class="bench-name"><i class="ph-fill ph-cpu"></i> CPU Multi-Thread</span>
+                        <span class="bench-score">98%</span>
+                    </div>
+                    <div class="bench-track"><div class="bench-fill" data-width="98"></div></div>
+
+                    <div class="bench-label-row">
+                        <span class="bench-name"><i class="ph-fill ph-memory"></i> RAM Bandwidth</span>
+                        <span class="bench-score">95%</span>
+                    </div>
+                    <div class="bench-track"><div class="bench-fill" data-width="95"></div></div>
+
+                    <div class="bench-label-row">
+                        <span class="bench-name"><i class="ph-fill ph-hard-drive"></i> NVMe Read Speed</span>
+                        <span class="bench-score">92%</span>
+                    </div>
+                    <div class="bench-track"><div class="bench-fill" data-width="92"></div></div>
+
+                    <div class="bench-label-row">
+                        <span class="bench-name"><i class="ph-fill ph-wifi-high"></i> Network Throughput</span>
+                        <span class="bench-score">88%</span>
+                    </div>
+                    <div class="bench-track"><div class="bench-fill" data-width="88"></div></div>
+
+                    <div class="bench-label-row">
+                        <span class="bench-name"><i class="ph-fill ph-lightning"></i> Power Efficiency</span>
+                        <span class="bench-score">99%</span>
+                    </div>
+                    <div class="bench-track"><div class="bench-fill gold" data-width="99"></div></div>
+                </div>
+                <div class="bench-col terminal-col reveal delay-1">
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="t-dot red"></span>
+                            <span class="t-dot yellow"></span>
+                            <span class="t-dot green"></span>
+                            <span class="t-title">nava_benchmark.sh</span>
+                        </div>
+                        <div class="terminal-body" id="terminalOutput">
+                            <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span></div>
+                            <div class="t-line t-out">[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz</div>
+                            <div class="t-line t-out">[INFO] RAM: 64GB LPDDR5X-6400</div>
+                            <div class="t-line t-out">[INFO] GPU: Radeon 890M iGPU</div>
+                            <div class="t-line t-success">[PASS] Cinebench R24 Multi: 24,819 pts</div>
+                            <div class="t-line t-success">[PASS] CrystalDisk Read: 7,412 MB/s</div>
+                            <div class="t-line t-success">[PASS] LLM Inference: 42 tok/s</div>
+                            <div class="t-line t-warn">[TEMP] Peak Temp: 74°C ✓ Under threshold</div>
+                            <div class="t-line t-success">[PASS] Total Power Draw: 28W ✅</div>
+                            <div class="t-line t-blink"><span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Video Review Section -->
     <section id="video" class="video-section">
         <div class="container">
@@ -649,6 +867,85 @@
                     </div>
                     <div class="video-info">
                         <h3>Beelink SER8: Hiệu năng thực tế</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AI LIVE FEED SECTION ===== -->
+    <section class="ai-feed-section">
+        <div class="container">
+            <div class="ai-feed-header reveal">
+                <div class="ai-pulse-dot"></div>
+                <h2 class="ai-feed-title">HỆ THỐNG AI <span class="t-highlight">LIVE</span></h2>
+                <p class="ai-feed-sub">Giám sát hiệu suất máy khách hàng theo thời gian thực</p>
+            </div>
+            <div class="ai-feed-grid">
+                <!-- Live Activity -->
+                <div class="ai-activity-feed reveal">
+                    <div class="feed-title-row"><i class="ph-fill ph-activity"></i> Hoạt Động Gần Đây</div>
+                    <div class="feed-list" id="aiFeedList">
+                        <div class="feed-item">
+                            <span class="feed-dot green"></span>
+                            <span class="feed-text">Minisforum UM890 — <b>AI Model DeepSeek V3</b> chạy offline 42 tok/s</span>
+                            <span class="feed-time">2 phút trước</span>
+                        </div>
+                        <div class="feed-item">
+                            <span class="feed-dot blue"></span>
+                            <span class="feed-text">ASUS ROG NUC 970 — <b>eGPU RTX 4090</b> kết nối OCuLink thành công</span>
+                            <span class="feed-time">5 phút trước</span>
+                        </div>
+                        <div class="feed-item">
+                            <span class="feed-dot green"></span>
+                            <span class="feed-text">Beelink SEi14 — <b>CrystalDisk</b> đạt 7,200 MB/s trên PCIe 4.0</span>
+                            <span class="feed-time">11 phút trước</span>
+                        </div>
+                        <div class="feed-item">
+                            <span class="feed-dot yellow"></span>
+                            <span class="feed-text">GMKtec EVO X2 — <b>NPU 50 TOPS</b> hoàn tất training model nhỏ</span>
+                            <span class="feed-time">18 phút trước</span>
+                        </div>
+                        <div class="feed-item">
+                            <span class="feed-dot blue"></span>
+                            <span class="feed-text">Aoostar GOD55 — Kết nối <b>4 màn hình 4K</b> đồng thời qua USB4</span>
+                            <span class="feed-time">24 phút trước</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tech Metrics -->
+                <div class="ai-metrics reveal delay-1">
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="ph-fill ph-brain"></i></div>
+                        <div class="metric-info">
+                            <div class="metric-title">AI TOPS Tổng Hợp</div>
+                            <div class="metric-value">50+ <span>TOPS</span></div>
+                        </div>
+                        <div class="metric-ring" style="--pct:82"></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="ph-fill ph-thermometer"></i></div>
+                        <div class="metric-info">
+                            <div class="metric-title">Nhiệt Độ Vận Hành</div>
+                            <div class="metric-value">74°C <span>avg</span></div>
+                        </div>
+                        <div class="metric-ring" style="--pct:74"></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="ph-fill ph-lightning"></i></div>
+                        <div class="metric-info">
+                            <div class="metric-title">Tiêu Thụ Điện</div>
+                            <div class="metric-value">28W <span>TDP</span></div>
+                        </div>
+                        <div class="metric-ring" style="--pct:28"></div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon"><i class="ph-fill ph-hard-drive"></i></div>
+                        <div class="metric-info">
+                            <div class="metric-title">Tốc Độ Lưu Trữ</div>
+                            <div class="metric-value">7.4 <span>GB/s</span></div>
+                        </div>
+                        <div class="metric-ring" style="--pct:93"></div>
                     </div>
                 </div>
             </div>

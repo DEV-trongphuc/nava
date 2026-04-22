@@ -176,4 +176,127 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Removed duplicate scroll progress bar logic
+
+    // ============================================
+    // 7. HERO PRODUCT SLIDER
+    // ============================================
+    const heroSlides    = document.querySelectorAll('.hero-slide');
+    const heroDots      = document.querySelectorAll('.h-dot');
+    const floatLabel1   = document.getElementById('floatLabel1');
+    const floatSub1     = document.getElementById('floatSub1');
+    const floatIcon1    = document.getElementById('floatIcon1');
+    const floatLabel2   = document.getElementById('floatLabel2');
+    const floatSub2     = document.getElementById('floatSub2');
+    const floatIcon2    = document.getElementById('floatIcon2');
+    const floatItem1    = document.getElementById('floatItem1');
+    const floatItem2    = document.getElementById('floatItem2');
+
+    // Data per slide: [icon-class, label, sub, icon2-class, label2, sub2]
+    const heroSlideData = [
+        { i1: 'ph-fill ph-cpu',          l1: 'Core Ultra 9',   s1: 'Xử lý đỉnh cao',
+          i2: 'ph-fill ph-lightning',    l2: 'AI NPU',          s2: 'Tích hợp sẵn' },
+        { i1: 'ph-fill ph-game-controller', l1: 'ROG Gaming',   s1: 'Hiệu năng đỉnh',
+          i2: 'ph-fill ph-plugs-connected', l2: 'OCuLink 40G',  s2: 'eGPU tốc độ cao' },
+        { i1: 'ph-fill ph-graphics-card',   l1: 'RTX 4090',     s1: 'Sức mạnh đồ họa',
+          i2: 'ph-fill ph-usb',             l2: 'USB4 / TB4',   s2: 'Kết nối siêu tốc' },
+        { i1: 'ph-fill ph-memory',          l1: 'LPDDR5X 6400', s1: 'Băng thông đỉnh',
+          i2: 'ph-fill ph-hard-drive',      l2: 'NVMe PCIe 4.0',s2: '7,400 MB/s' },
+    ];
+
+    let heroCurrentSlide = 0;
+    let heroAutoPlay;
+
+    function goToHeroSlide(index) {
+        // Remove active from all
+        heroSlides.forEach(s => s.classList.remove('active', 'exit'));
+        heroDots.forEach(d => d.classList.remove('active'));
+
+        // Set new active
+        heroCurrentSlide = (index + heroSlides.length) % heroSlides.length;
+        heroSlides[heroCurrentSlide].classList.add('active');
+        if (heroDots[heroCurrentSlide]) heroDots[heroCurrentSlide].classList.add('active');
+
+        // Animate floating items out then update
+        if (floatItem1 && floatItem2) {
+            floatItem1.classList.add('float-exit');
+            floatItem2.classList.add('float-exit');
+            setTimeout(() => {
+                const d = heroSlideData[heroCurrentSlide];
+                floatIcon1.className = d.i1;
+                floatLabel1.textContent = d.l1;
+                floatSub1.textContent   = d.s1;
+                floatIcon2.className = d.i2;
+                floatLabel2.textContent = d.l2;
+                floatSub2.textContent   = d.s2;
+                floatItem1.classList.remove('float-exit');
+                floatItem2.classList.remove('float-exit');
+                floatItem1.classList.add('float-enter');
+                floatItem2.classList.add('float-enter');
+                setTimeout(() => {
+                    floatItem1.classList.remove('float-enter');
+                    floatItem2.classList.remove('float-enter');
+                }, 500);
+            }, 300);
+        }
+    }
+
+    function startHeroAutoPlay() {
+        heroAutoPlay = setInterval(() => {
+            goToHeroSlide(heroCurrentSlide + 1);
+        }, 3500);
+    }
+
+    if (heroSlides.length > 0) {
+        startHeroAutoPlay();
+        heroDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                clearInterval(heroAutoPlay);
+                goToHeroSlide(parseInt(dot.dataset.slide));
+                startHeroAutoPlay();
+            });
+        });
+    }
+
+    // ============================================
+    // 8. STATS COUNTER ANIMATION (on scroll in)
+    // ============================================
+    const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.target);
+                const duration = 1800;
+                const step = Math.ceil(target / (duration / 16));
+                let current = 0;
+                const timer = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    el.textContent = current.toLocaleString('vi-VN');
+                    if (current >= target) clearInterval(timer);
+                }, 16);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+    // ============================================
+    // 9. BENCHMARK BAR ANIMATION (on scroll in)
+    // ============================================
+    const benchFills = document.querySelectorAll('.bench-fill[data-width]');
+
+    const benchObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                el.style.width = el.dataset.width + '%';
+                benchObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    benchFills.forEach(el => benchObserver.observe(el));
+
 });
