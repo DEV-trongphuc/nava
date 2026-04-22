@@ -61,9 +61,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 lastScroll = currentScroll;
 
+                // Calculate Scroll Percentage
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercentage = (height > 0) ? (winScroll / height) * 100 : 0;
+
                 // Back To Top Button Logic
                 if (backToTopBtn) {
-                    if (currentScroll > 500) {
+                    if (scrollPercentage > 80) {
                         backToTopBtn.classList.add('show');
                     } else {
                         backToTopBtn.classList.remove('show');
@@ -72,10 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Progress Bar Logic
                 if (progressBar) {
-                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrolled = (height > 0) ? (winScroll / height) * 100 : 0;
-                    progressBar.style.width = scrolled + "%";
+                    progressBar.style.width = scrollPercentage + "%";
                 }
 
                 isScrolling = false;
