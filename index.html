@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAVA STORE - Định Nghĩa Lại Sức Mạnh Điện Toán</title>
-
+    <title>NAVA STORE - Định Nghĩa Lại Sức Mạnh Điện Toán | Mini PC & eGPU</title>
+    <meta name="description" content="NAVA STORE - Đơn vị tiên phong cung cấp giải pháp Mini PC, eGPU, NAS và linh kiện hi-end. Tối ưu không gian làm việc, mạnh mẽ cho gaming và đồ họa AI.">
+    <meta name="keywords" content="Mini PC, eGPU, NAS, linh kiện máy tính, máy tính nhỏ gọn, PC gaming, Nava Store, AI PC, đồ họa">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="NAVA STORE">
+    <meta property="og:title" content="NAVA STORE - Định Nghĩa Lại Sức Mạnh Điện Toán">
+    <meta property="og:description" content="NAVA STORE - Đơn vị tiên phong cung cấp giải pháp Mini PC, eGPU, NAS và linh kiện hi-end. Tối ưu không gian làm việc.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://navastore.vn/">
+    <link rel="canonical" href="https://navastore.vn/">
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,16 +44,17 @@
                     <img src="https://s120-ava-talk.zadn.vn/3/5/0/c/2/120/81f9e13ab9e5380232f102e36863b648.jpg"
                         alt="Nava Store" class="header-logo-img">
                 </div>
-                <div class="search-box">
-                    <input type="text" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?">
-                    <button><i class="ph ph-magnifying-glass"></i></button>
-                </div>
+                <form action="/search" method="GET" class="search-box">
+                    <input type="text" name="query" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?" required>
+                    <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
+                </form>
                 <div class="top-actions">
                     <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
-                        <div><small>Hotline 24/7</small><br><strong>1900 xxxx</strong></div>
+                        <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
                     </a>
                     <a href="#" class="action-item cart-btn"><i class="ph ph-shopping-cart"></i> Giỏ hàng <span
                             class="cart-badge">0</span></a>
+                    <button class="mobile-menu-toggle"><i class="ph ph-list"></i></button>
                 </div>
             </div>
         </div>
@@ -70,7 +79,7 @@
 
                     <!-- Mega Dropdown: Mini PC -->
                     <li class="nav-item has-dropdown">
-                        <a href="https://navastore.vn/minipc"><img
+                        <a href="javascript:void(0);"><img
                                 src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
                                 alt="Mini PC"> <span>Mini PC</span> <i class="ph-bold ph-caret-down"></i></a>
                         <ul class="dropdown-menu">
@@ -88,7 +97,7 @@
 
                     <!-- Mega Dropdown: eGPU -->
                     <li class="nav-item has-dropdown">
-                        <a href="https://navastore.vn/egpu"><img
+                        <a href="javascript:void(0);"><img
                                 src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                 alt="eGPU"> <span>eGPU</span> <i class="ph-bold ph-caret-down"></i></a>
                         <ul class="dropdown-menu">
@@ -105,7 +114,7 @@
 
                     <!-- Mega Dropdown: Linh Kiện -->
                     <li class="nav-item has-dropdown">
-                        <a href="https://navastore.vn/collections/all"><img
+                        <a href="javascript:void(0);"><img
                                 src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
                                 alt="Linh Kiện"> <span>Linh Kiện</span> <i class="ph-bold ph-caret-down"></i></a>
                         <ul class="dropdown-menu">
@@ -144,7 +153,8 @@
             <div class="hero-content reveal">
                 <div class="hero-badge"><i class="ph-fill ph-rocket-launch"></i> Tương lai của máy tính cá nhân</div>
                 <h1 class="hero-title">
-                    <span class="text-gradient">ĐỊNH NGHĨA LẠI</span><br>SỨC MẠNH ĐIỆN TOÁN
+                    <span class="text-gradient">ĐỊNH NGHĨA LẠI</span><br>
+                    <span style="white-space: nowrap;">SỨC MẠNH ĐIỆN TOÁN</span>
                 </h1>
                 <p class="hero-subtitle">
                     Thu Gọn Không Gian, Mở Rộng Tầm Nhìn Cùng NAVA STORE.<br>
@@ -184,8 +194,23 @@
                 <!-- Vòng tròn năng lượng background -->
                 <div class="energy-ring"></div>
                 <!-- Hình ảnh sản phẩm bay lơ lửng -->
-                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
-                    alt="Mini PC" class="floating-pc">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082" alt="Mini PC" class="floating-pc">
+                
+                <!-- Tech Wow Elements -->
+                <div class="tech-float-item tech-item-1">
+                    <i class="ph-fill ph-cpu"></i>
+                    <div>
+                        <span>Core Ultra 9</span>
+                        <small>Xử lý đỉnh cao</small>
+                    </div>
+                </div>
+                <div class="tech-float-item tech-item-2">
+                    <i class="ph-fill ph-lightning"></i>
+                    <div>
+                        <span>AI NPU</span>
+                        <small>Tích hợp sẵn</small>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -375,6 +400,7 @@
                     </div>
                 </div>
             </div>
+            <div class="slider-dots"></div>
         </div>
     </section>
 
@@ -476,7 +502,7 @@
         <div class="container">
             <div class="section-header text-center mb-5">
                 <h2 class="section-title">TRẢI NGHIỆM KHÁC BIỆT</h2>
-                <p>Những công nghệ tối tân nhất được gói gọn trong thiết kế tinh giản</p>
+                <p class="bento-subtitle">Những công nghệ tối tân nhất được gói gọn trong thiết kế tinh giản</p>
             </div>
 
             <div class="bento-grid">
@@ -532,17 +558,17 @@
     <section id="about" class="about-section relative">
         <div class="container">
             <div class="about-intro reveal">
+                <div class="tech-badge"><i class="ph-fill ph-rocket"></i> ĐỊNH NGHĨA LẠI SỨC MẠNH</div>
                 <h2 class="section-title">Phá Vỡ Giới Hạn Không Gian</h2>
-                <div class="about-text-content glass-panel">
-                    <p>Trong nhịp độ vận hành vũ bão của kỷ nguyên số, không gian làm việc và giải trí đang đòi hỏi một
-                        sự chuyển mình mạnh mẽ. Những dàn PC truyền thống cồng kềnh, chiếm diện tích đang dần bộc lộ
-                        nhiều giới hạn về sự linh hoạt.</p>
-                    <p>Bạn thường xuyên phải đối mặt với một bài toán hóc búa: Làm sao để sở hữu một cỗ máy có hiệu năng
-                        khổng lồ, đủ sức xử lý các tác vụ đồ họa nặng nề hay vận hành trơn tru các mô hình dữ liệu phức
-                        tạp, nhưng vẫn phải giữ cho không gian thực sự tinh gọn?</p>
-                    <p class="highlight-text">Sự đánh đổi giữa hiệu suất của máy bàn và tính tản nhiệt, khả năng nâng
-                        cấp của laptop thường dẫn đến những cản trở không đáng có. <strong>Chào mừng bạn đến với NAVA
-                            STORE.</strong></p>
+                <div class="about-text-content full-width">
+                    <div class="text-body">
+                        <p class="lead-text">Trong nhịp độ vận hành vũ bão của kỷ nguyên số, không gian làm việc và giải trí đang đòi hỏi một sự chuyển mình mạnh mẽ. Những dàn PC truyền thống cồng kềnh đang dần bộc lộ nhiều giới hạn.</p>
+                        <p>Bạn thường xuyên phải đối mặt với một bài toán hóc búa: Làm sao để sở hữu một cỗ máy có hiệu năng khổng lồ, đủ sức xử lý các tác vụ đồ họa nặng nề hay vận hành trơn tru các mô hình dữ liệu phức tạp, nhưng vẫn phải giữ cho không gian thực sự tinh gọn?</p>
+                        <div class="highlight-box">
+                            <i class="ph-fill ph-check-circle"></i>
+                            <p>Sự đánh đổi giữa hiệu suất và không gian đã kết thúc. <span class="text-gradient">Chào mừng bạn đến với NAVA STORE.</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -566,120 +592,128 @@
                         khả năng nâng cấp lâu dài.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-
-
-    <!-- Video Review Section -->
-    <section class="video-section">
-        <div class="container">
-            <h2 class="section-title text-center mb-5">VIDEO REVIEW</h2>
-            <div class="video-grid">
-                <a href="https://navastore.vn/review" class="video-card reveal">
-                    <div class="video-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/thum-rog-970.jpg?v=1755573280147"
-                            alt="ASUS ROG NUC 970">
-                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">ASUS ROG NUC 970 Mini PC 50 củ có gì?</div>
-                    </div>
-                </a>
-                <a href="https://navastore.vn/review" class="video-card reveal delay-1">
-                    <div class="video-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-143028.png?v=1752910247987"
-                            alt="eGPU NAVA S1/S2">
-                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Hướng dẫn sử dụng eGPU NAVA S1/S2</div>
-                    </div>
-                </a>
-                <a href="https://navastore.vn/review" class="video-card reveal delay-2">
-                    <div class="video-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-095023.png?v=1752893442757"
-                            alt="Beelink SER8">
-                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
-                    </div>
-                    <div class="video-info">
-                        <div class="video-title">Beelink SER8 Review Chi Tiết</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- News & Blog Section -->
-    <section class="blog-section">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="section-title m-0">TIN TỨC CÔNG NGHỆ</h2>
-                <a href="https://navastore.vn/tin-tuc" class="text-primary font-weight-bold">Xem thêm &rarr;</a>
-            </div>
-            <div class="blog-grid">
-                <a href="https://navastore.vn/tin-tuc" class="blog-card reveal">
-                    <div class="blog-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/484.jpg?v=1713583274293"
-                            alt="Top 5 Máy Tính Mini">
-                    </div>
-                    <div class="blog-info">
-                        <div class="blog-date">20/04/2026</div>
-                        <div class="blog-title">Top 5 Máy Tính Mini TPHCM Giá Rẻ</div>
-                        <div class="blog-desc">Không gian sống và làm việc ngày càng khiêm tốn, máy tính mini đang dần
-                            trở thành xu hướng...</div>
-                    </div>
-                </a>
-                <a href="https://navastore.vn/tin-tuc" class="blog-card reveal delay-1">
-                    <div class="blog-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/483.jpg?v=1713506161833"
-                            alt="Top 5 Card Đồ Họa">
-                    </div>
-                    <div class="blog-info">
-                        <div class="blog-date">19/04/2026</div>
-                        <div class="blog-title">Top 5 Card Đồ Họa Mạnh Mẽ Cho Sinh Viên</div>
-                        <div class="blog-desc">Thị trường card đồ họa đa dạng với mẫu mã mới từ NVIDIA và AMD...</div>
-                    </div>
-                </a>
-                <a href="https://navastore.vn/tin-tuc" class="blog-card reveal delay-2">
-                    <div class="blog-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/475.jpg?v=1712975924970"
-                            alt="Mini PC Có Card Đồ Họa">
-                    </div>
-                    <div class="blog-info">
-                        <div class="blog-date">13/04/2026</div>
-                        <div class="blog-title">Mini PC Có Card Đồ Họa Không?</div>
-                        <div class="blog-desc">Nhỏ gọn, tiết kiệm điện, nhưng liệu Mini PC có sức mạnh đồ họa cho nhu
-                            cầu cao...</div>
-                    </div>
-                </a>
-                <a href="https://navastore.vn/tin-tuc" class="blog-card reveal delay-3">
-                    <div class="blog-thumb">
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/463.jpg?v=1711861022063"
-                            alt="Mua PC Mini Like New">
-                    </div>
-                    <div class="blog-info">
-                        <div class="blog-date">31/03/2026</div>
-                        <div class="blog-title">Mua PC Mini Like New Giá Rẻ TPHCM</div>
-                        <div class="blog-desc">Lựa chọn thông minh với giá rẻ hơn 30-50% mà hiệu năng gần như không
-                            đổi...</div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Neon Glassmorphism Banner -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-neon-box reveal">
+            <!-- CTA Neon Glassmorphism Banner -->
+            <div class="cta-neon-box blue-theme reveal mt-5" style="margin-top: 60px;">
+                <img src="https://s120-ava-talk.zadn.vn/3/5/0/c/2/120/81f9e13ab9e5380232f102e36863b648.jpg" alt="NAVA" class="cta-n-icon">
                 <div class="cta-glow"></div>
                 <h2 class="cta-title">SẴN SÀNG NÂNG TẦM TRẢI NGHIỆM?</h2>
-                <p class="cta-desc">Hàng ngàn khách hàng đã lựa chọn NAVA STORE để kiến tạo không gian làm việc tối giản
-                    và mạnh mẽ. Đến lượt bạn!</p>
-                <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-neon">
+                <p class="cta-desc text-white">Hàng ngàn khách hàng đã lựa chọn NAVA STORE để kiến tạo không gian làm việc tối giản và mạnh mẽ. Đến lượt bạn!</p>
+                <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-white">
                     KHÁM PHÁ NGAY <i class="ph ph-arrow-right"></i>
                 </a>
+            </div>
+        </div>
+    </section>
+    <!-- Video Review Section -->
+    <section id="video" class="video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">VIDEO REVIEW TRỰC QUAN</h2>
+                <a href="#" class="view-all-link">Xem tất cả <i class="ph ph-arrow-right"></i></a>
+            </div>
+            <div class="video-grid">
+                <!-- Video 1 -->
+                <div class="video-card reveal">
+                    <div class="video-thumb">
+                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/thum-rog-970.jpg?v=1755573280147" alt="ASUS ROG NUC 970">
+                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>ASUS ROG NUC 970 Mini PC 50 củ có gì?</h3>
+                    </div>
+                </div>
+                <!-- Video 2 -->
+                <div class="video-card reveal delay-1">
+                    <div class="video-thumb">
+                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-143028.png?v=1752910247987" alt="eGPU NAVA S1/S2">
+                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Hướng dẫn sử dụng eGPU NAVA S1/S2</h3>
+                    </div>
+                </div>
+                <!-- Video 3 -->
+                <div class="video-card reveal delay-2">
+                    <div class="video-thumb">
+                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-095023.png?v=1752893442757" alt="Beelink SER8">
+                        <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Beelink SER8: Hiệu năng thực tế</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">TIN TỨC CÔNG NGHỆ</h2>
+                <a href="tin-tuc" class="view-all-link">Xem tất cả <i class="ph ph-arrow-right"></i></a>
+            </div>
+            <div class="news-flex">
+                <!-- Featured Article -->
+                <div class="news-featured reveal">
+                    <div class="featured-img">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/articles/ieelq6n0mltrcoredpqobk0bvqmrkzgvvl-if8eenmca3lvmsfixmcxyyqaedshafau3obj04ytpxacsdzytv-ibvfnugctfwpdl3v0nsxbkudhujd4gwwpg2lldnnbc9o23-0yhsnmfyqcafbepsuzbaa5lbiqeryjyzo-1i6qq-8r0eoaglrvw74-6je52.jpeg?v=1776680182577" alt="Top 5 Mini PC">
+                        <div class="news-date">20/04</div>
+                    </div>
+                    <div class="featured-content">
+                        <h3>Top 5 Máy Tính Mini TPHCM Giá Rẻ</h3>
+                        <p>Không gian sống và làm việc tại hầu hết các phòng trọ hoặc căn hộ dịch vụ tại TP.HCM ngày càng khiêm tốn hơn...</p>
+                        <a href="#" class="read-more">Đọc tiếp <i class="ph ph-caret-double-right"></i></a>
+                    </div>
+                </div>
+                <!-- News List -->
+                <div class="news-list">
+                    <div class="news-item reveal delay-1">
+                        <div class="item-img">
+                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua-3.jpg?v=1776592633880" alt="Card đồ họa">
+                        </div>
+                        <div class="item-content">
+                            <h4>Top 5 Card Đồ Họa Mạnh Mẽ Cho Học Sinh Sinh Viên 2026</h4>
+                            <span class="item-date">19/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="news-item reveal delay-2">
+                        <div class="item-img">
+                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua.jpg?v=1776091615180" alt="Mini PC Card">
+                        </div>
+                        <div class="item-content">
+                            <h4>Mini PC Có Card Đồ Họa Không? Giải đáp thắc mắc</h4>
+                            <span class="item-date">13/04/2026</span>
+                        </div>
+                    </div>
+                    <div class="news-item reveal delay-3">
+                        <div class="item-img">
+                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/black-and-white-modern-vietnam-travel-presentation-c4ff0b76-e0f8-4087-b001-4e09f0c43698.jpg?v=1774972201780" alt="Mini PC Like New">
+                        </div>
+                        <div class="item-content">
+                            <h4>Mua PC Mini Like New Giá Rẻ TPHCM | Cấu Hình Mạnh</h4>
+                            <span class="item-date">31/03/2026</span>
+                        </div>
+                    </div>
+                    <div class="news-item reveal delay-4">
+                        <div class="item-img">
+                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/1202-asus-ra-mat-nuc-15-pro-chiec-mini-pc-ai-dau-tien-tren-the-gioi-1-5-31302c9c-6efb-42b2-bb6d-e87c75390d68.jpg?v=1774956254340" alt="Mini PC Văn phòng">
+                        </div>
+                        <div class="item-content">
+                            <h4>Mua Full Bộ Mini PC Văn Phòng Dưới 12 Triệu</h4>
+                            <span class="item-date">31/03/2026</span>
+                        </div>
+                    </div>
+                    <div class="news-item reveal delay-5">
+                        <div class="item-img">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/articles/ieelq6n0mltrcoredpqobk0bvqmrkzgvvl-if8eenmca3lvmsfixmcxyyqaedshafau3obj04ytpxacsdzytv-ibvfnugctfwpdl3v0nsxbkudhujd4gwwpg2lldnnbc9o23-0yhsnmfyqcafbepsuzbaa5lbiqeryjyzo-1i6qq-8r0eoaglrvw74-6je52.jpeg?v=1776680182577" alt="eGPU Setup">
+                        </div>
+                        <div class="item-content">
+                            <h4>Hướng Dẫn Setup eGPU Cho Laptop Mỏng Nhẹ 2026</h4>
+                            <span class="item-date">28/03/2026</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -764,6 +798,44 @@
     </footer>
 
     <!-- Main JS -->
+    <!-- Mobile Sidebar Drawer -->
+    <div class="sidebar-overlay"></div>
+    <div class="sidebar-drawer">
+        <div class="sidebar-header">
+            <div class="logo">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="NAVA" class="header-logo-img">
+            </div>
+            <button class="sidebar-close"><i class="ph ph-x"></i></button>
+        </div>
+        <div class="sidebar-content">
+            <ul class="mobile-nav">
+                <!-- Content will be cloned or manually added here -->
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <p>Hotline: 0972 178 527</p>
+            <p>Email: info@navatek.vn</p>
+        </div>
+    </div>
+
+    <!-- Floating Contact Buttons -->
+    <div class="floating-contact">
+        <div class="contact-sub-buttons">
+            <a href="tel:0972178527" class="sub-btn call" title="Gọi ngay">
+                <i class="ph-fill ph-phone"></i>
+            </a>
+            <a href="https://zalo.me/0972178527" target="_blank" class="sub-btn zalo" title="Chat Zalo">
+                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/01/Logo-Zalo-Arc.png" alt="Zalo">
+            </a>
+            <a href="https://m.me/navastore" target="_blank" class="sub-btn mess" title="Messenger">
+                <img src="https://static.xx.fbcdn.net/rsrc.php/yb/r/M8rOX7S5AN3.svg" alt="Messenger">
+            </a>
+        </div>
+        <button class="main-contact-btn pulsate">
+            <i class="ph-fill ph-phone"></i>
+        </button>
+    </div>
+
     <script src="assets/main.js"></script>
 </body>
 
