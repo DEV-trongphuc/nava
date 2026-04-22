@@ -354,7 +354,12 @@ ul { list-style: none; }
     .energy-ring { width: 220px; height: 220px; }
     
     /* --- SECTIONS MOBILE --- */
-    .section-title { font-size: 1.8rem; margin-bottom: 25px; }
+    .section-title { font-size: 1.5rem; margin-bottom: 20px; }
+    .brand-title { font-size: 1.4rem; margin-bottom: 30px; margin-top: 30px; letter-spacing: 1px; }
+    .about-title { font-size: 1.8rem; margin-bottom: 20px; }
+    .cta-title { font-size: 1.6rem; }
+    .hero-title { font-size: 1.8rem; margin-bottom: 15px; }
+    
     .product-grid { grid-template-columns: 1fr; gap: 20px; } /* Single column for better readability */
     .product-card { padding: 30px 20px 0; }
     .card-title { font-size: 1.5rem; }
