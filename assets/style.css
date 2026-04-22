@@ -777,6 +777,14 @@ ul {
     justify-content: space-between;
 }
 
+.card-content {
+    order: 1;
+}
+
+.card-image-wrap {
+    order: 2;
+}
+
 .card-glow {
     position: absolute;
     width: 200px;
@@ -2178,13 +2186,16 @@ ul {
 
     .footer-company-info {
         flex-direction: column;
-        text-align: center;
+        text-align: left;
         gap: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     .detail-item {
-        justify-content: center;
-        text-align: center;
+        justify-content: flex-start;
+        text-align: left;
+        align-items: flex-start;
     }
 
     .certifications {
@@ -3164,7 +3175,8 @@ ul {
         order: 1;
         padding-bottom: 10px;
         text-align: center;
-        align-self: stretch; /* reset from desktop grid 'end' */
+        align-self: stretch;
+        /* reset from desktop grid 'end' */
         width: 100%;
     }
 
@@ -3178,7 +3190,8 @@ ul {
         order: 3;
         text-align: center;
         padding-top: 10px;
-        align-self: stretch; /* reset from desktop grid 'start' */
+        align-self: stretch;
+        /* reset from desktop grid 'start' */
         width: 100%;
     }
 
@@ -3197,6 +3210,7 @@ ul {
     .hero-socials {
         justify-content: center;
         flex-wrap: wrap;
+        margin-top: 20px;
     }
 
     /* Floating tech items - mobile: use dedicated scaled animation */
@@ -3490,6 +3504,7 @@ ul {
     .footer-company-info .company-details .detail-item {
         justify-content: flex-start !important;
         text-align: left !important;
+        align-items: flex-start !important;
     }
 
     .card-actions .btn-pill {
@@ -3505,6 +3520,29 @@ ul {
         padding: 10px 16px !important;
         gap: 8px !important;
     }
+
+    /* Benefit cards spacing from hero socials */
+    .benefits-section {
+        margin-top: 10px;
+        padding-bottom: 40px;
+    }
+
+    .benefit-card h4 {
+        font-size: 0.8rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem !important;
+    }
+
+    .mobile-nav .nav-item.open .dropdown-menu {
+        width: 100%;
+    }
+
+    .benefit-card {
+        margin-bottom: 0;
+    }
+
 }
 
 /* ============================================
@@ -3762,6 +3800,15 @@ ul {
     display: block;
 }
 
+.stat-number-wrap {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    white-space: nowrap;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
 .stat-number {
     font-size: 2.8rem;
     font-weight: 800;
@@ -3775,6 +3822,7 @@ ul {
     font-weight: 700;
     color: #2563eb;
     display: inline;
+    margin-left: 2px;
 }
 
 .stat-label {

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Back To Top Button Logic
         if (backToTopBtn) {
-            if (scrollPercentage > 80) {
+            if (scrollPercentage > 50) {
                 backToTopBtn.classList.add('show');
             } else {
                 backToTopBtn.classList.remove('show');
@@ -121,6 +121,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuToggle) menuToggle.addEventListener('click', () => toggleSidebar(true));
     if (sidebarClose) sidebarClose.addEventListener('click', () => toggleSidebar(false));
     if (sidebarOverlay) sidebarOverlay.addEventListener('click', () => toggleSidebar(false));
+
+    // Mobile sidebar: toggle submenu on click for items with dropdown
+    if (mobileNavContainer) {
+        mobileNavContainer.querySelectorAll('.nav-item.has-dropdown > a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const navItem = link.closest('.nav-item');
+                const isOpen = navItem.classList.contains('open');
+                // Close all others
+                mobileNavContainer.querySelectorAll('.nav-item.open').forEach(el => el.classList.remove('open'));
+                if (!isOpen) navItem.classList.add('open');
+            });
+        });
+    }
 
     // 5. PRODUCT SLIDER DOTS LOGIC (MOBILE)
     const productGrid = document.querySelector('.product-grid');
