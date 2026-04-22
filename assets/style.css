@@ -426,11 +426,16 @@ ul {
 }
 
 .hero-title {
-    font-size: 3.4rem;
+    font-size: 3rem;
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 20px;
     letter-spacing: -1px;
+}
+
+.hero-title span {
+    white-space: nowrap;
+    display: block;
 }
 
 .text-gradient {
@@ -774,15 +779,31 @@ ul {
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .card-content {
-    order: 1;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 0;
+    flex: 1;
 }
 
 .card-image-wrap {
-    order: 2;
+    position: relative;
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0 30px;
+    position: relative;
+    z-index: 10;
 }
 
 .card-glow {
@@ -809,12 +830,6 @@ ul {
     transform: scale(2);
 }
 
-.card-content {
-    position: relative;
-    z-index: 10;
-    margin-bottom: 40px;
-}
-
 .card-title {
     font-size: 2rem;
     font-weight: 800;
@@ -824,24 +839,9 @@ ul {
 .card-desc {
     color: var(--text-gray);
     font-size: 1.05rem;
-    margin: 0 auto 25px;
+    margin: 0 auto;
     min-height: 70px;
     max-width: 90%;
-}
-
-.card-actions {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.card-image-wrap {
-    position: relative;
-    height: 280px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 20px;
 }
 
 .product-img {
@@ -1911,6 +1911,11 @@ ul {
         letter-spacing: 1px;
     }
 
+    /* Mobile line break for brand title */
+    .brand-br {
+        display: inline;
+    }
+
     .about-title {
         font-size: 1.8rem;
         margin-bottom: 20px;
@@ -2019,6 +2024,11 @@ ul {
 
 
 /* --- BRAND LOGO SLIDER --- */
+/* Mobile line break helper - hidden on desktop */
+.brand-br {
+    display: none;
+}
+
 .brand-title {
     text-align: center;
     font-size: 2.5rem;
@@ -3066,8 +3076,8 @@ ul {
 
 @media (max-width: 991px) {
     .floating-contact {
-        bottom: 15px;
-        right: 15px;
+        bottom: 25px;
+        right: 25px;
         width: 50px;
         height: 50px;
     }
@@ -3156,7 +3166,10 @@ ul {
     .hero-title {
         font-size: clamp(2rem, 8vw, 2.8rem) !important;
         white-space: normal !important;
-        line-height: 1.5;
+    }
+
+    .hero-title span {
+        white-space: normal !important;
     }
 
     .hero-3d {
