@@ -23,8 +23,8 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--bg-gray); line-height: 1.6; overflow-x: hidden; position: relative; }
+body { font-family: 'Inter', sans-serif; color: var(--text-dark); background-color: var(--bg-gray); line-height: 1.6; overflow-x: hidden; width: 100%; margin: 0; padding: 0; position: relative; }
+html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
 a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
 ul { list-style: none; }
 .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
