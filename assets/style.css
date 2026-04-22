@@ -3195,9 +3195,25 @@ ul {
         flex-wrap: wrap;
     }
 
-    /* Hide floating items on mobile - they overlap text */
+    /* Floating tech items - scaled down for mobile */
     .tech-float-item {
-        display: none !important;
+        display: flex;
+        transform: scale(0.75);
+        transform-origin: top left;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .tech-item-1 {
+        top: 8%;
+        left: 0;
+        transform-origin: top left;
+    }
+
+    .tech-item-2 {
+        bottom: 14%;
+        right: 0;
+        transform-origin: bottom right;
     }
 
     .energy-ring {
@@ -3215,6 +3231,7 @@ ul {
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-bottom: 32px; /* space for dots + gap before subtitle */
     }
 
     .hero-3d {
