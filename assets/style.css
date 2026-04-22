@@ -3259,7 +3259,7 @@ ul {
         align-items: center;
         justify-content: center;
         margin-bottom: 32px;
-        /* space for dots + gap before subtitle */
+        overflow: hidden;
     }
 
     .hero-3d {
@@ -3274,12 +3274,20 @@ ul {
 
     .hero-slide {
         height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
     }
 
     .floating-pc {
+        display: block;
         max-width: 88%;
         max-height: 340px;
+        width: auto;
+        height: auto;
         object-fit: contain;
+        margin: 0 auto;
     }
 
     .hero-slide-dots {
