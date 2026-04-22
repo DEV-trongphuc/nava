@@ -299,4 +299,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     benchFills.forEach(el => benchObserver.observe(el));
 
+    // ============================================
+    // 10. TERMINAL TYPING ANIMATION (on scroll in)
+    // ============================================
+    const terminalLines = [
+        { cls: '',          html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span>' },
+        { cls: 't-out',     html: '[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz' },
+        { cls: 't-out',     html: '[INFO] RAM: 64GB LPDDR5X-6400' },
+        { cls: 't-out',     html: '[INFO] GPU: Radeon 890M iGPU' },
+        { cls: 't-success', html: '[PASS] Cinebench R24 Multi: <b>24,819 pts</b>' },
+        { cls: 't-success', html: '[PASS] CrystalDisk Read: <b>7,412 MB/s</b>' },
+        { cls: 't-success', html: '[PASS] LLM Inference: <b>42 tok/s</b>' },
+        { cls: 't-warn',    html: '[TEMP] Peak Temp: 74°C ✓ Under threshold' },
+        { cls: 't-success', html: '[PASS] Total Power Draw: <b>28W</b> ✅' },
+        { cls: 't-blink',   html: '<span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span>' },
+    ];
+
+    const terminalBody = document.getElementById('terminalOutput');
+    let terminalStarted = false;
+
+    function runTerminalAnimation() {
+        if (terminalStarted || !terminalBody) return;
+        terminalStarted = true;
+        terminalBody.innerHTML = '';
+
+        terminalLines.forEach((lineData, i) => {
+            const div = document.createElement('div');
+            div.className = 't-line' + (lineData.cls ? ' ' + lineData.cls : '');
+            div.innerHTML = lineData.html;
+            terminalBody.appendChild(div);
+
+            setTimeout(() => {
+                div.classList.add('visible');
+            }, i * 380);
+        });
+    }
+
+    const terminalEl = document.getElementById('benchTerminal');
+    if (terminalEl) {
+        const termObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    runTerminalAnimation();
+                    termObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        termObserver.observe(terminalEl);
+    }
+
 });

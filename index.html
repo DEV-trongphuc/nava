@@ -806,25 +806,14 @@
                     <div class="bench-track"><div class="bench-fill gold" data-width="99"></div></div>
                 </div>
                 <div class="bench-col terminal-col reveal delay-1">
-                    <div class="terminal-box">
+                    <div class="terminal-box" id="benchTerminal">
                         <div class="terminal-header">
                             <span class="t-dot red"></span>
                             <span class="t-dot yellow"></span>
                             <span class="t-dot green"></span>
                             <span class="t-title">nava_benchmark.sh</span>
                         </div>
-                        <div class="terminal-body" id="terminalOutput">
-                            <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span></div>
-                            <div class="t-line t-out">[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz</div>
-                            <div class="t-line t-out">[INFO] RAM: 64GB LPDDR5X-6400</div>
-                            <div class="t-line t-out">[INFO] GPU: Radeon 890M iGPU</div>
-                            <div class="t-line t-success">[PASS] Cinebench R24 Multi: 24,819 pts</div>
-                            <div class="t-line t-success">[PASS] CrystalDisk Read: 7,412 MB/s</div>
-                            <div class="t-line t-success">[PASS] LLM Inference: 42 tok/s</div>
-                            <div class="t-line t-warn">[TEMP] Peak Temp: 74°C ✓ Under threshold</div>
-                            <div class="t-line t-success">[PASS] Total Power Draw: 28W ✅</div>
-                            <div class="t-line t-blink"><span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span></div>
-                        </div>
+                        <div class="terminal-body" id="terminalOutput"></div>
                     </div>
                 </div>
             </div>
@@ -873,84 +862,7 @@
         </div>
     </section>
 
-    <!-- ===== AI LIVE FEED SECTION ===== -->
-    <section class="ai-feed-section">
-        <div class="container">
-            <div class="ai-feed-header reveal">
-                <div class="ai-pulse-dot"></div>
-                <h2 class="ai-feed-title">HỆ THỐNG AI <span class="t-highlight">LIVE</span></h2>
-                <p class="ai-feed-sub">Giám sát hiệu suất máy khách hàng theo thời gian thực</p>
-            </div>
-            <div class="ai-feed-grid">
-                <!-- Live Activity -->
-                <div class="ai-activity-feed reveal">
-                    <div class="feed-title-row"><i class="ph-fill ph-activity"></i> Hoạt Động Gần Đây</div>
-                    <div class="feed-list" id="aiFeedList">
-                        <div class="feed-item">
-                            <span class="feed-dot green"></span>
-                            <span class="feed-text">Minisforum UM890 — <b>AI Model DeepSeek V3</b> chạy offline 42 tok/s</span>
-                            <span class="feed-time">2 phút trước</span>
-                        </div>
-                        <div class="feed-item">
-                            <span class="feed-dot blue"></span>
-                            <span class="feed-text">ASUS ROG NUC 970 — <b>eGPU RTX 4090</b> kết nối OCuLink thành công</span>
-                            <span class="feed-time">5 phút trước</span>
-                        </div>
-                        <div class="feed-item">
-                            <span class="feed-dot green"></span>
-                            <span class="feed-text">Beelink SEi14 — <b>CrystalDisk</b> đạt 7,200 MB/s trên PCIe 4.0</span>
-                            <span class="feed-time">11 phút trước</span>
-                        </div>
-                        <div class="feed-item">
-                            <span class="feed-dot yellow"></span>
-                            <span class="feed-text">GMKtec EVO X2 — <b>NPU 50 TOPS</b> hoàn tất training model nhỏ</span>
-                            <span class="feed-time">18 phút trước</span>
-                        </div>
-                        <div class="feed-item">
-                            <span class="feed-dot blue"></span>
-                            <span class="feed-text">Aoostar GOD55 — Kết nối <b>4 màn hình 4K</b> đồng thời qua USB4</span>
-                            <span class="feed-time">24 phút trước</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Tech Metrics -->
-                <div class="ai-metrics reveal delay-1">
-                    <div class="metric-card">
-                        <div class="metric-icon"><i class="ph-fill ph-brain"></i></div>
-                        <div class="metric-info">
-                            <div class="metric-title">AI TOPS Tổng Hợp</div>
-                            <div class="metric-value">50+ <span>TOPS</span></div>
-                        </div>
-                        <div class="metric-ring" style="--pct:82"></div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon"><i class="ph-fill ph-thermometer"></i></div>
-                        <div class="metric-info">
-                            <div class="metric-title">Nhiệt Độ Vận Hành</div>
-                            <div class="metric-value">74°C <span>avg</span></div>
-                        </div>
-                        <div class="metric-ring" style="--pct:74"></div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon"><i class="ph-fill ph-lightning"></i></div>
-                        <div class="metric-info">
-                            <div class="metric-title">Tiêu Thụ Điện</div>
-                            <div class="metric-value">28W <span>TDP</span></div>
-                        </div>
-                        <div class="metric-ring" style="--pct:28"></div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-icon"><i class="ph-fill ph-hard-drive"></i></div>
-                        <div class="metric-info">
-                            <div class="metric-title">Tốc Độ Lưu Trữ</div>
-                            <div class="metric-value">7.4 <span>GB/s</span></div>
-                        </div>
-                        <div class="metric-ring" style="--pct:93"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- News Section -->
 
     <!-- News Section -->
     <section id="news" class="news-section">
