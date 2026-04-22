@@ -3240,19 +3240,21 @@ ul {
 
 /* --- SCROLL PROGRESS BAR --- */
 .scroll-progress-container {
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
     height: 3px;
     background: transparent;
-    z-index: 1000;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
 }
 
-.header.scrolled .scroll-progress-container {
-    position: fixed;
-    top: 0;
-    bottom: auto;
+.scroll-progress-container.active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .scroll-progress-bar {
@@ -3267,10 +3269,35 @@ ul {
     .sidebar-header {
         flex-direction: row-reverse !important;
     }
+    .hero-3d {
+        padding-top: 100px !important;
+    }
 }
 
 @media (max-width: 768px) {
+    .top-bar {
+        padding: 5px 0 !important;
+    }
     .top-bar-container {
-        padding-bottom: 5px !important;
+        padding-bottom: 0 !important;
+    }
+    .highlight-box {
+        justify-content: flex-start !important;
+        padding: 15px !important;
+    }
+    .highlight-box p {
+        font-size: 0.9rem !important;
+        text-align: left !important;
+    }
+    .footer-col {
+        align-items: flex-start !important;
+    }
+    .footer-col ul {
+        text-align: left !important;
+        width: 100%;
+    }
+    .footer-company-info .company-details .detail-item {
+        justify-content: flex-start !important;
+        text-align: left !important;
     }
 }
