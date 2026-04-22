@@ -3195,25 +3195,35 @@ ul {
         flex-wrap: wrap;
     }
 
-    /* Floating tech items - scaled down for mobile */
+    /* Floating tech items - mobile: use dedicated scaled animation */
+    @keyframes floatMobileItem1 {
+        0%, 100% { transform: scale(0.75) translateY(0px); }
+        50%       { transform: scale(0.75) translateY(-8px); }
+    }
+    @keyframes floatMobileItem2 {
+        0%, 100% { transform: scale(0.75) translateY(0px); }
+        50%       { transform: scale(0.75) translateY(-8px); }
+    }
     .tech-float-item {
         display: flex;
+        animation: none; /* reset desktop animation */
         transform: scale(0.75);
-        transform-origin: top left;
         padding: 8px 12px;
         font-size: 0.8rem;
     }
 
     .tech-item-1 {
-        top: 8%;
-        left: 0;
+        top: 6%;
+        left: 4px;
         transform-origin: top left;
+        animation: floatMobileItem1 5s ease-in-out infinite !important;
     }
 
     .tech-item-2 {
-        bottom: 14%;
-        right: 0;
+        bottom: 12%;
+        right: 4px;
         transform-origin: bottom right;
+        animation: floatMobileItem2 5s ease-in-out infinite 0.5s !important;
     }
 
     .energy-ring {
