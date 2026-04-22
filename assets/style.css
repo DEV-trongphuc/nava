@@ -3177,11 +3177,19 @@ ul {
 
     .hero-image {
         height: 320px;
-        overflow: hidden;
+        /* NO overflow:hidden here - it clips the absolute-positioned slides */
     }
 
     .hero-3d {
-        overflow: hidden;
+        overflow: hidden; /* clips the ring at section level */
+    }
+
+    .hero-slider {
+        height: 320px;
+    }
+
+    .hero-slide {
+        height: 320px;
     }
 
     /* 3. Product Slider Cards (Siêu Phẩm Công Nghệ) */
