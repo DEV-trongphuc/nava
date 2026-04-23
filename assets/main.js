@@ -277,14 +277,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 const el = entry.target;
                 const target = parseInt(el.dataset.target);
-                const duration = 1800;
-                const step = Math.ceil(target / (duration / 16));
-                let current = 0;
+                const duration = 2000;
+                const frames = 60;
+                const stepTime = duration / frames;
+                let currentFrame = 0;
+                
                 const timer = setInterval(() => {
-                    current = Math.min(current + step, target);
-                    el.textContent = current.toLocaleString('vi-VN');
-                    if (current >= target) clearInterval(timer);
-                }, 16);
+                    currentFrame++;
+                    if (currentFrame >= frames) {
+                        el.textContent = target.toLocaleString('vi-VN');
+                        clearInterval(timer);
+                    } else {
+                        // Ease out cubic
+                        const progress = currentFrame / frames;
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const currentVal = Math.floor(target * easeOut);
+                        el.textContent = currentVal.toLocaleString('vi-VN');
+                    }
+                }, stepTime);
                 counterObserver.unobserve(el);
             }
         });
@@ -356,6 +366,83 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.3 });
         termObserver.observe(terminalEl);
+    }
+
+    // ============================================
+    // 11. THEME TOGGLE
+    // ============================================
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('nava-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('nava-theme', 'dark');
+            }
+        });
+    }
+    // ============================================
+    // 12. 3D TILT EFFECT & MAGNETIC BUTTONS (Tech Animations)
+    // ============================================
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+    
+    if (!isTouchDevice) {
+        // A. 3D Tilt for product cards & bento boxes
+        const tiltElements = document.querySelectorAll('.product-card, .bento-box');
+        
+        tiltElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
+                
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                let glare = el.querySelector('.glare');
+                if(!glare) {
+                    glare = document.createElement('div');
+                    glare.className = 'glare';
+                    el.appendChild(glare);
+                    el.style.position = 'relative';
+                    el.style.overflow = 'hidden';
+                }
+                const percentX = (x / rect.width) * 100;
+                const percentY = (y / rect.height) * 100;
+                glare.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%)`;
+                glare.style.opacity = '1';
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+                const glare = el.querySelector('.glare');
+                if(glare) glare.style.opacity = '0';
+            });
+        });
+
+        // B. Magnetic Hover for CTA buttons
+        const magneticBtns = document.querySelectorAll('.hero-cta .btn-pill, .social-btn');
+        
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0px, 0px)';
+            });
+        });
     }
 
 });
