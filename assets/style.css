@@ -1200,12 +1200,14 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary);
+    background: transparent;
     border-radius: 4px;
+    transition: background-color 0.3s;
 }
 
+#nava-master-wrapper:hover::-webkit-scrollbar-thumb,
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
+    background: var(--primary);
 }
 
 ::selection {
@@ -3808,8 +3810,8 @@ ul {
     }
 
     .spec-item {
-        padding: 10px 16px !important;
-        gap: 8px !important;
+        padding: 12px 24px !important;
+        gap: 12px !important;
     }
 
     /* Benefit cards spacing from hero socials */
