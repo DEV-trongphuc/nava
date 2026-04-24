@@ -154,7 +154,7 @@ ul {
 
 /* --- HEADER PREMIUM (DOUBLE MENU) --- */
 .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
@@ -478,7 +478,7 @@ ul {
 
 /* --- HERO SECTION 3D --- */
 .hero-3d {
-    padding: 220px 0 100px;
+    padding: 80px 0 100px;
     position: relative;
 }
 
@@ -1994,7 +1994,10 @@ ul {
 
     /* --- HERO MOBILE REFINEMENT --- */
     .hero-3d {
-        padding: 30px 0;
+        padding: 40px 0 40px;
+    }
+
+    .hero-3d-container {
         text-align: center;
     }
 
@@ -3740,7 +3743,7 @@ ul {
     /* Removed broken sidebar-header row-reverse */
 
     .hero-3d {
-        padding-top: 100px !important;
+        padding-top: 30px !important;
     }
 }
 
