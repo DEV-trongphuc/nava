@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const containerNode = header.parentElement;
             masterWrapper = document.createElement('div');
             masterWrapper.id = 'nava-master-wrapper';
-            
             // Move all children except scripts to masterWrapper
             const children = Array.from(containerNode.childNodes);
             children.forEach(child => {
@@ -24,6 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(masterWrapper);
         }
     }
+
+    // Force-hide Sapo's layout completely now that we are safe in the body
+    const sapoBody = document.querySelector('.page-body');
+    if (sapoBody && sapoBody !== masterWrapper.parentNode) {
+        sapoBody.style.display = 'none';
+    }
+    
+    // Force-hide any floating widgets
+    const floatingWidgets = document.querySelectorAll('.isocial_bubble, .fix-phone, .zalo-chat-widget');
+    floatingWidgets.forEach(widget => {
+        widget.style.display = 'none';
+    });
 
     // 1. INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
     const revealElements = document.querySelectorAll('.reveal');
