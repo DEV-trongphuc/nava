@@ -465,9 +465,14 @@ ul {
 }
 
 .mega-card img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.mini-pc-menu .mega-card img {
     width: 80px;
     height: 80px;
-    object-fit: contain;
 }
 
 .mega-card span {
