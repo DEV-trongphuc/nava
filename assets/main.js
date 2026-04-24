@@ -113,6 +113,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mobileNavContainer && mobileNavContainer.children.length === 0) {
         mainNavItems.forEach(item => {
             const clone = item.cloneNode(true);
+            const dropdown = clone.querySelector('.dropdown-menu');
+            if (dropdown) {
+                const parentText = clone.querySelector('a > span')?.innerText || '';
+                const header = document.createElement('div');
+                header.className = 'mobile-submenu-header';
+                header.innerHTML = `<h3>${parentText}</h3>`;
+                dropdown.prepend(header);
+            }
             mobileNavContainer.appendChild(clone);
         });
     }
@@ -122,6 +130,22 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebarDrawer.classList.add('active');
             sidebarOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            if (mobileNavContainer) {
+                const hasOpen = mobileNavContainer.querySelector('.nav-item.open');
+                if (!hasOpen) {
+                    const dropdowns = mobileNavContainer.querySelectorAll('.nav-item.has-dropdown');
+                    let targetDropdown = dropdowns[0];
+                    dropdowns.forEach(d => {
+                        if (d.textContent.includes('Mini PC')) {
+                            targetDropdown = d;
+                        }
+                    });
+                    if (targetDropdown) {
+                        targetDropdown.classList.add('open');
+                    }
+                }
+            }
         } else {
             sidebarDrawer.classList.remove('active');
             sidebarOverlay.classList.remove('active');
@@ -428,6 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { cls: 't-success', html: '[PASS] LLM Inference: <b>42 tok/s</b>' },
         { cls: 't-warn', html: '[TEMP] Peak Temp: 74°C ✓ Under threshold' },
         { cls: 't-success', html: '[PASS] Total Power Draw: <b>28W</b> ✅' },
+        { cls: 't-success', html: '[PASS] Size (Space Saving): <b>2000%</b> ✨' },
         { cls: 't-blink', html: '<span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span>' },
     ];
 
@@ -558,7 +583,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (openWarrantyBtn) openWarrantyBtn.addEventListener('click', openModal);
         if (openWarrantyBtnFooter) openWarrantyBtnFooter.addEventListener('click', openModal);
-        if (openWarrantyBtnHeader) openWarrantyBtnHeader.addEventListener('click', openModal);
+        
+        document.querySelectorAll('#open-warranty-modal-header').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                openModal(e);
+                const sidebarDrawer = document.querySelector('.sidebar-drawer');
+                const sidebarOverlay = document.querySelector('.sidebar-overlay');
+                if (sidebarDrawer) sidebarDrawer.classList.remove('active');
+                if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+            });
+        });
 
         closeWarrantyBtn.addEventListener('click', () => {
             warrantyModal.classList.remove('active');
@@ -571,6 +605,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             }
         });
+    }
+    // 13. TESTIMONIAL SLIDER REBORN
+    const testiTrack = document.querySelector('.testimonial-track');
+    const testiCards = document.querySelectorAll('.testimonial-card');
+    const testiDotsContainer = document.querySelector('.testi-dots');
+
+    if (testiTrack && testiCards.length > 0 && testiDotsContainer) {
+        let currentIndex = 0;
+        let cardsPerView = 3;
+        let testiAutoPlay;
+
+        function updateLayout() {
+            if (window.innerWidth <= 768) cardsPerView = 1;
+            else if (window.innerWidth <= 1024) cardsPerView = 2;
+            else cardsPerView = 3;
+            
+            buildDots();
+            goToSlide(0);
+        }
+
+        function buildDots() {
+            testiDotsContainer.innerHTML = '';
+            const numDots = Math.max(1, testiCards.length - cardsPerView + 1);
+            for (let i = 0; i < numDots; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+                dot.addEventListener('click', () => {
+                    goToSlide(i);
+                    resetAutoPlay();
+                });
+                testiDotsContainer.appendChild(dot);
+            }
+        }
+
+        function goToSlide(index) {
+            const numDots = Math.max(1, testiCards.length - cardsPerView + 1);
+            if (index >= numDots) index = 0;
+            if (index < 0) index = numDots - 1;
+            
+            currentIndex = index;
+            
+            const cardWidth = testiCards[0].offsetWidth;
+            const gap = 30; // From CSS
+            const translation = -(currentIndex * (cardWidth + gap));
+            
+            testiTrack.style.transform = `translateX(${translation}px)`;
+            
+            const dots = document.querySelectorAll('.testi-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+        }
+
+        function resetAutoPlay() {
+            clearInterval(testiAutoPlay);
+            testiAutoPlay = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 4000);
+        }
+
+        window.addEventListener('resize', () => {
+            updateLayout();
+        });
+
+        // Initialize
+        updateLayout();
+        resetAutoPlay();
+        
+        testiTrack.parentElement.addEventListener('mouseenter', () => clearInterval(testiAutoPlay));
+        testiTrack.parentElement.addEventListener('mouseleave', resetAutoPlay);
     }
 
 });
