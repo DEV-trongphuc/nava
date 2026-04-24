@@ -2273,14 +2273,14 @@ ul {
 }
 
 .header.scrolled {
-    transform: translateY(-110px);
+    transform: translateY(calc(-1 * var(--top-bar-height, 81px)));
     /* Height of top-bar on PC */
     box-shadow: var(--shadow-md);
 }
 
 @media (max-width: 991px) {
     .header.scrolled {
-        transform: translateY(-115px);
+        transform: translateY(calc(-1 * var(--top-bar-height, 150px)));
         /* Height of top-bar row + search row on mobile */
     }
 }

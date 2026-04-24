@@ -36,6 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. SMART STICKY HEADER & SCROLL PROGRESS & BACK TO TOP
     const header = document.querySelector('.header');
+
+    // Dynamic top-bar height calculation for sticky header
+    const updateTopBarHeight = () => {
+        const topBar = document.querySelector('.top-bar');
+        if (topBar && header) {
+            header.style.setProperty('--top-bar-height', `${topBar.offsetHeight}px`);
+        }
+    };
+    updateTopBarHeight();
+    window.addEventListener('resize', updateTopBarHeight);
+
     const progressBar = document.getElementById("myBar");
     const progressContainer = document.getElementById("progressContainer");
     const backToTopBtn = document.getElementById("backToTop");
