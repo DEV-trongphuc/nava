@@ -502,10 +502,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. TERMINAL TYPING ANIMATION (on scroll in)
     // ============================================
     const terminalLines = [
-        { cls: '', html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span>' },
-        { cls: 't-out', html: '[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz' },
-        { cls: 't-out', html: '[INFO] RAM: 64GB LPDDR5X-6400' },
-        { cls: 't-out', html: '[INFO] GPU: Radeon 890M iGPU' },
+        { cls: '', html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device asus-nuc-15-pro</span>' },
+        { cls: 't-out', html: '[INFO] CPU: Intel Core Ultra 5 225H' },
+        { cls: 't-out', html: '[INFO] RAM: DDR5 5600MHz SODIMM' },
+        { cls: 't-out', html: '[INFO] GPU: Intel Arc Graphics' },
         { cls: 't-success', html: '[PASS] Cinebench R24 Multi: <b>24,819 pts</b>' },
         { cls: 't-success', html: '[PASS] CrystalDisk Read: <b>7,412 MB/s</b>' },
         { cls: 't-success', html: '[PASS] LLM Inference: <b>42 tok/s</b>' },
