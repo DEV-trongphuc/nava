@@ -5533,3 +5533,24 @@ h1.page_name,
     padding: 0 !important;
     margin: 0 !important;
 }
+
+/* ================================================== */
+/* MASTER SAPO ESCAPE MODAL */
+/* ================================================== */
+#nava-master-wrapper {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: var(--bg-primary) !important;
+    z-index: 2147483647 !important; /* Maximum z-index to cover EVERYTHING */
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scroll-behavior: smooth;
+    isolation: isolate; /* Create new stacking context */
+}
+/* Hide scrollbar for Sapo's body since our wrapper scrolls */
+body:has(#nava-master-wrapper) {
+    overflow: hidden !important;
+}

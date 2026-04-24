@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        root: null, threshold: 0.15, rootMargin: "0px 0px -50px 0px"
+        root: document.getElementById('nava-master-wrapper') || null, 
+        threshold: 0.15, 
+        rootMargin: "0px 0px -50px 0px"
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
@@ -53,8 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastScroll = 0;
     let isScrolling = false;
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    // Use master wrapper if it exists (for Sapo), else fallback to window
+    const masterWrapper = document.getElementById('nava-master-wrapper');
+    const scrollTarget = masterWrapper || window;
+
+    scrollTarget.addEventListener('scroll', () => {
+        const currentScroll = masterWrapper ? masterWrapper.scrollTop : (window.pageYOffset || document.documentElement.scrollTop);
 
         // Header Sticky Logic: hide on scroll down, show on scroll up
         if (currentScroll > 150) {
@@ -73,7 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Calculate Scroll Percentage
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollHeight = masterWrapper ? masterWrapper.scrollHeight : document.documentElement.scrollHeight;
+        const clientHeight = masterWrapper ? masterWrapper.clientHeight : document.documentElement.clientHeight;
+        const height = scrollHeight - clientHeight;
         const scrollPercentage = (height > 0) ? (currentScroll / height) * 100 : 0;
 
         // Back To Top Button Logic
@@ -95,10 +103,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            if (masterWrapper) {
+                masterWrapper.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 
@@ -418,7 +433,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 counterObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.5 });
+    }, { 
+        root: masterWrapper || null,
+        threshold: 0.5 
+    });
 
     statNumbers.forEach(el => counterObserver.observe(el));
 
@@ -435,7 +453,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 benchObserver.unobserve(el);
             }
         });
-    }, { threshold: 0.3 });
+    }, { 
+        root: masterWrapper || null,
+        threshold: 0.3 
+    });
 
     benchFills.forEach(el => benchObserver.observe(el));
 
@@ -485,7 +506,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     termObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.3 });
+        }, { 
+            root: masterWrapper || null,
+            threshold: 0.3 
+        });
         termObserver.observe(terminalEl);
     }
 
