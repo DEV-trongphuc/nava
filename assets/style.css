@@ -414,16 +414,16 @@ ul {
 .dropdown-menu.mega-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 20px;
+    gap: 20px;
+    padding: 25px;
     width: max-content;
 }
 
 .mega-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
+    gap: 15px;
+    padding: 16px 24px;
     background: var(--bg-gray);
     border-radius: var(--radius-md);
     border: 1px solid transparent;
@@ -438,14 +438,14 @@ ul {
 }
 
 .mega-card img {
-    width: 24px;
-    height: 24px;
+    width: 36px;
+    height: 36px;
     object-fit: contain;
 }
 
 .mega-card span {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--text-dark);
 }
 
