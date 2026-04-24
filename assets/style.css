@@ -5514,10 +5514,16 @@ section.brand-slider:not(#brands) {
 
 /* FALLBACK: If Sapo's default page template is still used, aggressively hide its wrappers */
 .breadcrumbs,
-.page-title,
 .com_info .page-title h1,
+h1.page_name,
 .breadcrumb {
     display: none !important;
+}
+
+.com_info .page-title {
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
 }
 
 .com_info .container,
