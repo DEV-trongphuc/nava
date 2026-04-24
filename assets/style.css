@@ -93,17 +93,17 @@ ul {
 
 /* --- BACKGROUND DECOR (GLOWING ORBS) --- */
 .bg-decor-logo {
-    position: absolute;
-    width: 600px;
-    opacity: 0.03;
-    z-index: -1;
-    pointer-events: none;
+    position: absolute !important;
+    width: 600px !important;
+    opacity: 0.03 !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
 }
 
 .bg-decor-logo.top-left {
-    top: -100px;
-    left: -200px;
-    transform: rotate(-15deg);
+    top: -100px !important;
+    left: -200px !important;
+    transform: rotate(-15deg) !important;
 }
 
 .bg-glow {
@@ -5510,4 +5510,20 @@ ul {
 footer.bg-white.pt-5,
 section.brand-slider:not(#brands) {
     display: none !important;
+}
+
+/* FALLBACK: If Sapo's default page template is still used, aggressively hide its wrappers */
+.breadcrumbs,
+.page-title,
+.com_info .page-title h1,
+.breadcrumb {
+    display: none !important;
+}
+
+.com_info .container,
+.contentWarp .container {
+    max-width: 100% !important;
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
