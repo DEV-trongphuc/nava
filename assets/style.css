@@ -5564,3 +5564,12 @@ h1.page_name,
 body:has(#nava-master-wrapper) {
     overflow: hidden !important;
 }
+
+/* Hide scrollbar on mobile */
+@media (max-width: 991px) {
+    ::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+}
