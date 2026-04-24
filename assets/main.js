@@ -78,7 +78,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isScrolling = false;
 
     // Use master wrapper if it exists (for Sapo), else fallback to window
-    const masterWrapper = document.getElementById('nava-master-wrapper');
+    // masterWrapper was already declared at the top of the file
+    masterWrapper = document.getElementById('nava-master-wrapper');
     const scrollTarget = masterWrapper || window;
 
     scrollTarget.addEventListener('scroll', () => {
