@@ -5496,3 +5496,18 @@ ul {
     border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* --- SAPO OVERRIDES & RESETS --- */
+/* Hide default Sapo floating widgets when viewing this landing page */
+.fix-phone,
+.isocial_bubble.position-fixed,
+.isocial_bubble,
+.zalo-chat-widget {
+    display: none !important;
+}
+
+/* Hide Sapo's default footer and brand slider at the bottom of the page */
+footer.bg-white.pt-5,
+section.brand-slider:not(#brands) {
+    display: none !important;
+}
