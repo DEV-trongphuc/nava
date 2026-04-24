@@ -1,4 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // ============================================
+    // 0. AUTO-INJECT MASTER WRAPPER (SAPO RESCUE)
+    // ============================================
+    let masterWrapper = document.getElementById('nava-master-wrapper');
+    if (!masterWrapper) {
+        const header = document.querySelector('.header');
+        if (header && header.parentElement) {
+            const containerNode = header.parentElement;
+            masterWrapper = document.createElement('div');
+            masterWrapper.id = 'nava-master-wrapper';
+            
+            // Move all children except scripts to masterWrapper to avoid re-executing scripts
+            const children = Array.from(containerNode.childNodes);
+            children.forEach(child => {
+                if (child.nodeName !== 'SCRIPT') {
+                    masterWrapper.appendChild(child);
+                }
+            });
+            containerNode.prepend(masterWrapper);
+        }
+    }
+
     // 1. INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
     const revealElements = document.querySelectorAll('.reveal');
 
