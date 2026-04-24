@@ -2211,7 +2211,9 @@ ul {
 }
 
 .brand-title {
-    text-align: center;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 50px;
@@ -2223,6 +2225,12 @@ ul {
     -webkit-text-fill-color: transparent;
     color: #2563eb;
     letter-spacing: 2px;
+}
+
+.brand-slider {
+    display: block !important;
+    width: 100% !important;
+    clear: both;
 }
 
 .slider-wrapper {
@@ -3809,9 +3817,26 @@ ul {
         font-size: 1.5rem !important;
     }
 
+    .tech-specs-section {
+        padding: 35px 0 35px !important;
+    }
+
     .spec-item {
-        padding: 12px 24px !important;
-        gap: 12px !important;
+        padding: 16px 28px !important;
+        gap: 16px !important;
+    }
+
+    .spec-item .spec-icon {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .spec-item .spec-name {
+        font-size: 0.95rem !important;
+    }
+
+    .spec-item .spec-value {
+        font-size: 0.9rem !important;
     }
 
     /* Benefit cards spacing from hero socials */
