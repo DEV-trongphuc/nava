@@ -397,6 +397,30 @@ ul {
     transform: translateY(0);
 }
 
+/* --- MEGA MENU OVERLAY FOCUS --- */
+@media (min-width: 992px) {
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(2px);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+    }
+
+    body:has(.menu-bar .nav-item.has-dropdown:hover)::after {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .dropdown-menu li a {
     display: block;
     padding: 10px 20px;
