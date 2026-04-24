@@ -1187,11 +1187,11 @@ ul {
 
 /* --- CUSTOM SCROLLBAR & SELECTION --- */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px; /* slightly thinner for a modern look */
 }
 
 ::-webkit-scrollbar-track {
-    background: #0f172a;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1200,7 +1200,7 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #3385ff;
+    background: var(--primary-dark);
 }
 
 ::selection {
