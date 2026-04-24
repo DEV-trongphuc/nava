@@ -3,21 +3,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. AUTO-INJECT MASTER WRAPPER (SAPO RESCUE)
     // ============================================
     let masterWrapper = document.getElementById('nava-master-wrapper');
-    if (!masterWrapper) {
+    
+    // Always force masterWrapper to be a direct child of body to escape Sapo's CSS `transform` or `filter` stacking contexts
+    if (masterWrapper && masterWrapper.parentNode !== document.body) {
+        document.body.appendChild(masterWrapper);
+    } else if (!masterWrapper) {
         const header = document.querySelector('.header');
         if (header && header.parentElement) {
             const containerNode = header.parentElement;
             masterWrapper = document.createElement('div');
             masterWrapper.id = 'nava-master-wrapper';
             
-            // Move all children except scripts to masterWrapper to avoid re-executing scripts
+            // Move all children except scripts to masterWrapper
             const children = Array.from(containerNode.childNodes);
             children.forEach(child => {
                 if (child.nodeName !== 'SCRIPT') {
                     masterWrapper.appendChild(child);
                 }
             });
-            containerNode.prepend(masterWrapper);
+            document.body.appendChild(masterWrapper);
         }
     }
 
