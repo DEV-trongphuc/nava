@@ -5008,6 +5008,25 @@ ul {
     background: rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .cat-card img {
+    filter: brightness(2) drop-shadow(0 4px 6px rgba(255, 255, 255, 0.1));
+}
+
+[data-theme="dark"] .cat-card span {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .bench-name {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .bench-name i {
+    color: var(--primary-light);
+    filter: drop-shadow(0 0 8px rgba(102, 163, 255, 0.6));
+}
+
 [data-theme="dark"] .cta-neon-box .btn-white {
     background: var(--primary);
     color: #fff;
