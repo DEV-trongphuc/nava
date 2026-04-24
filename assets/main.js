@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. INTERSECTION OBSERVER FOR SCROLL ANIMATIONS
     const revealElements = document.querySelectorAll('.reveal');
-    
+
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -150,10 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. PRODUCT SLIDER DOTS LOGIC (MOBILE)
     const productGrid = document.querySelector('.product-grid');
     const dotsContainer = document.querySelector('.slider-dots');
-    
+
     if (productGrid && dotsContainer && window.innerWidth <= 991) {
         const cards = productGrid.querySelectorAll('.product-card');
-        
+
         cards.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
@@ -169,9 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         productGrid.addEventListener('scroll', () => {
             const scrollLeft = productGrid.scrollLeft;
-            const cardWidth = cards[0].offsetWidth + 20; 
+            const cardWidth = cards[0].offsetWidth + 20;
             const activeIndex = Math.round(scrollLeft / cardWidth);
-            
+
             const dots = dotsContainer.querySelectorAll('.dot');
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === activeIndex);
@@ -201,27 +201,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // 7. HERO PRODUCT SLIDER
     // ============================================
-    const heroSlides    = document.querySelectorAll('.hero-slide');
-    const heroDots      = document.querySelectorAll('.h-dot');
-    const floatLabel1   = document.getElementById('floatLabel1');
-    const floatSub1     = document.getElementById('floatSub1');
-    const floatIcon1    = document.getElementById('floatIcon1');
-    const floatLabel2   = document.getElementById('floatLabel2');
-    const floatSub2     = document.getElementById('floatSub2');
-    const floatIcon2    = document.getElementById('floatIcon2');
-    const floatItem1    = document.getElementById('floatItem1');
-    const floatItem2    = document.getElementById('floatItem2');
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.h-dot');
+    const floatLabel1 = document.getElementById('floatLabel1');
+    const floatSub1 = document.getElementById('floatSub1');
+    const floatIcon1 = document.getElementById('floatIcon1');
+    const floatLabel2 = document.getElementById('floatLabel2');
+    const floatSub2 = document.getElementById('floatSub2');
+    const floatIcon2 = document.getElementById('floatIcon2');
+    const floatItem1 = document.getElementById('floatItem1');
+    const floatItem2 = document.getElementById('floatItem2');
 
     // Data per slide: [icon-class, label, sub, icon2-class, label2, sub2]
     const heroSlideData = [
-        { i1: 'ph-fill ph-cpu',          l1: 'Core Ultra 9',   s1: 'Xử lý đỉnh cao',
-          i2: 'ph-fill ph-lightning',    l2: 'AI NPU',          s2: 'Tích hợp sẵn' },
-        { i1: 'ph-fill ph-game-controller', l1: 'ROG Gaming',   s1: 'Hiệu năng đỉnh',
-          i2: 'ph-fill ph-plugs-connected', l2: 'OCuLink 40G',  s2: 'eGPU tốc độ cao' },
-        { i1: 'ph-fill ph-graphics-card',   l1: 'RTX 4090',     s1: 'Sức mạnh đồ họa',
-          i2: 'ph-fill ph-usb',             l2: 'USB4 / TB4',   s2: 'Kết nối siêu tốc' },
-        { i1: 'ph-fill ph-memory',          l1: 'LPDDR5X 6400', s1: 'Băng thông đỉnh',
-          i2: 'ph-fill ph-hard-drive',      l2: 'NVMe PCIe 4.0',s2: '7,400 MB/s' },
+        {
+            i1: 'ph-fill ph-cpu', l1: 'Core Ultra 9', s1: 'Xử lý đỉnh cao',
+            i2: 'ph-fill ph-lightning', l2: 'AI NPU', s2: 'Tích hợp sẵn'
+        },
+        {
+            i1: 'ph-fill ph-game-controller', l1: 'ROG Gaming', s1: 'Hiệu năng đỉnh',
+            i2: 'https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png', l2: 'Openclaw', s2: 'Sức mạnh vượt trội'
+        },
+        {
+            i1: 'ph-fill ph-graphics-card', l1: 'RTX 5090', s1: 'Sức mạnh đồ họa',
+            i2: 'ph-fill ph-usb', l2: 'USB4 / TB4', s2: 'Kết nối siêu tốc'
+        },
+        {
+            i1: 'ph-fill ph-memory', l1: 'LPDDR5X 6400', s1: 'Băng thông đỉnh',
+            i2: 'ph-fill ph-hard-drive', l2: 'NVMe PCIe 4.0', s2: '7,400 MB/s'
+        },
+        {
+            i1: 'ph-fill ph-game-controller', l1: 'ROG NUC', s1: 'Sức mạnh tuyệt đối',
+            i2: 'https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png', l2: 'Openclaw', s2: 'Sức mạnh vượt trội'
+        },
     ];
 
     let heroCurrentSlide = 0;
@@ -243,12 +255,32 @@ document.addEventListener('DOMContentLoaded', () => {
             floatItem2.classList.add('float-exit');
             setTimeout(() => {
                 const d = heroSlideData[heroCurrentSlide];
-                floatIcon1.className = d.i1;
+
+                const setIcon = (el, iconVal) => {
+                    if (iconVal.startsWith('http')) {
+                        el.className = '';
+                        el.style.backgroundImage = `url(${iconVal})`;
+                        el.style.backgroundSize = 'contain';
+                        el.style.backgroundRepeat = 'no-repeat';
+                        el.style.backgroundPosition = 'center';
+                        el.style.width = '24px';
+                        el.style.height = '24px';
+                        el.style.display = 'inline-block';
+                    } else {
+                        el.style.backgroundImage = '';
+                        el.style.width = '';
+                        el.style.height = '';
+                        el.style.display = '';
+                        el.className = iconVal;
+                    }
+                };
+
+                setIcon(floatIcon1, d.i1);
                 floatLabel1.textContent = d.l1;
-                floatSub1.textContent   = d.s1;
-                floatIcon2.className = d.i2;
+                floatSub1.textContent = d.s1;
+                setIcon(floatIcon2, d.i2);
                 floatLabel2.textContent = d.l2;
-                floatSub2.textContent   = d.s2;
+                floatSub2.textContent = d.s2;
                 floatItem1.classList.remove('float-exit');
                 floatItem2.classList.remove('float-exit');
                 floatItem1.classList.add('float-enter');
@@ -276,6 +308,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 startHeroAutoPlay();
             });
         });
+
+        const heroSliderEl = document.getElementById('heroSlider');
+        const heroPrevBtn = document.getElementById('heroPrevBtn');
+        const heroNextBtn = document.getElementById('heroNextBtn');
+
+        if (heroPrevBtn) heroPrevBtn.addEventListener('click', () => {
+            clearInterval(heroAutoPlay);
+            goToHeroSlide(heroCurrentSlide - 1);
+            startHeroAutoPlay();
+        });
+
+        if (heroNextBtn) heroNextBtn.addEventListener('click', () => {
+            clearInterval(heroAutoPlay);
+            goToHeroSlide(heroCurrentSlide + 1);
+            startHeroAutoPlay();
+        });
+
+        const heroImageContainer = document.querySelector('.hero-image');
+        if (heroImageContainer) {
+            let startX = 0;
+            let endX = 0;
+            
+            heroImageContainer.addEventListener('touchstart', e => {
+                startX = e.changedTouches[0].screenX;
+            }, {passive: true});
+
+            heroImageContainer.addEventListener('touchend', e => {
+                endX = e.changedTouches[0].screenX;
+                handleHeroSwipe();
+            }, {passive: true});
+
+            heroImageContainer.addEventListener('mousedown', e => {
+                startX = e.screenX;
+            });
+
+            heroImageContainer.addEventListener('mouseup', e => {
+                endX = e.screenX;
+                handleHeroSwipe();
+            });
+
+            function handleHeroSwipe() {
+                const threshold = 50;
+                if (endX < startX - threshold) {
+                    clearInterval(heroAutoPlay);
+                    goToHeroSlide(heroCurrentSlide + 1);
+                    startHeroAutoPlay();
+                } else if (endX > startX + threshold) {
+                    clearInterval(heroAutoPlay);
+                    goToHeroSlide(heroCurrentSlide - 1);
+                    startHeroAutoPlay();
+                }
+            }
+        }
     }
 
     // ============================================
@@ -292,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const frames = 60;
                 const stepTime = duration / frames;
                 let currentFrame = 0;
-                
+
                 const timer = setInterval(() => {
                     currentFrame++;
                     if (currentFrame >= frames) {
@@ -334,16 +419,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. TERMINAL TYPING ANIMATION (on scroll in)
     // ============================================
     const terminalLines = [
-        { cls: '',          html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span>' },
-        { cls: 't-out',     html: '[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz' },
-        { cls: 't-out',     html: '[INFO] RAM: 64GB LPDDR5X-6400' },
-        { cls: 't-out',     html: '[INFO] GPU: Radeon 890M iGPU' },
+        { cls: '', html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device minisforum-um890</span>' },
+        { cls: 't-out', html: '[INFO] CPU: AMD Ryzen 9 8945HX @ 5.2GHz' },
+        { cls: 't-out', html: '[INFO] RAM: 64GB LPDDR5X-6400' },
+        { cls: 't-out', html: '[INFO] GPU: Radeon 890M iGPU' },
         { cls: 't-success', html: '[PASS] Cinebench R24 Multi: <b>24,819 pts</b>' },
         { cls: 't-success', html: '[PASS] CrystalDisk Read: <b>7,412 MB/s</b>' },
         { cls: 't-success', html: '[PASS] LLM Inference: <b>42 tok/s</b>' },
-        { cls: 't-warn',    html: '[TEMP] Peak Temp: 74°C ✓ Under threshold' },
+        { cls: 't-warn', html: '[TEMP] Peak Temp: 74°C ✓ Under threshold' },
         { cls: 't-success', html: '[PASS] Total Power Draw: <b>28W</b> ✅' },
-        { cls: 't-blink',   html: '<span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span>' },
+        { cls: 't-blink', html: '<span class="t-cursor">█</span> Benchmark complete — Score: <span class="t-highlight">ELITE</span>' },
     ];
 
     const terminalBody = document.getElementById('terminalOutput');
@@ -399,27 +484,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. 3D TILT EFFECT & MAGNETIC BUTTONS (Tech Animations)
     // ============================================
     const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
-    
+
     if (!isTouchDevice) {
         // A. 3D Tilt for product cards & bento boxes
         const tiltElements = document.querySelectorAll('.product-card, .bento-box');
-        
+
         tiltElements.forEach(el => {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                
+
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                
+
                 const rotateX = ((y - centerY) / centerY) * -5;
                 const rotateY = ((x - centerX) / centerX) * 5;
-                
+
                 el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-                
+
                 let glare = el.querySelector('.glare');
-                if(!glare) {
+                if (!glare) {
                     glare = document.createElement('div');
                     glare.className = 'glare';
                     el.appendChild(glare);
@@ -431,17 +516,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 glare.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%)`;
                 glare.style.opacity = '1';
             });
-            
+
             el.addEventListener('mouseleave', () => {
                 el.style.transform = `perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
                 const glare = el.querySelector('.glare');
-                if(glare) glare.style.opacity = '0';
+                if (glare) glare.style.opacity = '0';
             });
         });
 
         // B. Magnetic Hover for CTA buttons
         const magneticBtns = document.querySelectorAll('.hero-cta .btn-pill, .social-btn');
-        
+
         magneticBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
                 const rect = btn.getBoundingClientRect();
@@ -449,7 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const y = e.clientY - rect.top - rect.height / 2;
                 btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
             });
-            
+
             btn.addEventListener('mouseleave', () => {
                 btn.style.transform = 'translate(0px, 0px)';
             });
@@ -460,6 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 12. WARRANTY MODAL
     const openWarrantyBtn = document.getElementById('open-warranty-modal');
     const openWarrantyBtnFooter = document.getElementById('open-warranty-modal-footer');
+    const openWarrantyBtnHeader = document.getElementById('open-warranty-modal-header');
     const warrantyModal = document.getElementById('warranty-modal');
     const closeWarrantyBtn = document.getElementById('close-warranty-modal');
 
@@ -472,6 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (openWarrantyBtn) openWarrantyBtn.addEventListener('click', openModal);
         if (openWarrantyBtnFooter) openWarrantyBtnFooter.addEventListener('click', openModal);
+        if (openWarrantyBtnHeader) openWarrantyBtnHeader.addEventListener('click', openModal);
 
         closeWarrantyBtn.addEventListener('click', () => {
             warrantyModal.classList.remove('active');

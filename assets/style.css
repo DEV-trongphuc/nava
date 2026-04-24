@@ -48,6 +48,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 body {
     width: 100%;
@@ -407,6 +411,44 @@ ul {
     padding-left: 25px;
 }
 
+.dropdown-menu.mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    width: max-content;
+}
+
+.mega-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: var(--bg-gray);
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.mega-card:hover {
+    background: var(--bg-white);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.mega-card img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.mega-card span {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+}
+
 /* --- HERO SECTION 3D --- */
 .hero-3d {
     padding: 220px 0 100px;
@@ -435,9 +477,52 @@ ul {
     align-self: start;
 }
 
-/* keep hero-image spanning 2 rows */
 .hero-image {
     grid-area: image;
+}
+
+.hero-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    font-size: 2.5rem;
+    cursor: pointer;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+    padding: 10px;
+}
+.hero-image:hover .hero-nav-btn {
+    opacity: 1;
+    visibility: visible;
+}
+.hero-nav-btn:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+.hero-nav-btn.prev {
+    left: -40px;
+}
+.hero-nav-btn.next {
+    right: -40px;
+}
+@media (max-width: 991px) {
+    .hero-nav-btn { display: none; }
+}
+
+.hero-slider {
+    cursor: grab;
+}
+.hero-slider:active {
+    cursor: grabbing;
+}
+.hero-slider img,
+.hero-image img {
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .hero-content {
