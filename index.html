@@ -27,15 +27,15 @@
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
     <!-- Preload Critical Assets -->
-    <link rel="preload" href="https://nava-one.vercel.app/assets/style.css?v=20260424_z5" as="style">
-    <link rel="preload" href="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
-        as="image">
+    <link rel="preload" href="assets/style.css?v=20260425_z1" as="style">
+    <link rel="preload" href="https://bizweb.dktcdn.net/thumb/large/100/543/817/products/rog-nuc2.png?v=1762858052317"
+        as="image" fetchpriority="high">
     <!-- Google Fonts Optimized -->
     <link
         href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://nava-one.vercel.app/assets/style.css?v=20260424_z5">
+    <link rel="stylesheet" href="assets/style.css?v=20260425_z1">
     <!-- Theme Script for FOUC -->
     <script>
         const savedTheme = localStorage.getItem('nava-theme');
@@ -256,46 +256,46 @@
 
                     <!-- Slider images -->
                     <div class="hero-slider" id="heroSlider">
-                        <!-- Slide 1: Minisforum -->
+                        <!-- Slide 1: ROG NUC -->
                         <div class="hero-slide active">
+                            <img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/products/rog-nuc2.png?v=1762858052317"
+                                alt="ROG NUC" class="floating-pc" decoding="async" fetchpriority="high">
+                        </div>
+                        <!-- Slide 2: Minisforum -->
+                        <div class="hero-slide">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
                                 alt="Minisforum UM890" class="floating-pc" decoding="async">
                         </div>
-                        <!-- Slide 2: ASUS NUC -->
+                        <!-- Slide 3: ASUS NUC -->
                         <div class="hero-slide">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
                                 alt="ASUS NUC" class="floating-pc" decoding="async">
                         </div>
-                        <!-- Slide 3: eGPU NAVA -->
+                        <!-- Slide 4: eGPU NAVA -->
                         <div class="hero-slide">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082"
                                 alt="eGPU NAVA" class="floating-pc" decoding="async">
                         </div>
-                        <!-- Slide 4: Beelink -->
+                        <!-- Slide 5: Beelink -->
                         <div class="hero-slide">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082"
                                 alt="Beelink SER8" class="floating-pc" decoding="async">
-                        </div>
-                        <!-- Slide 5: ROG NUC -->
-                        <div class="hero-slide">
-                            <img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/products/rog-nuc2.png?v=1762858052317"
-                                alt="ROG NUC" class="floating-pc" decoding="async">
                         </div>
                     </div>
 
                     <!-- Floating Tech Items (change per slide) -->
                     <div class="tech-float-item tech-item-1" id="floatItem1">
-                        <i class="ph-fill ph-cpu" id="floatIcon1"></i>
+                        <i class="ph-fill ph-game-controller" id="floatIcon1"></i>
                         <div>
-                            <span id="floatLabel1">Core Ultra 9</span>
-                            <small id="floatSub1">Xử lý mượt mà</small>
+                            <span id="floatLabel1">ROG NUC</span>
+                            <small id="floatSub1">Sức mạnh tuyệt đối</small>
                         </div>
                     </div>
                     <div class="tech-float-item tech-item-2" id="floatItem2">
-                        <i class="ph-fill ph-lightning" id="floatIcon2"></i>
+                        <i id="floatIcon2" style="background-image: url('https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png'); background-size: contain; background-repeat: no-repeat; background-position: center center; width: 24px; height: 24px; display: inline-block;"></i>
                         <div>
-                            <span id="floatLabel2">AI NPU</span>
-                            <small id="floatSub2">Tích hợp sẵn</small>
+                            <span id="floatLabel2">Openclaw</span>
+                            <small id="floatSub2">Sức mạnh vượt trội</small>
                         </div>
                     </div>
 
@@ -1629,7 +1629,7 @@
 
     </div> <!-- /MASTER SAPO ESCAPE WRAPPER -->
 
-    <script src="https://nava-one.vercel.app/assets/main.js?v=20260424_z5"></script>
+    <script src="assets/main.js?v=20260424_z5"></script>
 </body>
 
 </html>

@@ -292,6 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Data per slide: [icon-class, label, sub, icon2-class, label2, sub2]
     const heroSlideData = [
         {
+            i1: 'ph-fill ph-game-controller', l1: 'ROG NUC', s1: 'Sức mạnh tuyệt đối',
+            i2: 'https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png', l2: 'Openclaw', s2: 'Sức mạnh vượt trội'
+        },
+        {
             i1: 'ph-fill ph-cpu', l1: 'Core Ultra 9', s1: 'Xử lý đỉnh cao',
             i2: 'ph-fill ph-lightning', l2: 'AI NPU', s2: 'Tích hợp sẵn'
         },
@@ -306,10 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             i1: 'ph-fill ph-memory', l1: 'LPDDR5X 6400', s1: 'Băng thông đỉnh',
             i2: 'ph-fill ph-hard-drive', l2: 'NVMe PCIe 4.0', s2: '7,400 MB/s'
-        },
-        {
-            i1: 'ph-fill ph-game-controller', l1: 'ROG NUC', s1: 'Sức mạnh tuyệt đối',
-            i2: 'https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png', l2: 'Openclaw', s2: 'Sức mạnh vượt trội'
         },
     ];
 
