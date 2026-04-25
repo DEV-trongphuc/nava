@@ -91,7 +91,13 @@
                         <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
                             <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
                         </a>
-                        <a href="/cart" class="action-item cart-btn"><i class="ph ph-shopping-cart"></i> Giỏ hàng</a>
+                        <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
+                            <div class="cart-icon-wrapper" style="position: relative;">
+                                <i class="ph ph-shopping-cart"></i>
+                                <span class="cart-count-badge" id="cart-count-badge" style="display: none;">0</span>
+                            </div>
+                            Giỏ hàng
+                        </a>
                         <button class="mobile-menu-toggle"><i class="ph ph-list"></i></button>
                     </div>
                 </div>
@@ -1515,6 +1521,33 @@
             </div>
         </div>
 
+
+        <!-- Cart Drawer -->
+        <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+        <div class="cart-drawer" id="cart-drawer">
+            <div class="cart-drawer-header">
+                <h2>Giỏ hàng của bạn</h2>
+                <button class="cart-close-btn" id="cart-close-btn"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="cart-drawer-body" id="cart-drawer-body">
+                <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+                    <i class="ph-light ph-shopping-cart"></i>
+                    <p>Giỏ hàng của bạn đang trống</p>
+                    <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-blue" id="cart-continue-shopping">Tiếp tục mua sắm</a>
+                </div>
+                <div class="cart-loading-state" id="cart-loading-state">
+                    <div class="cart-spinner"></div>
+                </div>
+                <div class="cart-items-list" id="cart-items-list"></div>
+            </div>
+            <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+                <div class="cart-total">
+                    <span>Tổng tiền:</span>
+                    <strong id="cart-total-price">0đ</strong>
+                </div>
+                <a href="/cart" class="btn-pill btn-blue cart-checkout-btn">Thanh toán ngay <i class="ph ph-arrow-right"></i></a>
+            </div>
+        </div>
 
         <!-- Warranty Modal -->
         <div id="warranty-modal" class="modal-overlay">
