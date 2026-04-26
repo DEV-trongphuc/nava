@@ -2731,9 +2731,9 @@ ul {
         display: none;
     }
 
-    /* Adjust header height */
+    /* Adjust header height - Always show on mobile */
     .header.scrolled {
-        transform: translateY(-70px);
+        transform: translateY(0);
     }
 }
 
@@ -3373,14 +3373,14 @@ ul {
     .floating-contact {
         bottom: 25px;
         right: 25px;
-        width: 28px;
-        height: 28px;
+        width: 44px;
+        height: 44px;
     }
 
     .main-contact-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 1.5rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.3rem;
     }
 
     .sub-btn {
@@ -5941,6 +5941,25 @@ body:has(#nava-master-wrapper) {
     /* Rộng bằng chữ SỨC MẠNH ĐIỆN TOÁN */
 }
 
+@media (max-width: 991px) {
+    .hero-benefits-slider {
+        margin-top: 10px;
+        margin-bottom: 60px;
+        height: 160px;
+    }
+    
+    .benefit-card-mini {
+        padding: 15px 10px !important;
+    }
+    
+    .b-icon-mini {
+        width: 45px !important;
+        height: 45px !important;
+        font-size: 1.5rem !important;
+        margin-bottom: 10px !important;
+    }
+}
+
 .benefit-pair {
     position: absolute;
     top: 0;
@@ -6161,6 +6180,8 @@ body:has(#nava-master-wrapper) {
     align-items: center;
     position: relative;
     overflow: hidden;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
 }
 
 .fab-cycle-img {
@@ -6206,6 +6227,8 @@ body:has(#nava-master-wrapper) {
     transition: 0.2s;
     overflow: hidden;
     padding: 0;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
 }
 
 .fab-item img {

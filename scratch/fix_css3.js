@@ -1,18 +1,16 @@
 const fs = require('fs');
-let css = fs.readFileSync('f:/BAO_SAPO/sapo_new/assets/style.css', 'utf8');
 
-// Replace light blue backgrounds
-css = css.replace(/background(-color)?:\s*#(f8faff|eef2fb|f0f4ff)(?=\s*[;}!])/gi, 'background$1: var(--bg-gray)');
+const styleFile = 'f:/BAO_SAPO/sapo_new/assets/style.css';
+let css = fs.readFileSync(styleFile, 'utf8');
 
-// Replace border colors
-css = css.replace(/border(-[a-z]+)?:\s*([^;]*)#(e2e8f8|e8edf5)(?=\s*[;}!])/gi, 'border$1: $2var(--border-color)');
+// 1. Center the FAB vertically
+css = css.replace(/bottom: 110px;/, 'top: 50%;\n    transform: translateY(-50%);');
 
-// Replace gradients that use light blue colors
-css = css.replace(/background(-image)?:\s*linear-gradient\([^;]+#(f8faff|eef2fb|f0f4ff)[^;]+\)(?=\s*[;}!])/gi, 'background$1: var(--bg-gray)');
+// 2. Round the cycle images
+css = css.replace(/object-fit: contain;(\s*opacity: 0;)/, 'object-fit: cover;\n    border-radius: 50%;$1');
 
-// Replace hardcoded dark text colors
-css = css.replace(/color:\s*#1a1f36(?=\s*[;}!])/gi, 'color: var(--text-dark)');
-css = css.replace(/color:\s*#5a6480(?=\s*[;}!])/gi, 'color: var(--text-gray)');
+// 3. Widen the benefit cards container to align with text
+css = css.replace(/max-width: 550px;\s*\/\*\s*Rộng bằng chữ SỨC MẠNH ĐIỆN TOÁN\s*\*\//, 'max-width: 615px; /* Rộng bằng chữ SỨC MẠNH ĐIỆN TOÁN */');
 
-fs.writeFileSync('f:/BAO_SAPO/sapo_new/assets/style.css', css);
-console.log("Replaced successfully!");
+fs.writeFileSync(styleFile, css);
+console.log('Fixed styles');
