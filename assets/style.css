@@ -491,7 +491,7 @@ ul {
 .hero-3d-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
         "head image"
         "foot image";
@@ -501,13 +501,14 @@ ul {
 
 .hero-head {
     grid-area: head;
-    align-self: end;
-    padding-bottom: 20px;
+    align-self: center;
+    padding-top: 30px;
 }
 
 .hero-foot {
     grid-area: foot;
-    align-self: start;
+    align-self: end;
+    margin-bottom: -28px;
 }
 
 .hero-image {
@@ -589,7 +590,7 @@ ul {
     font-size: 3rem;
     font-weight: 800;
     line-height: 1.4;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     letter-spacing: -1px;
     white-space: nowrap;
 }
@@ -3498,8 +3499,9 @@ ul {
         text-align: center;
         padding-top: 10px;
         align-self: stretch;
-        /* reset from desktop grid 'start' */
+        /* reset from desktop grid 'end' */
         width: 100%;
+        margin-bottom: 0;
     }
 
     .hero-cta {
@@ -5945,24 +5947,42 @@ body:has(#nava-master-wrapper) {
     .hero-benefits-slider {
         margin-top: 10px;
         margin-bottom: 60px;
-        height: 160px;
+        height: 120px;
+    }
+
+    .benefit-pair {
+        gap: 8px;
     }
     
     .benefit-card-mini {
-        padding: 15px 10px !important;
+        padding: 10px 8px !important;
+        gap: 8px !important;
+        flex-direction: row !important;
+        text-align: left !important;
+        align-items: center !important;
+    }
+
+    .benefit-card-mini h4 {
+        font-size: 0.8rem !important;
+        white-space: normal !important;
+    }
+
+    .benefit-card-mini p {
+        font-size: 0.65rem !important;
+        white-space: normal !important;
     }
     
     .b-icon-mini {
-        width: 45px !important;
-        height: 45px !important;
-        font-size: 1.5rem !important;
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 1.2rem !important;
         margin-bottom: 0 !important;
     }
 }
 
 .benefit-pair {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
     display: grid;
