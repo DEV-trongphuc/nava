@@ -5936,7 +5936,7 @@ body:has(#nava-master-wrapper) {
 /* TASK 1: Benefit slider */
 .hero-benefits-slider {
     position: relative;
-    height: 180px;
+    height: 90px;
     margin-top: 40px;
     width: 100%;
     max-width: 530px;
@@ -5947,7 +5947,7 @@ body:has(#nava-master-wrapper) {
     .hero-benefits-slider {
         margin-top: 10px;
         margin-bottom: 60px;
-        height: 120px;
+        height: 75px;
     }
 
     .floating-social-wrapper {
@@ -6009,7 +6009,7 @@ body:has(#nava-master-wrapper) {
     text-align: left;
     gap: 15px;
     background: var(--bg-white);
-    padding: 25px 20px;
+    padding: 5px 10px;
     border-radius: var(--radius-md);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     border: 1px solid var(--border-color);

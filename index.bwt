@@ -1225,7 +1225,6 @@
 /* Benefit 3D Hover & Slower Track */
 .hero-benefits-slider {
     position: relative;
-    overflow: hidden !important;
     padding: 20px !important;
     margin: -20px !important;
     height: 130px !important; /* 90px card + 40px padding */
