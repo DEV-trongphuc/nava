@@ -96,7 +96,7 @@
                 <div class="preloader-ring"></div>
                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png?1775454528082" alt="Nava Store" class="preloader-logo">
             </div>
-            <div class="preloader-text">Khởi động hệ thống...</div>
+            <div class="preloader-text">NAVA STORE</div>
         </div>
         <script>
             window.addEventListener('load', function() {
@@ -1762,7 +1762,7 @@
         </div>
 
         <!-- Floating Social Button -->
-        <div class="floating-social-wrapper">
+        <div class="floating-social-wrapper" style="z-index: 50;">
             <button class="fab-main" id="fabMainBtn">
                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367"
                     alt="Shopee" class="fab-cycle-img active">
