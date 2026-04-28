@@ -51,7 +51,7 @@
             <!-- Phosphor Icons -->
             <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
             <!-- Custom CSS -->
-            <link rel="stylesheet" href="https://nava-one.vercel.app/assets/style.css?v=20260426_v1">
+            <link rel="stylesheet" href="https://nava-one.vercel.app/assets/style.css?v=20260429_v2">
             <!-- Theme Script for FOUC -->
             <script>
                 const savedTheme = localStorage.getItem('nava-theme');
