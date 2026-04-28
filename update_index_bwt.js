@@ -246,7 +246,7 @@ bodyContent = bodyContent.replace(
                 <div class="preloader-ring"></div>
                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png?1775454528082" alt="Nava Store" class="preloader-logo">
             </div>
-            <div class="preloader-text">Khởi động hệ thống...</div>
+            <div class="preloader-text">NAVA STORE</div>
         </div>
         <script>
             window.addEventListener('load', function() {
@@ -291,6 +291,41 @@ bodyContent = bodyContent.replace(
         bottom: -235px !important;
     }
 }
+
+    /* Shopee Desktop Grid */
+    @media (min-width: 769px) {
+        .shopee-comments-list {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .shopee-comment-item {
+            border-bottom: none !important;
+            border: 1px solid var(--border-color, #e2e8f0);
+            border-radius: 12px;
+            padding: 20px;
+            background: var(--bg-card, #ffffff);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+    }
+    
+    /* Policy 3D Hover & Slower Track */
+    .policy-card {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    .policy-card:hover {
+        transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+        box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+        z-index: 10;
+    }
+    .policy-track {
+        animation-duration: 45s !important;
+        will-change: transform;
+    }
+    
 </style>
 <!-- Shopee Reviews Mobile Slider CSS -->
 <style>

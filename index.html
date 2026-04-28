@@ -48,6 +48,41 @@
 <body>
     <!-- MASTER SAPO ESCAPE WRAPPER -->
     <div id="nava-master-wrapper">
+<style>
+    /* Shopee Desktop Grid */
+    @media (min-width: 769px) {
+        .shopee-comments-list {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .shopee-comment-item {
+            border-bottom: none !important;
+            border: 1px solid var(--border-color, #e2e8f0);
+            border-radius: 12px;
+            padding: 20px;
+            background: var(--bg-card, #ffffff);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+    }
+    
+    /* Policy 3D Hover & Slower Track */
+    .policy-card {
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+    .policy-card:hover {
+        transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+        box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+        z-index: 10;
+    }
+    .policy-track {
+        animation-duration: 45s !important;
+        will-change: transform;
+    }
+    </style>
         <!-- Background Decor (Glowing Orbs & Logo) -->
         <div class="bg-glow orb-1"></div>
         <div class="bg-glow orb-2"></div>
@@ -1051,7 +1086,7 @@
             <div class="container">
                 <div class="about-intro reveal">
                     <div class="tech-badge"><i class="ph-fill ph-rocket"></i> ĐỊNH NGHĨA LẠI SỨC MẠNH</div>
-                    <h2 class="section-title">Phá Vỡ Giới Hạn Không Gian</h2>
+                    <h2 class="section-title">Phá Vỡ Giới Hạn Với Mini PC AI Siêu Nhỏ (SEO)</h2>
                     <div class="about-text-content full-width">
                         <div class="text-body">
                             <p class="lead-text">Trong nhịp độ vận hành vũ bão của kỷ nguyên số, không gian làm việc và
@@ -1114,128 +1149,7 @@
         </section>
 
 
-        <!-- Testimonial Section -->
-        <section class="testimonial-section">
-            <div class="container">
-                <div class="section-header testi-section-header-v2">
-                    <div class="testi-badge"><i class="ph-fill ph-star"></i> Đánh giá từ khách hàng</div>
-                    <h2 class="section-title">Khách Hàng Nói Gì Về <span>NAVA?</span></h2>
-                    <p class="testi-subtitle">Hơn 12,500+ khách hàng đã trải nghiệm và hài lòng với chất lượng dịch vụ,
-                        sản
-                        phẩm của chúng tôi.</p>
-                </div>
-                <div class="testimonial-slider-container">
-                    <div class="testimonial-track">
-
-                        <!-- Card 3 -->
-                        <div class="testimonial-card">
-                            <div class="testi-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                            <div class="testi-body">
-                                "Máy mạnh nhỏ gọn. Chạy 1 tuần không có lỗi gì, chạy mượt các tác vụ thông thường. Điểm
-                                yếu
-                                là quạt hơi ồn nếu ở không gian yên tĩnh thì sẽ nghe. Quạt dưới cần lắp thêm một miếng
-                                đệm
-                                thì sẽ êm hơn.<br><br>Cập nhật: máy chạy mượt các game hạng trung, như CIV. Chạy lâu
-                                không
-                                nóng, không giật. Đáng giá tiền nếu chấp nhận hơi ồn khi tải nặng."
-                            </div>
-                            <div class="testi-header">
-                                <div class="testi-avatar">N</div>
-                                <div class="testi-info">
-                                    <h4>Nghĩa</h4>
-                                    <div class="testi-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 4 -->
-                        <div class="testimonial-card">
-                            <div class="testi-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                            <div class="testi-body">
-                                "Sản phẩm tuyệt vời, đúng với mô tả. Giao hàng nhanh chóng, shipper thân thiện dễ
-                                mến.<br>Đóng gói cẩn thận, có thể thấy tâm huyết của người bán. Hộp không bị móp méo,
-                                vận
-                                chuyển rất tốt.<br>Chất lượng sản phẩm vượt mong đợi. Tôi rất hài lòng với trải nghiệm
-                                mua
-                                hàng này."
-                            </div>
-                            <div class="testi-header">
-                                <div class="testi-avatar">K</div>
-                                <div class="testi-info">
-                                    <h4>Kiên</h4>
-                                    <div class="testi-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 5 -->
-                        <div class="testimonial-card">
-                            <div class="testi-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                            <div class="testi-body">
-                                "Máy nhanh mượt, chính hãng, shop đóng gói rất chỉnh chu, cẩn thận, đã mua lần 2 máy bên
-                                shop, hỗ trợ nhiệt tình, giao hàng nhanh."
-                            </div>
-                            <div class="testi-header">
-                                <div class="testi-avatar">LL</div>
-                                <div class="testi-info">
-                                    <h4>Lê Long</h4>
-                                    <div class="testi-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 1 -->
-                        <div class="testimonial-card">
-                            <div class="testi-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                            <div class="testi-body">
-                                "Mua có 1 máy nhưng hỏi rất nhiều nhưng mà nhân viên vẫn tư vấn rất nhiệt tình."
-                            </div>
-                            <div class="testi-header">
-                                <div class="testi-avatar">QĐ</div>
-                                <div class="testi-info">
-                                    <h4>Quốc Đạt</h4>
-                                    <div class="testi-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Card 2 -->
-                        <div class="testimonial-card">
-                            <div class="testi-quote-icon"><i class="ph-fill ph-quotes"></i></div>
-                            <div class="testi-body">
-                                "Đặt 10 máy Asus Nuc 15 Pro để set-up cho nhân viên sử dụng, được tư vấn rất kỹ và hỗ
-                                trợ
-                                lắp đặt tận nơi. Rất hài lòng về dịch vụ."
-                            </div>
-                            <div class="testi-header">
-                                <div class="testi-avatar">ND</div>
-                                <div class="testi-info">
-                                    <h4>Ngọc Dung</h4>
-                                    <div class="testi-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i
-                                            class="ph-fill ph-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testi-dots"></div>
-                </div>
-            </div>
-        </section>
+        
 
         <!-- Shopee Reviews Section -->
         <section class="shopee-reviews-section">
@@ -1659,7 +1573,7 @@
         </div>
 
         <!-- Floating Social Button -->
-        <div class="floating-social-wrapper">
+        <div class="floating-social-wrapper" style="z-index: 50;">
             <button class="fab-main" id="fabMainBtn">
                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367"
                     alt="Shopee" class="fab-cycle-img active">
