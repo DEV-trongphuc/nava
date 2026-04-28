@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/shopee-summary",
+      "destination": "https://shopee.vn/api/v4/seller_operation/get_rating_summary_new?shop_id=65856601&userid=65858058"
+    },
+    {
+      "source": "/api/shopee-reviews",
+      "destination": "https://shopee.vn/api/v4/seller_operation/get_shop_ratings_new?userid=65858058&shopid=65856601&limit=10&offset=0&replied=undefined"
+    }
+  ]
+}
