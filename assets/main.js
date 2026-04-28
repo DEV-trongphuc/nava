@@ -874,9 +874,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     const shopeeList = document.getElementById('shopeeCommentsList');
     if (shopeeList) {
-        const shopeeApiUrl = '/api/shopee-reviews';
+        const shopeeApiUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://shopee.vn/api/v4/seller_operation/get_shop_ratings_new?userid=65858058&shopid=65856601&limit=10&offset=0&replied=undefined');
         
-        const shopeeSummaryUrl = '/api/shopee-summary';
+        const shopeeSummaryUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://shopee.vn/api/v4/seller_operation/get_rating_summary_new?shop_id=65856601&userid=65858058');
         const summaryEl = document.getElementById('shopeeRatingSummary');
 
         async function fetchShopeeReviews() {
@@ -945,13 +945,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             summaryEl.innerHTML = `
-                <div class="sr-overview">
-                    <div class="sr-score">${starStr} <span>/ 5</span></div>
+                <div class="sr-overview-card">
+                    <div class="sr-card-title">ĐIỂM TRUNG BÌNH</div>
+                    <div class="sr-score">${starStr}</div>
                     <div class="sr-stars">${starsHtml}</div>
                     <div class="sr-total">${total.toLocaleString()} đánh giá</div>
                 </div>
-                <div class="sr-bars">
-                    ${barsHtml}
+                <div class="sr-bars-card">
+                    <div class="sr-card-title">PHÂN BỐ ĐÁNH GIÁ</div>
+                    <div class="sr-bars">
+                        ${barsHtml}
+                    </div>
                 </div>
             `;
             summaryEl.style.display = 'flex';
@@ -1019,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="sc-meta">${dateStr} | Phân loại hàng: ${pModel}</div>
                         ${replyHtml}
                         ${productCardHtml}
-                        <div class="sc-helpful"><i class="ph-fill ph-thumbs-up"></i> Hữu ích?</div>
+                        
                     </div>
                 `;
                 shopeeList.appendChild(div);
