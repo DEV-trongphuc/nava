@@ -6048,7 +6048,7 @@ body:has(#nava-master-wrapper) {
 /* TASK 2: FAB Menu */
 .floating-social-wrapper {
     position: fixed;
-    top: 50%;
+    /* top: 50%; */
     transform: translateY(-50%);
     right: 20px;
     z-index: 999;
