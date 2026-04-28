@@ -1233,7 +1233,7 @@
     perspective: 1000px;
 }
 .benefit-card-mini:hover {
-    transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+    transform: rotateX(8deg) rotateY(-8deg) !important;
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
@@ -1266,7 +1266,7 @@
     perspective: 1000px;
 }
 .policy-card:hover {
-    transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+    transform: rotateX(8deg) rotateY(-8deg) !important;
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
@@ -1713,7 +1713,7 @@
         <style>
         .floating-social-wrapper {
             position: fixed;
-            bottom: 30px;
+            bottom: 20px;
             right: 20px;
             z-index: 50;
             display: flex;
