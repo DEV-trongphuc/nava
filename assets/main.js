@@ -973,7 +973,10 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderShopeeReviews(items) {
             shopeeList.innerHTML = '';
             
-            items.forEach(item => {
+            // Only show 4-star and 5-star reviews
+            const goodItems = items.filter(item => (item.rating_star || 5) >= 4);
+            
+            goodItems.forEach(item => {
                 const username = item.author_username || 'Khách hàng';
                 const portrait = item.author_portrait;
                 let avatarHtml = `<i class="ph-fill ph-user"></i>`;
