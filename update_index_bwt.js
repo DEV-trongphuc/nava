@@ -90,11 +90,11 @@ const videoLiquid = `
             <!-- Video 1 -->
             <div class="video-card reveal">
                 <a href="https://www.youtube.com/watch?v=Syk0rwciis4" target="_blank" class="video-card-link">
-                    <div class="video-thumb" id="first-video-thumb">
+                    <div class="video-thumb" id="first-video-thumb" id="first-video-thumb">
                         <img src="https://img.youtube.com/vi/Syk0rwciis4/maxresdefault.jpg" alt="Lại một em Mini PC đến từ nhà GMKtec | Review GMKtec M7 cùng Nava" loading="lazy" decoding="async">
                         <div class="play-btn"><i class="ph-fill ph-play"></i></div>
                     </div>
-                    <div class="video-info">
+                    <div class="video-info" style="pointer-events: auto;">
                         <h3>Lại một em Mini PC đến từ nhà GMKtec | Review GMKtec M7 cùng Nava</h3>
                     </div>
                 </a>
@@ -309,7 +309,12 @@ bodyContent = bodyContent.replace(
     }
     
     
+
 /* Benefit 3D Hover & Slower Track */
+.hero-benefits-slider {
+    position: relative;
+    overflow: hidden;
+}
 .benefit-card-mini {
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
     transform-style: preserve-3d;
@@ -321,8 +326,26 @@ bodyContent = bodyContent.replace(
     z-index: 10;
 }
 .benefit-pair {
-    transition: opacity 1s ease-in-out !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out !important;
+    transform: translateX(100%);
+    opacity: 0;
+    visibility: hidden;
 }
+.benefit-pair.bp-active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+}
+.benefit-pair.bp-exit {
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+}
+
 
 /* Policy 3D Hover & Slower Track */
     .policy-card {
