@@ -1227,7 +1227,7 @@
     position: relative;
     padding: 20px !important;
     margin: -20px !important;
-    height: 130px !important; /* 90px card + 40px padding */
+    height: 105px !important; /* 90px card + 40px padding */
     display: flex;
     align-items: center;
 }
@@ -1237,7 +1237,7 @@
     perspective: 1000px;
 }
 .benefit-card-mini:hover {
-    transform: rotateX(8deg) rotateY(-8deg) !important;
+    
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
@@ -1271,7 +1271,7 @@
     perspective: 1000px;
 }
 .policy-card:hover {
-    transform: rotateX(8deg) rotateY(-8deg) !important;
+    
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
