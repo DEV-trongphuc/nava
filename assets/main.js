@@ -874,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     const shopeeList = document.getElementById('shopeeCommentsList');
     if (shopeeList) {
-        const shopeeApiUrl = 'https://api.codetabs.com/v1/proxy?quest=https://shopee.vn/api/v4/seller_operation/get_shop_ratings_new?userid=65858058&shopid=65856601&limit=10&offset=0&replied=undefined';
+        const shopeeApiUrl = 'https://api.codetabs.com/v1/proxy?quest=https://shopee.vn/api/v4/seller_operation/get_shop_ratings_new?userid=65858058&shopid=65856601&limit=6&offset=0&replied=undefined';
         
         const shopeeSummaryUrl = 'https://api.codetabs.com/v1/proxy?quest=https://shopee.vn/api/v4/seller_operation/get_rating_summary_new?shop_id=65856601&userid=65858058';
         const summaryEl = document.getElementById('shopeeRatingSummary');
