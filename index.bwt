@@ -1237,7 +1237,6 @@
     perspective: 1000px;
 }
 .benefit-card-mini:hover {
-    
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
@@ -1271,7 +1270,6 @@
     perspective: 1000px;
 }
 .policy-card:hover {
-    
     box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
     z-index: 10;
 }
