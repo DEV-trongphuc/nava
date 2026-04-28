@@ -90,7 +90,7 @@ const videoLiquid = `
             <!-- Video 1 -->
             <div class="video-card reveal">
                 <a href="https://www.youtube.com/watch?v=Syk0rwciis4" target="_blank" class="video-card-link">
-                    <div class="video-thumb">
+                    <div class="video-thumb" id="first-video-thumb">
                         <img src="https://img.youtube.com/vi/Syk0rwciis4/maxresdefault.jpg" alt="Lại một em Mini PC đến từ nhà GMKtec | Review GMKtec M7 cùng Nava" loading="lazy" decoding="async">
                         <div class="play-btn"><i class="ph-fill ph-play"></i></div>
                     </div>
@@ -287,9 +287,7 @@ bodyContent = bodyContent.replace(
     .cart-count-badge {
         font-size: 10px !important;
     }
-    .floating-social-wrapper {
-        bottom: -235px !important;
-    }
+    
 }
 
     /* Shopee Desktop Grid */
