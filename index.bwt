@@ -1117,7 +1117,7 @@
             <div class="container">
                 <div class="about-intro reveal">
                     <div class="tech-badge"><i class="ph-fill ph-rocket"></i> ĐỊNH NGHĨA LẠI SỨC MẠNH</div>
-                    <h2 class="section-title">Phá Vỡ Giới Hạn Với Mini PC AI Siêu Nhỏ (SEO)</h2>
+                    <h2 class="section-title">Phá Vỡ Giới Hạn Với Mini PC AI Siêu Nhỏ</h2>
                     <div class="about-text-content full-width">
                         <div class="text-body">
                             <p class="lead-text">Trong nhịp độ vận hành vũ bão của kỷ nguyên số, không gian làm việc và
@@ -1202,6 +1202,40 @@
     .floating-social-wrapper {
         bottom: -235px !important;
     }
+}
+
+/* Shopee Desktop Grid */
+@media (min-width: 769px) {
+    .shopee-comments-list {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .shopee-comment-item {
+        border-bottom: none !important;
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 12px;
+        padding: 20px;
+        background: var(--bg-card, #ffffff);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        height: 100%;
+    }
+}
+
+/* Policy 3D Hover & Slower Track */
+.policy-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+.policy-card:hover {
+    transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+    box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+    z-index: 10;
+}
+.policy-track {
+    animation-duration: 45s !important;
+    will-change: transform;
 }
 </style>
 <!-- Shopee Reviews Mobile Slider CSS -->
