@@ -6811,3 +6811,11 @@ body:has(#nava-master-wrapper) {
     color: #f8fafc;
 }
 [data-theme="dark"] .sc-reply-title { color: #60a5fa; }
+
+/* --- FIX WIDTH --- */
+.shopee-comments-list {
+    max-width: 100% !important;
+}
+.shopee-rating-summary {
+    max-width: 100% !important;
+}
