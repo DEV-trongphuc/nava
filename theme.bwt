@@ -26,6 +26,7 @@
             <link rel="dns-prefetch" href="https://bizweb.dktcdn.net">
             <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
             <link rel="dns-prefetch" href="https://{{store.domain}}">
+            <link rel="preconnect" href="https://nava-one.vercel.app" crossorigin>
             <link rel="preload" as="image" href="{{'slide-img1.png' | asset_url | img_url: 'large'}}" media="screen and (max-width: 480px)">
             <link rel="preload" as="image" href="{{'slide-img2.png' | asset_url | img_url: 'large'}}" media="screen and (max-width: 480px)">
             {%-include 'head_styles'-%}

@@ -151,6 +151,8 @@ bodyContent = bodyContent.replace(
     /<!-- MASTER SAPO ESCAPE WRAPPER -->\s*<div id="nava-master-wrapper">/i,
     `<!-- MASTER SAPO ESCAPE WRAPPER -->
     <div id="nava-master-wrapper">
+        <!-- SEO H1 -->
+        <h1 style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">NAVA STORE - Chuyên Mini PC, eGPU, Linh kiện máy tính & Đồ họa AI</h1>
         <!-- PRELOADER -->
         <style>
             #nava-preloader {
