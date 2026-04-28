@@ -1014,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
 
                 const div = document.createElement('div');
-                div.className = 'shopee-comment-item reveal';
+                div.className = 'shopee-comment-item';
                 div.innerHTML = `
                     <div class="sc-avatar">${avatarHtml}</div>
                     <div class="sc-content">
