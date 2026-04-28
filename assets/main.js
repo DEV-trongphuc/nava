@@ -874,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     const shopeeList = document.getElementById('shopeeCommentsList');
     if (shopeeList) {
-        const shopeeApiUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=reviews';
+        const shopeeApiUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=reviews&limit=6';
         
         const shopeeSummaryUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary';
         const summaryEl = document.getElementById('shopeeRatingSummary');

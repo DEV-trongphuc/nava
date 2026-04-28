@@ -132,7 +132,7 @@ const videoLiquid = `
 bodyContent = bodyContent.replace(videoRegex, videoLiquid);
 
 // Set main.js to Vercel absolute URL
-bodyContent = bodyContent.replace(/src="assets\/main\.js\?[^"]+"/g, 'src="https://nava-one.vercel.app/assets/main.js?v=20260426_v1"');
+bodyContent = bodyContent.replace(/src="assets\/main\.js\?[^"]+"/g, 'src="https://nava-one.vercel.app/assets/main.js?v=1777402289099"');
 
 // Ensure any local assets (like assets/icon) in index.html are pointing to the vercel demo
 // (In index.html they were already pointing to https://nava-one.vercel.app but just to be safe: )
@@ -308,7 +308,23 @@ bodyContent = bodyContent.replace(
         }
     }
     
-    /* Policy 3D Hover & Slower Track */
+    
+/* Benefit 3D Hover & Slower Track */
+.benefit-card-mini {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+.benefit-card-mini:hover {
+    transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
+    box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+    z-index: 10;
+}
+.benefit-pair {
+    transition: opacity 1s ease-in-out !important;
+}
+
+/* Policy 3D Hover & Slower Track */
     .policy-card {
         transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
         transform-style: preserve-3d;
