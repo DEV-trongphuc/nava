@@ -502,10 +502,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 10. TERMINAL TYPING ANIMATION (on scroll in)
     // ============================================
     const terminalLines = [
-        { cls: '', html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device asus-nuc-15-pro</span>' },
-        { cls: 't-out', html: '[INFO] CPU: Intel Core Ultra 5 225H' },
-        { cls: 't-out', html: '[INFO] RAM: DDR5 5600MHz SODIMM' },
-        { cls: 't-out', html: '[INFO] GPU: Intel Arc Graphics' },
+        { cls: '', html: '<span class="t-prompt">$</span> <span class="t-cmd">run benchmark --device asus-nuc-ai-350</span>' },
+        { cls: 't-out', html: '[INFO] Model: NUC AI 350 (PN54)' },
+        { cls: 't-out', html: '[INFO] CPU: AMD Ryzen AI 7 350 8C/16T max 5.0Ghz' },
+        { cls: 't-out', html: '[INFO] RAM: 2x DDR5 5600 tối đa 128GB' },
+        { cls: 't-out', html: '[INFO] GPU: AMD Radeon™ 860M' },
         { cls: 't-success', html: '[PASS] Cinebench R24 Multi: <b>24,819 pts</b>' },
         { cls: 't-success', html: '[PASS] CrystalDisk Read: <b>7,412 MB/s</b>' },
         { cls: 't-success', html: '[PASS] LLM Inference: <b>42 tok/s</b>' },
@@ -866,3 +867,189 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+
+    // ============================================
+    // 11. SHOPEE REVIEWS REALTIME API
+    // ============================================
+    const shopeeList = document.getElementById('shopeeCommentsList');
+    if (shopeeList) {
+        const shopeeApiUrl = 'https://shopee.vn/api/v4/seller_operation/get_shop_ratings_new?userid=65858058&shopid=65856601&limit=10&offset=0&replied=undefined';
+        
+        const shopeeSummaryUrl = 'https://shopee.vn/api/v4/seller_operation/get_rating_summary_new?shop_id=65856601&userid=65858058';
+        const summaryEl = document.getElementById('shopeeRatingSummary');
+
+        async function fetchShopeeReviews() {
+            try {
+                // Fetch reviews and summary concurrently
+                const [resReviews, resSummary] = await Promise.all([
+                    fetch(shopeeApiUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null),
+                    fetch(shopeeSummaryUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null)
+                ]);
+
+                if (resSummary && resSummary.ok) {
+                    const dataSum = await resSummary.json();
+                    if (dataSum && dataSum.data && dataSum.data.seller_rating_summary) {
+                        renderShopeeSummary(dataSum.data.seller_rating_summary);
+                    }
+                } else {
+                    throw new Error("Summary fetch failed");
+                }
+
+                if (resReviews && resReviews.ok) {
+                    const dataRev = await resReviews.json();
+                    if (dataRev && dataRev.data && dataRev.data.items) {
+                        renderShopeeReviews(dataRev.data.items);
+                    }
+                } else {
+                    throw new Error("Reviews fetch failed");
+                }
+            } catch (error) {
+                console.warn("Shopee API blocked by CORS or error. Using fallback data.", error);
+                renderShopeeSummary(getMockShopeeSummary());
+                renderShopeeReviews(getMockShopeeData());
+            }
+        }
+
+        function renderShopeeSummary(summary) {
+            if (!summaryEl) return;
+            const total = summary.rating_total || 2419;
+            const starStr = Number(summary.rating_star || 4.97).toFixed(1);
+            // array mapping to 1, 2, 3, 4, 5 stars
+            const counts = summary.rating_count || [3, 1, 7, 23, 2385];
+            
+            // Build bars (from 5 down to 1)
+            let barsHtml = '';
+            for (let i = 5; i >= 1; i--) {
+                const count = counts[i-1] || 0;
+                const percent = total > 0 ? (count / total) * 100 : 0;
+                barsHtml += `
+                <div class="sr-bar-row">
+                    <span class="sr-star-label">${i} <i class="ph-fill ph-star"></i></span>
+                    <div class="sr-progress"><div class="sr-fill" style="width: ${percent}%"></div></div>
+                    <span class="sr-count">${count}</span>
+                </div>`;
+            }
+
+            // Overview stars
+            const scoreNum = parseFloat(starStr);
+            let starsHtml = '';
+            for(let i=1; i<=5; i++) {
+                if (i <= scoreNum) {
+                    starsHtml += '<i class="ph-fill ph-star"></i>';
+                } else if (i - 0.5 <= scoreNum) {
+                    starsHtml += '<i class="ph-fill ph-star-half"></i>';
+                } else {
+                    starsHtml += '<i class="ph ph-star"></i>'; // empty star
+                }
+            }
+
+            summaryEl.innerHTML = `
+                <div class="sr-overview">
+                    <div class="sr-score">${starStr} <span>/ 5</span></div>
+                    <div class="sr-stars">${starsHtml}</div>
+                    <div class="sr-total">${total.toLocaleString()} đánh giá</div>
+                </div>
+                <div class="sr-bars">
+                    ${barsHtml}
+                </div>
+            `;
+            summaryEl.style.display = 'flex';
+        }
+
+        function getMockShopeeSummary() {
+            return {
+                rating_total: 2419,
+                rating_count: [3, 1, 7, 23, 2385],
+                rating_star: 4.9791485664639445
+            };
+        }
+
+
+        function renderShopeeReviews(items) {
+            shopeeList.innerHTML = '';
+            
+            items.forEach(item => {
+                const username = item.author_username || 'Khách hàng';
+                const portrait = item.author_portrait;
+                let avatarHtml = `<i class="ph-fill ph-user"></i>`;
+                if (portrait) {
+                    avatarHtml = `<img src="https://cf.shopee.vn/file/${portrait}_tn" alt="${username}">`;
+                }
+                
+                const date = new Date((item.ctime || item.submit_time || Date.now()/1000) * 1000);
+                const dateStr = date.toISOString().replace('T', ' ').substring(0, 16);
+                
+                const product = (item.product_items && item.product_items[0]) || {};
+                const pName = product.name || '';
+                const pImg = product.image ? `https://cf.shopee.vn/file/${product.image}` : '';
+                const pModel = product.model_name || '';
+                
+                const reply = item.ItemRatingReply;
+                let replyHtml = '';
+                if (reply && reply.comment) {
+                    replyHtml = `
+                    <div class="sc-reply-box">
+                        <div class="sc-reply-title">Phản Hồi Của Người Bán</div>
+                        <div class="sc-reply-text">${reply.comment}</div>
+                    </div>`;
+                }
+                
+                let productCardHtml = '';
+                if (pName) {
+                    productCardHtml = `
+                    <div class="sc-product-card">
+                        <img src="${pImg}" alt="Product">
+                        <div class="sc-product-info">
+                            <span class="sc-product-name">${pName}</span>
+                            <span class="sc-product-variant">Phân loại hàng: ${pModel}</span>
+                        </div>
+                    </div>`;
+                }
+                
+                const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
+
+                const div = document.createElement('div');
+                div.className = 'shopee-comment-item reveal';
+                div.innerHTML = `
+                    <div class="sc-avatar">${avatarHtml}</div>
+                    <div class="sc-content">
+                        <div class="sc-username">${username}</div>
+                        <div class="sc-stars">${starsHtml}</div>
+                        <div class="sc-meta">${dateStr} | Phân loại hàng: ${pModel}</div>
+                        ${replyHtml}
+                        ${productCardHtml}
+                        <div class="sc-helpful"><i class="ph-fill ph-thumbs-up"></i> Hữu ích?</div>
+                    </div>
+                `;
+                shopeeList.appendChild(div);
+            });
+            
+            if (typeof reveal === 'function') reveal();
+        }
+
+        function getMockShopeeData() {
+            return [
+                {
+                    author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342939,
+                    product_items: [{ name: "Đế dựng đa năng cho máy tính Mini PC, điều chỉnh được, nhỏ gọn, tinh tế cho bàn làm việc", image: "vn-11134207-820l4-mir6bh17pj4426", model_name: "⑴ Đế Dựng Nhỏ" }]
+                },
+                {
+                    author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342933,
+                    product_items: [{ name: "Workstation Server Minisforum MS01 SFP+ 10Gbps MS-01 băng thông 10GB Máy trạm / chủ", image: "vn-11134207-820l4-metdd3xjbwg2d8", model_name: "i5 12600H 4.5Ghz 16T,NO RAM - NO SSD" }]
+                },
+                {
+                    author_username: "vutuannn", author_portrait: "vn-11134233-7ras8-m4enw6q4rdu792", rating_star: 5, submit_time: 1777273594,
+                    product_items: [{ name: "RAM Laptop 16GB DDR5 5600 MHz - Samsung, Crucial, SK Hynix, Micron", image: "vn-11134207-81ztc-mn2d789xy1ae0a", model_name: "CRUCIAL,16GB Single" }],
+                    ItemRatingReply: { comment: "Cảm ơn Quý khách vutuannn đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
+                },
+                {
+                    author_username: "ukshop12345", author_portrait: "c95ab40a615612b04ff68211d7c30fb8", rating_star: 5, submit_time: 1777208515,
+                    product_items: [{ name: "SSD Predator GM7000 1TB 2TB 4TB NVMe Gen 4 PCIe Có DRAM Tốc độ Cao", image: "vn-11134207-81ztc-mmtu6wrm7kzkb4", model_name: "New FullBox - 2TB" }],
+                    ItemRatingReply: { comment: "Cảm ơn Quý khách ukshop12345 đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
+                }
+            ];
+        }
+
+        fetchShopeeReviews();
+    }
