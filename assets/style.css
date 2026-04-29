@@ -6002,12 +6002,12 @@ body:has(#nava-master-wrapper) {
     }
 
     .benefit-card-mini h4 {
-        font-size: 0.8rem !important;
+        font-size: 0.6rem !important;
         white-space: normal !important;
     }
 
     .benefit-card-mini p {
-        font-size: 0.65rem !important;
+        font-size: 0.5rem !important;
         white-space: normal !important;
     }
 
@@ -6215,7 +6215,8 @@ body:has(#nava-master-wrapper) {
     font-size: 0.9rem;
     line-height: 1.4;
     transition: all 0.3s ease;
-    margin-bottom: 10px; /* Thêm khoảng cách */
+    margin-bottom: 10px;
+    /* Thêm khoảng cách */
 }
 
 .product-card:hover .card-desc {
