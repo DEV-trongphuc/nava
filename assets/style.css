@@ -3437,7 +3437,6 @@ ul {
 .spec-value img, 
 .tech-float-item i, 
 .brand-track, 
-.brand-item img, 
 .mega-card img, 
 .product-card img.brand-img {
     mix-blend-mode: multiply;
@@ -3447,7 +3446,6 @@ ul {
 [data-theme="dark"] .spec-value img, 
 [data-theme="dark"] .tech-float-item i, 
 [data-theme="dark"] .brand-track, 
-[data-theme="dark"] .brand-item img, 
 [data-theme="dark"] .mega-card img, 
 [data-theme="dark"] .product-card img.brand-img {
     mix-blend-mode: screen;
@@ -7098,6 +7096,9 @@ body::before {
         filter: none !important;
     }
 }
+
+
+
 
 
 
