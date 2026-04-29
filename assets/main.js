@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 0. AUTO-INJECT MASTER WRAPPER (SAPO RESCUE)
     // ============================================
     let masterWrapper = document.getElementById('nava-master-wrapper');
-    
+
     // Always force masterWrapper to be a direct child of body to escape Sapo's CSS `transform` or `filter` stacking contexts
     if (masterWrapper && masterWrapper.parentNode !== document.body) {
         document.body.appendChild(masterWrapper);
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sapoBody && sapoBody !== masterWrapper.parentNode) {
         sapoBody.style.display = 'none';
     }
-    
+
     // Force-hide any floating widgets
     const floatingWidgets = document.querySelectorAll('.isocial_bubble, .fix-phone, .zalo-chat-widget');
     floatingWidgets.forEach(widget => {
@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }, {
-        root: document.getElementById('nava-master-wrapper') || null, 
-        threshold: 0.15, 
+        root: document.getElementById('nava-master-wrapper') || null,
+        threshold: 0.15,
         rootMargin: "0px 0px -50px 0px"
     });
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.cursor = 'pointer';
             card.onclick = () => {
                 if (label.textContent.includes('Sản phẩm')) {
-                    window.open('https://shopee.vn/navastore.vn#product_list', '_blank');
+                    window.open('https://navastore.vn/tat-ca-san-pham', '_blank');
                 } else if (label.textContent.includes('Điểm đánh giá')) {
                     const reviewSection = document.querySelector('.shopee-reviews-section');
                     if (reviewSection) {
@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebarDrawer.classList.add('active');
             sidebarOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            
+
             if (mobileNavContainer) {
                 const hasOpen = mobileNavContainer.querySelector('.nav-item.open');
                 if (!hasOpen) {
@@ -428,15 +428,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (heroImageContainer) {
             let startX = 0;
             let endX = 0;
-            
+
             heroImageContainer.addEventListener('touchstart', e => {
                 startX = e.changedTouches[0].screenX;
-            }, {passive: true});
+            }, { passive: true });
 
             heroImageContainer.addEventListener('touchend', e => {
                 endX = e.changedTouches[0].screenX;
                 handleHeroSwipe();
-            }, {passive: true});
+            }, { passive: true });
 
             heroImageContainer.addEventListener('mousedown', e => {
                 startX = e.screenX;
@@ -493,9 +493,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 counterObserver.unobserve(el);
             }
         });
-    }, { 
+    }, {
         root: masterWrapper || null,
-        threshold: 0.5 
+        threshold: 0.5
     });
 
     statNumbers.forEach(el => counterObserver.observe(el));
@@ -513,9 +513,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 benchObserver.unobserve(el);
             }
         });
-    }, { 
+    }, {
         root: masterWrapper || null,
-        threshold: 0.3 
+        threshold: 0.3
     });
 
     benchFills.forEach(el => benchObserver.observe(el));
@@ -567,9 +567,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     termObserver.unobserve(entry.target);
                 }
             });
-        }, { 
+        }, {
             root: masterWrapper || null,
-            threshold: 0.3 
+            threshold: 0.3
         });
         termObserver.observe(terminalEl);
     }
@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (openWarrantyBtn) openWarrantyBtn.addEventListener('click', openModal);
         if (openWarrantyBtnFooter) openWarrantyBtnFooter.addEventListener('click', openModal);
-        
+
         document.querySelectorAll('#open-warranty-modal-header').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 openModal(e);
@@ -705,7 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.innerWidth <= 768) cardsPerView = 1;
             else if (window.innerWidth <= 1024) cardsPerView = 2;
             else cardsPerView = 3;
-            
+
             buildDots();
             goToSlide(0);
         }
@@ -728,15 +728,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const numDots = Math.max(1, testiCards.length - cardsPerView + 1);
             if (index >= numDots) index = 0;
             if (index < 0) index = numDots - 1;
-            
+
             currentIndex = index;
-            
+
             const cardWidth = testiCards[0].offsetWidth;
             const gap = 30; // From CSS
             const translation = -(currentIndex * (cardWidth + gap));
-            
+
             testiTrack.style.transform = `translateX(${translation}px)`;
-            
+
             const dots = document.querySelectorAll('.testi-dot');
             dots.forEach((dot, i) => {
                 dot.classList.toggle('active', i === currentIndex);
@@ -757,7 +757,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize
         updateLayout();
         resetAutoPlay();
-        
+
         testiTrack.parentElement.addEventListener('mouseenter', () => clearInterval(testiAutoPlay));
         testiTrack.parentElement.addEventListener('mouseleave', resetAutoPlay);
     }
@@ -798,7 +798,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (cartCloseBtn) cartCloseBtn.addEventListener('click', () => toggleCartDrawer(false));
     if (cartOverlay) cartOverlay.addEventListener('click', () => toggleCartDrawer(false));
-    
+
     // Format currency
     const formatMoney = (amount) => {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
@@ -806,7 +806,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateCartUI = (cart) => {
         cartLoadingState.style.display = 'none';
-        
+
         if (!cart || !cart.items || cart.items.length === 0) {
             cartEmptyState.style.display = 'flex';
             cartItemsList.innerHTML = '';
@@ -821,7 +821,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Has items
         cartEmptyState.style.display = 'none';
         cartFooter.style.display = 'block';
-        
+
         // Update badge
         if (cartCountBadge) {
             cartCountBadge.style.display = 'flex';
@@ -838,11 +838,11 @@ document.addEventListener('DOMContentLoaded', () => {
         cart.items.forEach(item => {
             const itemEl = document.createElement('div');
             itemEl.className = 'cart-item';
-            
+
             // Get proper image or placeholder
             let imgUrl = item.image || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png';
             if (imgUrl.startsWith('//')) imgUrl = 'https:' + imgUrl;
-            
+
             itemEl.innerHTML = `
                 <img src="${imgUrl}" alt="${item.title}" class="cart-item-img" onerror="this.src='https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png'">
                 <div class="cart-item-info">
@@ -862,7 +862,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartEmptyState.style.display = 'none';
         cartItemsList.innerHTML = '';
         cartFooter.style.display = 'none';
-        
+
         fetch('https://navastore.vn/cart.js')
             .then(res => res.json())
             .then(cart => {
@@ -891,110 +891,110 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-    // ============================================
-    // 11. SHOPEE REVIEWS REALTIME API
-    // ============================================
-    const shopeeList = document.getElementById('shopeeCommentsList');
-    if (shopeeList) {
-        const shopeeApiUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=reviews&limit=6';
-        
-        const shopeeSummaryUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary';
-        const summaryEl = document.getElementById('shopeeRatingSummary');
+// ============================================
+// 11. SHOPEE REVIEWS REALTIME API
+// ============================================
+const shopeeList = document.getElementById('shopeeCommentsList');
+if (shopeeList) {
+    const shopeeApiUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=reviews&limit=6';
 
-        async function fetchShopeeReviews() {
-            try {
-                // Fetch reviews and summary concurrently
-                const [resReviews, resSummary] = await Promise.all([
-                    fetch(shopeeApiUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null),
-                    fetch(shopeeSummaryUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null)
-                ]);
+    const shopeeSummaryUrl = 'https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary';
+    const summaryEl = document.getElementById('shopeeRatingSummary');
 
-                if (resSummary && resSummary.ok) {
-                    const dataSum = await resSummary.json();
-                    if (dataSum && dataSum.data && dataSum.data.seller_rating_summary) {
-                        renderShopeeSummary(dataSum.data.seller_rating_summary);
-                    }
-                } else {
-                    throw new Error("Summary fetch failed");
+    async function fetchShopeeReviews() {
+        try {
+            // Fetch reviews and summary concurrently
+            const [resReviews, resSummary] = await Promise.all([
+                fetch(shopeeApiUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null),
+                fetch(shopeeSummaryUrl, { headers: { 'Accept': 'application/json' } }).catch(() => null)
+            ]);
+
+            if (resSummary && resSummary.ok) {
+                const dataSum = await resSummary.json();
+                if (dataSum && dataSum.data && dataSum.data.seller_rating_summary) {
+                    renderShopeeSummary(dataSum.data.seller_rating_summary);
                 }
+            } else {
+                throw new Error("Summary fetch failed");
+            }
 
-                if (resReviews && resReviews.ok) {
-                    const dataRev = await resReviews.json();
-                    if (dataRev && dataRev.data && dataRev.data.items) {
-                        renderShopeeReviews(dataRev.data.items);
-                    }
-                } else {
-                    throw new Error("Reviews fetch failed");
+            if (resReviews && resReviews.ok) {
+                const dataRev = await resReviews.json();
+                if (dataRev && dataRev.data && dataRev.data.items) {
+                    renderShopeeReviews(dataRev.data.items);
                 }
-            } catch (error) {
-                console.warn("Shopee API blocked by CORS or error. Using fallback data.", error);
-                renderShopeeSummary(getMockShopeeSummary());
-                renderShopeeReviews(getMockShopeeData());
+            } else {
+                throw new Error("Reviews fetch failed");
+            }
+        } catch (error) {
+            console.warn("Shopee API blocked by CORS or error. Using fallback data.", error);
+            renderShopeeSummary(getMockShopeeSummary());
+            renderShopeeReviews(getMockShopeeData());
+        }
+    }
+
+    function renderShopeeSummary(summary) {
+        if (!summaryEl) return;
+        const total = summary.rating_total || 2419;
+        const starStr = Number(summary.rating_star || 4.97).toFixed(1);
+        // array mapping to 1, 2, 3, 4, 5 stars
+        const counts = summary.rating_count || [3, 1, 7, 23, 2385];
+
+        // Update realtime customer stat in hero section
+        const realtimeCustomerCountEl = document.getElementById('realtime-customer-count');
+        if (realtimeCustomerCountEl) {
+            realtimeCustomerCountEl.dataset.target = total;
+            // If it already animated (text content is not 0), update the text content
+            if (realtimeCustomerCountEl.textContent !== '0') {
+                realtimeCustomerCountEl.textContent = total.toLocaleString('vi-VN');
             }
         }
 
-        function renderShopeeSummary(summary) {
-            if (!summaryEl) return;
-            const total = summary.rating_total || 2419;
-            const starStr = Number(summary.rating_star || 4.97).toFixed(1);
-            // array mapping to 1, 2, 3, 4, 5 stars
-            const counts = summary.rating_count || [3, 1, 7, 23, 2385];
-            
-            // Update realtime customer stat in hero section
-            const realtimeCustomerCountEl = document.getElementById('realtime-customer-count');
-            if (realtimeCustomerCountEl) {
-                realtimeCustomerCountEl.dataset.target = total;
-                // If it already animated (text content is not 0), update the text content
-                if (realtimeCustomerCountEl.textContent !== '0') {
-                    realtimeCustomerCountEl.textContent = total.toLocaleString('vi-VN');
+        // Update realtime rating stat in hero section
+        const statCards = document.querySelectorAll('.stat-card');
+        statCards.forEach(card => {
+            const label = card.querySelector('.stat-label');
+            if (label && label.textContent.includes('Điểm đánh giá trung bình')) {
+                const numberEl = card.querySelector('.stat-number');
+                const suffixEl = card.querySelector('.stat-suffix');
+                if (numberEl && suffixEl) {
+                    const [intPart, decPart] = starStr.split('.');
+                    numberEl.dataset.target = intPart;
+                    if (numberEl.textContent !== '0') {
+                        numberEl.textContent = intPart;
+                    }
+                    suffixEl.textContent = `.${decPart}★`;
                 }
             }
+        });
 
-            // Update realtime rating stat in hero section
-            const statCards = document.querySelectorAll('.stat-card');
-            statCards.forEach(card => {
-                const label = card.querySelector('.stat-label');
-                if (label && label.textContent.includes('Điểm đánh giá trung bình')) {
-                    const numberEl = card.querySelector('.stat-number');
-                    const suffixEl = card.querySelector('.stat-suffix');
-                    if (numberEl && suffixEl) {
-                        const [intPart, decPart] = starStr.split('.');
-                        numberEl.dataset.target = intPart;
-                        if (numberEl.textContent !== '0') {
-                            numberEl.textContent = intPart;
-                        }
-                        suffixEl.textContent = `.${decPart}★`;
-                    }
-                }
-            });
-
-            // Build bars (from 5 down to 1)
-            let barsHtml = '';
-            for (let i = 5; i >= 1; i--) {
-                const count = counts[i-1] || 0;
-                const percent = total > 0 ? (count / total) * 100 : 0;
-                barsHtml += `
+        // Build bars (from 5 down to 1)
+        let barsHtml = '';
+        for (let i = 5; i >= 1; i--) {
+            const count = counts[i - 1] || 0;
+            const percent = total > 0 ? (count / total) * 100 : 0;
+            barsHtml += `
                 <div class="sr-bar-row">
                     <span class="sr-star-label">${i} <i class="ph-fill ph-star"></i></span>
                     <div class="sr-progress"><div class="sr-fill" style="width: ${percent}%"></div></div>
                     <span class="sr-count">${count}</span>
                 </div>`;
-            }
+        }
 
-            // Overview stars
-            const scoreNum = parseFloat(starStr);
-            let starsHtml = '';
-            for(let i=1; i<=5; i++) {
-                if (i <= scoreNum) {
-                    starsHtml += '<i class="ph-fill ph-star"></i>';
-                } else if (i - 0.5 <= scoreNum) {
-                    starsHtml += '<i class="ph-fill ph-star-half"></i>';
-                } else {
-                    starsHtml += '<i class="ph ph-star"></i>'; // empty star
-                }
+        // Overview stars
+        const scoreNum = parseFloat(starStr);
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= scoreNum) {
+                starsHtml += '<i class="ph-fill ph-star"></i>';
+            } else if (i - 0.5 <= scoreNum) {
+                starsHtml += '<i class="ph-fill ph-star-half"></i>';
+            } else {
+                starsHtml += '<i class="ph ph-star"></i>'; // empty star
             }
+        }
 
-            summaryEl.innerHTML = `
+        summaryEl.innerHTML = `
                 <div class="sr-overview-card" style="cursor: pointer;" onclick="window.open('https://shopee.vn/buyer/65858058/rating?shop_id=65856601', '_blank')">
                     <div class="sr-card-title">ĐIỂM TRUNG BÌNH</div>
                     <div class="sr-score">${starStr}</div>
@@ -1008,54 +1008,54 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
-            summaryEl.style.display = 'flex';
-        }
+        summaryEl.style.display = 'flex';
+    }
 
-        function getMockShopeeSummary() {
-            return {
-                rating_total: 2419,
-                rating_count: [3, 1, 7, 23, 2385],
-                rating_star: 4.9791485664639445
-            };
-        }
+    function getMockShopeeSummary() {
+        return {
+            rating_total: 2419,
+            rating_count: [3, 1, 7, 23, 2385],
+            rating_star: 4.9791485664639445
+        };
+    }
 
 
-        function renderShopeeReviews(items) {
-            shopeeList.innerHTML = '';
-            
-            // Only show 4-star and 5-star reviews
-            const goodItems = items.filter(item => (item.rating_star || 5) >= 4);
-            
-            goodItems.forEach(item => {
-                const username = item.author_username || 'Khách hàng';
-                const portrait = item.author_portrait;
-                let avatarHtml = `<i class="ph-fill ph-user"></i>`;
-                if (portrait) {
-                    avatarHtml = `<img src="https://cf.shopee.vn/file/${portrait}_tn" alt="${username}">`;
-                }
-                
-                const date = new Date((item.ctime || item.submit_time || Date.now()/1000) * 1000);
-                const dateStr = date.toISOString().replace('T', ' ').substring(0, 16);
-                
-                const product = (item.product_items && item.product_items[0]) || {};
-                const pName = product.name || '';
-                const pImg = product.image ? `https://cf.shopee.vn/file/${product.image}` : '';
-                const pModel = product.model_name || '';
-                const pLink = (product.shopid && product.itemid) ? `https://shopee.vn/product-i.${product.shopid}.${product.itemid}` : '#';
-                
-                const reply = item.ItemRatingReply;
-                let replyHtml = '';
-                if (reply && reply.comment) {
-                    replyHtml = `
+    function renderShopeeReviews(items) {
+        shopeeList.innerHTML = '';
+
+        // Only show 4-star and 5-star reviews
+        const goodItems = items.filter(item => (item.rating_star || 5) >= 4);
+
+        goodItems.forEach(item => {
+            const username = item.author_username || 'Khách hàng';
+            const portrait = item.author_portrait;
+            let avatarHtml = `<i class="ph-fill ph-user"></i>`;
+            if (portrait) {
+                avatarHtml = `<img src="https://cf.shopee.vn/file/${portrait}_tn" alt="${username}">`;
+            }
+
+            const date = new Date((item.ctime || item.submit_time || Date.now() / 1000) * 1000);
+            const dateStr = date.toISOString().replace('T', ' ').substring(0, 16);
+
+            const product = (item.product_items && item.product_items[0]) || {};
+            const pName = product.name || '';
+            const pImg = product.image ? `https://cf.shopee.vn/file/${product.image}` : '';
+            const pModel = product.model_name || '';
+            const pLink = (product.shopid && product.itemid) ? `https://shopee.vn/product-i.${product.shopid}.${product.itemid}` : '#';
+
+            const reply = item.ItemRatingReply;
+            let replyHtml = '';
+            if (reply && reply.comment) {
+                replyHtml = `
                     <div class="sc-reply-box">
                         <div class="sc-reply-title">Phản Hồi Của Người Bán</div>
                         <div class="sc-reply-text">${reply.comment}</div>
                     </div>`;
-                }
-                
-                let productCardHtml = '';
-                if (pName) {
-                    productCardHtml = `
+            }
+
+            let productCardHtml = '';
+            if (pName) {
+                productCardHtml = `
                     <div class="sc-product-card" style="display: flex;">
                         <img src="${pImg}" alt="Product">
                         <div class="sc-product-info">
@@ -1063,17 +1063,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="sc-product-variant">Phân loại hàng: ${pModel}</span>
                         </div>
                     </div>`;
-                }
-                
-                const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
+            }
 
-                const div = document.createElement('div');
-                div.className = 'shopee-comment-item';
-                if (pLink && pLink !== '#') {
-                    div.style.cursor = 'pointer';
-                    div.onclick = function() { window.open(pLink, '_blank'); };
-                }
-                div.innerHTML = `
+            const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
+
+            const div = document.createElement('div');
+            div.className = 'shopee-comment-item';
+            if (pLink && pLink !== '#') {
+                div.style.cursor = 'pointer';
+                div.onclick = function () { window.open(pLink, '_blank'); };
+            }
+            div.innerHTML = `
                     <div class="sc-avatar">${avatarHtml}</div>
                     <div class="sc-content">
                         <div class="sc-username">${username}</div>
@@ -1084,34 +1084,34 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                     </div>
                 `;
-                shopeeList.appendChild(div);
-            });
-            
-            if (typeof reveal === 'function') reveal();
-        }
+            shopeeList.appendChild(div);
+        });
 
-        function getMockShopeeData() {
-            return [
-                {
-                    author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342939,
-                    product_items: [{ name: "Đế dựng đa năng cho máy tính Mini PC, điều chỉnh được, nhỏ gọn, tinh tế cho bàn làm việc", image: "vn-11134207-820l4-mir6bh17pj4426", model_name: "⑴ Đế Dựng Nhỏ" }]
-                },
-                {
-                    author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342933,
-                    product_items: [{ name: "Workstation Server Minisforum MS01 SFP+ 10Gbps MS-01 băng thông 10GB Máy trạm / chủ", image: "vn-11134207-820l4-metdd3xjbwg2d8", model_name: "i5 12600H 4.5Ghz 16T,NO RAM - NO SSD" }]
-                },
-                {
-                    author_username: "vutuannn", author_portrait: "vn-11134233-7ras8-m4enw6q4rdu792", rating_star: 5, submit_time: 1777273594,
-                    product_items: [{ name: "RAM Laptop 16GB DDR5 5600 MHz - Samsung, Crucial, SK Hynix, Micron", image: "vn-11134207-81ztc-mn2d789xy1ae0a", model_name: "CRUCIAL,16GB Single" }],
-                    ItemRatingReply: { comment: "Cảm ơn Quý khách vutuannn đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
-                },
-                {
-                    author_username: "ukshop12345", author_portrait: "c95ab40a615612b04ff68211d7c30fb8", rating_star: 5, submit_time: 1777208515,
-                    product_items: [{ name: "SSD Predator GM7000 1TB 2TB 4TB NVMe Gen 4 PCIe Có DRAM Tốc độ Cao", image: "vn-11134207-81ztc-mmtu6wrm7kzkb4", model_name: "New FullBox - 2TB" }],
-                    ItemRatingReply: { comment: "Cảm ơn Quý khách ukshop12345 đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
-                }
-            ];
-        }
-
-        fetchShopeeReviews();
+        if (typeof reveal === 'function') reveal();
     }
+
+    function getMockShopeeData() {
+        return [
+            {
+                author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342939,
+                product_items: [{ name: "Đế dựng đa năng cho máy tính Mini PC, điều chỉnh được, nhỏ gọn, tinh tế cho bàn làm việc", image: "vn-11134207-820l4-mir6bh17pj4426", model_name: "⑴ Đế Dựng Nhỏ" }]
+            },
+            {
+                author_username: "vanthangmtd", author_portrait: "", rating_star: 5, submit_time: 1777342933,
+                product_items: [{ name: "Workstation Server Minisforum MS01 SFP+ 10Gbps MS-01 băng thông 10GB Máy trạm / chủ", image: "vn-11134207-820l4-metdd3xjbwg2d8", model_name: "i5 12600H 4.5Ghz 16T,NO RAM - NO SSD" }]
+            },
+            {
+                author_username: "vutuannn", author_portrait: "vn-11134233-7ras8-m4enw6q4rdu792", rating_star: 5, submit_time: 1777273594,
+                product_items: [{ name: "RAM Laptop 16GB DDR5 5600 MHz - Samsung, Crucial, SK Hynix, Micron", image: "vn-11134207-81ztc-mn2d789xy1ae0a", model_name: "CRUCIAL,16GB Single" }],
+                ItemRatingReply: { comment: "Cảm ơn Quý khách vutuannn đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
+            },
+            {
+                author_username: "ukshop12345", author_portrait: "c95ab40a615612b04ff68211d7c30fb8", rating_star: 5, submit_time: 1777208515,
+                product_items: [{ name: "SSD Predator GM7000 1TB 2TB 4TB NVMe Gen 4 PCIe Có DRAM Tốc độ Cao", image: "vn-11134207-81ztc-mmtu6wrm7kzkb4", model_name: "New FullBox - 2TB" }],
+                ItemRatingReply: { comment: "Cảm ơn Quý khách ukshop12345 đã tin tưởng và ủng hộ NavaStore. Shop hy vọng sản phẩm sẽ đem lại nhiều cảm hứng và hiệu quả cho công việc của Quý khách ạ! ☺️" }
+            }
+        ];
+    }
+
+    fetchShopeeReviews();
+}
