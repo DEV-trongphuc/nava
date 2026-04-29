@@ -3457,7 +3457,10 @@ ul {
     }
 
     .search-box {
-        display: none !important;
+        display: flex !important;
+        grid-column: 1 / span 3;
+        width: 100%;
+        margin-top: 10px;
     }
 
     /* Hide search box on mobile completely */
