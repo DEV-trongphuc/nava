@@ -3437,24 +3437,26 @@ ul {
         flex-wrap: wrap;
         padding-bottom: 15px;
     }
+
     .logo {
-        max-width: 140px;
+        max-width: 240px;
     }
-    
+
     .search-box {
         display: flex !important;
         grid-column: 2;
         grid-row: 1;
         width: auto;
         margin: 0 10px;
-        min-width: 80px; /* prevent it from collapsing entirely */
+        min-width: 80px;
+        /* prevent it from collapsing entirely */
     }
-    
+
     .search-box input {
         padding: 6px 35px 6px 12px;
         font-size: 0.85rem;
     }
-    
+
     .search-box button {
         width: 28px;
         height: 28px;
@@ -3472,7 +3474,7 @@ ul {
         grid-row: 1;
         gap: 10px !important;
     }
-    
+
     .header-logo-img {
         height: 35px;
         width: auto;
@@ -6212,6 +6214,13 @@ body:has(#nava-master-wrapper) {
     min-height: 40px;
     font-size: 0.9rem;
     line-height: 1.4;
+    transition: all 0.3s ease;
+    margin-bottom: 10px; /* Thêm khoảng cách */
+}
+
+.product-card:hover .card-desc {
+    -webkit-line-clamp: unset;
+    display: block;
 }
 
 
@@ -7048,16 +7057,15 @@ body::before {
         font-size: 1rem !important;
     }
 }
+
 /* --- PERFORMANCE: DISABLE HEAVY EFFECTS ON MOBILE --- */
 @media (max-width: 768px) {
     * {
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
     }
+
     img {
         filter: none !important;
     }
 }
-
-
-
