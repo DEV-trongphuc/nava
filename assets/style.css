@@ -2229,6 +2229,8 @@ ul {
     -webkit-text-fill-color: transparent;
     color: #2563eb;
     letter-spacing: 2px;
+    line-height: 1.4;
+    padding: 10px 0;
 }
 
 .brand-slider {
@@ -3164,6 +3166,14 @@ ul {
     line-height: 1.7;
     font-size: 1rem;
     margin: 0;
+}
+
+.highlight-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.highlight-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(52, 211, 153, 0.2);
 }
 
 .highlight-box {
@@ -7112,4 +7122,6 @@ body::before {
     mix-blend-mode: normal;
     filter: none;
 }
+
+
 
