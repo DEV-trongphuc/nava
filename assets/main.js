@@ -119,46 +119,53 @@ document.addEventListener('DOMContentLoaded', () => {
     masterWrapper = document.getElementById('nava-master-wrapper');
     const scrollTarget = masterWrapper || window;
 
+    let isTicking = false;
     scrollTarget.addEventListener('scroll', () => {
-        const currentScroll = masterWrapper ? masterWrapper.scrollTop : (window.pageYOffset || document.documentElement.scrollTop);
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                const currentScroll = masterWrapper ? masterWrapper.scrollTop : (window.pageYOffset || document.documentElement.scrollTop);
 
-        // Header Sticky Logic: hide on scroll down, show on scroll up
-        if (currentScroll > 150) {
-            if (currentScroll > lastScroll + 5) {
-                // Scrolling DOWN (with 5px threshold to avoid flicker)
-                header.classList.add('scrolled');
-            } else if (currentScroll < lastScroll - 5) {
-                // Scrolling UP → show header immediately
-                header.classList.remove('scrolled');
-            }
-            if (progressContainer) progressContainer.classList.add('active');
-        } else {
-            // Near top → always show header
-            header.classList.remove('scrolled');
-            if (progressContainer) progressContainer.classList.remove('active');
+                // Header Sticky Logic: hide on scroll down, show on scroll up
+                if (currentScroll > 150) {
+                    if (currentScroll > lastScroll + 5) {
+                        // Scrolling DOWN (with 5px threshold to avoid flicker)
+                        header.classList.add('scrolled');
+                    } else if (currentScroll < lastScroll - 5) {
+                        // Scrolling UP → show header immediately
+                        header.classList.remove('scrolled');
+                    }
+                    if (progressContainer) progressContainer.classList.add('active');
+                } else {
+                    // Near top → always show header
+                    header.classList.remove('scrolled');
+                    if (progressContainer) progressContainer.classList.remove('active');
+                }
+
+                // Calculate Scroll Percentage
+                const scrollHeight = masterWrapper ? masterWrapper.scrollHeight : document.documentElement.scrollHeight;
+                const clientHeight = masterWrapper ? masterWrapper.clientHeight : document.documentElement.clientHeight;
+                const height = scrollHeight - clientHeight;
+                const scrollPercentage = (height > 0) ? (currentScroll / height) * 100 : 0;
+
+                // Back To Top Button Logic
+                if (backToTopBtn) {
+                    if (scrollPercentage > 50) {
+                        backToTopBtn.classList.add('show');
+                    } else {
+                        backToTopBtn.classList.remove('show');
+                    }
+                }
+
+                // Progress Bar Logic
+                if (progressBar) {
+                    progressBar.style.width = scrollPercentage + "%";
+                }
+
+                lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+                isTicking = false;
+            });
+            isTicking = true;
         }
-
-        // Calculate Scroll Percentage
-        const scrollHeight = masterWrapper ? masterWrapper.scrollHeight : document.documentElement.scrollHeight;
-        const clientHeight = masterWrapper ? masterWrapper.clientHeight : document.documentElement.clientHeight;
-        const height = scrollHeight - clientHeight;
-        const scrollPercentage = (height > 0) ? (currentScroll / height) * 100 : 0;
-
-        // Back To Top Button Logic
-        if (backToTopBtn) {
-            if (scrollPercentage > 50) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-        }
-
-        // Progress Bar Logic
-        if (progressBar) {
-            progressBar.style.width = scrollPercentage + "%";
-        }
-
-        lastScroll = currentScroll <= 0 ? 0 : currentScroll;
     }, { passive: true });
 
     if (backToTopBtn) {
