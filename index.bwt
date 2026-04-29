@@ -1,5 +1,4 @@
-
-    <!-- MASTER SAPO ESCAPE WRAPPER -->
+<!-- MASTER SAPO ESCAPE WRAPPER -->
     <div id="nava-master-wrapper">
         <!-- SEO H1 -->
         <h1 style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">NAVA STORE - Mini PC & eGPU</h1>
@@ -371,7 +370,7 @@
                     </div>
 
                     <!-- Slide Dots -->
-                    <div class="hero-slide-dots" id="heroSlideDots">
+                    <div class="hero-slide-dots" id="heroSlideDots" style="transform: translateY(15px);">
                         <button class="h-dot active" data-slide="0"></button>
                         <button class="h-dot" data-slide="1"></button>
                         <button class="h-dot" data-slide="2"></button>
@@ -778,7 +777,7 @@
                     <div class="stat-card reveal">
                         <div class="stat-icon"><i class="ph-fill ph-users-three"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="12500">0</div>
+                            <div class="stat-number" id="realtime-customer-count" data-target="1200">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Khách hàng tin dùng</div>
@@ -789,7 +788,7 @@
                     <div class="stat-card reveal delay-1">
                         <div class="stat-icon"><i class="ph-fill ph-package"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="850">0</div>
+                            <div class="stat-number" id="realtime-product-count" data-target="200">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Sản phẩm chính hãng</div>
@@ -811,7 +810,7 @@
                     <div class="stat-card reveal delay-3">
                         <div class="stat-icon"><i class="ph-fill ph-clock-countdown"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-number" data-target="15">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Năm kinh nghiệm</div>
@@ -1345,7 +1344,7 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">VIDEO REVIEW TRỰC QUAN</h2>
-            <a href="https://www.youtube.com/@NAVAStore-MiniPC-eGPU" target="_blank" class="view-all-link">Xem tất cả <i class="ph ph-youtube-logo"></i></a>
+            <a href="https://www.youtube.com/@navastore-vn" target="_blank" class="view-all-link">Xem tất cả <i class="ph ph-youtube-logo"></i></a>
         </div>
         <div class="video-grid">
             <!-- Video 1 -->
@@ -1835,6 +1834,47 @@
 
         <script src="https://nava-one.vercel.app/assets/main.js?v=1777402289093"></script>
 
+        <script>
+            // Patch: Fetch shopee summary for realtime customer count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary', { headers: { 'Accept': 'application/json' } })
+                .then(res => res.json())
+                .then(data => {
+                    if(data && data.data && data.data.seller_rating_summary) {
+                        // Lấy số liệu gốc nhân 5 theo yêu cầu
+                        const total = (data.data.seller_rating_summary.rating_total || 0) * 5;
+                        const el = document.getElementById('realtime-customer-count');
+                        if (el) {
+                            el.dataset.target = total;
+                            // Wait for original animation to finish (2000ms), then force update
+                            setTimeout(() => {
+                                el.textContent = total.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                });
+
+            // Patch: Fetch shopee shop_base for realtime product count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=shop_base', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if(data && data.data && typeof data.data.item_count !== 'undefined') {
+                        // Lấy item_count nhân 2
+                        const itemCount = data.data.item_count * 2;
+                        const el = document.getElementById('realtime-product-count');
+                        if (el) {
+                            el.dataset.target = itemCount;
+                            setTimeout(() => {
+                                el.textContent = itemCount.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                })
+                .catch(err => console.error('Fetch shop base error:', err));
+        </script>
 
     </div>
 
@@ -1857,7 +1897,6 @@
             }
         });
     </script>
-\n
         <!-- Dynamic 3D Tilt Script for Benefit Cards -->
         <script>
             (function() {
@@ -1900,4 +1939,3 @@
                 }
             })();
         </script>
-        

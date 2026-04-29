@@ -918,6 +918,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // array mapping to 1, 2, 3, 4, 5 stars
             const counts = summary.rating_count || [3, 1, 7, 23, 2385];
             
+            // Update realtime customer stat in hero section
+            const realtimeCustomerCountEl = document.getElementById('realtime-customer-count');
+            if (realtimeCustomerCountEl) {
+                realtimeCustomerCountEl.dataset.target = total;
+                // If it already animated (text content is not 0), update the text content
+                if (realtimeCustomerCountEl.textContent !== '0') {
+                    realtimeCustomerCountEl.textContent = total.toLocaleString('vi-VN');
+                }
+            }
+
             // Build bars (from 5 down to 1)
             let barsHtml = '';
             for (let i = 5; i >= 1; i--) {

@@ -3048,6 +3048,11 @@ ul {
     padding: 10px 10px 10px 0;
     font-size: 0.95rem;
     background: transparent;
+    color: var(--text-dark);
+}
+
+.search-box input::placeholder {
+    color: var(--text-gray);
 }
 
 .search-box button {
