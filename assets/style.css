@@ -1919,7 +1919,7 @@ ul {
 
     .top-bar-container {
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: auto auto 1fr auto;
         align-items: center;
         gap: 15px;
     }
@@ -2705,7 +2705,7 @@ ul {
     }
 
     .top-bar-container {
-        grid-template-columns: auto 1fr auto !important;
+        grid-template-columns: auto auto 1fr auto !important;
     }
 
     .top-actions {
@@ -6234,17 +6234,17 @@ body:has(#nava-master-wrapper) {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-height: 60px;
+    height: 41px; /* Chiều cao 2 dòng */
     font-size: 0.9rem;
     line-height: 1.4;
     transition: all 0.3s ease;
-    margin-bottom: 10px;
-    /* Thêm khoảng cách */
+    margin-bottom: 30px; /* Bù đắp không gian để tổng cộng bằng 3 dòng */
 }
 
 .product-card:hover .card-desc {
-    -webkit-line-clamp: unset;
-    display: block;
+    -webkit-line-clamp: 3;
+    height: 61px; /* Chiều cao 3 dòng */
+    margin-bottom: 10px; /* Giảm margin bù đắp */
 }
 
 
@@ -7093,6 +7093,7 @@ body::before {
         filter: none !important;
     }
 }
+
 
 
 

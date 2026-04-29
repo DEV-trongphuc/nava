@@ -156,20 +156,23 @@
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
                             alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
                     </div>
+                    <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện" style="margin-right: 10px;">
+                        <div class="toggle-track">
+                            <div class="toggle-thumb">
+                                <i class="ph-fill ph-sun icon-sun"></i>
+                                <i class="ph-fill ph-moon icon-moon"></i>
+                            </div>
+                        </div>
+                    </button>
                     <form action="/search" method="GET" class="search-box">
                         <input type="text" name="query" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?"
                             required>
                         <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
                     </form>
                     <div class="top-actions">
-                        <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện">
-                            <div class="toggle-track">
-                                <div class="toggle-thumb">
-                                    <i class="ph-fill ph-sun icon-sun"></i>
-                                    <i class="ph-fill ph-moon icon-moon"></i>
-                                </div>
-                            </div>
-                        </button>
+                        <a href="https://navastore.vn/account/login" class="action-item"><i class="ph ph-user"></i>
+                            <div><small>Tài khoản</small><br><strong>Đăng nhập</strong></div>
+                        </a>
                         <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
                             <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
                         </a>
