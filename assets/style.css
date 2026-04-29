@@ -7005,7 +7005,7 @@ body::before {
     }
 
     .warranty-card {
-        padding: 30px 20px !important;
+        padding: 30px 15px !important;
         flex-direction: column !important;
         justify-content: center !important;
         text-align: center !important;
@@ -7025,5 +7025,6 @@ body::before {
 
     .warranty-content p {
         text-align: center !important;
+        font-size: 1rem !important;
     }
 }
