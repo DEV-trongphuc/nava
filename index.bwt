@@ -173,6 +173,7 @@
                             </div>
                             Giỏ hàng
                         </a>
+                        <button class="mobile-search-toggle" aria-label="Tìm kiếm"><i class="ph ph-magnifying-glass"></i></button>
                         <button class="mobile-menu-toggle"><i class="ph ph-list"></i></button>
                     </div>
                 </div>

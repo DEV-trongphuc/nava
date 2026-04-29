@@ -2426,7 +2426,7 @@ ul {
 }
 
 /* --- MOBILE MENU TOGGLE --- */
-.mobile-menu-toggle {
+.mobile-search-toggle, .mobile-menu-toggle {
     display: none;
     background: none;
     border: none;
@@ -2697,7 +2697,7 @@ ul {
 }
 
 @media (max-width: 991px) {
-    .mobile-menu-toggle {
+    .mobile-search-toggle, .mobile-menu-toggle {
         display: block;
     }
 
@@ -3443,13 +3443,15 @@ ul {
     }
 
     .search-box {
+        display: none !important;
+        grid-column: 1 / span 3;
+        grid-row: 2;
+        width: 100%;
+        margin: 10px 0 0 0;
+    }
+    
+    .search-box.active {
         display: flex !important;
-        grid-column: 2;
-        grid-row: 1;
-        width: auto;
-        margin: 0 10px;
-        min-width: 80px;
-        /* prevent it from collapsing entirely */
     }
 
     .search-box input {
@@ -6207,11 +6209,11 @@ body:has(#nava-master-wrapper) {
 
 .product-card .card-desc {
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    min-height: 40px;
+    min-height: 60px;
     font-size: 0.9rem;
     line-height: 1.4;
     transition: all 0.3s ease;
@@ -7070,3 +7072,4 @@ body::before {
         filter: none !important;
     }
 }
+

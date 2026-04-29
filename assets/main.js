@@ -186,6 +186,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 4. MOBILE SIDEBAR LOGIC
     const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const searchToggle = document.querySelector('.mobile-search-toggle');
+    const searchBox = document.querySelector('.search-box');
+
+    if (searchToggle && searchBox) {
+        searchToggle.addEventListener('click', () => {
+            searchBox.classList.toggle('active');
+            if (searchBox.classList.contains('active')) {
+                searchBox.querySelector('input').focus();
+            }
+        });
+    }
     const sidebarDrawer = document.querySelector('.sidebar-drawer');
     const sidebarOverlay = document.querySelector('.sidebar-overlay');
     const sidebarClose = document.querySelector('.sidebar-close');
@@ -1122,3 +1133,4 @@ if (shopeeList) {
 
     fetchShopeeReviews();
 }
+
