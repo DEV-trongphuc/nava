@@ -170,9 +170,15 @@
                         <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
                     </form>
                     <div class="top-actions">
-                        <a href="https://navastore.vn/account/login" class="action-item"><i class="ph ph-user"></i>
+                        {% if customer %}
+                        <a href="/account" class="action-item"><i class="ph ph-user-check" style="color: var(--primary);"></i>
+                            <div><small>Xin chào,</small><br><strong>{{ customer.first_name | default: customer.name }}</strong></div>
+                        </a>
+                        {% else %}
+                        <a href="/account/login" class="action-item"><i class="ph ph-user"></i>
                             <div><small>Tài khoản</small><br><strong>Đăng nhập</strong></div>
                         </a>
+                        {% endif %}
 
                         <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
                             <div class="cart-icon-wrapper" style="position: relative;">
