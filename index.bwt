@@ -361,7 +361,7 @@
                     </div>
                     <div class="tech-float-item tech-item-2" id="floatItem2">
                         <i id="floatIcon2"
-                            style="background-image: url('https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png'); background-size: contain; background-repeat: no-repeat; background-position: center center; width: 24px; height: 24px; display: inline-block;"></i>
+                            style="background-image: url('https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png'); background-size: contain; background-repeat: no-repeat; background-position: center center; width: 24px; height: 24px; display: inline-block;"></i>
                         <div>
                             <span id="floatLabel2">Openclaw</span>
                             <small id="floatSub2">Sức mạnh vượt trội</small>
@@ -641,7 +641,7 @@
                         </div>
                         <div class="card-icon-cluster"
                             style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; align-items: center; max-width: 100%; margin-left: auto; margin-right: auto;">
-                            <img src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" class="software-badge-icon">
 
                             <img src="https://nava-one.vercel.app/assets/icon/Codex.png" alt="Codex"
@@ -683,7 +683,7 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
                         <span class="spec-name">USB4 / Openclaw</span><span class="spec-value"><img
-                                src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                                src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" style="height:16px; margin-right:6px; vertical-align:middle;">Băng thông
                             40
                             Gbps</span>
@@ -728,7 +728,7 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
                         <span class="spec-name">USB4 / Openclaw</span><span class="spec-value"><img
-                                src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                                src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" style="height:16px; margin-right:6px; vertical-align:middle;">Băng thông
                             40
                             Gbps</span>
@@ -1936,3 +1936,4 @@
                 }
             })();
         </script>
+
