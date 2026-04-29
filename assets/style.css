@@ -3442,7 +3442,6 @@ ul {
     mix-blend-mode: multiply;
 }
 
-[data-theme="dark"] .software-badge-icon, 
 [data-theme="dark"] .spec-value img, 
 [data-theme="dark"] .tech-float-item i, 
 [data-theme="dark"] .brand-track, 
@@ -7107,4 +7106,10 @@ body::before {
 
 
 
+
+
+[data-theme="dark"] .software-badge-icon {
+    mix-blend-mode: normal;
+    filter: none;
+}
 
