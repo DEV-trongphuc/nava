@@ -54,6 +54,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
+    // 1.5 MAKE STAT CARDS CLICKABLE
+    const allStatCards = document.querySelectorAll('.stat-card');
+    allStatCards.forEach(card => {
+        const label = card.querySelector('.stat-label');
+        if (label) {
+            card.style.cursor = 'pointer';
+            card.onclick = () => {
+                if (label.textContent.includes('Sản phẩm')) {
+                    window.open('https://shopee.vn/navastore.vn#product_list', '_blank');
+                } else if (label.textContent.includes('Điểm đánh giá')) {
+                    const reviewSection = document.querySelector('.shopee-reviews-section');
+                    if (reviewSection) {
+                        reviewSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                } else {
+                    // For Khách hàng and 15 Năm kinh nghiệm
+                    window.open('https://shopee.vn/navastore.vn', '_blank');
+                }
+            };
+        }
+    });
+
     // 2. MOUSE PARALLAX EFFECT FOR HERO SECTION
     const heroSection = document.querySelector('.hero-3d');
     const floatingPC = document.querySelector('.floating-pc');

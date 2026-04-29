@@ -5261,6 +5261,16 @@ ul {
 }
 
 @media (max-width: 768px) {
+    .specs-ticker-wrapper::before {
+        left: 0;
+        background: transparent
+    }
+
+    .specs-ticker-wrapper::after {
+        right: 0;
+        background: transparent
+    }
+
     .customer-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -6963,6 +6973,7 @@ body:has(#nava-master-wrapper) {
 .shopee-rating-summary {
     max-width: 100% !important;
 }
+
 /* --- CYBER CIRCUIT GRID BACKGROUND --- */
 body::before {
     content: '';
@@ -6973,7 +6984,8 @@ body::before {
     height: 100vh;
     z-index: -999;
     pointer-events: none;
-    opacity: 0.025; /* R?t m?, tr?u tu?ng */
+    opacity: 0.025;
+    /* R?t m?, tr?u tu?ng */
     /* SVG M?ch di?n t? (Circuit Board Pattern) */
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%233385ff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%233385ff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%233385ff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%233385ff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%233385ff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%233385ff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%233385ff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%233385ff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%233385ff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%233385ff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
     background-size: 80px 80px;
@@ -6981,7 +6993,32 @@ body::before {
 }
 
 [data-theme="dark"] body::before {
-    opacity: 0.05; /* T?i thì sáng hon tí d? d? th?y */
+    opacity: 0.05;
+    /* T?i thï¿½ sï¿½ng hon tï¿½ d? d? th?y */
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%23ffffff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
 }
-
+/* --- WARRANTY SECTION MOBILE FIX --- */
+@media (max-width: 768px) {
+    .warranty-section {
+        padding: 40px 15px !important;
+    }
+    .warranty-card {
+        padding: 30px 20px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center !important;
+        gap: 20px !important;
+    }
+    .warranty-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .warranty-content h2.section-title {
+        text-align: center !important;
+    }
+    .warranty-content p {
+        text-align: center !important;
+    }
+}
