@@ -610,15 +610,15 @@
                         </div>
                         <div class="card-icon-cluster"
                             style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; align-items: center; max-width: 100%; margin-left: auto; margin-right: auto;">
-                            <img src="https://nava-one.vercel.app/assets/icon/word.png" alt="Word"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/word.png" alt="Word"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/excel_logo.png" alt="Excel"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/excel_logo.png" alt="Excel"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/ppt_logo.webp" alt="PowerPoint"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/ppt_logo.webp" alt="PowerPoint"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/canvalogo.jpg" alt="Canva"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/canvalogo.jpg" alt="Canva"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/capcut_logo.png" alt="Capcut"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/capcut_logo.png" alt="Capcut"
                                 class="software-badge-icon">
                         </div>
                         <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px;">Set-up Văn Phòng Tối Giản
@@ -644,16 +644,16 @@
                             <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" class="software-badge-icon">
 
-                            <img src="https://nava-one.vercel.app/assets/icon/Codex.png" alt="Codex"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/Codex.png" alt="Codex"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/antigravity.jpg" alt="Claude AI"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/antigravity.jpg" alt="Claude AI"
                                 class="software-badge-icon">
 
-                            <img src="https://nava-one.vercel.app/assets/icon/AI_logo.png" alt="Illustrator"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/AI_logo.png" alt="Illustrator"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/AE_logo.png" alt="After Effects"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/AE_logo.png" alt="After Effects"
                                 class="software-badge-icon">
-                            <img src="https://nava-one.vercel.app/assets/icon/Blender%20logo.png" alt="Blender"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/Blender%20logo.png" alt="Blender"
                                 class="software-badge-icon">
 
                         </div>
@@ -1163,7 +1163,7 @@
                 </div>
                 <!-- CTA Neon Glassmorphism Banner -->
                 <div class="cta-neon-box blue-theme reveal mt-5" style="margin-top: 60px;">
-                    <img src="https://nava-one.vercel.app/assets/logo.png" alt="NAVA" class="cta-n-icon" loading="lazy"
+                    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" alt="NAVA" class="cta-n-icon" loading="lazy"
                         decoding="async">
                     <div class="cta-glow"></div>
                     <h2 class="cta-title">SẴN SÀNG NÂNG TẦM TRẢI NGHIỆM?</h2>
@@ -1442,7 +1442,7 @@
             <div class="container footer-grid">
                 <div class="footer-col brand">
                     <div class="logo">
-                        <img src="https://nava-one.vercel.app/assets/logo.png" alt="Nava Store" class="footer-logo-img"
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" alt="Nava Store" class="footer-logo-img"
                             loading="lazy" decoding="async">
                     </div>
                     <p class="footer-desc">Trung tâm phân phối tiên phong chuyên cung cấp các giải pháp Mini PC & eGPU
@@ -1936,4 +1936,5 @@
                 }
             })();
         </script>
+
 
