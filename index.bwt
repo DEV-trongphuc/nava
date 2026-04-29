@@ -162,14 +162,7 @@
                         <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
                     </form>
                     <div class="top-actions">
-                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện">
-                            <div class="toggle-track">
-                                <div class="toggle-thumb">
-                                    <i class="ph-fill ph-sun icon-sun"></i>
-                                    <i class="ph-fill ph-moon icon-moon"></i>
-                                </div>
-                            </div>
-                        </button>
+
                         <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
                             <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
                         </a>
@@ -197,33 +190,7 @@
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_1.png?1775454528082"
                                     alt="Trang chủ" loading="lazy" decoding="async"> <span>Trang chủ</span></a>
                         </li>
-                        <li class="nav-item has-dropdown">
-                            <a href="https://navastore.vn/tat-ca-san-pham"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_2.png?1775454528082"
-                                    alt="Danh mục sản phẩm" loading="lazy" decoding="async"> <span>Danh mục sản
-                                    phẩm</span>
-                                <i class="ph-bold ph-caret-down"></i></a>
-                            <div class="dropdown-menu mega-grid">
-                                <a href="https://navastore.vn/minipc" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
-                                        alt="Mini PC"><span>Mini PC</span></a>
-                                <a href="https://navastore.vn/egpu" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
-                                        alt="eGPU"><span>eGPU</span></a>
-                                <a href="https://navastore.vn/nas" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
-                                        alt="NAS"><span>NAS / Server</span></a>
-                                <a href="https://navastore.vn/collections/all" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
-                                        alt="Linh Kiện"><span>Linh Kiện</span></a>
-                                <a href="https://navastore.vn/phu-kien" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
-                                        alt="Phụ kiện"><span>Phụ kiện</span></a>
-                                <a href="https://navastore.vn/like-new" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
-                                        alt="Like new"><span>Like new</span></a>
-                            </div>
-                        </li>
+                        
 
                         <!-- Mega Dropdown: Mini PC -->
                         <li class="nav-item has-dropdown">
@@ -926,7 +893,7 @@
                         <div
                             style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary) 0%, transparent 60%); opacity: 0.05; top: 0; left: 0;">
                         </div>
-                        <img src="https://nava-one.vercel.app/assets/baohanh.png" alt="Bảo Hành"
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/baohanh.png" alt="Bảo Hành"
                             style="width: 160px; height: auto; filter: drop-shadow(0 10px 20px rgba(0, 51, 102, 0.2)); position: relative; z-index: 2;">
                     </div>
                 </div>
@@ -1547,16 +1514,14 @@
                         alt="NAVA" class="header-logo-img" style="height: 35px; width: auto;" loading="lazy"
                         decoding="async">
                 </div>
-                <div class="sidebar-search" style="flex: 1; min-width: 0;">
-                    <form action="/search" method="get"
-                        style="display: flex; position: relative; margin: 0; width: 100%;">
-                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..."
-                            style="width: 100%; padding: 8px 15px 8px 35px; border-radius: 9999px; border: 1px solid var(--border-color); font-size: 0.9rem; outline: none; background: #f8fafc; box-sizing: border-box;">
-                        <button type="submit"
-                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-gray); display: flex;"><i
-                                class="ph ph-magnifying-glass" style="font-size: 1.1rem;"></i></button>
-                    </form>
-                </div>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện" style="margin-right: auto; margin-left: 20px;">
+                            <div class="toggle-track">
+                                <div class="toggle-thumb">
+                                    <i class="ph-fill ph-sun icon-sun"></i>
+                                    <i class="ph-fill ph-moon icon-moon"></i>
+                                </div>
+                            </div>
+                        </button>
                 <button class="sidebar-close"
                     style="flex-shrink: 0; background: none; border: none; font-size: 1.5rem; color: var(--text-gray); padding: 0;"><i
                         class="ph ph-x"></i></button>
