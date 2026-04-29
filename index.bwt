@@ -162,7 +162,14 @@
                         <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
                     </form>
                     <div class="top-actions">
-
+                        <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện">
+                            <div class="toggle-track">
+                                <div class="toggle-thumb">
+                                    <i class="ph-fill ph-sun icon-sun"></i>
+                                    <i class="ph-fill ph-moon icon-moon"></i>
+                                </div>
+                            </div>
+                        </button>
                         <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
                             <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
                         </a>

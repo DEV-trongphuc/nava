@@ -2700,6 +2700,9 @@ ul {
     .mobile-search-toggle, .mobile-menu-toggle {
         display: block;
     }
+    .desktop-theme-toggle {
+        display: none !important;
+    }
 
     .top-bar-container {
         grid-template-columns: auto 1fr auto !important;
@@ -3427,6 +3430,24 @@ ul {
     font-size: 0.95rem !important;
     line-height: 1.6 !important;
     color: #94a3b8 !important;
+}
+
+/* --- AUTO BACKGROUND REMOVAL FOR LOGOS --- */
+.software-badge-icon, 
+.spec-value img, 
+.tech-float-item i, 
+.brand-item img, 
+.product-card img.brand-img {
+    mix-blend-mode: multiply;
+}
+
+[data-theme="dark"] .software-badge-icon, 
+[data-theme="dark"] .spec-value img, 
+[data-theme="dark"] .tech-float-item i, 
+[data-theme="dark"] .brand-item img, 
+[data-theme="dark"] .product-card img.brand-img {
+    mix-blend-mode: screen;
+    filter: invert(1) hue-rotate(180deg);
 }
 
 /* --- MOBILE OPTIMIZATION --- */
@@ -7072,4 +7093,6 @@ body::before {
         filter: none !important;
     }
 }
+
+
 
