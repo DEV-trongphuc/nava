@@ -6234,6 +6234,7 @@ body:has(#nava-master-wrapper) {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-height: 0 !important;
     height: 41px; /* Chiều cao 2 dòng */
     font-size: 0.9rem;
     line-height: 1.4;
@@ -7093,6 +7094,8 @@ body::before {
         filter: none !important;
     }
 }
+
+
 
 
 

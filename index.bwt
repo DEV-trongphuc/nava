@@ -173,9 +173,7 @@
                         <a href="https://navastore.vn/account/login" class="action-item"><i class="ph ph-user"></i>
                             <div><small>Tài khoản</small><br><strong>Đăng nhập</strong></div>
                         </a>
-                        <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
-                            <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
-                        </a>
+
                         <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
                             <div class="cart-icon-wrapper" style="position: relative;">
                                 <i class="ph ph-shopping-cart"></i>
