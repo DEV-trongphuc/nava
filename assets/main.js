@@ -1001,6 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pName = product.name || '';
                 const pImg = product.image ? `https://cf.shopee.vn/file/${product.image}` : '';
                 const pModel = product.model_name || '';
+                const pLink = (product.shopid && product.itemid) ? `https://shopee.vn/product-i.${product.shopid}.${product.itemid}` : '#';
                 
                 const reply = item.ItemRatingReply;
                 let replyHtml = '';
@@ -1015,13 +1016,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 let productCardHtml = '';
                 if (pName) {
                     productCardHtml = `
-                    <div class="sc-product-card">
+                    <a href="${pLink}" target="_blank" class="sc-product-card" style="text-decoration: none; color: inherit; display: flex; cursor: pointer;">
                         <img src="${pImg}" alt="Product">
                         <div class="sc-product-info">
                             <span class="sc-product-name">${pName}</span>
                             <span class="sc-product-variant">Phân loại hàng: ${pModel}</span>
                         </div>
-                    </div>`;
+                    </a>`;
                 }
                 
                 const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
