@@ -215,13 +215,13 @@
                                     class="ph-bold ph-caret-down"></i></a>
                             <div class="dropdown-menu mega-grid mini-pc-menu">
                                 <a href="https://navastore.vn/asus" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313"
+                                        src="https://nava-one.vercel.app/assets/asus.png"
                                         alt="ASUS"></a>
                                 <a href="https://navastore.vn/asrock" class="mega-card"><img
                                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/ASRock_Logo.svg/3840px-ASRock_Logo.svg.png"
                                         alt="ASRock"></a>
                                 <a href="https://navastore.vn/aoostar" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
+                                        src="https://nava-one.vercel.app/assets/aoostar.png"
                                         alt="AOOSTAR"></a>
                                 <a href="https://navastore.vn/beelink" class="mega-card"><img
                                         src="https://bizweb.dktcdn.net/100/543/817/files/beelink.png?v=1770949197367"
@@ -233,7 +233,7 @@
                                         src="https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823"
                                         alt="GMKtec"></a>
                                 <a href="https://navastore.vn/msi" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230"
+                                        src="https://nava-one.vercel.app/assets/msi.png"
                                         alt="MSI"></a>
                                 <a href="https://navastore.vn/minisforum" class="mega-card"><img
                                         src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957"
@@ -908,7 +908,7 @@
                         <div
                             style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary) 0%, transparent 60%); opacity: 0.05; top: 0; left: 0;">
                         </div>
-                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/baohanh.png" alt="Bảo Hành"
+                        <img src="https://nava-one.vercel.app/assets/baohanh.png" alt="Bảo Hành"
                             style="width: 160px; height: auto; filter: drop-shadow(0 10px 20px rgba(0, 51, 102, 0.2)); position: relative; z-index: 2;">
                     </div>
                 </div>
@@ -1005,16 +1005,16 @@
                             src="https://bizweb.dktcdn.net/100/543/817/files/kioxia.png?v=1770717779673" alt="kioxia"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/amd.png?v=1770718398083" alt="amd"
+                            src="https://nava-one.vercel.app/assets/amd.png" alt="amd"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/predator_6fe7e00c-bfc7-46c6-b1e6-bca4febe9dde.png?v=1770718398233"
                             alt="predator" loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230" alt="msi"
+                            src="https://nava-one.vercel.app/assets/msi.png" alt="msi"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://nava-one.vercel.app/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/rog.png?v=1770718398283" alt="rog"
@@ -1031,16 +1031,16 @@
                             src="https://bizweb.dktcdn.net/100/543/817/files/kioxia.png?v=1770717779673" alt="kioxia"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/amd.png?v=1770718398083" alt="amd"
+                            src="https://nava-one.vercel.app/assets/amd.png" alt="amd"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/predator_6fe7e00c-bfc7-46c6-b1e6-bca4febe9dde.png?v=1770718398233"
                             alt="predator" loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230" alt="msi"
+                            src="https://nava-one.vercel.app/assets/msi.png" alt="msi"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://nava-one.vercel.app/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/rog.png?v=1770718398283" alt="rog"
@@ -1053,19 +1053,19 @@
             <div class="slider-wrapper" style="margin-top: -1px; border-top: none;">
                 <div class="brand-track reverse">
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/lexar.jpg?v=1770718398227" alt="lexar"
+                            src="https://nava-one.vercel.app/assets/lexar.png" alt="lexar"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/hyix.jpg?v=1770718398223" alt="hynix"
+                            src="https://nava-one.vercel.app/assets/sk.png" alt="hynix"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/biwin.jpg?v=1770718398170" alt="biwin"
+                            src="https://nava-one.vercel.app/assets/biwin.png" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
+                            src="https://nava-one.vercel.app/assets/aoostar.png"
                             alt="aoostar" loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
@@ -1076,24 +1076,24 @@
                             loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://nava-one.vercel.app/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                 </div>
                 <div class="brand-track reverse" aria-hidden="true">
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/lexar.jpg?v=1770718398227" alt="lexar"
+                            src="https://nava-one.vercel.app/assets/lexar.png" alt="lexar"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/hyix.jpg?v=1770718398223" alt="hynix"
+                            src="https://nava-one.vercel.app/assets/sk.png" alt="hynix"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/biwin.jpg?v=1770718398170" alt="biwin"
+                            src="https://nava-one.vercel.app/assets/biwin.png" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
+                            src="https://nava-one.vercel.app/assets/aoostar.png"
                             alt="aoostar" loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
@@ -1104,7 +1104,7 @@
                             loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://nava-one.vercel.app/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                 </div>
             </div>
@@ -1936,4 +1936,5 @@
                 }
             })();
         </script>
+
 
