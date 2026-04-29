@@ -928,6 +928,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            // Update realtime rating stat in hero section
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                const label = card.querySelector('.stat-label');
+                if (label && label.textContent.includes('Điểm đánh giá trung bình')) {
+                    const numberEl = card.querySelector('.stat-number');
+                    const suffixEl = card.querySelector('.stat-suffix');
+                    if (numberEl && suffixEl) {
+                        const [intPart, decPart] = starStr.split('.');
+                        numberEl.dataset.target = intPart;
+                        if (numberEl.textContent !== '0') {
+                            numberEl.textContent = intPart;
+                        }
+                        suffixEl.textContent = `.${decPart}★`;
+                    }
+                }
+            });
+
             // Build bars (from 5 down to 1)
             let barsHtml = '';
             for (let i = 5; i >= 1; i--) {
@@ -1016,19 +1034,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 let productCardHtml = '';
                 if (pName) {
                     productCardHtml = `
-                    <a href="${pLink}" target="_blank" class="sc-product-card" style="text-decoration: none; color: inherit; display: flex; cursor: pointer;">
+                    <div class="sc-product-card" style="display: flex;">
                         <img src="${pImg}" alt="Product">
                         <div class="sc-product-info">
                             <span class="sc-product-name">${pName}</span>
                             <span class="sc-product-variant">Phân loại hàng: ${pModel}</span>
                         </div>
-                    </a>`;
+                    </div>`;
                 }
                 
                 const starsHtml = '<i class="ph-fill ph-star"></i>'.repeat(item.rating_star || 5);
 
                 const div = document.createElement('div');
                 div.className = 'shopee-comment-item';
+                if (pLink && pLink !== '#') {
+                    div.style.cursor = 'pointer';
+                    div.onclick = function() { window.open(pLink, '_blank'); };
+                }
                 div.innerHTML = `
                     <div class="sc-avatar">${avatarHtml}</div>
                     <div class="sc-content">
