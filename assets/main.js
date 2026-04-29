@@ -595,17 +595,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // 11. THEME TOGGLE
     // ============================================
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('nava-theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('nava-theme', 'dark');
-            }
+    const themeToggleBtns = document.querySelectorAll('.theme-toggle-btn, #theme-toggle');
+    if (themeToggleBtns.length > 0) {
+        themeToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('nava-theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('nava-theme', 'dark');
+                }
+            });
         });
     }
     // ============================================
