@@ -2428,7 +2428,8 @@ ul {
 }
 
 /* --- MOBILE MENU TOGGLE --- */
-.mobile-search-toggle, .mobile-menu-toggle {
+.mobile-search-toggle,
+.mobile-menu-toggle {
     display: none;
     background: none;
     border: none;
@@ -2699,9 +2700,12 @@ ul {
 }
 
 @media (max-width: 991px) {
-    .mobile-search-toggle, .mobile-menu-toggle {
+
+    .mobile-search-toggle,
+    .mobile-menu-toggle {
         display: block;
     }
+
     .desktop-theme-toggle {
         display: none !important;
     }
@@ -3171,6 +3175,7 @@ ul {
 .highlight-hover {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 .highlight-hover:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(52, 211, 153, 0.2);
@@ -3443,19 +3448,19 @@ ul {
 }
 
 /* --- AUTO BACKGROUND REMOVAL FOR LOGOS --- */
-.software-badge-icon, 
-.spec-value img, 
-.tech-float-item i, 
-.brand-track, 
-.mega-card img, 
+.software-badge-icon,
+.spec-value img,
+.tech-float-item i,
+.brand-track,
+.mega-card img,
 .product-card img.brand-img {
     mix-blend-mode: multiply;
 }
 
-[data-theme="dark"] .spec-value img, 
-[data-theme="dark"] .tech-float-item i, 
-[data-theme="dark"] .brand-track, 
-[data-theme="dark"] .mega-card img, 
+[data-theme="dark"] .spec-value img,
+[data-theme="dark"] .tech-float-item i,
+[data-theme="dark"] .brand-track,
+[data-theme="dark"] .mega-card img,
 [data-theme="dark"] .product-card img.brand-img {
     mix-blend-mode: screen;
     filter: invert(1) hue-rotate(180deg);
@@ -3481,7 +3486,7 @@ ul {
         width: 100%;
         margin: 10px 0 0 0;
     }
-    
+
     .search-box.active {
         display: flex !important;
     }
@@ -6246,17 +6251,21 @@ body:has(#nava-master-wrapper) {
     overflow: hidden;
     text-overflow: ellipsis;
     min-height: 0 !important;
-    height: 41px; /* Chiều cao 2 dòng */
+    height: 41px;
+    /* Chiều cao 2 dòng */
     font-size: 0.9rem;
     line-height: 1.4;
     transition: all 0.3s ease;
-    margin-bottom: 30px; /* Bù đắp không gian để tổng cộng bằng 3 dòng */
+    margin-bottom: 30px;
+    /* Bù đắp không gian để tổng cộng bằng 3 dòng */
 }
 
 .product-card:hover .card-desc {
     -webkit-line-clamp: 3;
-    height: 61px; /* Chiều cao 3 dòng */
-    margin-bottom: 10px; /* Giảm margin bù đắp */
+    height: 61px;
+    /* Chiều cao 3 dòng */
+    margin-bottom: 10px;
+    /* Giảm margin bù đắp */
 }
 
 
@@ -7058,7 +7067,7 @@ body::before {
 }
 
 [data-theme="dark"] body::before {
-    opacity: 0.05;
+    opacity: 0.03;
     /* T?i th� s�ng hon t� d? d? th?y */
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%23ffffff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
 }
@@ -7122,6 +7131,3 @@ body::before {
     mix-blend-mode: normal;
     filter: none;
 }
-
-
-

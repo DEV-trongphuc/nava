@@ -1015,13 +1015,13 @@ if (shopeeList) {
         }
 
         summaryEl.innerHTML = `
-                <div class="sr-overview-card" style="cursor: pointer;" onclick="window.open('https://shopee.vn/buyer/65858058/rating?shop_id=65856601', '_blank')">
+                <div class="sr-overview-card" style="cursor: pointer;" onclick="window.open(window.innerWidth <= 768 ? 'https://shopee.vn/navastore.vn' : 'https://shopee.vn/buyer/65858058/rating?shop_id=65856601', '_blank')">
                     <div class="sr-card-title">ĐIỂM TRUNG BÌNH</div>
                     <div class="sr-score">${starStr}</div>
                     <div class="sr-stars">${starsHtml}</div>
                     <div class="sr-total">${total.toLocaleString()} đánh giá</div>
                 </div>
-                <div class="sr-bars-card" style="cursor: pointer;" onclick="window.open('https://shopee.vn/buyer/65858058/rating?shop_id=65856601', '_blank')">
+                <div class="sr-bars-card" style="cursor: pointer;" onclick="window.open(window.innerWidth <= 768 ? 'https://shopee.vn/navastore.vn' : 'https://shopee.vn/buyer/65858058/rating?shop_id=65856601', '_blank')">
                     <div class="sr-card-title">PHÂN BỐ ĐÁNH GIÁ</div>
                     <div class="sr-bars">
                         ${barsHtml}

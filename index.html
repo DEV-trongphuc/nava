@@ -4,134 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAVA STORE - Định Nghĩa Lại Sức Mạnh Điện Toán | Mini PC & eGPU</title>
-    <meta name="description"
-        content="NAVA STORE - Đơn vị tiên phong cung cấp giải pháp Mini PC, eGPU, NAS và linh kiện hi-end. Tối ưu không gian làm việc, mạnh mẽ cho gaming và đồ họa AI.">
-    <meta name="keywords"
-        content="Mini PC, eGPU, NAS, linh kiện máy tính, máy tính nhỏ gọn, PC gaming, Nava Store, AI PC, đồ họa">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="NAVA STORE">
-    <meta property="og:title" content="NAVA STORE - Định Nghĩa Lại Sức Mạnh Điện Toán">
-    <meta property="og:description"
-        content="NAVA STORE - Đơn vị tiên phong cung cấp giải pháp Mini PC, eGPU, NAS và linh kiện hi-end. Tối ưu không gian làm việc.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://navastore.vn/">
-    <link rel="canonical" href="https://navastore.vn/">
-    <!-- Google Fonts: Inter -->
+    <title>NAVA Store - Demo Preview</title>
+
+    <!-- Google Fonts (Inter & Fira Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-
-    <!-- Preload Critical Assets -->
-    <link rel="preload" href="assets/style.css?v=20260426_v6" as="style">
-    <link rel="preload" href="https://bizweb.dktcdn.net/thumb/large/100/543/817/products/rog-nuc2.png?v=1762858052317"
-        as="image" fetchpriority="high">
-    <!-- Google Fonts Optimized -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/style.css?v=20260426_v1">
-    <!-- Theme Script for FOUC -->
-    <script>
-        const savedTheme = localStorage.getItem('nava-theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-    </script>
+
+    <!-- Phosphor Icons (Script & CSS Fallback) -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css">
+
+    <!-- FontAwesome (if any legacy icons exist) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
     <!-- MASTER SAPO ESCAPE WRAPPER -->
     <div id="nava-master-wrapper">
-        <style>
-            /* Shopee Desktop Grid */
-            @media (min-width: 769px) {
-                .shopee-comments-list {
-                    display: grid !important;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                }
-
-                .shopee-comment-item {
-                    border-bottom: none !important;
-                    border: 1px solid var(--border-color, #e2e8f0);
-                    border-radius: 12px;
-                    padding: 20px;
-                    background: var(--bg-card, #ffffff);
-                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-                    height: 100%;
-                }
-            }
-
-
-
-            /* Benefit 3D Hover & Slower Track */
-            .hero-benefits-slider {
-                position: relative;
-                overflow: hidden;
-            }
-
-            .benefit-card-mini {
-                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
-                transform-style: preserve-3d;
-                perspective: 1000px;
-            }
-
-            .benefit-card-mini:hover {
-                transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
-                box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
-                z-index: 10;
-            }
-
-            .benefit-pair {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out !important;
-                transform: translateX(100%);
-                opacity: 0;
-                visibility: hidden;
-            }
-
-            .benefit-pair.bp-active {
-                transform: translateX(0);
-                opacity: 1;
-                visibility: visible;
-            }
-
-            .benefit-pair.bp-exit {
-                transform: translateX(-100%);
-                opacity: 0;
-                visibility: hidden;
-            }
-
-
-            /* Policy 3D Hover & Slower Track */
-            .policy-card {
-                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
-                transform-style: preserve-3d;
-                perspective: 1000px;
-            }
-
-            .policy-card:hover {
-                transform: translateY(-8px) rotateX(4deg) rotateY(-4deg) scale(1.03) !important;
-                box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
-                z-index: 10;
-            }
-
-            .policy-track {
-                animation-duration: 45s !important;
-                will-change: transform;
-            }
-        </style>
         <!-- Cyber Circuit Grid Background -->
-        <div class="cyber-grid-bg"></div>
+        <div class="cyber-grid-bg" style="display: none !important;"></div>
         <style>
             .cyber-grid-bg {
                 position: fixed;
@@ -148,10 +46,177 @@
             }
 
             [data-theme="dark"] .cyber-grid-bg {
-                opacity: 0.12;
+                opacity: 0.01;
                 background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%23ffffff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
             }
+
+            .mobile-break {
+                display: none;
+            }
+
+            .customer-card-title {
+                font-size: 1.5rem;
+                font-weight: 800;
+                margin-bottom: 15px;
+            }
+
+            @media (max-width: 768px) {
+                .mobile-break {
+                    display: block;
+                }
+
+                .customer-card-title {
+                    font-size: 1.2rem;
+                }
+            }
         </style>
+        <!-- SEO H1 -->
+        <h1
+            style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">
+            NAVA STORE - Mini PC & eGPU</h1>
+        <!-- PRELOADER -->
+        <style>
+            #nava-preloader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: #0a0f1c;
+                z-index: 999999;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: opacity 0.6s cubic-bezier(0.8, 0, 0.2, 1), visibility 0.6s, transform 0.6s ease;
+            }
+
+            .preloader-brand {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 30px;
+                width: 100px;
+                height: 100px;
+            }
+
+            .preloader-ring {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-top-color: #3b82f6;
+                border-right-color: rgba(59, 130, 246, 0.3);
+                animation: spin-ring 1.5s linear infinite;
+            }
+
+            .preloader-ring::before {
+                content: '';
+                position: absolute;
+                top: -6px;
+                left: -6px;
+                right: -6px;
+                bottom: -6px;
+                border-radius: 50%;
+                border: 2px solid transparent;
+                border-bottom-color: #10b981;
+                animation: spin-ring 2s linear infinite reverse;
+            }
+
+            .preloader-logo {
+                width: 45px;
+                height: auto;
+                animation: pulse-logo 2s ease-in-out infinite;
+                z-index: 2;
+                border-radius: 8px;
+            }
+
+            .preloader-text {
+                font-family: 'Inter', sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                letter-spacing: 4px;
+                color: #64748b;
+                text-transform: uppercase;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .preloader-text::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.8), transparent);
+                animation: shimmer-text 2s infinite;
+            }
+
+            @keyframes spin-ring {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes pulse-logo {
+
+                0%,
+                100% {
+                    transform: scale(1);
+                    opacity: 0.8;
+                    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    opacity: 1;
+                    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.8));
+                }
+            }
+
+            @keyframes shimmer-text {
+                100% {
+                    left: 100%;
+                }
+            }
+
+            .nava-preloader-hidden {
+                opacity: 0;
+                visibility: hidden;
+                transform: scale(1.05);
+            }
+        </style>
+        <div id="nava-preloader">
+            <div class="preloader-brand">
+                <div class="preloader-ring"></div>
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png?1775454528082"
+                    alt="Nava Store" class="preloader-logo">
+            </div>
+            <div class="preloader-text">NAVA STORE</div>
+        </div>
+        <script>
+            window.addEventListener('load', function () {
+                const preloader = document.getElementById('nava-preloader');
+                if (preloader) {
+                    preloader.classList.add('nava-preloader-hidden');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                }
+            });
+            setTimeout(() => {
+                const preloader = document.getElementById('nava-preloader');
+                if (preloader && !preloader.classList.contains('nava-preloader-hidden')) {
+                    preloader.classList.add('nava-preloader-hidden');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                }
+            }, 5000);
+        </script>
         <!-- Background Decor (Glowing Orbs & Logo) -->
         <div class="bg-glow orb-1"></div>
         <div class="bg-glow orb-2"></div>
@@ -178,30 +243,36 @@
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
                             alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
                     </div>
+                    <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện"
+                        style="margin-right: 10px;">
+                        <div class="toggle-track">
+                            <div class="toggle-thumb">
+                                <i class="ph-fill ph-sun icon-sun"></i>
+                                <i class="ph-fill ph-moon icon-moon"></i>
+                            </div>
+                        </div>
+                    </button>
                     <form action="/search" method="GET" class="search-box">
                         <input type="text" name="query" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?"
                             required>
                         <button type="submit"><i class="ph ph-magnifying-glass"></i></button>
                     </form>
                     <div class="top-actions">
-                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện">
-                            <div class="toggle-track">
-                                <div class="toggle-thumb">
-                                    <i class="ph-fill ph-sun icon-sun"></i>
-                                    <i class="ph-fill ph-moon icon-moon"></i>
-                                </div>
-                            </div>
-                        </button>
-                        <a href="#" class="action-item"><i class="ph ph-phone-call"></i>
-                            <div><small>Hotline 24/7</small><br><strong>0972 178 527</strong></div>
+                        <!-- Local Demo Account -->
+                        <a href="/account" class="action-item"><i class="ph ph-user-check"
+                                style="color: var(--primary);"></i>
+                            <div><small>Xin chào,</small><br><strong>Trọng Phúc</strong></div>
                         </a>
+
                         <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
                             <div class="cart-icon-wrapper" style="position: relative;">
                                 <i class="ph ph-shopping-cart"></i>
-                                <span class="cart-count-badge" id="cart-count-badge" style="display: none;">0</span>
+                                <span class="cart-count-badge" id="cart-count-badge" style="display: flex;">2</span>
                             </div>
                             Giỏ hàng
                         </a>
+                        <button class="mobile-search-toggle" aria-label="Tìm kiếm"><i
+                                class="ph ph-magnifying-glass"></i></button>
                         <button class="mobile-menu-toggle"><i class="ph ph-list"></i></button>
                     </div>
                 </div>
@@ -216,52 +287,26 @@
                     <ul class="main-nav">
                         <li class="nav-item">
                             <a href="https://navastore.vn/" class="active"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_1.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_1.png?1775454528082"
                                     alt="Trang chủ" loading="lazy" decoding="async"> <span>Trang chủ</span></a>
                         </li>
-                        <li class="nav-item has-dropdown">
-                            <a href="https://navastore.vn/tat-ca-san-pham"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_2.png?1775454528082"
-                                    alt="Danh mục sản phẩm" loading="lazy" decoding="async"> <span>Danh mục sản
-                                    phẩm</span>
-                                <i class="ph-bold ph-caret-down"></i></a>
-                            <div class="dropdown-menu mega-grid">
-                                <a href="https://navastore.vn/minipc" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
-                                        alt="Mini PC"><span>Mini PC</span></a>
-                                <a href="https://navastore.vn/egpu" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
-                                        alt="eGPU"><span>eGPU</span></a>
-                                <a href="https://navastore.vn/nas" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
-                                        alt="NAS"><span>NAS / Server</span></a>
-                                <a href="https://navastore.vn/collections/all" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
-                                        alt="Linh Kiện"><span>Linh Kiện</span></a>
-                                <a href="https://navastore.vn/phu-kien" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
-                                        alt="Phụ kiện"><span>Phụ kiện</span></a>
-                                <a href="https://navastore.vn/like-new" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
-                                        alt="Like new"><span>Like new</span></a>
-                            </div>
-                        </li>
+
 
                         <!-- Mega Dropdown: Mini PC -->
                         <li class="nav-item has-dropdown">
                             <a href="javascript:void(0);"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
                                     alt="Mini PC" loading="lazy" decoding="async"> <span>Mini PC</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
                             <div class="dropdown-menu mega-grid mini-pc-menu">
                                 <a href="https://navastore.vn/asus" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313"
+                                        src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png"
                                         alt="ASUS"></a>
                                 <a href="https://navastore.vn/asrock" class="mega-card"><img
                                         src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asrock.png"
                                         alt="ASRock"></a>
                                 <a href="https://navastore.vn/aoostar" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
+                                        src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/aoostar.png"
                                         alt="AOOSTAR"></a>
                                 <a href="https://navastore.vn/beelink" class="mega-card"><img
                                         src="https://bizweb.dktcdn.net/100/543/817/files/beelink.png?v=1770949197367"
@@ -273,7 +318,7 @@
                                         src="https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823"
                                         alt="GMKtec"></a>
                                 <a href="https://navastore.vn/msi" class="mega-card"><img
-                                        src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230"
+                                        src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/msi.png"
                                         alt="MSI"></a>
                                 <a href="https://navastore.vn/minisforum" class="mega-card"><img
                                         src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957"
@@ -287,34 +332,34 @@
                         <!-- Mega Dropdown: eGPU -->
                         <li class="nav-item has-dropdown">
                             <a href="javascript:void(0);"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                     alt="eGPU" loading="lazy" decoding="async"> <span>eGPU</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
                             <div class="dropdown-menu mega-grid" style="grid-template-columns: repeat(2, 1fr);">
                                 <a href="https://navastore.vn/dock-egpu" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
+                                        src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                         alt="DOCK eGPU"><span>DOCK eGPU</span></a>
                                 <a href="https://navastore.vn/egpu-aio" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
+                                        src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                         alt="ALL IN ONE"><span>ALL IN ONE</span></a>
                             </div>
                         </li>
 
                         <li class="nav-item">
                             <a href="https://navastore.vn/nas"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
                                     alt="NAS" loading="lazy" decoding="async"> <span>NAS / SERVER</span></a>
                         </li>
 
                         <!-- Mega Dropdown: Linh Kiện -->
                         <li class="nav-item has-dropdown">
                             <a href="javascript:void(0);"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
                                     alt="Linh Kiện" loading="lazy" decoding="async"> <span>Linh Kiện</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
                             <div class="dropdown-menu mega-grid" style="grid-template-columns: repeat(3, 1fr);">
                                 <a href="https://navastore.vn/ram-ssd" class="mega-card"><img
-                                        src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
+                                        src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
                                         alt="RAM/SSD"><span>RAM/SSD</span></a>
                                 <a href="https://navastore.vn/man-hinh" class="mega-card"><i class="ph-fill ph-monitor"
                                         style="font-size: 36px; color: var(--primary);"></i><span>Màn hình</span></a>
@@ -325,12 +370,12 @@
 
                         <li class="nav-item">
                             <a href="https://navastore.vn/phu-kien"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
                                     alt="Phụ kiện" loading="lazy" decoding="async"> <span>Phụ kiện</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="https://navastore.vn/like-new"><img
-                                    src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
+                                    src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
                                     alt="Like new" loading="lazy" decoding="async"> <span>Like new</span></a>
                         </li>
                         <li class="nav-item">
@@ -346,8 +391,34 @@
 
 
         <!-- Hero Section 3D (Z-Layout) -->
-        <section class="hero-3d">
-            <div class="container hero-3d-container">
+        <section class="hero-3d" style="position: relative; overflow: hidden;">
+            <!-- Thread Animation Background -->
+            <svg class="hero-thread-svg" viewBox="0 0 1440 800" preserveAspectRatio="none"
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.5;">
+                <defs>
+                    <filter id="glowParticle" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
+                        <feMerge>
+                            <feMergeNode in="blur" />
+                            <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                    </filter>
+                </defs>
+
+                <!-- Blue Thread (Grows from start to finish then vanishes, looping) -->
+                <path d="M-100 200 Q 400 50, 900 300 T 1600 100" fill="none" stroke="#3b82f6" stroke-width="1"
+                    pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+                    <animate attributeName="stroke-dashoffset" values="100; 0" dur="3s" repeatCount="indefinite" />
+                </path>
+
+                <!-- Independent floating particle -->
+                <circle r="2" fill="#3b82f6" filter="url(#glowParticle)">
+                    <animate attributeName="cx" values="0; 1600" dur="10s" repeatCount="indefinite" />
+                    <animate attributeName="cy" values="200; 100" dur="10s" repeatCount="indefinite" />
+                </circle>
+            </svg>
+
+            <div class="container hero-3d-container" style="position: relative; z-index: 1;">
                 <!-- Left Top: Badge + Title -->
                 <div class="hero-head reveal">
                     <h2 class="hero-title">
@@ -371,22 +442,22 @@
                         </div>
                         <!-- Slide 2: Minisforum -->
                         <div class="hero-slide">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
                                 alt="Minisforum UM890" class="floating-pc" decoding="async">
                         </div>
                         <!-- Slide 3: ASUS NUC -->
                         <div class="hero-slide">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
                                 alt="ASUS NUC" class="floating-pc" decoding="async">
                         </div>
                         <!-- Slide 4: eGPU NAVA -->
                         <div class="hero-slide">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082"
                                 alt="eGPU NAVA" class="floating-pc" decoding="async">
                         </div>
                         <!-- Slide 5: Beelink -->
                         <div class="hero-slide">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082"
                                 alt="Beelink SER8" class="floating-pc" decoding="async">
                         </div>
                     </div>
@@ -401,7 +472,7 @@
                     </div>
                     <div class="tech-float-item tech-item-2" id="floatItem2">
                         <i id="floatIcon2"
-                            style="background-image: url('https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png'); background-size: contain; background-repeat: no-repeat; background-position: center center; width: 24px; height: 24px; display: inline-block;"></i>
+                            style="background-image: url('https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png'); background-size: contain; background-repeat: no-repeat; background-position: center center; width: 24px; height: 24px; display: inline-block;"></i>
                         <div>
                             <span id="floatLabel2">Openclaw</span>
                             <small id="floatSub2">Sức mạnh vượt trội</small>
@@ -409,7 +480,7 @@
                     </div>
 
                     <!-- Slide Dots -->
-                    <div class="hero-slide-dots" id="heroSlideDots">
+                    <div class="hero-slide-dots" id="heroSlideDots" style="transform: translateY(15px);">
                         <button class="h-dot active" data-slide="0"></button>
                         <button class="h-dot" data-slide="1"></button>
                         <button class="h-dot" data-slide="2"></button>
@@ -466,166 +537,6 @@
 
 
 
-        <!-- Hot Categories (Danh mục nổi bật) -->
-        <section class="hot-categories">
-            <div class="container">
-                <h2 class="section-title text-center">DANH MỤC NỔI BẬT</h2>
-                <div class="cat-grid reveal">
-                    <a href="https://navastore.vn/minipc" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
-                            alt="Mini PC" loading="lazy" decoding="async">
-                        <span>Mini PC</span>
-                    </a>
-                    <a href="https://navastore.vn/egpu" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
-                            alt="eGPU" loading="lazy" decoding="async">
-                        <span>eGPU</span>
-                    </a>
-                    <a href="https://navastore.vn/nas" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
-                            alt="NAS" loading="lazy" decoding="async">
-                        <span>NAS / Server</span>
-                    </a>
-                    <a href="https://navastore.vn/collections/all" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
-                            alt="Linh Kiện" loading="lazy" decoding="async">
-                        <span>Linh Kiện</span>
-                    </a>
-                    <a href="https://navastore.vn/phu-kien" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
-                            alt="Phụ kiện" loading="lazy" decoding="async">
-                        <span>Phụ kiện</span>
-                    </a>
-                    <a href="https://navastore.vn/like-new" class="cat-card">
-                        <img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
-                            alt="Like new" loading="lazy" decoding="async">
-                        <span>Like new</span>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- Product Grid Section (Siêu Phẩm Công Nghệ) -->
-        <section id="products" class="product-section">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Hệ Sinh Thái Mini PC & eGPU Cao Cấp</h2>
-                    <a href="https://navastore.vn/tat-ca-san-pham" class="view-all-link">Xem tất cả <i
-                            class="ph ph-arrow-right"></i></a>
-                </div>
-                <div class="product-grid">
-                    <!-- Card 1: Minisforum -->
-                    <div class="product-card reveal">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">Minisforum</h2>
-                            <p class="card-desc">Giải pháp máy tính nhỏ gọn nhưng mạnh mẽ, thiết kế cho game thủ và sáng
-                                tạo
-                                nội dung.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
-                                alt="Minisforum" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/minisforum" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 2: Aoostar -->
-                    <div class="product-card reveal delay-1">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">Aoostar</h2>
-                            <p class="card-desc">Luôn đồng hành cùng niềm đam mê của bạn với sức mạnh và sự ổn định cao.
-                            </p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png?1775454528082"
-                                alt="Aoostar" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/aoostar" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 3: GMKtec -->
-                    <div class="product-card reveal delay-2">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">GMKtec</h2>
-                            <p class="card-desc">Khả năng chạy offline mô hình DeepSeek V3 với dòng EVO Series chuyên
-                                biệt
-                                AI.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png?1775454528082"
-                                alt="GMKtec" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/gmk" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Beelink -->
-                    <div class="product-card reveal">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">Beelink</h2>
-                            <p class="card-desc">Hiệu suất mạnh mẽ, thiết kế nhôm nguyên khối mang đến trải nghiệm làm
-                                việc
-                                mượt mà.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082"
-                                alt="Beelink" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/beelink" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 5: ASUS NUC -->
-                    <div class="product-card reveal delay-1">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">ASUS NUC</h2>
-                            <p class="card-desc">Giải pháp linh hoạt, bền bỉ đến từ ông lớn ASUS dành cho Doanh nghiệp
-                                và
-                                Chuyên gia.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
-                                alt="ASUS NUC" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/asus" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 6: eGPU -->
-                    <div class="product-card reveal delay-2">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">eGPU</h2>
-                            <p class="card-desc">Nâng cấp sức mạnh đồ họa tối đa cho Mini PC, Laptop và Máy chơi game
-                                cầm
-                                tay.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082"
-                                alt="eGPU" class="product-img" loading="lazy" decoding="async">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/egpu" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-dots"></div>
-            </div>
-        </section>
 
         <!-- Target Customer Groups Section -->
         <section class="target-customers-section" style="padding: 60px 0; background: var(--bg-gray);">
@@ -661,7 +572,7 @@
                             <img src="https://nava-one.vercel.app/assets/icon/capcut_logo.png" alt="Capcut"
                                 class="software-badge-icon">
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px;">Set-up Văn Phòng Tối Giản
+                        <h3 class="customer-card-title">Set-up Văn Phòng Tối Giản
                         </h3>
                         <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px;">Giải phóng không gian
                             làm
@@ -681,7 +592,7 @@
                         </div>
                         <div class="card-icon-cluster"
                             style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; align-items: center; max-width: 100%; margin-left: auto; margin-right: auto;">
-                            <img src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" class="software-badge-icon">
 
                             <img src="https://nava-one.vercel.app/assets/icon/Codex.png" alt="Codex"
@@ -697,7 +608,7 @@
                                 class="software-badge-icon">
 
                         </div>
-                        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 15px;">Chạy Local AI & Đồ Họa
+                        <h3 class="customer-card-title">Chạy Local AI & Đồ Họa
                         </h3>
                         <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px;">Sức mạnh từ NPU và
                             eGPU
@@ -711,6 +622,128 @@
                 </div>
             </div>
         </section>
+
+        <!-- Product Grid Section (Siêu Phẩm Công Nghệ) -->
+        <section id="products" class="product-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Hệ Sinh Thái <br class="mobile-break"> Mini PC & eGPU Cao Cấp</h2>
+                    <a href="https://navastore.vn/tat-ca-san-pham" class="view-all-link">Xem tất cả <i
+                            class="ph ph-arrow-right"></i></a>
+                </div>
+                <div class="product-grid">
+                    <!-- Card 1: Minisforum -->
+                    <div class="product-card reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">Minisforum</h2>
+                            <p class="card-desc">Giải pháp máy tính nhỏ gọn nhưng mạnh mẽ, thiết kế cho game thủ và sáng
+                                tạo
+                                nội dung.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
+                                alt="Minisforum" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/minisforum" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Aoostar -->
+                    <div class="product-card reveal delay-1">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">Aoostar</h2>
+                            <p class="card-desc">Luôn đồng hành cùng niềm đam mê của bạn với sức mạnh và sự ổn định cao.
+                            </p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png?1775454528082"
+                                alt="Aoostar" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/aoostar" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: GMKtec -->
+                    <div class="product-card reveal delay-2">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">GMKtec</h2>
+                            <p class="card-desc">Khả năng chạy offline mô hình DeepSeek V3 với dòng EVO Series chuyên
+                                biệt
+                                AI.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png?1775454528082"
+                                alt="GMKtec" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/gmk" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Beelink -->
+                    <div class="product-card reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">Beelink</h2>
+                            <p class="card-desc">Hiệu suất mạnh mẽ, thiết kế nhôm nguyên khối mang đến trải nghiệm làm
+                                việc
+                                mượt mà.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png?1775454528082"
+                                alt="Beelink" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/beelink" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: ASUS NUC -->
+                    <div class="product-card reveal delay-1">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">ASUS NUC</h2>
+                            <p class="card-desc">Giải pháp linh hoạt, bền bỉ đến từ ông lớn ASUS dành cho Doanh nghiệp
+                                và
+                                Chuyên gia.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
+                                alt="ASUS NUC" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/asus" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 6: eGPU -->
+                    <div class="product-card reveal delay-2">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">eGPU</h2>
+                            <p class="card-desc">Nâng cấp sức mạnh đồ họa tối đa cho Mini PC, Laptop và Máy chơi game
+                                cầm
+                                tay.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_2.png?1775454528082"
+                                alt="eGPU" class="product-img" loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/egpu" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots"></div>
+            </div>
+        </section>
+
+
         <!-- Tech Specs Ticker Section -->
         <section class="tech-specs-section">
             <div class="specs-ticker-wrapper" id="specsTicker">
@@ -723,7 +756,7 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
                         <span class="spec-name">USB4 / Openclaw</span><span class="spec-value"><img
-                                src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                                src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" style="height:16px; margin-right:6px; vertical-align:middle;">Băng thông
                             40
                             Gbps</span>
@@ -768,7 +801,7 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="ph-fill ph-plugs-connected"></i></span>
                         <span class="spec-name">USB4 / Openclaw</span><span class="spec-value"><img
-                                src="https://images.seeklogo.com/logo-png/66/1/openclaw-logo-png_seeklogo-665449.png"
+                                src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_openclaw.png"
                                 alt="Openclaw" style="height:16px; margin-right:6px; vertical-align:middle;">Băng thông
                             40
                             Gbps</span>
@@ -816,7 +849,7 @@
                     <div class="stat-card reveal">
                         <div class="stat-icon"><i class="ph-fill ph-users-three"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="12500">0</div>
+                            <div class="stat-number" id="realtime-customer-count" data-target="1200">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Khách hàng tin dùng</div>
@@ -827,7 +860,7 @@
                     <div class="stat-card reveal delay-1">
                         <div class="stat-icon"><i class="ph-fill ph-package"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="850">0</div>
+                            <div class="stat-number" id="realtime-product-count" data-target="200">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Sản phẩm chính hãng</div>
@@ -849,7 +882,7 @@
                     <div class="stat-card reveal delay-3">
                         <div class="stat-icon"><i class="ph-fill ph-clock-countdown"></i></div>
                         <div class="stat-number-wrap">
-                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-number" data-target="15">0</div>
                             <div class="stat-suffix">+</div>
                         </div>
                         <div class="stat-label">Năm kinh nghiệm</div>
@@ -860,101 +893,6 @@
                 </div>
             </div>
         </section>
-        <!-- Bento Features Grid Section -->
-        <section class="bento-section">
-            <div class="container">
-                <div class="section-header text-center mb-5">
-                    <h2 class="section-title">TRẢI NGHIỆM KHÁC BIỆT</h2>
-                    <p class="bento-subtitle">Những công nghệ hiện đại được gói gọn trong thiết kế tinh giản</p>
-                </div>
-
-                <div class="bento-grid">
-                    <!-- Large Box (Spans 2x2) -->
-                    <div class="bento-box large reveal">
-                        <i class="ph-fill ph-cpu bento-bg-icon"></i>
-                        <div class="bento-content">
-                            <div class="bento-icon"><i class="ph-fill ph-cpu"></i></div>
-                            <h3 class="bento-title">Sức Mạnh Vượt Trội Từ NPU</h3>
-                            <p class="bento-desc">Trang bị bộ vi xử lý Ryzen AI và Intel Core Ultra thế hệ mới nhất. Khả
-                                năng tính toán hàng chục ngàn tỷ phép tính mỗi giây (TOPS) giúp xử lý mượt mà các mô
-                                hình
-                                ngôn ngữ lớn (LLMs) ngay trên máy mà không cần kết nối internet.</p>
-                        </div>
-                    </div>
-
-                    <!-- Standard Boxes -->
-                    <div class="bento-box reveal delay-1">
-                        <i class="ph-fill ph-thermometer-cold bento-bg-icon"></i>
-                        <div class="bento-content">
-                            <div class="bento-icon"><i class="ph-fill ph-fan"></i></div>
-                            <h3 class="bento-title">Tản Nhiệt Kép</h3>
-                            <p class="bento-desc">Hệ thống tản nhiệt buồng hơi kết hợp kim loại lỏng đảm bảo nhiệt độ
-                                luôn
-                                dưới 75°C.</p>
-                        </div>
-                    </div>
-
-                    <div class="bento-box reveal delay-2">
-                        <i class="ph-fill ph-lightning bento-bg-icon"></i>
-                        <div class="bento-content">
-                            <div class="bento-icon"><i class="ph-fill ph-lightning"></i></div>
-                            <h3 class="bento-title">Tiết Kiệm Điện</h3>
-                            <p class="bento-desc">Tiêu thụ ít điện năng hơn đến 70% so với PC truyền thống, giảm chi phí
-                                vận
-                                hành.</p>
-                        </div>
-                    </div>
-
-                    <!-- Wide Box -->
-                    <div class="bento-box wide reveal delay-1">
-                        <i class="ph-fill ph-hard-drives bento-bg-icon"></i>
-                        <div class="bento-content">
-                            <div class="bento-icon"><i class="ph-fill ph-hard-drives"></i></div>
-                            <h3 class="bento-title">Kết Nối eGPU Tiên Tiến</h3>
-                            <p class="bento-desc">Tích hợp cổng OCuLink và USB4 tốc độ 40Gbps, mở khóa sức mạnh đồ họa
-                                đỉnh
-                                cao khi cắm vào hệ thống eGPU NAVA S1/S2.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Warranty Flipbook Section -->
-        <section class="warranty-section" style="padding: 60px 0; background: var(--bg-white);">
-            <div class="container">
-                <div class="warranty-card reveal"
-                    style="background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-white) 100%); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 50px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
-                    <div class="warranty-content" style="flex: 1; min-width: 300px;">
-                        <div
-                            style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(0, 51, 102, 0.1); color: var(--primary); border-radius: 9999px; font-weight: 600; font-size: 0.85rem; margin-bottom: 20px;">
-                            <i class="ph-fill ph-shield-check"></i> Cam Kết Chất Lượng
-                        </div>
-                        <h2 class="section-title" style="margin-bottom: 20px; font-size: 2rem;">Chính Sách Bảo Hành &
-                            Hậu
-                            Mãi</h2>
-                        <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">An
-                            tâm
-                            sử dụng với chính sách bảo hành minh bạch và rõ ràng từ NAVA STORE. Trải nghiệm đọc chính
-                            sách
-                            dạng Flipbook trực quan và dễ hiểu.</p>
-                        <button id="open-warranty-modal" class="btn-pill btn-blue btn-large"
-                            style="display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 1.05rem; transition: 0.3s; box-shadow: var(--shadow-md);">
-                            <i class="ph ph-article"></i> Xem chi tiết chính sách</button>
-                    </div>
-                    <div class="warranty-image"
-                        style="flex: 1; min-width: 300px; text-align: center; position: relative;">
-                        <div
-                            style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary) 0%, transparent 60%); opacity: 0.05; top: 0; left: 0;">
-                        </div>
-                        <img src="https://nava-one.vercel.app/assets/baohanh.png" alt="Bảo Hành"
-                            style="width: 160px; height: auto; filter: drop-shadow(0 10px 20px rgba(0, 51, 102, 0.2)); position: relative; z-index: 2;">
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- ===== PERFORMANCE BENCHMARK SECTION ===== -->
         <section class="benchmark-section">
             <div class="cyber-grid"></div>
@@ -1029,6 +967,142 @@
             </div>
         </section>
 
+        <!-- Bento Features Grid Section -->
+        <section class="bento-section">
+            <div class="container">
+                <div class="section-header text-center mb-5">
+                    <h2 class="section-title">TRẢI NGHIỆM KHÁC BIỆT</h2>
+                    <p class="bento-subtitle">Những công nghệ hiện đại được gói gọn trong thiết kế tinh giản</p>
+                </div>
+
+                <div class="bento-grid">
+                    <!-- Large Box (Spans 2x2) -->
+                    <div class="bento-box large reveal">
+                        <i class="ph-fill ph-cpu bento-bg-icon"></i>
+                        <div class="bento-content">
+                            <div class="bento-icon"><i class="ph-fill ph-cpu"></i></div>
+                            <h3 class="bento-title">Sức Mạnh Vượt Trội Từ NPU</h3>
+                            <p class="bento-desc">Trang bị bộ vi xử lý Ryzen AI và Intel Core Ultra thế hệ mới nhất. Khả
+                                năng tính toán hàng chục ngàn tỷ phép tính mỗi giây (TOPS) giúp xử lý mượt mà các mô
+                                hình
+                                ngôn ngữ lớn (LLMs) ngay trên máy mà không cần kết nối internet.</p>
+                        </div>
+                    </div>
+
+                    <!-- Standard Boxes -->
+                    <div class="bento-box reveal delay-1">
+                        <i class="ph-fill ph-thermometer-cold bento-bg-icon"></i>
+                        <div class="bento-content">
+                            <div class="bento-icon"><i class="ph-fill ph-fan"></i></div>
+                            <h3 class="bento-title">Tản Nhiệt Kép</h3>
+                            <p class="bento-desc">Hệ thống tản nhiệt buồng hơi kết hợp kim loại lỏng đảm bảo nhiệt độ
+                                luôn
+                                dưới 75°C.</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-box reveal delay-2">
+                        <i class="ph-fill ph-lightning bento-bg-icon"></i>
+                        <div class="bento-content">
+                            <div class="bento-icon"><i class="ph-fill ph-lightning"></i></div>
+                            <h3 class="bento-title">Tiết Kiệm Điện</h3>
+                            <p class="bento-desc">Tiêu thụ ít điện năng hơn đến 70% so với PC truyền thống, giảm chi phí
+                                vận
+                                hành.</p>
+                        </div>
+                    </div>
+
+                    <!-- Wide Box -->
+                    <div class="bento-box wide reveal delay-1">
+                        <i class="ph-fill ph-hard-drives bento-bg-icon"></i>
+                        <div class="bento-content">
+                            <div class="bento-icon"><i class="ph-fill ph-hard-drives"></i></div>
+                            <h3 class="bento-title">Kết Nối eGPU Tiên Tiến</h3>
+                            <p class="bento-desc">Tích hợp cổng OCuLink và USB4 tốc độ 40Gbps, mở khóa sức mạnh đồ họa
+                                đỉnh
+                                cao khi cắm vào hệ thống eGPU NAVA S1/S2.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Hot Categories (Danh mục nổi bật) -->
+        <section class="hot-categories">
+            <div class="container">
+                <h2 class="section-title text-center">DANH MỤC NỔI BẬT</h2>
+                <div class="cat-grid reveal">
+                    <a href="https://navastore.vn/minipc" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
+                            alt="Mini PC" loading="lazy" decoding="async">
+                        <span>Mini PC</span>
+                    </a>
+                    <a href="https://navastore.vn/egpu" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
+                            alt="eGPU" loading="lazy" decoding="async">
+                        <span>eGPU</span>
+                    </a>
+                    <a href="https://navastore.vn/nas" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
+                            alt="NAS" loading="lazy" decoding="async">
+                        <span>NAS / Server</span>
+                    </a>
+                    <a href="https://navastore.vn/collections/all" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
+                            alt="Linh Kiện" loading="lazy" decoding="async">
+                        <span>Linh Kiện</span>
+                    </a>
+                    <a href="https://navastore.vn/phu-kien" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
+                            alt="Phụ kiện" loading="lazy" decoding="async">
+                        <span>Phụ kiện</span>
+                    </a>
+                    <a href="https://navastore.vn/like-new" class="cat-card">
+                        <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
+                            alt="Like new" loading="lazy" decoding="async">
+                        <span>Like new</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Warranty Flipbook Section -->
+        <section class="warranty-section" style="padding: 60px 0; background: var(--bg-white);">
+            <div class="container">
+                <div class="warranty-card reveal"
+                    style="background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-white) 100%); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 50px; box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+                    <div class="warranty-content" style="flex: 1; min-width: 300px;">
+                        <div
+                            style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; background: rgba(0, 51, 102, 0.1); color: var(--primary); border-radius: 9999px; font-weight: 600; font-size: 0.85rem; margin-bottom: 20px;">
+                            <i class="ph-fill ph-shield-check"></i> Cam Kết Chất Lượng
+                        </div>
+                        <h2 class="section-title" style="margin-bottom: 20px; font-size: 2rem;">Chính Sách Bảo Hành &
+                            Hậu
+                            Mãi</h2>
+                        <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">An
+                            tâm
+                            sử dụng với chính sách bảo hành minh bạch và rõ ràng từ NAVA STORE. Trải nghiệm đọc chính
+                            sách
+                            dạng Flipbook trực quan và dễ hiểu.</p>
+                        <button id="open-warranty-modal" class="btn-pill btn-blue btn-large"
+                            style="display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: white; padding: 14px 28px; border-radius: 9999px; font-weight: 600; font-size: 1.05rem; transition: 0.3s; box-shadow: var(--shadow-md);">
+                            <i class="ph ph-article"></i> Xem chi tiết chính sách</button>
+                    </div>
+                    <div class="warranty-image"
+                        style="flex: 1; min-width: 300px; text-align: center; position: relative;">
+                        <div
+                            style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, var(--primary) 0%, transparent 60%); opacity: 0.05; top: 0; left: 0;">
+                        </div>
+                        <img src="https://nava-one.vercel.app/assets/baohanh.png" alt="Bảo Hành"
+                            style="width: 160px; height: auto; filter: drop-shadow(0 10px 20px rgba(0, 51, 102, 0.2)); position: relative; z-index: 2;">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
 
         <!-- Brand Slider Section -->
         <section id="brands" class="brand-slider glass-section">
@@ -1045,16 +1119,16 @@
                             src="https://bizweb.dktcdn.net/100/543/817/files/kioxia.png?v=1770717779673" alt="kioxia"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/amd.png?v=1770718398083" alt="amd"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/amd.png" alt="amd"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/predator_6fe7e00c-bfc7-46c6-b1e6-bca4febe9dde.png?v=1770718398233"
                             alt="predator" loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230" alt="msi"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/msi.png" alt="msi"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/rog.png?v=1770718398283" alt="rog"
@@ -1071,16 +1145,16 @@
                             src="https://bizweb.dktcdn.net/100/543/817/files/kioxia.png?v=1770717779673" alt="kioxia"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/amd.png?v=1770718398083" alt="amd"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/amd.png" alt="amd"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/predator_6fe7e00c-bfc7-46c6-b1e6-bca4febe9dde.png?v=1770718398233"
                             alt="predator" loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/msi.png?v=1770718398230" alt="msi"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/msi.png" alt="msi"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/rog.png?v=1770718398283" alt="rog"
@@ -1092,21 +1166,18 @@
             </div>
             <div class="slider-wrapper" style="margin-top: -1px; border-top: none;">
                 <div class="brand-track reverse">
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/lexar.jpg?v=1770718398227" alt="lexar"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/lexar.png" alt="lexar"
                             loading="lazy" decoding="async"></div>
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/hyix.jpg?v=1770718398223" alt="hynix"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/sk.png" alt="hynix"
                             loading="lazy" decoding="async"></div>
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/biwin.jpg?v=1770718398170" alt="biwin"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/biwin.png" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
-                            alt="aoostar" loading="lazy" decoding="async">
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/aoostar.png" alt="aoostar"
+                            loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823"
@@ -1116,25 +1187,22 @@
                             loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                 </div>
                 <div class="brand-track reverse" aria-hidden="true">
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/lexar.jpg?v=1770718398227" alt="lexar"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/lexar.png" alt="lexar"
                             loading="lazy" decoding="async"></div>
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/hyix.jpg?v=1770718398223" alt="hynix"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/sk.png" alt="hynix"
                             loading="lazy" decoding="async"></div>
-                    <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/biwin.jpg?v=1770718398170" alt="biwin"
+                    <div class="brand-item"><img src="https://nava-one.vercel.app/assets/biwin.png" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957" alt="biwin"
                             loading="lazy" decoding="async"></div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/aoostarlogo.jpg?v=1770948868153"
-                            alt="aoostar" loading="lazy" decoding="async">
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/aoostar.png" alt="aoostar"
+                            loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
                             src="https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823"
@@ -1144,7 +1212,7 @@
                             loading="lazy" decoding="async">
                     </div>
                     <div class="brand-item"><img
-                            src="https://bizweb.dktcdn.net/100/543/817/files/asus.jpg?v=1770948633313" alt="asus"
+                            src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png" alt="asus"
                             loading="lazy" decoding="async"></div>
                 </div>
             </div>
@@ -1168,12 +1236,14 @@
                                 năng khổng lồ, đủ sức xử lý các tác vụ đồ họa nặng nề hay vận hành trơn tru các mô hình
                                 dữ
                                 liệu phức tạp, nhưng vẫn phải giữ cho không gian thực sự tinh gọn?</p>
-                            <div class="highlight-box">
+                            <a href="https://navastore.vn/tat-ca-san-pham" class="highlight-box highlight-hover"
+                                style="text-decoration: none;">
                                 <i class="ph-fill ph-check-circle"></i>
                                 <p>Sự đánh đổi giữa hiệu suất và không gian đã kết thúc. <span
-                                        class="text-gradient">Chào
-                                        mừng bạn đến với NAVA STORE.</span></p>
-                            </div>
+                                        class="text-gradient">Khám phá ngay tất cả sản phẩm.</span> <i
+                                        class="ph-bold ph-arrow-right"
+                                        style="margin-left: 5px; color: #60a5fa; vertical-align: middle;"></i></p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1207,7 +1277,7 @@
                         decoding="async">
                     <div class="cta-glow"></div>
                     <h2 class="cta-title">SẴN SÀNG NÂNG TẦM TRẢI NGHIỆM?</h2>
-                    <p class="cta-desc text-white">Hàng ngàn khách hàng đã lựa chọn NAVA STORE để kiến tạo không gian
+                    <p class="cta-desc text-white">Hàng nghìn khách hàng đã lựa chọn NAVA STORE để kiến tạo không gian
                         làm
                         việc tối giản và mạnh mẽ. Đến lượt bạn!</p>
                     <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-white">
@@ -1220,6 +1290,145 @@
 
 
 
+        <!-- Mobile CSS Fixes (Cart + Shopee) -->
+        <style>
+            @media (max-width: 768px) {
+
+                /* Fix hidden cart icon on mobile */
+                .top-actions .cart-btn .cart-icon-wrapper {
+                    display: block !important;
+                }
+
+                .top-actions .cart-btn {
+                    font-size: 0 !important;
+                    /* Hide 'Giỏ hàng' text */
+                    padding: 6px 10px;
+                }
+
+                .top-actions .cart-btn i {
+                    font-size: 1.6rem !important;
+                }
+
+                .cart-count-badge {
+                    font-size: 10px !important;
+                }
+
+            }
+
+            /* Shopee Desktop Grid */
+            @media (min-width: 769px) {
+                .shopee-comments-list {
+                    display: grid !important;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                }
+
+                .shopee-comment-item {
+                    border-bottom: none !important;
+                    border: 1px solid var(--border-color, #e2e8f0);
+                    border-radius: 12px;
+                    padding: 20px;
+                    background: var(--bg-card, #ffffff);
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                    height: 100%;
+                }
+            }
+
+
+
+            /* Benefit 3D Hover & Slower Track */
+            .hero-benefits-slider {
+                position: relative;
+                padding: 20px !important;
+                margin: -20px !important;
+                height: 105px !important;
+                /* 90px card + 40px padding */
+                display: flex;
+                align-items: center;
+            }
+
+            .benefit-card-mini {
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+                transform-style: preserve-3d;
+                perspective: 1000px;
+            }
+
+            .benefit-card-mini:hover {
+                box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+                z-index: 10;
+            }
+
+            .benefit-pair {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                width: calc(100% - 40px);
+                /* subtract padding */
+                width: 100%;
+                transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease-in-out !important;
+                transform: translateY(100%);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .benefit-pair.bp-active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .benefit-pair.bp-exit {
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+
+            /* Policy 3D Hover & Slower Track */
+            .policy-card {
+                transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
+                transform-style: preserve-3d;
+                perspective: 1000px;
+            }
+
+            .policy-card:hover {
+                box-shadow: -5px 15px 30px rgba(0, 51, 102, 0.15) !important;
+                z-index: 10;
+            }
+
+            .policy-track {
+                animation-duration: 45s !important;
+                will-change: transform;
+            }
+        </style>
+        <!-- Shopee Reviews Mobile Slider CSS -->
+        <style>
+            @media (max-width: 768px) {
+                .shopee-comments-list {
+                    flex-direction: row;
+                    overflow-x: auto;
+                    scroll-snap-type: x mandatory;
+                    padding-bottom: 20px;
+                    gap: 15px;
+                    scrollbar-width: none;
+                }
+
+                .shopee-comments-list::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .shopee-comment-item {
+                    flex: 0 0 85%;
+                    scroll-snap-align: center;
+                    border-bottom: none;
+                    border: 1px solid var(--border-color, #e2e8f0);
+                    border-radius: 12px;
+                    padding: 20px;
+                    background: var(--bg-card, #ffffff);
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+                }
+            }
+        </style>
         <!-- Shopee Reviews Section -->
         <section class="shopee-reviews-section">
             <div class="container">
@@ -1240,59 +1449,93 @@
             </div>
         </section>
 
+
         <!-- Video Review Section -->
+        <style>
+            .video-card-link {
+                display: block;
+                color: inherit;
+                text-decoration: none;
+                height: 100%;
+            }
+
+            .video-card-link:hover {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .video-card-link .play-btn i {
+                margin-left: 2px !important;
+                /* Fix off-center play button */
+            }
+        </style>
         <section id="video" class="video-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">VIDEO REVIEW TRỰC QUAN</h2>
-                    <a href="#" class="view-all-link">Xem tất cả <i class="ph ph-arrow-right"></i></a>
+                    <a href="https://www.youtube.com/@navastore-vn" target="_blank" class="view-all-link">Xem tất cả <i
+                            class="ph ph-youtube-logo"></i></a>
                 </div>
                 <div class="video-grid">
                     <!-- Video 1 -->
                     <div class="video-card reveal">
-                        <div class="video-thumb">
-                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/thum-rog-970.jpg?v=1755573280147"
-                                alt="ASUS ROG NUC 970" loading="lazy" decoding="async">
-                            <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                        <div class="video-thumb" style="padding-top: 56.25%; position: relative;">
+                            <iframe width="100%" height="100%"
+                                src="https://www.youtube.com/embed/Syk0rwciis4?autoplay=1&mute=1&controls=1&rel=0&loop=1&playlist=Syk0rwciis4"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen
+                                style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius: 8px 8px 0 0;"></iframe>
                         </div>
-                        <div class="video-info">
-                            <h3>ASUS ROG NUC 970 Mini PC 50 củ có gì?</h3>
-                        </div>
+                        <a href="https://www.youtube.com/watch?v=Syk0rwciis4" target="_blank" class="video-card-link"
+                            style="display: block;">
+                            <div class="video-info">
+                                <h3>Lại một em Mini PC đến từ nhà GMKtec | Review GMKtec M7 cùng Nava</h3>
+                            </div>
+                        </a>
                     </div>
+
                     <!-- Video 2 -->
                     <div class="video-card reveal delay-1">
-                        <div class="video-thumb">
-                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-143028.png?v=1752910247987"
-                                alt="eGPU NAVA S1/S2" loading="lazy" decoding="async">
-                            <div class="play-btn"><i class="ph-fill ph-play"></i></div>
-                        </div>
-                        <div class="video-info">
-                            <h3>Hướng dẫn sử dụng eGPU NAVA S1/S2</h3>
-                        </div>
+                        <a href="https://www.youtube.com/watch?v=X_BmTM2T9gY" target="_blank" class="video-card-link">
+                            <div class="video-thumb">
+                                <img src="https://img.youtube.com/vi/X_BmTM2T9gY/maxresdefault.jpg"
+                                    alt="Lý do nào bạn nên sở hữu Mini PC?| Nava Store" loading="lazy" decoding="async">
+                                <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                            </div>
+                            <div class="video-info">
+                                <h3>Lý do nào bạn nên sở hữu Mini PC?| Nava Store</h3>
+                            </div>
+                        </a>
                     </div>
+
                     <!-- Video 3 -->
                     <div class="video-card reveal delay-2">
-                        <div class="video-thumb">
-                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/screenshot-2025-07-19-095023.png?v=1752893442757"
-                                alt="Beelink SER8" loading="lazy" decoding="async">
-                            <div class="play-btn"><i class="ph-fill ph-play"></i></div>
-                        </div>
-                        <div class="video-info">
-                            <h3>Beelink SER8: Hiệu năng thực tế</h3>
-                        </div>
+                        <a href="https://www.youtube.com/watch?v=RPZbRVCAImo" target="_blank" class="video-card-link">
+                            <div class="video-thumb">
+                                <img src="https://img.youtube.com/vi/RPZbRVCAImo/maxresdefault.jpg"
+                                    alt="Mini PC mang tính đột phá của thương hiệu Beelink ? | Review Beelink Ser8"
+                                    loading="lazy" decoding="async">
+                                <div class="play-btn"><i class="ph-fill ph-play"></i></div>
+                            </div>
+                            <div class="video-info">
+                                <h3>Mini PC mang tính đột phá của thương hiệu Beelink ? | Review Beelink Ser8</h3>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- News Section -->
 
+
+        <!-- News Section -->
         <!-- News Section -->
         <section id="news" class="news-section">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">TIN TỨC CÔNG NGHỆ</h2>
-                    <a href="tin-tuc" class="view-all-link">Xem tất cả <i class="ph ph-arrow-right"></i></a>
+                    <a href="/blogs/tin-tuc" class="view-all-link">Xem tất cả <i class="ph ph-arrow-right"></i></a>
                 </div>
                 <div class="news-flex">
                     <!-- Featured Article -->
@@ -1303,7 +1546,8 @@
                             <div class="news-date">20/04</div>
                         </div>
                         <div class="featured-content">
-                            <h3>Top 5 Máy Tính Mini TPHCM Giá Rẻ</h3>
+                            <h3><a href="#" style="color: inherit; text-decoration: none;">Top 5 Máy Tính Mini TPHCM Giá
+                                    Rẻ</a></h3>
                             <p>Không gian sống và làm việc tại hầu hết các phòng trọ hoặc căn hộ dịch vụ tại TP.HCM ngày
                                 càng khiêm tốn hơn...</p>
                             <a href="#" class="read-more">Đọc tiếp <i class="ph ph-caret-double-right"></i></a>
@@ -1313,58 +1557,53 @@
                     <div class="news-list">
                         <div class="news-item reveal delay-1">
                             <div class="item-img">
-                                <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua-3.jpg?v=1776592633880"
-                                    alt="Card đồ họa" loading="lazy" decoding="async">
+                                <img src="https://bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua-3.jpg?v=1776592633880"
+                                    alt="Card dồ họa" loading="lazy" decoding="async">
                             </div>
                             <div class="item-content">
-                                <h4>Top 5 Card Đồ Họa Mạnh Mẽ Cho Học Sinh Sinh Viên 2026</h4>
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">Top 5 Card Đồ Họa Mạnh Mẽ
+                                        Cho Học Sinh Sinh Viên 2026</a></h4>
                                 <span class="item-date">19/04/2026</span>
                             </div>
                         </div>
                         <div class="news-item reveal delay-2">
                             <div class="item-img">
-                                <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua.jpg?v=1776091615180"
+                                <img src="https://bizweb.dktcdn.net/thumb/medium/100/543/817/articles/vi-tri-dia-ly-cua.jpg?v=1776091615180"
                                     alt="Mini PC Card" loading="lazy" decoding="async">
                             </div>
                             <div class="item-content">
-                                <h4>Mini PC Có Card Đồ Họa Không? Giải đáp thắc mắc</h4>
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">Mini PC Có Card Đồ Họa
+                                        Không? Giải đáp thắc mắc</a></h4>
                                 <span class="item-date">13/04/2026</span>
                             </div>
                         </div>
                         <div class="news-item reveal delay-3">
                             <div class="item-img">
-                                <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/black-and-white-modern-vietnam-travel-presentation-c4ff0b76-e0f8-4087-b001-4e09f0c43698.jpg?v=1774972201780"
+                                <img src="https://bizweb.dktcdn.net/thumb/medium/100/543/817/articles/black-and-white-modern-vietnam-travel-presentation-c4ff0b76-e0f8-4087-b001-4e09f0c43698.jpg?v=1774972201780"
                                     alt="Mini PC Like New" loading="lazy" decoding="async">
                             </div>
                             <div class="item-content">
-                                <h4>Mua PC Mini Like New Giá Rẻ TPHCM | Cấu Hình Mạnh</h4>
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">Mua PC Mini Like New Giá
+                                        Rẻ TPHCM | Cấu Hình Mạnh</a></h4>
                                 <span class="item-date">31/03/2026</span>
                             </div>
                         </div>
                         <div class="news-item reveal delay-4">
                             <div class="item-img">
-                                <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/articles/1202-asus-ra-mat-nuc-15-pro-chiec-mini-pc-ai-dau-tien-tren-the-gioi-1-5-31302c9c-6efb-42b2-bb6d-e87c75390d68.jpg?v=1774956254340"
+                                <img src="https://bizweb.dktcdn.net/thumb/medium/100/543/817/articles/1202-asus-ra-mat-nuc-15-pro-chiec-mini-pc-ai-dau-tien-tren-the-gioi-1-5-31302c9c-6efb-42b2-bb6d-e87c75390d68.jpg?v=1774956254340"
                                     alt="Mini PC Văn phòng" loading="lazy" decoding="async">
                             </div>
                             <div class="item-content">
-                                <h4>Mua Full Bộ Mini PC Văn Phòng Dưới 12 Triệu</h4>
+                                <h4><a href="#" style="color: inherit; text-decoration: none;">Mua Full Bộ Mini PC Văn
+                                        Phòng Dưới 12 Triệu</a></h4>
                                 <span class="item-date">31/03/2026</span>
-                            </div>
-                        </div>
-                        <div class="news-item reveal delay-5">
-                            <div class="item-img">
-                                <img src="https://bizweb.dktcdn.net/100/543/817/articles/ieelq6n0mltrcoredpqobk0bvqmrkzgvvl-if8eenmca3lvmsfixmcxyyqaedshafau3obj04ytpxacsdzytv-ibvfnugctfwpdl3v0nsxbkudhujd4gwwpg2lldnnbc9o23-0yhsnmfyqcafbepsuzbaa5lbiqeryjyzo-1i6qq-8r0eoaglrvw74-6je52.jpeg?v=1776680182577"
-                                    alt="eGPU Setup" loading="lazy" decoding="async">
-                            </div>
-                            <div class="item-content">
-                                <h4>Hướng Dẫn Setup eGPU Cho Laptop Mỏng Nhẹ 2026</h4>
-                                <span class="item-date">28/03/2026</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Footer -->
 
@@ -1459,16 +1698,15 @@
                         alt="NAVA" class="header-logo-img" style="height: 35px; width: auto;" loading="lazy"
                         decoding="async">
                 </div>
-                <div class="sidebar-search" style="flex: 1; min-width: 0;">
-                    <form action="/search" method="get"
-                        style="display: flex; position: relative; margin: 0; width: 100%;">
-                        <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..."
-                            style="width: 100%; padding: 8px 15px 8px 35px; border-radius: 9999px; border: 1px solid var(--border-color); font-size: 0.9rem; outline: none; background: #f8fafc; box-sizing: border-box;">
-                        <button type="submit"
-                            style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text-gray); display: flex;"><i
-                                class="ph ph-magnifying-glass" style="font-size: 1.1rem;"></i></button>
-                    </form>
-                </div>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện"
+                    style="margin-right: auto; margin-left: 20px;">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb">
+                            <i class="ph-fill ph-sun icon-sun"></i>
+                            <i class="ph-fill ph-moon icon-moon"></i>
+                        </div>
+                    </div>
+                </button>
                 <button class="sidebar-close"
                     style="flex-shrink: 0; background: none; border: none; font-size: 1.5rem; color: var(--text-gray); padding: 0;"><i
                         class="ph ph-x"></i></button>
@@ -1657,9 +1895,12 @@
         </div>
         <style>
             .floating-social-wrapper {
-                position: fixed;
-                bottom: 30px;
-                right: 20px;
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                top: auto !important;
+                transform: none !important;
+                flex-direction: column !important;
                 z-index: 50;
                 display: flex;
                 flex-direction: column;
@@ -1787,15 +2028,56 @@
 
         <!-- /MASTER SAPO ESCAPE WRAPPER -->
 
-        <script src="assets/main.js?v=1777402289098"></script>
+        <script src="./assets/main.js"></script>
 
+        <script>
+            // Patch: Fetch shopee summary for realtime customer count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary', { headers: { 'Accept': 'application/json' } })
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.data && data.data.seller_rating_summary) {
+                        // Lấy số liệu gốc nhân 5 theo yêu cầu
+                        const total = (data.data.seller_rating_summary.rating_total || 0) * 5;
+                        const el = document.getElementById('realtime-customer-count');
+                        if (el) {
+                            el.dataset.target = total;
+                            // Wait for original animation to finish (2000ms), then force update
+                            setTimeout(() => {
+                                el.textContent = total.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                });
+
+            // Patch: Fetch shopee shop_base for realtime product count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=shop_base', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data && data.data && typeof data.data.item_count !== 'undefined') {
+                        // Lấy item_count nhân 2
+                        const itemCount = data.data.item_count * 2;
+                        const el = document.getElementById('realtime-product-count');
+                        if (el) {
+                            el.dataset.target = itemCount;
+                            setTimeout(() => {
+                                el.textContent = itemCount.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                })
+                .catch(err => console.error('Fetch shop base error:', err));
+        </script>
 
     </div>
 
     <script>
         // Cycle benefit cards
         setInterval(() => {
-            e = document.querySelector('.bp-active');
+            const active = document.querySelector('.bp-active');
             if (active) {
                 const next = active.nextElementSibling || active.parentElement.firstElementChild;
                 active.classList.remove('bp-active');
@@ -1811,22 +2093,50 @@
             }
         });
     </script>
-
-    <!-- Auto-play first video -->
+    <!-- Dynamic 3D Tilt Script for Benefit Cards -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const firstVideoThumb = document.getElementById('first-video-thumb');
-            if (firstVideoThumb) {
-                const observer = new IntersectionObserver((entries) => {
-                    if (entries[0].isIntersecting) {
-                        firstVideoThumb.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/Syk0rwciis4?autoplay=1&mute=1&controls=1&rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute; top:0; left:0; width:100%; height:100%; z-index: 10;"></iframe>';
-                        observer.disconnect();
-                    }
-                }, { threshold: 0.5 });
-                observer.observe(firstVideoThumb);
+        (function () {
+            function initTilt() {
+                const cards = document.querySelectorAll('.benefit-card-mini, .policy-card');
+                if (cards.length === 0) return; // Prevent errors if elements don't exist yet
+
+                cards.forEach(card => {
+                    card.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease';
+
+                    card.addEventListener('mousemove', e => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        // Calculate rotation based on mouse position
+                        const rotateX = ((y - centerY) / centerY) * -12; // Max 12 deg tilt
+                        const rotateY = ((x - centerX) / centerX) * 12;
+
+                        card.style.transition = 'transform 0.1s ease-out, box-shadow 0.4s ease';
+                        // Use setProperty with important to ensure it overrides any other CSS
+                        card.style.setProperty('transform', `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`, 'important');
+                    });
+
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease';
+                        card.style.setProperty('transform', 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', 'important');
+                    });
+                });
             }
-        });
+
+            // Run immediately
+            initTilt();
+            // Also run on DOMContentLoaded just in case
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initTilt);
+            }
+        })();
     </script>
+
+    </div>
 </body>
 
 </html>
