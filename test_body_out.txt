@@ -1,0 +1,17 @@
+compare-bar is at index: 144659
+Total length: 161090
+End of file snippet:
+mg) {
+                    if (!img.hasAttribute("alt") || img.alt.trim() === "minipc navastore maytinh #miniPC phukien egpu Minisforum MINISFORUM eGPU Laptop NavaStore") {
+                        // Gán alt dựa trên tên file ảnh hoặc tiêu đề trang
+                        let fileName = img.src.split('/').pop().split('.')[0];
+                        img.alt = fileName.replace(/[-_]/g, ' ');
+                    }
+                });
+            });
+        </script>
+        
+
+        
+
+    </html>
