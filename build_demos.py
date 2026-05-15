@@ -140,6 +140,29 @@ def build_collection(base_dir, header_part, footer_part):
                 .product-card { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-white); }
                 .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
                 
+                /* Advanced UX/UI Features */
+                @keyframes skeleton-loading { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+                .grid-loading { position: relative; pointer-events: none; }
+                .grid-loading::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.5); z-index: 10; backdrop-filter: blur(1px); }
+                .grid-loading .product-card { position: relative; overflow: hidden; border-color: var(--border-color); }
+                .grid-loading .product-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); background-size: 200% 100%; animation: skeleton-loading 1.2s infinite; z-index: 11; pointer-events: none; }
+                
+                #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+                .nava-toast { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-left: 4px solid var(--primary); padding: 15px 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); color: var(--text-color); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transform: translateX(120%); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+                .nava-toast.show { transform: translateX(0); opacity: 1; }
+                
+                .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -30%); opacity: 0; visibility: hidden; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.6); color: var(--text-color); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+                .product-card:hover .quick-view-btn { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
+                .quick-view-btn:hover { background: rgba(255, 255, 255, 0.8); }
+                
+                .product-img { transition: opacity 0.4s; }
+                .product-img-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1; }
+                .product-card:hover .product-img { opacity: 0; }
+                .product-card:hover .product-img-hover { opacity: 1; }
+                
+                .mobile-filter-btn { display: none; position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 30px; font-weight: bold; z-index: 90; box-shadow: 0 5px 20px rgba(14,165,233,0.4); align-items: center; gap: 8px; cursor: pointer; transition: transform 0.2s; }
+                .mobile-filter-btn:active { transform: translateX(-50%) scale(0.95); }
+                
                 @media (min-width: 992px) {
                     .nava-collection-layout { flex-direction: row; align-items: flex-start; }
                     .nava-sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 120px; }
@@ -148,6 +171,17 @@ def build_collection(base_dir, header_part, footer_part):
                 }
                 @media (max-width: 1199px) and (min-width: 992px) {
                     .product-grid { grid-template-columns: repeat(3, 1fr) !important; }
+                }
+                @media (max-width: 991px) {
+                    .nava-sidebar { position: fixed; top: 0; left: -100%; width: 85%; max-width: 320px; height: 100vh; background: var(--bg-white); z-index: 1000; transition: 0.3s ease; overflow-y: auto; box-shadow: 20px 0 50px rgba(0,0,0,0.1); padding: 20px 0; }
+                    .nava-sidebar.active { left: 0; }
+                    .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; backdrop-filter: blur(3px); }
+                    .sidebar-overlay.active { display: block; }
+                    .mobile-filter-btn { display: flex; }
+                    .brand-list { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; margin: 0 -5px; padding: 0 5px 10px; }
+                    .brand-item { scroll-snap-align: start; flex: 0 0 100px; }
+                    .brand-list::-webkit-scrollbar { height: 4px; }
+                    .brand-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
                 }
             </style>
 
@@ -173,16 +207,35 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="sidebar-block">
                             <h4 class="sidebar-title">LỌC GIÁ</h4>
                             <div style="margin-bottom: 20px; padding: 0 5px;">
-                                <div style="height: 4px; background: var(--bg-gray); border-radius: 2px; position: relative; margin-bottom: 15px; margin-top: 10px;">
-                                    <div style="position: absolute; left: 15%; right: 25%; height: 100%; background: var(--primary); border-radius: 2px;"></div>
-                                    <div style="position: absolute; left: 15%; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: white; border: 2px solid var(--primary); border-radius: 50%; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
-                                    <div style="position: absolute; right: 25%; top: 50%; transform: translate(50%, -50%); width: 16px; height: 16px; background: white; border: 2px solid var(--primary); border-radius: 50%; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);"></div>
+                                <style>
+                                    .range-slider { position: relative; height: 20px; margin-top: 10px; margin-bottom: 15px; }
+                                    .range-slider input[type="range"] { position: absolute; width: 100%; height: 4px; background: transparent; -webkit-appearance: none; pointer-events: none; outline: none; margin: 0; top: 8px; z-index: 3; }
+                                    .range-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 16px; height: 16px; background: white; border: 2px solid var(--primary); border-radius: 50%; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+                                    .range-track { position: absolute; width: 100%; height: 4px; background: var(--bg-gray); top: 8px; border-radius: 2px; }
+                                    .range-fill { position: absolute; height: 100%; background: var(--primary); top: 0; border-radius: 2px; }
+                                </style>
+                                <div class="range-slider">
+                                    <div class="range-track"><div class="range-fill" id="priceFill" style="left: 10%; right: 25%;"></div></div>
+                                    <input type="range" min="0" max="40000000" step="500000" value="4000000" id="priceMin" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
+                                    <input type="range" min="0" max="40000000" step="500000" value="30000000" id="priceMax" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                                    <input type="text" value="4.000.000đ" style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; transition: all 0.2s; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);" onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 0 2px rgba(14,165,233,0.1)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='inset 0 1px 2px rgba(0,0,0,0.02)'">
+                                    <input type="text" id="priceInputMin" value="4.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                     <span style="color: var(--text-gray); flex-shrink: 0; font-weight: bold;">-</span>
-                                    <input type="text" value="30.000.000đ" style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; transition: all 0.2s; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02);" onfocus="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 0 2px rgba(14,165,233,0.1)'" onblur="this.style.borderColor='var(--border-color)'; this.style.boxShadow='inset 0 1px 2px rgba(0,0,0,0.02)'">
+                                    <input type="text" id="priceInputMax" value="30.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                 </div>
+                                <script>
+                                    function updatePriceVisuals() {
+                                        let minVal = parseInt(document.getElementById('priceMin').value);
+                                        let maxVal = parseInt(document.getElementById('priceMax').value);
+                                        if(minVal > maxVal) { let tmp = minVal; minVal = maxVal; maxVal = tmp; }
+                                        document.getElementById('priceInputMin').value = minVal.toLocaleString('vi-VN') + 'đ';
+                                        document.getElementById('priceInputMax').value = maxVal.toLocaleString('vi-VN') + 'đ';
+                                        const fill = document.getElementById('priceFill');
+                                        fill.style.left = (minVal / 40000000 * 100) + '%';
+                                        fill.style.right = (100 - (maxVal / 40000000 * 100)) + '%';
+                                    }
+                                </script>
                             </div>
 
                         </div>
@@ -827,6 +880,223 @@ def build_collection(base_dir, header_part, footer_part):
                     </div>
                 </div>
             </div>
+            
+            <button class="mobile-filter-btn" onclick="toggleMobileSidebar()"><i class="ph-bold ph-faders"></i> Lọc sản phẩm</button>
+            <div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
+            
+            <div id="quick-view-modal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 10000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
+                <div style="background: var(--bg-white); width: 90%; max-width: 900px; height: 80vh; max-height: 600px; border-radius: var(--radius-lg); position: relative; display: flex; overflow: hidden; transform: scale(0.95); transition: transform 0.3s;">
+                    <button onclick="closeQuickView()" style="position: absolute; top: 15px; right: 15px; background: var(--bg-gray); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-color)'"><i class="ph-bold ph-x"></i></button>
+                    <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #f8fafc; padding: 20px;">
+                        <img id="qv-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="flex: 1; padding: 40px 30px; display: flex; flex-direction: column;">
+                        <h2 id="qv-title" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-color);"></h2>
+                        <div id="qv-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 20px;"></div>
+                        <div style="flex: 1; border-top: 1px solid var(--border-color); padding-top: 20px;">
+                            <p style="color: var(--text-gray); line-height: 1.6;">Sản phẩm Mini PC chính hãng, thiết kế nhỏ gọn, hiệu năng vượt trội. Hỗ trợ giao hàng hỏa tốc trong 2h tại nội thành.</p>
+                            <div class="card-specs" style="margin-top: 20px;">
+                                <span class="spec-pill">WIFI 6</span>
+                                <span class="spec-pill secondary">BT 5.2</span>
+                                <span class="spec-pill secondary">Type-C</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 15px; margin-top: 20px;">
+                            <a href="demo_product.html" style="flex: 1; padding: 12px; background: var(--bg-gray); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-align: center; text-decoration: none; transition: 0.2s;" onmouseover="this.style.background='var(--border-color)'" onmouseout="this.style.background='var(--bg-gray)'">Xem chi tiết</a>
+                            <button onclick="showToast('Đã thêm vào giỏ hàng thành công!'); closeQuickView();" style="flex: 1; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // 1. Toast Notification System
+                function showToast(message) {
+                    let container = document.getElementById('toast-container');
+                    if(!container) {
+                        container = document.createElement('div');
+                        container.id = 'toast-container';
+                        document.body.appendChild(container);
+                    }
+                    const toast = document.createElement('div');
+                    toast.className = 'nava-toast';
+                    toast.innerHTML = '<i class="ph-fill ph-check-circle" style="color: var(--primary); font-size: 1.3rem;"></i> ' + message;
+                    container.appendChild(toast);
+                    
+                    // trigger reflow
+                    void toast.offsetWidth;
+                    toast.classList.add('show');
+                    
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        setTimeout(() => toast.remove(), 400);
+                    }, 3000);
+                }
+
+                // 2. Interactive UX: Skeleton Loading & Filtering
+                function simulateLoading() {
+                    const grid = document.querySelector('.product-grid');
+                    if(!grid) return;
+                    grid.classList.add('grid-loading');
+                    setTimeout(() => {
+                        grid.classList.remove('grid-loading');
+                    }, 800);
+                }
+                
+                let originalCards = [];
+                function applyFiltersAndSort() {
+                    const grid = document.querySelector('.product-grid');
+                    if(!grid) return;
+                    
+                    if(originalCards.length === 0) {
+                        originalCards = Array.from(grid.querySelectorAll('.product-card'));
+                    }
+                    
+                    grid.classList.add('grid-loading');
+                    
+                    setTimeout(() => {
+                        const minInput = document.getElementById('priceMin');
+                        const maxInput = document.getElementById('priceMax');
+                        const minVal = minInput ? parseInt(minInput.value) : 0;
+                        const maxVal = maxInput ? parseInt(maxInput.value) : 40000000;
+                        
+                        const sortLabelEl = document.getElementById('sortLabel');
+                        const sortMethod = sortLabelEl ? sortLabelEl.textContent.trim() : 'Mặc định';
+                        
+                        let visibleCards = [];
+                        
+                        // Filtering
+                        originalCards.forEach(card => {
+                            const priceEl = card.querySelector('.card-content > div:last-child > span');
+                            let price = 0;
+                            if(priceEl) {
+                                price = parseInt(priceEl.textContent.replace(/[^0-9]/g, '')) || 0;
+                            }
+                            
+                            if(price >= minVal && price <= maxVal) {
+                                card.style.display = 'flex';
+                                visibleCards.push(card);
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                        
+                        // Sorting
+                        if(sortMethod === 'Giá tăng dần') {
+                            visibleCards.sort((a, b) => {
+                                const pa = parseInt(a.querySelector('.card-content > div:last-child > span').textContent.replace(/[^0-9]/g, '')) || 0;
+                                const pb = parseInt(b.querySelector('.card-content > div:last-child > span').textContent.replace(/[^0-9]/g, '')) || 0;
+                                return pa - pb;
+                            });
+                        } else if(sortMethod === 'Giá giảm dần') {
+                            visibleCards.sort((a, b) => {
+                                const pa = parseInt(a.querySelector('.card-content > div:last-child > span').textContent.replace(/[^0-9]/g, '')) || 0;
+                                const pb = parseInt(b.querySelector('.card-content > div:last-child > span').textContent.replace(/[^0-9]/g, '')) || 0;
+                                return pb - pa;
+                            });
+                        } else if(sortMethod === 'Mới nhất') {
+                            visibleCards.reverse(); // simple mock
+                        }
+                        
+                        // Re-append
+                        grid.innerHTML = '';
+                        visibleCards.forEach(card => grid.appendChild(card));
+                        
+                        if(visibleCards.length === 0) {
+                            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-gray); font-size: 1.1rem; border: 1px dashed var(--border-color); border-radius: var(--radius-lg);">Không tìm thấy sản phẩm nào trong tầm giá này.</div>';
+                        }
+                        
+                        grid.classList.remove('grid-loading');
+                    }, 400);
+                }
+                
+                // Bind loading to sort options and brand items
+                setTimeout(() => {
+                    document.querySelectorAll('.sort-drop-menu a').forEach(a => {
+                        const originalClick = a.onclick;
+                        a.onclick = function(e) {
+                            const res = originalClick ? originalClick.call(this, e) : true;
+                            applyFiltersAndSort();
+                            return res;
+                        }
+                    });
+                    
+                    document.querySelectorAll('.brand-item').forEach(b => {
+                        b.onclick = function() { applyFiltersAndSort(); showToast('Đã lọc theo thương hiệu'); }
+                    });
+                }, 500);
+
+                // 3. Quick View Modal
+                function openQuickView(name, price, img) {
+                    const modal = document.getElementById('quick-view-modal');
+                    document.getElementById('qv-title').textContent = name;
+                    document.getElementById('qv-price').textContent = price;
+                    document.getElementById('qv-img').src = img;
+                    
+                    modal.style.display = 'flex';
+                    void modal.offsetWidth;
+                    modal.style.opacity = '1';
+                    modal.children[0].style.transform = 'scale(1)';
+                }
+                function closeQuickView() {
+                    const modal = document.getElementById('quick-view-modal');
+                    modal.style.opacity = '0';
+                    modal.children[0].style.transform = 'scale(0.95)';
+                    setTimeout(() => { modal.style.display = 'none'; }, 300);
+                }
+                
+                // Inject Quick View buttons into all product cards
+                document.addEventListener('DOMContentLoaded', () => {
+                    document.querySelectorAll('.product-card').forEach(card => {
+                        const imgWrap = card.querySelector('.card-image-wrap');
+                        const titleEl = card.querySelector('.card-title');
+                        const priceEl = card.querySelector('.card-content > div:last-child > span');
+                        const imgEl = card.querySelector('.product-img');
+                        
+                        if(imgWrap && titleEl && priceEl && imgEl) {
+                            const name = titleEl.textContent.trim().replace('...', '');
+                            const price = priceEl.textContent.trim();
+                            const imgUrl = imgEl.src;
+                            
+                            // Add Quick View Button
+                            const btn = document.createElement('button');
+                            btn.className = 'quick-view-btn';
+                            btn.title = 'Xem nhanh';
+                            btn.innerHTML = '<i class="ph-bold ph-eye" style="font-size: 1.2rem;"></i>';
+                            btn.onclick = function(e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                openQuickView(name, price, imgUrl);
+                            };
+                            imgWrap.appendChild(btn);
+                            
+                            // Add hover image (fake 2nd angle by inverting or just a slightly different mock)
+                            const hoverImg = document.createElement('img');
+                            hoverImg.src = imgUrl; 
+                            hoverImg.className = 'product-img-hover';
+                            hoverImg.style.filter = 'brightness(0.9) contrast(1.1)'; // visual distinction for demo
+                            imgWrap.appendChild(hoverImg);
+                            
+                            // Add tooltips to spec pills
+                            card.querySelectorAll('.spec-pill').forEach(pill => {
+                                pill.title = 'Thông số phần cứng: ' + pill.textContent.trim();
+                            });
+                            
+                            // Update card onclick to open Quick View
+                            card.onclick = function(e) {
+                                e.preventDefault();
+                                openQuickView(name, price, imgUrl);
+                            };
+                        }
+                    });
+                });
+                
+                // 4. Mobile Off-canvas Sidebar
+                function toggleMobileSidebar() {
+                    document.querySelector('.nava-sidebar').classList.toggle('active');
+                    document.querySelector('.sidebar-overlay').classList.toggle('active');
+                }
+            </script>
         </div>
     """
     full_html = clean_liquid_tags(header_part + collection_html + local_footer_part)

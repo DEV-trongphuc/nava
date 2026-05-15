@@ -110,6 +110,9 @@ sticky_html = """
             btn.querySelector('i').className = 'ph ph-arrows-left-right';
         });
         updateCompareBar();
+        if(typeof showToast === 'function') {
+            showToast('Đã xóa tất cả sản phẩm khỏi danh sách đối chiếu');
+        }
     }
     function hideCompareBar() {
         const bar = document.getElementById('compare-bar');
