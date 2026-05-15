@@ -53,6 +53,27 @@ def get_core_layout(base_dir):
     # Inject Footer
     footer_part = footer_part.replace("{%- include 'footer' -%}", footer_content)
     
+    # Intercept Auth Links for Demo Environment
+    demo_auth_interceptor = """
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hijack login and register links to point to local demo HTMLs
+            const authLinks = document.querySelectorAll('a[href^="/account/login"], a[href^="/account/register"]');
+            authLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.getAttribute('href').includes('login')) {
+                        window.location.href = 'demo_login.html';
+                    } else if (this.getAttribute('href').includes('register')) {
+                        window.location.href = 'demo_register.html';
+                    }
+                });
+            });
+        });
+    </script>
+    """
+    footer_part += demo_auth_interceptor
+    
     return header_part, footer_part
 
 def build_index(base_dir, header_part, footer_part):
@@ -1334,6 +1355,374 @@ def build_product(base_dir, header_part, footer_part):
     with open(os.path.join(base_dir, "demo_product.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
+def build_auth_pages(base_dir):
+    # CSS & Boilerplate for Glassmorphism Fullscreen Auth Pages
+    auth_css = """
+        <style>
+            :root {
+                --primary: #0ea5e9;
+                --secondary: #3b82f6;
+                --bg-white: #ffffff;
+                --bg-gray: #f8fafc;
+                --text-color: #0f172a;
+                --text-gray: #64748b;
+                --border-color: #e2e8f0;
+                --radius-md: 12px;
+                --radius-lg: 24px;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                background: var(--bg-gray);
+                color: var(--text-color);
+                -webkit-font-smoothing: antialiased;
+            }
+            .auth-page-wrapper {
+                height: 100vh;
+                width: 100vw;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: linear-gradient(45deg, #020617, #0f172a, #0b1120, #172554);
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
+                padding: 10px;
+                box-sizing: border-box;
+                position: relative;
+            }
+            @keyframes gradientBG {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+            .auth-page-wrapper::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+                background-size: 30px 30px;
+                pointer-events: none;
+            }
+            .glass-card {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.8);
+                border-radius: var(--radius-lg);
+                padding: 30px 40px;
+                width: 100%;
+                max-width: 440px;
+                max-height: 95vh;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                position: relative;
+                z-index: 10;
+                overflow-y: auto;
+                scrollbar-width: none; /* Firefox */
+            }
+            .glass-card::-webkit-scrollbar {
+                display: none; /* Chrome */
+            }
+            .glass-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0; width: 100%; height: 4px;
+                background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+                background-size: 200% 100%;
+                animation: gradientMove 3s linear infinite;
+            }
+            @keyframes gradientMove {
+                0% { background-position: 100% 0; }
+                100% { background-position: -100% 0; }
+            }
+            .auth-title {
+                font-size: 1.8rem;
+                font-weight: 800;
+                color: var(--text-color);
+                text-align: center;
+                margin: 0 0 5px 0;
+            }
+            .auth-desc {
+                text-align: center;
+                color: var(--text-gray);
+                margin: 0 0 20px 0;
+                font-size: 0.9rem;
+            }
+            .form-group-nava {
+                margin-bottom: 15px;
+                position: relative;
+            }
+            .form-group-nava i {
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--text-gray);
+                font-size: 1.1rem;
+            }
+            .input-nava {
+                width: 100%;
+                padding: 12px 15px 12px 42px;
+                border: 1px solid var(--border-color);
+                border-radius: var(--radius-md);
+                background: #f8fafc;
+                color: var(--text-color);
+                font-size: 0.95rem;
+                outline: none;
+                transition: all 0.3s;
+                box-sizing: border-box;
+            }
+            .input-nava:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+                background: #fff;
+            }
+            .btn-nava {
+                width: 100%;
+                padding: 12px;
+                border-radius: var(--radius-md);
+                border: none;
+                font-size: 1.05rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+            }
+            .btn-primary-nava {
+                background: linear-gradient(90deg, var(--primary), var(--secondary));
+                color: white;
+                box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            }
+            .btn-primary-nava:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+            }
+            .social-divider {
+                display: flex;
+                align-items: center;
+                text-align: center;
+                margin: 20px 0;
+                color: var(--text-gray);
+                font-size: 0.85rem;
+            }
+            .social-divider::before, .social-divider::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .social-divider span {
+                padding: 0 10px;
+            }
+            .social-login-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .btn-social {
+                background: white;
+                border: 1px solid var(--border-color);
+                color: var(--text-color);
+                font-size: 0.95rem;
+                padding: 10px;
+            }
+            .btn-social:hover {
+                background: var(--bg-gray);
+                border-color: #cbd5e1;
+            }
+            .link-nava {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+                transition: 0.2s;
+            }
+            .link-nava:hover {
+                text-decoration: underline;
+            }
+            
+            /* Toggle forms */
+            #recover_customer_password { display: none; }
+            .show-recover #customer_login_wrapper { display: none; }
+            .show-recover #recover_customer_password { display: block; }
+        </style>
+    """
+
+    header_wrapper = f"""<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nava Store - Đăng Nhập / Đăng Ký</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    {auth_css}
+</head>
+<body>
+"""
+
+    footer_wrapper = "</body></html>"
+
+    # 1. Login HTML
+    login_html = header_wrapper + """
+        <div class="auth-page-wrapper" id="login-container">
+            <div class="glass-card">
+                <a href="demo_collection.html" class="link-nava" style="position: absolute; top: 25px; left: 25px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;"><i class="ph-bold ph-arrow-left"></i> Quay lại</a>
+                
+                <!-- Main Login Form -->
+                <div id="customer_login_wrapper">
+                    <div style="text-align: center; margin-top: 10px;">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
+                        <h1 class="auth-title">Đăng Nhập</h1>
+                        <p class="auth-desc">Chào mừng bạn quay trở lại Nava Store</p>
+                    </div>
+                    
+                    <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
+                        <input name="FormType" type="hidden" value="customer_login"/>
+                        <input name="utf8" type="hidden" value="true"/>
+                        
+                        <div class="form-group-nava">
+                            <i class="ph-bold ph-envelope"></i>
+                            <input type="email" placeholder="Nhập địa chỉ Email" class="input-nava" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" id="customer_email" required>
+                        </div>
+                        
+                        <div class="form-group-nava">
+                            <i class="ph-bold ph-lock"></i>
+                            <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" id="customer_password" required>
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-gray); font-size: 0.95rem;">
+                                <input type="checkbox" style="width: 16px; height: 16px; accent-color: var(--primary);">
+                                Ghi nhớ đăng nhập
+                            </label>
+                            <a href="#recover" onclick="toggleRecover(); return false;" class="link-nava">Quên mật khẩu?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-nava btn-primary-nava">Đăng Nhập Ngay</button>
+                    </form>
+                    
+                    <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
+                    
+                    <div class="social-login-grid">
+                        <button class="btn-nava btn-social" onclick="if(typeof loginGoogle === 'function') loginGoogle(); else alert('Chức năng Google Auth đang giả lập trên Sapo.'); return false;">
+                            <img src="https://images.seeklogo.com/logo-png/27/2/google-logo-png_seeklogo-273191.png" width="18" height="18" alt="Google"> Google
+                        </button>
+                        <button class="btn-nava btn-social" onclick="if(typeof loginFacebook === 'function') loginFacebook(); else alert('Chức năng Facebook Auth đang giả lập trên Sapo.'); return false;" style="color: #1877F2;">
+                            <i class="ph-fill ph-facebook-logo" style="font-size: 1.2rem;"></i> Facebook
+                        </button>
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 20px; color: var(--text-gray); font-size: 0.95rem;">
+                        Chưa có tài khoản? <a href="demo_register.html" class="link-nava">Đăng ký ngay</a>
+                    </p>
+                </div>
+
+                <!-- Recover Password Form -->
+                <form method="post" action="/account/recover" id="recover_customer_password" accept-charset="UTF-8">
+                    <input name="FormType" type="hidden" value="recover_customer_password"/>
+                    <input name="utf8" type="hidden" value="true"/>
+                    
+                    <div style="text-align: center; margin-top: 10px;">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
+                        <h1 class="auth-title">Quên Mật Khẩu</h1>
+                        <p class="auth-desc">Chúng tôi sẽ gửi một email kèm liên kết để bạn đặt lại mật khẩu an toàn.</p>
+                    </div>
+                    
+                    <div class="form-group-nava">
+                        <i class="ph-bold ph-envelope"></i>
+                        <input type="email" class="input-nava" placeholder="Nhập Email của bạn" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" id="customer_email1" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Gửi Liên Kết Khôi Phục</button>
+                    
+                    <p style="text-align: center; margin-top: 20px;">
+                        <a href="#" onclick="toggleRecover(); return false;" class="link-nava"><i class="ph-bold ph-arrow-left"></i> Quay lại đăng nhập</a>
+                    </p>
+                </form>
+                
+            </div>
+        </div>
+
+        <script>
+            function toggleRecover() {
+                const container = document.getElementById('login-container');
+                container.classList.toggle('show-recover');
+            }
+            if (window.location.hash == "#recover") { toggleRecover(); }
+        </script>
+    """ + footer_wrapper
+    
+    with open(os.path.join(base_dir, "demo_login.html"), "w", encoding="utf-8") as f:
+        f.write(login_html)
+
+    # 2. Register HTML
+    register_html = header_wrapper + """
+        <div class="auth-page-wrapper">
+            <div class="glass-card">
+                <a href="demo_collection.html" class="link-nava" style="position: absolute; top: 25px; left: 25px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;"><i class="ph-bold ph-arrow-left"></i> Quay lại</a>
+                <div style="text-align: center; margin-top: 10px;">
+                    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
+                    <h1 class="auth-title">Tạo Tài Khoản</h1>
+                    <p class="auth-desc">Đăng ký thành viên để nhận ngay nhiều ưu đãi</p>
+                </div>
+                
+                <form method="post" action="/account/register" id="customer_register" accept-charset="UTF-8">
+                    <input name="FormType" type="hidden" value="customer_register"/>
+                    <input name="utf8" type="hidden" value="true"/>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                        <div style="position: relative;">
+                            <i class="ph-bold ph-user" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-gray); font-size: 1.1rem;"></i>
+                            <input type="text" placeholder="Họ" class="input-nava" name="lastName" required>
+                        </div>
+                        <div style="position: relative;">
+                            <input type="text" placeholder="Tên" class="input-nava" style="padding-left: 15px;" name="firstName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group-nava">
+                        <i class="ph-bold ph-phone"></i>
+                        <input type="text" placeholder="Số điện thoại" class="input-nava" pattern="\\d+" name="Phone" required>
+                    </div>
+                    
+                    <div class="form-group-nava">
+                        <i class="ph-bold ph-envelope"></i>
+                        <input type="email" placeholder="E-mail" class="input-nava" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" required>
+                    </div>
+                    
+                    <div class="form-group-nava">
+                        <i class="ph-bold ph-lock"></i>
+                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Đăng Ký Tài Khoản</button>
+                </form>
+                
+                <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
+                
+                <div class="social-login-grid">
+                    <button class="btn-nava btn-social" onclick="if(typeof loginGoogle === 'function') loginGoogle(); else alert('Chức năng Google Auth đang giả lập trên Sapo.'); return false;">
+                        <img src="https://images.seeklogo.com/logo-png/27/2/google-logo-png_seeklogo-273191.png" width="18" height="18" alt="Google"> Google
+                    </button>
+                    <button class="btn-nava btn-social" onclick="if(typeof loginFacebook === 'function') loginFacebook(); else alert('Chức năng Facebook Auth đang giả lập trên Sapo.'); return false;" style="color: #1877F2;">
+                        <i class="ph-fill ph-facebook-logo" style="font-size: 1.2rem;"></i> Facebook
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; color: var(--text-gray); font-size: 0.95rem;">
+                    Đã có tài khoản? <a href="demo_login.html" class="link-nava">Đăng nhập</a>
+                </p>
+            </div>
+        </div>
+    """ + footer_wrapper
+    
+    with open(os.path.join(base_dir, "demo_register.html"), "w", encoding="utf-8") as f:
+        f.write(register_html)
+
 def build_all():
     base_dir = r"F:\BAO_SAPO\sapo_new"
     header_part, footer_part = get_core_layout(base_dir)
@@ -1346,6 +1735,9 @@ def build_all():
     
     build_product(base_dir, header_part, footer_part)
     print("Generated demo_product.html successfully!")
+    
+    build_auth_pages(base_dir)
+    print("Generated demo_login.html and demo_register.html successfully!")
 
 if __name__ == "__main__":
     build_all()
