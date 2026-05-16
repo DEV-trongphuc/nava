@@ -52,7 +52,7 @@
             <!-- Phosphor Icons -->
             <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
             <!-- Custom CSS -->
-            <link rel="stylesheet" href="https://nava-one.vercel.app/assets/style.css?v=20260429_v2">
+            <link rel="stylesheet" href="assets/style.css">
             <!-- Theme Script for FOUC -->
             <script>
                 const savedTheme = localStorage.getItem('nava-theme');
@@ -444,7 +444,7 @@
                     <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
                         🏆 ASUS Gold Partner
                     </span>
-                    <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-color); letter-spacing: -0.5px;">Mini PC ASUS NUC Chính Hãng</h1>
+                    <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-dark); letter-spacing: -0.5px;">Mini PC ASUS NUC Chính Hãng</h1>
                     <p style="color: var(--text-gray); max-width: 650px; font-size: 1.05rem; margin: 0; line-height: 1.6;">Là đối tác Gold Partner của ASUS, NAVA Store tự hào cung cấp các dòng sản phẩm ASUS NUC với chất lượng dịch vụ bảo hành cao cấp nhất.</p>
                 </div>
                 <div style="padding-right: 40px; position: relative; z-index: 2; opacity: 0.9;">
@@ -459,18 +459,18 @@
                 .nava-main { width: 100%; min-width: 0; }
                 
                 .sidebar-block { margin-bottom: 35px; }
-                .sidebar-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 20px; color: var(--text-color); display: flex; align-items: center; gap: 10px; }
+                .sidebar-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
                 .sidebar-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; }
                 
                 .category-list { list-style: none; padding: 0; margin: 0; }
                 .category-list li { margin-bottom: 10px; }
-                .category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-color); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; padding: 8px 12px; border-radius: var(--radius-sm); }
+                .category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; padding: 8px 12px; border-radius: var(--radius-sm); }
                 .category-list a:hover, .category-list a.active { color: var(--primary); background: rgba(14, 165, 233, 0.05); padding-left: 15px; }
                 .category-list a img { flex-shrink: 0; }
                 .category-list .count { margin-left: auto; background: var(--bg-gray); padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; color: var(--text-gray); display: flex; align-items: center; gap: 4px; }
                 
                 .price-filter-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
-                .price-filter-inputs input { width: 50%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-color); font-size: 0.9rem; transition: border-color 0.3s; }
+                .price-filter-inputs input { width: 50%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-dark); font-size: 0.9rem; transition: border-color 0.3s; }
                 .price-filter-inputs input:focus { border-color: var(--primary); outline: none; }
                 
                 .brand-list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; box-sizing: border-box; }
@@ -480,7 +480,7 @@
                 .brand-item:hover img { filter: grayscale(0%) brightness(1); opacity: 1; }
                 
                 .sort-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; background: var(--bg-white); padding: 15px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
-                .sort-label { font-weight: 700; margin-right: 10px; color: var(--text-color); }
+                .sort-label { font-weight: 700; margin-right: 10px; color: var(--text-dark); }
                 .sort-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid transparent; background: var(--bg-gray); color: var(--text-gray); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
                 .sort-btn:hover { background: rgba(14, 165, 233, 0.1); color: var(--primary); }
                 .sort-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); }
@@ -500,10 +500,10 @@
                 .grid-loading .product-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent); background-size: 200% 100%; animation: skeleton-loading 1.2s infinite; z-index: 11; pointer-events: none; }
                 
                 #toast-container { position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-                .nava-toast { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-left: 4px solid var(--primary); padding: 15px 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); color: var(--text-color); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transform: translateX(120%); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+                .nava-toast { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-left: 4px solid var(--primary); padding: 15px 20px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); color: var(--text-dark); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transform: translateX(120%); opacity: 0; transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
                 .nava-toast.show { transform: translateX(0); opacity: 1; }
                 
-                .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -30%); opacity: 0; visibility: hidden; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.6); color: var(--text-color); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+                .quick-view-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -30%); opacity: 0; visibility: hidden; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.6); color: var(--text-dark); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
                 .product-card:hover .quick-view-btn { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
                 .quick-view-btn:hover { background: rgba(255, 255, 255, 0.8); }
                 
@@ -572,9 +572,9 @@
                                     <input type="range" min="0" max="40000000" step="500000" value="30000000" id="priceMax" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                                    <input type="text" id="priceInputMin" value="4.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
+                                    <input type="text" id="priceInputMin" value="4.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                     <span style="color: var(--text-gray); flex-shrink: 0; font-weight: bold;">-</span>
-                                    <input type="text" id="priceInputMax" value="30.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-color); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
+                                    <input type="text" id="priceInputMax" value="30.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                 </div>
                                 <script>
                                     function updatePriceVisuals() {
@@ -727,7 +727,6 @@
                                 })();
                             </script>
                         </div>
-
                         <!-- Sort Dropdown -->
                         <div style="position: relative; flex-shrink: 0;">
                             <button class="sort-pill-btn" id="sortToggleBtn" onclick="document.getElementById('sortDropMenu').classList.toggle('show')">
@@ -744,10 +743,21 @@
                         </div>
                     </div>
                     
+                    <!-- Quick Filter Pills -->
+                    <div class="quick-filters" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; margin-bottom: 25px; -webkit-overflow-scrolling: touch;">
+                        <style>.quick-filters::-webkit-scrollbar { display: none; }</style>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; font-weight: 600; font-size: 0.85rem; cursor: pointer;">Tất cả</button>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Dưới 10 triệu</button>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Core Ultra 9</button>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Ryzen AI 9</button>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">RAM 32GB</button>
+                        <button style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Máy bộ eGPU</button>
+                    </div>
+                    
                     <!-- Featured Products -->
                     <div class="featured-section" style="display: none; margin-bottom: 40px;">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
-                            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--text-color); display: flex; align-items: center; gap: 8px;">
+                            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 8px;">
                                 <i class="ph-fill ph-star" style="color: var(--primary); font-size: 1.4rem;"></i> Nổi bật nhất
                             </h3>
                         </div>
@@ -755,27 +765,27 @@
                             
                             <div class="product-card" style="margin:0; display: flex; align-items: center; padding: 15px; gap: 15px;" onclick="window.location.href='demo_product.html'">
                                 <div style="width: 90px; height: 90px; flex-shrink: 0; position: relative;">
-                                    <button class="compare-btn" data-name="ASUS NUC 14 Essential" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
+                                    <button class="compare-btn" data-name="ASUS NUC 14 Essential" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
                                 
                                     <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Featured" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">HOT SALE</span>
-                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-color); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">ASUS NUC 14 Essential</h4>
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.1rem;">4.490.000₫</span>
+                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">ASUS NUC 14 Essential</h4>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">4.490.000₫</span>
                                 </div>
                             </div>
                             
                             <div class="product-card" style="margin:0; display: flex; align-items: center; padding: 15px; gap: 15px;" onclick="window.location.href='demo_product.html'">
                                 <div style="width: 90px; height: 90px; flex-shrink: 0; position: relative;">
-                                    <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
+                                    <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
                                 
                                     <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Featured" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">BÁN CHẠY</span>
-                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-color); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">AtomMan G7 PT Mini PC</h4>
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.1rem;">34.490.000₫</span>
+                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">AtomMan G7 PT Mini PC</h4>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">34.490.000₫</span>
                                 </div>
                             </div>
                             
@@ -785,8 +795,8 @@
                                 </div>
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">MỚI RA MẮT</span>
-                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-color); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">GMK EVO X1 32G</h4>
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.1rem;">31.190.000₫</span>
+                                    <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">GMK EVO X1 32G</h4>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">31.190.000₫</span>
                                 </div>
                             </div>
                             
@@ -804,7 +814,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -821,8 +831,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -832,7 +842,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -847,8 +857,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -858,7 +868,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -873,8 +883,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -884,7 +894,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -899,8 +909,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -910,7 +920,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -924,8 +934,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -935,7 +945,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -952,8 +962,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -963,7 +973,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -978,8 +988,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -989,7 +999,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1004,8 +1014,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1015,7 +1025,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1030,8 +1040,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1041,7 +1051,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1055,8 +1065,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1066,7 +1076,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1083,8 +1093,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1094,7 +1104,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1109,8 +1119,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1120,7 +1130,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1135,8 +1145,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1146,7 +1156,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1161,8 +1171,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1172,7 +1182,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1186,8 +1196,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1197,7 +1207,7 @@
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -1214,8 +1224,8 @@
                                 
                                 <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
                                 
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
-                                    <span style="color: var(--text-color); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
                                     <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                                 </div>
                             </div>
@@ -1224,11 +1234,11 @@
                                             </div>
                     
                     <div class="pagination" style="display: flex; justify-content: center; gap: 12px; margin-top: 50px; margin-bottom: 20px;">
-                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-left"></i></button>
+                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-left"></i></button>
                         <button style="width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--primary); color: white; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">1</button>
-                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-color); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">2</button>
-                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-color); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">3</button>
-                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-color); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-right"></i></button>
+                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">2</button>
+                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">3</button>
+                        <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -1238,12 +1248,12 @@
             
             <div id="quick-view-modal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 10000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
                 <div style="background: var(--bg-white); width: 90%; max-width: 900px; height: 80vh; max-height: 600px; border-radius: var(--radius-lg); position: relative; display: flex; overflow: hidden; transform: scale(0.95); transition: transform 0.3s;">
-                    <button onclick="closeQuickView()" style="position: absolute; top: 15px; right: 15px; background: var(--bg-gray); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-color)'"><i class="ph-bold ph-x"></i></button>
+                    <button onclick="closeQuickView()" style="position: absolute; top: 15px; right: 15px; background: var(--bg-gray); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-dark)'"><i class="ph-bold ph-x"></i></button>
                     <div style="flex: 1; display: flex; align-items: center; justify-content: center; background: #f8fafc; padding: 20px;">
                         <img id="qv-img" src="" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
                     <div style="flex: 1; padding: 40px 30px; display: flex; flex-direction: column;">
-                        <h2 id="qv-title" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-color);"></h2>
+                        <h2 id="qv-title" style="font-size: 1.5rem; font-weight: 800; margin-bottom: 10px; color: var(--text-dark);"></h2>
                         <div id="qv-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin-bottom: 20px;"></div>
                         <div style="flex: 1; border-top: 1px solid var(--border-color); padding-top: 20px;">
                             <p style="color: var(--text-gray); line-height: 1.6;">Sản phẩm Mini PC chính hãng, thiết kế nhỏ gọn, hiệu năng vượt trội. Hỗ trợ giao hàng hỏa tốc trong 2h tại nội thành.</p>
@@ -1254,7 +1264,7 @@
                             </div>
                         </div>
                         <div style="display: flex; gap: 15px; margin-top: 20px;">
-                            <a href="demo_product.html" style="flex: 1; padding: 12px; background: var(--bg-gray); color: var(--text-color); border: 1px solid var(--border-color); border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-align: center; text-decoration: none; transition: 0.2s;" onmouseover="this.style.background='var(--border-color)'" onmouseout="this.style.background='var(--bg-gray)'">Xem chi tiết</a>
+                            <a href="demo_product.html" style="flex: 1; padding: 12px; background: var(--bg-gray); color: var(--text-dark); border: 1px solid var(--border-color); border-radius: 8px; font-weight: bold; font-size: 1.1rem; text-align: center; text-decoration: none; transition: 0.2s;" onmouseover="this.style.background='var(--border-color)'" onmouseout="this.style.background='var(--bg-gray)'">Xem chi tiết</a>
                             <button onclick="showToast('Đã thêm vào giỏ hàng thành công!'); closeQuickView();" style="flex: 1; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3);" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Thêm vào giỏ</button>
                         </div>
                     </div>
@@ -1758,7 +1768,7 @@
 
         
     
-        <script src="https://nava-one.vercel.app/assets/main.js" defer></script>
+        <script src="assets/main.js" defer></script>
 
                         </div>
                         
@@ -1885,7 +1895,16 @@
             
         
 <!-- Sticky Compare Bar -->
-<!-- Sticky Compare Bar -->
+<style>
+    @media (max-width: 768px) {
+        #compare-bar-inner { flex-direction: column !important; gap: 12px !important; }
+        #compare-slots { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+        #compare-actions { width: 100% !important; justify-content: center !important; }
+        #compare-actions button { flex: 1 !important; justify-content: center !important; padding: 10px 15px !important; font-size: 0.95rem !important; }
+        .compare-slot-item { padding: 8px 12px !important; }
+        .compare-slot-item img { width: 40px !important; height: 40px !important; }
+    }
+</style>
 <div id="compare-bar" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: none; background: var(--bg-white) !important; box-shadow: 0 -10px 50px rgba(0,0,0,0.15) !important; border-top: 1px solid var(--border-color) !important; padding: 25px 0 !important;">
     <!-- Nút X tắt nhanh -->
     <button onclick="hideCompareBar()" style="position: absolute; top: -18px; right: 25px; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-gray); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s;" onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)'"><i class="ph-bold ph-x" style="font-size: 1.1rem;"></i></button>
@@ -1893,14 +1912,14 @@
     <!-- Nút mũi tên kéo lên -->
     <button id="compare-expand" onclick="executeCompare(true)" disabled style="position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 70px; height: 25px; border-radius: 12px 12px 0 0; background: var(--primary); border: none; color: white; cursor: not-allowed; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; box-shadow: 0 -4px 10px rgba(14,165,233,0.3); opacity: 0.5;"><i class="ph-bold ph-caret-up" style="font-size: 1.3rem;"></i></button>
 
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
-        <div style="display: flex; align-items: center; gap: 20px; flex: 1;">
+    <div id="compare-bar-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 20px; flex: 1; width: 100%;">
             <div id="compare-slots" style="display: flex; gap: 20px; flex: 1;">
                 <!-- Slots populated by JS -->
             </div>
         </div>
-        <div style="display: flex; gap: 15px; flex-shrink: 0;">
-            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-color); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
+        <div id="compare-actions" style="display: flex; gap: 15px; flex-shrink: 0;">
+            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
             <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
         </div>
     </div>
@@ -1911,8 +1930,8 @@
     <div style="background: var(--bg-white); width: 95%; max-width: 1100px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);" id="compare-modal-content">
         <!-- Header -->
         <div style="padding: 25px 30px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-gray);">
-            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--text-color); display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-scales" style="color: var(--primary); font-size: 1.6rem;"></i> Phân Tích & Đối Chiếu</h3>
-            <button onclick="closeCompareModal()" style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-color)'"><i class="ph ph-x" style="font-size: 1.3rem;"></i></button>
+            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-scales" style="color: var(--primary); font-size: 1.6rem;"></i> Phân Tích & Đối Chiếu</h3>
+            <button onclick="closeCompareModal()" style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)'"><i class="ph ph-x" style="font-size: 1.3rem;"></i></button>
         </div>
         <!-- Body -->
         <div id="compare-body" style="padding: 35px; overflow-y: auto; flex: 1;">
@@ -1927,7 +1946,7 @@
                     @keyframes nava-spin { 100% { transform: rotate(360deg); } }
                     @keyframes nava-spin-reverse { 100% { transform: rotate(-360deg); } }
                 </style>
-                <h4 style="margin: 0 0 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--text-color);">Nava Store đang xử lý dữ liệu...</h4>
+                <h4 style="margin: 0 0 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--text-dark);">Nava Store đang xử lý dữ liệu...</h4>
                 <p style="color: var(--text-gray); margin: 0; font-size: 1.05rem;">Vui lòng đợi trong giây lát để hệ thống đối chiếu thông số.</p>
             </div>
             <!-- Result State -->
@@ -1957,7 +1976,7 @@
         if (idx > -1) {
             compareList.splice(idx, 1);
             btn.style.background = 'var(--bg-white)';
-            btn.style.color = 'var(--text-color)';
+            btn.style.color = 'var(--text-dark)';
             btn.querySelector('i').className = 'ph ph-arrows-left-right';
         } else {
             if (compareList.length >= 2) {
@@ -1978,7 +1997,7 @@
         document.querySelectorAll('.compare-btn').forEach(btn => {
             if (btn.getAttribute('data-name') === name) {
                 btn.style.background = 'var(--bg-white)';
-                btn.style.color = 'var(--text-color)';
+                btn.style.color = 'var(--text-dark)';
                 btn.querySelector('i').className = 'ph ph-arrows-left-right';
             }
         });
@@ -1989,7 +2008,7 @@
         compareList = [];
         document.querySelectorAll('.compare-btn').forEach(btn => {
             btn.style.background = 'var(--bg-white)';
-            btn.style.color = 'var(--text-color)';
+            btn.style.color = 'var(--text-dark)';
             btn.querySelector('i').className = 'ph ph-arrows-left-right';
         });
         updateCompareBar();
@@ -2035,10 +2054,10 @@
             if (i < compareList.length) {
                 const p = compareList[i];
                 html += `
-                    <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
                         <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <div style="flex: 1; min-width: 0;">
-                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
+                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
                             <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
                         </div>
                         <button onclick="removeCompare('${p.name}')" style="background: none; border: none; color: var(--text-gray); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-x"></i></button>
@@ -2046,7 +2065,7 @@
                 `;
             } else {
                 html += `
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
                         <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                         Thêm sản phẩm
                     </div>
@@ -2119,13 +2138,13 @@
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                     <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
                         <img src="${p1.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
-                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-color); font-weight: 800;">${p1.name}</h4>
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p1.name}</h4>
                         <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p1.price}</div>
                         <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
                     </div>
                     <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
                         <img src="${p2.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
-                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-color); font-weight: 800;">${p2.name}</h4>
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p2.name}</h4>
                         <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p2.price}</div>
                         <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
                     </div>
@@ -2137,7 +2156,7 @@
             for(let i=0; i<labels.length; i++) {
                 const bg = i % 2 === 0 ? 'var(--bg-gray)' : 'var(--bg-white)';
                 let s1 = specs1[i], s2 = specs2[i];
-                let color1 = 'var(--text-color)', color2 = 'var(--text-color)';
+                let color1 = 'var(--text-dark)', color2 = 'var(--text-dark)';
                 let icon1 = '', icon2 = '';
                 
                 // Dumb mock logic to make one look better
@@ -2162,7 +2181,7 @@
                 <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(14,165,233,0.05), rgba(15,23,42,0.02)); border-radius: var(--radius-lg); border: 1px solid rgba(14,165,233,0.2); display: flex; gap: 15px;">
                     <i class="ph-fill ph-storefront" style="color: var(--primary); font-size: 2rem;"></i>
                     <div>
-                        <h4 style="margin: 0 0 5px 0; color: var(--text-color); font-weight: 800;">Đề xuất từ Nava Store</h4>
+                        <h4 style="margin: 0 0 5px 0; color: var(--text-dark); font-weight: 800;">Đề xuất từ Nava Store</h4>
                         <p style="margin: 0; color: var(--text-gray); line-height: 1.5;">Nếu bạn ưu tiên hiệu năng mạnh mẽ để chơi game hoặc làm đồ họa nặng, <strong>${p1.price > p2.price ? p1.name : p2.name}</strong> là lựa chọn tốt hơn. Tuy nhiên, nếu bạn cần sự nhỏ gọn và mức giá tối ưu, <strong>${p1.price <= p2.price ? p1.name : p2.name}</strong> sẽ rất phù hợp.</p>
                     </div>
                 </div>

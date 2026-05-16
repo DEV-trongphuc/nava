@@ -2,7 +2,16 @@ import os
 
 sticky_html = """
 <!-- Sticky Compare Bar -->
-<!-- Sticky Compare Bar -->
+<style>
+    @media (max-width: 768px) {
+        #compare-bar-inner { flex-direction: column !important; gap: 12px !important; }
+        #compare-slots { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+        #compare-actions { width: 100% !important; justify-content: center !important; }
+        #compare-actions button { flex: 1 !important; justify-content: center !important; padding: 10px 15px !important; font-size: 0.95rem !important; }
+        .compare-slot-item { padding: 8px 12px !important; }
+        .compare-slot-item img { width: 40px !important; height: 40px !important; }
+    }
+</style>
 <div id="compare-bar" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: none; background: var(--bg-white) !important; box-shadow: 0 -10px 50px rgba(0,0,0,0.15) !important; border-top: 1px solid var(--border-color) !important; padding: 25px 0 !important;">
     <!-- Nút X tắt nhanh -->
     <button onclick="hideCompareBar()" style="position: absolute; top: -18px; right: 25px; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-gray); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s;" onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)'"><i class="ph-bold ph-x" style="font-size: 1.1rem;"></i></button>
@@ -10,14 +19,14 @@ sticky_html = """
     <!-- Nút mũi tên kéo lên -->
     <button id="compare-expand" onclick="executeCompare(true)" disabled style="position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 70px; height: 25px; border-radius: 12px 12px 0 0; background: var(--primary); border: none; color: white; cursor: not-allowed; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; box-shadow: 0 -4px 10px rgba(14,165,233,0.3); opacity: 0.5;"><i class="ph-bold ph-caret-up" style="font-size: 1.3rem;"></i></button>
 
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
-        <div style="display: flex; align-items: center; gap: 20px; flex: 1;">
+    <div id="compare-bar-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 20px; flex: 1; width: 100%;">
             <div id="compare-slots" style="display: flex; gap: 20px; flex: 1;">
                 <!-- Slots populated by JS -->
             </div>
         </div>
-        <div style="display: flex; gap: 15px; flex-shrink: 0;">
-            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-color); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
+        <div id="compare-actions" style="display: flex; gap: 15px; flex-shrink: 0;">
+            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
             <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
         </div>
     </div>
@@ -28,8 +37,8 @@ sticky_html = """
     <div style="background: var(--bg-white); width: 95%; max-width: 1100px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);" id="compare-modal-content">
         <!-- Header -->
         <div style="padding: 25px 30px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-gray);">
-            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--text-color); display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-scales" style="color: var(--primary); font-size: 1.6rem;"></i> Phân Tích & Đối Chiếu</h3>
-            <button onclick="closeCompareModal()" style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-color); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-color)'"><i class="ph ph-x" style="font-size: 1.3rem;"></i></button>
+            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-scales" style="color: var(--primary); font-size: 1.6rem;"></i> Phân Tích & Đối Chiếu</h3>
+            <button onclick="closeCompareModal()" style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)'"><i class="ph ph-x" style="font-size: 1.3rem;"></i></button>
         </div>
         <!-- Body -->
         <div id="compare-body" style="padding: 35px; overflow-y: auto; flex: 1;">
@@ -44,7 +53,7 @@ sticky_html = """
                     @keyframes nava-spin { 100% { transform: rotate(360deg); } }
                     @keyframes nava-spin-reverse { 100% { transform: rotate(-360deg); } }
                 </style>
-                <h4 style="margin: 0 0 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--text-color);">Nava Store đang xử lý dữ liệu...</h4>
+                <h4 style="margin: 0 0 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--text-dark);">Nava Store đang xử lý dữ liệu...</h4>
                 <p style="color: var(--text-gray); margin: 0; font-size: 1.05rem;">Vui lòng đợi trong giây lát để hệ thống đối chiếu thông số.</p>
             </div>
             <!-- Result State -->
@@ -74,7 +83,7 @@ sticky_html = """
         if (idx > -1) {
             compareList.splice(idx, 1);
             btn.style.background = 'var(--bg-white)';
-            btn.style.color = 'var(--text-color)';
+            btn.style.color = 'var(--text-dark)';
             btn.querySelector('i').className = 'ph ph-arrows-left-right';
         } else {
             if (compareList.length >= 2) {
@@ -95,7 +104,7 @@ sticky_html = """
         document.querySelectorAll('.compare-btn').forEach(btn => {
             if (btn.getAttribute('data-name') === name) {
                 btn.style.background = 'var(--bg-white)';
-                btn.style.color = 'var(--text-color)';
+                btn.style.color = 'var(--text-dark)';
                 btn.querySelector('i').className = 'ph ph-arrows-left-right';
             }
         });
@@ -106,7 +115,7 @@ sticky_html = """
         compareList = [];
         document.querySelectorAll('.compare-btn').forEach(btn => {
             btn.style.background = 'var(--bg-white)';
-            btn.style.color = 'var(--text-color)';
+            btn.style.color = 'var(--text-dark)';
             btn.querySelector('i').className = 'ph ph-arrows-left-right';
         });
         updateCompareBar();
@@ -152,10 +161,10 @@ sticky_html = """
             if (i < compareList.length) {
                 const p = compareList[i];
                 html += `
-                    <div style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
                         <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <div style="flex: 1; min-width: 0;">
-                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
+                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
                             <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
                         </div>
                         <button onclick="removeCompare('${p.name}')" style="background: none; border: none; color: var(--text-gray); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-x"></i></button>
@@ -163,7 +172,7 @@ sticky_html = """
                 `;
             } else {
                 html += `
-                    <div style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
                         <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                         Thêm sản phẩm
                     </div>
@@ -236,13 +245,13 @@ sticky_html = """
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                     <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
                         <img src="${p1.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
-                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-color); font-weight: 800;">${p1.name}</h4>
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p1.name}</h4>
                         <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p1.price}</div>
                         <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
                     </div>
                     <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
                         <img src="${p2.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
-                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-color); font-weight: 800;">${p2.name}</h4>
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p2.name}</h4>
                         <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p2.price}</div>
                         <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
                     </div>
@@ -254,7 +263,7 @@ sticky_html = """
             for(let i=0; i<labels.length; i++) {
                 const bg = i % 2 === 0 ? 'var(--bg-gray)' : 'var(--bg-white)';
                 let s1 = specs1[i], s2 = specs2[i];
-                let color1 = 'var(--text-color)', color2 = 'var(--text-color)';
+                let color1 = 'var(--text-dark)', color2 = 'var(--text-dark)';
                 let icon1 = '', icon2 = '';
                 
                 // Dumb mock logic to make one look better
@@ -279,7 +288,7 @@ sticky_html = """
                 <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(14,165,233,0.05), rgba(15,23,42,0.02)); border-radius: var(--radius-lg); border: 1px solid rgba(14,165,233,0.2); display: flex; gap: 15px;">
                     <i class="ph-fill ph-storefront" style="color: var(--primary); font-size: 2rem;"></i>
                     <div>
-                        <h4 style="margin: 0 0 5px 0; color: var(--text-color); font-weight: 800;">Đề xuất từ Nava Store</h4>
+                        <h4 style="margin: 0 0 5px 0; color: var(--text-dark); font-weight: 800;">Đề xuất từ Nava Store</h4>
                         <p style="margin: 0; color: var(--text-gray); line-height: 1.5;">Nếu bạn ưu tiên hiệu năng mạnh mẽ để chơi game hoặc làm đồ họa nặng, <strong>${p1.price > p2.price ? p1.name : p2.name}</strong> là lựa chọn tốt hơn. Tuy nhiên, nếu bạn cần sự nhỏ gọn và mức giá tối ưu, <strong>${p1.price <= p2.price ? p1.name : p2.name}</strong> sẽ rất phù hợp.</p>
                     </div>
                 </div>

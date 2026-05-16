@@ -52,7 +52,7 @@
             <!-- Phosphor Icons -->
             <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
             <!-- Custom CSS -->
-            <link rel="stylesheet" href="https://nava-one.vercel.app/assets/style.css?v=20260429_v2">
+            <link rel="stylesheet" href="assets/style.css">
             <!-- Theme Script for FOUC -->
             <script>
                 const savedTheme = localStorage.getItem('nava-theme');
@@ -430,200 +430,1208 @@
                     <div class="col-right position-relative">
                         <div class="contentWarp pb-5">
                             
-        <div class="container" style="max-width: 1600px !important; margin: 0 auto !important; padding: 40px 15px; margin-top: 100px;">
-            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 25px;">
-                <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
-                <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
-                <a href="demo_collection.html" style="color: var(--text-gray); text-decoration: none;">DOCK eGPU</a>
-                <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
-                <span style="color: var(--primary); font-weight: bold;">EGPU MINISFORUM DEG1 Oculink</span>
+        <style>
+            html, body { max-width: 100vw; overflow-x: hidden; }
+            .nava-breadcrumb, .thumbnail-list { overscroll-behavior-x: contain; box-sizing: border-box; }
+        </style>
+        <div class="container" style="max-width: 1400px !important; width: 100% !important; box-sizing: border-box !important; margin: 30px auto 0 !important; padding: 0 16px !important;">
+            <style>.nava-breadcrumb::-webkit-scrollbar { display: none; }</style>
+            <div class="nava-breadcrumb" style="background: transparent; padding: 0; margin-bottom: 24px; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; z-index: 10; position: relative; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; scrollbar-width: none; -webkit-overflow-scrolling: touch;">
+                <a href="/" style="color: #1e3a8a; text-decoration: none; font-weight: 500; flex-shrink: 0;">Trang chủ</a>
+                <span style="color: #64748b; font-weight: 500; flex-shrink: 0;">/</span>
+                <a href="#" style="color: #1e3a8a; text-decoration: none; font-weight: 500; flex-shrink: 0;">Mini PC</a>
+                <span style="color: #64748b; font-weight: 500; flex-shrink: 0;">/</span>
+                <a href="#" style="color: #1e3a8a; text-decoration: none; font-weight: 500; flex-shrink: 0;">Mini PC Asus</a>
+                <span style="color: #64748b; font-weight: 500; flex-shrink: 0;">/</span>
+                <span style="color: #64748b; font-weight: 500; flex-shrink: 0;">ASUS NUC AI 350</span>
             </div>
             
             <style>
-                .nava-product-layout { display: flex; flex-direction: column; gap: 40px; }
-                .nava-prod-gallery { width: 100%; }
-                .nava-prod-info { width: 100%; }
+                /* Base Reset for Product Page */
+                .nava-product-layout { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; width: 100%; box-sizing: border-box; }
+                .nava-prod-gallery { width: 100%; box-sizing: border-box; }
+                .nava-prod-info { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
                 @media (min-width: 992px) {
-                    .nava-product-layout { flex-direction: row; align-items: flex-start; }
-                    .nava-prod-gallery { width: 45%; flex-shrink: 0; position: sticky; top: 100px; }
-                    .nava-prod-info { width: 55%; flex-shrink: 0; padding-left: 20px; }
+                    .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 60px; }
+                    .nava-prod-gallery { width: 55%; position: sticky; top: 130px; }
+                    .nava-prod-info { width: 45%; }
                 }
+                
+                /* Clean Gallery */
+                .main-image-container { 
+                    background: #f8fafc; 
+                    border-radius: 16px; 
+                    padding: 24px; 
+                    text-align: center; 
+                    margin-bottom: 16px; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    position: relative;
+                    aspect-ratio: 4/3;
+                }
+                .main-image-container img { max-width: 90%; max-height: 90%; object-fit: contain; }
+                .gallery-nav-btn {
+                    position: absolute; top: 50%; transform: translateY(-50%);
+                    width: 40px; height: 40px; background: rgba(255,255,255,0.8); backdrop-filter: blur(4px);
+                    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                    cursor: pointer; border: 1px solid #e2e8f0; color: #475569; transition: 0.2s; z-index: 5;
+                }
+                .gallery-nav-btn:hover { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+                .gallery-nav-prev { left: 16px; }
+                .gallery-nav-next { right: 16px; }
+                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
+                .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
+                .gallery-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
+                .gallery-thumb { 
+                    width: 72px; height: 72px; border-radius: 12px; background: #f8fafc; padding: 8px; 
+                    cursor: pointer; border: 2px solid transparent; transition: 0.2s; flex-shrink: 0;
+                }
+                .gallery-thumb:hover { border-color: #cbd5e1; }
+                .gallery-thumb.active { border-color: var(--primary); }
+                
+                /* Minimal Typography */
+                .prod-brand { margin-bottom: 12px; }
+                .prod-brand img { height: 24px; object-fit: contain; }
+                .prod-title { font-size: 1.8rem; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 16px; }
+                .prod-price-wrap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; }
+                .prod-price { font-size: 2.2rem; font-weight: 700; color: var(--primary); }
+                .prod-vat { font-size: 0.85rem; color: #64748b; }
+                
+                /* Flat Variants completely redesigned */
+                .variant-group { margin-bottom: 24px; }
+                .variant-label { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;}
+                .variant-options { display: flex; flex-wrap: wrap; gap: 8px; }
+                .variant-card {
+                    border: 1px solid #cbd5e1; border-radius: 8px; padding: 8px 12px;
+                    cursor: pointer; background: #fff; transition: 0.2s;
+                    display: flex; align-items: baseline; gap: 6px;
+                }
+                .variant-card:hover { border-color: #94a3b8; }
+                .variant-card.active { border-color: var(--primary); background: #f0f9ff; box-shadow: 0 0 0 1px var(--primary); }
+                .variant-card-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
+                .variant-card.active .variant-card-title { color: var(--primary); }
+                .variant-card-price { font-size: 0.75rem; color: #64748b; font-weight: 500; }
+                
+                /* Action Buttons */
+                .action-row { display: flex; gap: 12px; margin-bottom: 12px; margin-top: 10px; }
+                .qty-input-group { 
+                    display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; height: 50px; width: 110px; flex-shrink: 0;
+                }
+                .qty-btn { width: 36px; height: 100%; background: transparent; border: none; font-size: 1.2rem; cursor: pointer; color: #475569; }
+                .qty-input { width: 38px; text-align: center; border: none; background: transparent; font-weight: 600; font-size: 1rem; color: #0f172a; }
+                
+                .btn-add-cart { 
+                    flex: 1; height: 50px; background: #f8fafc; color: var(--primary); border: 1px solid #e2e8f0; border-radius: 8px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: 0.2s;
+                }
+                .btn-add-cart:hover { background: #e2e8f0; }
+                
+                .btn-buy-now { 
+                    width: 100%; height: 56px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.2s; margin-bottom: 24px;
+                }
+                .btn-buy-now:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+                
+                /* Dark Mode Overrides for Product Page */
+                [data-theme="dark"] body { background-color: var(--bg-white) !important; color: var(--text-dark) !important; }
+                [data-theme="dark"] .main-image-container { background: #fff !important; border-color: var(--border-color); padding: 20px; border-radius: 16px; box-shadow: inset 0 0 0 1px #e2e8f0; }
+                [data-theme="dark"] .main-image-container img { mix-blend-mode: normal !important; }
+                [data-theme="dark"] .gallery-nav-btn { background: rgba(30,41,59,0.8); border-color: var(--border-color); color: var(--text-dark); }
+                [data-theme="dark"] .gallery-nav-btn:hover { background: var(--primary); color: white; }
+                [data-theme="dark"] .gallery-dot { background: var(--border-color); }
+                [data-theme="dark"] .gallery-thumb { background: #fff !important; border-color: var(--border-color); padding: 4px; box-shadow: inset 0 0 0 1px #e2e8f0; }
+                [data-theme="dark"] .gallery-thumb.active { box-shadow: 0 0 0 2px var(--primary); }
+                [data-theme="dark"] .prod-brand img { filter: brightness(0) invert(1) !important; opacity: 0.9; }
+                [data-theme="dark"] .prod-title { color: var(--text-dark); }
+                [data-theme="dark"] .prod-price-wrap { border-bottom-color: var(--border-color); }
+                [data-theme="dark"] .prod-vat { color: var(--text-gray); }
+                [data-theme="dark"] .variant-label { color: var(--text-dark); }
+                [data-theme="dark"] .variant-card { background: var(--bg-gray); border-color: var(--border-color); }
+                [data-theme="dark"] .variant-card:hover { border-color: var(--text-gray); }
+                [data-theme="dark"] .variant-card.active { background: rgba(51, 133, 255, 0.1); border-color: var(--primary); }
+                [data-theme="dark"] .variant-card-title { color: var(--text-dark) !important; }
+                [data-theme="dark"] .variant-card.active .variant-card-title { color: var(--primary) !important; }
+                [data-theme="dark"] .variant-card-price { color: var(--text-gray); }
+                [data-theme="dark"] .qty-input-group { border-color: var(--border-color) !important; background: transparent !important; }
+                [data-theme="dark"] .qty-btn { color: var(--text-dark); }
+                [data-theme="dark"] .qty-input { color: var(--text-dark); }
+                [data-theme="dark"] .btn-add-cart { background: rgba(51, 133, 255, 0.15); border-color: rgba(51, 133, 255, 0.3); color: #66a3ff; }
+                [data-theme="dark"] .btn-add-cart:hover { background: rgba(51, 133, 255, 0.25); }
+                [data-theme="dark"] .btn-buy-now { background: var(--primary); color: #fff; }
+                [data-theme="dark"] .policy-box { border-color: var(--border-color) !important; background: var(--bg-gray) !important; }
+                [data-theme="dark"] .policy-box h3 { color: var(--text-dark) !important; }
+                [data-theme="dark"] .policy-box .policy-item { color: var(--text-dark) !important; }
+                [data-theme="dark"] .mobile-actions-col button:nth-child(2) { background: var(--bg-gray) !important; }
+                [data-theme="dark"] #sticky-cart-bar { background: rgba(15,23,42,0.95) !important; border-top-color: var(--border-color) !important; }
+                [data-theme="dark"] .sticky-cart-left .img-wrap { background: #fff !important; border-color: var(--border-color) !important; }
+                [data-theme="dark"] .sticky-title { color: var(--text-dark) !important; }
+                [data-theme="dark"] .nava-breadcrumb span { color: var(--text-gray) !important; }
+                [data-theme="dark"] .nava-breadcrumb a { color: var(--text-dark) !important; }
+                [data-theme="dark"] .nava-breadcrumb a:hover { color: var(--primary) !important; }
+                
+                [data-theme="dark"] .desc-column { background: var(--bg-white); border-color: var(--border-color); }
+                [data-theme="dark"] .desc-column h2, [data-theme="dark"] .desc-column h3 { color: var(--text-dark) !important; }
+                [data-theme="dark"] .desc-column p, [data-theme="dark"] .desc-column ul, [data-theme="dark"] .desc-column li { color: var(--text-gray) !important; }
+                [data-theme="dark"] .desc-column strong { color: var(--text-dark) !important; }
+                
+                [data-theme="dark"] .specs-column { background: var(--bg-gray); border-color: var(--border-color); }
+                [data-theme="dark"] .specs-column h2 { color: var(--text-dark) !important; }
+                [data-theme="dark"] .nava-spec-row { border-color: var(--border-color); }
+                [data-theme="dark"] .nava-spec-label { color: var(--text-gray) !important; }
+                [data-theme="dark"] .nava-spec-value { color: var(--text-dark) !important; }
+                [data-theme="dark"] .specs-column .action-btn { background: var(--bg-white) !important; border-color: var(--border-color) !important; color: var(--primary) !important; }
+                [data-theme="dark"] .specs-column .action-btn:hover { background: var(--bg-gray) !important; }
+                
+                [data-theme="dark"] .product-card { background: var(--bg-white); border-color: var(--border-color); }
+                [data-theme="dark"] .product-card h2.card-title { color: var(--text-dark) !important; }
+                [data-theme="dark"] .product-card:hover h2.card-title { color: var(--primary) !important; }
+                [data-theme="dark"] .product-card .compare-btn { background: var(--bg-gray) !important; color: var(--text-gray) !important; border-color: var(--border-color) !important; }
+                [data-theme="dark"] .product-card .compare-btn:hover { color: var(--primary) !important; border-color: var(--primary) !important; }
+                [data-theme="dark"] .product-card span[style*="color: var(--text-dark)"] { color: var(--text-dark) !important; }
+                [data-theme="dark"] .sp-item { background: var(--bg-gray) !important; border-color: var(--border-color) !important; color: var(--text-dark) !important; }
+                [data-theme="dark"] .sp-item i { background: var(--bg-white) !important; box-shadow: none; }
+                [data-theme="dark"] h2 { color: var(--text-dark) !important; }
+                [data-theme="dark"] .badge { background: var(--primary) !important; color: white !important; }
+                
+                /* Simple Policy */
+                .simple-policies { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 24px; border-top: 1px dashed #cbd5e1; }
+                .sp-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; }
+                .sp-item i { font-size: 1.2rem; color: var(--primary); background: #fff; padding: 6px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+                
+                @media (max-width: 768px) {
+                    .prod-title { font-size: 1.4rem; margin-bottom: 12px; }
+                    .prod-price { font-size: 1.8rem; }
+                    .prod-price-wrap { margin-bottom: 20px; padding-bottom: 16px; flex-direction: column; gap: 4px; border-bottom: none; }
+                    
+                    /* Fix variants layout */
+                    .variant-options { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
+                    .variant-card { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px; width: 100%; box-sizing: border-box; }
+                    .variant-card-title { font-size: 0.85rem; }
+                    .variant-card-price { font-size: 0.75rem; }
+                    
+                    /* Fix actions layout */
+                    .nava-product-layout { gap: 24px; margin-bottom: 30px !important; }
+                    .action-row { margin-bottom: 16px; }
+                    .btn-buy-now-subtext { display: none !important; }
+                    .mobile-actions-col button { padding: 8px 4px !important; }
+                    .mobile-actions-col button span { font-size: 0.75rem !important; }
+                    
+                    /* Fix policies box */
+                    .policy-mobile-box { display: flex !important; flex-direction: column !important; gap: 12px !important; }
+                    
+                    /* Fix gallery thumbnails cutoff on mobile */
+                    .thumbnail-list { justify-content: flex-start !important; padding-left: 8px !important; padding-right: 8px !important; }
+                }
+                
+                /* Magnifier */
+                .main-image-container { position: relative; overflow: hidden; cursor: zoom-in; }
+                #main-product-img { width: 100%; height: 100%; object-fit: contain; }
             </style>
-            <div class="nava-product-layout" style="background: var(--bg-white); border-radius: var(--radius-lg); border: 1px solid var(--border-color); padding: 35px; margin-bottom: 40px; box-shadow: var(--shadow-sm);">
-                <!-- Product Gallery -->
+            
+            <div class="nava-product-layout" style="margin-bottom: 60px;">
+                <!-- Gallery -->
                 <div class="nava-prod-gallery">
-                    <div class="main-image" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 50px; text-align: center; margin-bottom: 20px; background: var(--bg-gray); position: relative; overflow: hidden; cursor: zoom-in;">
-                        <span class="badge" style="position: absolute; top: 20px; left: 20px; background: #ef4444; color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 800; z-index: 2; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);">MỚI NHẤT</span>
-                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="MINISFORUM DEG1" style="max-width: 85%; height: auto; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <div class="main-image-container" id="main-image-container" onclick="openLightbox()">
+                        <span class="badge" style="position: absolute; top: 16px; left: 16px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; z-index: 2;">MỚI NHẤT</span>
+                        
+                        <button style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
+                        
+                        <div class="gallery-nav-btn gallery-nav-prev" onclick="event.stopPropagation(); navigateGallery(-1)"><i class="ph-bold ph-caret-left"></i></div>
+                        <img id="main-product-img" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
+                        <div class="gallery-nav-btn gallery-nav-next" onclick="event.stopPropagation(); navigateGallery(1)"><i class="ph-bold ph-caret-right"></i></div>
                     </div>
-                    <div class="thumbnail-list" style="display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none;">
-                        <div style="width: 85px; height: 85px; border: 2px solid var(--primary); border-radius: var(--radius-md); padding: 10px; background: var(--bg-gray); cursor: pointer; flex-shrink: 0;">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" style="width: 100%; height: 100%; object-fit: contain;">
+                    
+                    <div class="gallery-dots">
+                        <div class="gallery-dot active" onclick="document.querySelectorAll('.gallery-thumb')[0].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[1].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[2].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[3].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[4].click()"></div>
+                    </div>
+                    
+                    <div class="thumbnail-list" id="thumbnail-list" style="display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
+                        <div class="gallery-thumb active" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
-                        <div style="width: 85px; height: 85px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px; background: var(--bg-gray); cursor: pointer; flex-shrink: 0; opacity: 0.7; transition: all 0.3s;" onmouseover="this.style.opacity='1'">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" style="width: 100%; height: 100%; object-fit: contain;">
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/w692-01a37475-f53f-4188-84a0-d46b8f01d6d6.png')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/w692-01a37475-f53f-4188-84a0-d46b8f01d6d6.png" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
-                        <div style="width: 85px; height: 85px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 10px; background: var(--bg-gray); cursor: pointer; flex-shrink: 0; opacity: 0.7; transition: all 0.3s;" onmouseover="this.style.opacity='1'">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" style="width: 100%; height: 100%; object-fit: contain;">
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/bia1-fc2ef492-2792-4c14-9b3f-5c7d6995afdc.png')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/bia1-fc2ef492-2792-4c14-9b3f-5c7d6995afdc.png" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350.jpg')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/asus-nuc-ai-350.jpg" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350-2.jpg')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/asus-nuc-ai-350-2.jpg" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
                     </div>
                 </div>
                 
-                <!-- Product Info -->
+                <!-- Info -->
                 <div class="nava-prod-info">
-                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-gray); text-transform: uppercase; letter-spacing: 1px;">Minisforum</span>
-                        <span style="width: 4px; height: 4px; background: var(--text-gray); border-radius: 50%;"></span>
-                        <span style="font-size: 0.85rem; font-weight: 600; color: #10b981; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Tình trạng: Còn hàng</span>
+                    <div class="prod-brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg" alt="ASUS">
+                    </div>
+                    <h1 class="prod-title">ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350</h1>
+                    
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: #64748b; font-size: 0.9rem;">
+                        <span style="display: flex; align-items: center; gap: 4px; color: #f59e0b; font-weight: 600;"><i class="ph-fill ph-star"></i> 5.0</span>
+                        <span>|</span>
+                        <span>Đã bán: 85</span>
+                        <span>|</span>
+                        <span style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
                     </div>
                     
-                    <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 15px; line-height: 1.3; color: var(--text-color);">EGPU MINISFORUM DEG1 Oculink - Hàng chính hãng MinisForum</h1>
-                    
-                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px; color: var(--text-gray); font-size: 0.95rem;">
-                        <span style="display: flex; align-items: center; gap: 5px;"><i class="ph-fill ph-star" style="color: #f59e0b; font-size: 1.1rem;"></i> <strong style="color: var(--text-color);">4.9</strong> (152 Đánh giá)</span>
-                        <span style="width: 1px; height: 15px; background: var(--border-color);"></span>
-                        <span>Đã bán: <strong style="color: var(--text-color);">340+</strong></span>
-                        <span style="width: 1px; height: 15px; background: var(--border-color);"></span>
-                        <span style="cursor: pointer; color: var(--primary); font-weight: 600;"><i class="ph ph-share-network"></i> Chia sẻ</span>
-                    </div>
-                    
-                    <div class="price-box" style="background: linear-gradient(90deg, rgba(14,165,233,0.05) 0%, transparent 100%); border-left: 4px solid var(--primary); padding: 20px 25px; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin-bottom: 30px;">
-                        <div style="color: var(--primary); font-weight: 900; font-size: 2.5rem; line-height: 1; margin-bottom: 5px;">2.490.000₫</div>
-                        <div style="color: var(--text-gray); font-size: 1rem;">Cam kết chính hãng 100%. Đã bao gồm VAT.</div>
-                    </div>
-                    
-                    <div style="margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; color: var(--text-color);">
-                        <ul style="padding-left: 20px; margin: 0; color: var(--text-color);">
-                            <li style="margin-bottom: 8px;"><strong>Kết Nối OCuLink Hiệu Suất Cao:</strong> PCIe 4.0 x4, băng thông 64 GB/s.</li>
-                            <li style="margin-bottom: 8px;"><strong>Thiết Kế Mở Linh Hoạt:</strong> Hỗ trợ các card đồ họa lớn như RTX 4090 / RX 7900 XTX.</li>
-                            <li style="margin-bottom: 8px;"><strong>Tương Thích Nguồn ATX/SFX:</strong> Đảm bảo điện năng cho VGA cao cấp.</li>
-                        </ul>
-                    </div>
-                    
-                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
-                    
-                    <div class="quantity-add" style="display: flex; gap: 15px; margin-bottom: 25px;">
-                        <div style="display: flex; border: 1px solid var(--border-color); border-radius: var(--radius-md); overflow: hidden; background: var(--bg-gray);">
-                            <button style="width: 45px; height: 50px; background: transparent; border: none; cursor: pointer; font-size: 1.2rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
-                            <input type="text" value="1" style="width: 60px; height: 50px; border: none; text-align: center; font-weight: bold; background: var(--bg-white); color: var(--text-color); font-size: 1.1rem; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color);">
-                            <button style="width: 45px; height: 50px; background: transparent; border: none; cursor: pointer; font-size: 1.2rem; transition: background 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">+</button>
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: center; gap: 6px; background: #f1f5f9; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: #334155; border: 1px solid #e2e8f0;">
+                            <i class="ph ph-cpu" style="font-size: 1.1rem; color: var(--primary);"></i> Ryzen AI 7
                         </div>
-                        <button class="btn-pill" style="flex: 1; border-radius: var(--radius-md); font-size: 1.1rem; display: flex; justify-content: center; align-items: center; gap: 10px; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='rgba(14, 165, 233, 0.1)'; this.style.color='var(--primary)';">
-                            <i class="ph ph-shopping-cart-simple" style="font-size: 1.3rem;"></i> THÊM VÀO GIỎ
+                        <div style="display: flex; align-items: center; gap: 6px; background: #f1f5f9; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: #334155; border: 1px solid #e2e8f0;">
+                            <i class="ph ph-graphics-card" style="font-size: 1.1rem; color: var(--primary);"></i> Radeon 860M
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; background: #f1f5f9; padding: 6px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: #334155; border: 1px solid #e2e8f0;">
+                            <i class="ph ph-brain" style="font-size: 1.1rem; color: var(--primary);"></i> 50 TOPS
+                        </div>
+                        <a href="#thong-so" style="display: flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 0.85rem; font-weight: 600; color: #1e3a8a; text-decoration: none; transition: 0.2s;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Xem chi tiết <i class="ph-bold ph-caret-right"></i></a>
+                    </div>
+                    
+                    <div class="prod-price-wrap">
+                        <div class="prod-price" id="main-price">12.390.000₫</div>
+                        <div class="prod-vat">Giá đã bao gồm VAT</div>
+                    </div>
+
+                    <!-- Variants -->
+                    <div class="variant-group">
+                        <div class="variant-label"><span>RAM DDR5</span></div>
+                        <div class="variant-options">
+                            <div class="variant-card active" onclick="selectVariant(this, 'ram', 0)">
+                                <span class="variant-card-title">0GB</span>
+                                <span class="variant-card-price">Cơ bản</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ram', 1890000)">
+                                <span class="variant-card-title">8GB - 4800</span>
+                                <span class="variant-card-price">+1.890.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ram', 2090000)">
+                                <span class="variant-card-title">8GB - 5600</span>
+                                <span class="variant-card-price">+2.090.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ram', 3790000)">
+                                <span class="variant-card-title">16GB - 4800</span>
+                                <span class="variant-card-price">+3.790.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ram', 4190000)">
+                                <span class="variant-card-title">16GB - 5600</span>
+                                <span class="variant-card-price">+4.190.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ram', 6990000)">
+                                <span class="variant-card-title">32GB - 4800</span>
+                                <span class="variant-card-price">+6.990.000₫</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="variant-group" style="margin-bottom: 32px;">
+                        <div class="variant-label"><span>Ổ cứng SSD NVMe</span></div>
+                        <div class="variant-options">
+                            <div class="variant-card active" onclick="selectVariant(this, 'ssd', 0)">
+                                <span class="variant-card-title">0GB</span>
+                                <span class="variant-card-price">Cơ bản</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 1190000)">
+                                <span class="variant-card-title">256GB</span>
+                                <span class="variant-card-price">+1.190.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 2290000)">
+                                <span class="variant-card-title">500GB</span>
+                                <span class="variant-card-price">+2.290.000₫</span>
+                            </div>
+                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 3990000)">
+                                <span class="variant-card-title">1TB</span>
+                                <span class="variant-card-price">+3.990.000₫</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="action-row">
+                        <div class="qty-input-group">
+                            <button class="qty-btn" onclick="let input=this.nextElementSibling; if(input.value>1) input.value--">-</button>
+                            <input type="text" value="1" class="qty-input" readonly>
+                            <button class="qty-btn" onclick="let input=this.previousElementSibling; input.value++">+</button>
+                        </div>
+                        <button class="btn-add-cart">THÊM VÀO GIỎ</button>
+                    </div>
+                    
+                    <div class="mobile-actions-col" style="display: flex; gap: 12px; margin-bottom: 24px;">
+                        <button class="btn-buy-now" style="flex: 7; margin-bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;">
+                            <span style="font-size: 1.1rem; font-weight: 700;">MUA NGAY</span>
+                            <span class="btn-buy-now-subtext" style="font-size: 0.8rem; font-weight: 500; opacity: 0.9;">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                        </button>
+                        <button style="flex: 3; background: #fff; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='var(--primary)';">
+                            <i class="ph-bold ph-storefront" style="font-size: 1.4rem;"></i>
+                            <span style="margin-top: 4px; text-align: center;">ĐẾN CỬA HÀNG</span>
                         </button>
                     </div>
                     
-                    <button class="btn-pill btn-blue" style="width: 100%; border-radius: var(--radius-md); padding: 16px; font-weight: bold; font-size: 1.2rem; margin-bottom: 30px; cursor: pointer; box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);">
-                        MUA NGAY <br> <span style="font-size: 0.9rem; font-weight: normal; opacity: 0.9;">Giao hàng tận nơi hoặc nhận tại cửa hàng</span>
-                    </button>
+                    <div class="policy-box" style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #f8fafc;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 0;">Chính sách sản phẩm</h3>
+                            <a href="#" style="font-size: 0.85rem; color: #1e3a8a; text-decoration: none; font-weight: 600;">Tìm hiểu thêm</a>
+                        </div>
+                        
+                        <div class="policy-mobile-box" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-shield-check" style="font-size: 1.4rem; color: var(--primary);"></i> Hàng chính hãng - Bảo hành 36 tháng
+                            </div>
+                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-truck" style="font-size: 1.4rem; color: var(--primary);"></i> Giao hàng miễn phí toàn quốc
+                            </div>
+                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-arrows-left-right" style="font-size: 1.4rem; color: var(--primary);"></i> 1 đổi 1 trong 30 ngày
+                            </div>
+                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-headset" style="font-size: 1.4rem; color: var(--primary);"></i> Hỗ trợ kỹ thuật trọn đời
+                            </div>
+                        </div>
+                    </div>
                     
-                    <!-- Policy Grid -->
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; border-radius: var(--radius-lg); border: 1px dashed var(--border-color); background: var(--bg-gray);">
-                        <div style="display: flex; align-items: flex-start; gap: 12px;">
-                            <i class="ph-fill ph-shield-check" style="font-size: 28px; color: var(--primary);"></i>
-                            <div>
-                                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text-color);">Bảo hành chính hãng</div>
-                                <div style="font-size: 0.85rem; color: var(--text-gray);">12 tháng tại các trung tâm</div>
+
+                </div>
+            </div>
+            
+            <!-- Product Details Grid -->
+            <div style="margin-bottom: 80px; width: 100%;">
+                <style>
+                    .product-details-grid { display: flex; flex-direction: column; gap: 30px; }
+                    .desc-column { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 32px; flex: 1; }
+                    .specs-column { background: #f8fafc; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; }
+                    .nava-spec-grid { display: flex; flex-direction: column; }
+                    .nava-spec-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
+                    .nava-spec-row:last-child { border-bottom: none; }
+                    .nava-spec-label { color: #64748b; font-weight: 500; font-size: 0.85rem; }
+                    .nava-spec-value { color: #0f172a; font-weight: 600; font-size: 0.85rem; line-height: 1.4; word-break: break-word; }
+                    @media (min-width: 992px) {
+                        .product-details-grid { flex-direction: row; align-items: flex-start; gap: 40px; }
+                        .desc-column { width: 60%; }
+                        .specs-column { width: 40%; position: sticky; top: 130px; }
+                    }
+                </style>
+                
+                <div class="product-details-grid">
+                    <!-- Left: Description -->
+                    <div class="desc-column">
+                        <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 24px; color: #0f172a;">Đặc điểm nổi bật</h2>
+                        
+                        <h3 style="font-weight: 700; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a;">Đỉnh Cao Hiệu Suất Trong Thiết Kế Nhỏ Gọn</h3>
+                        <p style="margin-bottom: 24px; color: #475569; line-height: 1.7; font-size: 0.95rem;">ASUS NUC AI 350 (PN54) là mẫu Mini PC tiên phong được trang bị bộ vi xử lý AMD Ryzen™ AI 300 Series, mang đến hiệu suất vượt trội và khả năng xử lý trí tuệ nhân tạo (AI) tiên tiến. Với thiết kế siêu nhỏ gọn, độ bền đạt chuẩn quân đội MIL-STD-810H, và tích hợp công nghệ Copilot+ PC.</p>
+                        
+                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0;" alt="ASUS NUC">
+                        
+                        <h3 style="font-weight: 700; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a;">Hiệu Suất Vượt Trội Với AMD Ryzen™ AI 300</h3>
+                        <p style="margin-bottom: 16px; color: #475569; line-height: 1.7; font-size: 0.95rem;">Trang bị bộ vi xử lý tối đa 12 lõi siêu nhanh và kiến trúc tiên tiến:</p>
+                        <ul style="padding-left: 20px; color: #475569; line-height: 1.7; font-size: 0.95rem;">
+                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Đồ họa mạnh mẽ:</strong> AMD Radeon™ 890M dựa trên kiến trúc RDNA™ 3.5.</li>
+                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Băng thông AI tối đa:</strong> Kiến trúc XDNA 2 cung cấp NPU lên đến 50 TOPS.</li>
+                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Chuẩn bị cho tương lai:</strong> Đáp ứng yêu cầu khắt khe của Copilot+ PC.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Right: Technical Specs -->
+                    <div class="specs-column">
+                        <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                            <i class="ph-fill ph-cpu" style="color: var(--primary);"></i> Thông số kỹ thuật
+                        </h2>
+                        
+                        <div class="nava-spec-grid">
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">CPU</div>
+                                <div class="nava-spec-value">AMD Ryzen™ AI 7 350 (up to 5.1 GHz)</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Đồ họa</div>
+                                <div class="nava-spec-value">AMD Radeon™ 860M</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">NPU (AI)</div>
+                                <div class="nava-spec-value">Lên đến 50 TOPS</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">RAM</div>
+                                <div class="nava-spec-value">Hỗ trợ DDR5-5600 (Max 64GB)</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Lưu trữ</div>
+                                <div class="nava-spec-value">2 x M.2 2280 PCIe Gen4x4 NVMe</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Kết nối</div>
+                                <div class="nava-spec-value">Wi-Fi 6E, Bluetooth 5.3, 2.5G LAN</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Cổng xuất hình</div>
+                                <div class="nava-spec-value">Hỗ trợ 4 màn hình 4K</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Trọng lượng</div>
+                                <div class="nava-spec-value">0.75 kg</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Bảo hành</div>
+                                <div class="nava-spec-value">36 tháng chính hãng</div>
                             </div>
                         </div>
-                        <div style="display: flex; align-items: flex-start; gap: 12px;">
-                            <i class="ph-fill ph-rocket" style="font-size: 28px; color: var(--primary);"></i>
-                            <div>
-                                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text-color);">Giao hàng hỏa tốc</div>
-                                <div style="font-size: 0.85rem; color: var(--text-gray);">Trong vòng 2h tại TP.HCM & HN</div>
+                        
+                        <button class="action-btn" style="width: 100%; margin-top: 30px; border: 1px solid #cbd5e1; background: #fff; color: var(--primary); font-weight: 700; height: 48px; border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 4px 10px rgba(14,165,233,0.1)';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
+                            <i class="ph-bold ph-download-simple"></i> Tải Datasheet (PDF)
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommended Products Section -->
+            <div style="margin-top: 20px; margin-bottom: 80px; width: 100%;">
+                <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 24px; color: #0f172a; display: flex; justify-content: space-between; align-items: center;">
+                    Sản phẩm liên quan
+                    <div style="display: flex; gap: 8px;">
+                        <button style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--text-gray); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-gray)';"><i class="ph-bold ph-caret-left"></i></button>
+                        <button style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); display: flex; justify-content: center; align-items: center; cursor: pointer; color: var(--text-dark); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';"><i class="ph-bold ph-caret-right"></i></button>
+                    </div>
+                </h2>
+                
+                <style>
+                    .related-product-grid {
+                        display: grid;
+                        grid-template-columns: repeat(4, 1fr);
+                        gap: 20px;
+                        padding-bottom: 20px;
+                    }
+                    @media (max-width: 1199px) { .related-product-grid { grid-template-columns: repeat(3, 1fr); } }
+                    @media (max-width: 991px) { .related-product-grid { grid-template-columns: repeat(2, 1fr); } }
+                    @media (max-width: 575px) { .related-product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+                    
+                    .product-card {
+                        background: #fff;
+                        border-radius: 16px;
+                        border: 1px solid var(--border-color);
+                        padding: 15px;
+                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                        position: relative;
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                        cursor: pointer;
+                        overflow: hidden;
+                    }
+                    .product-card:hover {
+                        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+                        transform: translateY(-4px);
+                        border-color: var(--primary);
+                    }
+                    .card-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 1; }
+                    .product-card:hover .card-glow { opacity: 1; }
+                    
+                    .card-image-wrap {
+                        height: 180px; position: relative; background: transparent; padding: 0; z-index: 2;
+                    }
+                    .compare-btn {
+                        position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: #fff; border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+                    }
+                    .compare-btn:hover {
+                        border-color: var(--primary); color: var(--primary);
+                    }
+                    .product-img {
+                        object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;
+                    }
+                    .product-card:hover .product-img {
+                        transform: scale(1.05);
+                    }
+                    .card-content {
+                        padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column; z-index: 2;
+                    }
+                    .card-specs {
+                        display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
+                    }
+                    .spec-pill {
+                        background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-block; white-space: nowrap; box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+                    }
+                    .spec-pill.secondary {
+                        background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); box-shadow: none; font-weight: 600;
+                    }
+                    .card-title {
+                        font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700; color: #0f172a; transition: color 0.2s;
+                    }
+                    .product-card:hover .card-title {
+                        color: var(--primary);
+                    }
+                </style>
+                
+                <div class="related-product-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card" onclick="window.location.href='demo_product.html'">
+                        <div class="card-glow"></div>
+                        <div class="card-image-wrap">
+                            <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-specs">
+                                <span class="spec-pill">CPU 6.000</span>
+                                <span class="spec-pill secondary">MARK</span>
+                                <span class="spec-pill secondary">GPU 1.200</span>
+                                <span class="spec-pill">WIFI 6E</span>
+                                <span class="spec-pill secondary">4 USB 3.2</span>
+                                <span class="spec-pill secondary">2 TYPE C</span>
+                            </div>
+                            <h2 class="card-title">ASUS NUC 14 Essential Int...</h2>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                             </div>
                         </div>
-                        <div style="display: flex; align-items: flex-start; gap: 12px;">
-                            <i class="ph-fill ph-arrows-left-right" style="font-size: 28px; color: var(--primary);"></i>
-                            <div>
-                                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text-color);">1 đổi 1 miễn phí</div>
-                                <div style="font-size: 0.85rem; color: var(--text-gray);">Trong 30 ngày nếu lỗi NSX</div>
+                    </div>
+                    
+                    <!-- Product 2 -->
+                    <div class="product-card" onclick="window.location.href='demo_product.html'">
+                        <div class="card-glow"></div>
+                        <div class="card-image-wrap">
+                            <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-specs">
+                                <span class="spec-pill">CPU 40.000</span>
+                                <span class="spec-pill secondary">MARK</span>
+                                <span class="spec-pill secondary">GPU 17...</span>
+                                <span class="spec-pill">4 FAN S...</span>
+                                <span class="spec-pill secondary">WIFI 7</span>
+                            </div>
+                            <h2 class="card-title">AtomMan G7 PT Mini PC...</h2>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                             </div>
                         </div>
-                        <div style="display: flex; align-items: flex-start; gap: 12px;">
-                            <i class="ph-fill ph-headset" style="font-size: 28px; color: var(--primary);"></i>
-                            <div>
-                                <div style="font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; color: var(--text-color);">Hỗ trợ kỹ thuật</div>
-                                <div style="font-size: 0.85rem; color: var(--text-gray);">Giải đáp nhanh chóng trọn đời</div>
+                    </div>
+                    
+                    <!-- Product 3 -->
+                    <div class="product-card" onclick="window.location.href='demo_product.html'">
+                        <div class="card-glow"></div>
+                        <div class="card-image-wrap">
+                            <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', '31.190.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg" alt="Mini PC GMK EVO" class="product-img">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-specs">
+                                <span class="spec-pill">CPU 38.500</span>
+                                <span class="spec-pill secondary">MARK</span>
+                                <span class="spec-pill secondary">GPU ...</span>
+                                <span class="spec-pill">2 NVME</span>
+                                <span class="spec-pill secondary">USB4</span>
+                            </div>
+                            <h2 class="card-title">Mini PC GMK EVO X1 32G...</h2>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product 4 -->
+                    <div class="product-card" onclick="window.location.href='demo_product.html'">
+                        <div class="card-glow"></div>
+                        <div class="card-image-wrap">
+                            <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-specs">
+                                <span class="spec-pill">CPU 22.000</span>
+                                <span class="spec-pill secondary">MARK</span>
+                                <span class="spec-pill secondary">CPU ...</span>
+                                <span class="spec-pill">WIFI 6</span>
+                                <span class="spec-pill secondary">2 USB4</span>
+                            </div>
+                            <h2 class="card-title">Tablet Minisforum V3 SE...</h2>
+                            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Product Tabs -->
-            <div style="margin-bottom: 60px; width: 100%;">
-                <div>
-                    <div style="background: var(--bg-white); border-radius: var(--radius-lg); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
-                        <div style="display: flex; border-bottom: 1px solid var(--border-color); background: var(--bg-gray); overflow-x: auto; scrollbar-width: none;">
-                            <button style="padding: 20px 30px; background: var(--bg-white); border: none; border-bottom: 3px solid var(--primary); color: var(--primary); font-weight: 800; font-size: 1.1rem; cursor: pointer; white-space: nowrap;">Mô Tả Sản Phẩm</button>
-                            <button style="padding: 20px 30px; background: transparent; border: none; border-bottom: 3px solid transparent; color: var(--text-gray); font-weight: 600; font-size: 1.1rem; cursor: pointer; white-space: nowrap; transition: color 0.3s;" onmouseover="this.style.color='var(--text-color)'" onmouseout="this.style.color='var(--text-gray)'">Thông Số Kỹ Thuật</button>
-                            <button style="padding: 20px 30px; background: transparent; border: none; border-bottom: 3px solid transparent; color: var(--text-gray); font-weight: 600; font-size: 1.1rem; cursor: pointer; white-space: nowrap; transition: color 0.3s;" onmouseover="this.style.color='var(--text-color)'" onmouseout="this.style.color='var(--text-gray)'">Video Đánh Giá</button>
-                            <button style="padding: 20px 30px; background: transparent; border: none; border-bottom: 3px solid transparent; color: var(--text-gray); font-weight: 600; font-size: 1.1rem; cursor: pointer; white-space: nowrap; transition: color 0.3s;" onmouseover="this.style.color='var(--text-color)'" onmouseout="this.style.color='var(--text-gray)'">Bình Luận (152)</button>
+            <!-- Sticky Add to Cart -->
+            <style>
+                .sticky-cart-left { display: flex; align-items: center; gap: 20px; }
+                .sticky-cart-right { display: flex; gap: 16px; align-items: center; }
+                .sticky-title { font-weight: 700; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 4px; }
+                .sticky-price-display { color: var(--primary); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.5px; }
+                @media (max-width: 768px) {
+                    #sticky-cart-bar { padding: 10px 0 !important; background: rgba(255, 255, 255, 0.98) !important; }
+                    .sticky-cart-left { flex-direction: column; align-items: flex-start; gap: 0 !important; flex: 1; min-width: 0; }
+                    .sticky-cart-left > div:nth-child(2) { display: flex; flex-direction: column; }
+                    .sticky-cart-left .img-wrap { display: none !important; }
+                    .sticky-title { display: block !important; font-size: 0.75rem !important; font-weight: 500 !important; color: var(--text-gray) !important; margin: 0 !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; order: 2; }
+                    .sticky-price-display { font-size: 1.15rem !important; margin-bottom: 0; order: 1; }
+                    .sticky-cart-right { gap: 8px !important; flex-shrink: 0; }
+                    .btn-add-cart-sticky { width: auto !important; min-width: 54px !important; padding: 0 20px !important; height: 42px !important; border-radius: 8px !important; }
+                    .btn-add-cart-sticky i { font-size: 1.3rem !important; }
+                    .btn-buy-now-sticky { height: 42px !important; padding: 0 15px !important; font-size: 0.9rem !important; border-radius: 8px !important; }
+                    #sticky-cart-bar .container { padding: 0 12px !important; gap: 10px; }
+                }
+            </style>
+            <div id="sticky-cart-bar" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); box-shadow: 0 -10px 40px rgba(0,0,0,0.08); padding: 16px 0; z-index: 1000; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-top: 1px solid rgba(255,255,255,0.5);">
+                <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1250px; padding: 0 20px;">
+                    <div class="sticky-cart-left">
+                        <div class="img-wrap" style="width: 64px; height: 64px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
-                        <div style="padding: 40px; font-size: 1.05rem; line-height: 1.8; color: var(--text-color);">
-                            <h3 style="font-weight: 800; margin-bottom: 20px; font-size: 1.5rem;">Thông tin chi tiết</h3>
-                            <p style="margin-bottom: 20px;">MINISFORUM DEG1 Oculink eGPU Dock là giải pháp mở rộng đồ họa hiệu suất cao, giúp nâng cấp khả năng xử lý đồ họa cho các thiết bị như laptop siêu mỏng và mini PC. Với thiết kế mở và giao diện OCuLink, sản phẩm này mang lại băng thông truyền tải cao, đáp ứng nhu cầu chơi game và xử lý đồ họa chuyên nghiệp.</p>
-                            
-                            <h3 style="font-weight: 800; margin-top: 40px; margin-bottom: 20px; font-size: 1.5rem;">Đặc Điểm Nổi Bật</h3>
-                            <ul style="padding-left: 20px;">
-                                <li style="margin-bottom: 15px;"><strong>Kết Nối OCuLink Hiệu Suất Cao:</strong> Sử dụng giao diện OCuLink (PCIe 4.0 x4), DEG1 cung cấp băng thông truyền tải dữ liệu lên đến 64 GB/s, vượt trội so với các dock eGPU sử dụng Thunderbolt 3.</li>
-                                <li style="margin-bottom: 15px;"><strong>Thiết Kế Mở Linh Hoạt:</strong> Với thiết kế mở, DEG1 hỗ trợ các card đồ họa có kích thước khác nhau, bao gồm cả NVIDIA GeForce RTX 4090 và AMD Radeon RX 7900 XTX, giúp người dùng dễ dàng nâng cấp theo nhu cầu.</li>
-                                <li style="margin-bottom: 15px;"><strong>Tương Thích Nguồn ATX/SFX:</strong> Hỗ trợ cả nguồn ATX và SFX, người dùng có thể lựa chọn nguồn phù hợp với hệ thống của mình, đảm bảo cung cấp đủ điện năng cho các card đồ họa cao cấp.</li>
-                                <li style="margin-bottom: 15px;"><strong>Kết Nối Đa Dạng:</strong> Trang bị cổng PCIe x16 (PCIe 4.0 x4) cho phép kết nối linh hoạt với nhiều loại card đồ họa, mở rộng khả năng xử lý đồ họa cho hệ thống.</li>
-                            </ul>
-                            
-                            <h3 style="font-weight: 800; margin-top: 40px; margin-bottom: 20px; font-size: 1.5rem;">Lưu Ý Khi Sử Dụng</h3>
-                            <ul style="padding-left: 20px;">
-                                <li style="margin-bottom: 15px;"><strong>Không Hỗ Trợ Hot-Plugging:</strong> Giao diện OCuLink không hỗ trợ cắm nóng; cần tắt cả dock và máy tính trước khi kết nối hoặc ngắt kết nối để tránh hư hỏng.</li>
-                                <li style="margin-bottom: 15px;"><strong>Khóa Cố Định Cổng Kết Nối:</strong> Cổng OCuLink có cơ chế khóa; cần nhấn nút mở khóa trước khi rút cáp để tránh gây hỏng cổng kết nối.</li>
-                                <li style="margin-bottom: 15px;"><strong>Tính Năng Khởi Động Đồng Thời:</strong> Chức năng khởi động đồng thời chỉ tương thích với các mini PC của MINISFORUM và yêu cầu sử dụng dây cáp chính hãng.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Sticky Add to Cart (Hidden by default, shown on scroll in JS) -->
-            <div id="sticky-cart-bar" style="position: fixed; bottom: 0; left: 0; width: 100%; background: var(--bg-white); box-shadow: 0 -10px 30px rgba(0,0,0,0.1); padding: 15px 0; z-index: 1000; transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-top: 1px solid var(--border-color);">
-                <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 60px; height: 60px; background: var(--bg-gray); border-radius: var(--radius-sm); border: 1px solid var(--border-color); padding: 5px;">
-                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" style="width: 100%; height: 100%; object-fit: contain;">
-                        </div>
-                        <div style="display: none; @media (min-width: 768px) { display: block; }">
-                            <div style="font-weight: 700; font-size: 1.1rem; color: var(--text-color); margin-bottom: 4px;">EGPU MINISFORUM DEG1 Oculink</div>
-                            <div style="color: var(--primary); font-weight: 900; font-size: 1.2rem;">2.490.000₫</div>
+                        <div style="width: 100%;">
+                            <div class="sticky-title">ASUS NUC AI 350</div>
+                            <div class="sticky-price-display" id="sticky-price">12.390.000₫</div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 15px; align-items: center;">
-                        <div class="d-none d-md-flex" style="align-items: center; gap: 10px; margin-right: 15px;">
-                            <span style="font-weight: 600; color: var(--text-gray); font-size: 0.9rem;">Số lượng:</span>
-                            <div style="display: flex; border: 1px solid var(--border-color); border-radius: var(--radius-sm); overflow: hidden; height: 40px;">
-                                <button style="width: 30px; background: var(--bg-gray); border: none; cursor: pointer; font-weight: bold;">-</button>
-                                <input type="text" value="1" style="width: 40px; border: none; text-align: center; font-weight: bold; background: var(--bg-white); color: var(--text-color);">
-                                <button style="width: 30px; background: var(--bg-gray); border: none; cursor: pointer; font-weight: bold;">+</button>
-                            </div>
-                        </div>
-                        <button class="btn-pill" style="padding: 12px 24px; border-radius: var(--radius-sm); border: 2px solid var(--primary); color: var(--primary); background: transparent; font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--primary)'; this.style.color='white';" onmouseout="this.style.background='transparent'; this.style.color='var(--primary)';">Thêm vào giỏ</button>
-                        <button class="btn-pill btn-blue" style="padding: 12px 30px; border-radius: var(--radius-sm); font-weight: bold; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);">Mua ngay</button>
+                    <div class="sticky-cart-right">
+                        <button class="action-btn btn-add-cart btn-add-cart-sticky" style="width: auto; min-width: 64px; height: 48px; padding: 0 24px; border-radius: 8px !important; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" title="Thêm vào giỏ">
+                            <i class="ph ph-shopping-cart-simple" style="font-size: 1.4rem;"></i>
+                        </button>
+                        <button class="action-btn btn-buy-now btn-buy-now-sticky" style="height: 48px; margin-bottom: 0; border-radius: 8px !important; padding: 0 32px; box-shadow: 0 8px 15px -3px rgba(14, 165, 233, 0.3);">Mua ngay</button>
                     </div>
                 </div>
             </div>
             
             <script>
-                // Show sticky bar on scroll
-                window.addEventListener('scroll', function() {
-                    const stickyBar = document.getElementById('sticky-cart-bar');
-                    if (window.scrollY > 500) {
-                        stickyBar.style.transform = 'translateY(0)';
-                    } else {
-                        stickyBar.style.transform = 'translateY(100%)';
+                // Image Gallery Logic
+                function changeMainImage(element, src) {
+                    const img = document.getElementById('main-product-img');
+                    if (img.src.includes(src)) return; // prevent clicking same image
+                    
+                    img.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        img.src = src;
+                        img.onload = () => { img.style.opacity = '1'; };
+                        setTimeout(() => { img.style.opacity = '1'; }, 50); // fallback
+                    }, 200);
+                    
+                    const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+                    const dots = Array.from(document.querySelectorAll('.gallery-dot'));
+                    
+                    thumbs.forEach(t => t.classList.remove('active'));
+                    element.classList.add('active');
+                    
+                    const index = thumbs.indexOf(element);
+                    dots.forEach(d => d.classList.remove('active'));
+                    if (dots[index]) dots[index].classList.add('active');
+                    
+                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+                
+                function navigateGallery(direction) {
+                    const thumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+                    let activeIndex = thumbs.findIndex(t => t.classList.contains('active'));
+                    
+                    if (activeIndex === -1) return;
+                    
+                    let newIndex = activeIndex + direction;
+                    if (newIndex >= thumbs.length) newIndex = 0;
+                    if (newIndex < 0) newIndex = thumbs.length - 1;
+                    
+                    thumbs[newIndex].click();
+                }
+                
+                // Variant Price Calculation Logic
+                const basePrice = 12390000;
+                let activeRamPrice = 0;
+                let activeSsdPrice = 0;
+                let activeRamName = '0GB';
+                let activeSsdName = '0GB';
+                
+                function selectVariant(element, type, price) {
+                    const siblings = element.parentNode.querySelectorAll('.variant-card');
+                    siblings.forEach(el => el.classList.remove('active'));
+                    element.classList.add('active');
+                    
+                    const titleEl = element.querySelector('.variant-card-title');
+                    const name = titleEl ? titleEl.innerText : '';
+                    
+                    if (type === 'ram') { activeRamPrice = price; activeRamName = name; }
+                    if (type === 'ssd') { activeSsdPrice = price; activeSsdName = name; }
+                    
+                    const total = basePrice + activeRamPrice + activeSsdPrice;
+                    
+                    document.getElementById('main-price').innerHTML = total.toLocaleString('vi-VN') + '₫';
+                    const stickyPrice = document.getElementById('sticky-price');
+                    if(stickyPrice) stickyPrice.innerHTML = total.toLocaleString('vi-VN') + '₫';
+                    
+                    const stickyTitle = document.querySelector('.sticky-title');
+                    if(stickyTitle) {
+                        let opts = [];
+                        if(activeRamName && activeRamName !== '0GB') opts.push(activeRamName);
+                        if(activeSsdName && activeSsdName !== '0GB') opts.push(activeSsdName);
+                        let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
+                        stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+                }
+
+                // Show sticky bar on scroll
+                // Show sticky bar on scroll
+                // Show sticky bar on scroll
+                function toggleStickyBar(e) {
+                    const stickyBar = document.getElementById('sticky-cart-bar');
+                    if (!stickyBar) return;
+                    
+                    const threshold = window.innerWidth <= 768 ? 400 : 600;
+                    let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    
+                    // Fallback for Sapo themes using wrapper scrolling
+                    if (scrollY === 0) {
+                        const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main');
+                        for (let i=0; i<wrappers.length; i++) {
+                            if (wrappers[i].scrollTop > scrollY) scrollY = wrappers[i].scrollTop;
+                        }
+                    }
+                    
+                    // Trust event target if it's a large scrollable area
+                    if (e && e.target && e.target.scrollTop > scrollY) {
+                        if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
+                            scrollY = e.target.scrollTop;
+                        }
+                    }
+                    
+                    if (scrollY > threshold) {
+                        stickyBar.style.setProperty('transform', 'translateY(0)', 'important');
+                        stickyBar.style.setProperty('display', 'block', 'important');
+                    } else {
+                        stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', function() {
+                    const stickyBar = document.getElementById('sticky-cart-bar');
+                    if (stickyBar) {
+                        stickyBar.style.setProperty('z-index', '2147483647', 'important');
+                        if (stickyBar.parentNode !== document.body) {
+                            document.body.appendChild(stickyBar);
+                        }
+                    }
+                    toggleStickyBar(); // Check immediately on load
                 });
+
+                window.addEventListener('scroll', toggleStickyBar, true);
+                
+                // Magnifier Effect
+                const mainImgContainer = document.getElementById('main-image-container');
+                const mainImgObj = document.getElementById('main-product-img');
+                
+                mainImgContainer.addEventListener('mousemove', (e) => {
+                    if(window.innerWidth < 992) return; // Only zoom on desktop
+                    const rect = mainImgContainer.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const xPercent = (x / rect.width) * 100;
+                    const yPercent = (y / rect.height) * 100;
+                    
+                    mainImgObj.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                    mainImgObj.style.transform = 'scale(2)';
+                });
+                
+                mainImgContainer.addEventListener('mouseleave', () => {
+                    mainImgObj.style.transformOrigin = 'center center';
+                    mainImgObj.style.transform = 'scale(1)';
+                });
+                mainImgContainer.addEventListener('mouseenter', () => {
+                    mainImgObj.style.transition = 'opacity 0.3s ease, transform 0.1s ease-out';
+                });
+                
+                // Lightbox
+                const galleryImages = [
+                    '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973',
+                    '//bizweb.dktcdn.net/thumb/large/100/543/817/products/w692-01a37475-f53f-4188-84a0-d46b8f01d6d6.png',
+                    '//bizweb.dktcdn.net/thumb/large/100/543/817/products/bia1-fc2ef492-2792-4c14-9b3f-5c7d6995afdc.png',
+                    '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350.jpg',
+                    '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350-2.jpg'
+                ];
+                let currentLightboxIndex = 0;
+                
+                function openLightbox() {
+                    let lightbox = document.getElementById('nava-lightbox');
+                    if (!lightbox) {
+                        lightbox = document.createElement('div');
+                        lightbox.id = 'nava-lightbox';
+                        lightbox.innerHTML = `
+                            <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s;">
+                                <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph ph-x"></i></button>
+                                <button onclick="event.stopPropagation(); navigateLightbox(-1)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-left"></i></button>
+                                <img id="lightbox-img" src="" style="max-width: 90%; max-height: 90vh; object-fit: contain; transition: 0.3s; transform: scale(0.95); opacity: 0;" onclick="event.stopPropagation();">
+                                <button onclick="event.stopPropagation(); navigateLightbox(1)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-right"></i></button>
+                                <div id="lightbox-counter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 2px;"></div>
+                            </div>
+                        `;
+                        lightbox.querySelector('div').onclick = closeLightbox; // close when clicking background
+                        document.body.appendChild(lightbox);
+                    }
+                    
+                    const currentSrc = mainImgObj.src;
+                    currentLightboxIndex = galleryImages.findIndex(src => currentSrc.includes(src.split('?')[0]));
+                    if(currentLightboxIndex === -1) currentLightboxIndex = 0;
+                    
+                    const lightboxDiv = lightbox.querySelector('div');
+                    lightbox.style.display = 'block';
+                    void lightboxDiv.offsetWidth; // trigger reflow
+                    lightboxDiv.style.opacity = '1';
+                    
+                    updateLightboxImage();
+                    document.body.style.overflow = 'hidden';
+                }
+                
+                function closeLightbox() {
+                    const lightbox = document.getElementById('nava-lightbox');
+                    if (!lightbox) return;
+                    const lightboxDiv = lightbox.querySelector('div');
+                    lightboxDiv.style.opacity = '0';
+                    setTimeout(() => {
+                        lightbox.style.display = 'none';
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
+                
+                function navigateLightbox(dir) {
+                    currentLightboxIndex += dir;
+                    if(currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+                    if(currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+                    updateLightboxImage();
+                }
+                
+                function updateLightboxImage() {
+                    const lightboxImg = document.getElementById('lightbox-img');
+                    const counter = document.getElementById('lightbox-counter');
+                    lightboxImg.style.opacity = '0';
+                    lightboxImg.style.transform = 'scale(0.95)';
+                    
+                    setTimeout(() => {
+                        lightboxImg.src = galleryImages[currentLightboxIndex];
+                        counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+                        lightboxImg.onload = () => {
+                            lightboxImg.style.opacity = '1';
+                            lightboxImg.style.transform = 'scale(1)';
+                        };
+                    }, 200);
+                }
             </script>
         </div>
+    <!-- Mobile Sidebar Drawer -->
+        <div class="sidebar-overlay"></div>
+        <div class="sidebar-drawer">
+            <div class="sidebar-header"
+                style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 20px; border-bottom: 1px solid var(--border-color);">
+                <div class="logo" style="flex-shrink: 0;">
+                    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
+                        alt="NAVA" class="header-logo-img" style="height: 35px; width: auto;" loading="lazy"
+                        decoding="async">
+                </div>
+                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện" style="margin-right: auto; margin-left: 20px;">
+                            <div class="toggle-track">
+                                <div class="toggle-thumb">
+                                    <i class="ph-fill ph-sun icon-sun"></i>
+                                    <i class="ph-fill ph-moon icon-moon"></i>
+                                </div>
+                            </div>
+                        </button>
+                <button class="sidebar-close"
+                    style="flex-shrink: 0; background: none; border: none; font-size: 1.5rem; color: var(--text-gray); padding: 0;"><i
+                        class="ph ph-x"></i></button>
+            </div>
+            <div class="sidebar-content">
+                <ul class="mobile-nav">
+                    <!-- Content will be cloned or manually added here -->
+                </ul>
+            </div>
+            <div class="sidebar-footer"
+                style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-top: 1px solid var(--border-color);">
+                <div>
+                    <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: var(--text-gray);">Hotline: <strong>0972 178
+                            527</strong></p>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-gray);">Email: info@navatek.vn</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="https://zalo.me/3182872871563786385" target="_blank" title="Chat Zalo"
+                        style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
+                        <img src="https://zalo-chat-static.zadn.vn/v1/favicon-96x96.v1.png" alt="Zalo"
+                            style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
+                    </a>
+                    <a href="https://m.me/navastore" target="_blank" title="Messenger"
+                        style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
+                        <img src="https://static.xx.fbcdn.net/rsrc.php/yb/r/M8rOX7S5AN3.svg" alt="Messenger"
+                            style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Cart Drawer -->
+        <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+        <div class="cart-drawer" id="cart-drawer">
+            <div class="cart-drawer-header">
+                <h2>Giỏ hàng của bạn</h2>
+                <button class="cart-close-btn" id="cart-close-btn"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="cart-drawer-body" id="cart-drawer-body">
+                <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+                    <i class="ph-light ph-shopping-cart"></i>
+                    <p>Giỏ hàng của bạn đang trống</p>
+                    <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-blue"
+                        id="cart-continue-shopping">Tiếp tục mua sắm</a>
+                </div>
+                <div class="cart-loading-state" id="cart-loading-state">
+                    <div class="cart-spinner"></div>
+                </div>
+                <div class="cart-items-list" id="cart-items-list"></div>
+            </div>
+            <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+                <div class="cart-total">
+                    <span>Tổng tiền:</span>
+                    <strong id="cart-total-price">0đ</strong>
+                </div>
+                <a href="/cart" class="btn-pill btn-blue cart-checkout-btn">Thanh toán ngay <i
+                        class="ph ph-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Warranty Modal -->
+        <div id="warranty-modal" class="modal-overlay">
+            <div class="modal-content warranty-modal-content">
+                <button class="modal-close" id="close-warranty-modal"><i class="ph ph-x"></i></button>
+                <div class="modal-header">
+                    <h2>Chính sách bảo hành tại Nava Store</h2>
+                </div>
+                <div class="modal-body-scroll">
+                    <div class="warranty-block">
+                        <h3><i class="ph-fill ph-check-circle" style="color: #10b981;"></i> Áp Dụng Cho Các Sản Phẩm:
+                        </h3>
+                        <ul>
+                            <li><strong>Đối với MiniPC:</strong>
+                                <ul>
+                                    <li>Minis Forum: Bảo hành 2 năm từ nhà sản xuất, miễn phí gửi bảo hành 1 năm đầu.
+                                    </li>
+                                    <li>Bee Link, Aoostar, GMKtec, Morefine, FEVM: Bảo hành 12 tháng, miễn phí gửi bảo
+                                        hành
+                                        6 tháng đầu.</li>
+                                    <li>Firebat, Trycoo,... : Bảo hành 6 tháng từ nhà sản xuất.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Đối với RAM Samsung/Hynix:</strong> Bảo hành 3 năm từ nhà sản xuất.</li>
+                            <li><strong>Đối với SSD:</strong>
+                                <ul>
+                                    <li>Samsung/Lexar/Predator: Bảo hành 3 năm từ nhà sản xuất.</li>
+                                    <li>Hynix: Bảo hành 1 năm từ nhà sản xuất.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="warranty-block">
+                        <h3><i class="ph-fill ph-shield-check" style="color: var(--primary);"></i> Điều Kiện Bảo Hành:
+                        </h3>
+                        <ul>
+                            <li>Sản phẩm được bán ra bởi Nava Store và có tem bảo hành của Nava Store hoặc tem bảo hành
+                                từ
+                                nhà cung cấp/sản xuất (còn nguyên vẹn).</li>
+                            <li>Sản phẩm trong thời hạn bảo hành hợp lệ, đầy đủ phụ kiện và bao bì theo yêu cầu.</li>
+                            <li>Sản phẩm lỗi do kỹ thuật hoặc từ nhà sản xuất, được xác định bởi Nava Store hoặc nhà
+                                phân
+                                phối.</li>
+                        </ul>
+                    </div>
+
+                    <div class="warranty-block">
+                        <h3><i class="ph-fill ph-warning-circle" style="color: #ef4444;"></i> Không Đủ Điều Kiện Bảo
+                            Hành:
+                        </h3>
+                        <ul>
+                            <li>Sản phẩm hết hạn hoặc không đáp ứng điều kiện bảo hành.</li>
+                            <li>Sản phẩm mất tem, mờ tem, cạo sửa, chắp vá.</li>
+                            <li>Hư hại do va đập, cấn móp, cháy nổ, dính chất lỏng, hoặc lỗi do người dùng.</li>
+                            <li>Sản phẩm có dấu hiệu tự ý tháo mở, sửa chữa.</li>
+                        </ul>
+                    </div>
+
+                    <div class="warranty-block note-block">
+                        <h3><i class="ph-fill ph-info" style="color: #3b82f6;"></i> Lưu ý thêm:</h3>
+                        <p>- Nếu sản phẩm chỉ còn tem của nhà sản xuất, quý khách vui lòng đến TTBH chính hãng để được
+                            hỗ
+                            trợ.</p>
+                        <p>- Tra cứu bảo hành các hãng (ASUS, MSI, ASROCK, ZOTAC...) vui lòng liên hệ TTBH chính hãng
+                            tương
+                            ứng.</p>
+                        <p class="modal-subtitle" style="margin-top: 15px; text-align: left; font-size: 1rem;"><i
+                                class="ph-fill ph-warning-circle"></i> Lưu ý: Shop không bảo hành dữ liệu cho khách
+                            hàng.
+                        </p>
+                    </div>
+
+                    <div class="warranty-contact">
+                        <h3>Liên hệ bảo hành:</h3>
+                        <div class="contact-grid">
+                            <a href="https://www.facebook.com/navastore.vn/" target="_blank" class="contact-item fb"><i
+                                    class="ph-fill ph-facebook-logo"></i> Fanpage Nava Store</a>
+                            <a href="https://zalo.me/3182872871563786385" target="_blank" class="contact-item zalo"><img
+                                    src="https://cnv.vn/wp-content/uploads/2025/01/zalo-oa-png.png" alt="Zalo OA"
+                                    style="width: 22px; height: 22px; border-radius: 50%;"> Zalo OA: Nava Store</a>
+                            <div class="contact-item phone"><i class="ph-fill ph-phone"></i> Hotline: 0972178527</div>
+                            <div class="contact-item address" style="grid-column: 1 / -1;"><i
+                                    class="ph-fill ph-map-pin"></i> 160/15 Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh.
+                            </div>
+                            <div class="contact-item time" style="grid-column: 1 / -1;"><i class="ph-fill ph-clock"></i>
+                                Tiếp nhận: Thứ 2 – Thứ 7 (9:00 AM – 5:00 PM).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        
+        <!-- Floating Social Button -->
+        <div class="floating-social-wrapper">
+            <button class="fab-main" id="fabMainBtn">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" class="fab-cycle-img active">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" class="fab-cycle-img">
+                <img src="https://bizweb.dktcdn.net/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok" class="fab-cycle-img">
+                <img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook" class="fab-cycle-img">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube" class="fab-cycle-img">
+            </button>
+            <div class="fab-menu" id="fabMenu">
+                <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee"></a>
+                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada"></a>
+                <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok"></a>
+                <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook"></a>
+                <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube"></a>
+            </div>
+        </div>
+        <style>
+        .floating-social-wrapper {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            top: auto !important;
+            transform: none !important;
+            flex-direction: column !important;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .fab-main {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            position: relative;
+            z-index: 51;
+            overflow: hidden;
+            padding: 0;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+        .fab-main:hover {
+            transform: scale(1.05);
+        }
+        .fab-cycle-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .fab-cycle-img.active {
+            opacity: 1;
+        }
+        .fab-menu {
+            position: absolute;
+            bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+        .fab-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .fab-item {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            border: 2px solid white;
+        }
+        .fab-item:hover {
+            transform: scale(1.1) translateY(-2px);
+        }
+        .fab-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        </style>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cycle FAB images
+            setInterval(() => {
+                const imgs = document.querySelectorAll('.fab-cycle-img');
+                if (imgs.length > 0) {
+                    let activeIdx = -1;
+                    imgs.forEach((img, idx) => {
+                        if (img.classList.contains('active')) activeIdx = idx;
+                        img.classList.remove('active');
+                    });
+                    if (activeIdx !== -1) {
+                        const nextIdx = (activeIdx + 1) % imgs.length;
+                        imgs[nextIdx].classList.add('active');
+                    } else {
+                        imgs[0].classList.add('active');
+                    }
+                }
+            }, 2500);
+
+            // Toggle FAB menu
+            const fabMainBtn = document.getElementById('fabMainBtn');
+            if(fabMainBtn) {
+                fabMainBtn.addEventListener('click', function () {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.floating-social-wrapper')) {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.remove('active');
+                }
+            });
+        });
+        </script>
+
+
+        
     
+        <script src="assets/main.js" defer></script>
+
                         </div>
                         
                         <footer class="footer">
@@ -747,7 +1755,321 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
             
-        </body>
+         """
+<!-- Sticky Compare Bar -->
+<style>
+    @media (max-width: 768px) {
+        #compare-bar-inner { flex-direction: column !important; gap: 12px !important; }
+        #compare-slots { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+        #compare-actions { width: 100% !important; justify-content: center !important; }
+        #compare-actions button { flex: 1 !important; justify-content: center !important; padding: 10px 15px !important; font-size: 0.95rem !important; }
+        .compare-slot-item { padding: 8px 12px !important; }
+        .compare-slot-item img { width: 40px !important; height: 40px !important; }
+    }
+</style>
+<div id="compare-bar" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: none; background: var(--bg-white) !important; box-shadow: 0 -10px 50px rgba(0,0,0,0.15) !important; border-top: 1px solid var(--border-color) !important; padding: 25px 0 !important;">
+    <!-- Nút X tắt nhanh -->
+    <button onclick="hideCompareBar()" style="position: absolute; top: -18px; right: 25px; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-gray); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s;" onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)'"><i class="ph-bold ph-x" style="font-size: 1.1rem;"></i></button>
+
+    <!-- Nút mũi tên kéo lên -->
+    <button id="compare-expand" onclick="executeCompare(true)" disabled style="position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 70px; height: 25px; border-radius: 12px 12px 0 0; background: var(--primary); border: none; color: white; cursor: not-allowed; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; box-shadow: 0 -4px 10px rgba(14,165,233,0.3); opacity: 0.5;"><i class="ph-bold ph-caret-up" style="font-size: 1.3rem;"></i></button>
+
+    <div id="compare-bar-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 20px; flex: 1; width: 100%;">
+            <div id="compare-slots" style="display: flex; gap: 20px; flex: 1;">
+                <!-- Slots populated by JS -->
+            </div>
+        </div>
+        <div id="compare-actions" style="display: flex; gap: 15px; flex-shrink: 0;">
+            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
+            <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
+        </div>
+    </div>
+</div>
+
+<!-- Comparison Modal -->
+<div id="compare-modal" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; background: rgba(15,23,42,0.8) !important; backdrop-filter: blur(8px) !important; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+    <div style="background: var(--bg-white); width: 95%; max-width: 1100px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);" id="compare-modal-content">
+        <!-- Header -->
+        <div style="padding: 25px 30px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-gray);">
+            <h3 style="margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--text-dark); display: flex; align-items: center; gap: 12px;"><i class="ph-fill ph-scales" style="color: var(--primary); font-size: 1.6rem;"></i> Phân Tích & Đối Chiếu</h3>
+            <button onclick="closeCompareModal()" style="width: 40px; height: 40px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s;" onmouseover="this.style.borderColor='#ef4444'; this.style.color='#ef4444'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)'"><i class="ph ph-x" style="font-size: 1.3rem;"></i></button>
+        </div>
+        <!-- Body -->
+        <div id="compare-body" style="padding: 35px; overflow-y: auto; flex: 1;">
+            <!-- Loading State -->
+            <div id="compare-loading" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 0;">
+                <div style="position: relative; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                    <div style="position: absolute; inset: 0; border: 3px solid transparent; border-top-color: var(--primary); border-bottom-color: var(--primary); border-radius: 50%; animation: nava-spin 1.5s linear infinite; opacity: 0.8;"></div>
+                    <div style="position: absolute; inset: 5px; border: 3px solid transparent; border-left-color: #38bdf8; border-right-color: #38bdf8; border-radius: 50%; animation: nava-spin-reverse 2s linear infinite; opacity: 0.6;"></div>
+                    <div style="font-size: 2.2rem; font-weight: 900; color: var(--primary); font-family: 'Inter', sans-serif; letter-spacing: -1px; text-shadow: 0 0 10px rgba(30,58,138,0.3); z-index: 2;">N</div>
+                </div>
+                <style>
+                    @keyframes nava-spin { 100% { transform: rotate(360deg); } }
+                    @keyframes nava-spin-reverse { 100% { transform: rotate(-360deg); } }
+                </style>
+                <h4 style="margin: 0 0 10px 0; font-size: 1.3rem; font-weight: 700; color: var(--text-dark);">Nava Store đang xử lý dữ liệu...</h4>
+                <p style="color: var(--text-gray); margin: 0; font-size: 1.05rem;">Vui lòng đợi trong giây lát để hệ thống đối chiếu thông số.</p>
+            </div>
+            <!-- Result State -->
+            <div id="compare-result" style="display: none;">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comparison Logic -->
+<script>
+    // Ensure the sticky bar and modal are direct children of document.documentElement (HTML tag)
+    // This perfectly bypasses ANY transform or overflow bugs on the BODY tag!
+    document.addEventListener("DOMContentLoaded", function() {
+        const cb = document.getElementById('compare-bar');
+        const cm = document.getElementById('compare-modal');
+        if (cb && cb.parentNode !== document.documentElement) { document.documentElement.appendChild(cb); }
+        if (cm && cm.parentNode !== document.documentElement) { document.documentElement.appendChild(cm); }
+    });
+
+    let compareList = [];
+    
+    function toggleCompare(btn, name, img, price) {
+        console.log('--- toggleCompare called ---');
+        const idx = compareList.findIndex(p => p.name === name);
+        if (idx > -1) {
+            compareList.splice(idx, 1);
+            btn.style.background = 'var(--bg-white)';
+            btn.style.color = 'var(--text-dark)';
+            btn.querySelector('i').className = 'ph ph-arrows-left-right';
+        } else {
+            if (compareList.length >= 2) {
+                alert('Chỉ có thể so sánh tối đa 2 sản phẩm cùng lúc!');
+                return;
+            }
+            compareList.push({ name, img, price });
+            btn.style.background = 'var(--primary)';
+            btn.style.color = 'white';
+            btn.querySelector('i').className = 'ph-bold ph-check';
+        }
+        updateCompareBar();
+    }
+    
+    function removeCompare(name) {
+        compareList = compareList.filter(p => p.name !== name);
+        // Reset buttons
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            if (btn.getAttribute('data-name') === name) {
+                btn.style.background = 'var(--bg-white)';
+                btn.style.color = 'var(--text-dark)';
+                btn.querySelector('i').className = 'ph ph-arrows-left-right';
+            }
+        });
+        updateCompareBar();
+    }
+    
+    function clearCompare() {
+        compareList = [];
+        document.querySelectorAll('.compare-btn').forEach(btn => {
+            btn.style.background = 'var(--bg-white)';
+            btn.style.color = 'var(--text-dark)';
+            btn.querySelector('i').className = 'ph ph-arrows-left-right';
+        });
+        updateCompareBar();
+        if(typeof showToast === 'function') {
+            showToast('Đã xóa tất cả sản phẩm khỏi danh sách đối chiếu');
+        }
+    }
+    function hideCompareBar() {
+        const bar = document.getElementById('compare-bar');
+        bar.style.setProperty('display', 'none', 'important');
+    }
+
+    function updateCompareBar() {
+        const bar = document.getElementById('compare-bar');
+        const slots = document.getElementById('compare-slots');
+        const submitBtn = document.getElementById('compare-submit');
+        const expandBtn = document.getElementById('compare-expand');
+        
+        if (compareList.length > 0) {
+            bar.style.setProperty('display', 'block', 'important');
+        } else {
+            bar.style.setProperty('display', 'none', 'important');
+        }
+        
+        if (compareList.length === 2) {
+            submitBtn.disabled = false;
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.style.opacity = '1';
+            expandBtn.disabled = false;
+            expandBtn.style.cursor = 'pointer';
+            expandBtn.style.opacity = '1';
+        } else {
+            submitBtn.disabled = true;
+            submitBtn.style.cursor = 'not-allowed';
+            submitBtn.style.opacity = '0.5';
+            expandBtn.disabled = true;
+            expandBtn.style.cursor = 'not-allowed';
+            expandBtn.style.opacity = '0.5';
+        }
+        
+        let html = '';
+        for (let i = 0; i < 2; i++) {
+            if (i < compareList.length) {
+                const p = compareList[i];
+                html += `
+                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
+                        <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                        <div style="flex: 1; min-width: 0;">
+                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
+                        </div>
+                        <button onclick="removeCompare('${p.name}')" style="background: none; border: none; color: var(--text-gray); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                `;
+            } else {
+                html += `
+                    <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
+                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
+                        Thêm sản phẩm
+                    </div>
+                `;
+            }
+        }
+        slots.innerHTML = html;
+    }
+    
+    function executeCompare(isFullScreen = false) {
+        const modal = document.getElementById('compare-modal');
+        const modalContent = document.getElementById('compare-modal-content');
+        const loading = document.getElementById('compare-loading');
+        const result = document.getElementById('compare-result');
+        
+        modal.style.setProperty('display', 'flex', 'important');
+        
+        if (isFullScreen) {
+            modalContent.style.width = '100%';
+            modalContent.style.maxWidth = '100%';
+            modalContent.style.height = '100vh';
+            modalContent.style.maxHeight = '100vh';
+            modalContent.style.borderRadius = '0';
+            modalContent.style.transform = 'translateY(100vh)';
+            
+            // Trigger reflow
+            void modal.offsetWidth;
+            
+            modalContent.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            modal.style.opacity = '1';
+            modalContent.style.transform = 'translateY(0)';
+        } else {
+            modalContent.style.width = '95%';
+            modalContent.style.maxWidth = '1100px';
+            modalContent.style.height = 'auto';
+            modalContent.style.maxHeight = '90vh';
+            modalContent.style.borderRadius = 'var(--radius-lg)';
+            modalContent.style.transform = 'scale(0.95)';
+            
+            // Trigger reflow
+            void modal.offsetWidth;
+            
+            modalContent.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            modal.style.opacity = '1';
+            modalContent.style.transform = 'scale(1)';
+        }
+        
+        loading.style.display = 'flex';
+        result.style.display = 'none';
+        
+        setTimeout(() => {
+            loading.style.display = 'none';
+            
+            // Generate mock specs based on names
+            const getSpecs = (name) => {
+                if (name.includes('NUC 14')) return ['Intel Core Ultra 5', 'Intel Arc Graphics', '16GB DDR5 5600MHz', '512GB PCIe Gen4', 'Wi-Fi 6E, Bluetooth 5.3', '4x USB 3.2, 2x Type-C'];
+                if (name.includes('AtomMan')) return ['AMD Ryzen 9 7945HX', 'AMD Radeon RX 7600M', '32GB DDR5 5200MHz', '1TB PCIe Gen4', 'Wi-Fi 7, Bluetooth 5.4', 'Dual 2.5G LAN, USB4'];
+                if (name.includes('GMK EVO')) return ['AMD Ryzen 7 8845HS', 'Radeon 780M', '32GB DDR5 5600MHz', '1TB PCIe Gen4', 'Wi-Fi 6, Bluetooth 5.2', 'Oculink, Dual 2.5G LAN'];
+                if (name.includes('Beelink')) return ['AMD Ryzen 7 8845HS', 'Radeon 780M', '16GB DDR5 5600MHz', '1TB PCIe Gen4', 'Wi-Fi 6, Bluetooth 5.2', 'USB4, 2.5G LAN'];
+                return ['Intel Core i5', 'Intel UHD', '16GB DDR4', '512GB SSD', 'Wi-Fi 6', 'USB 3.0'];
+            };
+            
+            const p1 = compareList[0];
+            const p2 = compareList[1];
+            const specs1 = getSpecs(p1.name);
+            const specs2 = getSpecs(p2.name);
+            const labels = ['CPU', 'GPU', 'RAM', 'Lưu trữ', 'Kết nối', 'Cổng giao tiếp'];
+            
+            let tableHtml = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                    <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
+                        <img src="${p1.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p1.name}</h4>
+                        <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p1.price}</div>
+                        <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
+                    </div>
+                    <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color); border-radius: var(--radius-lg); background: var(--bg-gray);">
+                        <img src="${p2.img}" style="width: 150px; height: 150px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white); border-radius: 8px; padding: 10px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: var(--text-dark); font-weight: 800;">${p2.name}</h4>
+                        <div style="color: var(--primary); font-weight: 800; font-size: 1.3rem;">${p2.price}</div>
+                        <a href="demo_product.html" style="display: inline-block; margin-top: 15px; padding: 8px 20px; background: var(--primary); color: white; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 0.9rem;">Xem chi tiết</a>
+                    </div>
+                </div>
+                
+                <div style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden;">
+            `;
+            
+            for(let i=0; i<labels.length; i++) {
+                const bg = i % 2 === 0 ? 'var(--bg-gray)' : 'var(--bg-white)';
+                let s1 = specs1[i], s2 = specs2[i];
+                let color1 = 'var(--text-dark)', color2 = 'var(--text-dark)';
+                let icon1 = '', icon2 = '';
+                
+                // Dumb mock logic to make one look better
+                if (s1 !== s2 && s1.length > s2.length) {
+                    color1 = 'var(--primary)'; icon1 = ' <i class="ph-fill ph-check-circle" style="color:var(--primary)"></i>';
+                } else if (s1 !== s2) {
+                    color2 = 'var(--primary)'; icon2 = ' <i class="ph-fill ph-check-circle" style="color:var(--primary)"></i>';
+                }
+                
+                tableHtml += `
+                    <div style="display: grid; grid-template-columns: 150px 1fr 1fr; border-bottom: 1px solid var(--border-color); background: ${bg};">
+                        <div style="padding: 15px 20px; font-weight: 800; color: var(--text-gray); border-right: 1px solid var(--border-color); display: flex; align-items: center;">${labels[i]}</div>
+                        <div style="padding: 15px 20px; border-right: 1px solid var(--border-color); font-weight: 600; color: ${color1}; line-height: 1.4;">${s1}${icon1}</div>
+                        <div style="padding: 15px 20px; font-weight: 600; color: ${color2}; line-height: 1.4;">${s2}${icon2}</div>
+                    </div>
+                `;
+            }
+            
+            tableHtml += `
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(14,165,233,0.05), rgba(15,23,42,0.02)); border-radius: var(--radius-lg); border: 1px solid rgba(14,165,233,0.2); display: flex; gap: 15px;">
+                    <i class="ph-fill ph-storefront" style="color: var(--primary); font-size: 2rem;"></i>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0; color: var(--text-dark); font-weight: 800;">Đề xuất từ Nava Store</h4>
+                        <p style="margin: 0; color: var(--text-gray); line-height: 1.5;">Nếu bạn ưu tiên hiệu năng mạnh mẽ để chơi game hoặc làm đồ họa nặng, <strong>${p1.price > p2.price ? p1.name : p2.name}</strong> là lựa chọn tốt hơn. Tuy nhiên, nếu bạn cần sự nhỏ gọn và mức giá tối ưu, <strong>${p1.price <= p2.price ? p1.name : p2.name}</strong> sẽ rất phù hợp.</p>
+                    </div>
+                </div>
+            `;
+            
+            result.innerHTML = tableHtml;
+            result.style.display = 'block';
+        }, 1200);
+    }
+    
+    function closeCompareModal() {
+        const modal = document.getElementById('compare-modal');
+        const modalContent = document.getElementById('compare-modal-content');
+        modal.style.opacity = '0';
+        if (modalContent.style.width === '100%') {
+            modalContent.style.transform = 'translateY(100vh)';
+        } else {
+            modalContent.style.transform = 'scale(0.95)';
+        }
+        setTimeout(() => {
+            modal.style.setProperty('display', 'none', 'important');
+        }, 300);
+    }
+</script>
+
+</body>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 document.querySelectorAll("img").forEach(function (img) {
