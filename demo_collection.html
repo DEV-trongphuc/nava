@@ -430,7 +430,7 @@
                     <div class="col-right position-relative">
                         <div class="contentWarp pb-5">
                             
-        <div class="container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 50px auto 0 !important; padding: 30px 30px 80px;">
+        <div class="container" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 0 auto !important; padding: 30px 30px 80px;">
             <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 25px; font-size: 0.95rem;">
                 <a href="/" style="color: var(--text-gray); text-decoration: none; display: inline-flex; align-items: center; gap: 5px;"><i class="ph ph-house"></i> Trang chủ</a> 
                 <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
@@ -447,7 +447,7 @@
                     <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-dark); letter-spacing: -0.5px;">Mini PC ASUS NUC Chính Hãng</h1>
                     <p style="color: var(--text-gray); max-width: 650px; font-size: 1.05rem; margin: 0; line-height: 1.6;">Là đối tác Gold Partner của ASUS, NAVA Store tự hào cung cấp các dòng sản phẩm ASUS NUC với chất lượng dịch vụ bảo hành cao cấp nhất.</p>
                 </div>
-                <div style="padding-right: 40px; position: relative; z-index: 2; opacity: 0.9;">
+                <div style="position: relative; z-index: 2; opacity: 0.9;" class="hero-image-wrap">
                     <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/asus.png" alt="ASUS" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
                 </div>
             </div>
@@ -512,8 +512,8 @@
                 .product-card:hover .product-img { opacity: 0; }
                 .product-card:hover .product-img-hover { opacity: 1; }
                 
-                .mobile-filter-btn { display: none; position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); background: var(--primary); color: white; border: none; padding: 12px 24px; border-radius: 30px; font-weight: bold; z-index: 90; box-shadow: 0 5px 20px rgba(14,165,233,0.4); align-items: center; gap: 8px; cursor: pointer; transition: transform 0.2s; }
-                .mobile-filter-btn:active { transform: translateX(-50%) scale(0.95); }
+                .mobile-filter-btn { display: none; position: fixed; bottom: 85px; right: 20px; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 90; box-shadow: 0 5px 20px rgba(14,165,233,0.4); justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; }
+                .mobile-filter-btn:active { transform: scale(0.95); }
                 
                 @media (min-width: 992px) {
                     .nava-collection-layout { flex-direction: row; align-items: flex-start; }
@@ -525,6 +525,12 @@
                     .product-grid { grid-template-columns: repeat(3, 1fr) !important; }
                 }
                 @media (max-width: 991px) {
+                    #nava-col-container { margin-top: 0 !important; padding-top: 25px !important; }
+                    .hero-image-wrap { display: none; }
+                    .collection-hero { flex-direction: column !important; align-items: flex-start !important; padding: 25px 20px !important; text-align: left; }
+                    .collection-hero h1 { font-size: 1.8rem !important; }
+                    .collection-hero p { font-size: 0.95rem !important; }
+                    
                     .nava-sidebar { position: fixed; top: 0; left: -100%; width: 85%; max-width: 320px; height: 100vh; background: var(--bg-white); z-index: 1000; transition: 0.3s ease; overflow-y: auto; box-shadow: 20px 0 50px rgba(0,0,0,0.1); padding: 20px 0; }
                     .nava-sidebar.active { left: 0; }
                     .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; backdrop-filter: blur(3px); }
@@ -534,6 +540,24 @@
                     .brand-item { scroll-snap-align: start; flex: 0 0 100px; }
                     .brand-list::-webkit-scrollbar { height: 4px; }
                     .brand-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+                }
+                
+                @media (max-width: 575px) {
+                    #nava-col-container { padding: 10px 10px 80px !important; margin-top: 0 !important; }
+                    .product-grid { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+                    /* Filter icon only */
+                    #sortLabel, #sortToggleBtn .ph-caret-down { display: none !important; }
+                    #sortToggleBtn { width: 44px; height: 44px; padding: 0 !important; display: flex; justify-content: center; align-items: center; border-radius: 12px; }
+                    #sortToggleBtn > i:first-child { font-size: 1.4rem !important; margin: 0 !important; }
+                    .ai-btn { padding: 8px 12px !important; }
+                    .product-card { padding: 10px !important; min-width: 0; }
+                    .card-title { font-size: 0.85rem !important; height: auto !important; max-height: 36px !important; margin-bottom: 6px !important; }
+                    .card-specs { gap: 4px !important; margin-bottom: 8px !important; }
+                    .spec-pill { padding: 2px 4px !important; font-size: 0.6rem !important; }
+                    /* Force the price row to wrap properly on very small screens */
+                    .product-card > .card-content > div:last-child { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
+                    .product-card > .card-content > div:last-child span { font-size: 0.95rem !important; }
+                    .product-card > .card-content > div:last-child a { padding: 6px 10px !important; font-size: 0.75rem !important; width: 100%; box-sizing: border-box; justify-content: center; }
                 }
             </style>
 
@@ -729,10 +753,10 @@
                         </div>
                         <!-- Sort Dropdown -->
                         <div style="position: relative; flex-shrink: 0;">
-                            <button class="sort-pill-btn" id="sortToggleBtn" onclick="document.getElementById('sortDropMenu').classList.toggle('show')">
-                                <i class="ph ph-sort-ascending" style="color: var(--primary);"></i>
+                            <button class="sort-pill-btn" id="sortToggleBtn" onclick="document.getElementById('sortDropMenu').classList.toggle('show')" style="display: flex; align-items: center;">
+                                <i class="ph ph-faders" style="color: var(--primary); margin-right: 6px;"></i>
                                 <span id="sortLabel">Mặc định</span>
-                                <i class="ph ph-caret-down" style="color:#94a3b8; font-size:0.85rem;"></i>
+                                <i class="ph ph-caret-down" style="color:#94a3b8; font-size:0.85rem; margin-left: 6px;"></i>
                             </button>
                             <div class="sort-drop-menu" id="sortDropMenu">
                                 <a href="#" onclick="document.getElementById('sortLabel').textContent='Mặc định'; document.getElementById('sortDropMenu').classList.remove('show'); return false;"><i class="ph ph-list-dashes" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Mặc định</a>
@@ -808,7 +832,7 @@
                     </div>
                     
                     <!-- Product Grid (4 columns) -->
-                    <div class="product-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                    <div class="product-grid" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 100%; box-sizing: border-box;">
                         
                         <!-- Product 1 -->
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
@@ -1243,7 +1267,7 @@
                 </div>
             </div>
             
-            <button class="mobile-filter-btn" onclick="toggleMobileSidebar()"><i class="ph-bold ph-faders"></i> Lọc sản phẩm</button>
+            <button class="mobile-filter-btn" onclick="toggleMobileSidebar()"><i class="ph-bold ph-faders" style="font-size: 1.4rem;"></i></button>
             <div class="sidebar-overlay" onclick="toggleMobileSidebar()"></div>
             
             <div id="quick-view-modal" style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 10000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s;">
