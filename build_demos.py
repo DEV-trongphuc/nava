@@ -107,7 +107,7 @@ def build_collection(base_dir, header_part, footer_part):
             </div>
 
             <!-- Techy Hero Banner -->
-            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
                 <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
                 <div style="position: relative; z-index: 2;">
                     <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
@@ -2114,8 +2114,8 @@ def build_auth_pages(base_dir):
     auth_css = """
         <style>
             :root {
-                --primary: #0ea5e9;
-                --secondary: #3b82f6;
+                --primary: #003366;
+                --secondary: #004c99;
                 --bg-white: #ffffff;
                 --bg-gray: #f8fafc;
                 --text-color: #0f172a;
@@ -2615,6 +2615,797 @@ def build_compare_page(base_dir, header_part, footer_part):
     with open(os.path.join(base_dir, "demo_compare.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
+def build_cart_page(base_dir, header_part, footer_part):
+    sticky_stuff = ""
+    with open(os.path.join(base_dir, "index.bwt"), "r", encoding="utf-8") as f:
+        idx_content = f.read()
+        if "<!-- Mobile Sidebar Drawer -->" in idx_content:
+            sticky_stuff = idx_content[idx_content.find("<!-- Mobile Sidebar Drawer -->"):]
+            if "<!-- /MASTER SAPO ESCAPE WRAPPER -->" in sticky_stuff:
+                sticky_stuff = sticky_stuff.split("<!-- /MASTER SAPO ESCAPE WRAPPER -->")[0]
+                
+    local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
+
+    cart_html = """
+        <style>
+            .nava-cart-page { padding: 0 15px; max-width: 1200px; margin: 30px auto 60px; }
+            .cart-title { font-size: 2.2rem; font-weight: 900; color: var(--text-dark); margin-bottom: 30px; display: flex; align-items: center; gap: 10px; }
+            .cart-title i { color: var(--primary); }
+            
+            .cart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+            
+            .cart-items-container { background: var(--bg-white); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+            .cart-item { display: flex; gap: 20px; align-items: center; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); }
+            .cart-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+            
+            .cart-item-img { width: 100px; height: 100px; object-fit: contain; border-radius: var(--radius-md); background: var(--bg-gray); padding: 10px; border: 1px solid var(--border-color); }
+            .cart-item-details { flex: 1; }
+            .cart-item-title { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); text-decoration: none; display: block; margin-bottom: 5px; }
+            .cart-item-title:hover { color: var(--primary); }
+            .cart-item-variant { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; }
+            
+            .cart-item-price { font-size: 1.15rem; font-weight: 800; color: var(--primary); }
+            
+            .cart-item-actions { display: flex; align-items: center; gap: 15px; }
+            
+            .qty-spinner { display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; background: var(--bg-gray); }
+            .qty-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; cursor: pointer; color: var(--text-dark); transition: 0.2s; }
+            .qty-btn:hover { background: rgba(0, 51, 102, 0.1); color: var(--primary); }
+            .qty-input { width: 40px; height: 32px; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none; }
+            
+            .cart-item-remove { width: 32px; height: 32px; border-radius: 50%; background: #fee2e2; color: #ef4444; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+            .cart-item-remove:hover { background: #ef4444; color: white; transform: scale(1.1); }
+            
+            .cart-summary { background: var(--bg-white); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; position: sticky; top: 120px; }
+            .summary-title { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+            
+            .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; color: var(--text-gray); font-weight: 500; }
+            .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 900; color: var(--text-dark); }
+            .summary-total-price { color: var(--primary); font-size: 1.5rem; }
+            
+            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 25px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
+            .btn-checkout-nava:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3); color: white !important; }
+            
+            .promo-box { display: flex; gap: 10px; margin-top: 25px; }
+            .promo-input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-md); outline: none; font-size: 0.9rem; transition: 0.3s; background: var(--bg-gray); }
+            .promo-input:focus { border-color: var(--primary); background: white; }
+            .promo-btn { padding: 10px 15px; background: var(--text-dark); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; transition: 0.3s; }
+            .promo-btn:hover { background: var(--primary); }
+            
+            @media (max-width: 991px) {
+                .cart-grid { grid-template-columns: 1fr; }
+                .cart-summary { position: static; }
+                .nava-cart-page { margin-top: 30px; }
+            }
+            @media (max-width: 575px) {
+                .cart-item { flex-direction: column; align-items: flex-start; }
+                .cart-item-img { width: 80px; height: 80px; }
+            }
+        </style>
+        
+        <div class="nava-cart-page">
+            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 20px;">
+                <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
+                <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
+                <span style="color: var(--primary); font-weight: bold;">Giỏ hàng</span>
+            </div>
+            
+            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn</h1>
+            
+            <div class="cart-grid">
+                <!-- Left: Cart Items -->
+                <div class="cart-items-container">
+                    <!-- Item 1 -->
+                    <div class="cart-item">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <a href="demo_product.html" class="cart-item-title">ASUS NUC 14 Essential</a>
+                            <div class="cart-item-variant">Core i3 / 8GB / 256GB</div>
+                            <div class="cart-item-price">4.490.000₫</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="qty-spinner">
+                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <input type="text" value="1" class="qty-input" readonly>
+                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                            </div>
+                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="cart-item">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="cart-item-img">
+                        <div class="cart-item-details">
+                            <a href="demo_product.html" class="cart-item-title">GMK EVO X1 32G</a>
+                            <div class="cart-item-variant">Ryzen AI 9 HX370 / 32GB / 1TB</div>
+                            <div class="cart-item-price">31.190.000₫</div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="qty-spinner">
+                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <input type="text" value="1" class="qty-input" readonly>
+                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                            </div>
+                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <a href="demo_collection.html" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;"><i class="ph-bold ph-arrow-left"></i> Tiếp tục mua sắm</a>
+                        <button style="background: transparent; color: var(--text-gray); border: none; font-weight: 600; cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-trash"></i> Xóa tất cả</button>
+                    </div>
+                </div>
+                
+                <!-- Right: Summary -->
+                <div class="cart-summary">
+                    <h2 class="summary-title">Tóm Tắt Đơn Hàng</h2>
+                    
+                    <div class="summary-row">
+                        <span>Tạm tính (2 sản phẩm)</span>
+                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000₫</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Phí vận chuyển</span>
+                        <span style="color: #10b981; font-weight: 700;">Miễn phí</span>
+                    </div>
+                    
+                    <div class="promo-box">
+                        <input type="text" class="promo-input" placeholder="Mã giảm giá...">
+                        <button class="promo-btn">Áp dụng</button>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <span>Tổng Tiền</span>
+                        <span class="summary-total-price">35.680.000₫</span>
+                    </div>
+                    
+                    <p style="font-size: 0.8rem; color: var(--text-gray); text-align: right; margin-top: 5px; font-style: italic;">(Đã bao gồm VAT)</p>
+                    
+                    <a href="demo_checkout.html" class="btn-checkout-nava">Thanh Toán Ngay <i class="ph-bold ph-arrow-right" style="vertical-align: middle; margin-left: 5px;"></i></a>
+                    
+                    <div style="margin-top: 20px; text-align: center;">
+                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px;">Thanh toán an toàn 100%</p>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-1.png?1778729235331" alt="Visa" style="height: 25px;">
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-2.png?1778729235331" alt="Mastercard" style="height: 25px;">
+                            <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-4.png?1778729235331" alt="JCB" style="height: 25px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    """
+    full_html = clean_liquid_tags(header_part + cart_html + local_footer_part)
+    with open(os.path.join(base_dir, "demo_cart.html"), "w", encoding="utf-8") as f:
+        f.write(full_html)
+
+def build_checkout_page(base_dir):
+    # Standalone Checkout UI matching App
+    checkout_html = """<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nava Store - Thanh Toán</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css?v=2">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-gray, #f8fafc); color: var(--text-dark); position: relative; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        
+        .checkout-header { background: var(--bg-white); padding: 20px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        
+        .checkout-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; margin: 40px auto; }
+        
+        .section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+        .section-title i { color: var(--primary); font-size: 1.5rem; }
+        
+        .checkout-card { background: var(--bg-white); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); margin-bottom: 30px; }
+        
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+        .nava-input { width: 100%; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-gray); font-family: inherit; font-size: 0.95rem; color: var(--text-dark); transition: 0.3s; box-sizing: border-box; outline: none; }
+        .nava-input:focus { background: white; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.15); }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
+        .payment-method-wrapper { margin-bottom: 12px; }
+        .radio-option { display: flex; align-items: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer; transition: 0.3s; background: var(--bg-white); }
+        .radio-option:hover { border-color: var(--primary); background: rgba(0, 51, 102, 0.02) !important; }
+        .radio-option.active { border-color: var(--primary); background: rgba(0, 51, 102, 0.04) !important; }
+        .radio-option input[type="radio"] { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 15px; cursor: pointer; }
+        .radio-label { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
+        .payment-details { display: none; margin-top: 10px; padding: 0; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .order-summary { position: sticky; top: 100px; background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
+        
+        .order-item { display: flex; gap: 15px; align-items: center; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); }
+        .item-img-wrap { position: relative; width: 70px; height: 70px; border-radius: var(--radius-md); background: white; border: 1px solid var(--border-color); padding: 5px; }
+        .item-img { width: 100%; height: 100%; object-fit: contain; }
+        .item-badge { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; box-shadow: 0 2px 5px rgba(0, 51, 102, 0.4); }
+        .item-info { flex: 1; }
+        .item-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 4px 0; color: var(--text-dark); }
+        .item-var { font-size: 0.8rem; color: var(--text-gray); }
+        .item-price { font-weight: 800; color: var(--text-dark); font-size: 1rem; }
+        
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-gray); font-weight: 500; }
+        .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); align-items: center; }
+        .summary-total-label { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); }
+        .summary-total-val { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+        
+        .btn-pay { display: block; width: 100%; padding: 18px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.15rem; border: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.25); margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.35); }
+        
+        @media (max-width: 991px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+            .order-summary { position: static; order: -1; margin-bottom: 30px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="bg-glow orb-1"></div>
+    <div class="bg-glow orb-2"></div>
+    <div class="bg-glow orb-3"></div>
+    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png?1775454528082" alt="Decor" class="bg-decor-logo top-left" aria-hidden="true" loading="lazy" decoding="async" style="pointer-events: none; z-index: 0; opacity: 0.4;">
+    <div class="container" style="position: relative; z-index: 10;">
+        <div class="checkout-grid">
+            <!-- Left: Forms -->
+            <div class="checkout-main">
+                <!-- Shipping Info -->
+                <div class="checkout-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0; font-size: 1.2rem;"><i class="ph-fill ph-map-pin"></i> Thông tin mua hàng</h2>
+                        <a href="demo_login.html" style="color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600;"><i class="ph-bold ph-sign-out"></i> Đăng xuất</a>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Sổ địa chỉ</label>
+                        <select class="nava-input">
+                            <option value="">Địa chỉ khác...</option>
+                            <option value="1">Nhà riêng - 702 Võ Nguyên Giáp</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="email" class="nava-input" placeholder="Email" value="turniodev@gmail.com">
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="input-group">
+                            <input type="text" class="nava-input" placeholder="Họ và tên" value="Turnio Dev">
+                        </div>
+                        <div class="input-group">
+                            <input type="tel" class="nava-input" placeholder="Số điện thoại" value="0972178527">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <div id="address-trigger" onclick="openAddressModal()" class="nava-input" style="cursor: pointer; display: flex; align-items: center; gap: 10px; background: var(--bg-white); min-height: 52px; user-select: none;">
+                            <i class="ph-bold ph-map-pin" style="color: var(--primary); font-size: 1.1rem; flex-shrink: 0;"></i>
+                            <span id="address-display" style="flex: 1; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">Thành phố Thủ Đức, TP Hồ Chí Minh</span>
+                            <i class="ph-bold ph-caret-down" style="color: var(--text-muted); flex-shrink: 0;"></i>
+                        </div>
+                        <input type="hidden" id="province-select" value="HCM">
+                        <input type="hidden" id="ward-select" value="1">
+                    </div>
+                    
+                    <div class="input-group">
+                        <input type="text" class="nava-input" placeholder="Số nhà, Tên đường (ví dụ: Số 123 Đường ABC)" value="702 Võ Nguyên Giáp">
+                    </div>
+                    
+                    <div class="input-group" style="margin-bottom: 0;">
+                        <textarea class="nava-input" rows="3" placeholder="Ghi chú (tùy chọn)"></textarea>
+                    </div>
+                </div>
+                <!-- Payment Methods -->
+                <div class="checkout-card">
+                    <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px;"><i class="ph-fill ph-credit-card"></i> Thanh toán</h2>
+                            
+                            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
+                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                        <input type="radio" name="payment" value="bank" checked>
+                                        <div>
+                                            <span class="radio-label">Chuyển khoản qua ngân hàng</span>
+                                        </div>
+                                        <i class="ph-fill ph-bank" style="font-size: 1.5rem; color: var(--primary); margin-left: auto;"></i>
+                                    </label>
+                                    <div class="payment-details" id="bank-details" style="display: block; padding: 0 15px 15px 15px; margin: 0;">
+                                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; text-align: center; margin-top: 5px;">
+                                            <p style="font-weight: 700; color: var(--text-dark); margin: 0 0 5px 0;">Ngân hàng TMCP Á Châu (ACB)</p>
+                                            <p style="font-size: 0.9rem; color: var(--text-gray); margin: 0 0 5px 0;">CÔNG TY TNHH NAVATEK</p>
+                                            <p style="font-size: 1.2rem; font-weight: 900; color: var(--primary); margin: 0 0 15px 0; letter-spacing: 1px;">123434688</p>
+                                            <img src="https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=180019000&des=DH%20Nava" alt="QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto;">
+                                            <p style="font-size: 0.8rem; color: var(--text-gray); margin: 15px 0 0 0;">Mở ứng dụng ngân hàng để quét mã QR</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                        <input type="radio" name="payment" value="momo">
+                                        <div>
+                                            <span class="radio-label">Thanh toán qua MoMo</span>
+                                        </div>
+                                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                                    </label>
+                                </div>
+            
+                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                        <input type="radio" name="payment" value="vnpay">
+                                        <div>
+                                            <span class="radio-label">Thanh toán qua VNPAY</span>
+                                        </div>
+                                        <img src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418189687.png" alt="VNPAY" style="max-height: 20px; margin-left: auto;">
+                                    </label>
+                                </div>
+            
+                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                        <input type="radio" name="payment" value="zalopay">
+                                        <div>
+                                            <span class="radio-label">Thanh toán qua ZaloPay</span>
+                                        </div>
+                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png" alt="ZaloPay" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                                    </label>
+                                </div>
+            
+                                <div class="payment-method-wrapper" style="margin: 0;">
+                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                        <input type="radio" name="payment" value="cod">
+                                        <div>
+                                            <span class="radio-label">Thu hộ (COD)</span>
+                                        </div>
+                                        <i class="ph-fill ph-money" style="font-size: 1.5rem; color: #10b981; margin-left: auto;"></i>
+                                    </label>
+                                    <div class="payment-details" id="cod-details" style="display: none; padding: 0 15px 15px 15px; margin: 0;">
+                                        <p style="font-size: 0.9rem; color: var(--text-gray); background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin: 5px 0 0 0;">Khách hàng thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận được sản phẩm.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                <div class="checkout-footer-links" style="display: flex; gap: 20px; font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 40px; flex-wrap: wrap;">
+                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
+                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách bảo mật</a>
+                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Điều khoản sử dụng</a>
+                </div>
+            </div>
+            
+            <!-- Right: Order Summary -->
+            <div style="position: sticky; top: 30px; display: flex; flex-direction: column; gap: 30px; height: fit-content;">
+                <!-- Shipping Methods -->
+                <div class="checkout-card" style="margin-bottom: 0;">
+                    <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px;"><i class="ph-fill ph-truck"></i> Vận chuyển</h2>
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
+                        <label class="radio-option" style="border: none; border-bottom: 1px solid var(--border-color); border-radius: 0; padding: 15px; margin: 0; background: transparent;">
+                            <input type="radio" name="shipping" value="freeship">
+                            <div style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
+                                <span class="radio-label" style="font-weight: 500;">NAVA - Chuyển phát nhanh</span>
+                                <span style="font-weight: 700; color: var(--primary);">FREESHIP</span>
+                            </div>
+                        </label>
+                        <label class="radio-option" id="hoatoc-shipping-option" style="border: none; border-radius: 0; padding: 15px; margin: 0; background: transparent;">
+                            <input type="radio" name="shipping" value="hoatoc" checked>
+                            <div style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
+                                <span class="radio-label" style="font-weight: 500;">Hoả Tốc (HCM)</span>
+                                <span style="font-weight: 700;">39.000₫</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="order-summary" style="margin-bottom: 0; top: 0; position: relative;">
+                    <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px;"><i class="ph-fill ph-receipt"></i> Tóm Tắt Đơn Hàng</h2>
+                    
+                    <div class="order-items-list">
+                        <!-- Item 1 -->
+                        <div class="order-item">
+                            <div class="item-img-wrap">
+                                <span class="item-badge">1</span>
+                                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="item-img">
+                            </div>
+                            <div class="item-info">
+                                <h4 class="item-title">ASUS NUC 14 Essential</h4>
+                                <span class="item-var">Core i3 / 8GB / 256GB</span>
+                            </div>
+                            <div class="item-price">4.490.000₫</div>
+                        </div>
+                        
+                        <!-- Item 2 -->
+                        <div class="order-item">
+                            <div class="item-img-wrap">
+                                <span class="item-badge">1</span>
+                                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="item-img">
+                            </div>
+                            <div class="item-info">
+                                <h4 class="item-title">GMK EVO X1 32G</h4>
+                                <span class="item-var">Ryzen AI 9 HX370 / 32GB / 1TB</span>
+                            </div>
+                            <div class="item-price">31.190.000₫</div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-details" style="margin-top: 25px;">
+                        <div class="summary-line">
+                            <span>Tạm tính</span>
+                            <span style="color: var(--text-dark); font-weight: 600;">35.680.000₫</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Phí vận chuyển</span>
+                            <span id="summary-shipping-fee" style="color: #10b981; font-weight: 600;">Miễn phí</span>
+                        </div>
+                        <div class="summary-line">
+                            <span>Giảm giá</span>
+                            <span style="color: var(--text-dark); font-weight: 600;">0₫</span>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-total">
+                        <div class="summary-total-label">Tổng thanh toán</div>
+                        <div class="summary-total-val" id="summary-total">35.680.000₫</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 25px;">
+                        <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
+                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đây là bản Demo Checkout App UI - Đặt hàng thành công!')">ĐẶT HÀNG</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Address Modal -->
+    <div id="address-modal" class="address-modal-overlay" onclick="closeAddressModal()" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15,23,42,0.5); z-index: 999999; align-items: center; justify-content: center; backdrop-filter: blur(6px); opacity: 1; visibility: visible;">
+        <div class="modal-content" onclick="event.stopPropagation()" style="background: #fff; width: 100%; max-width: 460px; border-radius: 24px; overflow: hidden; display: flex; flex-direction: column; max-height: 80vh; box-shadow: 0 25px 60px -12px rgba(0,0,0,0.25); margin: 20px; z-index: 1000000; position: relative; opacity: 1; visibility: visible;">
+            <div class="modal-header">
+                <h3 id="modal-title">Chọn Tỉnh / Thành phố</h3>
+                <button id="close-modal" class="btn-close" onclick="closeAddressModal()"><i class="ph-bold ph-x"></i></button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="address-search" class="nava-input" placeholder="Tìm kiếm..." style="background: var(--bg-white);">
+            </div>
+            <div class="modal-body" id="address-list">
+                <!-- JS populated -->
+            </div>
+            <div class="modal-footer" id="modal-footer" style="display: none;">
+                <button id="modal-back" class="btn secondary sm" onclick="goBackAddressStep()" style="display: flex; align-items: center; gap: 6px; background: var(--bg-gray); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-dark);"><i class="ph-bold ph-arrow-left"></i> Quay lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Address Modal Logic (Global) ---
+        let cityData = { cities: [], wards: [] };
+        let addressStep = 1; 
+        let selectedCity = null;
+        let selectedWard = null;
+        let fetchError = false;
+
+        fetch('assets/ctiy.json')
+            .then(r => r.json())
+            .then(data => { cityData = data; })
+            .catch(err => { console.error("Lỗi tải json", err); fetchError = true; });
+
+        function getCleanCityName(name) {
+            const match = name.match(/\[(.*?)\]/);
+            return match ? match[1] : name.replace(/\s*\(.*?\)\s*/g, '').trim();
+        }
+
+        function openAddressModal() {
+            console.log("--> openAddressModal() called");
+            addressStep = 1;
+            selectedCity = null;
+            selectedWard = null;
+            const searchInput = document.getElementById('address-search');
+            if(searchInput) searchInput.value = '';
+            renderAddressList();
+            const modal = document.getElementById('address-modal');
+            if(modal) {
+                console.log("Setting modal display to flex");
+                modal.style.display = 'flex';
+                // Force positioning to override any possible bugs
+                modal.style.position = 'fixed';
+                modal.style.top = '0';
+                modal.style.left = '0';
+                modal.style.width = '100vw';
+                modal.style.height = '100vh';
+                modal.style.zIndex = '999999';
+                modal.style.opacity = '1';
+                modal.style.visibility = 'visible';
+            } else {
+                console.error("Modal element not found!");
+            }
+        }
+
+        function closeAddressModal() {
+            const modal = document.getElementById('address-modal');
+            if(modal) modal.style.display = 'none';
+        }
+
+        function goBackAddressStep() {
+            if (addressStep === 2) {
+                addressStep = 1;
+                selectedCity = null;
+                const searchInput = document.getElementById('address-search');
+                if(searchInput) searchInput.value = '';
+                renderAddressList();
+            }
+        }
+
+        function triggerShippingUpdate() {
+            // Trigger a custom event or just let DOMContentLoaded attach it globally
+            if(window.updateShippingStateGlobal) {
+                window.updateShippingStateGlobal();
+            }
+        }
+
+        function renderAddressList() {
+            const searchInput = document.getElementById('address-search');
+            const listEl = document.getElementById('address-list');
+            const displayEl = document.getElementById('address-display');
+            const provinceSelectHidden = document.getElementById('province-select');
+            const hoatocShipping = document.getElementById('hoatoc-shipping-option');
+            
+            const query = searchInput ? searchInput.value.toLowerCase() : '';
+            if(listEl) listEl.innerHTML = '';
+            
+            document.getElementById('modal-title').textContent = addressStep === 1 ? 'Chọn Tỉnh / Thành phố' : 'Chọn Quận / Huyện / Xã';
+            document.getElementById('modal-footer').style.display = addressStep === 2 ? 'flex' : 'none';
+            
+            if (fetchError) {
+                if(listEl) listEl.innerHTML = '<div style="padding: 30px; text-align: center; color: red;">Lỗi tải dữ liệu. Vui lòng mở bằng Live Server.</div>';
+                return;
+            }
+
+            if (addressStep === 1) {
+                const filtered = cityData.cities.filter(c => c.name.toLowerCase().includes(query) || getCleanCityName(c.name).toLowerCase().includes(query));
+                if (filtered.length === 0) listEl.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-gray);">Không tìm thấy</div>';
+                filtered.forEach(c => {
+                    const div = document.createElement('div');
+                    div.className = 'list-item';
+                    div.innerHTML = `<span>${getCleanCityName(c.name)}</span> <i class="ph-bold ph-caret-right" style="color:var(--text-gray)"></i>`;
+                    div.onclick = (e) => {
+                        e.stopPropagation();
+                        selectedCity = c;
+                        addressStep = 2;
+                        if(searchInput) searchInput.value = '';
+                        renderAddressList();
+                    };
+                    if(listEl) listEl.appendChild(div);
+                });
+            } else if (addressStep === 2) {
+                const cleanName = getCleanCityName(selectedCity.name);
+                let wards = cityData.wards.filter(w => w.city === cleanName);
+                if (query) {
+                    wards = wards.filter(w => w.wnew.toLowerCase().includes(query) || (w.wold && w.wold.toLowerCase().includes(query)));
+                }
+                if (wards.length === 0) listEl.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-gray);">Không có dữ liệu</div>';
+                wards.forEach(w => {
+                    const div = document.createElement('div');
+                    div.className = 'list-item';
+                    div.innerHTML = `<div><span>${w.wnew}</span>${w.wold && w.wold !== w.wnew ? `<div class="list-item-sub">(Cũ: ${w.wold})</div>` : ''}</div> <i class="ph-bold ph-check" style="color:transparent"></i>`;
+                    div.onclick = (e) => {
+                        e.stopPropagation();
+                        selectedWard = w;
+                        if(displayEl) {
+                            displayEl.textContent = `${w.wnew}, ${cleanName}`;
+                            displayEl.style.color = 'var(--text-dark)';
+                        }
+                        
+                        if (cleanName.includes("Hà Nội") || cleanName.includes("Hồ Chí Minh") || cleanName.includes("HCM")) {
+                            if(provinceSelectHidden) provinceSelectHidden.value = 'HCM';
+                            if (hoatocShipping) hoatocShipping.style.display = 'flex';
+                        } else {
+                            if(provinceSelectHidden) provinceSelectHidden.value = cleanName;
+                            if (hoatocShipping) hoatocShipping.style.display = 'none';
+                            const freeShip = document.querySelector('input[name="shipping"][value="freeship"]');
+                            if(freeShip) freeShip.checked = true;
+                            triggerShippingUpdate();
+                        }
+                        
+                        closeAddressModal();
+                    };
+                    if(listEl) listEl.appendChild(div);
+                });
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById('address-search');
+            if(searchInput) searchInput.addEventListener('input', renderAddressList);
+            const paymentRadios = document.querySelectorAll('input[name="payment"]');
+            const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+            
+            function updatePaymentState() {
+                paymentRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));
+                document.querySelectorAll('.payment-details').forEach(el => el.style.display = 'none');
+                
+                const checkedPayment = document.querySelector('input[name="payment"]:checked');
+                if (checkedPayment) {
+                    checkedPayment.closest('.radio-option').classList.add('active');
+                    if (checkedPayment.value === 'bank') {
+                        document.getElementById('bank-details').style.display = 'block';
+                    } else if (checkedPayment.value === 'cod') {
+                        document.getElementById('cod-details').style.display = 'block';
+                    }
+                }
+            }
+            
+            function updateShippingState() {
+                shippingRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));
+                const checkedShipping = document.querySelector('input[name="shipping"]:checked');
+                
+                let shippingFee = 0;
+                if (checkedShipping) {
+                    checkedShipping.closest('.radio-option').classList.add('active');
+                    if (checkedShipping.value === 'hoatoc') {
+                        shippingFee = 39000;
+                    }
+                }
+                
+                const shippingFeeEl = document.getElementById('summary-shipping-fee');
+                const totalEl = document.getElementById('summary-total');
+                if (shippingFeeEl && totalEl) {
+                    if (shippingFee === 0) {
+                        shippingFeeEl.textContent = 'Miễn phí';
+                        shippingFeeEl.style.color = '#10b981';
+                    } else {
+                        shippingFeeEl.textContent = shippingFee.toLocaleString('vi-VN') + '₫';
+                        shippingFeeEl.style.color = 'var(--text-dark)';
+                    }
+                    const total = 35680000 + shippingFee;
+                    totalEl.textContent = total.toLocaleString('vi-VN').replace(/,/g, '.') + '₫';
+                }
+            }
+            window.updateShippingStateGlobal = updateShippingState;
+            
+            paymentRadios.forEach(radio => radio.addEventListener('change', updatePaymentState));
+            shippingRadios.forEach(radio => radio.addEventListener('change', updateShippingState));
+
+            updatePaymentState();
+            updateShippingState();
+        });
+    </script>
+</body>
+</html>
+"""
+    with open(os.path.join(base_dir, "demo_checkout.html"), "w", encoding="utf-8") as f:
+        f.write(checkout_html)
+
+def build_policy_pages(base_dir, header_part, footer_part):
+    sticky_stuff = ""
+    with open(os.path.join(base_dir, "index.bwt"), "r", encoding="utf-8") as f:
+        idx_content = f.read()
+        if "<!-- Mobile Sidebar Drawer -->" in idx_content:
+            sticky_stuff = idx_content[idx_content.find("<!-- Mobile Sidebar Drawer -->"):]
+            if "<!-- /MASTER SAPO ESCAPE WRAPPER -->" in sticky_stuff:
+                sticky_stuff = sticky_stuff.split("<!-- /MASTER SAPO ESCAPE WRAPPER -->")[0]
+                
+    local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
+
+    policy_html = """
+        <style>
+            .nava-policy-page { max-width: 1200px; margin: 100px auto 40px; padding: 40px 15px; }
+            .policy-hero { text-align: center; margin-bottom: 40px; padding: 40px 20px; background: linear-gradient(135deg, rgba(0, 51, 102, 0.1), rgba(0, 76, 153, 0.05)); border-radius: var(--radius-lg); border: 1px solid rgba(0, 51, 102, 0.2); }
+            .policy-hero h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin: 0 0 10px 0; }
+            .policy-hero p { color: var(--text-gray); font-size: 1.1rem; margin: 0; }
+            
+            .policy-grid { display: grid; grid-template-columns: 280px 1fr; gap: 30px; }
+            
+            .policy-sidebar { position: sticky; top: 100px; background: var(--bg-white); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; }
+            .policy-sidebar h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+            .policy-nav-list { list-style: none; padding: 0; margin: 0; }
+            .policy-nav-list li { margin-bottom: 10px; }
+            .policy-nav-list a { display: flex; align-items: center; gap: 10px; padding: 12px 15px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; transition: all 0.3s; }
+            .policy-nav-list a:hover { background: rgba(0, 51, 102, 0.05); color: var(--primary); transform: translateX(5px); }
+            .policy-nav-list a.active { background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3); }
+            
+            .policy-content { background: var(--bg-white); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); line-height: 1.8; color: var(--text-dark); font-size: 1.05rem; }
+            .policy-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px dashed var(--border-color); }
+            .policy-content h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin: 30px 0 15px 0; }
+            .policy-content p { margin-bottom: 20px; color: #475569; }
+            .policy-content ul { padding-left: 0; list-style: none; margin-bottom: 25px; }
+            .policy-content ul li { position: relative; padding-left: 30px; margin-bottom: 10px; color: #475569; }
+            .policy-content ul li::before { content: '\\2713'; position: absolute; left: 0; top: 2px; color: var(--primary); font-weight: 900; font-family: sans-serif; font-size: 1.1rem; }
+            
+            .policy-highlight { background: rgba(16, 185, 129, 0.1); padding: 20px; border-left: 4px solid #10b981; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 25px 0; color: #065f46; font-weight: 500; }
+            
+            @media (max-width: 991px) {
+                .policy-grid { grid-template-columns: 1fr; }
+                .policy-sidebar { position: static; margin-bottom: 30px; }
+            }
+            @media (max-width: 575px) {
+                .policy-content { padding: 25px 20px; }
+                .policy-hero { padding: 30px 15px; }
+                .policy-hero h1 { font-size: 2rem; }
+            }
+        </style>
+        
+        <div class="nava-policy-page">
+            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 20px; justify-content: center;">
+                <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
+                <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
+                <span style="color: var(--primary); font-weight: bold;">Chính sách bảo hành</span>
+            </div>
+            
+            <div class="policy-hero">
+                <h1>Chính Sách Bảo Hành</h1>
+                <p>Nava Store cam kết mang lại trải nghiệm dịch vụ hậu mãi tốt nhất</p>
+            </div>
+            
+            <div class="policy-grid">
+                <!-- Sidebar -->
+                <div class="policy-sidebar">
+                    <h3>Danh mục chính sách</h3>
+                    <ul class="policy-nav-list">
+                        <li><a href="#"><i class="ph-bold ph-shield-check"></i> Điều khoản sử dụng</a></li>
+                        <li><a href="#" class="active"><i class="ph-bold ph-wrench"></i> Chính sách bảo hành</a></li>
+                        <li><a href="#"><i class="ph-bold ph-arrows-left-right"></i> Chính sách đổi trả</a></li>
+                        <li><a href="#"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
+                        <li><a href="#"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Content -->
+                <div class="policy-content">
+                    <h2>Quy Định Bảo Hành Chung</h2>
+                    <p>Chào mừng bạn đến với chính sách bảo hành của Nava Store. Chúng tôi luôn mong muốn mang lại cho khách hàng sự yên tâm tuyệt đối khi sử dụng các sản phẩm công nghệ (Mini PC, eGPU, Linh kiện). Dưới đây là các quy định cơ bản:</p>
+                    
+                    <div class="policy-highlight">
+                        Tất cả các sản phẩm bán ra tại Nava Store đều được bảo hành chính hãng hoặc bảo hành trực tiếp tại hệ thống của chúng tôi tùy theo từng thương hiệu cụ thể (Minisforum, ASUS, GMKtec, Beelink,...).
+                    </div>
+                    
+                    <h3>1. Điều kiện bảo hành hợp lệ</h3>
+                    <ul>
+                        <li>Sản phẩm còn trong thời hạn bảo hành tính từ ngày mua hàng (căn cứ theo hóa đơn hoặc tem bảo hành).</li>
+                        <li>Sản phẩm bị lỗi kỹ thuật do nhà sản xuất (phần cứng).</li>
+                        <li>Tem bảo hành của Nava Store hoặc của nhà phân phối phải còn nguyên vẹn, không có dấu hiệu tẩy xóa, rách rời hay chắp vá.</li>
+                        <li>Sê-ri (S/N) trên sản phẩm phải trùng khớp với thông tin trên hệ thống mua hàng.</li>
+                    </ul>
+                    
+                    <h3>2. Trường hợp từ chối bảo hành</h3>
+                    <p>Sản phẩm của quý khách sẽ không được bảo hành miễn phí (mà chuyển sang hình thức sửa chữa tính phí) trong các trường hợp sau:</p>
+                    <ul>
+                        <li>Sản phẩm đã hết thời hạn bảo hành.</li>
+                        <li>Sản phẩm hư hỏng do lỗi người dùng: làm rơi vỡ, vô nước, chập cháy điện do sử dụng sai nguồn, tác động vật lý.</li>
+                        <li>Tự ý tháo lắp, sửa chữa, thay đổi linh kiện bên trong máy mà không có sự ủy quyền của Nava Store.</li>
+                        <li>Thiệt hại do thiên tai, hỏa hoạn, côn trùng phá hoại.</li>
+                    </ul>
+                    
+                    <h3>3. Thời gian và quy trình xử lý</h3>
+                    <p>Khi gặp sự cố, quý khách vui lòng liên hệ trực tiếp bộ phận CSKH qua Hotline hoặc Zalo. Chúng tôi sẽ:</p>
+                    <ul>
+                        <li><strong>Bước 1:</strong> Tiếp nhận thông tin và hướng dẫn xử lý từ xa (nếu là lỗi phần mềm).</li>
+                        <li><strong>Bước 2:</strong> Nếu cần can thiệp phần cứng, quý khách gửi máy về trung tâm bảo hành của Nava Store.</li>
+                        <li><strong>Bước 3:</strong> Thời gian kiểm tra và xử lý thông thường từ <strong>3 - 7 ngày làm việc</strong> (không tính cuối tuần và ngày lễ).</li>
+                        <li><strong>Bước 4:</strong> Bàn giao lại thiết bị hoạt động ổn định cho quý khách.</li>
+                    </ul>
+                    
+                    <p style="margin-top: 40px; text-align: center; font-style: italic; color: var(--text-gray);">
+                        Mọi thắc mắc xin vui lòng liên hệ bộ phận hỗ trợ khách hàng: <strong style="color: var(--primary);">0378 859 736 (Zalo)</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    """
+    
+    full_html = clean_liquid_tags(header_part + policy_html + local_footer_part)
+    with open(os.path.join(base_dir, "demo_policy.html"), "w", encoding="utf-8") as f:
+        f.write(full_html)
+
 def build_all():
     base_dir = r"F:\BAO_SAPO\sapo_new"
     header_part, footer_part = get_core_layout(base_dir)
@@ -2630,6 +3421,15 @@ def build_all():
     
     build_compare_page(base_dir, header_part, footer_part)
     print("Generated demo_compare.html successfully!")
+    
+    build_cart_page(base_dir, header_part, footer_part)
+    print("Generated demo_cart.html successfully!")
+
+    build_checkout_page(base_dir)
+    print("Generated demo_checkout.html successfully!")
+    
+    build_policy_pages(base_dir, header_part, footer_part)
+    print("Generated demo_policy.html successfully!")
     
     build_auth_pages(base_dir)
     print("Generated demo_login.html and demo_register.html successfully!")
