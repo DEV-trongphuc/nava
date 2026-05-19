@@ -186,12 +186,14 @@ custom_styles = """
     
     /* Mobile Responsive */
     @media (max-width: 991px) {
-        .dashboard-container { margin: 20px auto; }
+        .dashboard-container { margin: 30px auto 20px auto; }
         .dashboard-grid { flex-direction: column; gap: 20px; }
         .dashboard-sidebar-wrapper { flex: 1; width: 100%; }
-        .dashboard-content { padding: 20px; }
-        .table-container { border: none; }
-        .table-nava { display: block; width: 100%; overflow-x: auto; white-space: nowrap; }
+        .dashboard-main-wrapper { width: 100%; max-width: 100%; }
+        .dashboard-content { padding: 15px; width: 100%; max-width: 100%; box-sizing: border-box; }
+        .info-grid { grid-template-columns: 1fr; gap: 15px; }
+        .table-container { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--border-color); }
+        .table-nava { display: table; width: 100%; min-width: 600px; }
         .dashboard-sidebar { position: static; margin-bottom: 0; }
         .user-profile-section { display: flex; align-items: center; gap: 15px; padding: 20px; text-align: left; }
         .user-profile-section img { margin: 0 !important; width: 50px !important; height: 50px !important; }
