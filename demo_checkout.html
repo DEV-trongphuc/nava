@@ -113,9 +113,7 @@
                         <input type="hidden" id="ward-select" value="1">
                     </div>
                     
-                    <div class="input-group">
-                        <input type="text" class="nava-input" placeholder="Số nhà, Tên đường (ví dụ: Số 123 Đường ABC)" value="702 Võ Nguyên Giáp">
-                    </div>
+                    
                     
                     <div class="input-group" style="margin-bottom: 0;">
                         <textarea class="nava-input" rows="3" placeholder="Ghi chú (tùy chọn)"></textarea>
@@ -192,9 +190,9 @@
 
 
                 <div class="checkout-footer-links" style="display: flex; gap: 20px; font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 40px; flex-wrap: wrap;">
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách bảo mật</a>
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Điều khoản sử dụng</a>
+                    <a href="demo_policy.html#return" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
+                    <a href="demo_policy.html#privacy" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách bảo mật</a>
+                    <a href="demo_policy.html#terms" style="color: var(--primary); text-decoration: none; font-weight: 500;">Điều khoản sử dụng</a>
                 </div>
             </div>
             
@@ -252,7 +250,7 @@
                         </div>
                     </div>
                     
-                    <div class="summary-details" style="margin-top: 25px;">
+                    <div class="summary-details" style="margin-top: 60px;">
                         <div class="summary-line">
                             <span>Tạm tính</span>
                             <span style="color: var(--text-dark); font-weight: 600;">35.680.000₫</span>
@@ -272,7 +270,7 @@
                         <div class="summary-total-val" id="summary-total">35.680.000₫</div>
                     </div>
                     
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 25px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 60px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
                         <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đây là bản Demo Checkout App UI - Đặt hàng thành công!')">ĐẶT HÀNG</button>
                     </div>
@@ -320,6 +318,8 @@
         }
 
         function openAddressModal() {
+            const modal = document.getElementById("address-modal");
+            if (modal && modal.parentNode !== document.body) { document.body.appendChild(modal); }
             console.log("--> openAddressModal() called");
             addressStep = 1;
             selectedCity = null;
@@ -351,7 +351,7 @@
         }
 
         function goBackAddressStep() {
-            if (addressStep === 2) {
+            if (addressStep === 3) { addressStep = 2; document.querySelector(".modal-search").style.display = "block"; renderAddressList(); } else if (addressStep === 2) {
                 addressStep = 1;
                 selectedCity = null;
                 const searchInput = document.getElementById('address-search');
@@ -367,6 +367,16 @@
             }
         }
 
+        
+        function confirmAddress() {
+            const street = document.getElementById('street-input').value;
+            if(!street) { alert('Vui lòng nhập số nhà & đường'); return; }
+            const fullAddress = street + ', ' + selectedWard.wnew + ', ' + getCleanCityName(selectedCity.name);
+            document.getElementById('address-display').textContent = fullAddress;
+            document.getElementById('address-display').style.color = 'var(--text-dark)';
+            closeAddressModal();
+        }
+    
         function renderAddressList() {
             const searchInput = document.getElementById('address-search');
             const listEl = document.getElementById('address-list');
@@ -401,7 +411,7 @@
                     };
                     if(listEl) listEl.appendChild(div);
                 });
-            } else if (addressStep === 2) {
+            } else if (addressStep === 3) { addressStep = 2; document.querySelector(".modal-search").style.display = "block"; renderAddressList(); } else if (addressStep === 2) {
                 const cleanName = getCleanCityName(selectedCity.name);
                 let wards = cityData.wards.filter(w => w.city === cleanName);
                 if (query) {

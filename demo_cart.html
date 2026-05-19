@@ -119,22 +119,8 @@
                     
                     <!-- MASTER SAPO ESCAPE WRAPPER -->
     <div id="nava-master-wrapper">
-        <!-- Cyber Circuit Grid Background -->
-        <div class="cyber-grid-bg" style="display: none !important;"></div>
+<!-- Cyber Circuit Grid Background Removed -->
         <style>
-            .cyber-grid-bg {
-                position: fixed;
-                top: 0; left: 0; width: 100vw; height: 100vh;
-                z-index: 0; pointer-events: none;
-                opacity: 0.05;
-                background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%233385ff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%233385ff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%233385ff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%233385ff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%233385ff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%233385ff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%233385ff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%233385ff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%233385ff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%233385ff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
-                background-size: 80px 80px;
-                transition: opacity 0.3s ease;
-            }
-            [data-theme="dark"] .cyber-grid-bg {
-                opacity: 0.01;
-                background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10h20v20H10zM70 70h20v20H70zM30 20h40M20 30v40M80 30v40M30 80h40' stroke='%23ffffff' stroke-width='1' fill='none' stroke-opacity='0.8'/%3E%3Ccircle cx='30' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='20' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='20' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='30' r='3' fill='%23ffffff'/%3E%3Ccircle cx='80' cy='70' r='3' fill='%23ffffff'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%23ffffff'/%3E%3Ccircle cx='70' cy='80' r='3' fill='%23ffffff'/%3E%3Cpath d='M0 50h20M80 50h20M50 0v20M50 80v20' stroke='%23ffffff' stroke-width='1' stroke-opacity='0.4'/%3E%3C/svg%3E");
-            }
             .mobile-break { display: none; }
             .customer-card-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 15px; }
             @media (max-width: 768px) {
@@ -466,10 +452,10 @@
             .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 900; color: var(--text-dark); }
             .summary-total-price { color: var(--primary); font-size: 1.5rem; }
             
-            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 25px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
+            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 60px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
             .btn-checkout-nava:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3); color: white !important; }
             
-            .promo-box { display: flex; gap: 10px; margin-top: 25px; }
+            .promo-box { display: flex; gap: 10px; margin-top: 60px; }
             .promo-input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-md); outline: none; font-size: 0.9rem; transition: 0.3s; background: var(--bg-gray); }
             .promo-input:focus { border-color: var(--primary); background: white; }
             .promo-btn { padding: 10px 15px; background: var(--text-dark); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; transition: 0.3s; }

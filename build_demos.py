@@ -107,7 +107,7 @@ def build_collection(base_dir, header_part, footer_part):
             </div>
 
             <!-- Techy Hero Banner -->
-            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 60px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
                 <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
                 <div style="position: relative; z-index: 2;">
                     <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
@@ -1368,17 +1368,18 @@ def build_product(base_dir, header_part, footer_part):
                     .specs-column { padding: 16px !important; }
                     
                     /* Fix variants layout */
-                    .variant-options { display: grid !important; grid-template-columns: 1fr 1fr; gap: 10px; }
-                    .variant-card { flex-direction: column; align-items: flex-start; gap: 4px; padding: 10px; width: 100%; box-sizing: border-box; }
-                    .variant-card-title { font-size: 0.85rem; }
-                    .variant-card-price { font-size: 0.75rem; }
+                    .variant-options { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+                    .variant-card { flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 8px; width: 100%; box-sizing: border-box; text-align: left; }
+                    .variant-card-title { font-size: 0.8rem; }
+                    .variant-card-price { font-size: 0.7rem; }
                     
                     /* Fix actions layout */
                     .nava-product-layout { gap: 24px; margin-bottom: 30px !important; }
                     .action-row { margin-bottom: 16px; }
                     .btn-buy-now-subtext { display: none !important; }
-                    .mobile-actions-col button { padding: 8px 4px !important; }
+                    .mobile-actions-col button { height: 52px !important; padding: 4px !important; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
                     .mobile-actions-col button span { font-size: 0.75rem !important; }
+                    .mobile-actions-col button i { font-size: 1.2rem !important; }
                     
                     /* Fix policies box */
                     .policy-mobile-box { display: flex !important; flex-direction: column !important; gap: 12px !important; }
@@ -1569,7 +1570,71 @@ def build_product(base_dir, header_part, footer_part):
             <div style="margin-bottom: 80px; width: 100%;">
                 <style>
                     .product-details-grid { display: flex; flex-direction: column; gap: 30px; }
-                    .desc-column { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 32px; flex: 1; }
+                    .desc-column { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 32px; flex: 1; min-width: 0; }
+                    .desc-column iframe { display: block; margin: 0 auto 20px auto; border-radius: 16px; width: 100%; aspect-ratio: 16/9; height: auto; border: none; }
+                    .desc-column img { max-width: 100%; height: auto; display: block; margin: 24px auto; border-radius: 12px; }
+                    .desc-column p { line-height: 1.8; color: #475569; margin-bottom: 20px; font-size: 0.95rem; }
+                    .desc-column h2 { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 32px; margin-bottom: 16px; }
+                    .desc-column h3 { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 24px; margin-bottom: 12px; }
+                    .desc-column hr { border: 0; border-top: 1px dashed #e2e8f0; margin: 32px 0; }
+                    .desc-column ul { margin-bottom: 20px; padding-left: 20px; }
+                    .desc-column li { margin-bottom: 8px; line-height: 1.7; color: #475569; font-size: 0.95rem; }
+                    
+                    .desc-content-wrapper {
+                        position: relative;
+                        max-height: 1200px;
+                        overflow: hidden;
+                        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .desc-content-wrapper.expanded {
+                        max-height: 5000px;
+                    }
+                    .desc-overlay {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 140px;
+                        background: linear-gradient(to bottom, rgba(255,255,255,0), #ffffff);
+                        pointer-events: none;
+                        transition: opacity 0.3s ease;
+                    }
+                    [data-theme="dark"] .desc-overlay {
+                        background: linear-gradient(to bottom, rgba(15,23,42,0), var(--bg-white, #1e293b));
+                    }
+                    .desc-content-wrapper.expanded .desc-overlay {
+                        opacity: 0;
+                    }
+                    .btn-show-more {
+                        background: #fff;
+                        border: 1px solid var(--primary);
+                        color: var(--primary);
+                        font-weight: 700;
+                        padding: 10px 28px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                        font-size: 0.9rem;
+                        transition: all 0.2s;
+                        box-shadow: 0 4px 12px rgba(14,165,233,0.05);
+                    }
+                    .btn-show-more:hover {
+                        background: var(--primary);
+                        color: #fff;
+                        box-shadow: 0 6px 16px rgba(14,165,233,0.25);
+                    }
+                    [data-theme="dark"] .btn-show-more {
+                        background: rgba(51, 133, 255, 0.1);
+                        border-color: rgba(51, 133, 255, 0.4);
+                        color: #66a3ff;
+                    }
+                    [data-theme="dark"] .btn-show-more:hover {
+                        background: var(--primary);
+                        color: #fff;
+                    }
+                    
                     .specs-column { background: #f8fafc; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; }
                     .nava-spec-grid { display: flex; flex-direction: column; }
                     .nava-spec-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
@@ -1578,8 +1643,8 @@ def build_product(base_dir, header_part, footer_part):
                     .nava-spec-value { color: #0f172a; font-weight: 600; font-size: 0.85rem; line-height: 1.4; word-break: break-word; }
                     @media (min-width: 992px) {
                         .product-details-grid { flex-direction: row; align-items: flex-start; gap: 40px; }
-                        .desc-column { width: 60%; }
-                        .specs-column { width: 40%; position: sticky; top: 130px; }
+                        .desc-column { flex: 1; min-width: 0; }
+                        .specs-column { width: 380px; flex-shrink: 0; position: sticky; top: 130px; }
                     }
                 </style>
                 
@@ -1587,19 +1652,410 @@ def build_product(base_dir, header_part, footer_part):
                     <!-- Left: Description -->
                     <div class="desc-column">
                         <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 24px; color: #0f172a;">Đặc điểm nổi bật</h2>
-                        
-                        <h3 style="font-weight: 700; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a;">Đỉnh Cao Hiệu Suất Trong Thiết Kế Nhỏ Gọn</h3>
-                        <p style="margin-bottom: 24px; color: #475569; line-height: 1.7; font-size: 0.95rem;">ASUS NUC AI 350 (PN54) là mẫu Mini PC tiên phong được trang bị bộ vi xử lý AMD Ryzen™ AI 300 Series, mang đến hiệu suất vượt trội và khả năng xử lý trí tuệ nhân tạo (AI) tiên tiến. Với thiết kế siêu nhỏ gọn, độ bền đạt chuẩn quân đội MIL-STD-810H, và tích hợp công nghệ Copilot+ PC.</p>
-                        
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0;" alt="ASUS NUC">
-                        
-                        <h3 style="font-weight: 700; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a;">Hiệu Suất Vượt Trội Với AMD Ryzen™ AI 300</h3>
-                        <p style="margin-bottom: 16px; color: #475569; line-height: 1.7; font-size: 0.95rem;">Trang bị bộ vi xử lý tối đa 12 lõi siêu nhanh và kiến trúc tiên tiến:</p>
-                        <ul style="padding-left: 20px; color: #475569; line-height: 1.7; font-size: 0.95rem;">
-                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Đồ họa mạnh mẽ:</strong> AMD Radeon™ 890M dựa trên kiến trúc RDNA™ 3.5.</li>
-                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Băng thông AI tối đa:</strong> Kiến trúc XDNA 2 cung cấp NPU lên đến 50 TOPS.</li>
-                            <li style="margin-bottom: 8px;"><strong style="color: #0f172a;">Chuẩn bị cho tương lai:</strong> Đáp ứng yêu cầu khắt khe của Copilot+ PC.</li>
-                        </ul>
+                        <div class="desc-content-wrapper" id="desc-wrapper">
+                            <div class="position-relative rte">
+ <p>
+  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/g5x0nIzBEWU?si=daKxCL1mOebvtoCn" title="YouTube video player" width="560">
+  </iframe>
+ </p>
+ <p>
+  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Wrc43VVRJnA?si=zAc-N5SDecqi95en" title="YouTube video player" width="560">
+  </iframe>
+ </p>
+ <h2 data-pm-slice="1 1 []" dir="ltr">
+  <strong>
+   Đỉnh Cao Hiệu Suất Trong Thiết Kế Nhỏ Gọn
+  </strong>
+ </h2>
+ <p dir="ltr">
+  ASUS NUC AI 350 (PN54) là mẫu Mini PC tiên phong được trang bị bộ vi xử lý AMD Ryzen™ AI 300 Series, mang đến hiệu suất vượt trội và khả năng xử lý trí tuệ nhân tạo (AI) tiên tiến. Với thiết kế siêu nhỏ gọn, độ bền đạt chuẩn quân đội MIL-STD-810H, và tích hợp công nghệ Copilot+ PC, ASUS NUC AI 350 (PN54) là giải pháp lý tưởng cho các ứng dụng văn phòng, bán lẻ thông minh, biển báo kỹ thuật số, và giải trí tại gia. Được tối ưu hóa cho các tác vụ đòi hỏi hiệu suất cao, sản phẩm này không chỉ đáp ứng nhu cầu hiện tại mà còn định hình tương lai công nghệ với khả năng AI vượt trội.
+ </p>
+ <p dir="ltr" style="text-align: center;">
+  <img data-thumb="original" original-height="692" original-width="692" src="//bizweb.dktcdn.net/100/543/817/files/w692-646e17e0-bbb8-46a8-abc4-7d7c5c7a9734.png?v=1763981380383"/>
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="699" original-width="1632" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-overview.jpg?v=1760324778855"/>
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Hiệu Suất Vượt Trội Với Bộ Vi Xử Lý AMD Ryzen™ AI 300 Series
+  </strong>
+ </h2>
+ <p dir="ltr">
+  ASUS NUC AI 350 (PN54) được trang bị bộ vi xử lý AMD Ryzen™ AI 300 Series với tối đa 12 lõi siêu nhanh và kiến trúc XDNA2 NPU, cung cấp hiệu suất AI lên đến 50 TOPS. So với thế hệ XDNA™ đầu tiên, ASUS NUC AI 350 (PN54) mang lại hiệu suất AI nhanh hơn gấp 5 lần, đảm bảo xử lý mượt mà các tác vụ AI phức tạp như tạo nội dung, phân tích dữ liệu lớn, và tối ưu hóa quy trình làm việc. Bộ vi xử lý này được tối ưu hóa cho các ứng dụng AI mới nhất và hệ điều hành Windows, mang đến trải nghiệm mượt mà, nhanh chóng và thông minh hơn.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="688" original-width="1527" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-wifi6e-bt-2c9d7913-7d53-46e3-b646-beb021384ff2.jpg?v=1760950730370"/>
+ </p>
+ <p dir="ltr">
+  Bộ nhớ
+  <strong>
+   DDR5
+  </strong>
+  max 5600 tốc độ cao, với băng thông tăng 50% ở mức điện áp chỉ 1.1V, giúp
+  <strong>
+   ASUS NUC AI 350 (PN54)
+  </strong>
+  xử lý các tác vụ nặng như chỉnh sửa video 4K, quản lý cơ sở dữ liệu lớn, và đa nhiệm hiệu quả. Công nghệ làm mát thông minh đảm bảo hiệu suất ổn định ngay cả trong môi trường làm việc liên tục 24/7, giúp tối ưu hóa năng lượng và giảm thiểu tiếng ồn.
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Điểm Nổi Bật Của Hiệu Suất
+  </strong>
+ </h2>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    Hiệu Suất AI Vượt Trội: Lên đến 50 TOPS, hỗ trợ các công cụ AI như Text to Image, Generative Fill, và Object Add/Remove, giúp đơn giản hóa quy trình sáng tạo nội dung.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Đa Nhiệm Mượt Mà: 12 lõi siêu nhanh và bộ nhớ DDR5 đảm bảo xử lý nhanh chóng các tác vụ phức tạp.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Tiết Kiệm Năng Lượng: Tiêu thụ năng lượng thấp hơn 40% so với các dòng Mini PC thông thường, phù hợp với các tiêu chuẩn tiết kiệm năng lượng nghiêm ngặt.
+   </p>
+  </li>
+ </ul>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="753" original-width="1757" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-cpu.jpg?v=1760325120134"/>
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   AMD Radeon™ 860M Graphics
+  </strong>
+ </h2>
+ <p dir="ltr">
+  <strong>
+   ASUS NUC AI 350 (PN54)
+  </strong>
+  tích hợp card đồ họa
+  <strong>
+   AMD Radeon™ 860M
+  </strong>
+  , mang đến khả năng hiển thị xuất sắc với độ phân giải 4K trên tối đa bốn màn hình đồng thời. Điều này khiến
+  <strong>
+   ASUS NUC AI 350 (PN54)
+  </strong>
+  trở thành lựa chọn lý tưởng cho các ứng dụng như biển báo kỹ thuật số, trình chiếu đa phương tiện, hoặc thiết lập không gian làm việc đa màn hình. Card đồ họa Radeon™ 860M còn hỗ trợ chơi game nhẹ, đáp ứng nhu cầu giải trí của người dùng trong giờ nghỉ.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="720" original-width="1280" src="//bizweb.dktcdn.net/100/543/817/files/860m.jpg?v=1755682730132"/>
+ </p>
+ <h3 dir="ltr">
+  Ứng Dụng Đồ Họa
+ </h3>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    <strong>
+     Hiển Thị Đa Màn Hình
+    </strong>
+    : Kết nối đồng thời bốn màn hình 4K, lý tưởng cho các ứng dụng bán lẻ, văn phòng, hoặc giải trí tại gia.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    <strong>
+     Chỉnh Sửa Video 4K
+    </strong>
+    : Khả năng xử lý đồ họa mạnh mẽ giúp chỉnh sửa video mượt mà, đáp ứng nhu cầu của các nhà sáng tạo nội dung.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    <strong>
+     Hiệu Suất Đồ Họa Cao
+    </strong>
+    : Radeon™ 800M đảm bảo trải nghiệm hình ảnh sắc nét, màu sắc sống động, và hiệu ứng mượt mà.
+   </p>
+  </li>
+ </ul>
+ <p dir="ltr">
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Kết Nối Siêu Nhanh Và Linh Hoạt
+  </strong>
+ </h2>
+ <p dir="ltr">
+  <strong>
+   ASUS NUC AI 350 (PN54)
+  </strong>
+  được trang bị bộ kết nối tiên tiến, bao gồm Wi-Fi 6E từ MediaTek, Bluetooth 5.3, và tùy chọn LAN 2.5G, đảm bảo tốc độ truyền dữ liệu nhanh chóng và ổn định. Với sáu cổng USB, hai cổng DisplayPort, và hỗ trợ USB 4, PN54 đáp ứng mọi nhu cầu kết nối từ văn phòng hiện đại đến các hệ thống bán lẻ thông minh. Công nghệ Wi-Fi 6E cho phép kết nối đồng thời lên đến 16 thiết bị, đảm bảo hiệu suất mạng tối ưu ngay cả trong môi trường đông đúc.
+ </p>
+ <p dir="ltr">
+  <br/>
+  <img data-thumb="original" original-height="1035" original-width="1500" src="//bizweb.dktcdn.net/100/543/817/files/mini-pc-asus-nuc-ai-350-2.jpg?v=1763981401892">
+   <img data-thumb="original" original-height="990" original-width="1300" src="//bizweb.dktcdn.net/100/543/817/files/vn-11134208-820l4-mfp9kvo3rtal15-resize-w1750-nl.jpg?v=1760325260948"/>
+  </img>
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Đặc Điểm Kết Nối
+  </strong>
+ </h2>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    <strong>
+     Wi-Fi 6E:
+    </strong>
+    Tốc độ tải xuống nhanh hơn và truyền dữ liệu ổn định, lý tưởng cho các ứng dụng trực tuyến và đám mây.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    <strong>
+     LAN 2.5G
+    </strong>
+    : Hỗ trợ kết nối mạng đa thiết bị, phù hợp với các hệ thống phức tạp như trung tâm dữ liệu hoặc bán lẻ thông minh.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    <strong>
+     USB 4
+    </strong>
+    : Tốc độ truyền dữ liệu siêu nhanh, đáp ứng nhu cầu kết nối với các thiết bị ngoại vi hiện đại.
+   </p>
+  </li>
+ </ul>
+ <p dir="ltr">
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Bảo Mật Cao Cấp Với Công Nghệ Tiên Tiến
+  </strong>
+ </h2>
+ <p dir="ltr">
+  Bảo mật là ưu tiên hàng đầu của ASUS ExpertCenter PN54. Sản phẩm tích hợp công nghệ nhận diện dấu vân tay, cho phép đăng nhập Windows Hello nhanh chóng và an toàn, thay thế mật khẩu truyền thống bằng dữ liệu sinh trắc học mã hóa. Mô-đun TPM (Trusted Platform Module) tùy chọn cung cấp mã hóa dựa trên phần cứng, bảo vệ dữ liệu khỏi các truy cập trái phép. Ngoài ra, phím Copilot chuyên dụng cho phép kích hoạt tức thì các tính năng AI, nâng cao hiệu quả công việc và bảo mật.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="953" original-width="1653" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-npu-copilot-plus-pc.jpg?v=1760325275931"/>
+ </p>
+ <h3 dir="ltr">
+  <strong>
+   Tính Năng Bảo Mật
+  </strong>
+ </h3>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    <strong>
+     Nhận Diện Dấu Vân Tay
+    </strong>
+    : Đăng nhập an toàn và tiện lợi, bảo vệ dữ liệu cá nhân và doanh nghiệp.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    TPM Tùy Chọn: Mã hóa phần cứng giúp bảo vệ dữ liệu khỏi các mối đe dọa an ninh mạng.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    <strong>
+     Phím Copilot
+    </strong>
+    : Kích hoạt nhanh các tính năng AI, tối ưu hóa quy trình làm việc và cá nhân hóa trải nghiệm người dùng.
+   </p>
+  </li>
+ </ul>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Thiết Kế Nhỏ Gọn, Độ Bền Chuẩn Quân Đội
+  </strong>
+ </h2>
+ <p dir="ltr">
+  Với kích thước chỉ 130 x 130 x 34mm,
+  <strong>
+   ASUS NUC AI 350 (PN54)
+  </strong>
+  là một trong những Mini PC nhỏ gọn nhất trên thị trường, dễ dàng phù hợp với mọi không gian làm việc. Dù nhỏ gọn, sản phẩm vẫn đạt chuẩn độ bền quân đội MIL-STD-810H, vượt qua các bài kiểm tra khắc nghiệt về sốc, nhiệt độ cực đoan, cát bụi, và rung lắc. Thiết kế mô-đun không cần dụng cụ cho phép nâng cấp bộ nhớ và lưu trữ dễ dàng, đảm bảo khả năng mở rộng trong tương lai.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="746" original-width="1500" src="//bizweb.dktcdn.net/100/543/817/files/mini-pc-asus-nuc-ai-350.jpg?v=1763981435550"/>
+ </p>
+ <h3 dir="ltr">
+  <strong>
+   Đặc Điểm Thiết Kế
+  </strong>
+ </h3>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    Kích Thước Siêu Nhỏ: Tiết kiệm không gian, phù hợp với văn phòng, cửa hàng bán lẻ, hoặc giải trí tại gia.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Độ Bền MIL-STD-810H: Đảm bảo hoạt động ổn định trong các điều kiện môi trường khắc nghiệt.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Nâng Cấp Dễ Dàng: Thiết kế mô-đun giúp thay thế hoặc nâng cấp RAM và SSD mà không cần dụng cụ chuyên dụng.
+   </p>
+  </li>
+ </ul>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Tính Bền Vững Và Tiết Kiệm Năng Lượng
+  </strong>
+ </h2>
+ <p dir="ltr">
+  ASUS cam kết xây dựng tương lai bền vững với ExpertCenter PN54. Sản phẩm sử dụng vật liệu thân thiện với môi trường và đạt tiêu chuẩn EPEAT Climate+, đồng thời cung cấp hiệu suất năng lượng vượt trội với mức tiết kiệm năng lượng lên đến 40%. Quy trình sản xuất của ASUS tuân thủ các tiêu chuẩn ESG cao, đảm bảo giảm thiểu tác động đến môi trường mà vẫn duy trì hiệu suất tối ưu.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="812" original-width="1973" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-bao-ve-moi-truong.jpg?v=1760325294990"/>
+ </p>
+ <h3 dir="ltr">
+  Cam Kết Bền Vững
+ </h3>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    Vật Liệu Thân Thiện Môi Trường: Đáp ứng tiêu chuẩn EPEAT Climate+, giảm thiểu tác động đến môi trường.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Tiết Kiệm Năng Lượng: Giảm 40% tiêu thụ năng lượng, lý tưởng cho các doanh nghiệp chú trọng đến hiệu quả năng lượng.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Sản Xuất Bền Vững: Quy trình sản xuất tuân thủ các tiêu chuẩn ESG, góp phần xây dựng tương lai xanh.
+   </p>
+  </li>
+ </ul>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Ứng Dụng Đa Dạng Cho Mọi Nhu Cầu
+  </strong>
+ </h2>
+ <p dir="ltr">
+  ASUS ExpertCenter PN54 là giải pháp toàn diện cho nhiều lĩnh vực, từ văn phòng hiện đại, bán lẻ thông minh, đến giải trí tại gia. Với khả năng hỗ trợ AI cục bộ, sản phẩm đảm bảo bảo mật dữ liệu tối ưu, đặc biệt quan trọng đối với các doanh nghiệp xử lý thông tin nhạy cảm. PN54 còn lý tưởng cho các nhà sáng tạo nội dung, với khả năng xử lý các tác vụ như chỉnh sửa video 4K, tạo hình ảnh bằng AI, và quản lý dữ liệu lớn.
+ </p>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="357" original-width="1249" src="//bizweb.dktcdn.net/100/543/817/files/screenshot-2025-08-20-164533.jpg?v=1755683147185"/>
+ </p>
+ <h3 dir="ltr">
+  Ứng Dụng Cụ Thể
+ </h3>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    Văn Phòng Hiện Đại: Hỗ trợ đa nhiệm, kết nối đa màn hình, và các công cụ AI để tăng năng suất.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Bán Lẻ Thông Minh: Hỗ trợ biển báo kỹ thuật số, kết nối mạng tốc độ cao, và thiết kế nhỏ gọn cho không gian hạn chế.
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Giải Trí Tại Gia: Hỗ trợ hiển thị 4K và chơi game nhẹ, mang đến trải nghiệm giải trí đỉnh cao.
+   </p>
+  </li>
+ </ul>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="721" original-width="1643" src="//bizweb.dktcdn.net/100/543/817/files/asus-nuc-ai-350-pn54-ung-dung.jpg?v=1760325316050"/>
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Thông Số Kỹ Thuật
+  </strong>
+ </h2>
+ <ul data-tight="true" dir="ltr">
+  <li>
+   <p dir="ltr">
+    Bộ Vi Xử Lý: AMD Ryzen™ AI 300 Series (tùy chọn Ryzen AI 5 340, Ryzen AI 5 350, Ryzen AI 7 350)
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Đồ Họa: AMD Radeon™ 800M (Radeon 860M với Ryzen AI 7 350)
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Bộ Nhớ: Hỗ trợ lên đến 128GB DDR5 RAM
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Lưu Trữ: Hỗ trợ lên đến 2TB M.2 NVMe SSD
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Kết Nối: Wi-Fi 6E, Bluetooth 5.2,LAN 2.5G, USB 4, sáu cổng USB, hai cổng DisplayPort
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Hệ Điều Hành: Windows 11
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Bảo Mật: Nhận diện dấu vân tay, TPM tùy chọn, phím Copilot
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Kích Thước: 130 x 130 x 34mm
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Độ Bền: Chuẩn quân đội MIL-STD-810H
+   </p>
+  </li>
+  <li>
+   <p dir="ltr">
+    Tiết Kiệm Năng Lượng: Tiêu thụ năng lượng thấp hơn 40%, đạt chuẩn EPEAT Climate+
+   </p>
+  </li>
+ </ul>
+ <p dir="ltr">
+  <img data-thumb="original" original-height="1149" original-width="1500" src="//bizweb.dktcdn.net/100/543/817/files/mini-pc-asus-nuc-ai-350-3.jpg?v=1763981447557"/>
+ </p>
+ <hr/>
+ <h2 dir="ltr">
+  <strong>
+   Kết Luận
+  </strong>
+ </h2>
+ <p dir="ltr">
+  ASUS NUC AI 350 (PN54) là sự kết hợp hoàn hảo giữa hiệu suất mạnh mẽ, thiết kế nhỏ gọn, và công nghệ AI tiên tiến. Với bộ vi xử lý AMD Ryzen™ AI 300 Series, đồ họa Radeon™ 800M, và khả năng kết nối vượt trội, PN54 không chỉ đáp ứng nhu cầu hiện tại mà còn sẵn sàng cho tương lai. Độ bền chuẩn quân đội, bảo mật cao cấp, và cam kết bền vững khiến sản phẩm này trở thành lựa chọn hàng đầu cho các doanh nghiệp, nhà sáng tạo nội dung, và người dùng cá nhân. Hãy khám phá ASUS ExpertCenter PN54 ngay hôm nay để trải nghiệm công nghệ đỉnh cao trong tầm tay!
+ </p>
+ <p>
+  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/_er1aM1m2Ho?si=eHqkesK0LAb_zM1k" title="YouTube video player" width="560">
+  </iframe>
+ </p>
+</div>
+                            <div class="desc-overlay"></div>
+                        </div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button class="btn-show-more" onclick="toggleDescription()" id="btn-show-desc">Xem thêm <i class="ph-bold ph-caret-down"></i></button>
+                        </div>
                     </div>
                     
                     <!-- Right: Technical Specs -->
@@ -1610,46 +2066,80 @@ def build_product(base_dir, header_part, footer_part):
                         
                         <div class="nava-spec-grid">
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">CPU</div>
-                                <div class="nava-spec-value">AMD Ryzen™ AI 7 350 (up to 5.1 GHz)</div>
+                                <div class="nava-spec-label">Thương hiệu</div>
+                                <div class="nava-spec-value">Asus</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">Đồ họa</div>
+                                <div class="nava-spec-label">Model</div>
+                                <div class="nava-spec-value">NUC AI 350 (PN54)</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Tình trạng</div>
+                                <div class="nava-spec-value">Mới 100%</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Kích thước</div>
+                                <div class="nava-spec-value">130x130x34mm</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">CPU</div>
+                                <div class="nava-spec-value">AMD Ryzen AI 7 350 8C/16T max 5.0Ghz</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">CPU Mark</div>
+                                <div class="nava-spec-value">30.000</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">GPU</div>
                                 <div class="nava-spec-value">AMD Radeon™ 860M</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">NPU (AI)</div>
-                                <div class="nava-spec-value">Lên đến 50 TOPS</div>
+                                <div class="nava-spec-label">G3D Mark</div>
+                                <div class="nava-spec-value">8.500</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">RAM</div>
-                                <div class="nava-spec-value">Hỗ trợ DDR5-5600 (Max 64GB)</div>
+                                <div class="nava-spec-label">Ram</div>
+                                <div class="nava-spec-value">2x DDR5 5600 tối đa 128GB</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">Lưu trữ</div>
-                                <div class="nava-spec-value">2 x M.2 2280 PCIe Gen4x4 NVMe</div>
+                                <div class="nava-spec-label">SSD</div>
+                                <div class="nava-spec-value">2x M.2 2280 NVMe</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">Kết nối</div>
-                                <div class="nava-spec-value">Wi-Fi 6E, Bluetooth 5.3, 2.5G LAN</div>
+                                <div class="nava-spec-label">Kết nối không dây</div>
+                                <div class="nava-spec-value">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">Cổng xuất hình</div>
-                                <div class="nava-spec-value">Hỗ trợ 4 màn hình 4K</div>
+                                <div class="nava-spec-label">Cổng IO</div>
+                                <div class="nava-spec-value" style="font-weight: 600; line-height: 1.6;">
+                                    1x USB 4<br>
+                                    1x USB 3.2 Gen2 Type A (10G)<br>
+                                    1x USB 2.0 Type A (5G)<br>
+                                    1x HDMI2.1(FRL6)<br>
+                                    2x DisplayPort 1.4<br>
+                                    1x 2.5G RJ45 LAN<br>
+                                    1x DC in
+                                </div>
                             </div>
                             <div class="nava-spec-row">
-                                <div class="nava-spec-label">Trọng lượng</div>
-                                <div class="nava-spec-value">0.75 kg</div>
+                                <div class="nava-spec-label">Power</div>
+                                <div class="nava-spec-value">DC 120W</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">Tính năng đặc biệt</div>
+                                <div class="nava-spec-value">Vân tay, Copilot+, lên đến 66 TOPS</div>
+                            </div>
+                            <div class="nava-spec-row">
+                                <div class="nava-spec-label">OS</div>
+                                <div class="nava-spec-value">Win 11 Pro, Office 2021</div>
                             </div>
                             <div class="nava-spec-row">
                                 <div class="nava-spec-label">Bảo hành</div>
-                                <div class="nava-spec-value">36 tháng chính hãng</div>
+                                <div class="nava-spec-value">36 tháng</div>
                             </div>
                         </div>
                         
-                        <button class="action-btn" style="width: 100%; margin-top: 30px; border: 1px solid #cbd5e1; background: #fff; color: var(--primary); font-weight: 700; height: 48px; border-radius: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 4px 10px rgba(14,165,233,0.1)';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                            <i class="ph-bold ph-download-simple"></i> Tải Datasheet (PDF)
-                        </button>
+
                     </div>
                 </div>
             </div>
@@ -1868,6 +2358,18 @@ def build_product(base_dir, header_part, footer_part):
             </div>
             
             <script>
+                function toggleDescription() {
+                    const wrapper = document.getElementById('desc-wrapper');
+                    const btn = document.getElementById('btn-show-desc');
+                    if (wrapper.classList.contains('expanded')) {
+                        wrapper.classList.remove('expanded');
+                        btn.innerHTML = 'Xem thêm <i class="ph-bold ph-caret-down"></i>';
+                        wrapper.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        wrapper.classList.add('expanded');
+                        btn.innerHTML = 'Thu gọn <i class="ph-bold ph-caret-up"></i>';
+                    }
+                }
                 // Image Gallery Logic
                 function changeMainImage(element, src) {
                     const img = document.getElementById('main-product-img');
@@ -2491,7 +2993,7 @@ def build_compare_page(base_dir, header_part, footer_part):
 
     compare_html = """
         <style>
-            .compare-page { padding: 40px 15px; max-width: 1200px; margin: 100px auto 40px; }
+            .compare-page { padding: 20px 15px; max-width: 1200px; margin: 10px auto; }
             .compare-hero { text-align: center; margin-bottom: 40px; }
             .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
             .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
@@ -2541,7 +3043,6 @@ def build_compare_page(base_dir, header_part, footer_part):
             
             <div class="compare-hero">
                 <h1>So Sánh Sản Phẩm</h1>
-                <p>Khám phá sự khác biệt để lựa chọn cấu hình phù hợp nhất với bạn</p>
             </div>
             
             <div class="compare-grid">
@@ -2553,13 +3054,13 @@ def build_compare_page(base_dir, header_part, footer_part):
                     <div class="compare-cell-header">
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
                         <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC" class="compare-prod-img">
-                        <div class="compare-prod-title">ASUS NUC AI 350</div>
+                        <div class="compare-prod-title">ASUS NUC AI 350 (PN54)</div>
                         <div class="compare-prod-price">12.390.000₫</div>
                         <a href="demo_product.html" class="btn-pill btn-blue" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; text-decoration: none; display: block; box-sizing: border-box;">Mua ngay</a>
                     </div>
                     <div class="compare-cell-header">
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
-                        <img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/products/minisforum-um880-pro.jpg?v=1723521250260" alt="UM890 PRO" class="compare-prod-img">
+                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420" alt="UM890 PRO" class="compare-prod-img">
                         <div class="compare-prod-title">MINISFORUM UM890 Pro</div>
                         <div class="compare-prod-price">14.990.000₫</div>
                         <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
@@ -2568,45 +3069,105 @@ def build_compare_page(base_dir, header_part, footer_part):
                 
                 <!-- Specs -->
                 <div class="compare-row">
-                    <div class="compare-cell compare-label">Vi xử lý (CPU)</div>
-                    <div class="compare-cell highlight-cell"><i class="ph-fill ph-cpu" style="margin-right: 5px;"></i> AMD Ryzen™ AI 7 350</div>
-                    <div class="compare-cell">AMD Ryzen™ 9 8945HS</div>
+                    <div class="compare-cell compare-label">Thương hiệu</div>
+                    <div class="compare-cell">Asus</div>
+                    <div class="compare-cell">Minisforum</div>
                 </div>
-                
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Model</div>
+                    <div class="compare-cell">NUC AI 350 (PN54)</div>
+                    <div class="compare-cell">UM890 Pro</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Tình trạng</div>
+                    <div class="compare-cell">Mới 100%</div>
+                    <div class="compare-cell">Mới 100%</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Kích thước</div>
+                    <div class="compare-cell highlight-cell">130x130x34mm (Cực mỏng)</div>
+                    <div class="compare-cell">130x127x60mm</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Vi xử lý (CPU)</div>
+                    <div class="compare-cell">AMD Ryzen AI 7 350 (8C/16T, max 5.0Ghz)</div>
+                    <div class="compare-cell highlight-cell">AMD Ryzen 9 8945HS (8C/16T, max 5.2Ghz)</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">CPU Mark (Hiệu năng)</div>
+                    <div class="compare-cell highlight-cell">~30.000 điểm</div>
+                    <div class="compare-cell">~29.500 điểm</div>
+                </div>
+
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Đồ họa (GPU)</div>
-                    <div class="compare-cell highlight-cell">Radeon™ 860M (RDNA 3.5)</div>
-                    <div class="compare-cell">Radeon™ 780M (RDNA 3)</div>
+                    <div class="compare-cell highlight-cell">AMD Radeon™ 860M</div>
+                    <div class="compare-cell">AMD Radeon™ 780M</div>
                 </div>
-                
+
                 <div class="compare-row">
-                    <div class="compare-cell compare-label">NPU (Xử lý AI)</div>
-                    <div class="compare-cell highlight-cell">Lên đến 50 TOPS</div>
-                    <div class="compare-cell">Lên đến 39 TOPS</div>
+                    <div class="compare-cell compare-label">G3D Mark (Đồ họa)</div>
+                    <div class="compare-cell highlight-cell">~8.500 điểm</div>
+                    <div class="compare-cell">~7.200 điểm</div>
                 </div>
-                
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Xử lý AI (NPU)</div>
+                    <div class="compare-cell highlight-cell">Lên đến 50 TOPS NPU (Tổng 66 TOPS)</div>
+                    <div class="compare-cell">Lên đến 16 TOPS NPU (Tổng 39 TOPS)</div>
+                </div>
+
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Hỗ trợ RAM</div>
-                    <div class="compare-cell">DDR5 Dual 5600MHz (Max 96GB)</div>
-                    <div class="compare-cell highlight-cell">DDR5 Dual 5600MHz (Max 96GB)</div>
+                    <div class="compare-cell highlight-cell">2x DDR5 5600 tối đa 128GB</div>
+                    <div class="compare-cell">2x DDR5 5600 tối đa 96GB</div>
                 </div>
-                
+
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Lưu trữ (SSD)</div>
-                    <div class="compare-cell">2x M.2 2280 PCIe 4.0 x4</div>
-                    <div class="compare-cell highlight-cell">2x M.2 2280 PCIe 4.0 x4</div>
+                    <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
+                    <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
                 </div>
-                
+
                 <div class="compare-row">
-                    <div class="compare-cell compare-label">Cổng kết nối đặc biệt</div>
-                    <div class="compare-cell">Wi-Fi 6E, Bluetooth 5.3</div>
-                    <div class="compare-cell highlight-cell"><i class="ph-bold ph-plugs" style="margin-right: 5px;"></i> Cổng OCuLink 64Gbps (Gắn eGPU)</div>
+                    <div class="compare-cell compare-label">Kết nối không dây</div>
+                    <div class="compare-cell highlight-cell">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
+                    <div class="compare-cell">Wi-Fi 6E + Bluetooth® 5.3</div>
                 </div>
-                
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Cổng kết nối (IO)</div>
+                    <div class="compare-cell">1x USB4, 1x USB 3.2 Gen2 A, 1x USB 2.0, 1x HDMI 2.1, 2x DP 1.4, 1x 2.5G LAN</div>
+                    <div class="compare-cell highlight-cell">2x USB4, 4x USB 3.2 Gen2 A, 1x HDMI 2.1, 1x DP 1.4, 2x 2.5G LAN, 1x OCuLink</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Tính năng đặc biệt</div>
+                    <div class="compare-cell">Vân tay, phím Copilot+, hỗ trợ Copilot+ PC</div>
+                    <div class="compare-cell highlight-cell">Cổng OCuLink chuyên dụng gắn eGPU, tản nhiệt kim loại lỏng</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Hệ điều hành</div>
+                    <div class="compare-cell highlight-cell">Win 11 Pro + Office 2021 bản quyền</div>
+                    <div class="compare-cell">Win 11 Pro bản quyền</div>
+                </div>
+
+                <div class="compare-row">
+                    <div class="compare-cell compare-label">Nguồn cấp điện</div>
+                    <div class="compare-cell">Adapter DC 120W</div>
+                    <div class="compare-cell highlight-cell">Adapter GaN 120W (Cực kỳ nhỏ gọn)</div>
+                </div>
+
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Bảo hành</div>
-                    <div class="compare-cell highlight-cell"><i class="ph-fill ph-shield-check" style="margin-right: 5px;"></i> 36 tháng chính hãng ASUS</div>
-                    <div class="compare-cell">12 tháng MINISFORUM</div>
+                    <div class="compare-cell highlight-cell"><i class="ph-fill ph-shield-check" style="margin-right: 5px;"></i> 36 tháng chính hãng ASUS Việt Nam</div>
+                    <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
                 </div>
             </div>
         </div>
@@ -2663,10 +3224,10 @@ def build_cart_page(base_dir, header_part, footer_part):
             .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 900; color: var(--text-dark); }
             .summary-total-price { color: var(--primary); font-size: 1.5rem; }
             
-            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 25px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
+            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 60px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
             .btn-checkout-nava:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3); color: white !important; }
             
-            .promo-box { display: flex; gap: 10px; margin-top: 25px; }
+            .promo-box { display: flex; gap: 10px; margin-top: 60px; }
             .promo-input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-md); outline: none; font-size: 0.9rem; transition: 0.3s; background: var(--bg-gray); }
             .promo-input:focus { border-color: var(--primary); background: white; }
             .promo-btn { padding: 10px 15px; background: var(--text-dark); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; transition: 0.3s; }
@@ -2898,9 +3459,7 @@ def build_checkout_page(base_dir):
                         <input type="hidden" id="ward-select" value="1">
                     </div>
                     
-                    <div class="input-group">
-                        <input type="text" class="nava-input" placeholder="Số nhà, Tên đường (ví dụ: Số 123 Đường ABC)" value="702 Võ Nguyên Giáp">
-                    </div>
+                    
                     
                     <div class="input-group" style="margin-bottom: 0;">
                         <textarea class="nava-input" rows="3" placeholder="Ghi chú (tùy chọn)"></textarea>
@@ -2977,9 +3536,9 @@ def build_checkout_page(base_dir):
 
 
                 <div class="checkout-footer-links" style="display: flex; gap: 20px; font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 40px; flex-wrap: wrap;">
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách bảo mật</a>
-                    <a href="demo_policy.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">Điều khoản sử dụng</a>
+                    <a href="demo_policy.html#return" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
+                    <a href="demo_policy.html#privacy" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách bảo mật</a>
+                    <a href="demo_policy.html#terms" style="color: var(--primary); text-decoration: none; font-weight: 500;">Điều khoản sử dụng</a>
                 </div>
             </div>
             
@@ -3037,7 +3596,7 @@ def build_checkout_page(base_dir):
                         </div>
                     </div>
                     
-                    <div class="summary-details" style="margin-top: 25px;">
+                    <div class="summary-details" style="margin-top: 60px;">
                         <div class="summary-line">
                             <span>Tạm tính</span>
                             <span style="color: var(--text-dark); font-weight: 600;">35.680.000₫</span>
@@ -3057,7 +3616,7 @@ def build_checkout_page(base_dir):
                         <div class="summary-total-val" id="summary-total">35.680.000₫</div>
                     </div>
                     
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 25px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 60px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
                         <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đây là bản Demo Checkout App UI - Đặt hàng thành công!')">ĐẶT HÀNG</button>
                     </div>
@@ -3105,6 +3664,8 @@ def build_checkout_page(base_dir):
         }
 
         function openAddressModal() {
+            const modal = document.getElementById("address-modal");
+            if (modal && modal.parentNode !== document.body) { document.body.appendChild(modal); }
             console.log("--> openAddressModal() called");
             addressStep = 1;
             selectedCity = null;
@@ -3136,7 +3697,7 @@ def build_checkout_page(base_dir):
         }
 
         function goBackAddressStep() {
-            if (addressStep === 2) {
+            if (addressStep === 3) { addressStep = 2; document.querySelector(".modal-search").style.display = "block"; renderAddressList(); } else if (addressStep === 2) {
                 addressStep = 1;
                 selectedCity = null;
                 const searchInput = document.getElementById('address-search');
@@ -3152,6 +3713,16 @@ def build_checkout_page(base_dir):
             }
         }
 
+        
+        function confirmAddress() {
+            const street = document.getElementById('street-input').value;
+            if(!street) { alert('Vui lòng nhập số nhà & đường'); return; }
+            const fullAddress = street + ', ' + selectedWard.wnew + ', ' + getCleanCityName(selectedCity.name);
+            document.getElementById('address-display').textContent = fullAddress;
+            document.getElementById('address-display').style.color = 'var(--text-dark)';
+            closeAddressModal();
+        }
+    
         function renderAddressList() {
             const searchInput = document.getElementById('address-search');
             const listEl = document.getElementById('address-list');
@@ -3186,7 +3757,7 @@ def build_checkout_page(base_dir):
                     };
                     if(listEl) listEl.appendChild(div);
                 });
-            } else if (addressStep === 2) {
+            } else if (addressStep === 3) { addressStep = 2; document.querySelector(".modal-search").style.display = "block"; renderAddressList(); } else if (addressStep === 2) {
                 const cleanName = getCleanCityName(selectedCity.name);
                 let wards = cityData.wards.filter(w => w.city === cleanName);
                 if (query) {
@@ -3298,52 +3869,52 @@ def build_policy_pages(base_dir, header_part, footer_part):
 
     policy_html = """
         <style>
-            .nava-policy-page { max-width: 1200px; margin: 100px auto 40px; padding: 40px 15px; }
-            .policy-hero { text-align: center; margin-bottom: 40px; padding: 40px 20px; background: linear-gradient(135deg, rgba(0, 51, 102, 0.1), rgba(0, 76, 153, 0.05)); border-radius: var(--radius-lg); border: 1px solid rgba(0, 51, 102, 0.2); }
-            .policy-hero h1 { font-size: 2.5rem; font-weight: 900; color: var(--text-dark); margin: 0 0 10px 0; }
-            .policy-hero p { color: var(--text-gray); font-size: 1.1rem; margin: 0; }
+            .nava-policy-page { max-width: 1200px; margin: 60px auto 30px; padding: 20px 15px; }
+            .policy-hero { text-align: center; margin-bottom: 25px; padding: 25px 20px; background: linear-gradient(135deg, rgba(0, 51, 102, 0.08), rgba(0, 76, 153, 0.03)); border-radius: var(--radius-md); border: 1px solid rgba(0, 51, 102, 0.15); }
+            .policy-hero h1 { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 0 0 6px 0; }
+            .policy-hero p { color: var(--text-gray); font-size: 0.95rem; margin: 0; }
             
-            .policy-grid { display: grid; grid-template-columns: 280px 1fr; gap: 30px; }
+            .policy-grid { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
             
-            .policy-sidebar { position: sticky; top: 100px; background: var(--bg-white); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; }
-            .policy-sidebar h3 { font-size: 1.2rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; padding-bottom: 15px; border-bottom: 1px solid var(--border-color); }
+            .policy-sidebar { position: sticky; top: 80px; background: var(--bg-white); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; }
+            .policy-sidebar h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
             .policy-nav-list { list-style: none; padding: 0; margin: 0; }
-            .policy-nav-list li { margin-bottom: 10px; }
-            .policy-nav-list a { display: flex; align-items: center; gap: 10px; padding: 12px 15px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; transition: all 0.3s; }
-            .policy-nav-list a:hover { background: rgba(0, 51, 102, 0.05); color: var(--primary); transform: translateX(5px); }
-            .policy-nav-list a.active { background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 4px 10px rgba(0, 51, 102, 0.3); }
+            .policy-nav-list li { margin-bottom: 6px; }
+            .policy-nav-list a { display: flex; align-items: center; gap: 8px; padding: 10px 12px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9rem; transition: all 0.3s; cursor: pointer; }
+            .policy-nav-list a:hover { background: rgba(0, 51, 102, 0.05); color: var(--primary); transform: translateX(3px); }
+            .policy-nav-list a.active { background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 3px 8px rgba(0, 51, 102, 0.25); }
             
-            .policy-content { background: var(--bg-white); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); line-height: 1.8; color: var(--text-dark); font-size: 1.05rem; }
-            .policy-content h2 { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px dashed var(--border-color); }
-            .policy-content h3 { font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin: 30px 0 15px 0; }
-            .policy-content p { margin-bottom: 20px; color: #475569; }
-            .policy-content ul { padding-left: 0; list-style: none; margin-bottom: 25px; }
-            .policy-content ul li { position: relative; padding-left: 30px; margin-bottom: 10px; color: #475569; }
-            .policy-content ul li::before { content: '\\2713'; position: absolute; left: 0; top: 2px; color: var(--primary); font-weight: 900; font-family: sans-serif; font-size: 1.1rem; }
+            .policy-content { background: var(--bg-white); border-radius: var(--radius-md); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); line-height: 1.7; color: var(--text-dark); font-size: 0.95rem; }
+            .policy-content h2 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; padding-bottom: 8px; border-bottom: 2px dashed var(--border-color); }
+            .policy-content h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 20px 0 10px 0; }
+            .policy-content p { margin-bottom: 15px; color: #475569; }
+            .policy-content ul { padding-left: 0; list-style: none; margin-bottom: 20px; }
+            .policy-content ul li { position: relative; padding-left: 22px; margin-bottom: 8px; color: #475569; }
+            .policy-content ul li::before { content: '\\2713'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900; font-family: sans-serif; font-size: 0.95rem; }
             
-            .policy-highlight { background: rgba(16, 185, 129, 0.1); padding: 20px; border-left: 4px solid #10b981; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 25px 0; color: #065f46; font-weight: 500; }
+            .policy-highlight { background: rgba(16, 185, 129, 0.08); padding: 15px; border-left: 4px solid #10b981; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 20px 0; color: #065f46; font-weight: 500; font-size: 0.95rem; }
             
             @media (max-width: 991px) {
                 .policy-grid { grid-template-columns: 1fr; }
-                .policy-sidebar { position: static; margin-bottom: 30px; }
+                .policy-sidebar { position: static; margin-bottom: 20px; }
             }
             @media (max-width: 575px) {
-                .policy-content { padding: 25px 20px; }
-                .policy-hero { padding: 30px 15px; }
-                .policy-hero h1 { font-size: 2rem; }
+                .policy-content { padding: 20px 15px; }
+                .policy-hero { padding: 20px 10px; margin-bottom: 15px; }
+                .policy-hero h1 { font-size: 1.5rem; }
             }
         </style>
         
         <div class="nava-policy-page">
-            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 20px; justify-content: center;">
+            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 15px; justify-content: center;">
                 <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
                 <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
-                <span style="color: var(--primary); font-weight: bold;">Chính sách bảo hành</span>
+                <span id="breadcrumb-current" style="color: var(--primary); font-weight: bold;">Chính sách bảo hành</span>
             </div>
             
             <div class="policy-hero">
-                <h1>Chính Sách Bảo Hành</h1>
-                <p>Nava Store cam kết mang lại trải nghiệm dịch vụ hậu mãi tốt nhất</p>
+                <h1 id="policy-title">Chính Sách Bảo Hành</h1>
+                <p id="policy-subtitle">Nava Store cam kết mang lại trải nghiệm dịch vụ hậu mãi tốt nhất</p>
             </div>
             
             <div class="policy-grid">
@@ -3351,55 +3922,209 @@ def build_policy_pages(base_dir, header_part, footer_part):
                 <div class="policy-sidebar">
                     <h3>Danh mục chính sách</h3>
                     <ul class="policy-nav-list">
-                        <li><a href="#"><i class="ph-bold ph-shield-check"></i> Điều khoản sử dụng</a></li>
-                        <li><a href="#" class="active"><i class="ph-bold ph-wrench"></i> Chính sách bảo hành</a></li>
-                        <li><a href="#"><i class="ph-bold ph-arrows-left-right"></i> Chính sách đổi trả</a></li>
-                        <li><a href="#"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
-                        <li><a href="#"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
+                        <li><a onclick="switchPolicy('terms')" id="tab-terms"><i class="ph-bold ph-shield-check"></i> Điều khoản sử dụng</a></li>
+                        <li><a onclick="switchPolicy('warranty')" id="tab-warranty" class="active"><i class="ph-bold ph-wrench"></i> Chính sách bảo hành</a></li>
+                        <li><a onclick="switchPolicy('return')" id="tab-return"><i class="ph-bold ph-arrows-left-right"></i> Chính sách đổi trả</a></li>
+                        <li><a onclick="switchPolicy('privacy')" id="tab-privacy"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
+                        <li><a onclick="switchPolicy('shipping')" id="tab-shipping"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
                     </ul>
                 </div>
                 
                 <!-- Content -->
-                <div class="policy-content">
-                    <h2>Quy Định Bảo Hành Chung</h2>
-                    <p>Chào mừng bạn đến với chính sách bảo hành của Nava Store. Chúng tôi luôn mong muốn mang lại cho khách hàng sự yên tâm tuyệt đối khi sử dụng các sản phẩm công nghệ (Mini PC, eGPU, Linh kiện). Dưới đây là các quy định cơ bản:</p>
-                    
-                    <div class="policy-highlight">
-                        Tất cả các sản phẩm bán ra tại Nava Store đều được bảo hành chính hãng hoặc bảo hành trực tiếp tại hệ thống của chúng tôi tùy theo từng thương hiệu cụ thể (Minisforum, ASUS, GMKtec, Beelink,...).
-                    </div>
-                    
-                    <h3>1. Điều kiện bảo hành hợp lệ</h3>
-                    <ul>
-                        <li>Sản phẩm còn trong thời hạn bảo hành tính từ ngày mua hàng (căn cứ theo hóa đơn hoặc tem bảo hành).</li>
-                        <li>Sản phẩm bị lỗi kỹ thuật do nhà sản xuất (phần cứng).</li>
-                        <li>Tem bảo hành của Nava Store hoặc của nhà phân phối phải còn nguyên vẹn, không có dấu hiệu tẩy xóa, rách rời hay chắp vá.</li>
-                        <li>Sê-ri (S/N) trên sản phẩm phải trùng khớp với thông tin trên hệ thống mua hàng.</li>
-                    </ul>
-                    
-                    <h3>2. Trường hợp từ chối bảo hành</h3>
-                    <p>Sản phẩm của quý khách sẽ không được bảo hành miễn phí (mà chuyển sang hình thức sửa chữa tính phí) trong các trường hợp sau:</p>
-                    <ul>
-                        <li>Sản phẩm đã hết thời hạn bảo hành.</li>
-                        <li>Sản phẩm hư hỏng do lỗi người dùng: làm rơi vỡ, vô nước, chập cháy điện do sử dụng sai nguồn, tác động vật lý.</li>
-                        <li>Tự ý tháo lắp, sửa chữa, thay đổi linh kiện bên trong máy mà không có sự ủy quyền của Nava Store.</li>
-                        <li>Thiệt hại do thiên tai, hỏa hoạn, côn trùng phá hoại.</li>
-                    </ul>
-                    
-                    <h3>3. Thời gian và quy trình xử lý</h3>
-                    <p>Khi gặp sự cố, quý khách vui lòng liên hệ trực tiếp bộ phận CSKH qua Hotline hoặc Zalo. Chúng tôi sẽ:</p>
-                    <ul>
-                        <li><strong>Bước 1:</strong> Tiếp nhận thông tin và hướng dẫn xử lý từ xa (nếu là lỗi phần mềm).</li>
-                        <li><strong>Bước 2:</strong> Nếu cần can thiệp phần cứng, quý khách gửi máy về trung tâm bảo hành của Nava Store.</li>
-                        <li><strong>Bước 3:</strong> Thời gian kiểm tra và xử lý thông thường từ <strong>3 - 7 ngày làm việc</strong> (không tính cuối tuần và ngày lễ).</li>
-                        <li><strong>Bước 4:</strong> Bàn giao lại thiết bị hoạt động ổn định cho quý khách.</li>
-                    </ul>
-                    
-                    <p style="margin-top: 40px; text-align: center; font-style: italic; color: var(--text-gray);">
-                        Mọi thắc mắc xin vui lòng liên hệ bộ phận hỗ trợ khách hàng: <strong style="color: var(--primary);">0378 859 736 (Zalo)</strong>
-                    </p>
+                <div class="policy-content" id="policy-main-content">
+                    <!-- Default loaded (warranty) -->
                 </div>
             </div>
         </div>
+
+        <script>
+            const policyData = {
+                terms: {
+                    title: "Điều khoản sử dụng",
+                    subtitle: "Quy định khi tham gia trải nghiệm và giao dịch tại hệ thống Nava Store",
+                    html: `
+                        <h2>Điều khoản dịch vụ chung</h2>
+                        <p>Chào mừng quý khách đến với Nava Store. Khi truy cập và sử dụng website của chúng tôi, quý khách đồng ý tuân thủ các điều khoản sau đây. Vui lòng đọc kỹ trước khi thực hiện giao dịch:</p>
+                        
+                        <h3>1. Phạm vi áp dụng</h3>
+                        <p>Điều khoản này áp dụng cho toàn bộ các giao dịch mua sắm trực tuyến, giao dịch tại cửa hàng, cũng như các hoạt động tham khảo thông tin, tư vấn kỹ thuật trên các nền tảng chính thức của Nava Store.</p>
+                        
+                        <h3>2. Quyền và nghĩa vụ của khách hàng</h3>
+                        <ul>
+                            <li>Cung cấp thông tin chính xác, trung thực khi đặt hàng (Họ tên, Số điện thoại, Địa chỉ giao hàng).</li>
+                            <li>Tự bảo mật thông tin tài khoản mua hàng cá nhân để tránh phát sinh giao dịch ngoài ý muốn.</li>
+                            <li>Được quyền kiểm tra hình thức ngoại quan sản phẩm trước khi thanh toán (Chế độ đồng kiểm với bưu tá).</li>
+                        </ul>
+                        
+                        <h3>3. Bản quyền & Sở hữu trí tuệ</h3>
+                        <p>Tất cả nội dung bao gồm hình ảnh thiết kế, logo thương hiệu Nava Store, các bài viết giới thiệu đặc điểm nổi bật và đánh giá sản phẩm đều thuộc sở hữu của Nava Store. Nghiêm cấm sao chép dưới mọi hình thức thương mại khi chưa được sự đồng ý bằng văn bản của chúng tôi.</p>
+                        
+                        <p style="margin-top: 40px; text-align: center; font-style: italic; color: var(--text-gray);">
+                            Cảm ơn quý khách đã tin tưởng và đồng hành cùng Nava Store!
+                        </p>
+                    `
+                },
+                warranty: {
+                    title: "Chính sách bảo hành",
+                    subtitle: "Hỗ trợ kỹ thuật tối đa, bảo hành dài hạn từ Nava Store và nhà sản xuất",
+                    html: `
+                        <h2>Quy định bảo hành tại Nava Store</h2>
+                        <p style="color: #ef4444; font-weight: bold; padding: 8px 12px; background: #fef2f2; border-radius: 6px;">
+                            Lưu ý quan trọng: Nava Store không bảo hành dữ liệu cho khách hàng dưới mọi hình thức. Quý khách vui lòng sao lưu dữ liệu cá nhân trước khi thực hiện bảo hành.
+                        </p>
+                        
+                        <h3>1. Thời hạn bảo hành theo nhóm sản phẩm</h3>
+                        <ul>
+                            <li><strong>Đối với dòng máy Mini PC:</strong>
+                                <ul>
+                                    <li><strong>Minisforum:</strong> Bảo hành 2 năm từ nhà sản xuất, miễn phí gửi bảo hành trong 1 năm đầu.</li>
+                                    <li><strong>Beelink, Aoostar, GMKtec, Morefine, FEVM:</strong> Bảo hành 12 tháng từ nhà sản xuất, miễn phí gửi bảo hành trong 6 tháng đầu.</li>
+                                    <li><strong>Firebat, Trycoo:</strong> Bảo hành 6 tháng từ nhà sản xuất.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Đối với RAM (Samsung, Hynix):</strong> Bảo hành 3 năm từ nhà sản xuất.</li>
+                            <li><strong>Đối với ổ cứng SSD:</strong>
+                                <ul>
+                                    <li><strong>Samsung, Lexar, Predator:</strong> Bảo hành 3 năm từ nhà sản xuất.</li>
+                                    <li><strong>Hynix:</strong> Bảo hành 1 năm từ nhà sản xuất.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>2. Điều kiện bảo hành hợp lệ</h3>
+                        <ul>
+                            <li>Sản phẩm được bán ra bởi Nava Store, có tem bảo hành của Nava Store hoặc tem bảo hành của nhà phân phối/sản xuất còn nguyên vẹn. Tem không rách, bong tróc hoặc bị tẩy xóa thông tin.</li>
+                            <li>Sản phẩm bị lỗi kỹ thuật (phần cứng) do nhà sản xuất.</li>
+                            <li>Sản phẩm còn trong thời hạn bảo hành được ghi nhận trên hệ thống hoặc tem bảo hành.</li>
+                        </ul>
+
+                        <h3>3. Các trường hợp từ chối bảo hành</h3>
+                        <ul>
+                            <li>Sản phẩm đã hết thời hạn bảo hành.</li>
+                            <li>Tem bảo hành bị rách, chắp vá, mất tem hoặc thông tin sê-ri (S/N) bị cạo sửa.</li>
+                            <li>Sản phẩm bị biến dạng do tác động ngoại lực (rơi vỡ, móp méo, trầy xước nặng), cháy nổ linh kiện do dùng sai nguồn điện, vào nước hoặc ẩm ướt do môi trường sử dụng.</li>
+                            <li>Khách hàng tự ý tháo mở máy, sửa chữa hoặc nâng cấp thay đổi kết cấu mà không có sự đồng ý của kỹ thuật viên Nava Store.</li>
+                        </ul>
+
+                        <h3>4. Địa chỉ tiếp nhận bảo hành</h3>
+                        <p><strong>Nava Store - Trung tâm dịch vụ kỹ thuật:</strong></p>
+                        <ul>
+                            <li><strong>Địa chỉ:</strong> 160/15 Linh Trung, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh.</li>
+                            <li><strong>Hotline:</strong> 0972 178 527 - Mr Ngọc Thọ.</li>
+                            <li><strong>Thời gian tiếp nhận:</strong> Thứ 2 - Thứ 7 (9:00 AM - 5:00 PM).</li>
+                        </ul>
+                    `
+                },
+                return: {
+                    title: "Chính sách đổi trả",
+                    subtitle: "Hỗ trợ đổi mới nhanh chóng đối với sản phẩm phát sinh lỗi trong tuần đầu tiên",
+                    html: `
+                        <h2>Chính sách đổi trả & hoàn tiền</h2>
+                        <p>Nava Store luôn đặt lợi ích của khách hàng lên hàng đầu. Nhằm mang lại trải nghiệm mua sắm an tâm nhất, chúng tôi áp dụng chính sách đổi mới 1-đổi-1 như sau:</p>
+                        
+                        <h3>1. Điều kiện đổi mới (Chỉ trong 7 ngày đầu)</h3>
+                        <ul>
+                            <li>Sản phẩm phát sinh lỗi phần cứng do nhà sản xuất (được kỹ thuật viên kiểm tra và xác nhận).</li>
+                            <li>Ngoại quan sản phẩm còn mới 100%, không bị trầy xước, cấn móp hay biến dạng so với ban đầu.</li>
+                            <li>Hộp sản phẩm còn nguyên vẹn, đầy đủ phụ kiện đi kèm (sách hướng dẫn, adapter nguồn, ốc vít gắn ổ cứng, dây HDMI,...).</li>
+                        </ul>
+                        
+                        <h3>2. Quy trình thực hiện đổi trả</h3>
+                        <ul>
+                            <li><strong>Bước 1:</strong> Khách hàng liên hệ với Nava Store qua Hotline hoặc Zalo OA để cung cấp thông tin mô tả lỗi sản phẩm.</li>
+                            <li><strong>Bước 2:</strong> Gửi sản phẩm đến trung tâm để kỹ thuật viên kiểm tra (Nội thành có thể đến trực tiếp cửa hàng).</li>
+                            <li><strong>Bước 3:</strong> Sau khi xác nhận lỗi, Nava Store sẽ gửi đổi sản phẩm mới tương tự cho khách hàng hoàn toàn miễn phí vận chuyển.</li>
+                        </ul>
+                        
+                        <h3>3. Phương án hoàn tiền</h3>
+                        <p>Trong trường hợp sản phẩm lỗi không còn hàng để đổi mới, khách hàng có quyền lựa chọn nâng cấp lên model khác (bù chênh lệch) hoặc Nava Store sẽ thực hiện hoàn tiền 100% giá trị sản phẩm qua tài khoản ngân hàng trong vòng 24-48 giờ làm việc.</p>
+                    `
+                },
+                privacy: {
+                    title: "Chính sách bảo mật",
+                    subtitle: "Bảo vệ thông tin cá nhân khách hàng an toàn tuyệt đối là nghĩa vụ của Nava Store",
+                    html: `
+                        <h2>Bảo vệ thông tin khách hàng</h2>
+                        <p>Nava Store hiểu rằng bảo mật thông tin cá nhân là vô cùng quan trọng đối với sự tin cậy của khách hàng. Chúng tôi cam kết sử dụng thông tin của bạn một cách minh bạch và an toàn nhất:</p>
+                        
+                        <h3>1. Thông tin thu thập</h3>
+                        <p>Chúng tôi chỉ thu thập các thông tin cơ bản phục vụ cho việc mua hàng và kích hoạt bảo hành, bao gồm: Họ tên, Số điện thoại liên hệ, Địa chỉ giao hàng và Email (nếu có).</p>
+                        
+                        <h3>2. Mục đích sử dụng</h3>
+                        <ul>
+                            <li>Xử lý và vận chuyển đơn hàng chính xác đến địa chỉ của bạn.</li>
+                            <li>Kích hoạt bảo hành điện tử và hỗ trợ xử lý kỹ thuật sau mua hàng.</li>
+                            <li>Gửi thông báo ưu đãi đặc biệt dành riêng cho khách hàng cũ (nếu khách hàng đồng ý nhận).</li>
+                        </ul>
+                        
+                        <h3>3. Cam kết bảo mật</h3>
+                        <p>Chúng tôi tuyệt đối không bán, chia sẻ hay cung cấp thông tin cá nhân của khách hàng cho bất kỳ bên thứ ba nào khác ngoài đơn vị vận chuyển (GHTK, Viettel Post) để giao nhận hàng hóa. Toàn bộ cơ sở dữ liệu được mã hóa an toàn trên hệ thống máy chủ của Nava Store.</p>
+                    `
+                },
+                shipping: {
+                    title: "Chính sách vận chuyển",
+                    subtitle: "Giao hàng tận nơi toàn quốc, hỗ trợ kiểm tra hàng trước khi thanh toán",
+                    html: `
+                        <h2>Phương thức vận chuyển & Giao nhận</h2>
+                        <p>Nava Store hợp tác với các đơn vị vận chuyển hàng đầu Việt Nam để mang sản phẩm đến tay khách hàng nhanh nhất, an toàn nhất.</p>
+                        
+                        <h3>1. Thời gian giao nhận</h3>
+                        <ul>
+                            <li><strong>Khu vực TP. Hồ Chí Minh:</strong> Giao hàng hỏa tốc trong 1 - 2 giờ qua Grab/AhaMove hoặc giao nhanh trong vòng 24 giờ.</li>
+                            <li><strong>Khu vực các tỉnh thành khác:</strong> Giao hàng từ 2 - 4 ngày làm việc thông qua đơn vị chuyển phát nhanh chuyên nghiệp.</li>
+                        </ul>
+                        
+                        <h3>2. Chi phí vận chuyển</h3>
+                        <ul>
+                            <li><strong>Miễn phí vận chuyển toàn quốc:</strong> Áp dụng cho các đơn hàng mua trọn bộ Mini PC hoặc đơn hàng có giá trị từ 5.000.000₫ trở lên.</li>
+                            <li><strong>Đồng giá phí ship:</strong> 30.000₫ đối với các đơn hàng linh kiện phụ kiện dưới 5.000.000₫.</li>
+                        </ul>
+                        
+                        <h3>3. Quyền đồng kiểm khi nhận hàng</h3>
+                        <p>Tất cả sản phẩm công nghệ giá trị cao gửi từ Nava Store đều được dán tem niêm phong và đóng gói kỹ càng. Khi nhận hàng, quý khách được quyền mở hộp kiểm tra ngoại quan máy (đúng dòng máy, không móp méo, đầy đủ phụ kiện) trước khi ký nhận và thanh toán tiền cho bưu tá.</p>
+                    `
+                }
+            };
+
+            function switchPolicy(policyKey) {
+                const data = policyData[policyKey];
+                if (!data) return;
+
+                // Update contents
+                document.getElementById('policy-title').innerText = data.title;
+                document.getElementById('policy-subtitle').innerText = data.subtitle;
+                document.getElementById('policy-main-content').innerHTML = data.html;
+                document.getElementById('breadcrumb-current').innerText = data.title;
+
+                // Update active class in sidebar
+                document.querySelectorAll('.policy-nav-list a').forEach(el => el.classList.remove('active'));
+                const activeTab = document.getElementById('tab-' + policyKey);
+                if (activeTab) activeTab.classList.add('active');
+
+                // Update url hash nicely without scrolling
+                history.pushState(null, null, '#' + policyKey);
+            }
+
+            // Read hash on load
+            window.addEventListener('DOMContentLoaded', () => {
+                const hash = window.location.hash.replace('#', '');
+                if (hash && policyData[hash]) {
+                    switchPolicy(hash);
+                } else {
+                    switchPolicy('warranty'); // Default tab
+                }
+            });
+
+            // Listen to popstate for back navigation support
+            window.addEventListener('popstate', () => {
+                const hash = window.location.hash.replace('#', '');
+                if (hash && policyData[hash]) {
+                    switchPolicy(hash);
+                } else {
+                    switchPolicy('warranty');
+                }
+            });
+        </script>
     """
     
     full_html = clean_liquid_tags(header_part + policy_html + local_footer_part)
