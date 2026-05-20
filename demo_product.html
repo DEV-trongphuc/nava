@@ -434,18 +434,21 @@
             
             <style>
                 /* Base Reset for Product Page */
-                .nava-product-layout { display: flex; flex-direction: column; gap: 40px; margin-top: 20px; width: 100%; box-sizing: border-box; }
+                .nava-product-layout { 
+                    display: flex; flex-direction: column; gap: 40px; margin-top: 20px; width: 100%; box-sizing: border-box; 
+                    background: #ffffff; padding: 24px; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.03); border: 1px solid #e2e8f0;
+                }
                 .nava-prod-gallery { width: 100%; box-sizing: border-box; }
                 .nava-prod-info { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
                 @media (min-width: 992px) {
-                    .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 60px; }
+                    .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 60px; padding: 40px; }
                     .nava-prod-gallery { width: 55%; position: sticky; top: 130px; }
                     .nava-prod-info { width: 45%; }
                 }
                 
                 /* Clean Gallery */
                 .main-image-container { 
-                    background: #f8fafc; 
+                    background: #ffffff; 
                     border-radius: 16px; 
                     padding: 24px; 
                     text-align: center; 
@@ -455,6 +458,7 @@
                     justify-content: center; 
                     position: relative;
                     aspect-ratio: 4/3;
+                    border: 1px solid #e2e8f0;
                 }
                 .main-image-container img { max-width: 90%; max-height: 90%; object-fit: contain; }
                 .gallery-nav-btn {
@@ -470,8 +474,9 @@
                 .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
                 .gallery-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
                 .gallery-thumb { 
-                    width: 72px; height: 72px; border-radius: 12px; background: #f8fafc; padding: 8px; 
-                    cursor: pointer; border: 2px solid transparent; transition: 0.2s; flex-shrink: 0;
+                    width: 72px; height: 72px; border-radius: 12px; background: #ffffff; padding: 8px; 
+                    cursor: pointer; border: 1px solid #e2e8f0; transition: 0.2s; flex-shrink: 0;
+                    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
                 }
                 .gallery-thumb:hover { border-color: #cbd5e1; }
                 .gallery-thumb.active { border-color: var(--primary); }
@@ -567,6 +572,7 @@
                 [data-theme="dark"] .specs-column .action-btn { background: var(--bg-white) !important; border-color: var(--border-color) !important; color: var(--primary) !important; }
                 [data-theme="dark"] .specs-column .action-btn:hover { background: var(--bg-gray) !important; }
                 
+                [data-theme="dark"] .nava-product-layout { background: var(--bg-white) !important; border-color: var(--border-color) !important; box-shadow: none !important; }
                 [data-theme="dark"] .product-card { background: var(--bg-white); border-color: var(--border-color); }
                 [data-theme="dark"] .product-card h2.card-title { color: var(--text-dark) !important; }
                 [data-theme="dark"] .product-card:hover h2.card-title { color: var(--primary) !important; }
@@ -621,10 +627,10 @@
             <div class="nava-product-layout" style="margin-bottom: 60px;">
                 <!-- Gallery -->
                 <div class="nava-prod-gallery">
-                    <div class="main-image-container" id="main-image-container" onclick="openLightbox()">
+                    <div class="main-image-container" id="main-image-container" onclick="window.openLightbox()">
                         <span class="badge" style="position: absolute; top: 16px; left: 16px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; z-index: 2;">MỚI NHẤT</span>
                         
-                        <button style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
+                        <button type="button" onclick="if(event) event.stopPropagation(); window.openLightbox();" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
                         
                         <div class="gallery-nav-btn gallery-nav-prev" onclick="event.stopPropagation(); navigateGallery(-1)"><i class="ph-bold ph-caret-left"></i></div>
                         <img id="main-product-img" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
@@ -1748,7 +1754,7 @@
                 ];
                 let currentLightboxIndex = 0;
                 
-                function openLightbox() {
+                window.openLightbox = function() {
                     let lightbox = document.getElementById('nava-lightbox');
                     if (!lightbox) {
                         lightbox = document.createElement('div');
