@@ -627,10 +627,10 @@
             <div class="nava-product-layout" style="margin-bottom: 60px;">
                 <!-- Gallery -->
                 <div class="nava-prod-gallery">
-                    <div class="main-image-container" id="main-image-container" onclick="window.openLightbox()">
+                    <div class="main-image-container" id="main-image-container" onclick="window.openLightbox(event)">
                         <span class="badge" style="position: absolute; top: 16px; left: 16px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; z-index: 2;">MỚI NHẤT</span>
                         
-                        <button type="button" onclick="if(event) event.stopPropagation(); window.openLightbox();" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
+                        <button type="button" onclick="window.openLightbox(event)" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
                         
                         <div class="gallery-nav-btn gallery-nav-prev" onclick="event.stopPropagation(); navigateGallery(-1)"><i class="ph-bold ph-caret-left"></i></div>
                         <img id="main-product-img" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
@@ -1754,56 +1754,62 @@
                 ];
                 let currentLightboxIndex = 0;
                 
-                window.openLightbox = function() {
+                window.openLightbox = function(e) {
+                    if (e && e.stopPropagation) e.stopPropagation();
                     let lightbox = document.getElementById('nava-lightbox');
                     if (!lightbox) {
                         lightbox = document.createElement('div');
                         lightbox.id = 'nava-lightbox';
                         lightbox.innerHTML = `
-                            <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 10000; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s;">
-                                <button onclick="closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph ph-x"></i></button>
-                                <button onclick="event.stopPropagation(); navigateLightbox(-1)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-left"></i></button>
-                                <img id="lightbox-img" src="" style="max-width: 90%; max-height: 90vh; object-fit: contain; transition: 0.3s; transform: scale(0.95); opacity: 0;" onclick="event.stopPropagation();">
-                                <button onclick="event.stopPropagation(); navigateLightbox(1)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-right"></i></button>
-                                <div id="lightbox-counter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 2px;"></div>
+                            <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2147483647; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s;">
+                                <button type="button" onclick="window.closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph ph-x"></i></button>
+                                <button type="button" onclick="if(event) event.stopPropagation(); window.navigateLightbox(-1)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-left"></i></button>
+                                <img id="lightbox-img" src="" style="max-width: 90%; max-height: 90vh; object-fit: contain; transition: 0.3s; transform: scale(0.95); opacity: 0; position: relative; z-index: 1;" onclick="if(event) event.stopPropagation();">
+                                <button type="button" onclick="if(event) event.stopPropagation(); window.navigateLightbox(1)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-right"></i></button>
+                                <div id="lightbox-counter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 2px; z-index: 2;"></div>
                             </div>
                         `;
-                        lightbox.querySelector('div').onclick = closeLightbox; // close when clicking background
+                        lightbox.querySelector('div').onclick = window.closeLightbox; // close when clicking background
                         document.body.appendChild(lightbox);
                     }
                     
-                    const currentSrc = mainImgObj.src;
-                    currentLightboxIndex = galleryImages.findIndex(src => currentSrc.includes(src.split('?')[0]));
-                    if(currentLightboxIndex === -1) currentLightboxIndex = 0;
+                    const mainObj = document.getElementById('main-product-img');
+                    if (mainObj) {
+                        const currentSrc = mainObj.src || '';
+                        currentLightboxIndex = galleryImages.findIndex(src => currentSrc.includes(src.split('?')[0]));
+                        if(currentLightboxIndex === -1) currentLightboxIndex = 0;
+                    }
                     
-                    const lightboxDiv = lightbox.querySelector('div');
                     lightbox.style.display = 'block';
-                    void lightboxDiv.offsetWidth; // trigger reflow
-                    lightboxDiv.style.opacity = '1';
+                    const lightboxDiv = lightbox.querySelector('div');
+                    if (lightboxDiv) {
+                        void lightboxDiv.offsetWidth; // trigger reflow
+                        lightboxDiv.style.opacity = '1';
+                    }
                     
-                    updateLightboxImage();
+                    window.updateLightboxImage();
                     document.body.style.overflow = 'hidden';
                 }
                 
-                function closeLightbox() {
+                window.closeLightbox = function() {
                     const lightbox = document.getElementById('nava-lightbox');
                     if (!lightbox) return;
                     const lightboxDiv = lightbox.querySelector('div');
-                    lightboxDiv.style.opacity = '0';
+                    if (lightboxDiv) lightboxDiv.style.opacity = '0';
                     setTimeout(() => {
                         lightbox.style.display = 'none';
                         document.body.style.overflow = '';
                     }, 300);
                 }
                 
-                function navigateLightbox(dir) {
+                window.navigateLightbox = function(dir) {
                     currentLightboxIndex += dir;
                     if(currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
                     if(currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
-                    updateLightboxImage();
+                    window.updateLightboxImage();
                 }
                 
-                function updateLightboxImage() {
+                window.updateLightboxImage = function() {
                     const lightboxImg = document.getElementById('lightbox-img');
                     const counter = document.getElementById('lightbox-counter');
                     lightboxImg.style.opacity = '0';
