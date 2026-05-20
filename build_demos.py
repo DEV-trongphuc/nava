@@ -99,7 +99,7 @@ def build_collection(base_dir, header_part, footer_part):
     local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
 
     collection_html = """
-        <div class="container" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 0 auto !important; padding: 30px 30px 80px;">
+        <div class="container" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 0 auto !important; padding: 10px 30px 80px;">
             <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 25px; font-size: 0.95rem;">
                 <a href="/" style="color: var(--text-gray); text-decoration: none; display: inline-flex; align-items: center; gap: 5px;"><i class="ph ph-house"></i> Trang chủ</a> 
                 <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
@@ -107,7 +107,7 @@ def build_collection(base_dir, header_part, footer_part):
             </div>
 
             <!-- Techy Hero Banner -->
-            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 60px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+            <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
                 <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
                 <div style="position: relative; z-index: 2;">
                     <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
@@ -3673,7 +3673,6 @@ def build_checkout_page(base_dir):
             const searchInput = document.getElementById('address-search');
             if(searchInput) searchInput.value = '';
             renderAddressList();
-            const modal = document.getElementById('address-modal');
             if(modal) {
                 console.log("Setting modal display to flex");
                 modal.style.display = 'flex';
