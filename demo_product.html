@@ -10,13 +10,14 @@
             <link rel="preconnect" href="">
             <link rel="preconnect" href="https://bizweb.dktcdn.net" crossorigin>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0, user-scalable=0">			
-            <title></title>
+            <title>ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350 - Nava Store</title>
             <!-- ================= Page description ================== -->
             
-            <meta name="description" content="">
+            <meta name="description" content="ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350 chính hãng, hiệu năng AI vượt trội với AMD Ryzen AI, card Radeon 860M, bảo hành 36 tháng.">
+    <meta name="keywords" content="ASUS NUC AI 350, ExpertCenter PN54, Mini PC Ryzen AI 7 350, Nava Store">
             
             <!-- ================= Meta ================== -->
-            <meta name="keywords" content=""/><meta name="keywords" content=", "/><meta name="keywords" content=", , , , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , ,  , "/><meta name="keywords" content=", , "/>		
+            		
             <meta name="robots" content="noodp,index,follow" />
             <link rel="shortcut icon" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png" type="image/x-icon" />  
             <link rel="preload" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" as="image" media="(min-width: 992px)" />
@@ -452,7 +453,7 @@
                     border-radius: 16px; 
                     padding: 24px; 
                     text-align: center; 
-                    margin-bottom: 16px; 
+                    margin-bottom: 32px; 
                     display: flex; 
                     align-items: center; 
                     justify-content: center; 
@@ -470,7 +471,7 @@
                 .gallery-nav-btn:hover { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
                 .gallery-nav-prev { left: 16px; }
                 .gallery-nav-next { right: 16px; }
-                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
+                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; }
                 .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
                 .gallery-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
                 .gallery-thumb { 
@@ -490,6 +491,15 @@
                 .prod-vat { font-size: 0.85rem; color: #64748b; }
                 
                 /* Flat Variants completely redesigned */
+                .variants-row-container {
+                    display: flex;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                }
+                .variants-row-container .variant-group {
+                    flex: 1;
+                    margin-bottom: 0;
+                }
                 .variant-group { margin-bottom: 24px; }
                 .variant-label { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;}
                 .variant-options { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -502,7 +512,109 @@
                 .variant-card.active { border-color: var(--primary); background: #f0f9ff; box-shadow: 0 0 0 1px var(--primary); }
                 .variant-card-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
                 .variant-card.active .variant-card-title { color: var(--primary); }
-                .variant-card-price { font-size: 0.75rem; color: #64748b; font-weight: 500; }
+                .variant-card-price { display: none !important; }
+                
+                .variant-price-display {
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    color: var(--primary);
+                    margin-left: auto;
+                    background: rgba(14, 165, 233, 0.08);
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                }
+                
+                /* Premium Dropdown Styles */
+                .nava-dropdown-wrapper {
+                    position: relative;
+                    width: 100%;
+                }
+                .nava-dropdown-display {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 10px;
+                    padding: 12px 18px;
+                    background: #fff;
+                    cursor: pointer;
+                    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    color: #0f172a;
+                    user-select: none;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                }
+                .nava-dropdown-display:hover {
+                    border-color: var(--primary);
+                    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.05);
+                }
+                .nava-dropdown-selected {
+                    display: inline-block;
+                }
+                .nava-dropdown-arrow {
+                    font-size: 1rem;
+                    color: #64748b;
+                    transition: transform 0.2s ease;
+                }
+                .nava-dropdown-wrapper.active .nava-dropdown-arrow {
+                    transform: rotate(180deg);
+                    color: var(--primary);
+                }
+                .nava-dropdown-wrapper:hover .nava-dropdown-display {
+                    border-color: var(--primary);
+                }
+                .nava-dropdown-list {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    margin-top: 6px;
+                    padding: 6px;
+                    background: rgba(255, 255, 255, 0.98);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+                    list-style: none;
+                    z-index: 1000;
+                    margin-bottom: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(-10px) scale(0.98);
+                    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
+                }
+                .nava-dropdown-wrapper.active .nava-dropdown-list {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0) scale(1);
+                }
+                .nava-dropdown-item {
+                    padding: 10px 16px;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    font-weight: 550;
+                    color: #334155;
+                    border-radius: 8px;
+                    transition: all 0.15s ease;
+                    margin-bottom: 2px;
+                }
+                .nava-dropdown-item:last-child {
+                    margin-bottom: 0;
+                }
+                .nava-dropdown-item:hover {
+                    background: #f1f5f9;
+                    color: var(--primary);
+                }
+                .nava-dropdown-item.active {
+                    background: #e0f2fe;
+                    color: var(--primary);
+                    font-weight: 700;
+                }
+                [data-theme="dark"] .variant-price-display {
+                    background: rgba(51, 133, 255, 0.15);
+                    color: #66a3ff;
+                }
                 
                 /* Action Buttons */
                 .action-row { display: flex; gap: 12px; margin-bottom: 12px; margin-top: 10px; }
@@ -521,6 +633,11 @@
                     width: 100%; height: 56px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.2s; margin-bottom: 24px;
                 }
                 .btn-buy-now:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+                
+                .btn-goto-store { 
+                    background: #fff; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+                }
+                .btn-goto-store:hover { background: var(--primary); color: #fff; }
                 
                 /* Dark Mode Overrides for Product Page */
                 [data-theme="dark"] body { background-color: var(--bg-white) !important; color: var(--text-dark) !important; }
@@ -551,7 +668,7 @@
                 [data-theme="dark"] .policy-box { border-color: var(--border-color) !important; background: var(--bg-gray) !important; }
                 [data-theme="dark"] .policy-box h3 { color: var(--text-dark) !important; }
                 [data-theme="dark"] .policy-box .policy-item { color: var(--text-dark) !important; }
-                [data-theme="dark"] .mobile-actions-col button:nth-child(2) { background: var(--bg-gray) !important; }
+                [data-theme="dark"] .btn-goto-store { background: var(--bg-gray) !important; border-color: var(--border-color) !important; color: var(--text-dark) !important; }
                 [data-theme="dark"] #sticky-cart-bar { background: rgba(15,23,42,0.95) !important; border-top-color: var(--border-color) !important; }
                 [data-theme="dark"] .sticky-cart-left .img-wrap { background: #fff !important; border-color: var(--border-color) !important; }
                 [data-theme="dark"] .sticky-title { color: var(--text-dark) !important; }
@@ -698,76 +815,65 @@
                     </div>
 
                     <!-- Variants -->
-                    <div class="variant-group">
-                        <div class="variant-label"><span>RAM DDR5</span></div>
-                        <div class="variant-options">
-                            <div class="variant-card active" onclick="selectVariant(this, 'ram', 0)">
-                                <span class="variant-card-title">0GB</span>
-                                <span class="variant-card-price">Cơ bản</span>
+                    <div class="variants-row-container">
+                        <div class="variant-group">
+                            <div class="variant-label">
+                                <span>RAM DDR5</span>
+                                <span class="variant-price-display" id="ram-price-display">+0₫</span>
                             </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 1890000)">
-                                <span class="variant-card-title">8GB - 4800</span>
-                                <span class="variant-card-price">+1.890.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 2090000)">
-                                <span class="variant-card-title">8GB - 5600</span>
-                                <span class="variant-card-price">+2.090.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 3790000)">
-                                <span class="variant-card-title">16GB - 4800</span>
-                                <span class="variant-card-price">+3.790.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 4190000)">
-                                <span class="variant-card-title">16GB - 5600</span>
-                                <span class="variant-card-price">+4.190.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 6990000)">
-                                <span class="variant-card-title">32GB - 4800</span>
-                                <span class="variant-card-price">+6.990.000₫</span>
+                            <div class="nava-dropdown-wrapper">
+                                <div class="nava-dropdown-display">
+                                    <span class="nava-dropdown-selected" id="ram-selected-text">NO RAM</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')">NO RAM</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')">8GB - 4800</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')">8GB - 5600</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')">16GB - 4800</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')">16GB - 5600</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="variant-group" style="margin-bottom: 32px;">
-                        <div class="variant-label"><span>Ổ cứng SSD NVMe</span></div>
-                        <div class="variant-options">
-                            <div class="variant-card active" onclick="selectVariant(this, 'ssd', 0)">
-                                <span class="variant-card-title">0GB</span>
-                                <span class="variant-card-price">Cơ bản</span>
+                        
+                        <div class="variant-group">
+                            <div class="variant-label">
+                                <span>Ổ cứng SSD NVMe</span>
+                                <span class="variant-price-display" id="ssd-price-display">+0₫</span>
                             </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 1190000)">
-                                <span class="variant-card-title">256GB</span>
-                                <span class="variant-card-price">+1.190.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 2290000)">
-                                <span class="variant-card-title">500GB</span>
-                                <span class="variant-card-price">+2.290.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 3990000)">
-                                <span class="variant-card-title">1TB</span>
-                                <span class="variant-card-price">+3.990.000₫</span>
+                            <div class="nava-dropdown-wrapper">
+                                <div class="nava-dropdown-display">
+                                    <span class="nava-dropdown-selected" id="ssd-selected-text">NO SSD</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')">NO SSD</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')">256GB</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')">500GB</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Actions -->
-                    <div class="action-row">
-                        <div class="qty-input-group">
-                            <button class="qty-btn" onclick="let input=this.nextElementSibling; if(input.value>1) input.value--">-</button>
+                    <button class="btn-buy-now" style="width: 100%; height: auto; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4; margin-bottom: 12px;">
+                        <span style="font-size: 1.1rem; font-weight: 700;">MUA NGAY</span>
+                        <span class="btn-buy-now-subtext" style="font-size: 0.8rem; font-weight: 500; opacity: 0.9;">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                    </button>
+
+                    <div class="action-row" style="display: flex; gap: 12px; margin-bottom: 24px; align-items: center; width: 100%;">
+                        <div class="qty-input-group" style="flex-shrink: 0;">
+                            <button class="qty-btn" onclick="if(this.nextElementSibling.value>1) this.nextElementSibling.value--">-</button>
                             <input type="text" value="1" class="qty-input" readonly>
-                            <button class="qty-btn" onclick="let input=this.previousElementSibling; input.value++">+</button>
+                            <button class="qty-btn" onclick="this.previousElementSibling.value++">+</button>
                         </div>
-                        <button class="btn-add-cart">THÊM VÀO GIỎ</button>
-                    </div>
-                    
-                    <div class="mobile-actions-col" style="display: flex; gap: 12px; margin-bottom: 24px;">
-                        <button class="btn-buy-now" style="flex: 7; margin-bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;">
-                            <span style="font-size: 1.1rem; font-weight: 700;">MUA NGAY</span>
-                            <span class="btn-buy-now-subtext" style="font-size: 0.8rem; font-weight: 500; opacity: 0.9;">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                        <button class="btn-add-cart" style="flex: 1; height: 50px; display: flex; align-items: center; justify-content: center;" title="Thêm vào giỏ">
+                            <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
                         </button>
-                        <button style="flex: 3; background: #fff; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='var(--primary)';">
+                        <button class="btn-goto-store" style="flex: 1; height: 50px; display: flex; align-items: center; justify-content: center;" title="Đến cửa hàng">
                             <i class="ph-bold ph-storefront" style="font-size: 1.4rem;"></i>
-                            <span style="margin-top: 4px; text-align: center;">ĐẾN CỬA HÀNG</span>
                         </button>
                     </div>
                     
@@ -1439,13 +1545,13 @@
                         display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
                     }
                     .spec-pill {
-                        background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-block; white-space: nowrap; box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+                        background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; display: inline-block; white-space: nowrap; box-shadow: none;
                     }
                     .spec-pill.secondary {
                         background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); box-shadow: none; font-weight: 600;
                     }
                     .card-title {
-                        font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700; color: #0f172a; transition: color 0.2s;
+                        font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; font-weight: 700; color: #0f172a; transition: color 0.2s;
                     }
                     .product-card:hover .card-title {
                         color: var(--primary);
@@ -1462,17 +1568,15 @@
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 6.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU 1.200</span>
+                                <span class="spec-pill">CPU 6.000</span>                                <span class="spec-pill secondary">GPU 1.200</span>
                                 <span class="spec-pill">WIFI 6E</span>
                                 <span class="spec-pill secondary">4 USB 3.2</span>
                                 <span class="spec-pill secondary">2 TYPE C</span>
                             </div>
-                            <h2 class="card-title">ASUS NUC 14 Essential Int...</h2>
+                            <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -1486,16 +1590,14 @@
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 40.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU 17...</span>
+                                <span class="spec-pill">CPU 40.000</span>                                <span class="spec-pill secondary">GPU 17...</span>
                                 <span class="spec-pill">4 FAN S...</span>
                                 <span class="spec-pill secondary">WIFI 7</span>
                             </div>
-                            <h2 class="card-title">AtomMan G7 PT Mini PC...</h2>
+                            <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -1509,16 +1611,14 @@
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 38.500</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU ...</span>
+                                <span class="spec-pill">CPU 38.500</span>                                <span class="spec-pill secondary">GPU ...</span>
                                 <span class="spec-pill">2 NVME</span>
                                 <span class="spec-pill secondary">USB4</span>
                             </div>
-                            <h2 class="card-title">Mini PC GMK EVO X1 32G...</h2>
+                            <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -1532,16 +1632,14 @@
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 22.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">CPU ...</span>
+                                <span class="spec-pill">CPU 22.000</span>                                <span class="spec-pill secondary">CPU ...</span>
                                 <span class="spec-pill">WIFI 6</span>
                                 <span class="spec-pill secondary">2 USB4</span>
                             </div>
-                            <h2 class="card-title">Tablet Minisforum V3 SE...</h2>
+                            <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -1644,19 +1742,36 @@
                 const basePrice = 12390000;
                 let activeRamPrice = 0;
                 let activeSsdPrice = 0;
-                let activeRamName = '0GB';
-                let activeSsdName = '0GB';
+                let activeRamName = 'NO RAM';
+                let activeSsdName = 'NO SSD';
                 
-                function selectVariant(element, type, price) {
-                    const siblings = element.parentNode.querySelectorAll('.variant-card');
+                function selectVariantDropdown(element, type, price, name) {
+                    const wrapper = element.closest('.nava-dropdown-wrapper');
+                    const displayEl = wrapper.querySelector('.nava-dropdown-selected');
+                    if (displayEl) {
+                        displayEl.innerText = name;
+                    }
+                    
+                    const siblings = element.parentNode.querySelectorAll('.nava-dropdown-item');
                     siblings.forEach(el => el.classList.remove('active'));
                     element.classList.add('active');
                     
-                    const titleEl = element.querySelector('.variant-card-title');
-                    const name = titleEl ? titleEl.innerText : '';
-                    
-                    if (type === 'ram') { activeRamPrice = price; activeRamName = name; }
-                    if (type === 'ssd') { activeSsdPrice = price; activeSsdName = name; }
+                    if (type === 'ram') { 
+                        activeRamPrice = price; 
+                        activeRamName = name; 
+                        const displayEl = document.getElementById('ram-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
+                    if (type === 'ssd') { 
+                        activeSsdPrice = price; 
+                        activeSsdName = name; 
+                        const displayEl = document.getElementById('ssd-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
                     
@@ -1667,11 +1782,14 @@
                     const stickyTitle = document.querySelector('.sticky-title');
                     if(stickyTitle) {
                         let opts = [];
-                        if(activeRamName && activeRamName !== '0GB') opts.push(activeRamName);
-                        if(activeSsdName && activeSsdName !== '0GB') opts.push(activeSsdName);
+                        if(activeRamName && activeRamName !== 'NO RAM') opts.push(activeRamName);
+                        if(activeSsdName && activeSsdName !== 'NO SSD') opts.push(activeSsdName);
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+                    
+                    // Close the dropdown after selection (for touch devices)
+                    wrapper.classList.remove('active');
                 }
 
                 // Show sticky bar on scroll
@@ -1716,6 +1834,27 @@
                         }
                     }
                     toggleStickyBar(); // Check immediately on load
+                    
+                    // Toggle dropdowns on click for mobile/touch
+                    document.querySelectorAll('.nava-dropdown-display').forEach(display => {
+                        display.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const wrapper = this.closest('.nava-dropdown-wrapper');
+                            const wasActive = wrapper.classList.contains('active');
+                            
+                            // Close all dropdowns first
+                            document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+                            
+                            if (!wasActive) {
+                                wrapper.classList.add('active');
+                            }
+                        });
+                    });
+                    
+                    // Close dropdowns on clicking outside
+                    document.addEventListener('click', function() {
+                        document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+                    });
                 });
 
                 window.addEventListener('scroll', toggleStickyBar, true);
@@ -2259,7 +2398,25 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
             
-         """
+        
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hijack login and register links to point to local demo HTMLs
+            const authLinks = document.querySelectorAll('a[href^="/account/login"], a[href^="/account/register"]');
+            authLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.getAttribute('href').includes('login')) {
+                        window.location.href = 'demo_login.html';
+                    } else if (this.getAttribute('href').includes('register')) {
+                        window.location.href = 'demo_register.html';
+                    }
+                });
+            });
+        });
+    </script>
+    
+
 <!-- Sticky Compare Bar -->
 <style>
     @media (max-width: 768px) {
@@ -2334,7 +2491,7 @@
         if (cm && cm.parentNode !== document.documentElement) { document.documentElement.appendChild(cm); }
     });
 
-    let compareList = [];
+    var compareList = [];
     
     function toggleCompare(btn, name, img, price) {
         console.log('--- toggleCompare called ---');
@@ -2590,20 +2747,3 @@
         
 
     </html>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hijack login and register links to point to local demo HTMLs
-            const authLinks = document.querySelectorAll('a[href^="/account/login"], a[href^="/account/register"]');
-            authLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.getAttribute('href').includes('login')) {
-                        window.location.href = 'demo_login.html';
-                    } else if (this.getAttribute('href').includes('register')) {
-                        window.location.href = 'demo_register.html';
-                    }
-                });
-            });
-        });
-    </script>
-    

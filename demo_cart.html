@@ -10,13 +10,14 @@
             <link rel="preconnect" href="">
             <link rel="preconnect" href="https://bizweb.dktcdn.net" crossorigin>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0, user-scalable=0">			
-            <title></title>
+            <title>Giỏ Hàng - Nava Store</title>
             <!-- ================= Page description ================== -->
             
-            <meta name="description" content="">
+            <meta name="description" content="Giỏ hàng của bạn tại Nava Store. Kiểm tra sản phẩm và tiến hành thanh toán.">
+    <meta name="keywords" content="gio hang, nava store, thanh toan">
             
             <!-- ================= Meta ================== -->
-            <meta name="keywords" content=""/><meta name="keywords" content=", "/><meta name="keywords" content=", , , , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , ,  , "/><meta name="keywords" content=", , "/>		
+            		
             <meta name="robots" content="noodp,index,follow" />
             <link rel="shortcut icon" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png" type="image/x-icon" />  
             <link rel="preload" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" as="image" media="(min-width: 992px)" />
@@ -494,9 +495,9 @@
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
                             </div>
                             <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
@@ -512,9 +513,9 @@
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
                             </div>
                             <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
@@ -998,23 +999,7 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
             
-        </body>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                document.querySelectorAll("img").forEach(function (img) {
-                    if (!img.hasAttribute("alt") || img.alt.trim() === "minipc navastore maytinh #miniPC phukien egpu Minisforum MINISFORUM eGPU Laptop NavaStore") {
-                        // Gán alt dựa trên tên file ảnh hoặc tiêu đề trang
-                        let fileName = img.src.split('/').pop().split('.')[0];
-                        img.alt = fileName.replace(/[-_]/g, ' ');
-                    }
-                });
-            });
-        </script>
         
-
-        
-
-    </html>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Hijack login and register links to point to local demo HTMLs
@@ -1032,3 +1017,20 @@
         });
     </script>
     
+</body>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll("img").forEach(function (img) {
+                    if (!img.hasAttribute("alt") || img.alt.trim() === "minipc navastore maytinh #miniPC phukien egpu Minisforum MINISFORUM eGPU Laptop NavaStore") {
+                        // Gán alt dựa trên tên file ảnh hoặc tiêu đề trang
+                        let fileName = img.src.split('/').pop().split('.')[0];
+                        img.alt = fileName.replace(/[-_]/g, ' ');
+                    }
+                });
+            });
+        </script>
+        
+
+        
+
+    </html>

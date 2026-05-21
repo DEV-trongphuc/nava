@@ -8,7 +8,7 @@
         if (cm && cm.parentNode !== document.documentElement) { document.documentElement.appendChild(cm); }
     });
 
-    let compareList = [];
+    var compareList = [];
     
     function toggleCompare(btn, name, img, price) {
         console.log('--- toggleCompare called ---');

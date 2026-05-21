@@ -54,34 +54,54 @@
                 const basePrice = 12390000;
                 let activeRamPrice = 0;
                 let activeSsdPrice = 0;
-                let activeRamName = '0GB';
-                let activeSsdName = '0GB';
+                let activeRamName = 'NO RAM';
+                let activeSsdName = 'NO SSD';
                 
-                function selectVariant(element, type, price) {
-                    const siblings = element.parentNode.querySelectorAll('.variant-card');
+                function selectVariantDropdown(element, type, price, name) {
+                    const wrapper = element.closest('.nava-dropdown-wrapper');
+                    const displayEl = wrapper.querySelector('.nava-dropdown-selected');
+                    if (displayEl) {
+                        displayEl.innerText = name;
+                    }
+
+                    const siblings = element.parentNode.querySelectorAll('.nava-dropdown-item');
                     siblings.forEach(el => el.classList.remove('active'));
                     element.classList.add('active');
-                    
-                    const titleEl = element.querySelector('.variant-card-title');
-                    const name = titleEl ? titleEl.innerText : '';
-                    
-                    if (type === 'ram') { activeRamPrice = price; activeRamName = name; }
-                    if (type === 'ssd') { activeSsdPrice = price; activeSsdName = name; }
-                    
+
+                    if (type === 'ram') {
+                        activeRamPrice = price;
+                        activeRamName = name;
+                        const displayEl = document.getElementById('ram-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
+                    if (type === 'ssd') {
+                        activeSsdPrice = price;
+                        activeSsdName = name;
+                        const displayEl = document.getElementById('ssd-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
+
                     const total = basePrice + activeRamPrice + activeSsdPrice;
-                    
+
                     document.getElementById('main-price').innerHTML = total.toLocaleString('vi-VN') + '₫';
                     const stickyPrice = document.getElementById('sticky-price');
                     if(stickyPrice) stickyPrice.innerHTML = total.toLocaleString('vi-VN') + '₫';
-                    
+
                     const stickyTitle = document.querySelector('.sticky-title');
                     if(stickyTitle) {
                         let opts = [];
-                        if(activeRamName && activeRamName !== '0GB') opts.push(activeRamName);
-                        if(activeSsdName && activeSsdName !== '0GB') opts.push(activeSsdName);
+                        if(activeRamName && activeRamName !== 'NO RAM') opts.push(activeRamName);
+                        if(activeSsdName && activeSsdName !== 'NO SSD') opts.push(activeSsdName);
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+
+                    // Close the dropdown after selection (for touch devices)
+                    wrapper.classList.remove('active');
                 }
 
                 // Show sticky bar on scroll
@@ -126,6 +146,27 @@
                         }
                     }
                     toggleStickyBar(); // Check immediately on load
+
+                    // Toggle dropdowns on click for mobile/touch
+                    document.querySelectorAll('.nava-dropdown-display').forEach(display => {
+                        display.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const wrapper = this.closest('.nava-dropdown-wrapper');
+                            const wasActive = wrapper.classList.contains('active');
+
+                            // Close all dropdowns first
+                            document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+
+                            if (!wasActive) {
+                                wrapper.classList.add('active');
+                            }
+                        });
+                    });
+
+                    // Close dropdowns on clicking outside
+                    document.addEventListener('click', function() {
+                        document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+                    });
                 });
 
                 window.addEventListener('scroll', toggleStickyBar, true);

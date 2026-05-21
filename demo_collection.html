@@ -10,13 +10,14 @@
             <link rel="preconnect" href="">
             <link rel="preconnect" href="https://bizweb.dktcdn.net" crossorigin>
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2.0, user-scalable=0">			
-            <title></title>
+            <title>Mini PC ASUS NUC Chính Hãng - Nava Store</title>
             <!-- ================= Page description ================== -->
             
-            <meta name="description" content="">
+            <meta name="description" content="Mua Mini PC ASUS NUC chính hãng tại Nava Store. Hỗ trợ trả góp, bảo hành 36 tháng, giao hàng nhanh toàn quốc.">
+    <meta name="keywords" content="Mini PC Asus, Asus NUC, Mini PC Asus NUC, Nava Store">
             
             <!-- ================= Meta ================== -->
-            <meta name="keywords" content=""/><meta name="keywords" content=", "/><meta name="keywords" content=", , , , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , "/><meta name="keywords" content=", , ,  , "/><meta name="keywords" content=", , "/>		
+            		
             <meta name="robots" content="noodp,index,follow" />
             <link rel="shortcut icon" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png" type="image/x-icon" />  
             <link rel="preload" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" as="image" media="(min-width: 992px)" />
@@ -472,8 +473,10 @@
                 .sort-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); }
                 
                 .card-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
-                .spec-pill { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-block; white-space: nowrap; box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2); }
+                .spec-pill { background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; display: inline-block; white-space: nowrap; box-shadow: none; }
                 .spec-pill.secondary { background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); box-shadow: none; font-weight: 600; }
+                .card-title { height: 2.8em; line-height: 1.4; overflow: hidden; font-size: 1rem; font-weight: 700; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--text-dark); transition: color 0.2s; }
+                .product-card:hover .card-title { color: var(--primary); }
                 
                 .product-card { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-white); }
                 .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
@@ -497,6 +500,58 @@
                 .product-img-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1; }
                 .product-card:hover .product-img { opacity: 0; }
                 .product-card:hover .product-img-hover { opacity: 1; }
+                
+                /* Collapsible Category Description Section */
+                .category-description-section {
+                    margin-top: 50px;
+                    border-top: 1px solid var(--border-color);
+                    padding-top: 40px;
+                    position: relative;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+                .cat-desc-wrapper {
+                    max-height: 220px;
+                    overflow: hidden;
+                    position: relative;
+                    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .cat-desc-wrapper.expanded {
+                    max-height: 2000px;
+                }
+                .cat-desc-fade {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100px;
+                    background: linear-gradient(to bottom, transparent, var(--bg-white, #ffffff));
+                    pointer-events: none;
+                    transition: opacity 0.3s ease;
+                }
+                .cat-desc-wrapper.expanded .cat-desc-fade {
+                    opacity: 0;
+                }
+                .btn-cat-more {
+                    background: var(--bg-white);
+                    border: 1px solid var(--primary);
+                    color: var(--primary);
+                    font-weight: 700;
+                    padding: 10px 28px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    font-size: 0.9rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    box-shadow: 0 4px 10px rgba(14,165,233,0.05);
+                }
+                .btn-cat-more:hover {
+                    background: var(--primary);
+                    color: #fff;
+                    box-shadow: 0 6px 16px rgba(14,165,233,0.25);
+                }
                 
                 .mobile-filter-btn { display: none; position: fixed; bottom: 85px; right: 20px; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 90; box-shadow: 0 5px 20px rgba(14,165,233,0.4); justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; }
                 .mobile-filter-btn:active { transform: scale(0.95); }
@@ -705,7 +760,7 @@
                             </div>
                             <script>
                                 (function() {
-                                    var input = document.getElementById('aiSearchInput');
+                                    var aiSearchInput = document.getElementById('aiSearchInput');
                                     var btn = document.getElementById('aiSearchBtn');
                                     var drop = document.getElementById('aiResultsDropdown');
                                     var loading = document.getElementById('aiLoading');
@@ -714,7 +769,7 @@
                                     var summary = document.getElementById('aiSummaryText');
                                     var timer = null;
                                     function doSearch() {
-                                        var q = input.value.trim();
+                                        var q = aiSearchInput.value.trim();
                                         if (!q) { drop.classList.remove('active'); return; }
                                         drop.classList.add('active');
                                         loading.style.display = 'block';
@@ -730,8 +785,8 @@
                                             header.textContent = '✨ HOÀN TẤT PHÂN TÍCH & TÌM KIẾM';
                                         }, 1200);
                                     }
-                                    input.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doSearch, 700); });
-                                    input.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doSearch(); } });
+                                    aiSearchInput.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doSearch, 700); });
+                                    aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doSearch(); } });
                                     btn.addEventListener('click', function() { clearTimeout(timer); doSearch(); });
                                     document.addEventListener('click', function(e) { if (!document.getElementById('ai-search-widget').contains(e.target)) drop.classList.remove('active'); });
                                 })();
@@ -831,19 +886,17 @@
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -858,18 +911,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -884,18 +935,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -910,18 +959,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -936,17 +983,15 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -962,19 +1007,17 @@
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -989,18 +1032,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1015,18 +1056,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1041,18 +1080,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1067,17 +1104,15 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1093,19 +1128,17 @@
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1120,18 +1153,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1146,18 +1177,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1172,18 +1201,16 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1198,17 +1225,15 @@
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1224,19 +1249,17 @@
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -1250,6 +1273,32 @@
                         <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">3</button>
                         <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-right"></i></button>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Category Description Section -->
+            <div class="category-description-section">
+                <div id="cat-desc-wrapper" class="cat-desc-wrapper">
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 16px;">Giới thiệu về dòng Mini PC ASUS NUC</h2>
+                    <p style="color: var(--text-gray); line-height: 1.8; margin-bottom: 15px; font-size: 0.95rem;">
+                        Mini PC ASUS NUC (Next Unit of Computing) là dòng máy tính nhỏ gọn thế hệ mới, mang trong mình sức mạnh hiệu năng vượt trội tương đương các dòng máy tính để bàn truyền thống. Kể từ khi ASUS chính thức tiếp quản và phát triển thương hiệu NUC từ Intel, các dòng sản phẩm này đã được nâng cấp mạnh mẽ về cả thiết kế, độ bền lẫn các giải pháp tản nhiệt tiên tiến.
+                    </p>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-top: 20px; margin-bottom: 12px;">Những ưu điểm vượt trội của ASUS NUC</h3>
+                    <ul style="color: var(--text-gray); line-height: 1.8; margin-left: 20px; margin-bottom: 15px; font-size: 0.95rem; list-style-type: disc;">
+                        <li style="margin-bottom: 8px;"><strong>Thiết kế siêu nhỏ gọn:</strong> Với kích thước chỉ nằm gọn trong lòng bàn tay, ASUS NUC giúp tối ưu hóa không gian làm việc, dễ dàng lắp đặt phía sau màn hình thông qua khung treo VESA tiêu chuẩn.</li>
+                        <li style="margin-bottom: 8px;"><strong>Hiệu năng mạnh mẽ:</strong> Trang bị các bộ vi xử lý Intel Core hoặc AMD Ryzen thế hệ mới nhất, đáp ứng hoàn hảo từ công việc văn phòng, lập trình, đồ họa nhẹ cho tới các giải pháp tự động hóa chuyên sâu.</li>
+                        <li style="margin-bottom: 8px;"><strong>Độ bền chuẩn quân đội:</strong> Tất cả sản phẩm ASUS NUC đều trải qua các bài kiểm tra nghiêm ngặt về nhiệt độ, độ rung và rơi tự do đạt tiêu chuẩn MIL-STD-810H, hoạt động bền bỉ 24/7.</li>
+                        <li style="margin-bottom: 8px;"><strong>Khả năng nâng cấp linh hoạt:</strong> Hỗ trợ khe cắm RAM DDR5 kép và các cổng lưu trữ SSD M.2 PCIe tốc độ cao, cho phép người dùng tùy biến cấu hình theo đúng nhu cầu sử dụng thực tế.</li>
+                    </ul>
+                    <p style="color: var(--text-gray); line-height: 1.8; margin-bottom: 15px; font-size: 0.95rem;">
+                        Hiện nay, NAVA Store tự hào là đối tác Gold Partner của ASUS tại Việt Nam, mang đến cho quý khách hàng các sản phẩm Mini PC ASUS NUC chính hãng với chế độ bảo hành vàng 36 tháng, lỗi 1 đổi 1 trong vòng 30 ngày và dịch vụ hỗ trợ kỹ thuật trọn đời từ đội ngũ chuyên gia giàu kinh nghiệm.
+                    </p>
+                    <div class="cat-desc-fade"></div>
+                </div>
+                <div style="text-align: center; margin-top: 20px; position: relative; z-index: 5;">
+                    <button id="cat-desc-btn" class="btn-cat-more" onclick="toggleCatDescription()">
+                        Xem thêm <i class="ph ph-caret-down"></i>
+                    </button>
                 </div>
             </div>
             
@@ -1430,18 +1479,6 @@
                             const price = priceEl.textContent.trim();
                             const imgUrl = imgEl.src;
                             
-                            // Add Quick View Button
-                            const btn = document.createElement('button');
-                            btn.className = 'quick-view-btn';
-                            btn.title = 'Xem nhanh';
-                            btn.innerHTML = '<i class="ph-bold ph-eye" style="font-size: 1.2rem;"></i>';
-                            btn.onclick = function(e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                openQuickView(name, price, imgUrl);
-                            };
-                            imgWrap.appendChild(btn);
-                            
                             // Add hover image (fake 2nd angle by inverting or just a slightly different mock)
                             const hoverImg = document.createElement('img');
                             hoverImg.src = imgUrl; 
@@ -1453,12 +1490,6 @@
                             card.querySelectorAll('.spec-pill').forEach(pill => {
                                 pill.title = 'Thông số phần cứng: ' + pill.textContent.trim();
                             });
-                            
-                            // Update card onclick to open Quick View
-                            card.onclick = function(e) {
-                                e.preventDefault();
-                                openQuickView(name, price, imgUrl);
-                            };
                         }
                     });
                 });
@@ -1467,6 +1498,21 @@
                 function toggleMobileSidebar() {
                     document.querySelector('.nava-sidebar').classList.toggle('active');
                     document.querySelector('.sidebar-overlay').classList.toggle('active');
+                }
+                
+                // 5. Category Description Toggle
+                function toggleCatDescription() {
+                    const wrapper = document.getElementById('cat-desc-wrapper');
+                    const btn = document.getElementById('cat-desc-btn');
+                    if (!wrapper || !btn) return;
+                    
+                    const isExpanded = wrapper.classList.toggle('expanded');
+                    if (isExpanded) {
+                        btn.innerHTML = 'Thu gọn <i class="ph ph-caret-up"></i>';
+                    } else {
+                        btn.innerHTML = 'Xem thêm <i class="ph ph-caret-down"></i>';
+                        wrapper.scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             </script>
         </div>
@@ -1904,6 +1950,24 @@
     <!-- End Google Tag Manager (noscript) -->
             
         
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hijack login and register links to point to local demo HTMLs
+            const authLinks = document.querySelectorAll('a[href^="/account/login"], a[href^="/account/register"]');
+            authLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (this.getAttribute('href').includes('login')) {
+                        window.location.href = 'demo_login.html';
+                    } else if (this.getAttribute('href').includes('register')) {
+                        window.location.href = 'demo_register.html';
+                    }
+                });
+            });
+        });
+    </script>
+    
+
 <!-- Sticky Compare Bar -->
 <style>
     @media (max-width: 768px) {
@@ -1978,7 +2042,7 @@
         if (cm && cm.parentNode !== document.documentElement) { document.documentElement.appendChild(cm); }
     });
 
-    let compareList = [];
+    var compareList = [];
     
     function toggleCompare(btn, name, img, price) {
         console.log('--- toggleCompare called ---');
@@ -2234,20 +2298,3 @@
         
 
     </html>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Hijack login and register links to point to local demo HTMLs
-            const authLinks = document.querySelectorAll('a[href^="/account/login"], a[href^="/account/register"]');
-            authLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (this.getAttribute('href').includes('login')) {
-                        window.location.href = 'demo_login.html';
-                    } else if (this.getAttribute('href').includes('register')) {
-                        window.location.href = 'demo_register.html';
-                    }
-                });
-            });
-        });
-    </script>
-    

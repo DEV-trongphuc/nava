@@ -32,7 +32,37 @@ def clean_liquid_tags(text):
     # Remove all remaining {{ ... }} tags
     text = re.sub(r"{{-?\s*[^}]+\s*}}", "", text)
 
+    # Remove any broken/empty meta keywords tags
+    text = re.sub(r'<meta name="keywords" content="[^"]*"\s*/?>', '', text)
+
     return text
+
+def inject_seo_metadata(html, title, description, keywords):
+    # 1. Replace title tag
+    if "<title>" in html:
+        html = re.sub(r'<title>.*?</title>', f'<title>{title}</title>', html, flags=re.DOTALL)
+    else:
+        html = html.replace('<head>', f'<head>\n    <title>{title}</title>')
+        
+    # 2. Replace description tag
+    desc_tag = f'<meta name="description" content="{description}">'
+    if 'name="description"' in html:
+        html = re.sub(r'<meta\s+name="description"\s+content="[^"]*"\s*/?>', desc_tag, html)
+        html = re.sub(r'<meta\s+content="[^"]*"\s+name="description"\s*/?>', desc_tag, html)
+    else:
+        if f'<title>{title}</title>' in html:
+            html = html.replace(f'<title>{title}</title>', f'<title>{title}</title>\n    {desc_tag}')
+        else:
+            html = html.replace('</head>', f'    {desc_tag}\n</head>')
+            
+    # 3. Inject keywords tag
+    keywords_tag = f'<meta name="keywords" content="{keywords}">'
+    if desc_tag in html:
+        html = html.replace(desc_tag, f'{desc_tag}\n    {keywords_tag}')
+    else:
+        html = html.replace('</head>', f'    {keywords_tag}\n</head>')
+        
+    return html
 
 def get_core_layout(base_dir):
     with open(os.path.join(base_dir, "theme.bwt"), "r", encoding="utf-8") as f:
@@ -72,7 +102,12 @@ def get_core_layout(base_dir):
         });
     </script>
     """
-    footer_part += demo_auth_interceptor
+    if "</body>" in footer_part:
+        footer_part = footer_part.replace("</body>", f"{demo_auth_interceptor}\n</body>")
+    elif "</html>" in footer_part:
+        footer_part = footer_part.replace("</html>", f"{demo_auth_interceptor}\n</html>")
+    else:
+        footer_part += demo_auth_interceptor
     
     return header_part, footer_part
 
@@ -82,6 +117,12 @@ def build_index(base_dir, header_part, footer_part):
         
     full_index = header_part.replace(open(os.path.join(base_dir, "extracted_header.html"), "r", encoding="utf-8").read(), "") + index_content + footer_part
     full_index = clean_liquid_tags(full_index)
+    full_index = inject_seo_metadata(
+        full_index, 
+        title="Nava Store - Mini PC & eGPU Chính Hãng", 
+        description="Nava Store chuyên cung cấp các dòng sản phẩm Mini PC, eGPU, RAM, SSD, linh kiện máy tính chính hãng chất lượng cao.", 
+        keywords="Mini PC, eGPU, Asus NUC, Minisforum, Beelink, Nava Store"
+    )
     
     with open(os.path.join(base_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(full_index)
@@ -155,8 +196,10 @@ def build_collection(base_dir, header_part, footer_part):
                 .sort-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); }
                 
                 .card-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
-                .spec-pill { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-block; white-space: nowrap; box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2); }
+                .spec-pill { background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; display: inline-block; white-space: nowrap; box-shadow: none; }
                 .spec-pill.secondary { background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); box-shadow: none; font-weight: 600; }
+                .card-title { height: 2.8em; line-height: 1.4; overflow: hidden; font-size: 1rem; font-weight: 700; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; color: var(--text-dark); transition: color 0.2s; }
+                .product-card:hover .card-title { color: var(--primary); }
                 
                 .product-card { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease; border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-white); }
                 .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
@@ -180,6 +223,58 @@ def build_collection(base_dir, header_part, footer_part):
                 .product-img-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1; }
                 .product-card:hover .product-img { opacity: 0; }
                 .product-card:hover .product-img-hover { opacity: 1; }
+                
+                /* Collapsible Category Description Section */
+                .category-description-section {
+                    margin-top: 50px;
+                    border-top: 1px solid var(--border-color);
+                    padding-top: 40px;
+                    position: relative;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+                .cat-desc-wrapper {
+                    max-height: 220px;
+                    overflow: hidden;
+                    position: relative;
+                    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                .cat-desc-wrapper.expanded {
+                    max-height: 2000px;
+                }
+                .cat-desc-fade {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100px;
+                    background: linear-gradient(to bottom, transparent, var(--bg-white, #ffffff));
+                    pointer-events: none;
+                    transition: opacity 0.3s ease;
+                }
+                .cat-desc-wrapper.expanded .cat-desc-fade {
+                    opacity: 0;
+                }
+                .btn-cat-more {
+                    background: var(--bg-white);
+                    border: 1px solid var(--primary);
+                    color: var(--primary);
+                    font-weight: 700;
+                    padding: 10px 28px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    font-size: 0.9rem;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    box-shadow: 0 4px 10px rgba(14,165,233,0.05);
+                }
+                .btn-cat-more:hover {
+                    background: var(--primary);
+                    color: #fff;
+                    box-shadow: 0 6px 16px rgba(14,165,233,0.25);
+                }
                 
                 .mobile-filter-btn { display: none; position: fixed; bottom: 85px; right: 20px; background: var(--primary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; z-index: 90; box-shadow: 0 5px 20px rgba(14,165,233,0.4); justify-content: center; align-items: center; cursor: pointer; transition: transform 0.2s; }
                 .mobile-filter-btn:active { transform: scale(0.95); }
@@ -388,7 +483,7 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <script>
                                 (function() {
-                                    var input = document.getElementById('aiSearchInput');
+                                    var aiSearchInput = document.getElementById('aiSearchInput');
                                     var btn = document.getElementById('aiSearchBtn');
                                     var drop = document.getElementById('aiResultsDropdown');
                                     var loading = document.getElementById('aiLoading');
@@ -397,7 +492,7 @@ def build_collection(base_dir, header_part, footer_part):
                                     var summary = document.getElementById('aiSummaryText');
                                     var timer = null;
                                     function doSearch() {
-                                        var q = input.value.trim();
+                                        var q = aiSearchInput.value.trim();
                                         if (!q) { drop.classList.remove('active'); return; }
                                         drop.classList.add('active');
                                         loading.style.display = 'block';
@@ -413,8 +508,8 @@ def build_collection(base_dir, header_part, footer_part):
                                             header.textContent = '\u2728 HOÀN TẤT PHÂN TÍCH & TÌM KIẾM';
                                         }, 1200);
                                     }
-                                    input.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doSearch, 700); });
-                                    input.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doSearch(); } });
+                                    aiSearchInput.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doSearch, 700); });
+                                    aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doSearch(); } });
                                     btn.addEventListener('click', function() { clearTimeout(timer); doSearch(); });
                                     document.addEventListener('click', function(e) { if (!document.getElementById('ai-search-widget').contains(e.target)) drop.classList.remove('active'); });
                                 })();
@@ -514,19 +609,17 @@ def build_collection(base_dir, header_part, footer_part):
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -541,18 +634,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -567,18 +658,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -593,18 +682,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -619,17 +706,15 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -645,19 +730,17 @@ def build_collection(base_dir, header_part, footer_part):
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -672,18 +755,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -698,18 +779,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -724,18 +803,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -750,17 +827,15 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -776,19 +851,17 @@ def build_collection(base_dir, header_part, footer_part):
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -803,18 +876,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 40.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 17...</span>
+                                    <span class="spec-pill">CPU 40.000</span>                                    <span class="spec-pill secondary">GPU 17...</span>
                                     <span class="spec-pill">4 FAN S...</span>
                                     <span class="spec-pill secondary">WIFI 7</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">AtomMan G7 PT Mini PC...</h2>
+                                <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -829,18 +900,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 38.500</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU ...</span>
+                                    <span class="spec-pill">CPU 38.500</span>                                    <span class="spec-pill secondary">GPU ...</span>
                                     <span class="spec-pill">2 NVME</span>
                                     <span class="spec-pill secondary">USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Mini PC GMK EVO X1 32G...</h2>
+                                <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -855,18 +924,16 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 22.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">CPU ...</span>
+                                    <span class="spec-pill">CPU 22.000</span>                                    <span class="spec-pill secondary">CPU ...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                     <span class="spec-pill secondary">2 USB4</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Tablet Minisforum V3 SE...</h2>
+                                <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -881,17 +948,15 @@ def build_collection(base_dir, header_part, footer_part):
                             </div>
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 26.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 16...</span>
+                                    <span class="spec-pill">CPU 26.000</span>                                    <span class="spec-pill secondary">GPU 16...</span>
                                     <span class="spec-pill">WIFI 6</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">Beelink SER8 AMD 884...</h2>
+                                <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -907,19 +972,17 @@ def build_collection(base_dir, header_part, footer_part):
                             <div class="card-content" style="padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column;">
                                 <!-- Specs Badges -->
                                 <div class="card-specs">
-                                    <span class="spec-pill">CPU 6.000</span>
-                                    <span class="spec-pill secondary">MARK</span>
-                                    <span class="spec-pill secondary">GPU 1.200</span>
+                                    <span class="spec-pill">CPU 6.000</span>                                    <span class="spec-pill secondary">GPU 1.200</span>
                                     <span class="spec-pill">WIFI 6E</span>
                                     <span class="spec-pill secondary">4 USB 3.2</span>
                                     <span class="spec-pill secondary">2 TYPE C</span>
                                 </div>
                                 
-                                <h2 class="card-title" style="font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700;">ASUS NUC 14 Essential Int...</h2>
+                                <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                     <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                    <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -933,6 +996,32 @@ def build_collection(base_dir, header_part, footer_part):
                         <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'">3</button>
                         <button style="width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='var(--bg-white)'"><i class="ph ph-caret-right"></i></button>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Category Description Section -->
+            <div class="category-description-section">
+                <div id="cat-desc-wrapper" class="cat-desc-wrapper">
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 16px;">Giới thiệu về dòng Mini PC ASUS NUC</h2>
+                    <p style="color: var(--text-gray); line-height: 1.8; margin-bottom: 15px; font-size: 0.95rem;">
+                        Mini PC ASUS NUC (Next Unit of Computing) là dòng máy tính nhỏ gọn thế hệ mới, mang trong mình sức mạnh hiệu năng vượt trội tương đương các dòng máy tính để bàn truyền thống. Kể từ khi ASUS chính thức tiếp quản và phát triển thương hiệu NUC từ Intel, các dòng sản phẩm này đã được nâng cấp mạnh mẽ về cả thiết kế, độ bền lẫn các giải pháp tản nhiệt tiên tiến.
+                    </p>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-top: 20px; margin-bottom: 12px;">Những ưu điểm vượt trội của ASUS NUC</h3>
+                    <ul style="color: var(--text-gray); line-height: 1.8; margin-left: 20px; margin-bottom: 15px; font-size: 0.95rem; list-style-type: disc;">
+                        <li style="margin-bottom: 8px;"><strong>Thiết kế siêu nhỏ gọn:</strong> Với kích thước chỉ nằm gọn trong lòng bàn tay, ASUS NUC giúp tối ưu hóa không gian làm việc, dễ dàng lắp đặt phía sau màn hình thông qua khung treo VESA tiêu chuẩn.</li>
+                        <li style="margin-bottom: 8px;"><strong>Hiệu năng mạnh mẽ:</strong> Trang bị các bộ vi xử lý Intel Core hoặc AMD Ryzen thế hệ mới nhất, đáp ứng hoàn hảo từ công việc văn phòng, lập trình, đồ họa nhẹ cho tới các giải pháp tự động hóa chuyên sâu.</li>
+                        <li style="margin-bottom: 8px;"><strong>Độ bền chuẩn quân đội:</strong> Tất cả sản phẩm ASUS NUC đều trải qua các bài kiểm tra nghiêm ngặt về nhiệt độ, độ rung và rơi tự do đạt tiêu chuẩn MIL-STD-810H, hoạt động bền bỉ 24/7.</li>
+                        <li style="margin-bottom: 8px;"><strong>Khả năng nâng cấp linh hoạt:</strong> Hỗ trợ khe cắm RAM DDR5 kép và các cổng lưu trữ SSD M.2 PCIe tốc độ cao, cho phép người dùng tùy biến cấu hình theo đúng nhu cầu sử dụng thực tế.</li>
+                    </ul>
+                    <p style="color: var(--text-gray); line-height: 1.8; margin-bottom: 15px; font-size: 0.95rem;">
+                        Hiện nay, NAVA Store tự hào là đối tác Gold Partner của ASUS tại Việt Nam, mang đến cho quý khách hàng các sản phẩm Mini PC ASUS NUC chính hãng với chế độ bảo hành vàng 36 tháng, lỗi 1 đổi 1 trong vòng 30 ngày và dịch vụ hỗ trợ kỹ thuật trọn đời từ đội ngũ chuyên gia giàu kinh nghiệm.
+                    </p>
+                    <div class="cat-desc-fade"></div>
+                </div>
+                <div style="text-align: center; margin-top: 20px; position: relative; z-index: 5;">
+                    <button id="cat-desc-btn" class="btn-cat-more" onclick="toggleCatDescription()">
+                        Xem thêm <i class="ph ph-caret-down"></i>
+                    </button>
                 </div>
             </div>
             
@@ -1113,18 +1202,6 @@ def build_collection(base_dir, header_part, footer_part):
                             const price = priceEl.textContent.trim();
                             const imgUrl = imgEl.src;
                             
-                            // Add Quick View Button
-                            const btn = document.createElement('button');
-                            btn.className = 'quick-view-btn';
-                            btn.title = 'Xem nhanh';
-                            btn.innerHTML = '<i class="ph-bold ph-eye" style="font-size: 1.2rem;"></i>';
-                            btn.onclick = function(e) {
-                                e.stopPropagation();
-                                e.preventDefault();
-                                openQuickView(name, price, imgUrl);
-                            };
-                            imgWrap.appendChild(btn);
-                            
                             // Add hover image (fake 2nd angle by inverting or just a slightly different mock)
                             const hoverImg = document.createElement('img');
                             hoverImg.src = imgUrl; 
@@ -1136,12 +1213,6 @@ def build_collection(base_dir, header_part, footer_part):
                             card.querySelectorAll('.spec-pill').forEach(pill => {
                                 pill.title = 'Thông số phần cứng: ' + pill.textContent.trim();
                             });
-                            
-                            // Update card onclick to open Quick View
-                            card.onclick = function(e) {
-                                e.preventDefault();
-                                openQuickView(name, price, imgUrl);
-                            };
                         }
                     });
                 });
@@ -1151,18 +1222,33 @@ def build_collection(base_dir, header_part, footer_part):
                     document.querySelector('.nava-sidebar').classList.toggle('active');
                     document.querySelector('.sidebar-overlay').classList.toggle('active');
                 }
+                
+                // 5. Category Description Toggle
+                function toggleCatDescription() {
+                    const wrapper = document.getElementById('cat-desc-wrapper');
+                    const btn = document.getElementById('cat-desc-btn');
+                    if (!wrapper || !btn) return;
+                    
+                    const isExpanded = wrapper.classList.toggle('expanded');
+                    if (isExpanded) {
+                        btn.innerHTML = 'Thu gọn <i class="ph ph-caret-up"></i>';
+                    } else {
+                        btn.innerHTML = 'Xem thêm <i class="ph ph-caret-down"></i>';
+                        wrapper.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
             </script>
         </div>
     """
     full_html = clean_liquid_tags(header_part + collection_html + local_footer_part)
     
-    # Inject sticky compare bar directly into the HTML
     try:
         with open(os.path.join(base_dir, "post_build.py"), "r", encoding="utf-8") as pb_file:
             pb_content = pb_file.read()
-            start_idx = pb_content.find('sticky_html = """') + len('sticky_html = """')
+            start_pos = pb_content.find('sticky_html = """')
             end_idx = pb_content.find('"""\n\nfile_path')
-            if start_idx != -1 and end_idx != -1:
+            if start_pos != -1 and end_idx != -1:
+                start_idx = start_pos + len('sticky_html = """')
                 sticky_html = pb_content[start_idx:end_idx]
                 if "<!-- Sticky Compare Bar -->" not in full_html:
                     if "</body>" in full_html:
@@ -1174,6 +1260,12 @@ def build_collection(base_dir, header_part, footer_part):
         
     # Remove any surrogate characters that may come from theme files
     full_html = full_html.encode('utf-8', errors='replace').decode('utf-8', errors='replace')
+    full_html = inject_seo_metadata(
+        full_html,
+        title="Mini PC ASUS NUC Chính Hãng - Nava Store",
+        description="Mua Mini PC ASUS NUC chính hãng tại Nava Store. Hỗ trợ trả góp, bảo hành 36 tháng, giao hàng nhanh toàn quốc.",
+        keywords="Mini PC Asus, Asus NUC, Mini PC Asus NUC, Nava Store"
+    )
     with open(os.path.join(base_dir, "demo_collection.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
@@ -1227,7 +1319,7 @@ def build_product(base_dir, header_part, footer_part):
                     border-radius: 16px; 
                     padding: 24px; 
                     text-align: center; 
-                    margin-bottom: 16px; 
+                    margin-bottom: 32px; 
                     display: flex; 
                     align-items: center; 
                     justify-content: center; 
@@ -1245,7 +1337,7 @@ def build_product(base_dir, header_part, footer_part):
                 .gallery-nav-btn:hover { background: #fff; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
                 .gallery-nav-prev { left: 16px; }
                 .gallery-nav-next { right: 16px; }
-                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; }
+                .gallery-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; }
                 .gallery-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: 0.3s; }
                 .gallery-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
                 .gallery-thumb { 
@@ -1265,6 +1357,15 @@ def build_product(base_dir, header_part, footer_part):
                 .prod-vat { font-size: 0.85rem; color: #64748b; }
                 
                 /* Flat Variants completely redesigned */
+                .variants-row-container {
+                    display: flex;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                }
+                .variants-row-container .variant-group {
+                    flex: 1;
+                    margin-bottom: 0;
+                }
                 .variant-group { margin-bottom: 24px; }
                 .variant-label { font-weight: 600; font-size: 0.9rem; color: #1e293b; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;}
                 .variant-options { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1277,7 +1378,109 @@ def build_product(base_dir, header_part, footer_part):
                 .variant-card.active { border-color: var(--primary); background: #f0f9ff; box-shadow: 0 0 0 1px var(--primary); }
                 .variant-card-title { font-size: 0.85rem; font-weight: 700; color: #0f172a; }
                 .variant-card.active .variant-card-title { color: var(--primary); }
-                .variant-card-price { font-size: 0.75rem; color: #64748b; font-weight: 500; }
+                .variant-card-price { display: none !important; }
+                
+                .variant-price-display {
+                    font-size: 0.9rem;
+                    font-weight: 700;
+                    color: var(--primary);
+                    margin-left: auto;
+                    background: rgba(14, 165, 233, 0.08);
+                    padding: 4px 10px;
+                    border-radius: 6px;
+                }
+                
+                /* Premium Dropdown Styles */
+                .nava-dropdown-wrapper {
+                    position: relative;
+                    width: 100%;
+                }
+                .nava-dropdown-display {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 10px;
+                    padding: 12px 18px;
+                    background: #fff;
+                    cursor: pointer;
+                    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    color: #0f172a;
+                    user-select: none;
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+                }
+                .nava-dropdown-display:hover {
+                    border-color: var(--primary);
+                    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.05);
+                }
+                .nava-dropdown-selected {
+                    display: inline-block;
+                }
+                .nava-dropdown-arrow {
+                    font-size: 1rem;
+                    color: #64748b;
+                    transition: transform 0.2s ease;
+                }
+                .nava-dropdown-wrapper.active .nava-dropdown-arrow {
+                    transform: rotate(180deg);
+                    color: var(--primary);
+                }
+                .nava-dropdown-wrapper:hover .nava-dropdown-display {
+                    border-color: var(--primary);
+                }
+                .nava-dropdown-list {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    margin-top: 6px;
+                    padding: 6px;
+                    background: rgba(255, 255, 255, 0.98);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+                    list-style: none;
+                    z-index: 1000;
+                    margin-bottom: 0;
+                    opacity: 0;
+                    visibility: hidden;
+                    transform: translateY(-10px) scale(0.98);
+                    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.2s;
+                }
+                .nava-dropdown-wrapper.active .nava-dropdown-list {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateY(0) scale(1);
+                }
+                .nava-dropdown-item {
+                    padding: 10px 16px;
+                    cursor: pointer;
+                    font-size: 0.9rem;
+                    font-weight: 550;
+                    color: #334155;
+                    border-radius: 8px;
+                    transition: all 0.15s ease;
+                    margin-bottom: 2px;
+                }
+                .nava-dropdown-item:last-child {
+                    margin-bottom: 0;
+                }
+                .nava-dropdown-item:hover {
+                    background: #f1f5f9;
+                    color: var(--primary);
+                }
+                .nava-dropdown-item.active {
+                    background: #e0f2fe;
+                    color: var(--primary);
+                    font-weight: 700;
+                }
+                [data-theme="dark"] .variant-price-display {
+                    background: rgba(51, 133, 255, 0.15);
+                    color: #66a3ff;
+                }
                 
                 /* Action Buttons */
                 .action-row { display: flex; gap: 12px; margin-bottom: 12px; margin-top: 10px; }
@@ -1296,6 +1499,11 @@ def build_product(base_dir, header_part, footer_part):
                     width: 100%; height: 56px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: 0.2s; margin-bottom: 24px;
                 }
                 .btn-buy-now:hover { opacity: 0.9; box-shadow: 0 4px 12px rgba(14,165,233,0.3); }
+                
+                .btn-goto-store { 
+                    background: #fff; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+                }
+                .btn-goto-store:hover { background: var(--primary); color: #fff; }
                 
                 /* Dark Mode Overrides for Product Page */
                 [data-theme="dark"] body { background-color: var(--bg-white) !important; color: var(--text-dark) !important; }
@@ -1326,7 +1534,7 @@ def build_product(base_dir, header_part, footer_part):
                 [data-theme="dark"] .policy-box { border-color: var(--border-color) !important; background: var(--bg-gray) !important; }
                 [data-theme="dark"] .policy-box h3 { color: var(--text-dark) !important; }
                 [data-theme="dark"] .policy-box .policy-item { color: var(--text-dark) !important; }
-                [data-theme="dark"] .mobile-actions-col button:nth-child(2) { background: var(--bg-gray) !important; }
+                [data-theme="dark"] .btn-goto-store { background: var(--bg-gray) !important; border-color: var(--border-color) !important; color: var(--text-dark) !important; }
                 [data-theme="dark"] #sticky-cart-bar { background: rgba(15,23,42,0.95) !important; border-top-color: var(--border-color) !important; }
                 [data-theme="dark"] .sticky-cart-left .img-wrap { background: #fff !important; border-color: var(--border-color) !important; }
                 [data-theme="dark"] .sticky-title { color: var(--text-dark) !important; }
@@ -1473,76 +1681,65 @@ def build_product(base_dir, header_part, footer_part):
                     </div>
 
                     <!-- Variants -->
-                    <div class="variant-group">
-                        <div class="variant-label"><span>RAM DDR5</span></div>
-                        <div class="variant-options">
-                            <div class="variant-card active" onclick="selectVariant(this, 'ram', 0)">
-                                <span class="variant-card-title">0GB</span>
-                                <span class="variant-card-price">Cơ bản</span>
+                    <div class="variants-row-container">
+                        <div class="variant-group">
+                            <div class="variant-label">
+                                <span>RAM DDR5</span>
+                                <span class="variant-price-display" id="ram-price-display">+0₫</span>
                             </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 1890000)">
-                                <span class="variant-card-title">8GB - 4800</span>
-                                <span class="variant-card-price">+1.890.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 2090000)">
-                                <span class="variant-card-title">8GB - 5600</span>
-                                <span class="variant-card-price">+2.090.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 3790000)">
-                                <span class="variant-card-title">16GB - 4800</span>
-                                <span class="variant-card-price">+3.790.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 4190000)">
-                                <span class="variant-card-title">16GB - 5600</span>
-                                <span class="variant-card-price">+4.190.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ram', 6990000)">
-                                <span class="variant-card-title">32GB - 4800</span>
-                                <span class="variant-card-price">+6.990.000₫</span>
+                            <div class="nava-dropdown-wrapper">
+                                <div class="nava-dropdown-display">
+                                    <span class="nava-dropdown-selected" id="ram-selected-text">NO RAM</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')">NO RAM</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')">8GB - 4800</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')">8GB - 5600</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')">16GB - 4800</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')">16GB - 5600</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="variant-group" style="margin-bottom: 32px;">
-                        <div class="variant-label"><span>Ổ cứng SSD NVMe</span></div>
-                        <div class="variant-options">
-                            <div class="variant-card active" onclick="selectVariant(this, 'ssd', 0)">
-                                <span class="variant-card-title">0GB</span>
-                                <span class="variant-card-price">Cơ bản</span>
+                        
+                        <div class="variant-group">
+                            <div class="variant-label">
+                                <span>Ổ cứng SSD NVMe</span>
+                                <span class="variant-price-display" id="ssd-price-display">+0₫</span>
                             </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 1190000)">
-                                <span class="variant-card-title">256GB</span>
-                                <span class="variant-card-price">+1.190.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 2290000)">
-                                <span class="variant-card-title">500GB</span>
-                                <span class="variant-card-price">+2.290.000₫</span>
-                            </div>
-                            <div class="variant-card" onclick="selectVariant(this, 'ssd', 3990000)">
-                                <span class="variant-card-title">1TB</span>
-                                <span class="variant-card-price">+3.990.000₫</span>
+                            <div class="nava-dropdown-wrapper">
+                                <div class="nava-dropdown-display">
+                                    <span class="nava-dropdown-selected" id="ssd-selected-text">NO SSD</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')">NO SSD</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')">256GB</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')">500GB</li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                     
                     <!-- Actions -->
-                    <div class="action-row">
-                        <div class="qty-input-group">
-                            <button class="qty-btn" onclick="let input=this.nextElementSibling; if(input.value>1) input.value--">-</button>
+                    <button class="btn-buy-now" style="width: 100%; height: auto; padding: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4; margin-bottom: 12px;">
+                        <span style="font-size: 1.1rem; font-weight: 700;">MUA NGAY</span>
+                        <span class="btn-buy-now-subtext" style="font-size: 0.8rem; font-weight: 500; opacity: 0.9;">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                    </button>
+
+                    <div class="action-row" style="display: flex; gap: 12px; margin-bottom: 24px; align-items: center; width: 100%;">
+                        <div class="qty-input-group" style="flex-shrink: 0;">
+                            <button class="qty-btn" onclick="if(this.nextElementSibling.value>1) this.nextElementSibling.value--">-</button>
                             <input type="text" value="1" class="qty-input" readonly>
-                            <button class="qty-btn" onclick="let input=this.previousElementSibling; input.value++">+</button>
+                            <button class="qty-btn" onclick="this.previousElementSibling.value++">+</button>
                         </div>
-                        <button class="btn-add-cart">THÊM VÀO GIỎ</button>
-                    </div>
-                    
-                    <div class="mobile-actions-col" style="display: flex; gap: 12px; margin-bottom: 24px;">
-                        <button class="btn-buy-now" style="flex: 7; margin-bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;">
-                            <span style="font-size: 1.1rem; font-weight: 700;">MUA NGAY</span>
-                            <span class="btn-buy-now-subtext" style="font-size: 0.8rem; font-weight: 500; opacity: 0.9;">Giao tận nơi hoặc nhận tại cửa hàng</span>
+                        <button class="btn-add-cart" style="flex: 1; height: 50px; display: flex; align-items: center; justify-content: center;" title="Thêm vào giỏ">
+                            <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
                         </button>
-                        <button style="flex: 3; background: #fff; border: 1px solid var(--primary); border-radius: 8px; color: var(--primary); font-weight: 700; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.4;" onmouseover="this.style.background='var(--primary)'; this.style.color='#fff';" onmouseout="this.style.background='#fff'; this.style.color='var(--primary)';">
+                        <button class="btn-goto-store" style="flex: 1; height: 50px; display: flex; align-items: center; justify-content: center;" title="Đến cửa hàng">
                             <i class="ph-bold ph-storefront" style="font-size: 1.4rem;"></i>
-                            <span style="margin-top: 4px; text-align: center;">ĐẾN CỬA HÀNG</span>
                         </button>
                     </div>
                     
@@ -2214,13 +2411,13 @@ def build_product(base_dir, header_part, footer_part):
                         display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px;
                     }
                     .spec-pill {
-                        background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 800; display: inline-block; white-space: nowrap; box-shadow: 0 2px 4px rgba(30, 58, 138, 0.2);
+                        background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; display: inline-block; white-space: nowrap; box-shadow: none;
                     }
                     .spec-pill.secondary {
                         background: var(--bg-gray); color: var(--text-gray); border: 1px solid var(--border-color); box-shadow: none; font-weight: 600;
                     }
                     .card-title {
-                        font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 40px; font-weight: 700; color: #0f172a; transition: color 0.2s;
+                        font-size: 1rem; line-height: 1.4; margin-bottom: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; font-weight: 700; color: #0f172a; transition: color 0.2s;
                     }
                     .product-card:hover .card-title {
                         color: var(--primary);
@@ -2237,17 +2434,15 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 6.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU 1.200</span>
+                                <span class="spec-pill">CPU 6.000</span>                                <span class="spec-pill secondary">GPU 1.200</span>
                                 <span class="spec-pill">WIFI 6E</span>
                                 <span class="spec-pill secondary">4 USB 3.2</span>
                                 <span class="spec-pill secondary">2 TYPE C</span>
                             </div>
-                            <h2 class="card-title">ASUS NUC 14 Essential Int...</h2>
+                            <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -2261,16 +2456,14 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 40.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU 17...</span>
+                                <span class="spec-pill">CPU 40.000</span>                                <span class="spec-pill secondary">GPU 17...</span>
                                 <span class="spec-pill">4 FAN S...</span>
                                 <span class="spec-pill secondary">WIFI 7</span>
                             </div>
-                            <h2 class="card-title">AtomMan G7 PT Mini PC...</h2>
+                            <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -2284,16 +2477,14 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 38.500</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">GPU ...</span>
+                                <span class="spec-pill">CPU 38.500</span>                                <span class="spec-pill secondary">GPU ...</span>
                                 <span class="spec-pill">2 NVME</span>
                                 <span class="spec-pill secondary">USB4</span>
                             </div>
-                            <h2 class="card-title">Mini PC GMK EVO X1 32G...</h2>
+                            <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -2307,16 +2498,14 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
                         <div class="card-content">
                             <div class="card-specs">
-                                <span class="spec-pill">CPU 22.000</span>
-                                <span class="spec-pill secondary">MARK</span>
-                                <span class="spec-pill secondary">CPU ...</span>
+                                <span class="spec-pill">CPU 22.000</span>                                <span class="spec-pill secondary">CPU ...</span>
                                 <span class="spec-pill">WIFI 6</span>
                                 <span class="spec-pill secondary">2 USB4</span>
                             </div>
-                            <h2 class="card-title">Tablet Minisforum V3 SE...</h2>
+                            <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
                                 <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
-                                <a href="demo_product.html" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'"><i class="ph ph-shopping-cart-simple"></i> Xem ngay</a>
+                                
                             </div>
                         </div>
                     </div>
@@ -2419,19 +2608,36 @@ def build_product(base_dir, header_part, footer_part):
                 const basePrice = 12390000;
                 let activeRamPrice = 0;
                 let activeSsdPrice = 0;
-                let activeRamName = '0GB';
-                let activeSsdName = '0GB';
+                let activeRamName = 'NO RAM';
+                let activeSsdName = 'NO SSD';
                 
-                function selectVariant(element, type, price) {
-                    const siblings = element.parentNode.querySelectorAll('.variant-card');
+                function selectVariantDropdown(element, type, price, name) {
+                    const wrapper = element.closest('.nava-dropdown-wrapper');
+                    const displayEl = wrapper.querySelector('.nava-dropdown-selected');
+                    if (displayEl) {
+                        displayEl.innerText = name;
+                    }
+                    
+                    const siblings = element.parentNode.querySelectorAll('.nava-dropdown-item');
                     siblings.forEach(el => el.classList.remove('active'));
                     element.classList.add('active');
                     
-                    const titleEl = element.querySelector('.variant-card-title');
-                    const name = titleEl ? titleEl.innerText : '';
-                    
-                    if (type === 'ram') { activeRamPrice = price; activeRamName = name; }
-                    if (type === 'ssd') { activeSsdPrice = price; activeSsdName = name; }
+                    if (type === 'ram') { 
+                        activeRamPrice = price; 
+                        activeRamName = name; 
+                        const displayEl = document.getElementById('ram-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
+                    if (type === 'ssd') { 
+                        activeSsdPrice = price; 
+                        activeSsdName = name; 
+                        const displayEl = document.getElementById('ssd-price-display');
+                        if (displayEl) {
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        }
+                    }
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
                     
@@ -2442,11 +2648,14 @@ def build_product(base_dir, header_part, footer_part):
                     const stickyTitle = document.querySelector('.sticky-title');
                     if(stickyTitle) {
                         let opts = [];
-                        if(activeRamName && activeRamName !== '0GB') opts.push(activeRamName);
-                        if(activeSsdName && activeSsdName !== '0GB') opts.push(activeSsdName);
+                        if(activeRamName && activeRamName !== 'NO RAM') opts.push(activeRamName);
+                        if(activeSsdName && activeSsdName !== 'NO SSD') opts.push(activeSsdName);
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+                    
+                    // Close the dropdown after selection (for touch devices)
+                    wrapper.classList.remove('active');
                 }
 
                 // Show sticky bar on scroll
@@ -2491,6 +2700,27 @@ def build_product(base_dir, header_part, footer_part):
                         }
                     }
                     toggleStickyBar(); // Check immediately on load
+                    
+                    // Toggle dropdowns on click for mobile/touch
+                    document.querySelectorAll('.nava-dropdown-display').forEach(display => {
+                        display.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            const wrapper = this.closest('.nava-dropdown-wrapper');
+                            const wasActive = wrapper.classList.contains('active');
+                            
+                            // Close all dropdowns first
+                            document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+                            
+                            if (!wasActive) {
+                                wrapper.classList.add('active');
+                            }
+                        });
+                    });
+                    
+                    // Close dropdowns on clicking outside
+                    document.addEventListener('click', function() {
+                        document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
+                    });
                 });
 
                 window.addEventListener('scroll', toggleStickyBar, true);
@@ -2608,9 +2838,10 @@ def build_product(base_dir, header_part, footer_part):
     try:
         with open("post_build.py", "r", encoding="utf-8") as f:
             pb_content = f.read()
-            start_idx = pb_content.find('sticky_compare_html = """') + len('sticky_compare_html = """')
+            start_pos = pb_content.find('sticky_html = """')
             end_idx = pb_content.find('"""\n\nfile_path')
-            if start_idx != -1 and end_idx != -1:
+            if start_pos != -1 and end_idx != -1:
+                start_idx = start_pos + len('sticky_html = """')
                 sticky_html = pb_content[start_idx:end_idx]
                 if "<!-- Sticky Compare Bar -->" not in full_html:
                     if "</body>" in full_html:
@@ -2620,6 +2851,12 @@ def build_product(base_dir, header_part, footer_part):
     except Exception as e:
         print("Failed to inject sticky compare bar:", e)
 
+    full_html = inject_seo_metadata(
+        full_html,
+        title="ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350 - Nava Store",
+        description="ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350 chính hãng, hiệu năng AI vượt trội với AMD Ryzen AI, card Radeon 860M, bảo hành 36 tháng.",
+        keywords="ASUS NUC AI 350, ExpertCenter PN54, Mini PC Ryzen AI 7 350, Nava Store"
+    )
     with open(os.path.join(base_dir, "demo_product.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
@@ -3185,6 +3422,12 @@ def build_compare_page(base_dir, header_part, footer_part):
         </div>
     """
     full_html = clean_liquid_tags(header_part + compare_html + local_footer_part)
+    full_html = inject_seo_metadata(
+        full_html,
+        title="So Sánh Sản Phẩm - Nava Store",
+        description="So sánh các sản phẩm Mini PC, eGPU để lựa chọn sản phẩm phù hợp nhất với nhu cầu của bạn.",
+        keywords="so sanh san pham, mini pc, egpu, nava store"
+    )
     with open(os.path.join(base_dir, "demo_compare.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
@@ -3278,9 +3521,9 @@ def build_cart_page(base_dir, header_part, footer_part):
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
                             </div>
                             <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
@@ -3296,9 +3539,9 @@ def build_cart_page(base_dir, header_part, footer_part):
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="let inp = this.nextElementSibling; if(inp.value > 1) inp.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="let inp = this.previousElementSibling; inp.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
                             </div>
                             <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
@@ -3351,6 +3594,12 @@ def build_cart_page(base_dir, header_part, footer_part):
         </div>
     """
     full_html = clean_liquid_tags(header_part + cart_html + local_footer_part)
+    full_html = inject_seo_metadata(
+        full_html,
+        title="Giỏ Hàng - Nava Store",
+        description="Giỏ hàng của bạn tại Nava Store. Kiểm tra sản phẩm và tiến hành thanh toán.",
+        keywords="gio hang, nava store, thanh toan"
+    )
     with open(os.path.join(base_dir, "demo_cart.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
@@ -4139,6 +4388,12 @@ def build_policy_pages(base_dir, header_part, footer_part):
     """
     
     full_html = clean_liquid_tags(header_part + policy_html + local_footer_part)
+    full_html = inject_seo_metadata(
+        full_html,
+        title="Chính Sách - Nava Store",
+        description="Chính sách bán hàng, bảo hành, đổi trả và vận chuyển tại Nava Store.",
+        keywords="chinh sach, nava store"
+    )
     with open(os.path.join(base_dir, "demo_policy.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
