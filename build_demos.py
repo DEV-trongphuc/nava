@@ -1836,6 +1836,7 @@ def build_product(base_dir, header_part, footer_part):
                     .specs-column { padding: 16px !important; }
                     
                     /* Fix variants layout */
+                    .variants-row-container { flex-direction: column; gap: 12px; }
                     .variant-options { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 6px; }
                     .variant-card { flex-direction: column; align-items: flex-start; gap: 2px; padding: 6px 8px; width: 100%; box-sizing: border-box; text-align: left; }
                     .variant-card-title { font-size: 0.8rem; }
