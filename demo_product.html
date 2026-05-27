@@ -701,16 +701,6 @@
                 [data-theme="dark"] h2 { color: var(--text-dark) !important; }
                 [data-theme="dark"] .badge { background: var(--primary) !important; color: white !important; }
                 
-                /* Price animation & visual feedback */
-                @keyframes priceBump {
-                    0% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary)); }
-                    50% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(30, 58, 138, 0.5)); color: #10b981; }
-                    100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--primary)); }
-                }
-                .price-bump-animation {
-                    animation: priceBump 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                    display: inline-block;
-                }
 
                 /* Center select text in dropdown and align arrow */
                 .nava-dropdown-display {
@@ -1130,11 +1120,6 @@
                         <!-- Primary MUA NGAY Button -->
                         <button class="btn-buy-now-primary" id="btn-buy-now-main">
                             MUA NGAY
-                        </button>
-
-                        <!-- Secondary THÊM VÀO GIỎ Button -->
-                        <button class="btn-add-to-cart-secondary" id="btn-add-cart-main">
-                            THÊM VÀO GIỎ
                         </button>
 
                         <!-- Bottom Row: Qty Selector and Actions -->
@@ -2021,6 +2006,33 @@
                 let activeSsdPrice = 0;
                 let activeRamName = 'NO RAM';
                 let activeSsdName = 'NO SSD';
+                let currentPrice = basePrice;
+
+                function animatePrice(elementId, startValue, endValue, duration = 400) {
+                    const obj = document.getElementById(elementId);
+                    if (!obj) return;
+                    
+                    const startTime = performance.now();
+                    
+                    function update(currentTime) {
+                        const elapsedTime = currentTime - startTime;
+                        if (elapsedTime >= duration) {
+                            obj.innerHTML = endValue.toLocaleString('vi-VN') + '₫';
+                            return;
+                        }
+                        
+                        // Ease out quad
+                        const progress = elapsedTime / duration;
+                        const easeProgress = progress * (2 - progress);
+                        
+                        const currentValue = Math.round(startValue + (endValue - startValue) * easeProgress);
+                        obj.innerHTML = currentValue.toLocaleString('vi-VN') + '₫';
+                        
+                        requestAnimationFrame(update);
+                    }
+                    
+                    requestAnimationFrame(update);
+                }
                 
                 function selectVariantDropdown(element, type, price, name) {
                     const wrapper = element.closest('.nava-dropdown-wrapper');
@@ -2052,19 +2064,10 @@
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
                     
-                    const mainPrice = document.getElementById('main-price');
-                    if (mainPrice) {
-                        mainPrice.innerHTML = total.toLocaleString('vi-VN') + '₫';
-                        mainPrice.classList.remove('price-bump-animation');
-                        void mainPrice.offsetWidth; // Force reflow
-                        mainPrice.classList.add('price-bump-animation');
-                    }
-                    const stickyPrice = document.getElementById('sticky-price');
-                    if(stickyPrice) {
-                        stickyPrice.innerHTML = total.toLocaleString('vi-VN') + '₫';
-                        stickyPrice.classList.remove('price-bump-animation');
-                        void stickyPrice.offsetWidth; // Force reflow
-                        stickyPrice.classList.add('price-bump-animation');
+                    if (total !== currentPrice) {
+                        animatePrice('main-price', currentPrice, total, 400);
+                        animatePrice('sticky-price', currentPrice, total, 400);
+                        currentPrice = total;
                     }
                     
                     const stickyTitle = document.querySelector('.sticky-title');
@@ -2172,11 +2175,6 @@
                         }
                     };
 
-                    const btnAddCartMain = document.getElementById('btn-add-cart-main');
-                    if (btnAddCartMain) {
-                        btnAddCartMain.addEventListener('click', triggerCartOpen);
-                    }
-                    
                     const btnCartIcon = document.getElementById('btn-cart-icon');
                     if (btnCartIcon) {
                         btnCartIcon.addEventListener('click', triggerCartOpen);
