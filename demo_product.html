@@ -2101,12 +2101,12 @@
                     const stickyBar = document.getElementById('sticky-cart-bar');
                     if (!stickyBar) return;
                     
-                    const threshold = window.innerWidth <= 768 ? 400 : 600;
+                    const threshold = window.innerWidth <= 768 ? 200 : 600;
                     let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
                     
                     // Fallback for Sapo themes using wrapper scrolling
                     if (scrollY === 0) {
-                        const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main');
+                        const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
                         for (let i=0; i<wrappers.length; i++) {
                             if (wrappers[i].scrollTop > scrollY) scrollY = wrappers[i].scrollTop;
                         }
@@ -2127,12 +2127,14 @@
                     }
                 }
 
-                document.addEventListener('DOMContentLoaded', function() {
+                function initProductPage() {
+                    const scrollTarget = document.getElementById('nava-master-wrapper') || document.body;
+
                     const stickyBar = document.getElementById('sticky-cart-bar');
                     if (stickyBar) {
                         stickyBar.style.setProperty('z-index', '2147483647', 'important');
-                        if (stickyBar.parentNode !== document.body) {
-                            document.body.appendChild(stickyBar);
+                        if (stickyBar.parentNode !== scrollTarget) {
+                            scrollTarget.appendChild(stickyBar);
                         }
                     }
                     toggleStickyBar(); // Check immediately on load
@@ -2204,9 +2206,18 @@
                     document.addEventListener('click', function() {
                         document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
                     });
-                });
 
-                window.addEventListener('scroll', toggleStickyBar, true);
+                    // Bind scroll listeners
+                    const scrollContainer = document.getElementById('nava-master-wrapper') || window;
+                    scrollContainer.addEventListener('scroll', toggleStickyBar, { passive: true });
+                    window.addEventListener('scroll', toggleStickyBar, true);
+                }
+
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initProductPage);
+                } else {
+                    initProductPage();
+                }
                 
                 // Magnifier Effect
                 const mainImgContainer = document.getElementById('main-image-container');
