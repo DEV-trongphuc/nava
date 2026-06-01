@@ -265,8 +265,10 @@
             <div class="top-bar">
                 <div class="container top-bar-container">
                     <div class="logo">
-                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
-                            alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
+                        <a href="index.html">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
+                                alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
+                        </a>
                     </div>
                     <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện" style="margin-right: 10px;">
                         <div class="toggle-track">
@@ -310,7 +312,7 @@
                     </div>
                     <ul class="main-nav">
                         <li class="nav-item">
-                            <a href="https://navastore.vn/" class="active"><img
+                            <a href="index.html" class="active"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_1.png?1775454528082"
                                     alt="Trang chủ" loading="lazy" decoding="async"> <span>Trang chủ</span></a>
                         </li>
@@ -318,7 +320,7 @@
 
                         <!-- Mega Dropdown: Mini PC -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
                                     alt="Mini PC" loading="lazy" decoding="async"> <span>Mini PC</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -355,7 +357,7 @@
 
                         <!-- Mega Dropdown: eGPU -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                     alt="eGPU" loading="lazy" decoding="async"> <span>eGPU</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -370,14 +372,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://navastore.vn/nas"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
                                     alt="NAS" loading="lazy" decoding="async"> <span>NAS / SERVER</span></a>
                         </li>
 
                         <!-- Mega Dropdown: Linh Kiện -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
                                     alt="Linh Kiện" loading="lazy" decoding="async"> <span>Linh Kiện</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -393,12 +395,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://navastore.vn/phu-kien"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
                                     alt="Phụ kiện" loading="lazy" decoding="async"> <span>Phụ kiện</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://navastore.vn/like-new"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
                                     alt="Like new" loading="lazy" decoding="async"> <span>Like new</span></a>
                         </li>
@@ -453,14 +455,8 @@
             .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 900; color: var(--text-dark); }
             .summary-total-price { color: var(--primary); font-size: 1.5rem; }
             
-            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 60px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
+            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 20px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
             .btn-checkout-nava:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3); color: white !important; }
-            
-            .promo-box { display: flex; gap: 10px; margin-top: 60px; }
-            .promo-input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-md); outline: none; font-size: 0.9rem; transition: 0.3s; background: var(--bg-gray); }
-            .promo-input:focus { border-color: var(--primary); background: white; }
-            .promo-btn { padding: 10px 15px; background: var(--text-dark); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; transition: 0.3s; }
-            .promo-btn:hover { background: var(--primary); }
             
             @media (max-width: 991px) {
                 .cart-grid { grid-template-columns: 1fr; }
@@ -470,6 +466,9 @@
             @media (max-width: 575px) {
                 .cart-item { flex-direction: column; align-items: flex-start; }
                 .cart-item-img { width: 80px; height: 80px; }
+                .qty-btn { width: 40px !important; height: 40px !important; font-size: 1.25rem !important; }
+                .qty-spinner { border-radius: 24px !important; }
+                .qty-input { width: 45px !important; height: 40px !important; font-size: 1.1rem !important; }
             }
         </style>
         
@@ -480,50 +479,49 @@
                 <span style="color: var(--primary); font-weight: bold;">Giỏ hàng</span>
             </div>
             
-            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn</h1>
+            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (2 sản phẩm)</h1>
             
             <div class="cart-grid">
                 <!-- Left: Cart Items -->
                 <div class="cart-items-container">
                     <!-- Item 1 -->
-                    <div class="cart-item">
+                    <div class="cart-item" data-price="4490000" id="cart-item-1">
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="cart-item-img">
                         <div class="cart-item-details">
                             <a href="demo_product.html" class="cart-item-title">ASUS NUC 14 Essential</a>
                             <div class="cart-item-variant">Core i3 / 8GB / 256GB</div>
-                            <div class="cart-item-price">4.490.000₫</div>
+                            <div class="cart-item-price">4.490.000đ</div>
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, -1)"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, 1)"><i class="ph-bold ph-plus"></i></button>
                             </div>
-                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                            <button class="cart-item-remove" onclick="removeCartItem(this)" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
                     </div>
                     
                     <!-- Item 2 -->
-                    <div class="cart-item">
+                    <div class="cart-item" data-price="31190000" id="cart-item-2">
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="cart-item-img">
                         <div class="cart-item-details">
                             <a href="demo_product.html" class="cart-item-title">GMK EVO X1 32G</a>
                             <div class="cart-item-variant">Ryzen AI 9 HX370 / 32GB / 1TB</div>
-                            <div class="cart-item-price">31.190.000₫</div>
+                            <div class="cart-item-price">31.190.000đ</div>
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, -1)"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, 1)"><i class="ph-bold ph-plus"></i></button>
                             </div>
-                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                            <button class="cart-item-remove" onclick="removeCartItem(this)" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
                     </div>
                     
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <a href="demo_collection.html" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;"><i class="ph-bold ph-arrow-left"></i> Tiếp tục mua sắm</a>
-                        <button style="background: transparent; color: var(--text-gray); border: none; font-weight: 600; cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-trash"></i> Xóa tất cả</button>
                     </div>
                 </div>
                 
@@ -533,7 +531,7 @@
                     
                     <div class="summary-row">
                         <span>Tạm tính (2 sản phẩm)</span>
-                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000₫</span>
+                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000đ</span>
                     </div>
                     
                     <div class="summary-row">
@@ -541,22 +539,186 @@
                         <span style="color: #10b981; font-weight: 700;">Miễn phí</span>
                     </div>
                     
-                    <div class="promo-box">
-                        <input type="text" class="promo-input" placeholder="Mã giảm giá...">
-                        <button class="promo-btn">Áp dụng</button>
+                    <div class="summary-row" id="summary-discount-row">
+                        <span>Giảm giá (Voucher)</span>
+                        <span id="summary-discount-value" style="color: var(--primary); font-weight: 700;">-356.800đ</span>
+                    </div>
+                    
+                    <!-- NAVA Voucher Section (Shopee Style) -->
+                    <style>
+                        .shopee-voucher-container {
+                            border: 1px solid var(--border-color);
+                            background: var(--bg-gray);
+                            border-radius: var(--radius-md);
+                            padding: 16px;
+                            margin: 20px 0;
+                            font-family: inherit;
+                        }
+                        .voucher-header {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            margin-bottom: 12px;
+                        }
+                        .voucher-tag {
+                            background: rgba(0, 51, 102, 0.08); /* brand blue light tint */
+                            color: var(--primary);
+                            font-size: 0.72rem;
+                            font-weight: 700;
+                            padding: 4px 8px;
+                            border-radius: 6px;
+                            letter-spacing: 0.5px;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 4px;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                        }
+                        [data-theme="dark"] .voucher-tag {
+                            background: rgba(51, 133, 255, 0.15);
+                            color: #66a3ff;
+                        }
+                        .voucher-title {
+                            font-weight: 700;
+                            color: var(--text-dark);
+                            font-size: 0.9rem;
+                        }
+                        .voucher-ticket {
+                            display: flex;
+                            align-items: stretch;
+                            background: var(--bg-white, #ffffff);
+                            border: 1px solid var(--border-color);
+                            border-radius: 8px;
+                            overflow: hidden;
+                            position: relative;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                        }
+                        /* Ticket style circular notches */
+                        .voucher-ticket::before,
+                        .voucher-ticket::after {
+                            content: '';
+                            position: absolute;
+                            width: 14px;
+                            height: 14px;
+                            background: var(--bg-gray); /* Blends with shopee-voucher-container background */
+                            border: 1px solid var(--border-color);
+                            border-radius: 50%;
+                            z-index: 5;
+                            box-sizing: border-box;
+                        }
+                        .voucher-ticket::before {
+                            top: -7px;
+                            left: 83px; /* centered at 90px boundary */
+                            clip-path: inset(7px 0 0 0); /* only show bottom half */
+                        }
+                        .voucher-ticket::after {
+                            bottom: -7px;
+                            left: 83px; /* centered at 90px boundary */
+                            clip-path: inset(0 0 7px 0); /* only show top half */
+                        }
+                        .voucher-left {
+                            background: rgba(0, 51, 102, 0.04);
+                            color: var(--primary);
+                            width: 90px;
+                            flex-shrink: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 800;
+                            font-size: 0.85rem;
+                            text-align: center;
+                            letter-spacing: 0.5px;
+                            border-right: 1px dashed var(--border-color);
+                            box-sizing: border-box;
+                        }
+                        [data-theme="dark"] .voucher-left {
+                            background: rgba(51, 133, 255, 0.08);
+                            color: #66a3ff;
+                        }
+                        .voucher-right {
+                            padding: 12px 14px;
+                            flex: 1;
+                            font-size: 0.85rem;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                        }
+                        .voucher-desc {
+                            font-weight: 700;
+                            color: var(--text-dark);
+                            margin-bottom: 3px;
+                            font-size: 0.85rem;
+                        }
+                        .voucher-subtext {
+                            color: var(--text-gray);
+                            font-size: 0.78rem;
+                        }
+                        .kol-input-box {
+                            display: flex;
+                            gap: 8px;
+                            margin-top: 15px;
+                        }
+                        .kol-input {
+                            flex: 1;
+                            padding: 10px 14px;
+                            border: 1px solid var(--border-color);
+                            border-radius: 8px;
+                            font-size: 0.88rem;
+                            outline: none;
+                            background: var(--bg-white, #ffffff);
+                            transition: 0.2s;
+                            box-sizing: border-box;
+                            min-width: 0; /* allows input to shrink on small screens */
+                        }
+                        .kol-input:focus {
+                            border-color: var(--primary);
+                            background: var(--bg-white, #ffffff);
+                        }
+                        .kol-btn {
+                            padding: 10px 20px;
+                            background: var(--primary);
+                            color: white;
+                            border: none;
+                            border-radius: 8px;
+                            font-weight: 700;
+                            cursor: pointer;
+                            transition: all 0.2s;
+                            font-size: 0.88rem;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                        }
+                        .kol-btn:hover {
+                            background: var(--primary-light);
+                        }
+                    </style>
+                    <div class="shopee-voucher-container">
+                        <div class="voucher-header">
+                            <span class="voucher-tag"><i class="ph-fill ph-tag"></i> NAVA Voucher</span>
+                            <span class="voucher-title">Khuyến mãi dành cho bạn</span>
+                        </div>
+                        <div class="voucher-ticket">
+                            <div class="voucher-left">1% OFF</div>
+                            <div class="voucher-right">
+                                <div class="voucher-desc" id="applied-voucher-title">Tự động áp dụng mã NAVA1</div>
+                                <div class="voucher-subtext" id="applied-voucher-sub">Đã giảm <span id="voucher-discount-amount" style="color: var(--primary); font-weight: 800;">356.800đ</span> (1%)</div>
+                            </div>
+                        </div>
+                        <div class="kol-input-box">
+                            <input type="text" class="kol-input" id="kol-code-input" placeholder="Nhập mã giảm giá...">
+                            <button class="kol-btn" onclick="applyKOLCode()">Áp dụng</button>
+                        </div>
+                        <div id="kol-alert" style="display: none; font-size: 0.8rem; font-weight: 600; margin-top: 8px; color: #10b981;"></div>
                     </div>
                     
                     <div class="summary-total">
                         <span>Tổng Tiền</span>
-                        <span class="summary-total-price">35.680.000₫</span>
+                        <span class="summary-total-price" id="summary-total-price-val">35.323.200đ</span>
                     </div>
                     
-                    <p style="font-size: 0.8rem; color: var(--text-gray); text-align: right; margin-top: 5px; font-style: italic;">(Đã bao gồm VAT)</p>
-                    
-                    <a href="demo_checkout.html" class="btn-checkout-nava">Thanh Toán Ngay <i class="ph-bold ph-arrow-right" style="vertical-align: middle; margin-left: 5px;"></i></a>
+                    <a href="demo_checkout.html" class="btn-checkout-nava">Thanh Toán <i class="ph-bold ph-arrow-right" style="vertical-align: middle; margin-left: 5px;"></i></a>
                     
                     <div style="margin-top: 20px; text-align: center;">
-                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px;">Thanh toán an toàn 100%</p>
+                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px;">An toàn & Bảo mật</p>
                         <div style="display: flex; gap: 10px; justify-content: center;">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-1.png?1778729235331" alt="Visa" style="height: 25px;">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-2.png?1778729235331" alt="Mastercard" style="height: 25px;">
@@ -566,6 +728,179 @@
                 </div>
             </div>
         </div>
+        
+        <script>
+            let cartSubtotal = 35680000;
+            let activeDiscountPercent = 1;
+            let activeDiscountValue = 356800;
+            let appliedCode = 'NAVA1';
+            
+            function changeQty(btn, delta) {
+                const spinner = btn.closest('.qty-spinner');
+                const input = spinner.querySelector('.qty-input');
+                let val = parseInt(input.value) || 1;
+                val += delta;
+                if (val < 1) val = 1;
+                input.value = val;
+                recalculateSubtotal();
+            }
+            
+            function removeCartItem(btn) {
+                const item = btn.closest('.cart-item');
+                if (item) {
+                    item.remove();
+                    recalculateSubtotal();
+                }
+            }
+            
+            function recalculateSubtotal() {
+                let subtotal = 0;
+                let itemCount = 0;
+                const items = document.querySelectorAll('.cart-item');
+                items.forEach(item => {
+                    const price = parseInt(item.getAttribute('data-price')) || 0;
+                    const qty = parseInt(item.querySelector('.qty-input').value) || 1;
+                    subtotal += price * qty;
+                    itemCount += qty;
+                });
+                
+                cartSubtotal = subtotal;
+                
+                // Update item count in UI
+                const titleEl = document.querySelector('.cart-title');
+                if (titleEl) {
+                    titleEl.innerHTML = `<i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (${itemCount} sản phẩm)`;
+                }
+                
+                const summaryQtyEl = document.querySelector('.summary-row span:first-child');
+                if (summaryQtyEl) {
+                    summaryQtyEl.textContent = `Tạm tính (${itemCount} sản phẩm)`;
+                }
+                
+                const summarySubtotalEl = document.querySelector('.summary-row span:last-child');
+                if (summarySubtotalEl) {
+                    summarySubtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+                }
+                
+                let qty1 = 0;
+                let qty2 = 0;
+                const item1 = document.getElementById('cart-item-1');
+                if (item1) qty1 = parseInt(item1.querySelector('.qty-input').value) || 0;
+                const item2 = document.getElementById('cart-item-2');
+                if (item2) qty2 = parseInt(item2.querySelector('.qty-input').value) || 0;
+                
+                localStorage.setItem('nava_qty_item1', qty1);
+                localStorage.setItem('nava_qty_item2', qty2);
+                localStorage.setItem('nava_cart_subtotal', subtotal);
+                
+                if (itemCount === 0) {
+                    const grid = document.querySelector('.cart-grid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;">
+                                <i class="ph ph-shopping-cart-simple" style="font-size: 5rem; color: var(--text-gray); margin-bottom: 20px; display: block;"></i>
+                                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Giỏ hàng của bạn đang trống</h2>
+                                <p style="color: var(--text-gray); margin-bottom: 25px;">Hãy tiếp tục khám phá và mua sắm các sản phẩm công nghệ tuyệt vời tại Nava Store.</p>
+                                <a href="demo_collection.html" class="btn-nava btn-primary-nava" style="display: inline-flex; width: auto; padding: 12px 30px; text-decoration: none; border-radius: 8px;">Tiếp tục mua sắm</a>
+                            </div>
+                        `;
+                    }
+                    localStorage.setItem('nava_cart_total', 0);
+                    localStorage.setItem('nava_discount_val', 0);
+                    return;
+                }
+                
+                updateCartTotals();
+            }
+            
+            function updateCartTotals() {
+                const discountValEl = document.getElementById('voucher-discount-amount');
+                const discountSummaryEl = document.getElementById('summary-discount-value');
+                const totalPriceEl = document.getElementById('summary-total-price-val');
+                
+                // Recalculate
+                activeDiscountValue = Math.round(cartSubtotal * (activeDiscountPercent / 100));
+                let finalTotal = cartSubtotal - activeDiscountValue;
+                
+                // Format currency
+                const discountStr = activeDiscountValue.toLocaleString('vi-VN') + 'đ';
+                const finalStr = finalTotal.toLocaleString('vi-VN') + 'đ';
+                
+                if (discountValEl) discountValEl.innerText = discountStr;
+                if (discountSummaryEl) discountSummaryEl.innerText = '-' + discountStr;
+                if (totalPriceEl) totalPriceEl.innerText = finalStr;
+                
+                // Save to localStorage so checkout page can sync
+                localStorage.setItem('nava_discount_percent', activeDiscountPercent);
+                localStorage.setItem('nava_discount_code', appliedCode);
+                localStorage.setItem('nava_discount_val', activeDiscountValue);
+                localStorage.setItem('nava_cart_total', finalTotal);
+            }
+            
+            function applyKOLCode() {
+                const input = document.getElementById('kol-code-input');
+                const alertBox = document.getElementById('kol-alert');
+                const titleEl = document.getElementById('applied-voucher-title');
+                const subEl = document.getElementById('applied-voucher-sub');
+                const code = input.value.trim().toUpperCase();
+                
+                if (!code) return;
+                
+                if (code === 'KOL10') {
+                    activeDiscountPercent = 10;
+                    appliedCode = 'KOL10';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = '🎉 Đã áp dụng mã KOL10: Giảm 10% tổng đơn hàng!';
+                    titleEl.innerText = 'Đã áp dụng mã KOL10';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else if (code === 'NAVA50') {
+                    activeDiscountPercent = 50;
+                    appliedCode = 'NAVA50';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = '🎉 Siêu Voucher NAVA50: Giảm 50% tổng đơn hàng!';
+                    titleEl.innerText = 'Đã áp dụng mã NAVA50';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else if (code === 'NAVA1') {
+                    activeDiscountPercent = 1;
+                    appliedCode = 'NAVA1';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = 'Đã quay lại mã giảm giá mặc định NAVA1 (1%)';
+                    titleEl.innerText = 'Tự động áp dụng mã NAVA1';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else {
+                    alertBox.style.color = '#ef4444';
+                    alertBox.innerText = '❌ Mã voucher không hợp lệ hoặc đã hết lượt sử dụng!';
+                    alertBox.style.display = 'block';
+                }
+            }
+            
+            // Initialize on load
+            window.addEventListener('DOMContentLoaded', () => {
+                const q1 = localStorage.getItem('nava_qty_item1') !== null ? parseInt(localStorage.getItem('nava_qty_item1')) : 1;
+                const q2 = localStorage.getItem('nava_qty_item2') !== null ? parseInt(localStorage.getItem('nava_qty_item2')) : 1;
+                
+                const item1 = document.getElementById('cart-item-1');
+                if (item1) {
+                    if (q1 > 0) {
+                        item1.querySelector('.qty-input').value = q1;
+                    } else {
+                        item1.remove();
+                    }
+                }
+                const item2 = document.getElementById('cart-item-2');
+                if (item2) {
+                    if (q2 > 0) {
+                        item2.querySelector('.qty-input').value = q2;
+                    } else {
+                        item2.remove();
+                    }
+                }
+                recalculateSubtotal();
+            });
+        </script>
     <!-- Mobile Sidebar Drawer -->
         <div class="sidebar-overlay"></div>
         <div class="sidebar-drawer">

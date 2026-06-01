@@ -53,7 +53,7 @@ custom_styles = """
     
     /* Bulletproof Grid */
     .dashboard-grid { display: flex; gap: 30px; align-items: flex-start; }
-    .dashboard-sidebar-wrapper { flex: 0 0 280px; width: 280px; }
+    .dashboard-sidebar-wrapper { flex: 0 0 280px; width: 280px; align-self: stretch; }
     .dashboard-main-wrapper { flex: 1; min-width: 0; }
     
     /* Sidebar Styling */
@@ -64,7 +64,8 @@ custom_styles = """
         border: 1px solid var(--border-color);
         overflow: hidden;
         position: sticky;
-        top: 80px;
+        top: 140px;
+        height: fit-content;
     }
     .user-profile-section {
         padding: 30px 20px;
@@ -225,19 +226,34 @@ account_content = f"""
         {sidebar}
         <div class="dashboard-main-wrapper">
             <div class="dashboard-content">
-                <div class="content-header">
+                <div class="content-header" style="flex-wrap: wrap; gap: 15px;">
                     <h1 class="content-title"><i class="ph-fill ph-user-circle" style="color: var(--primary);"></i> Thông tin tài khoản</h1>
+                    <button class="btn-nava btn-nava-primary" onclick="alert('Tính năng chỉnh sửa thông tin đang giả lập trên Sapo.')"><i class="ph-bold ph-pencil-simple"></i> Edit</button>
                 </div>
 
                 <div class="info-box">
                     <div class="info-grid">
-                        <div class="info-item">
-                            <label>Họ và tên</label>
-                            <div>Turnio Dev</div>
+                        <!-- Left Column -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="info-item">
+                                <label>Họ và tên</label>
+                                <div>Turnio Dev</div>
+                            </div>
+                            <div class="info-item">
+                                <label>Địa chỉ Email</label>
+                                <div>dev@turnio.net</div>
+                            </div>
                         </div>
-                        <div class="info-item">
-                            <label>Địa chỉ Email</label>
-                            <div>dev@turnio.net</div>
+                        <!-- Right Column -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="info-item">
+                                <label>Số điện thoại</label>
+                                <div>0378859736</div>
+                            </div>
+                            <div class="info-item">
+                                <label>Địa chỉ mặc định</label>
+                                <div>123 Đường Nguyễn Văn Linh, Phường Tân Phong, Quận 7, TP. Hồ Chí Minh</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -246,7 +262,7 @@ account_content = f"""
                     Đơn hàng gần đây
                 </div>
                 
-                <div class="table-container">
+                <div class="table-container" style="margin-bottom: 40px;">
                     <table class="table-nava">
                         <thead>
                             <tr>
@@ -267,7 +283,7 @@ account_content = f"""
                                         <span style="font-weight: 600; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">ASUS NUC AI 350</span>
                                     </div>
                                 </td>
-                                <td style="font-weight: 700; color: var(--primary);">12.390.000₫</td>
+                                <td style="font-weight: 700; color: var(--primary);">12.390.000đ</td>
                                 <td><span class="badge-status badge-success">Đã giao hàng</span></td>
                             </tr>
                             <tr>
@@ -279,12 +295,131 @@ account_content = f"""
                                         <span style="font-weight: 600; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">RAM DDR5 32GB 5600MHz...</span>
                                     </div>
                                 </td>
-                                <td style="font-weight: 700; color: var(--primary);">3.500.000₫</td>
+                                <td style="font-weight: 700; color: var(--primary);">3.500.000đ</td>
                                 <td><span class="badge-status badge-warning">Đang xử lý</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Recently Viewed Section -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+                <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+                <div class="template-product mt-5" style="width: 100%; margin-top: 50px;">
+                    <div class="box_product_1 rounded-10 bg-white py-3 px-2 p-lg-3" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm);">
+                        <div class="t1 align-items-center d-flex justify-content-between mb-3">
+                            <h3 class="special-content_title font-weight-bold position-relative m-0" style="font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+                                <i class="ph-fill ph-clock-counter-clockwise" style="color: var(--primary); font-size: 1.5rem;"></i>
+                                <span class="position-relative">Sản phẩm đã xem</span>
+                            </h3>
+                        </div>
+                        <div class="swiper js-recent-slider p-2 pb-3 pb-lg-2" style="position: relative; overflow: hidden; list-style: none; padding: 0; z-index: 1;">
+                            <div class="swiper-wrapper js-recent-container" id="recent-products-wrapper">
+                                <!-- Dynamic cards -->
+                            </div>
+                            <!-- Navigation -->
+                            <div class="swiper-button-prev recent-prev" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; --swiper-navigation-size: 14px;"></div>
+                            <div class="swiper-button-next recent-next" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; --swiper-navigation-size: 14px;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {{
+                        const container = document.getElementById('recent-products-wrapper');
+                        if (container) {{
+                            let items = [];
+                            try {{
+                                items = JSON.parse(localStorage.getItem('mewRecent')) || [];
+                            }} catch(e) {{}}
+                            
+                            if (items.length === 0) {{
+                                items = [
+                                    {{
+                                        name: 'ASUS NUC AI 350 (PN54)',
+                                        img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973',
+                                        price: '12.390.000đ',
+                                        url: 'demo_product.html'
+                                    }},
+                                    {{
+                                        name: 'MINISFORUM UM890 Pro',
+                                        img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420',
+                                        price: '14.990.000đ',
+                                        url: 'demo_product.html'
+                                    }},
+                                    {{
+                                        name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)',
+                                        img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png',
+                                        price: '14.200.000đ',
+                                        url: 'demo_product.html'
+                                    }}
+                                ];
+                            }}
+                            
+                            let html = '';
+                            items.forEach(item => {{
+                                const name = item.name || item.title || item;
+                                const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+                                const price = item.price || 'Liên hệ';
+                                const url = item.url || 'demo_product.html';
+                                
+                                html += `
+                                    <div class="swiper-slide" style="height: auto;">
+                                        <div class="product-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px; background: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; box-sizing: border-box;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.05)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+                                            <a href="${{url}}" style="text-decoration: none; display: block; margin-bottom: 10px;">
+                                                <img src="${{img}}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
+                                            </a>
+                                            <a href="${{url}}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${{name}}</a>
+                                            <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${{price}}</div>
+                                            <a href="${{url}}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
+                                        </div>
+                                    </div>
+                                `;
+                            }});
+                            container.innerHTML = html;
+                            
+                            const swiperRecent = new Swiper('.js-recent-slider', {{
+                                slidesPerView: 2,
+                                spaceBetween: 15,
+                                navigation: {{
+                                    nextEl: '.recent-next',
+                                    prevEl: '.recent-prev',
+                                }},
+                                breakpoints: {{
+                                    576: {{ slidesPerView: 2 }},
+                                    768: {{ slidesPerView: 3 }},
+                                    992: {{ slidesPerView: 4 }}
+                                }}
+                            }});
+                            
+                            function updateRecentNavVisibility() {{
+                                const swiperEl = document.querySelector('.js-recent-slider');
+                                if (swiperEl) {{
+                                    const prevBtn = swiperEl.querySelector('.recent-prev');
+                                    const nextBtn = swiperEl.querySelector('.recent-next');
+                                    if (prevBtn && nextBtn) {{
+                                        let currentSlidesPerView = 2;
+                                        const width = window.innerWidth;
+                                        if (width >= 992) currentSlidesPerView = 4;
+                                        else if (width >= 768) currentSlidesPerView = 3;
+                                        else if (width >= 576) currentSlidesPerView = 2;
+                                        
+                                        if (items.length <= currentSlidesPerView) {{
+                                            prevBtn.style.setProperty('display', 'none', 'important');
+                                            nextBtn.style.setProperty('display', 'none', 'important');
+                                        }} else {{
+                                            prevBtn.style.removeProperty('display');
+                                            nextBtn.style.removeProperty('display');
+                                        }}
+                                    }}
+                                }}
+                            }}
+                            updateRecentNavVisibility();
+                            swiperRecent.on('resize', updateRecentNavVisibility);
+                            swiperRecent.on('update', updateRecentNavVisibility);
+                        }}
+                    }});
+                </script>
             </div>
         </div>
     </div>

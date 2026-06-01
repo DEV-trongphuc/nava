@@ -265,8 +265,10 @@
             <div class="top-bar">
                 <div class="container top-bar-container">
                     <div class="logo">
-                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
-                            alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
+                        <a href="index.html">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
+                                alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async">
+                        </a>
                     </div>
                     <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện" style="margin-right: 10px;">
                         <div class="toggle-track">
@@ -310,7 +312,7 @@
                     </div>
                     <ul class="main-nav">
                         <li class="nav-item">
-                            <a href="https://navastore.vn/" class="active"><img
+                            <a href="index.html" class="active"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_1.png?1775454528082"
                                     alt="Trang chủ" loading="lazy" decoding="async"> <span>Trang chủ</span></a>
                         </li>
@@ -318,7 +320,7 @@
 
                         <!-- Mega Dropdown: Mini PC -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082"
                                     alt="Mini PC" loading="lazy" decoding="async"> <span>Mini PC</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -355,7 +357,7 @@
 
                         <!-- Mega Dropdown: eGPU -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082"
                                     alt="eGPU" loading="lazy" decoding="async"> <span>eGPU</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -370,14 +372,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://navastore.vn/nas"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_5.png?1775454528082"
                                     alt="NAS" loading="lazy" decoding="async"> <span>NAS / SERVER</span></a>
                         </li>
 
                         <!-- Mega Dropdown: Linh Kiện -->
                         <li class="nav-item has-dropdown">
-                            <a href="javascript:void(0);"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082"
                                     alt="Linh Kiện" loading="lazy" decoding="async"> <span>Linh Kiện</span> <i
                                     class="ph-bold ph-caret-down"></i></a>
@@ -393,12 +395,12 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://navastore.vn/phu-kien"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082"
                                     alt="Phụ kiện" loading="lazy" decoding="async"> <span>Phụ kiện</span></a>
                         </li>
                         <li class="nav-item">
-                            <a href="https://navastore.vn/like-new"><img
+                            <a href="demo_collection.html"><img
                                     src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082"
                                     alt="Like new" loading="lazy" decoding="async"> <span>Like new</span></a>
                         </li>
@@ -423,7 +425,7 @@
             .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
             .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
             
-            .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+            .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
             
             /* Header Row */
             .compare-row-header { display: contents; }
@@ -450,12 +452,42 @@
             .remove-btn:hover { background: #ef4444; color: white; }
             
             @media (max-width: 768px) {
-                .compare-grid { grid-template-columns: 100px 1fr 1fr; }
+                .compare-grid { grid-template-columns: 100px 1fr 1fr !important; }
                 .compare-label { font-size: 0.75rem; padding: 10px; }
                 .compare-cell { font-size: 0.85rem; padding: 10px; }
                 .compare-prod-img { width: 80px; height: 80px; }
                 .compare-prod-title { font-size: 1rem; }
                 .compare-prod-price { font-size: 1.1rem; }
+                .col-3-compare { display: none !important; }
+            }
+
+            /* Dark Mode Styling Overrides */
+            [data-theme="dark"] .compare-grid {
+                background: #1e293b;
+                border-color: #334155;
+            }
+            [data-theme="dark"] .compare-cell-header {
+                background: #0f172a !important;
+                border-color: #334155 !important;
+            }
+            [data-theme="dark"] .compare-cell-header.empty {
+                background: #1e293b !important;
+                border-color: #334155 !important;
+            }
+            [data-theme="dark"] .compare-cell {
+                border-color: #334155 !important;
+                color: #e2e8f0 !important;
+            }
+            [data-theme="dark"] .compare-label {
+                background: #0f172a !important;
+                color: #94a3b8 !important;
+            }
+            [data-theme="dark"] .highlight-cell {
+                background: rgba(16, 185, 129, 0.15) !important;
+                color: #34d399 !important;
+            }
+            [data-theme="dark"] .compare-row:hover .compare-cell {
+                background: rgba(255, 255, 255, 0.02) !important;
             }
         </style>
         
@@ -480,14 +512,21 @@
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
                         <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC" class="compare-prod-img">
                         <div class="compare-prod-title">ASUS NUC AI 350 (PN54)</div>
-                        <div class="compare-prod-price">12.390.000₫</div>
-                        <a href="demo_product.html" class="btn-pill btn-blue" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; text-decoration: none; display: block; box-sizing: border-box;">Mua ngay</a>
+                        <div class="compare-prod-price">12.390.000đ</div>
+                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
                     </div>
                     <div class="compare-cell-header">
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
                         <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420" alt="UM890 PRO" class="compare-prod-img">
                         <div class="compare-prod-title">MINISFORUM UM890 Pro</div>
-                        <div class="compare-prod-price">14.990.000₫</div>
+                        <div class="compare-prod-price">14.990.000đ</div>
+                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
+                    </div>
+                    <div class="compare-cell-header col-3-compare">
+                        <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Beelink SER8" class="compare-prod-img">
+                        <div class="compare-prod-title">BEELINK SER8 AI</div>
+                        <div class="compare-prod-price">15.490.000đ</div>
                         <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
                     </div>
                 </div>
@@ -497,104 +536,242 @@
                     <div class="compare-cell compare-label">Thương hiệu</div>
                     <div class="compare-cell">Asus</div>
                     <div class="compare-cell">Minisforum</div>
+                    <div class="compare-cell col-3-compare">Beelink</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Model</div>
                     <div class="compare-cell">NUC AI 350 (PN54)</div>
                     <div class="compare-cell">UM890 Pro</div>
+                    <div class="compare-cell col-3-compare">SER8 AI</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Tình trạng</div>
                     <div class="compare-cell">Mới 100%</div>
                     <div class="compare-cell">Mới 100%</div>
+                    <div class="compare-cell col-3-compare">Mới 100%</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Kích thước</div>
                     <div class="compare-cell highlight-cell">130x130x34mm (Cực mỏng)</div>
                     <div class="compare-cell">130x127x60mm</div>
+                    <div class="compare-cell col-3-compare">135x135x48mm</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Vi xử lý (CPU)</div>
                     <div class="compare-cell">AMD Ryzen AI 7 350 (8C/16T, max 5.0Ghz)</div>
                     <div class="compare-cell highlight-cell">AMD Ryzen 9 8945HS (8C/16T, max 5.2Ghz)</div>
+                    <div class="compare-cell col-3-compare">AMD Ryzen 7 8845HS (8C/16T, max 5.1Ghz)</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">CPU Mark (Hiệu năng)</div>
                     <div class="compare-cell highlight-cell">~30.000 điểm</div>
                     <div class="compare-cell">~29.500 điểm</div>
+                    <div class="compare-cell col-3-compare">~29.000 điểm</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Đồ họa (GPU)</div>
                     <div class="compare-cell highlight-cell">AMD Radeon™ 860M</div>
                     <div class="compare-cell">AMD Radeon™ 780M</div>
+                    <div class="compare-cell col-3-compare">AMD Radeon™ 780M</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">G3D Mark (Đồ họa)</div>
                     <div class="compare-cell highlight-cell">~8.500 điểm</div>
                     <div class="compare-cell">~7.200 điểm</div>
+                    <div class="compare-cell col-3-compare">~7.200 điểm</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Xử lý AI (NPU)</div>
                     <div class="compare-cell highlight-cell">Lên đến 50 TOPS NPU (Tổng 66 TOPS)</div>
                     <div class="compare-cell">Lên đến 16 TOPS NPU (Tổng 39 TOPS)</div>
+                    <div class="compare-cell col-3-compare">Lên đến 16 TOPS NPU (Tổng 38 TOPS)</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Hỗ trợ RAM</div>
                     <div class="compare-cell highlight-cell">2x DDR5 5600 tối đa 128GB</div>
                     <div class="compare-cell">2x DDR5 5600 tối đa 96GB</div>
+                    <div class="compare-cell col-3-compare">2x DDR5 5600 tối đa 64GB</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Lưu trữ (SSD)</div>
                     <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
                     <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
+                    <div class="compare-cell col-3-compare">2x M.2 2280 NVMe PCIe 4.0</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Kết nối không dây</div>
                     <div class="compare-cell highlight-cell">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
                     <div class="compare-cell">Wi-Fi 6E + Bluetooth® 5.3</div>
+                    <div class="compare-cell col-3-compare">Wi-Fi 6 + Bluetooth® 5.2</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Cổng kết nối (IO)</div>
                     <div class="compare-cell">1x USB4, 1x USB 3.2 Gen2 A, 1x USB 2.0, 1x HDMI 2.1, 2x DP 1.4, 1x 2.5G LAN</div>
                     <div class="compare-cell highlight-cell">2x USB4, 4x USB 3.2 Gen2 A, 1x HDMI 2.1, 1x DP 1.4, 2x 2.5G LAN, 1x OCuLink</div>
+                    <div class="compare-cell col-3-compare">1x USB4, 3x USB 3.2, 1x Type-C, 1x HDMI, 1x DP, 1x 2.5G LAN</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Tính năng đặc biệt</div>
                     <div class="compare-cell">Vân tay, phím Copilot+, hỗ trợ Copilot+ PC</div>
                     <div class="compare-cell highlight-cell">Cổng OCuLink chuyên dụng gắn eGPU, tản nhiệt kim loại lỏng</div>
+                    <div class="compare-cell col-3-compare">Thân máy nhôm nguyên khối, tản nhiệt buồng hơi</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Hệ điều hành</div>
                     <div class="compare-cell highlight-cell">Win 11 Pro + Office 2021 bản quyền</div>
                     <div class="compare-cell">Win 11 Pro bản quyền</div>
+                    <div class="compare-cell col-3-compare">Win 11 Pro bản quyền</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Nguồn cấp điện</div>
                     <div class="compare-cell">Adapter DC 120W</div>
                     <div class="compare-cell highlight-cell">Adapter GaN 120W (Cực kỳ nhỏ gọn)</div>
+                    <div class="compare-cell col-3-compare">Adapter DC 120W</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Bảo hành</div>
                     <div class="compare-cell highlight-cell"><i class="ph-fill ph-shield-check" style="margin-right: 5px;"></i> 36 tháng chính hãng ASUS Việt Nam</div>
                     <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
+                    <div class="compare-cell col-3-compare">12 tháng cửa hàng</div>
                 </div>
             </div>
+            
+            <!-- Recently Viewed Section -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+            <div class="template-product mt-5" style="width: 100%; margin-top: 50px;">
+                <div class="box_product_1 rounded-10 bg-white py-3 px-2 p-lg-3" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm);">
+                    <div class="t1 align-items-center d-flex justify-content-between mb-3">
+                        <h3 class="special-content_title font-weight-bold position-relative m-0" style="font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="ph-fill ph-clock-counter-clockwise" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            <span class="position-relative">Sản phẩm đã xem</span>
+                        </h3>
+                    </div>
+                    <div class="swiper js-recent-slider p-2 pb-3 pb-lg-2" style="position: relative; overflow: hidden; list-style: none; padding: 0; z-index: 1;">
+                        <div class="swiper-wrapper js-recent-container" id="recent-products-wrapper">
+                            <!-- Dynamic cards -->
+                        </div>
+                        <!-- Navigation -->
+                        <div class="swiper-button-prev recent-prev" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
+                        <div class="swiper-button-next recent-next" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const container = document.getElementById('recent-products-wrapper');
+                    if (container) {
+                        let items = [];
+                        try {
+                            items = JSON.parse(localStorage.getItem('mewRecent')) || [];
+                        } catch(e) {}
+                        
+                        if (items.length === 0) {
+                            items = [
+                                {
+                                    name: 'ASUS NUC AI 350 (PN54)',
+                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973',
+                                    price: '12.390.000đ',
+                                    url: 'demo_product.html'
+                                },
+                                {
+                                    name: 'MINISFORUM UM890 Pro',
+                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420',
+                                    price: '14.990.000đ',
+                                    url: 'demo_product.html'
+                                },
+                                {
+                                    name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)',
+                                    img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png',
+                                    price: '14.200.000đ',
+                                    url: 'demo_product.html'
+                                }
+                            ];
+                        }
+                        
+                        let html = '';
+                        items.forEach(item => {
+                            const name = item.name || item.title || item;
+                            const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+                            const price = item.price || 'Liên hệ';
+                            const url = item.url || 'demo_product.html';
+                            
+                            html += `
+                                <div class="swiper-slide" style="height: auto;">
+                                    <div class="product-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px; background: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; box-sizing: border-box;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.05)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+                                        <a href="${url}" style="text-decoration: none; display: block; margin-bottom: 10px;">
+                                            <img src="${img}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
+                                        </a>
+                                        <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${name}</a>
+                                        <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${price}</div>
+                                        <a href="${url}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                        
+                        const swiperRecent = new Swiper('.js-recent-slider', {
+                            slidesPerView: 2,
+                            spaceBetween: 15,
+                            navigation: {
+                                nextEl: '.recent-next',
+                                prevEl: '.recent-prev',
+                            },
+                            breakpoints: {
+                                576: { slidesPerView: 2 },
+                                768: { slidesPerView: 3 },
+                                992: { slidesPerView: 4 },
+                                1200: { slidesPerView: 5 }
+                            }
+                        });
+                        
+                        function updateRecentNavVisibility() {
+                            const swiperEl = document.querySelector('.js-recent-slider');
+                            if (swiperEl) {
+                                const prevBtn = swiperEl.querySelector('.recent-prev');
+                                const nextBtn = swiperEl.querySelector('.recent-next');
+                                if (prevBtn && nextBtn) {
+                                    let currentSlidesPerView = 2;
+                                    const width = window.innerWidth;
+                                    if (width >= 1200) currentSlidesPerView = 5;
+                                    else if (width >= 992) currentSlidesPerView = 4;
+                                    else if (width >= 768) currentSlidesPerView = 3;
+                                    else if (width >= 576) currentSlidesPerView = 2;
+                                    
+                                    if (items.length <= currentSlidesPerView) {
+                                        prevBtn.style.setProperty('display', 'none', 'important');
+                                        nextBtn.style.setProperty('display', 'none', 'important');
+                                    } else {
+                                        prevBtn.style.removeProperty('display');
+                                        nextBtn.style.removeProperty('display');
+                                    }
+                                }
+                            }
+                        }
+                        updateRecentNavVisibility();
+                        swiperRecent.on('resize', updateRecentNavVisibility);
+                        swiperRecent.on('update', updateRecentNavVisibility);
+                    }
+                });
+            </script>
         </div>
     <!-- Mobile Sidebar Drawer -->
         <div class="sidebar-overlay"></div>

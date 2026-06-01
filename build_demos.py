@@ -229,6 +229,7 @@ def build_collection(base_dir, header_part, footer_part):
                     margin-top: 50px;
                     border-top: 1px solid var(--border-color);
                     padding-top: 40px;
+                    padding-bottom: 50px;
                     position: relative;
                     width: 100%;
                     box-sizing: border-box;
@@ -466,7 +467,7 @@ def build_collection(base_dir, header_part, footer_part):
                                         <div class="ai-result-info" style="white-space: normal;">
                                             <h5 style="white-space: nowrap;">GMKTEC NucBox K6 (Ryzen 7 7840HS / 32GB)</h5>
                                             <div style="font-size: 0.8rem; color: #475569; margin: 4px 0 6px; line-height: 1.4;">Tích hợp Radeon 780M cực mạnh, RAM 32GB lớn, đáp ứng hoàn hảo nhu cầu chiến mượt các tựa game AAA.</div>
-                                            <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">14.200.000₫</div>
+                                            <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">14.200.000đ</div>
                                         </div>
                                     </a>
                                     
@@ -476,7 +477,7 @@ def build_collection(base_dir, header_part, footer_part):
                                     </div>
                                     <a href="#" class="ai-result-item">
                                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" class="ai-result-img" alt="ASUS NUC">
-                                        <div class="ai-result-info"><h5>ASUS NUC 14 Pro Core Ultra 5 (16GB/512GB)</h5><div class="ai-result-price">12.500.000₫</div></div>
+                                        <div class="ai-result-info"><h5>ASUS NUC 14 Pro Core Ultra 5 (16GB/512GB)</h5><div class="ai-result-price">12.500.000đ</div></div>
                                     </a>
                                     <a href="#" class="ai-view-more">Xem thêm tất cả 8 kết quả &nbsp;<i class="ph-bold ph-arrow-right"></i></a>
                                 </div>
@@ -553,27 +554,27 @@ def build_collection(base_dir, header_part, footer_part):
                             
                             <div class="product-card" style="margin:0; display: flex; align-items: center; padding: 15px; gap: 15px;" onclick="window.location.href='demo_product.html'">
                                 <div style="width: 90px; height: 90px; flex-shrink: 0; position: relative;">
-                                    <button class="compare-btn" data-name="ASUS NUC 14 Essential" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
+                                    <button class="compare-btn" data-name="ASUS NUC 14 Essential" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
                                 
                                     <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Featured" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">HOT SALE</span>
                                     <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">ASUS NUC 14 Essential</h4>
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">4.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">4.490.000đ</span>
                                 </div>
                             </div>
                             
                             <div class="product-card" style="margin:0; display: flex; align-items: center; padding: 15px; gap: 15px;" onclick="window.location.href='demo_product.html'">
                                 <div style="width: 90px; height: 90px; flex-shrink: 0; position: relative;">
-                                    <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
+                                    <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: -5px; right: -5px; width: 28px; height: 28px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right" style="font-size: 0.8rem;"></i></button>
                                 
                                     <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Featured" style="width: 100%; height: 100%; object-fit: contain;">
                                 </div>
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">BÁN CHẠY</span>
                                     <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">AtomMan G7 PT Mini PC</h4>
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">34.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">34.490.000đ</span>
                                 </div>
                             </div>
                             
@@ -584,7 +585,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <div style="flex: 1; min-width: 0;">
                                     <span class="spec-pill" style="margin-bottom: 8px;">MỚI RA MẮT</span>
                                     <h4 style="margin: 0 0 6px 0; font-size: 0.95rem; font-weight: 700; color: var(--text-dark); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;">GMK EVO X1 32G</h4>
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">31.190.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.1rem;">31.190.000đ</span>
                                 </div>
                             </div>
                             
@@ -602,7 +603,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -618,7 +619,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -628,7 +629,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -642,7 +643,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -652,7 +653,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -666,7 +667,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000đ</span>
                                     
                                 </div>
                             </div>
@@ -676,7 +677,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -690,7 +691,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000đ</span>
                                     
                                 </div>
                             </div>
@@ -700,7 +701,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -713,7 +714,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000đ</span>
                                     
                                 </div>
                             </div>
@@ -723,7 +724,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -739,7 +740,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -749,7 +750,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -763,7 +764,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -773,7 +774,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -787,7 +788,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000đ</span>
                                     
                                 </div>
                             </div>
@@ -797,7 +798,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -811,7 +812,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000đ</span>
                                     
                                 </div>
                             </div>
@@ -821,7 +822,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -834,7 +835,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000đ</span>
                                     
                                 </div>
                             </div>
@@ -844,7 +845,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -860,7 +861,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -870,7 +871,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -884,7 +885,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -894,7 +895,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', '31.190.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -908,7 +909,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000đ</span>
                                     
                                 </div>
                             </div>
@@ -918,7 +919,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -932,7 +933,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000đ</span>
                                     
                                 </div>
                             </div>
@@ -942,7 +943,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="Beelink SER8 AMD 884" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'Beelink SER8 AMD 884', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png', '11.990.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_2.png" alt="Beelink SER8" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -955,7 +956,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">Beelink SER8 AMD 884</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">11.990.000đ</span>
                                     
                                 </div>
                             </div>
@@ -965,7 +966,7 @@ def build_collection(base_dir, header_part, footer_part):
                         <div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='demo_product.html'">
                             <div class="card-glow"></div>
                             <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
+                                <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-dark); cursor: pointer; z-index: 5; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 2px 10px rgba(0,0,0,0.05);" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')" onmouseover="if(this.style.background!=='var(--primary)'){this.style.borderColor='var(--primary)'; this.style.color='var(--primary)'}"><i class="ph ph-arrows-left-right"></i></button>
                             
                                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img" style="object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;">
                             </div>
@@ -981,7 +982,7 @@ def build_collection(base_dir, header_part, footer_part):
                                 <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                                 
                                 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                    <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000đ</span>
                                     
                                 </div>
                             </div>
@@ -1403,7 +1404,7 @@ def build_product(base_dir, header_part, footer_part):
                     border-radius: 10px;
                     padding: 12px 18px;
                     background: #fff;
-                    cursor: pointer;
+                    cursor: default;
                     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
                     font-size: 0.95rem;
                     font-weight: 600;
@@ -1917,33 +1918,32 @@ def build_product(base_dir, header_part, footer_part):
                         <span style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
                     </div>
                     
-                    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
-                        <a href="#thong-so" class="prod-spec-tag">
-                            <i class="ph ph-cpu"></i> Ryzen AI 7
-                        </a>
-                        <a href="#thong-so" class="prod-spec-tag">
-                            <i class="ph ph-graphics-card"></i> Radeon 860M
-                        </a>
-                        <a href="#thong-so" class="prod-spec-tag">
-                            <i class="ph ph-brain"></i> 50 TOPS
-                        </a>
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 24px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-cpu" style="color: var(--primary);"></i> Ryzen AI 7
+                            </a>
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-graphics-card" style="color: var(--primary);"></i> Radeon 860M
+                            </a>
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-brain" style="color: var(--primary);"></i> 50 TOPS
+                            </a>
+                        </div>
+                        <button type="button" class="btn-nava-compare-trigger" onclick="openCompareDrawerDirect()" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
+                            <i class="ph-bold ph-arrows-left-right"></i> So sánh
+                        </button>
                     </div>
                     
-                    <div class="prod-price-wrap">
-                        <div class="prod-price" id="main-price">12.390.000₫</div>
-                    </div>
-
-                    <!-- Variants -->
-                    <div class="variants-row-container">
-                        <div class="variant-group">
-                            <div class="variant-label">
-                                <span>RAM DDR5</span>
-                                <span class="variant-price-display" id="ram-price-display">+0₫</span>
-                            </div>
-                            <div class="nava-dropdown-wrapper">
-                                <div class="nava-dropdown-display">
-                                    <span class="nava-dropdown-selected" id="ram-selected-text">NO RAM</span>
-                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                    <!-- Variants (Horizontal Full Width Rows) -->
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px;">
+                        <!-- RAM Row -->
+                        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
+                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                                    <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
                                 </div>
                                 <ul class="nava-dropdown-list">
                                     <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')">NO RAM</li>
@@ -1954,17 +1954,16 @@ def build_product(base_dir, header_part, footer_part):
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
                                 </ul>
                             </div>
+                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
                         </div>
                         
-                        <div class="variant-group">
-                            <div class="variant-label">
-                                <span>SSD NVMe</span>
-                                <span class="variant-price-display" id="ssd-price-display">+0₫</span>
-                            </div>
-                            <div class="nava-dropdown-wrapper">
-                                <div class="nava-dropdown-display">
-                                    <span class="nava-dropdown-selected" id="ssd-selected-text">NO SSD</span>
-                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow"></i>
+                        <!-- SSD Row -->
+                        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
+                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                                    <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
                                 </div>
                                 <ul class="nava-dropdown-list">
                                     <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')">NO SSD</li>
@@ -1973,35 +1972,41 @@ def build_product(base_dir, header_part, footer_part):
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
                                 </ul>
                             </div>
+                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
                         </div>
                     </div>
                     
-                    <!-- Actions -->
-                    <div class="product-actions-container">
-                        <!-- Yellow Warranty Badge -->
-                        <div class="warranty-badge-container">
-                            <i class="ph-bold ph-shield-check"></i>
-                            <span>Bảo hành chính hãng 36 tháng</span>
+                    <!-- Actions (Updated to column N layout) -->
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+                        <!-- Row 1: Quantity Spinner & Price -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);">Số lượng</span>
+                                <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray);">
+                                    <button class="qty-adjust" onclick="adjustQty(-1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
+                                    <input type="text" value="1" class="qty-val" id="qty-val-main" readonly style="width: 36px; height: 32px; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); outline: none;">
+                                    <button class="qty-adjust" onclick="adjustQty(1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">+</button>
+                                </div>
+                            </div>
+                            <div class="prod-price" id="main-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">12.390.000đ</div>
                         </div>
 
-                        <!-- Primary MUA NGAY Button -->
-                        <button class="btn-buy-now-primary" id="btn-buy-now-main">
-                            MUA NGAY
-                        </button>
-
-                        <!-- Bottom Row: Qty Selector and Actions -->
-                        <div class="actions-bottom-row">
-                            <span class="qty-label">Số lượng</span>
-                            <div class="qty-selector">
-                                <button class="qty-adjust" onclick="adjustQty(-1)">-</button>
-                                <input type="text" value="1" class="qty-val" id="qty-val-main" readonly>
-                                <button class="qty-adjust" onclick="adjustQty(1)">+</button>
-                            </div>
-                            <button class="btn-icon-secondary" id="btn-cart-icon" title="Giỏ hàng">
-                                <i class="ph-bold ph-shopping-cart"></i>
+                        <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
+                        <div style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
+                            <!-- Icon Cart Button -->
+                            <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                                <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
                             </button>
-                            <button class="btn-icon-secondary" onclick="window.location.href='demo_collection.html'" title="Đến cửa hàng">
-                                <i class="ph-bold ph-storefront"></i>
+                            
+                            <!-- Trả góp 0% Button -->
+                            <button onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                                TRẢ GÓP 0%
+                            </button>
+                            
+                            <!-- Mua Ngay Button with Subtext -->
+                            <button id="btn-buy-now-main" style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(0, 51, 102, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 51, 102, 0.2)';">
+                                <span style="font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">MUA NGAY</span>
+                                <span style="font-size: 0.65rem; opacity: 0.85; font-weight: 600;">Bảo hành chính hãng 36 tháng</span>
                             </button>
                         </div>
                     </div>
@@ -2526,9 +2531,14 @@ def build_product(base_dir, header_part, footer_part):
                     
                     <!-- Right: Technical Specs -->
                     <div class="specs-column">
-                        <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; color: #0f172a; display: flex; align-items: center; gap: 8px;">
-                            <i class="ph-fill ph-cpu" style="color: var(--primary);"></i> Thông số kỹ thuật
-                        </h2>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <h2 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 8px; margin: 0;">
+                                <i class="ph-fill ph-cpu" style="color: var(--primary);"></i> Thông số kỹ thuật
+                            </h2>
+                            <button type="button" class="btn-nava-compare-trigger" onclick="openCompareDrawerDirect()" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
+                                <i class="ph-bold ph-arrows-left-right"></i> So sánh
+                            </button>
+                        </div>
                         
                         <div class="nava-spec-grid">
                             <div class="nava-spec-row">
@@ -2692,7 +2702,7 @@ def build_product(base_dir, header_part, footer_part):
                     <div class="product-card" onclick="window.location.href='demo_product.html'">
                         <div class="card-glow"></div>
                         <div class="card-image-wrap">
-                            <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <button class="compare-btn" data-name="ASUS NUC 14 Essential Int" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'ASUS NUC 14 Essential Int', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '4.490.000đ')"><i class="ph ph-arrows-left-right"></i></button>
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="product-img">
                         </div>
                         <div class="card-content">
@@ -2704,7 +2714,7 @@ def build_product(base_dir, header_part, footer_part):
                             </div>
                             <h2 class="card-title">ASUS NUC 14 Essential Intel</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000₫</span>
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">4.490.000đ</span>
                                 
                             </div>
                         </div>
@@ -2714,7 +2724,7 @@ def build_product(base_dir, header_part, footer_part):
                     <div class="product-card" onclick="window.location.href='demo_product.html'">
                         <div class="card-glow"></div>
                         <div class="card-image-wrap">
-                            <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <button class="compare-btn" data-name="AtomMan G7 PT Mini PC" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'AtomMan G7 PT Mini PC', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', '34.490.000đ')"><i class="ph ph-arrows-left-right"></i></button>
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="AtomMan G7 PT" class="product-img">
                         </div>
                         <div class="card-content">
@@ -2725,7 +2735,7 @@ def build_product(base_dir, header_part, footer_part):
                             </div>
                             <h2 class="card-title">AtomMan G7 PT Mini PC</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000₫</span>
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">34.490.000đ</span>
                                 
                             </div>
                         </div>
@@ -2735,7 +2745,7 @@ def build_product(base_dir, header_part, footer_part):
                     <div class="product-card" onclick="window.location.href='demo_product.html'">
                         <div class="card-glow"></div>
                         <div class="card-image-wrap">
-                            <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', '31.190.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <button class="compare-btn" data-name="Mini PC GMK EVO X1 32G" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Mini PC GMK EVO X1 32G', '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', '31.190.000đ')"><i class="ph ph-arrows-left-right"></i></button>
                             <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg" alt="Mini PC GMK EVO" class="product-img">
                         </div>
                         <div class="card-content">
@@ -2746,7 +2756,7 @@ def build_product(base_dir, header_part, footer_part):
                             </div>
                             <h2 class="card-title">Mini PC GMK EVO X1 32G</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000₫</span>
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">31.190.000đ</span>
                                 
                             </div>
                         </div>
@@ -2756,7 +2766,7 @@ def build_product(base_dir, header_part, footer_part):
                     <div class="product-card" onclick="window.location.href='demo_product.html'">
                         <div class="card-glow"></div>
                         <div class="card-image-wrap">
-                            <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000₫')"><i class="ph ph-arrows-left-right"></i></button>
+                            <button class="compare-btn" data-name="Tablet Minisforum V3 SE" title="Thêm vào so sánh" onclick="event.stopPropagation(); toggleCompare(this, 'Tablet Minisforum V3 SE', '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png', '23.090.000đ')"><i class="ph ph-arrows-left-right"></i></button>
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_2.png" alt="Tablet Minisforum" class="product-img">
                         </div>
                         <div class="card-content">
@@ -2767,7 +2777,7 @@ def build_product(base_dir, header_part, footer_part):
                             </div>
                             <h2 class="card-title">Tablet Minisforum V3 SE</h2>
                             <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-top: auto; gap: 8px;">
-                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000₫</span>
+                                <span style="color: var(--text-dark); font-weight: 800; font-size: 1.15rem;">23.090.000đ</span>
                                 
                             </div>
                         </div>
@@ -2803,7 +2813,7 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
                         <div style="width: 100%;">
                             <div class="sticky-title">ASUS NUC AI 350</div>
-                            <div class="sticky-price-display" id="sticky-price">12.390.000₫</div>
+                            <div class="sticky-price-display" id="sticky-price">12.390.000đ</div>
                         </div>
                     </div>
                     <div class="sticky-cart-right">
@@ -2884,7 +2894,7 @@ def build_product(base_dir, header_part, footer_part):
                     function update(currentTime) {
                         const elapsedTime = currentTime - startTime;
                         if (elapsedTime >= duration) {
-                            obj.innerHTML = endValue.toLocaleString('vi-VN') + '₫';
+                            obj.innerHTML = endValue.toLocaleString('vi-VN') + 'đ';
                             return;
                         }
                         
@@ -2893,7 +2903,7 @@ def build_product(base_dir, header_part, footer_part):
                         const easeProgress = progress * (2 - progress);
                         
                         const currentValue = Math.round(startValue + (endValue - startValue) * easeProgress);
-                        obj.innerHTML = currentValue.toLocaleString('vi-VN') + '₫';
+                        obj.innerHTML = currentValue.toLocaleString('vi-VN') + 'đ';
                         
                         requestAnimationFrame(update);
                     }
@@ -2917,7 +2927,7 @@ def build_product(base_dir, header_part, footer_part):
                         activeRamName = name; 
                         const displayEl = document.getElementById('ram-price-display');
                         if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
                         }
                     }
                     if (type === 'ssd') { 
@@ -2925,7 +2935,7 @@ def build_product(base_dir, header_part, footer_part):
                         activeSsdName = name; 
                         const displayEl = document.getElementById('ssd-price-display');
                         if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
                         }
                     }
                     
@@ -3005,33 +3015,21 @@ def build_product(base_dir, header_part, footer_part):
                     }
                     toggleStickyBar(); // Check immediately on load
                     
-                    // Toggle dropdowns on click for mobile/touch
+                    // Toggle dropdowns disabled on click, only hover is enabled
                     document.querySelectorAll('.nava-dropdown-display').forEach(display => {
                         display.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            const wrapper = this.closest('.nava-dropdown-wrapper');
-                            const wasActive = wrapper.classList.contains('active');
-                            
-                            // Close all dropdowns first
-                            document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
-                            
-                            if (!wasActive) {
-                                wrapper.classList.add('active');
-                            }
+                            e.preventDefault();
+                            e.stopPropagation(); // Disable direct click toggle
                         });
                     });
                     
-                    // Hover expansion on desktop
+                    // Hover expansion on all screen sizes
                     document.querySelectorAll('.nava-dropdown-wrapper').forEach(wrapper => {
                         wrapper.addEventListener('mouseenter', function() {
-                            if (window.innerWidth > 991) {
-                                wrapper.classList.add('active');
-                            }
+                            wrapper.classList.add('active');
                         });
                         wrapper.addEventListener('mouseleave', function() {
-                            if (window.innerWidth > 991) {
-                                wrapper.classList.remove('active');
-                            }
+                            wrapper.classList.remove('active');
                         });
                     });
 
@@ -3283,10 +3281,10 @@ def build_auth_pages(base_dir):
                 position: relative;
                 z-index: 10;
                 overflow-y: auto;
-                scrollbar-width: none; /* Firefox */
+                scrollbar-width: none;
             }
             .glass-card::-webkit-scrollbar {
-                display: none; /* Chrome */
+                display: none;
             }
             .glass-card::before {
                 content: '';
@@ -3302,20 +3300,19 @@ def build_auth_pages(base_dir):
             }
             .auth-title {
                 font-size: 1.8rem;
-                font-weight: 800;
+                font-weight: 850;
                 color: var(--text-dark);
-                text-align: center;
                 margin: 0 0 5px 0;
+                letter-spacing: -0.5px;
             }
             .auth-desc {
-                text-align: center;
                 color: var(--text-gray);
-                margin: 0 0 20px 0;
-                font-size: 0.9rem;
+                font-size: 0.92rem;
+                margin: 0 0 25px 0;
             }
             .form-group-nava {
-                margin-bottom: 15px;
                 position: relative;
+                margin-bottom: 18px;
             }
             .form-group-nava i {
                 position: absolute;
@@ -3327,60 +3324,77 @@ def build_auth_pages(base_dir):
             }
             .input-nava {
                 width: 100%;
-                padding: 12px 15px 12px 42px;
+                padding: 14px 16px 14px 44px;
                 border: 1px solid var(--border-color);
                 border-radius: var(--radius-md);
-                background: #f8fafc;
-                color: var(--text-dark);
+                background: var(--bg-gray);
+                font-family: inherit;
                 font-size: 0.95rem;
-                outline: none;
+                color: var(--text-dark);
                 transition: all 0.3s;
                 box-sizing: border-box;
+                outline: none;
             }
             .input-nava:focus {
                 border-color: var(--primary);
-                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
-                background: #fff;
+                background: white;
+                box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
             }
             .btn-nava {
                 width: 100%;
-                padding: 12px;
+                padding: 14px;
                 border-radius: var(--radius-md);
-                border: none;
-                font-size: 1.05rem;
                 font-weight: 700;
+                font-size: 1rem;
                 cursor: pointer;
                 transition: all 0.3s;
+                box-sizing: border-box;
+                border: 1px solid var(--border-color);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
+                gap: 10px;
             }
             .btn-primary-nava {
                 background: linear-gradient(90deg, var(--primary), var(--secondary));
                 color: white;
-                box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+                border: none;
+                box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2);
             }
             .btn-primary-nava:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+                box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3);
+            }
+            .link-nava {
+                color: var(--primary);
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 0.95rem;
+                transition: color 0.2s;
+            }
+            .link-nava:hover {
+                color: var(--secondary);
+                text-decoration: underline;
             }
             .social-divider {
                 display: flex;
                 align-items: center;
                 text-align: center;
-                margin: 20px 0;
+                margin: 25px 0 20px;
                 color: var(--text-gray);
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                font-weight: 700;
+                letter-spacing: 1px;
             }
-            .social-divider::before, .social-divider::after {
+            .social-divider::before,
+            .social-divider::after {
                 content: '';
                 flex: 1;
                 border-bottom: 1px solid var(--border-color);
             }
-            .social-divider span {
-                padding: 0 10px;
-            }
+            .social-divider::before { margin-right: 10px; }
+            .social-divider::after { margin-left: 10px; }
+            
             .social-login-grid {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -3388,118 +3402,111 @@ def build_auth_pages(base_dir):
             }
             .btn-social {
                 background: white;
-                border: 1px solid var(--border-color);
                 color: var(--text-dark);
                 font-size: 0.95rem;
                 padding: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                transition: all 0.2s;
             }
             .btn-social:hover {
                 background: var(--bg-gray);
                 border-color: #cbd5e1;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             }
-            .link-nava {
-                color: var(--primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: 0.2s;
-            }
-            .link-nava:hover {
-                text-decoration: underline;
-            }
-            
-            /* Toggle forms */
-            #recover_customer_password { display: none; }
-            .show-recover #customer_login_wrapper { display: none; }
-            .show-recover #recover_customer_password { display: block; }
         </style>
     """
 
     header_wrapper = f"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nava Store - Đăng Nhập / Đăng Ký</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    {auth_css}
-</head>
-<body>
-"""
+    <html lang="vi">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Tài Khoản - Nava Store</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+            <script src="https://unpkg.com/@phosphor-icons/web"></script>
+            {auth_css}
+        </head>
+        <body>
+    """
+    
+    footer_wrapper = """
+        </body>
+    </html>
+    """
 
-    footer_wrapper = "</body></html>"
-
-    # 1. Login HTML
+    # 1. Login HTML (with Recovery Form built-in)
     login_html = header_wrapper + """
         <div class="auth-page-wrapper" id="login-container">
-            <div class="glass-card">
+            <!-- Normal Login Card -->
+            <div class="glass-card normal-login-box">
                 <a href="demo_collection.html" class="link-nava" style="position: absolute; top: 25px; left: 25px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;"><i class="ph-bold ph-arrow-left"></i> Quay lại</a>
-                
-                <!-- Main Login Form -->
-                <div id="customer_login_wrapper">
-                    <div style="text-align: center; margin-top: 10px;">
-                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
-                        <h1 class="auth-title">Đăng Nhập</h1>
-                        <p class="auth-desc">Chào mừng bạn quay trở lại Nava Store</p>
-                    </div>
-                    
-                    <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
-                        <input name="FormType" type="hidden" value="customer_login"/>
-                        <input name="utf8" type="hidden" value="true"/>
-                        
-                        <div class="form-group-nava">
-                            <i class="ph-bold ph-envelope"></i>
-                            <input type="email" placeholder="Nhập địa chỉ Email" class="input-nava" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" id="customer_email" required>
-                        </div>
-                        
-                        <div class="form-group-nava">
-                            <i class="ph-bold ph-lock"></i>
-                            <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" id="customer_password" required>
-                        </div>
-                        
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
-                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-gray); font-size: 0.95rem;">
-                                <input type="checkbox" style="width: 16px; height: 16px; accent-color: var(--primary);">
-                                Ghi nhớ đăng nhập
-                            </label>
-                            <a href="#recover" onclick="toggleRecover(); return false;" class="link-nava">Quên mật khẩu?</a>
-                        </div>
-                        
-                        <button type="submit" class="btn-nava btn-primary-nava">Đăng Nhập Ngay</button>
-                    </form>
-                    
-                    <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
-                    
-                    <div class="social-login-grid">
-                        <button class="btn-nava btn-social" onclick="if(typeof loginGoogle === 'function') loginGoogle(); else alert('Chức năng Google Auth đang giả lập trên Sapo.'); return false;">
-                            <img src="https://images.seeklogo.com/logo-png/27/2/google-logo-png_seeklogo-273191.png" width="18" height="18" alt="Google"> Google
-                        </button>
-                        <button class="btn-nava btn-social" onclick="if(typeof loginFacebook === 'function') loginFacebook(); else alert('Chức năng Facebook Auth đang giả lập trên Sapo.'); return false;" style="color: #1877F2;">
-                            <i class="ph-fill ph-facebook-logo" style="font-size: 1.2rem;"></i> Facebook
-                        </button>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 20px; color: var(--text-gray); font-size: 0.95rem;">
-                        Chưa có tài khoản? <a href="demo_register.html" class="link-nava">Đăng ký ngay</a>
-                    </p>
+                <div style="text-align: center; margin-top: 10px;">
+                    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
+                    <h1 class="auth-title">Đăng Nhập</h1>
+                    <p class="auth-desc">Chào mừng bạn quay lại với Nava Store</p>
                 </div>
-
-                <!-- Recover Password Form -->
+                
+                <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
+                    <input name="FormType" type="hidden" value="customer_login"/>
+                    <input name="utf8" type="hidden" value="true"/>
+                    
+                    <div class="form-group-nava">
+                        <i class="ph-bold ph-envelope"></i>
+                        <input type="email" placeholder="Nhập địa chỉ Email" class="input-nava" pattern="[a-z0-9._%%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" id="customer_email" required>
+                    </div>
+                    
+                    <div class="form-group-nava" style="position: relative;">
+                        <i class="ph-bold ph-lock"></i>
+                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" id="customer_password" required style="padding-right: 40px;">
+                        <i class="ph ph-eye-slash" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-gray); font-size: 1.1rem; z-index: 5;" onclick="togglePasswordVisibility('customer_password', this)"></i>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+                        <a href="#" onclick="toggleRecover(); return false;" class="link-nava" style="font-size: 0.88rem; font-weight: 500;">Quên mật khẩu?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Đăng Nhập</button>
+                </form>
+                
+                <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
+                
+                <div class="social-login-grid">
+                    <button class="btn-nava btn-social" onclick="if(typeof loginGoogle === 'function') loginGoogle(); else alert('Chức năng Google Auth đang giả lập trên Sapo.'); return false;">
+                        <img src="https://images.seeklogo.com/logo-png/27/2/google-logo-png_seeklogo-273191.png" width="18" height="18" alt="Google"> Google
+                    </button>
+                    <button class="btn-nava btn-social" onclick="if(typeof loginFacebook === 'function') loginFacebook(); else alert('Chức năng Facebook Auth đang giả lập trên Sapo.'); return false;" style="color: #1877F2;">
+                        <i class="ph-fill ph-facebook-logo" style="font-size: 1.2rem;"></i> Facebook
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 25px; color: var(--text-gray); font-size: 0.95rem;">
+                    Chưa có tài khoản? <a href="demo_register.html" class="link-nava">Đăng ký ngay</a>
+                </p>
+            </div>
+            
+            <!-- Recovery Card -->
+            <style>
+                .recover-login-box { display: none; }
+                .show-recover .normal-login-box { display: none; }
+                .show-recover .recover-login-box { display: block; }
+            </style>
+            
+            <div class="glass-card recover-login-box">
+                <div style="text-align: center;">
+                    <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
+                    <h1 class="auth-title">Khôi Phục Mật Khẩu</h1>
+                    <p class="auth-desc">Nhập email của bạn để nhận liên kết khôi phục</p>
+                </div>
+                
                 <form method="post" action="/account/recover" id="recover_customer_password" accept-charset="UTF-8">
                     <input name="FormType" type="hidden" value="recover_customer_password"/>
                     <input name="utf8" type="hidden" value="true"/>
                     
-                    <div style="text-align: center; margin-top: 10px;">
-                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082" alt="Nava Store" style="height: 45px; margin-bottom: 15px;">
-                        <h1 class="auth-title">Quên Mật Khẩu</h1>
-                        <p class="auth-desc">Chúng tôi sẽ gửi một email kèm liên kết để bạn đặt lại mật khẩu an toàn.</p>
-                    </div>
-                    
                     <div class="form-group-nava">
                         <i class="ph-bold ph-envelope"></i>
-                        <input type="email" class="input-nava" placeholder="Nhập Email của bạn" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" id="customer_email1" required>
+                        <input type="email" class="input-nava" placeholder="Nhập Email của bạn" pattern="[a-z0-9._%%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" id="customer_email1" required>
                     </div>
                     
                     <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Gửi Liên Kết Khôi Phục</button>
@@ -3518,6 +3525,18 @@ def build_auth_pages(base_dir):
                 container.classList.toggle('show-recover');
             }
             if (window.location.hash == "#recover") { toggleRecover(); }
+            
+            function togglePasswordVisibility(inputId, icon) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'ph ph-eye';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'ph ph-eye-slash';
+                }
+            }
         </script>
     """ + footer_wrapper
     
@@ -3526,7 +3545,7 @@ def build_auth_pages(base_dir):
 
     # 2. Register HTML
     register_html = header_wrapper + """
-        <div class="auth-page-wrapper">
+        <div class="auth-page-wrapper" id="register-container">
             <div class="glass-card">
                 <a href="demo_collection.html" class="link-nava" style="position: absolute; top: 25px; left: 25px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;"><i class="ph-bold ph-arrow-left"></i> Quay lại</a>
                 <div style="text-align: center; margin-top: 10px;">
@@ -3551,20 +3570,25 @@ def build_auth_pages(base_dir):
                     
                     <div class="form-group-nava">
                         <i class="ph-bold ph-phone"></i>
-                        <input type="text" placeholder="Số điện thoại" class="input-nava" pattern="\\d+" name="Phone" required>
+                        <input type="tel" placeholder="Số điện thoại" class="input-nava" pattern="\\d+" name="Phone" required>
                     </div>
                     
                     <div class="form-group-nava">
                         <i class="ph-bold ph-envelope"></i>
-                        <input type="email" placeholder="E-mail" class="input-nava" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" required>
+                        <input type="email" placeholder="E-mail" class="input-nava" pattern="[a-z0-9._%%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$" name="email" required>
                     </div>
                     
-                    <div class="form-group-nava">
+                    <div class="form-group-nava" style="position: relative;">
                         <i class="ph-bold ph-lock"></i>
-                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" required>
+                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" id="register_password" required style="padding-right: 40px;">
+                        <i class="ph ph-eye-slash" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-gray); font-size: 1.1rem; z-index: 5;" onclick="togglePasswordVisibility('register_password', this)"></i>
                     </div>
                     
                     <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Đăng Ký Tài Khoản</button>
+                    
+                    <p style="text-align: center; margin-top: 15px; color: var(--text-gray); font-size: 0.8rem; line-height: 1.4;">
+                        Bằng việc đăng ký, bạn đồng ý với <a href="demo_policy.html#terms" class="link-nava" style="font-size: 0.8rem;">Điều khoản dịch vụ</a> và <a href="demo_policy.html#privacy" class="link-nava" style="font-size: 0.8rem;">Chính sách bảo mật</a> của Nava Store
+                    </p>
                 </form>
                 
                 <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
@@ -3583,6 +3607,20 @@ def build_auth_pages(base_dir):
                 </p>
             </div>
         </div>
+        
+        <script>
+            function togglePasswordVisibility(inputId, icon) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'ph ph-eye';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'ph ph-eye-slash';
+                }
+            }
+        </script>
     """ + footer_wrapper
     
     with open(os.path.join(base_dir, "demo_register.html"), "w", encoding="utf-8") as f:
@@ -3607,7 +3645,7 @@ def build_compare_page(base_dir, header_part, footer_part):
             .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
             .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
             
-            .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+            .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
             
             /* Header Row */
             .compare-row-header { display: contents; }
@@ -3634,12 +3672,42 @@ def build_compare_page(base_dir, header_part, footer_part):
             .remove-btn:hover { background: #ef4444; color: white; }
             
             @media (max-width: 768px) {
-                .compare-grid { grid-template-columns: 100px 1fr 1fr; }
+                .compare-grid { grid-template-columns: 100px 1fr 1fr !important; }
                 .compare-label { font-size: 0.75rem; padding: 10px; }
                 .compare-cell { font-size: 0.85rem; padding: 10px; }
                 .compare-prod-img { width: 80px; height: 80px; }
                 .compare-prod-title { font-size: 1rem; }
                 .compare-prod-price { font-size: 1.1rem; }
+                .col-3-compare { display: none !important; }
+            }
+
+            /* Dark Mode Styling Overrides */
+            [data-theme="dark"] .compare-grid {
+                background: #1e293b;
+                border-color: #334155;
+            }
+            [data-theme="dark"] .compare-cell-header {
+                background: #0f172a !important;
+                border-color: #334155 !important;
+            }
+            [data-theme="dark"] .compare-cell-header.empty {
+                background: #1e293b !important;
+                border-color: #334155 !important;
+            }
+            [data-theme="dark"] .compare-cell {
+                border-color: #334155 !important;
+                color: #e2e8f0 !important;
+            }
+            [data-theme="dark"] .compare-label {
+                background: #0f172a !important;
+                color: #94a3b8 !important;
+            }
+            [data-theme="dark"] .highlight-cell {
+                background: rgba(16, 185, 129, 0.15) !important;
+                color: #34d399 !important;
+            }
+            [data-theme="dark"] .compare-row:hover .compare-cell {
+                background: rgba(255, 255, 255, 0.02) !important;
             }
         </style>
         
@@ -3664,14 +3732,21 @@ def build_compare_page(base_dir, header_part, footer_part):
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
                         <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC" class="compare-prod-img">
                         <div class="compare-prod-title">ASUS NUC AI 350 (PN54)</div>
-                        <div class="compare-prod-price">12.390.000₫</div>
-                        <a href="demo_product.html" class="btn-pill btn-blue" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; text-decoration: none; display: block; box-sizing: border-box;">Mua ngay</a>
+                        <div class="compare-prod-price">12.390.000đ</div>
+                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
                     </div>
                     <div class="compare-cell-header">
                         <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
                         <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420" alt="UM890 PRO" class="compare-prod-img">
                         <div class="compare-prod-title">MINISFORUM UM890 Pro</div>
-                        <div class="compare-prod-price">14.990.000₫</div>
+                        <div class="compare-prod-price">14.990.000đ</div>
+                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
+                    </div>
+                    <div class="compare-cell-header col-3-compare">
+                        <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
+                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Beelink SER8" class="compare-prod-img">
+                        <div class="compare-prod-title">BEELINK SER8 AI</div>
+                        <div class="compare-prod-price">15.490.000đ</div>
                         <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
                     </div>
                 </div>
@@ -3681,104 +3756,242 @@ def build_compare_page(base_dir, header_part, footer_part):
                     <div class="compare-cell compare-label">Thương hiệu</div>
                     <div class="compare-cell">Asus</div>
                     <div class="compare-cell">Minisforum</div>
+                    <div class="compare-cell col-3-compare">Beelink</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Model</div>
                     <div class="compare-cell">NUC AI 350 (PN54)</div>
                     <div class="compare-cell">UM890 Pro</div>
+                    <div class="compare-cell col-3-compare">SER8 AI</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Tình trạng</div>
                     <div class="compare-cell">Mới 100%</div>
                     <div class="compare-cell">Mới 100%</div>
+                    <div class="compare-cell col-3-compare">Mới 100%</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Kích thước</div>
                     <div class="compare-cell highlight-cell">130x130x34mm (Cực mỏng)</div>
                     <div class="compare-cell">130x127x60mm</div>
+                    <div class="compare-cell col-3-compare">135x135x48mm</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Vi xử lý (CPU)</div>
                     <div class="compare-cell">AMD Ryzen AI 7 350 (8C/16T, max 5.0Ghz)</div>
                     <div class="compare-cell highlight-cell">AMD Ryzen 9 8945HS (8C/16T, max 5.2Ghz)</div>
+                    <div class="compare-cell col-3-compare">AMD Ryzen 7 8845HS (8C/16T, max 5.1Ghz)</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">CPU Mark (Hiệu năng)</div>
                     <div class="compare-cell highlight-cell">~30.000 điểm</div>
                     <div class="compare-cell">~29.500 điểm</div>
+                    <div class="compare-cell col-3-compare">~29.000 điểm</div>
                 </div>
-
+                
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Đồ họa (GPU)</div>
                     <div class="compare-cell highlight-cell">AMD Radeon™ 860M</div>
                     <div class="compare-cell">AMD Radeon™ 780M</div>
+                    <div class="compare-cell col-3-compare">AMD Radeon™ 780M</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">G3D Mark (Đồ họa)</div>
                     <div class="compare-cell highlight-cell">~8.500 điểm</div>
                     <div class="compare-cell">~7.200 điểm</div>
+                    <div class="compare-cell col-3-compare">~7.200 điểm</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Xử lý AI (NPU)</div>
                     <div class="compare-cell highlight-cell">Lên đến 50 TOPS NPU (Tổng 66 TOPS)</div>
                     <div class="compare-cell">Lên đến 16 TOPS NPU (Tổng 39 TOPS)</div>
+                    <div class="compare-cell col-3-compare">Lên đến 16 TOPS NPU (Tổng 38 TOPS)</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Hỗ trợ RAM</div>
                     <div class="compare-cell highlight-cell">2x DDR5 5600 tối đa 128GB</div>
                     <div class="compare-cell">2x DDR5 5600 tối đa 96GB</div>
+                    <div class="compare-cell col-3-compare">2x DDR5 5600 tối đa 64GB</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Lưu trữ (SSD)</div>
                     <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
                     <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
+                    <div class="compare-cell col-3-compare">2x M.2 2280 NVMe PCIe 4.0</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Kết nối không dây</div>
                     <div class="compare-cell highlight-cell">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
                     <div class="compare-cell">Wi-Fi 6E + Bluetooth® 5.3</div>
+                    <div class="compare-cell col-3-compare">Wi-Fi 6 + Bluetooth® 5.2</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Cổng kết nối (IO)</div>
                     <div class="compare-cell">1x USB4, 1x USB 3.2 Gen2 A, 1x USB 2.0, 1x HDMI 2.1, 2x DP 1.4, 1x 2.5G LAN</div>
                     <div class="compare-cell highlight-cell">2x USB4, 4x USB 3.2 Gen2 A, 1x HDMI 2.1, 1x DP 1.4, 2x 2.5G LAN, 1x OCuLink</div>
+                    <div class="compare-cell col-3-compare">1x USB4, 3x USB 3.2, 1x Type-C, 1x HDMI, 1x DP, 1x 2.5G LAN</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Tính năng đặc biệt</div>
                     <div class="compare-cell">Vân tay, phím Copilot+, hỗ trợ Copilot+ PC</div>
                     <div class="compare-cell highlight-cell">Cổng OCuLink chuyên dụng gắn eGPU, tản nhiệt kim loại lỏng</div>
+                    <div class="compare-cell col-3-compare">Thân máy nhôm nguyên khối, tản nhiệt buồng hơi</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Hệ điều hành</div>
                     <div class="compare-cell highlight-cell">Win 11 Pro + Office 2021 bản quyền</div>
                     <div class="compare-cell">Win 11 Pro bản quyền</div>
+                    <div class="compare-cell col-3-compare">Win 11 Pro bản quyền</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Nguồn cấp điện</div>
                     <div class="compare-cell">Adapter DC 120W</div>
                     <div class="compare-cell highlight-cell">Adapter GaN 120W (Cực kỳ nhỏ gọn)</div>
+                    <div class="compare-cell col-3-compare">Adapter DC 120W</div>
                 </div>
-
+ 
                 <div class="compare-row">
                     <div class="compare-cell compare-label">Bảo hành</div>
                     <div class="compare-cell highlight-cell"><i class="ph-fill ph-shield-check" style="margin-right: 5px;"></i> 36 tháng chính hãng ASUS Việt Nam</div>
                     <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
+                    <div class="compare-cell col-3-compare">12 tháng cửa hàng</div>
                 </div>
             </div>
+            
+            <!-- Recently Viewed Section -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+            <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+            <div class="template-product mt-5" style="width: 100%; margin-top: 50px;">
+                <div class="box_product_1 rounded-10 bg-white py-3 px-2 p-lg-3" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm);">
+                    <div class="t1 align-items-center d-flex justify-content-between mb-3">
+                        <h3 class="special-content_title font-weight-bold position-relative m-0" style="font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="ph-fill ph-clock-counter-clockwise" style="color: var(--primary); font-size: 1.5rem;"></i>
+                            <span class="position-relative">Sản phẩm đã xem</span>
+                        </h3>
+                    </div>
+                    <div class="swiper js-recent-slider p-2 pb-3 pb-lg-2" style="position: relative; overflow: hidden; list-style: none; padding: 0; z-index: 1;">
+                        <div class="swiper-wrapper js-recent-container" id="recent-products-wrapper">
+                            <!-- Dynamic cards -->
+                        </div>
+                        <!-- Navigation -->
+                        <div class="swiper-button-prev recent-prev" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
+                        <div class="swiper-button-next recent-next" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const container = document.getElementById('recent-products-wrapper');
+                    if (container) {
+                        let items = [];
+                        try {
+                            items = JSON.parse(localStorage.getItem('mewRecent')) || [];
+                        } catch(e) {}
+                        
+                        if (items.length === 0) {
+                            items = [
+                                {
+                                    name: 'ASUS NUC AI 350 (PN54)',
+                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973',
+                                    price: '12.390.000đ',
+                                    url: 'demo_product.html'
+                                },
+                                {
+                                    name: 'MINISFORUM UM890 Pro',
+                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420',
+                                    price: '14.990.000đ',
+                                    url: 'demo_product.html'
+                                },
+                                {
+                                    name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)',
+                                    img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png',
+                                    price: '14.200.000đ',
+                                    url: 'demo_product.html'
+                                }
+                            ];
+                        }
+                        
+                        let html = '';
+                        items.forEach(item => {
+                            const name = item.name || item.title || item;
+                            const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+                            const price = item.price || 'Liên hệ';
+                            const url = item.url || 'demo_product.html';
+                            
+                            html += `
+                                <div class="swiper-slide" style="height: auto;">
+                                    <div class="product-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px; background: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; box-sizing: border-box;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.05)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+                                        <a href="${url}" style="text-decoration: none; display: block; margin-bottom: 10px;">
+                                            <img src="${img}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
+                                        </a>
+                                        <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${name}</a>
+                                        <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${price}</div>
+                                        <a href="${url}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        container.innerHTML = html;
+                        
+                        const swiperRecent = new Swiper('.js-recent-slider', {
+                            slidesPerView: 2,
+                            spaceBetween: 15,
+                            navigation: {
+                                nextEl: '.recent-next',
+                                prevEl: '.recent-prev',
+                            },
+                            breakpoints: {
+                                576: { slidesPerView: 2 },
+                                768: { slidesPerView: 3 },
+                                992: { slidesPerView: 4 },
+                                1200: { slidesPerView: 5 }
+                            }
+                        });
+                        
+                        function updateRecentNavVisibility() {
+                            const swiperEl = document.querySelector('.js-recent-slider');
+                            if (swiperEl) {
+                                const prevBtn = swiperEl.querySelector('.recent-prev');
+                                const nextBtn = swiperEl.querySelector('.recent-next');
+                                if (prevBtn && nextBtn) {
+                                    let currentSlidesPerView = 2;
+                                    const width = window.innerWidth;
+                                    if (width >= 1200) currentSlidesPerView = 5;
+                                    else if (width >= 992) currentSlidesPerView = 4;
+                                    else if (width >= 768) currentSlidesPerView = 3;
+                                    else if (width >= 576) currentSlidesPerView = 2;
+                                    
+                                    if (items.length <= currentSlidesPerView) {
+                                        prevBtn.style.setProperty('display', 'none', 'important');
+                                        nextBtn.style.setProperty('display', 'none', 'important');
+                                    } else {
+                                        prevBtn.style.removeProperty('display');
+                                        nextBtn.style.removeProperty('display');
+                                    }
+                                }
+                            }
+                        }
+                        updateRecentNavVisibility();
+                        swiperRecent.on('resize', updateRecentNavVisibility);
+                        swiperRecent.on('update', updateRecentNavVisibility);
+                    }
+                });
+            </script>
         </div>
     """
     full_html = clean_liquid_tags(header_part + compare_html + local_footer_part)
@@ -3839,14 +4052,8 @@ def build_cart_page(base_dir, header_part, footer_part):
             .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); font-size: 1.2rem; font-weight: 900; color: var(--text-dark); }
             .summary-total-price { color: var(--primary); font-size: 1.5rem; }
             
-            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 60px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
+            .btn-checkout-nava { display: block; width: 100%; padding: 15px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white !important; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.1rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; margin-top: 20px; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2); border: none; cursor: pointer; }
             .btn-checkout-nava:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3); color: white !important; }
-            
-            .promo-box { display: flex; gap: 10px; margin-top: 60px; }
-            .promo-input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: var(--radius-md); outline: none; font-size: 0.9rem; transition: 0.3s; background: var(--bg-gray); }
-            .promo-input:focus { border-color: var(--primary); background: white; }
-            .promo-btn { padding: 10px 15px; background: var(--text-dark); color: white; border: none; border-radius: var(--radius-md); font-weight: 700; cursor: pointer; transition: 0.3s; }
-            .promo-btn:hover { background: var(--primary); }
             
             @media (max-width: 991px) {
                 .cart-grid { grid-template-columns: 1fr; }
@@ -3856,6 +4063,9 @@ def build_cart_page(base_dir, header_part, footer_part):
             @media (max-width: 575px) {
                 .cart-item { flex-direction: column; align-items: flex-start; }
                 .cart-item-img { width: 80px; height: 80px; }
+                .qty-btn { width: 40px !important; height: 40px !important; font-size: 1.25rem !important; }
+                .qty-spinner { border-radius: 24px !important; }
+                .qty-input { width: 45px !important; height: 40px !important; font-size: 1.1rem !important; }
             }
         </style>
         
@@ -3866,50 +4076,49 @@ def build_cart_page(base_dir, header_part, footer_part):
                 <span style="color: var(--primary); font-weight: bold;">Giỏ hàng</span>
             </div>
             
-            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn</h1>
+            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (2 sản phẩm)</h1>
             
             <div class="cart-grid">
                 <!-- Left: Cart Items -->
                 <div class="cart-items-container">
                     <!-- Item 1 -->
-                    <div class="cart-item">
+                    <div class="cart-item" data-price="4490000" id="cart-item-1">
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="cart-item-img">
                         <div class="cart-item-details">
                             <a href="demo_product.html" class="cart-item-title">ASUS NUC 14 Essential</a>
                             <div class="cart-item-variant">Core i3 / 8GB / 256GB</div>
-                            <div class="cart-item-price">4.490.000₫</div>
+                            <div class="cart-item-price">4.490.000đ</div>
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, -1)"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, 1)"><i class="ph-bold ph-plus"></i></button>
                             </div>
-                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                            <button class="cart-item-remove" onclick="removeCartItem(this)" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
                     </div>
                     
                     <!-- Item 2 -->
-                    <div class="cart-item">
+                    <div class="cart-item" data-price="31190000" id="cart-item-2">
                         <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="cart-item-img">
                         <div class="cart-item-details">
                             <a href="demo_product.html" class="cart-item-title">GMK EVO X1 32G</a>
                             <div class="cart-item-variant">Ryzen AI 9 HX370 / 32GB / 1TB</div>
-                            <div class="cart-item-price">31.190.000₫</div>
+                            <div class="cart-item-price">31.190.000đ</div>
                         </div>
                         <div class="cart-item-actions">
                             <div class="qty-spinner">
-                                <button class="qty-btn" onclick="if(this.nextElementSibling.value > 1) this.nextElementSibling.value--"><i class="ph-bold ph-minus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, -1)"><i class="ph-bold ph-minus"></i></button>
                                 <input type="text" value="1" class="qty-input" readonly>
-                                <button class="qty-btn" onclick="this.previousElementSibling.value++"><i class="ph-bold ph-plus"></i></button>
+                                <button class="qty-btn" onclick="changeQty(this, 1)"><i class="ph-bold ph-plus"></i></button>
                             </div>
-                            <button class="cart-item-remove" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
+                            <button class="cart-item-remove" onclick="removeCartItem(this)" title="Xóa sản phẩm"><i class="ph-bold ph-trash"></i></button>
                         </div>
                     </div>
                     
                     <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <a href="demo_collection.html" style="color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;"><i class="ph-bold ph-arrow-left"></i> Tiếp tục mua sắm</a>
-                        <button style="background: transparent; color: var(--text-gray); border: none; font-weight: 600; cursor: pointer; transition: 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-trash"></i> Xóa tất cả</button>
                     </div>
                 </div>
                 
@@ -3919,7 +4128,7 @@ def build_cart_page(base_dir, header_part, footer_part):
                     
                     <div class="summary-row">
                         <span>Tạm tính (2 sản phẩm)</span>
-                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000₫</span>
+                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000đ</span>
                     </div>
                     
                     <div class="summary-row">
@@ -3927,22 +4136,186 @@ def build_cart_page(base_dir, header_part, footer_part):
                         <span style="color: #10b981; font-weight: 700;">Miễn phí</span>
                     </div>
                     
-                    <div class="promo-box">
-                        <input type="text" class="promo-input" placeholder="Mã giảm giá...">
-                        <button class="promo-btn">Áp dụng</button>
+                    <div class="summary-row" id="summary-discount-row">
+                        <span>Giảm giá (Voucher)</span>
+                        <span id="summary-discount-value" style="color: var(--primary); font-weight: 700;">-356.800đ</span>
+                    </div>
+                    
+                    <!-- NAVA Voucher Section (Shopee Style) -->
+                    <style>
+                        .shopee-voucher-container {
+                            border: 1px solid var(--border-color);
+                            background: var(--bg-gray);
+                            border-radius: var(--radius-md);
+                            padding: 16px;
+                            margin: 20px 0;
+                            font-family: inherit;
+                        }
+                        .voucher-header {
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            margin-bottom: 12px;
+                        }
+                        .voucher-tag {
+                            background: rgba(0, 51, 102, 0.08); /* brand blue light tint */
+                            color: var(--primary);
+                            font-size: 0.72rem;
+                            font-weight: 700;
+                            padding: 4px 8px;
+                            border-radius: 6px;
+                            letter-spacing: 0.5px;
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 4px;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                        }
+                        [data-theme="dark"] .voucher-tag {
+                            background: rgba(51, 133, 255, 0.15);
+                            color: #66a3ff;
+                        }
+                        .voucher-title {
+                            font-weight: 700;
+                            color: var(--text-dark);
+                            font-size: 0.9rem;
+                        }
+                        .voucher-ticket {
+                            display: flex;
+                            align-items: stretch;
+                            background: var(--bg-white, #ffffff);
+                            border: 1px solid var(--border-color);
+                            border-radius: 8px;
+                            overflow: hidden;
+                            position: relative;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                        }
+                        /* Ticket style circular notches */
+                        .voucher-ticket::before,
+                        .voucher-ticket::after {
+                            content: '';
+                            position: absolute;
+                            width: 14px;
+                            height: 14px;
+                            background: var(--bg-gray); /* Blends with shopee-voucher-container background */
+                            border: 1px solid var(--border-color);
+                            border-radius: 50%;
+                            z-index: 5;
+                            box-sizing: border-box;
+                        }
+                        .voucher-ticket::before {
+                            top: -7px;
+                            left: 83px; /* centered at 90px boundary */
+                            clip-path: inset(7px 0 0 0); /* only show bottom half */
+                        }
+                        .voucher-ticket::after {
+                            bottom: -7px;
+                            left: 83px; /* centered at 90px boundary */
+                            clip-path: inset(0 0 7px 0); /* only show top half */
+                        }
+                        .voucher-left {
+                            background: rgba(0, 51, 102, 0.04);
+                            color: var(--primary);
+                            width: 90px;
+                            flex-shrink: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 800;
+                            font-size: 0.85rem;
+                            text-align: center;
+                            letter-spacing: 0.5px;
+                            border-right: 1px dashed var(--border-color);
+                            box-sizing: border-box;
+                        }
+                        [data-theme="dark"] .voucher-left {
+                            background: rgba(51, 133, 255, 0.08);
+                            color: #66a3ff;
+                        }
+                        .voucher-right {
+                            padding: 12px 14px;
+                            flex: 1;
+                            font-size: 0.85rem;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                        }
+                        .voucher-desc {
+                            font-weight: 700;
+                            color: var(--text-dark);
+                            margin-bottom: 3px;
+                            font-size: 0.85rem;
+                        }
+                        .voucher-subtext {
+                            color: var(--text-gray);
+                            font-size: 0.78rem;
+                        }
+                        .kol-input-box {
+                            display: flex;
+                            gap: 8px;
+                            margin-top: 15px;
+                        }
+                        .kol-input {
+                            flex: 1;
+                            padding: 10px 14px;
+                            border: 1px solid var(--border-color);
+                            border-radius: 8px;
+                            font-size: 0.88rem;
+                            outline: none;
+                            background: var(--bg-white, #ffffff);
+                            transition: 0.2s;
+                            box-sizing: border-box;
+                            min-width: 0; /* allows input to shrink on small screens */
+                        }
+                        .kol-input:focus {
+                            border-color: var(--primary);
+                            background: var(--bg-white, #ffffff);
+                        }
+                        .kol-btn {
+                            padding: 10px 20px;
+                            background: var(--primary);
+                            color: white;
+                            border: none;
+                            border-radius: 8px;
+                            font-weight: 700;
+                            cursor: pointer;
+                            transition: all 0.2s;
+                            font-size: 0.88rem;
+                            white-space: nowrap;
+                            flex-shrink: 0;
+                        }
+                        .kol-btn:hover {
+                            background: var(--primary-light);
+                        }
+                    </style>
+                    <div class="shopee-voucher-container">
+                        <div class="voucher-header">
+                            <span class="voucher-tag"><i class="ph-fill ph-tag"></i> NAVA Voucher</span>
+                            <span class="voucher-title">Khuyến mãi dành cho bạn</span>
+                        </div>
+                        <div class="voucher-ticket">
+                            <div class="voucher-left">1% OFF</div>
+                            <div class="voucher-right">
+                                <div class="voucher-desc" id="applied-voucher-title">Tự động áp dụng mã NAVA1</div>
+                                <div class="voucher-subtext" id="applied-voucher-sub">Đã giảm <span id="voucher-discount-amount" style="color: var(--primary); font-weight: 800;">356.800đ</span> (1%)</div>
+                            </div>
+                        </div>
+                        <div class="kol-input-box">
+                            <input type="text" class="kol-input" id="kol-code-input" placeholder="Nhập mã giảm giá...">
+                            <button class="kol-btn" onclick="applyKOLCode()">Áp dụng</button>
+                        </div>
+                        <div id="kol-alert" style="display: none; font-size: 0.8rem; font-weight: 600; margin-top: 8px; color: #10b981;"></div>
                     </div>
                     
                     <div class="summary-total">
                         <span>Tổng Tiền</span>
-                        <span class="summary-total-price">35.680.000₫</span>
+                        <span class="summary-total-price" id="summary-total-price-val">35.323.200đ</span>
                     </div>
                     
-                    <p style="font-size: 0.8rem; color: var(--text-gray); text-align: right; margin-top: 5px; font-style: italic;">(Đã bao gồm VAT)</p>
-                    
-                    <a href="demo_checkout.html" class="btn-checkout-nava">Thanh Toán Ngay <i class="ph-bold ph-arrow-right" style="vertical-align: middle; margin-left: 5px;"></i></a>
+                    <a href="demo_checkout.html" class="btn-checkout-nava">Thanh Toán <i class="ph-bold ph-arrow-right" style="vertical-align: middle; margin-left: 5px;"></i></a>
                     
                     <div style="margin-top: 20px; text-align: center;">
-                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px;">Thanh toán an toàn 100%</p>
+                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px;">An toàn & Bảo mật</p>
                         <div style="display: flex; gap: 10px; justify-content: center;">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-1.png?1778729235331" alt="Visa" style="height: 25px;">
                             <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/payment-2.png?1778729235331" alt="Mastercard" style="height: 25px;">
@@ -3952,6 +4325,179 @@ def build_cart_page(base_dir, header_part, footer_part):
                 </div>
             </div>
         </div>
+        
+        <script>
+            let cartSubtotal = 35680000;
+            let activeDiscountPercent = 1;
+            let activeDiscountValue = 356800;
+            let appliedCode = 'NAVA1';
+            
+            function changeQty(btn, delta) {
+                const spinner = btn.closest('.qty-spinner');
+                const input = spinner.querySelector('.qty-input');
+                let val = parseInt(input.value) || 1;
+                val += delta;
+                if (val < 1) val = 1;
+                input.value = val;
+                recalculateSubtotal();
+            }
+            
+            function removeCartItem(btn) {
+                const item = btn.closest('.cart-item');
+                if (item) {
+                    item.remove();
+                    recalculateSubtotal();
+                }
+            }
+            
+            function recalculateSubtotal() {
+                let subtotal = 0;
+                let itemCount = 0;
+                const items = document.querySelectorAll('.cart-item');
+                items.forEach(item => {
+                    const price = parseInt(item.getAttribute('data-price')) || 0;
+                    const qty = parseInt(item.querySelector('.qty-input').value) || 1;
+                    subtotal += price * qty;
+                    itemCount += qty;
+                });
+                
+                cartSubtotal = subtotal;
+                
+                // Update item count in UI
+                const titleEl = document.querySelector('.cart-title');
+                if (titleEl) {
+                    titleEl.innerHTML = `<i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (${itemCount} sản phẩm)`;
+                }
+                
+                const summaryQtyEl = document.querySelector('.summary-row span:first-child');
+                if (summaryQtyEl) {
+                    summaryQtyEl.textContent = `Tạm tính (${itemCount} sản phẩm)`;
+                }
+                
+                const summarySubtotalEl = document.querySelector('.summary-row span:last-child');
+                if (summarySubtotalEl) {
+                    summarySubtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+                }
+                
+                let qty1 = 0;
+                let qty2 = 0;
+                const item1 = document.getElementById('cart-item-1');
+                if (item1) qty1 = parseInt(item1.querySelector('.qty-input').value) || 0;
+                const item2 = document.getElementById('cart-item-2');
+                if (item2) qty2 = parseInt(item2.querySelector('.qty-input').value) || 0;
+                
+                localStorage.setItem('nava_qty_item1', qty1);
+                localStorage.setItem('nava_qty_item2', qty2);
+                localStorage.setItem('nava_cart_subtotal', subtotal);
+                
+                if (itemCount === 0) {
+                    const grid = document.querySelector('.cart-grid');
+                    if (grid) {
+                        grid.innerHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px;">
+                                <i class="ph ph-shopping-cart-simple" style="font-size: 5rem; color: var(--text-gray); margin-bottom: 20px; display: block;"></i>
+                                <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--text-dark); margin-bottom: 10px;">Giỏ hàng của bạn đang trống</h2>
+                                <p style="color: var(--text-gray); margin-bottom: 25px;">Hãy tiếp tục khám phá và mua sắm các sản phẩm công nghệ tuyệt vời tại Nava Store.</p>
+                                <a href="demo_collection.html" class="btn-nava btn-primary-nava" style="display: inline-flex; width: auto; padding: 12px 30px; text-decoration: none; border-radius: 8px;">Tiếp tục mua sắm</a>
+                            </div>
+                        `;
+                    }
+                    localStorage.setItem('nava_cart_total', 0);
+                    localStorage.setItem('nava_discount_val', 0);
+                    return;
+                }
+                
+                updateCartTotals();
+            }
+            
+            function updateCartTotals() {
+                const discountValEl = document.getElementById('voucher-discount-amount');
+                const discountSummaryEl = document.getElementById('summary-discount-value');
+                const totalPriceEl = document.getElementById('summary-total-price-val');
+                
+                // Recalculate
+                activeDiscountValue = Math.round(cartSubtotal * (activeDiscountPercent / 100));
+                let finalTotal = cartSubtotal - activeDiscountValue;
+                
+                // Format currency
+                const discountStr = activeDiscountValue.toLocaleString('vi-VN') + 'đ';
+                const finalStr = finalTotal.toLocaleString('vi-VN') + 'đ';
+                
+                if (discountValEl) discountValEl.innerText = discountStr;
+                if (discountSummaryEl) discountSummaryEl.innerText = '-' + discountStr;
+                if (totalPriceEl) totalPriceEl.innerText = finalStr;
+                
+                // Save to localStorage so checkout page can sync
+                localStorage.setItem('nava_discount_percent', activeDiscountPercent);
+                localStorage.setItem('nava_discount_code', appliedCode);
+                localStorage.setItem('nava_discount_val', activeDiscountValue);
+                localStorage.setItem('nava_cart_total', finalTotal);
+            }
+            
+            function applyKOLCode() {
+                const input = document.getElementById('kol-code-input');
+                const alertBox = document.getElementById('kol-alert');
+                const titleEl = document.getElementById('applied-voucher-title');
+                const subEl = document.getElementById('applied-voucher-sub');
+                const code = input.value.trim().toUpperCase();
+                
+                if (!code) return;
+                
+                if (code === 'KOL10') {
+                    activeDiscountPercent = 10;
+                    appliedCode = 'KOL10';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = '🎉 Đã áp dụng mã KOL10: Giảm 10% tổng đơn hàng!';
+                    titleEl.innerText = 'Đã áp dụng mã KOL10';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else if (code === 'NAVA50') {
+                    activeDiscountPercent = 50;
+                    appliedCode = 'NAVA50';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = '🎉 Siêu Voucher NAVA50: Giảm 50% tổng đơn hàng!';
+                    titleEl.innerText = 'Đã áp dụng mã NAVA50';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else if (code === 'NAVA1') {
+                    activeDiscountPercent = 1;
+                    appliedCode = 'NAVA1';
+                    alertBox.style.color = '#10b981';
+                    alertBox.innerText = 'Đã quay lại mã giảm giá mặc định NAVA1 (1%)';
+                    titleEl.innerText = 'Tự động áp dụng mã NAVA1';
+                    alertBox.style.display = 'block';
+                    updateCartTotals();
+                } else {
+                    alertBox.style.color = '#ef4444';
+                    alertBox.innerText = '❌ Mã voucher không hợp lệ hoặc đã hết lượt sử dụng!';
+                    alertBox.style.display = 'block';
+                }
+            }
+            
+            // Initialize on load
+            window.addEventListener('DOMContentLoaded', () => {
+                const q1 = localStorage.getItem('nava_qty_item1') !== null ? parseInt(localStorage.getItem('nava_qty_item1')) : 1;
+                const q2 = localStorage.getItem('nava_qty_item2') !== null ? parseInt(localStorage.getItem('nava_qty_item2')) : 1;
+                
+                const item1 = document.getElementById('cart-item-1');
+                if (item1) {
+                    if (q1 > 0) {
+                        item1.querySelector('.qty-input').value = q1;
+                    } else {
+                        item1.remove();
+                    }
+                }
+                const item2 = document.getElementById('cart-item-2');
+                if (item2) {
+                    if (q2 > 0) {
+                        item2.querySelector('.qty-input').value = q2;
+                    } else {
+                        item2.remove();
+                    }
+                }
+                recalculateSubtotal();
+            });
+        </script>
     """
     full_html = clean_liquid_tags(header_part + cart_html + local_footer_part)
     full_html = inject_seo_metadata(
@@ -4025,10 +4571,50 @@ def build_checkout_page(base_dir):
         .btn-pay { display: block; width: 100%; padding: 18px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.15rem; border: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.25); margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
         .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.35); }
         
+        /* Mobile Sticky Bottom Bar styles */
+        .mobile-sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 9999;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+        }
+        .mobile-sticky-bar .sticky-price-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 2px;
+        }
+        .mobile-sticky-bar .sticky-price-val {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .mobile-sticky-bar .btn-sticky-pay {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2);
+        }
+        
         @media (max-width: 991px) {
             .checkout-grid { grid-template-columns: 1fr; }
             .order-summary { position: static; order: -1; margin-bottom: 30px; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .mobile-sticky-bar { display: flex; }
+            body { padding-bottom: 90px !important; }
         }
         
     </style>
@@ -4057,20 +4643,24 @@ def build_checkout_page(base_dir):
                         </select>
                     </div>
                     
+                    <!-- NATURAL ORDER FOR FIELDS: Full Name -> Phone -> Email -> Address -->
                     <div class="input-group">
-                        <input type="email" class="nava-input" placeholder="Email" value="turniodev@gmail.com">
+                        <label>Họ và tên</label>
+                        <input type="text" class="nava-input" id="checkout-fullname" placeholder="Nhập họ và tên" value="Turnio Dev" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" class="nava-input" id="checkout-phone" placeholder="Nhập số điện thoại" value="0972178527" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email (tùy chọn)</label>
+                        <input type="email" class="nava-input" id="checkout-email" placeholder="Nhập địa chỉ Email" value="turniodev@gmail.com">
                     </div>
                     
-                    <div class="grid-2">
-                        <div class="input-group">
-                            <input type="text" class="nava-input" placeholder="Họ và tên" value="Turnio Dev">
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" class="nava-input" placeholder="Số điện thoại" value="0972178527">
-                        </div>
-                    </div>
-                    
                     <div class="input-group">
+                        <label>Địa chỉ nhận hàng</label>
                         <div id="address-trigger" onclick="openAddressModal()" class="nava-input" style="cursor: pointer; display: flex; align-items: center; gap: 10px; background: var(--bg-white); min-height: 52px; user-select: none;">
                             <i class="ph-bold ph-map-pin" style="color: var(--primary); font-size: 1.1rem; flex-shrink: 0;"></i>
                             <span id="address-display" style="flex: 1; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">Thành phố Thủ Đức, TP Hồ Chí Minh</span>
@@ -4080,81 +4670,115 @@ def build_checkout_page(base_dir):
                         <input type="hidden" id="ward-select" value="1">
                     </div>
                     
-                    
-                    
                     <div class="input-group" style="margin-bottom: 0;">
-                        <textarea class="nava-input" rows="3" placeholder="Ghi chú (tùy chọn)"></textarea>
+                        <label>Ghi chú đơn hàng (tùy chọn)</label>
+                        <textarea class="nava-input" rows="3" placeholder="Nhập ghi chú hoặc yêu cầu giao hàng..."></textarea>
                     </div>
                 </div>
                 <!-- Payment Methods -->
                 <div class="checkout-card">
                     <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px;"><i class="ph-fill ph-credit-card"></i> Thanh toán</h2>
                             
-                            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="bank" checked>
-                                        <div>
-                                            <span class="radio-label">Chuyển khoản qua ngân hàng</span>
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="bank" checked>
+                                <div>
+                                    <span class="radio-label">Chuyển khoản qua ngân hàng (ACB Auto-banking)</span>
+                                </div>
+                                <i class="ph-fill ph-bank" style="font-size: 1.5rem; color: var(--primary); margin-left: auto;"></i>
+                            </label>
+                            <div class="payment-details" id="bank-details" style="display: block; padding: 0 15px 15px 15px; margin: 0;">
+                                <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: left; margin-top: 5px;">
+                                    <p style="font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; text-align: center; font-size: 1.05rem;"><i class="ph-bold ph-info"></i> THÔNG TIN CHUYỂN KHOẢN</p>
+                                    
+                                    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Ngân hàng</span>
+                                            <span style="font-weight: 700; color: var(--text-dark); font-size: 0.95rem;">TMCP Á Châu (ACB)</span>
                                         </div>
-                                        <i class="ph-fill ph-bank" style="font-size: 1.5rem; color: var(--primary); margin-left: auto;"></i>
-                                    </label>
-                                    <div class="payment-details" id="bank-details" style="display: block; padding: 0 15px 15px 15px; margin: 0;">
-                                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; text-align: center; margin-top: 5px;">
-                                            <p style="font-weight: 700; color: var(--text-dark); margin: 0 0 5px 0;">Ngân hàng TMCP Á Châu (ACB)</p>
-                                            <p style="font-size: 0.9rem; color: var(--text-gray); margin: 0 0 5px 0;">CÔNG TY TNHH NAVATEK</p>
-                                            <p style="font-size: 1.2rem; font-weight: 900; color: var(--primary); margin: 0 0 15px 0; letter-spacing: 1px;">123434688</p>
-                                            <img src="https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=180019000&des=DH%20Nava" alt="QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto;">
-                                            <p style="font-size: 0.8rem; color: var(--text-gray); margin: 15px 0 0 0;">Mở ứng dụng ngân hàng để quét mã QR</p>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Chủ tài khoản</span>
+                                            <span style="font-weight: 700; color: var(--text-dark); font-size: 0.95rem;">CÔNG TY TNHH NAVATEK</span>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Số tài khoản</span>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span id="bank-acc-no" style="font-weight: 800; color: var(--primary); font-size: 1.1rem; letter-spacing: 0.5px;">123434688</span>
+                                                <button type="button" onclick="copyToClipboard('bank-acc-no', this)" style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--text-dark); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)';">
+                                                    <i class="ph-bold ph-copy"></i> Copy
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Số tiền</span>
+                                            <span id="bank-amount" style="font-weight: 800; color: var(--text-dark); font-size: 1rem;">35.323.200đ</span>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Nội dung CK</span>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span id="bank-ck-content" style="font-weight: 800; color: var(--primary); font-size: 1.05rem; letter-spacing: 0.5px;">DH NAVA 8527</span>
+                                                <button type="button" onclick="copyToClipboard('bank-ck-content', this)" style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--text-dark); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)';">
+                                                    <i class="ph-bold ph-copy"></i> Copy
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="momo">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua MoMo</span>
-                                        </div>
-                                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="vnpay">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua VNPAY</span>
-                                        </div>
-                                        <img src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418189687.png" alt="VNPAY" style="max-height: 20px; margin-left: auto;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="zalopay">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua ZaloPay</span>
-                                        </div>
-                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png" alt="ZaloPay" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0;">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="cod">
-                                        <div>
-                                            <span class="radio-label">Thu hộ (COD)</span>
-                                        </div>
-                                        <i class="ph-fill ph-money" style="font-size: 1.5rem; color: #10b981; margin-left: auto;"></i>
-                                    </label>
-                                    <div class="payment-details" id="cod-details" style="display: none; padding: 0 15px 15px 15px; margin: 0;">
-                                        <p style="font-size: 0.9rem; color: var(--text-gray); background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin: 5px 0 0 0;">Khách hàng thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận được sản phẩm.</p>
-                                    </div>
+                                    
+                                    <img id="checkout-qr-img" src="https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=35323200&des=DH%%20NAVA%%208527" alt="QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto; background: white; padding: 5px;">
+                                    <p style="font-size: 0.8rem; color: var(--text-gray); margin: 15px 0 0 0; text-align: center;"><i class="ph-bold ph-qr-code"></i> Quét mã QR bằng ứng dụng ngân hàng để tự duyệt đơn tự động</p>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="momo">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua MoMo</span>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="vnpay">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua VNPAY</span>
+                                </div>
+                                <img src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418189687.png" alt="VNPAY" style="max-height: 20px; margin-left: auto;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="zalopay">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua ZaloPay</span>
+                                </div>
+                                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png" alt="ZaloPay" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0;">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="cod">
+                                <div>
+                                    <span class="radio-label">Thu hộ (COD)</span>
+                                </div>
+                                <i class="ph-fill ph-money" style="font-size: 1.5rem; color: #10b981; margin-left: auto;"></i>
+                            </label>
+                            <div class="payment-details" id="cod-details" style="display: none; padding: 0 15px 15px 15px; margin: 0;">
+                                <p style="font-size: 0.9rem; color: var(--text-gray); background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin: 5px 0 0 0;">Khách hàng thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận được sản phẩm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="checkout-footer-links" style="display: flex; gap: 20px; font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 40px; flex-wrap: wrap;">
                     <a href="demo_policy.html#return" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
@@ -4180,7 +4804,7 @@ def build_checkout_page(base_dir):
                             <input type="radio" name="shipping" value="hoatoc" checked>
                             <div style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
                                 <span class="radio-label" style="font-weight: 500;">Hoả Tốc (HCM)</span>
-                                <span style="font-weight: 700;">39.000₫</span>
+                                <span style="font-weight: 700;">39.000đ</span>
                             </div>
                         </label>
                     </div>
@@ -4191,7 +4815,7 @@ def build_checkout_page(base_dir):
                     
                     <div class="order-items-list">
                         <!-- Item 1 -->
-                        <div class="order-item">
+                        <div class="order-item" id="checkout-item-1">
                             <div class="item-img-wrap">
                                 <span class="item-badge">1</span>
                                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="item-img">
@@ -4200,11 +4824,11 @@ def build_checkout_page(base_dir):
                                 <h4 class="item-title">ASUS NUC 14 Essential</h4>
                                 <span class="item-var">Core i3 / 8GB / 256GB</span>
                             </div>
-                            <div class="item-price">4.490.000₫</div>
+                            <div class="item-price">4.490.000đ</div>
                         </div>
                         
                         <!-- Item 2 -->
-                        <div class="order-item">
+                        <div class="order-item" id="checkout-item-2">
                             <div class="item-img-wrap">
                                 <span class="item-badge">1</span>
                                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="item-img">
@@ -4213,38 +4837,53 @@ def build_checkout_page(base_dir):
                                 <h4 class="item-title">GMK EVO X1 32G</h4>
                                 <span class="item-var">Ryzen AI 9 HX370 / 32GB / 1TB</span>
                             </div>
-                            <div class="item-price">31.190.000₫</div>
+                            <div class="item-price">31.190.000đ</div>
                         </div>
                     </div>
                     
-                    <div class="summary-details" style="margin-top: 60px;">
+                    <div class="summary-details" style="margin-top: 30px;">
                         <div class="summary-line">
                             <span>Tạm tính</span>
-                            <span style="color: var(--text-dark); font-weight: 600;">35.680.000₫</span>
+                            <span style="color: var(--text-dark); font-weight: 600;">35.680.000đ</span>
                         </div>
                         <div class="summary-line">
                             <span>Phí vận chuyển</span>
                             <span id="summary-shipping-fee" style="color: #10b981; font-weight: 600;">Miễn phí</span>
                         </div>
-                        <div class="summary-line">
+                        <div class="summary-line" id="checkout-discount-row">
                             <span>Giảm giá</span>
-                            <span style="color: var(--text-dark); font-weight: 600;">0₫</span>
+                            <span id="checkout-discount-val" style="color: var(--text-dark); font-weight: 600;">0đ</span>
                         </div>
                     </div>
                     
                     <div class="summary-total">
                         <div class="summary-total-label">Tổng thanh toán</div>
-                        <div class="summary-total-val" id="summary-total">35.680.000₫</div>
+                        <div class="summary-total-val" id="summary-total">35.680.000đ</div>
                     </div>
                     
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 60px;">
+                    <!-- 15-DAY RETURN ASSURANCE BANNER -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; padding: 12px; background: rgba(16, 185, 129, 0.08); border-radius: 8px; color: #065f46; font-weight: 700; font-size: 0.88rem; border: 1px solid rgba(16, 185, 129, 0.2);">
+                        <i class="ph-fill ph-arrow-counter-clockwise" style="font-size: 1.1rem;"></i>
+                        <span>Đổi trả hàng trong vòng 15 ngày</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
-                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đây là bản Demo Checkout App UI - Đặt hàng thành công!')">ĐẶT HÀNG</button>
+                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đặt hàng thành công!')">ĐẶT HÀNG</button>
                     </div>
                 </div>
             </div>
             
         </div>
+    </div>
+
+    <!-- Mobile Sticky Bottom Bar -->
+    <div class="mobile-sticky-bar">
+        <div>
+            <div class="sticky-price-label">Tổng thanh toán</div>
+            <div class="sticky-price-val" id="sticky-total-price">35.323.200đ</div>
+        </div>
+        <button class="btn-sticky-pay" onclick="alert('Đặt hàng thành công!')">THANH TOÁN</button>
     </div>
 
     <!-- Address Modal -->
@@ -4267,6 +4906,29 @@ def build_checkout_page(base_dir):
     </div>
 
     <script>
+        // Copy to clipboard function with premium feedback
+        function copyToClipboard(elementId, btn) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            let text = el.innerText || el.textContent;
+            if (elementId === 'bank-amount') {
+                text = text.replace(/[^0-9]/g, '');
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="ph-bold ph-check" style="color: #10b981;"></i> Đã copy';
+                btn.style.borderColor = '#10b981';
+                btn.style.color = '#10b981';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 1500);
+            }).catch(err => {
+                console.error('Lỗi sao chép: ', err);
+            });
+        }
+
         // --- Address Modal Logic (Global) ---
         let cityData = { cities: [], wards: [] };
         let addressStep = 1; 
@@ -4280,8 +4942,8 @@ def build_checkout_page(base_dir):
             .catch(err => { console.error("Lỗi tải json", err); fetchError = true; });
 
         function getCleanCityName(name) {
-            const match = name.match(/\[(.*?)\]/);
-            return match ? match[1] : name.replace(/\s*\(.*?\)\s*/g, '').trim();
+            const match = name.match(/\\[(.*?)\\]/);
+            return match ? match[1] : name.replace(/\\s*\\(.*?\\)\\s*/g, '').trim();
         }
 
         function openAddressModal() {
@@ -4297,7 +4959,6 @@ def build_checkout_page(base_dir):
             if(modal) {
                 console.log("Setting modal display to flex");
                 modal.style.display = 'flex';
-                // Force positioning to override any possible bugs
                 modal.style.position = 'fixed';
                 modal.style.top = '0';
                 modal.style.left = '0';
@@ -4327,13 +4988,11 @@ def build_checkout_page(base_dir):
         }
 
         function triggerShippingUpdate() {
-            // Trigger a custom event or just let DOMContentLoaded attach it globally
             if(window.updateShippingStateGlobal) {
                 window.updateShippingStateGlobal();
             }
         }
 
-        
         function confirmAddress() {
             const street = document.getElementById('street-input').value;
             if(!street) { alert('Vui lòng nhập số nhà & đường'); return; }
@@ -4420,6 +5079,46 @@ def build_checkout_page(base_dir):
             const paymentRadios = document.querySelectorAll('input[name="payment"]');
             const shippingRadios = document.querySelectorAll('input[name="shipping"]');
             
+            // Recalculation logic using dynamic discount and quantities from localStorage
+            const qty1 = localStorage.getItem('nava_qty_item1') !== null ? parseInt(localStorage.getItem('nava_qty_item1')) : 1;
+            const qty2 = localStorage.getItem('nava_qty_item2') !== null ? parseInt(localStorage.getItem('nava_qty_item2')) : 1;
+            
+            // Update Item 1 UI
+            const orderItem1 = document.getElementById('checkout-item-1');
+            if (orderItem1) {
+                if (qty1 > 0) {
+                    orderItem1.querySelector('.item-badge').textContent = qty1;
+                    orderItem1.querySelector('.item-price').textContent = (qty1 * 4490000).toLocaleString('vi-VN') + 'đ';
+                    orderItem1.style.display = 'flex';
+                } else {
+                    orderItem1.style.display = 'none';
+                }
+            }
+            
+            // Update Item 2 UI
+            const orderItem2 = document.getElementById('checkout-item-2');
+            if (orderItem2) {
+                if (qty2 > 0) {
+                    orderItem2.querySelector('.item-badge').textContent = qty2;
+                    orderItem2.querySelector('.item-price').textContent = (qty2 * 31190000).toLocaleString('vi-VN') + 'đ';
+                    orderItem2.style.display = 'flex';
+                } else {
+                    orderItem2.style.display = 'none';
+                }
+            }
+            
+            const subtotal = (qty1 * 4490000) + (qty2 * 31190000);
+            
+            // Update Tạm tính in summary details
+            const summarySubtotalEl = document.querySelector('.summary-details .summary-line:first-child span:last-child');
+            if (summarySubtotalEl) {
+                summarySubtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+            }
+            
+            let discountPercent = parseFloat(localStorage.getItem('nava_discount_percent')) || 1;
+            let discountVal = Math.round(subtotal * (discountPercent / 100));
+            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVA1';
+            
             function updatePaymentState() {
                 paymentRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));
                 document.querySelectorAll('.payment-details').forEach(el => el.style.display = 'none');
@@ -4449,25 +5148,77 @@ def build_checkout_page(base_dir):
                 
                 const shippingFeeEl = document.getElementById('summary-shipping-fee');
                 const totalEl = document.getElementById('summary-total');
+                const stickyTotalEl = document.getElementById('sticky-total-price');
+                const discountValEl = document.getElementById('checkout-discount-val');
+                const discountRowEl = document.getElementById('checkout-discount-row');
+                
+                // Update discount display
+                if (discountValEl) {
+                    if (discountVal > 0) {
+                        discountValEl.textContent = '-' + discountVal.toLocaleString('vi-VN') + 'đ';
+                        discountValEl.style.color = 'var(--primary)';
+                        discountValEl.style.fontWeight = '700';
+                        if (discountRowEl) {
+                            discountRowEl.querySelector('span:first-child').innerHTML = `Giảm giá <span style="background:var(--primary);color:white;font-size:0.75rem;font-weight:800;padding:2px 6px;border-radius:3px;margin-left:5px;">${discountCode}</span>`;
+                        }
+                    } else {
+                        discountValEl.textContent = '0đ';
+                        discountValEl.style.color = '';
+                        discountValEl.style.fontWeight = '';
+                    }
+                }
+                
                 if (shippingFeeEl && totalEl) {
                     if (shippingFee === 0) {
                         shippingFeeEl.textContent = 'Miễn phí';
                         shippingFeeEl.style.color = '#10b981';
                     } else {
-                        shippingFeeEl.textContent = shippingFee.toLocaleString('vi-VN') + '₫';
+                        shippingFeeEl.textContent = shippingFee.toLocaleString('vi-VN') + 'đ';
                         shippingFeeEl.style.color = 'var(--text-dark)';
                     }
-                    const total = 35680000 + shippingFee;
-                    totalEl.textContent = total.toLocaleString('vi-VN').replace(/,/g, '.') + '₫';
+                    const total = subtotal - discountVal + shippingFee;
+                    const formattedTotal = total.toLocaleString('vi-VN') + 'đ';
+                    totalEl.textContent = formattedTotal;
+                    if (stickyTotalEl) stickyTotalEl.textContent = formattedTotal;
+                    
+                    // Update bank amount & QR code
+                    const bankAmountEl = document.getElementById('bank-amount');
+                    const bankCkContentEl = document.getElementById('bank-ck-content');
+                    const qrImgEl = document.getElementById('checkout-qr-img');
+                    
+                    if (bankAmountEl) bankAmountEl.textContent = formattedTotal;
+                    
+                    const ckContent = (bankCkContentEl ? bankCkContentEl.textContent : 'DH NAVA 8527').toUpperCase();
+                    if (qrImgEl) {
+                        qrImgEl.src = `https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=${total}&des=${encodeURIComponent(ckContent)}`;
+                    }
                 }
             }
+            
+            // Dynamic Auto-banking description update based on phone number input
+            const phoneInput = document.getElementById('checkout-phone');
+            const bankCkContentEl = document.getElementById('bank-ck-content');
+            
+            function updateCKContentText() {
+                const phoneVal = (phoneInput ? phoneInput.value.trim() : '0972178527') || '0972178527';
+                const last4Digits = phoneVal.length >= 4 ? phoneVal.slice(-4) : phoneVal;
+                const ckContent = `DH NAVA ${last4Digits}`.toUpperCase();
+                if (bankCkContentEl) bankCkContentEl.textContent = ckContent;
+                updateShippingState();
+            }
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', updateCKContentText);
+            }
+            
             window.updateShippingStateGlobal = updateShippingState;
             
             paymentRadios.forEach(radio => radio.addEventListener('change', updatePaymentState));
             shippingRadios.forEach(radio => radio.addEventListener('change', updateShippingState));
-
+ 
             updatePaymentState();
             updateShippingState();
+            updateCKContentText();
         });
     </script>
 </body>
@@ -4498,261 +5249,205 @@ def build_policy_pages(base_dir, header_part, footer_part):
             
             .policy-sidebar { position: sticky; top: 80px; background: var(--bg-white); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; }
             .policy-sidebar h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
-            .policy-nav-list { list-style: none; padding: 0; margin: 0; }
-            .policy-nav-list li { margin-bottom: 6px; }
-            .policy-nav-list a { display: flex; align-items: center; gap: 8px; padding: 10px 12px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; font-size: 0.9rem; transition: all 0.3s; cursor: pointer; }
-            .policy-nav-list a:hover { background: rgba(0, 51, 102, 0.05); color: var(--primary); transform: translateX(3px); }
-            .policy-nav-list a.active { background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; box-shadow: 0 3px 8px rgba(0, 51, 102, 0.25); }
+            .policy-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+            .policy-menu-link { display: flex; align-items: center; gap: 10px; padding: 12px 15px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; font-size: 0.92rem; transition: all 0.2s; border: 1px solid transparent; white-space: nowrap; }
+            .policy-menu-link:hover { background: var(--bg-gray); color: var(--text-dark); }
+            .policy-menu-link.active { background: rgba(0, 51, 102, 0.05); color: var(--primary); border-color: rgba(0, 51, 102, 0.15); }
             
-            .policy-content { background: var(--bg-white); border-radius: var(--radius-md); padding: 25px 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); line-height: 1.7; color: var(--text-dark); font-size: 0.95rem; }
-            .policy-content h2 { font-size: 1.5rem; font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; padding-bottom: 8px; border-bottom: 2px dashed var(--border-color); }
-            .policy-content h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin: 20px 0 10px 0; }
-            .policy-content p { margin-bottom: 15px; color: #475569; }
-            .policy-content ul { padding-left: 0; list-style: none; margin-bottom: 20px; }
-            .policy-content ul li { position: relative; padding-left: 22px; margin-bottom: 8px; color: #475569; }
-            .policy-content ul li::before { content: '\\2713'; position: absolute; left: 0; top: 0px; color: var(--primary); font-weight: 900; font-family: sans-serif; font-size: 0.95rem; }
+            .policy-content { background: var(--bg-white); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); min-height: 400px; }
             
-            .policy-highlight { background: rgba(16, 185, 129, 0.08); padding: 15px; border-left: 4px solid #10b981; border-radius: 0 var(--radius-md) var(--radius-md) 0; margin: 20px 0; color: #065f46; font-weight: 500; font-size: 0.95rem; }
+            .policy-tab-content { display: none; }
+            .policy-tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
             
-            @media (max-width: 991px) {
+            .policy-tab-content h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+            .policy-tab-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin: 25px 0 12px 0; }
+            .policy-tab-content p { color: var(--text-gray); line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; }
+            .policy-tab-content ul { padding-left: 20px; color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+            .policy-tab-content li { margin-bottom: 8px; }
+            
+            .warranty-block { border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px 20px; margin-bottom: 20px; background: var(--bg-gray); }
+            .warranty-block h3 { margin-top: 0 !important; }
+            .note-block { background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.2); color: #1e3a8a; }
+            
+            @media (max-width: 768px) {
                 .policy-grid { grid-template-columns: 1fr; }
-                .policy-sidebar { position: static; margin-bottom: 20px; }
-            }
-            @media (max-width: 575px) {
-                .policy-content { padding: 20px 15px; }
-                .policy-hero { padding: 20px 10px; margin-bottom: 15px; }
+                .policy-sidebar { position: static; }
                 .policy-hero h1 { font-size: 1.5rem; }
             }
         </style>
         
         <div class="nava-policy-page">
-            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 15px; justify-content: center;">
+            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 20px;">
                 <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
                 <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
-                <span id="breadcrumb-current" style="color: var(--primary); font-weight: bold;">Chính sách bảo hành</span>
+                <span style="color: var(--primary); font-weight: bold;">Chính sách & Điều khoản</span>
             </div>
             
             <div class="policy-hero">
-                <h1 id="policy-title">Chính Sách Bảo Hành</h1>
-                <p id="policy-subtitle">Nava Store cam kết mang lại trải nghiệm dịch vụ hậu mãi tốt nhất</p>
+                <h1>Chính Sách & Điều Khoản</h1>
+                <p>Thông tin chi tiết về các chính sách bán hàng, bảo hành và bảo mật tại Nava Store</p>
             </div>
             
             <div class="policy-grid">
                 <!-- Sidebar -->
                 <div class="policy-sidebar">
                     <h3>Danh mục chính sách</h3>
-                    <ul class="policy-nav-list">
-                        <li><a onclick="switchPolicy('terms')" id="tab-terms"><i class="ph-bold ph-shield-check"></i> Điều khoản sử dụng</a></li>
-                        <li><a onclick="switchPolicy('warranty')" id="tab-warranty" class="active"><i class="ph-bold ph-wrench"></i> Chính sách bảo hành</a></li>
-                        <li><a onclick="switchPolicy('return')" id="tab-return"><i class="ph-bold ph-arrows-left-right"></i> Chính sách đổi trả</a></li>
-                        <li><a onclick="switchPolicy('privacy')" id="tab-privacy"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
-                        <li><a onclick="switchPolicy('shipping')" id="tab-shipping"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
+                    <ul class="policy-menu">
+                        <li><a href="#warranty" onclick="switchPolicyTab('warranty'); return false;" id="tab-btn-warranty" class="policy-menu-link active"><i class="ph-bold ph-shield-check"></i> Chính sách bảo hành</a></li>
+                        <li><a href="#shipping" onclick="switchPolicyTab('shipping'); return false;" id="tab-btn-shipping" class="policy-menu-link"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
+                        <li><a href="#return" onclick="switchPolicyTab('return'); return false;" id="tab-btn-return" class="policy-menu-link"><i class="ph-bold ph-arrow-counter-clockwise"></i> Chính sách hoàn trả</a></li>
+                        <li><a href="#privacy" onclick="switchPolicyTab('privacy'); return false;" id="tab-btn-privacy" class="policy-menu-link"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
+                        <li><a href="#terms" onclick="switchPolicyTab('terms'); return false;" id="tab-btn-terms" class="policy-menu-link"><i class="ph-bold ph-file-text"></i> Điều khoản dịch vụ</a></li>
                     </ul>
                 </div>
                 
-                <!-- Content -->
-                <div class="policy-content" id="policy-main-content">
-                    <!-- Default loaded (warranty) -->
+                <!-- Content Column with CTA -->
+                <div style="display: flex; flex-direction: column; gap: 25px;">
+                    <div class="policy-content" id="policy-main-content" style="margin-bottom: 0;">
+                        <!-- Tab 1: Warranty -->
+                        <div class="policy-tab-content active" id="policy-tab-warranty">
+                            <h2>Chính Sách Bảo Hành</h2>
+                            <p>Nava Store cam kết mang đến chính sách bảo hành tối ưu nhất cho quý khách hàng đối với tất cả các dòng sản phẩm Mini PC, eGPU và linh kiện công nghệ bán ra.</p>
+                            
+                            <div class="warranty-block warranty-eligible">
+                                <h3><i class="ph-fill ph-check-circle" style="color: #10b981;"></i> Điều Kiện Được Bảo Hành:</h3>
+                                <ul>
+                                    <li>Sản phẩm được bán ra bởi Nava Store và có tem bảo hành của Nava Store hoặc tem bảo hành từ nhà cung cấp/sản xuất (còn nguyên vẹn).</li>
+                                    <li>Sản phẩm trong thời hạn bảo hành hợp lệ, đầy đủ phụ kiện và bao bì theo yêu cầu.</li>
+                                    <li>Sản phẩm lỗi do kỹ thuật hoặc từ nhà sản xuất, được xác định bởi Nava Store hoặc nhà phân phối.</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="warranty-block warranty-ineligible">
+                                <h3><i class="ph-fill ph-warning-circle" style="color: #ef4444;"></i> Không Đủ Điều Kiện Bảo Hành:</h3>
+                                <ul>
+                                    <li>Sản phẩm hết hạn hoặc không đáp ứng điều kiện bảo hành.</li>
+                                    <li>Sản phẩm mất tem, mờ tem, cạo sửa, chắp vá.</li>
+                                    <li>Hư hại do va đập, cấn móp, cháy nổ, dính chất lỏng, hoặc lỗi do người dùng.</li>
+                                    <li>Sản phẩm có dấu hiệu tự ý tháo mở, sửa chữa.</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="warranty-block note-block">
+                                <h3><i class="ph-fill ph-info" style="color: #3b82f6;"></i> Lưu ý thêm:</h3>
+                                <p>- Nếu sản phẩm lỗi trong vòng 15 ngày đầu, quý khách sẽ được đổi sản phẩm mới cùng model.</p>
+                                <p>- Thời gian bảo hành thông thường là từ 7 đến 15 ngày làm việc tùy thuộc vào linh kiện lỗi cần xử lý.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tab 2: Shipping -->
+                        <div class="policy-tab-content" id="policy-tab-shipping">
+                            <h2>Chính Sách Vận Chuyển</h2>
+                            <p>Chúng tôi cung cấp dịch vụ giao hàng toàn quốc nhanh chóng và an toàn tuyệt đối với mọi đơn hàng.</p>
+                            
+                            <h3>1. Thời gian giao hàng dự kiến:</h3>
+                            <ul>
+                                <li><strong>Khu vực nội thành TP.HCM:</strong> Giao nhanh trong vòng 2-4 giờ (với tùy chọn Hoả Tốc) hoặc trong vòng 24 giờ.</li>
+                                <li><strong>Các tỉnh thành khác:</strong> Thời gian từ 2-4 ngày làm việc tuỳ thuộc địa chỉ của quý khách.</li>
+                            </ul>
+                            
+                            <h3>2. Phí vận chuyển:</h3>
+                            <ul>
+                                <li>Miễn phí vận chuyển Standard (Freeship) cho mọi đơn hàng Mini PC, eGPU trên toàn quốc.</li>
+                                <li>Phí giao hàng hoả tốc áp dụng mức phí cố định 39.000đ cho khu vực TP.HCM.</li>
+                            </ul>
+                            
+                            <h3>3. Đồng kiểm khi nhận hàng:</h3>
+                            <p>Quý khách hàng được quyền mở gói hàng đồng kiểm ngoại quan cùng với nhân viên giao nhận. Vui lòng quay video clip khui hộp để đảm bảo quyền lợi đổi trả tối đa khi xảy ra sự cố nứt vỡ, móp méo sản phẩm do vận chuyển.</p>
+                        </div>
+                        
+                        <!-- Tab 3: Return -->
+                        <div class="policy-tab-content" id="policy-tab-return">
+                            <h2>Chính Sách Hoàn Trả & Đổi Hàng</h2>
+                            <p>Chính sách bảo vệ khách hàng vượt trội tại Nava Store cho phép đổi trả hàng trong vòng 15 ngày.</p>
+                            
+                            <h3>1. Thời hạn đổi trả hàng:</h3>
+                            <p>Quý khách có thể yêu cầu đổi hàng hoặc hoàn trả tiền trong vòng tối đa 15 ngày kể từ ngày nhận hàng (xác nhận theo phiếu giao hàng hoặc hệ thống đơn vị vận chuyển).</p>
+                            
+                            <h3>2. Điều kiện đổi trả:</h3>
+                            <ul>
+                                <li>Sản phẩm lỗi kỹ thuật từ nhà sản xuất.</li>
+                                <li>Sản phẩm giao không đúng loại, không đúng model, thiếu phụ kiện so với đơn hàng đã đặt.</li>
+                                <li>Sản phẩm phải còn nguyên hộp, tem mác niêm phong ban đầu, không trầy xước cấn móp cọ xát và đầy đủ quà tặng đi kèm nếu có.</li>
+                            </ul>
+                            
+                            <h3>3. Chi phí vận chuyển đổi trả:</h3>
+                            <p>Nava Store sẽ chịu 100% chi phí vận chuyển phát sinh khi thực hiện đổi trả do lỗi kỹ thuật hoặc lỗi giao sai từ phía cửa hàng.</p>
+                        </div>
+                        
+                        <!-- Tab 4: Privacy -->
+                        <div class="policy-tab-content" id="policy-tab-privacy">
+                            <h2>Chính Sách Bảo Mật</h2>
+                            <p>Nava Store tôn trọng và cam kết bảo vệ thông tin riêng tư cá nhân của khách hàng khi truy cập và mua hàng tại hệ thống.</p>
+                            
+                            <h3>1. Thu thập thông tin:</h3>
+                            <p>Chúng tôi chỉ thu thập thông tin cơ bản liên quan đến giao dịch đặt hàng gồm: Họ tên, Số điện thoại, Email và Địa chỉ giao nhận hàng.</p>
+                            
+                            <h3>2. Mục đích sử dụng:</h3>
+                            <p>Thông tin thu thập chỉ được dùng để xác nhận đơn hàng, xử lý giao hàng, cung cấp dịch vụ bảo hành sửa chữa, và gửi thông báo chương trình khuyến mãi nếu được sự đồng ý của khách hàng.</p>
+                            
+                            <h3>3. Cam kết bảo mật:</h3>
+                            <p>Thông tin của khách hàng được mã hoá và lưu trữ trên hệ thống an toàn. Chúng tôi tuyệt đối không bán, chia sẻ hay tiết lộ thông tin khách hàng cho bên thứ ba ngoại trừ đơn vị vận chuyển trung gian phục vụ giao nhận đơn hàng.</p>
+                        </div>
+                        
+                        <!-- Tab 5: Terms -->
+                        <div class="policy-tab-content" id="policy-tab-terms">
+                            <h2>Điều Khoản Dịch Vụ</h2>
+                            <p>Chào mừng bạn đến với trang web demo của Nava Store. Bằng cách truy cập và sử dụng dịch vụ tại đây, bạn đồng ý với các điều khoản dưới đây:</p>
+                            
+                            <h3>1. Bản quyền nội dung:</h3>
+                            <p>Mọi hình ảnh, văn bản, thông số kỹ thuật sản phẩm và thiết kế giao diện trên website thuộc sở hữu độc quyền của Nava Store. Nghiêm cấm mọi hành vi sao chép trái phép.</p>
+                            
+                            <h3>2. Giá cả & Mô tả sản phẩm:</h3>
+                            <p>Nava Store luôn cố gắng cung cấp thông tin giá cả chính xác nhất. Tuy nhiên, nếu có sai sót kỹ thuật hiển thị sai giá trị thực tế, chúng tôi có quyền từ chối hoặc hủy đơn hàng đó sau khi liên hệ giải thích với quý khách.</p>
+                            
+                            <h3>3. Trách nhiệm người dùng:</h3>
+                            <p>Người dùng cam kết cung cấp thông tin liên hệ chính xác, trung thực khi thực hiện đặt mua hàng để đảm bảo quyền lợi vận chuyển và dịch vụ hậu mãi chăm sóc khách hàng tốt nhất.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 5px;">
+                        <a href="demo_collection.html" class="btn-nava btn-primary-nava" style="display: inline-flex; width: auto; padding: 14px 35px; text-decoration: none; border-radius: var(--radius-md); font-weight: 700; color: white; background: linear-gradient(90deg, var(--primary), var(--primary-light)); align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);">
+                            <i class="ph-bold ph-shopping-bag"></i> Tiếp tục mua sắm
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-
+        
         <script>
-            const policyData = {
-                terms: {
-                    title: "Điều khoản sử dụng",
-                    subtitle: "Quy định khi tham gia trải nghiệm và giao dịch tại hệ thống Nava Store",
-                    html: `
-                        <h2>Điều khoản dịch vụ chung</h2>
-                        <p>Chào mừng quý khách đến với Nava Store. Khi truy cập và sử dụng website của chúng tôi, quý khách đồng ý tuân thủ các điều khoản sau đây. Vui lòng đọc kỹ trước khi thực hiện giao dịch:</p>
-                        
-                        <h3>1. Phạm vi áp dụng</h3>
-                        <p>Điều khoản này áp dụng cho toàn bộ các giao dịch mua sắm trực tuyến, giao dịch tại cửa hàng, cũng như các hoạt động tham khảo thông tin, tư vấn kỹ thuật trên các nền tảng chính thức của Nava Store.</p>
-                        
-                        <h3>2. Quyền và nghĩa vụ của khách hàng</h3>
-                        <ul>
-                            <li>Cung cấp thông tin chính xác, trung thực khi đặt hàng (Họ tên, Số điện thoại, Địa chỉ giao hàng).</li>
-                            <li>Tự bảo mật thông tin tài khoản mua hàng cá nhân để tránh phát sinh giao dịch ngoài ý muốn.</li>
-                            <li>Được quyền kiểm tra hình thức ngoại quan sản phẩm trước khi thanh toán (Chế độ đồng kiểm với bưu tá).</li>
-                        </ul>
-                        
-                        <h3>3. Bản quyền & Sở hữu trí tuệ</h3>
-                        <p>Tất cả nội dung bao gồm hình ảnh thiết kế, logo thương hiệu Nava Store, các bài viết giới thiệu đặc điểm nổi bật và đánh giá sản phẩm đều thuộc sở hữu của Nava Store. Nghiêm cấm sao chép dưới mọi hình thức thương mại khi chưa được sự đồng ý bằng văn bản của chúng tôi.</p>
-                        
-                        <p style="margin-top: 40px; text-align: center; font-style: italic; color: var(--text-gray);">
-                            Cảm ơn quý khách đã tin tưởng và đồng hành cùng Nava Store!
-                        </p>
-                    `
-                },
-                warranty: {
-                    title: "Chính sách bảo hành",
-                    subtitle: "Hỗ trợ kỹ thuật tối đa, bảo hành dài hạn từ Nava Store và nhà sản xuất",
-                    html: `
-                        <h2>Quy định bảo hành tại Nava Store</h2>
-                        <p style="color: #ef4444; font-weight: bold; padding: 8px 12px; background: #fef2f2; border-radius: 6px;">
-                            Lưu ý quan trọng: Nava Store không bảo hành dữ liệu cho khách hàng dưới mọi hình thức. Quý khách vui lòng sao lưu dữ liệu cá nhân trước khi thực hiện bảo hành.
-                        </p>
-                        
-                        <h3>1. Thời hạn bảo hành theo nhóm sản phẩm</h3>
-                        <ul>
-                            <li><strong>Đối với dòng máy Mini PC:</strong>
-                                <ul>
-                                    <li><strong>Minisforum:</strong> Bảo hành 2 năm từ nhà sản xuất, miễn phí gửi bảo hành trong 1 năm đầu.</li>
-                                    <li><strong>Beelink, Aoostar, GMKtec, Morefine, FEVM:</strong> Bảo hành 12 tháng từ nhà sản xuất, miễn phí gửi bảo hành trong 6 tháng đầu.</li>
-                                    <li><strong>Firebat, Trycoo:</strong> Bảo hành 6 tháng từ nhà sản xuất.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Đối với RAM (Samsung, Hynix):</strong> Bảo hành 3 năm từ nhà sản xuất.</li>
-                            <li><strong>Đối với ổ cứng SSD:</strong>
-                                <ul>
-                                    <li><strong>Samsung, Lexar, Predator:</strong> Bảo hành 3 năm từ nhà sản xuất.</li>
-                                    <li><strong>Hynix:</strong> Bảo hành 1 năm từ nhà sản xuất.</li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <h3>2. Điều kiện bảo hành hợp lệ</h3>
-                        <ul>
-                            <li>Sản phẩm được bán ra bởi Nava Store, có tem bảo hành của Nava Store hoặc tem bảo hành của nhà phân phối/sản xuất còn nguyên vẹn. Tem không rách, bong tróc hoặc bị tẩy xóa thông tin.</li>
-                            <li>Sản phẩm bị lỗi kỹ thuật (phần cứng) do nhà sản xuất.</li>
-                            <li>Sản phẩm còn trong thời hạn bảo hành được ghi nhận trên hệ thống hoặc tem bảo hành.</li>
-                        </ul>
-
-                        <h3>3. Các trường hợp từ chối bảo hành</h3>
-                        <ul>
-                            <li>Sản phẩm đã hết thời hạn bảo hành.</li>
-                            <li>Tem bảo hành bị rách, chắp vá, mất tem hoặc thông tin sê-ri (S/N) bị cạo sửa.</li>
-                            <li>Sản phẩm bị biến dạng do tác động ngoại lực (rơi vỡ, móp méo, trầy xước nặng), cháy nổ linh kiện do dùng sai nguồn điện, vào nước hoặc ẩm ướt do môi trường sử dụng.</li>
-                            <li>Khách hàng tự ý tháo mở máy, sửa chữa hoặc nâng cấp thay đổi kết cấu mà không có sự đồng ý của kỹ thuật viên Nava Store.</li>
-                        </ul>
-
-                        <h3>4. Địa chỉ tiếp nhận bảo hành</h3>
-                        <p><strong>Nava Store - Trung tâm dịch vụ kỹ thuật:</strong></p>
-                        <ul>
-                            <li><strong>Địa chỉ:</strong> 160/15 Linh Trung, Phường Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh.</li>
-                            <li><strong>Hotline:</strong> 0972 178 527 - Mr Ngọc Thọ.</li>
-                            <li><strong>Thời gian tiếp nhận:</strong> Thứ 2 - Thứ 7 (9:00 AM - 5:00 PM).</li>
-                        </ul>
-                    `
-                },
-                return: {
-                    title: "Chính sách đổi trả",
-                    subtitle: "Hỗ trợ đổi mới nhanh chóng đối với sản phẩm phát sinh lỗi trong tuần đầu tiên",
-                    html: `
-                        <h2>Chính sách đổi trả & hoàn tiền</h2>
-                        <p>Nava Store luôn đặt lợi ích của khách hàng lên hàng đầu. Nhằm mang lại trải nghiệm mua sắm an tâm nhất, chúng tôi áp dụng chính sách đổi mới 1-đổi-1 như sau:</p>
-                        
-                        <h3>1. Điều kiện đổi mới (Chỉ trong 7 ngày đầu)</h3>
-                        <ul>
-                            <li>Sản phẩm phát sinh lỗi phần cứng do nhà sản xuất (được kỹ thuật viên kiểm tra và xác nhận).</li>
-                            <li>Ngoại quan sản phẩm còn mới 100%, không bị trầy xước, cấn móp hay biến dạng so với ban đầu.</li>
-                            <li>Hộp sản phẩm còn nguyên vẹn, đầy đủ phụ kiện đi kèm (sách hướng dẫn, adapter nguồn, ốc vít gắn ổ cứng, dây HDMI,...).</li>
-                        </ul>
-                        
-                        <h3>2. Quy trình thực hiện đổi trả</h3>
-                        <ul>
-                            <li><strong>Bước 1:</strong> Khách hàng liên hệ với Nava Store qua Hotline hoặc Zalo OA để cung cấp thông tin mô tả lỗi sản phẩm.</li>
-                            <li><strong>Bước 2:</strong> Gửi sản phẩm đến trung tâm để kỹ thuật viên kiểm tra (Nội thành có thể đến trực tiếp cửa hàng).</li>
-                            <li><strong>Bước 3:</strong> Sau khi xác nhận lỗi, Nava Store sẽ gửi đổi sản phẩm mới tương tự cho khách hàng hoàn toàn miễn phí vận chuyển.</li>
-                        </ul>
-                        
-                        <h3>3. Phương án hoàn tiền</h3>
-                        <p>Trong trường hợp sản phẩm lỗi không còn hàng để đổi mới, khách hàng có quyền lựa chọn nâng cấp lên model khác (bù chênh lệch) hoặc Nava Store sẽ thực hiện hoàn tiền 100% giá trị sản phẩm qua tài khoản ngân hàng trong vòng 24-48 giờ làm việc.</p>
-                    `
-                },
-                privacy: {
-                    title: "Chính sách bảo mật",
-                    subtitle: "Bảo vệ thông tin cá nhân khách hàng an toàn tuyệt đối là nghĩa vụ của Nava Store",
-                    html: `
-                        <h2>Bảo vệ thông tin khách hàng</h2>
-                        <p>Nava Store hiểu rằng bảo mật thông tin cá nhân là vô cùng quan trọng đối với sự tin cậy của khách hàng. Chúng tôi cam kết sử dụng thông tin của bạn một cách minh bạch và an toàn nhất:</p>
-                        
-                        <h3>1. Thông tin thu thập</h3>
-                        <p>Chúng tôi chỉ thu thập các thông tin cơ bản phục vụ cho việc mua hàng và kích hoạt bảo hành, bao gồm: Họ tên, Số điện thoại liên hệ, Địa chỉ giao hàng và Email (nếu có).</p>
-                        
-                        <h3>2. Mục đích sử dụng</h3>
-                        <ul>
-                            <li>Xử lý và vận chuyển đơn hàng chính xác đến địa chỉ của bạn.</li>
-                            <li>Kích hoạt bảo hành điện tử và hỗ trợ xử lý kỹ thuật sau mua hàng.</li>
-                            <li>Gửi thông báo ưu đãi đặc biệt dành riêng cho khách hàng cũ (nếu khách hàng đồng ý nhận).</li>
-                        </ul>
-                        
-                        <h3>3. Cam kết bảo mật</h3>
-                        <p>Chúng tôi tuyệt đối không bán, chia sẻ hay cung cấp thông tin cá nhân của khách hàng cho bất kỳ bên thứ ba nào khác ngoài đơn vị vận chuyển (GHTK, Viettel Post) để giao nhận hàng hóa. Toàn bộ cơ sở dữ liệu được mã hóa an toàn trên hệ thống máy chủ của Nava Store.</p>
-                    `
-                },
-                shipping: {
-                    title: "Chính sách vận chuyển",
-                    subtitle: "Giao hàng tận nơi toàn quốc, hỗ trợ kiểm tra hàng trước khi thanh toán",
-                    html: `
-                        <h2>Phương thức vận chuyển & Giao nhận</h2>
-                        <p>Nava Store hợp tác với các đơn vị vận chuyển hàng đầu Việt Nam để mang sản phẩm đến tay khách hàng nhanh nhất, an toàn nhất.</p>
-                        
-                        <h3>1. Thời gian giao nhận</h3>
-                        <ul>
-                            <li><strong>Khu vực TP. Hồ Chí Minh:</strong> Giao hàng hỏa tốc trong 1 - 2 giờ qua Grab/AhaMove hoặc giao nhanh trong vòng 24 giờ.</li>
-                            <li><strong>Khu vực các tỉnh thành khác:</strong> Giao hàng từ 2 - 4 ngày làm việc thông qua đơn vị chuyển phát nhanh chuyên nghiệp.</li>
-                        </ul>
-                        
-                        <h3>2. Chi phí vận chuyển</h3>
-                        <ul>
-                            <li><strong>Miễn phí vận chuyển toàn quốc:</strong> Áp dụng cho các đơn hàng mua trọn bộ Mini PC hoặc đơn hàng có giá trị từ 5.000.000₫ trở lên.</li>
-                            <li><strong>Đồng giá phí ship:</strong> 30.000₫ đối với các đơn hàng linh kiện phụ kiện dưới 5.000.000₫.</li>
-                        </ul>
-                        
-                        <h3>3. Quyền đồng kiểm khi nhận hàng</h3>
-                        <p>Tất cả sản phẩm công nghệ giá trị cao gửi từ Nava Store đều được dán tem niêm phong và đóng gói kỹ càng. Khi nhận hàng, quý khách được quyền mở hộp kiểm tra ngoại quan máy (đúng dòng máy, không móp méo, đầy đủ phụ kiện) trước khi ký nhận và thanh toán tiền cho bưu tá.</p>
-                    `
-                }
-            };
-
-            function switchPolicy(policyKey) {
-                const data = policyData[policyKey];
-                if (!data) return;
-
-                // Update contents
-                document.getElementById('policy-title').innerText = data.title;
-                document.getElementById('policy-subtitle').innerText = data.subtitle;
-                document.getElementById('policy-main-content').innerHTML = data.html;
-                document.getElementById('breadcrumb-current').innerText = data.title;
-
-                // Update active class in sidebar
-                document.querySelectorAll('.policy-nav-list a').forEach(el => el.classList.remove('active'));
-                const activeTab = document.getElementById('tab-' + policyKey);
-                if (activeTab) activeTab.classList.add('active');
-
-                // Update url hash nicely without scrolling
-                history.pushState(null, null, '#' + policyKey);
+            function switchPolicyTab(tabId) {
+                // Hide all tab contents
+                document.querySelectorAll('.policy-tab-content').forEach(el => el.classList.remove('active'));
+                // Remove active class from all links
+                document.querySelectorAll('.policy-menu-link').forEach(el => el.classList.remove('active'));
+                
+                // Show current tab & set active link
+                const targetTab = document.getElementById('policy-tab-' + tabId);
+                const targetLink = document.getElementById('tab-btn-' + tabId);
+                if (targetTab) targetTab.classList.add('active');
+                if (targetLink) targetLink.classList.add('active');
+                
+                // Update URL hash
+                window.location.hash = tabId;
             }
-
-            // Read hash on load
+            
+            // Check hash on load
             window.addEventListener('DOMContentLoaded', () => {
                 const hash = window.location.hash.replace('#', '');
-                if (hash && policyData[hash]) {
-                    switchPolicy(hash);
-                } else {
-                    switchPolicy('warranty'); // Default tab
-                }
-            });
-
-            // Listen to popstate for back navigation support
-            window.addEventListener('popstate', () => {
-                const hash = window.location.hash.replace('#', '');
-                if (hash && policyData[hash]) {
-                    switchPolicy(hash);
-                } else {
-                    switchPolicy('warranty');
+                if (hash && ['warranty', 'shipping', 'return', 'privacy', 'terms'].includes(hash)) {
+                    switchPolicyTab(hash);
                 }
             });
         </script>
     """
-    
     full_html = clean_liquid_tags(header_part + policy_html + local_footer_part)
     full_html = inject_seo_metadata(
         full_html,
-        title="Chính Sách - Nava Store",
-        description="Chính sách bán hàng, bảo hành, đổi trả và vận chuyển tại Nava Store.",
-        keywords="chinh sach, nava store"
+        title="Chính Sách & Điều Khoản - Nava Store",
+        description="Thông tin chi tiết về các chính sách bán hàng, bảo hành, hoàn tiền và bảo mật tại Nava Store.",
+        keywords="chinh sach bao hanh, chinh sach van chuyen, dieu khoan dich vu, nava store"
     )
     with open(os.path.join(base_dir, "demo_policy.html"), "w", encoding="utf-8") as f:
         f.write(full_html)

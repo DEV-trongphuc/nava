@@ -58,10 +58,50 @@
         .btn-pay { display: block; width: 100%; padding: 18px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.15rem; border: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.25); margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
         .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.35); }
         
+        /* Mobile Sticky Bottom Bar styles */
+        .mobile-sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 20px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 9999;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+        }
+        .mobile-sticky-bar .sticky-price-label {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            margin-bottom: 2px;
+        }
+        .mobile-sticky-bar .sticky-price-val {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+        .mobile-sticky-bar .btn-sticky-pay {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2);
+        }
+        
         @media (max-width: 991px) {
             .checkout-grid { grid-template-columns: 1fr; }
             .order-summary { position: static; order: -1; margin-bottom: 30px; }
             .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .mobile-sticky-bar { display: flex; }
+            body { padding-bottom: 90px !important; }
         }
         
     </style>
@@ -90,20 +130,24 @@
                         </select>
                     </div>
                     
+                    <!-- NATURAL ORDER FOR FIELDS: Full Name -> Phone -> Email -> Address -->
                     <div class="input-group">
-                        <input type="email" class="nava-input" placeholder="Email" value="turniodev@gmail.com">
+                        <label>Họ và tên</label>
+                        <input type="text" class="nava-input" id="checkout-fullname" placeholder="Nhập họ và tên" value="Turnio Dev" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" class="nava-input" id="checkout-phone" placeholder="Nhập số điện thoại" value="0972178527" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email (tùy chọn)</label>
+                        <input type="email" class="nava-input" id="checkout-email" placeholder="Nhập địa chỉ Email" value="turniodev@gmail.com">
                     </div>
                     
-                    <div class="grid-2">
-                        <div class="input-group">
-                            <input type="text" class="nava-input" placeholder="Họ và tên" value="Turnio Dev">
-                        </div>
-                        <div class="input-group">
-                            <input type="tel" class="nava-input" placeholder="Số điện thoại" value="0972178527">
-                        </div>
-                    </div>
-                    
                     <div class="input-group">
+                        <label>Địa chỉ nhận hàng</label>
                         <div id="address-trigger" onclick="openAddressModal()" class="nava-input" style="cursor: pointer; display: flex; align-items: center; gap: 10px; background: var(--bg-white); min-height: 52px; user-select: none;">
                             <i class="ph-bold ph-map-pin" style="color: var(--primary); font-size: 1.1rem; flex-shrink: 0;"></i>
                             <span id="address-display" style="flex: 1; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">Thành phố Thủ Đức, TP Hồ Chí Minh</span>
@@ -113,81 +157,115 @@
                         <input type="hidden" id="ward-select" value="1">
                     </div>
                     
-                    
-                    
                     <div class="input-group" style="margin-bottom: 0;">
-                        <textarea class="nava-input" rows="3" placeholder="Ghi chú (tùy chọn)"></textarea>
+                        <label>Ghi chú đơn hàng (tùy chọn)</label>
+                        <textarea class="nava-input" rows="3" placeholder="Nhập ghi chú hoặc yêu cầu giao hàng..."></textarea>
                     </div>
                 </div>
                 <!-- Payment Methods -->
                 <div class="checkout-card">
                     <h2 class="section-title" style="font-size: 1.2rem; margin-bottom: 20px;"><i class="ph-fill ph-credit-card"></i> Thanh toán</h2>
                             
-                            <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="bank" checked>
-                                        <div>
-                                            <span class="radio-label">Chuyển khoản qua ngân hàng</span>
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-white); overflow: hidden;">
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="bank" checked>
+                                <div>
+                                    <span class="radio-label">Chuyển khoản qua ngân hàng (ACB Auto-banking)</span>
+                                </div>
+                                <i class="ph-fill ph-bank" style="font-size: 1.5rem; color: var(--primary); margin-left: auto;"></i>
+                            </label>
+                            <div class="payment-details" id="bank-details" style="display: block; padding: 0 15px 15px 15px; margin: 0;">
+                                <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: left; margin-top: 5px;">
+                                    <p style="font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; text-align: center; font-size: 1.05rem;"><i class="ph-bold ph-info"></i> THÔNG TIN CHUYỂN KHOẢN</p>
+                                    
+                                    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Ngân hàng</span>
+                                            <span style="font-weight: 700; color: var(--text-dark); font-size: 0.95rem;">TMCP Á Châu (ACB)</span>
                                         </div>
-                                        <i class="ph-fill ph-bank" style="font-size: 1.5rem; color: var(--primary); margin-left: auto;"></i>
-                                    </label>
-                                    <div class="payment-details" id="bank-details" style="display: block; padding: 0 15px 15px 15px; margin: 0;">
-                                        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; text-align: center; margin-top: 5px;">
-                                            <p style="font-weight: 700; color: var(--text-dark); margin: 0 0 5px 0;">Ngân hàng TMCP Á Châu (ACB)</p>
-                                            <p style="font-size: 0.9rem; color: var(--text-gray); margin: 0 0 5px 0;">CÔNG TY TNHH NAVATEK</p>
-                                            <p style="font-size: 1.2rem; font-weight: 900; color: var(--primary); margin: 0 0 15px 0; letter-spacing: 1px;">123434688</p>
-                                            <img src="https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=180019000&des=DH%20Nava" alt="QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto;">
-                                            <p style="font-size: 0.8rem; color: var(--text-gray); margin: 15px 0 0 0;">Mở ứng dụng ngân hàng để quét mã QR</p>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Chủ tài khoản</span>
+                                            <span style="font-weight: 700; color: var(--text-dark); font-size: 0.95rem;">CÔNG TY TNHH NAVATEK</span>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Số tài khoản</span>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span id="bank-acc-no" style="font-weight: 800; color: var(--primary); font-size: 1.1rem; letter-spacing: 0.5px;">123434688</span>
+                                                <button type="button" onclick="copyToClipboard('bank-acc-no', this)" style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--text-dark); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)';">
+                                                    <i class="ph-bold ph-copy"></i> Copy
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Số tiền</span>
+                                            <span id="bank-amount" style="font-weight: 800; color: var(--text-dark); font-size: 1rem;">35.323.200đ</span>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                            <span style="color: var(--text-gray); font-size: 0.9rem;">Nội dung CK</span>
+                                            <div style="display: flex; align-items: center; gap: 8px;">
+                                                <span id="bank-ck-content" style="font-weight: 800; color: var(--primary); font-size: 1.05rem; letter-spacing: 0.5px;">DH NAVA 8527</span>
+                                                <button type="button" onclick="copyToClipboard('bank-ck-content', this)" style="background: var(--bg-white); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 10px; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; font-weight: 700; color: var(--text-dark); transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)';">
+                                                    <i class="ph-bold ph-copy"></i> Copy
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="momo">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua MoMo</span>
-                                        </div>
-                                        <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="vnpay">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua VNPAY</span>
-                                        </div>
-                                        <img src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418189687.png" alt="VNPAY" style="max-height: 20px; margin-left: auto;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="zalopay">
-                                        <div>
-                                            <span class="radio-label">Thanh toán qua ZaloPay</span>
-                                        </div>
-                                        <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png" alt="ZaloPay" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
-                                    </label>
-                                </div>
-            
-                                <div class="payment-method-wrapper" style="margin: 0;">
-                                    <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
-                                        <input type="radio" name="payment" value="cod">
-                                        <div>
-                                            <span class="radio-label">Thu hộ (COD)</span>
-                                        </div>
-                                        <i class="ph-fill ph-money" style="font-size: 1.5rem; color: #10b981; margin-left: auto;"></i>
-                                    </label>
-                                    <div class="payment-details" id="cod-details" style="display: none; padding: 0 15px 15px 15px; margin: 0;">
-                                        <p style="font-size: 0.9rem; color: var(--text-gray); background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin: 5px 0 0 0;">Khách hàng thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận được sản phẩm.</p>
-                                    </div>
+                                    
+                                    <img id="checkout-qr-img" src="https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=35323200&des=DH%%20NAVA%%208527" alt="QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--border-color); display: block; margin: 0 auto; background: white; padding: 5px;">
+                                    <p style="font-size: 0.8rem; color: var(--text-gray); margin: 15px 0 0 0; text-align: center;"><i class="ph-bold ph-qr-code"></i> Quét mã QR bằng ứng dụng ngân hàng để tự duyệt đơn tự động</p>
                                 </div>
                             </div>
                         </div>
-
+                        
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="momo">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua MoMo</span>
+                                </div>
+                                <img src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png" alt="MoMo" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="vnpay">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua VNPAY</span>
+                                </div>
+                                <img src="https://vnpay.vn/s1/statics.vnpay.vn/2023/9/06ncktiwd6dc1694418189687.png" alt="VNPAY" style="max-height: 20px; margin-left: auto;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0; border-bottom: 1px solid var(--border-color);">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="zalopay">
+                                <div>
+                                    <span class="radio-label">Thanh toán qua ZaloPay</span>
+                                </div>
+                                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-ZaloPay-Square.png" alt="ZaloPay" style="max-height: 24px; margin-left: auto; border-radius: 4px;">
+                            </label>
+                        </div>
+    
+                        <div class="payment-method-wrapper" style="margin: 0;">
+                            <label class="radio-option" style="border: none; border-radius: 0; margin: 0; background: transparent; padding: 15px;">
+                                <input type="radio" name="payment" value="cod">
+                                <div>
+                                    <span class="radio-label">Thu hộ (COD)</span>
+                                </div>
+                                <i class="ph-fill ph-money" style="font-size: 1.5rem; color: #10b981; margin-left: auto;"></i>
+                            </label>
+                            <div class="payment-details" id="cod-details" style="display: none; padding: 0 15px 15px 15px; margin: 0;">
+                                <p style="font-size: 0.9rem; color: var(--text-gray); background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin: 5px 0 0 0;">Khách hàng thanh toán bằng tiền mặt cho nhân viên giao hàng khi nhận được sản phẩm.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="checkout-footer-links" style="display: flex; gap: 20px; font-size: 0.85rem; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 40px; flex-wrap: wrap;">
                     <a href="demo_policy.html#return" style="color: var(--primary); text-decoration: none; font-weight: 500;">Chính sách hoàn trả</a>
@@ -213,7 +291,7 @@
                             <input type="radio" name="shipping" value="hoatoc" checked>
                             <div style="flex: 1; display: flex; justify-content: space-between; align-items: center;">
                                 <span class="radio-label" style="font-weight: 500;">Hoả Tốc (HCM)</span>
-                                <span style="font-weight: 700;">39.000₫</span>
+                                <span style="font-weight: 700;">39.000đ</span>
                             </div>
                         </label>
                     </div>
@@ -224,7 +302,7 @@
                     
                     <div class="order-items-list">
                         <!-- Item 1 -->
-                        <div class="order-item">
+                        <div class="order-item" id="checkout-item-1">
                             <div class="item-img-wrap">
                                 <span class="item-badge">1</span>
                                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="ASUS NUC 14" class="item-img">
@@ -233,11 +311,11 @@
                                 <h4 class="item-title">ASUS NUC 14 Essential</h4>
                                 <span class="item-var">Core i3 / 8GB / 256GB</span>
                             </div>
-                            <div class="item-price">4.490.000₫</div>
+                            <div class="item-price">4.490.000đ</div>
                         </div>
                         
                         <!-- Item 2 -->
-                        <div class="order-item">
+                        <div class="order-item" id="checkout-item-2">
                             <div class="item-img-wrap">
                                 <span class="item-badge">1</span>
                                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="GMK EVO X1" class="item-img">
@@ -246,38 +324,53 @@
                                 <h4 class="item-title">GMK EVO X1 32G</h4>
                                 <span class="item-var">Ryzen AI 9 HX370 / 32GB / 1TB</span>
                             </div>
-                            <div class="item-price">31.190.000₫</div>
+                            <div class="item-price">31.190.000đ</div>
                         </div>
                     </div>
                     
-                    <div class="summary-details" style="margin-top: 60px;">
+                    <div class="summary-details" style="margin-top: 30px;">
                         <div class="summary-line">
                             <span>Tạm tính</span>
-                            <span style="color: var(--text-dark); font-weight: 600;">35.680.000₫</span>
+                            <span style="color: var(--text-dark); font-weight: 600;">35.680.000đ</span>
                         </div>
                         <div class="summary-line">
                             <span>Phí vận chuyển</span>
                             <span id="summary-shipping-fee" style="color: #10b981; font-weight: 600;">Miễn phí</span>
                         </div>
-                        <div class="summary-line">
+                        <div class="summary-line" id="checkout-discount-row">
                             <span>Giảm giá</span>
-                            <span style="color: var(--text-dark); font-weight: 600;">0₫</span>
+                            <span id="checkout-discount-val" style="color: var(--text-dark); font-weight: 600;">0đ</span>
                         </div>
                     </div>
                     
                     <div class="summary-total">
                         <div class="summary-total-label">Tổng thanh toán</div>
-                        <div class="summary-total-val" id="summary-total">35.680.000₫</div>
+                        <div class="summary-total-val" id="summary-total">35.680.000đ</div>
                     </div>
                     
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 60px;">
+                    <!-- 15-DAY RETURN ASSURANCE BANNER -->
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; padding: 12px; background: rgba(16, 185, 129, 0.08); border-radius: 8px; color: #065f46; font-weight: 700; font-size: 0.88rem; border: 1px solid rgba(16, 185, 129, 0.2);">
+                        <i class="ph-fill ph-arrow-counter-clockwise" style="font-size: 1.1rem;"></i>
+                        <span>Đổi trả hàng trong vòng 15 ngày</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
-                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đây là bản Demo Checkout App UI - Đặt hàng thành công!')">ĐẶT HÀNG</button>
+                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đặt hàng thành công!')">ĐẶT HÀNG</button>
                     </div>
                 </div>
             </div>
             
         </div>
+    </div>
+
+    <!-- Mobile Sticky Bottom Bar -->
+    <div class="mobile-sticky-bar">
+        <div>
+            <div class="sticky-price-label">Tổng thanh toán</div>
+            <div class="sticky-price-val" id="sticky-total-price">35.323.200đ</div>
+        </div>
+        <button class="btn-sticky-pay" onclick="alert('Đặt hàng thành công!')">THANH TOÁN</button>
     </div>
 
     <!-- Address Modal -->
@@ -300,6 +393,29 @@
     </div>
 
     <script>
+        // Copy to clipboard function with premium feedback
+        function copyToClipboard(elementId, btn) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            let text = el.innerText || el.textContent;
+            if (elementId === 'bank-amount') {
+                text = text.replace(/[^0-9]/g, '');
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="ph-bold ph-check" style="color: #10b981;"></i> Đã copy';
+                btn.style.borderColor = '#10b981';
+                btn.style.color = '#10b981';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.borderColor = '';
+                    btn.style.color = '';
+                }, 1500);
+            }).catch(err => {
+                console.error('Lỗi sao chép: ', err);
+            });
+        }
+
         // --- Address Modal Logic (Global) ---
         let cityData = { cities: [], wards: [] };
         let addressStep = 1; 
@@ -330,7 +446,6 @@
             if(modal) {
                 console.log("Setting modal display to flex");
                 modal.style.display = 'flex';
-                // Force positioning to override any possible bugs
                 modal.style.position = 'fixed';
                 modal.style.top = '0';
                 modal.style.left = '0';
@@ -360,13 +475,11 @@
         }
 
         function triggerShippingUpdate() {
-            // Trigger a custom event or just let DOMContentLoaded attach it globally
             if(window.updateShippingStateGlobal) {
                 window.updateShippingStateGlobal();
             }
         }
 
-        
         function confirmAddress() {
             const street = document.getElementById('street-input').value;
             if(!street) { alert('Vui lòng nhập số nhà & đường'); return; }
@@ -453,6 +566,46 @@
             const paymentRadios = document.querySelectorAll('input[name="payment"]');
             const shippingRadios = document.querySelectorAll('input[name="shipping"]');
             
+            // Recalculation logic using dynamic discount and quantities from localStorage
+            const qty1 = localStorage.getItem('nava_qty_item1') !== null ? parseInt(localStorage.getItem('nava_qty_item1')) : 1;
+            const qty2 = localStorage.getItem('nava_qty_item2') !== null ? parseInt(localStorage.getItem('nava_qty_item2')) : 1;
+            
+            // Update Item 1 UI
+            const orderItem1 = document.getElementById('checkout-item-1');
+            if (orderItem1) {
+                if (qty1 > 0) {
+                    orderItem1.querySelector('.item-badge').textContent = qty1;
+                    orderItem1.querySelector('.item-price').textContent = (qty1 * 4490000).toLocaleString('vi-VN') + 'đ';
+                    orderItem1.style.display = 'flex';
+                } else {
+                    orderItem1.style.display = 'none';
+                }
+            }
+            
+            // Update Item 2 UI
+            const orderItem2 = document.getElementById('checkout-item-2');
+            if (orderItem2) {
+                if (qty2 > 0) {
+                    orderItem2.querySelector('.item-badge').textContent = qty2;
+                    orderItem2.querySelector('.item-price').textContent = (qty2 * 31190000).toLocaleString('vi-VN') + 'đ';
+                    orderItem2.style.display = 'flex';
+                } else {
+                    orderItem2.style.display = 'none';
+                }
+            }
+            
+            const subtotal = (qty1 * 4490000) + (qty2 * 31190000);
+            
+            // Update Tạm tính in summary details
+            const summarySubtotalEl = document.querySelector('.summary-details .summary-line:first-child span:last-child');
+            if (summarySubtotalEl) {
+                summarySubtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
+            }
+            
+            let discountPercent = parseFloat(localStorage.getItem('nava_discount_percent')) || 1;
+            let discountVal = Math.round(subtotal * (discountPercent / 100));
+            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVA1';
+            
             function updatePaymentState() {
                 paymentRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));
                 document.querySelectorAll('.payment-details').forEach(el => el.style.display = 'none');
@@ -482,25 +635,77 @@
                 
                 const shippingFeeEl = document.getElementById('summary-shipping-fee');
                 const totalEl = document.getElementById('summary-total');
+                const stickyTotalEl = document.getElementById('sticky-total-price');
+                const discountValEl = document.getElementById('checkout-discount-val');
+                const discountRowEl = document.getElementById('checkout-discount-row');
+                
+                // Update discount display
+                if (discountValEl) {
+                    if (discountVal > 0) {
+                        discountValEl.textContent = '-' + discountVal.toLocaleString('vi-VN') + 'đ';
+                        discountValEl.style.color = 'var(--primary)';
+                        discountValEl.style.fontWeight = '700';
+                        if (discountRowEl) {
+                            discountRowEl.querySelector('span:first-child').innerHTML = `Giảm giá <span style="background:var(--primary);color:white;font-size:0.75rem;font-weight:800;padding:2px 6px;border-radius:3px;margin-left:5px;">${discountCode}</span>`;
+                        }
+                    } else {
+                        discountValEl.textContent = '0đ';
+                        discountValEl.style.color = '';
+                        discountValEl.style.fontWeight = '';
+                    }
+                }
+                
                 if (shippingFeeEl && totalEl) {
                     if (shippingFee === 0) {
                         shippingFeeEl.textContent = 'Miễn phí';
                         shippingFeeEl.style.color = '#10b981';
                     } else {
-                        shippingFeeEl.textContent = shippingFee.toLocaleString('vi-VN') + '₫';
+                        shippingFeeEl.textContent = shippingFee.toLocaleString('vi-VN') + 'đ';
                         shippingFeeEl.style.color = 'var(--text-dark)';
                     }
-                    const total = 35680000 + shippingFee;
-                    totalEl.textContent = total.toLocaleString('vi-VN').replace(/,/g, '.') + '₫';
+                    const total = subtotal - discountVal + shippingFee;
+                    const formattedTotal = total.toLocaleString('vi-VN') + 'đ';
+                    totalEl.textContent = formattedTotal;
+                    if (stickyTotalEl) stickyTotalEl.textContent = formattedTotal;
+                    
+                    // Update bank amount & QR code
+                    const bankAmountEl = document.getElementById('bank-amount');
+                    const bankCkContentEl = document.getElementById('bank-ck-content');
+                    const qrImgEl = document.getElementById('checkout-qr-img');
+                    
+                    if (bankAmountEl) bankAmountEl.textContent = formattedTotal;
+                    
+                    const ckContent = (bankCkContentEl ? bankCkContentEl.textContent : 'DH NAVA 8527').toUpperCase();
+                    if (qrImgEl) {
+                        qrImgEl.src = `https://qr.sepay.vn/img?acc=123434688&bank=ACB&amount=${total}&des=${encodeURIComponent(ckContent)}`;
+                    }
                 }
             }
+            
+            // Dynamic Auto-banking description update based on phone number input
+            const phoneInput = document.getElementById('checkout-phone');
+            const bankCkContentEl = document.getElementById('bank-ck-content');
+            
+            function updateCKContentText() {
+                const phoneVal = (phoneInput ? phoneInput.value.trim() : '0972178527') || '0972178527';
+                const last4Digits = phoneVal.length >= 4 ? phoneVal.slice(-4) : phoneVal;
+                const ckContent = `DH NAVA ${last4Digits}`.toUpperCase();
+                if (bankCkContentEl) bankCkContentEl.textContent = ckContent;
+                updateShippingState();
+            }
+            
+            if (phoneInput) {
+                phoneInput.addEventListener('input', updateCKContentText);
+            }
+            
             window.updateShippingStateGlobal = updateShippingState;
             
             paymentRadios.forEach(radio => radio.addEventListener('change', updatePaymentState));
             shippingRadios.forEach(radio => radio.addEventListener('change', updateShippingState));
-
+ 
             updatePaymentState();
             updateShippingState();
+            updateCKContentText();
         });
     </script>
 </body>

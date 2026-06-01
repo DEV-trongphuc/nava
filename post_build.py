@@ -19,7 +19,7 @@ sticky_html = """
     <!-- Nút mũi tên kéo lên -->
     <button id="compare-expand" onclick="executeCompare(true)" disabled style="position: absolute; top: -24px; left: 50%; transform: translateX(-50%); width: 70px; height: 25px; border-radius: 12px 12px 0 0; background: var(--primary); border: none; color: white; cursor: not-allowed; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s; box-shadow: 0 -4px 10px rgba(14,165,233,0.3); opacity: 0.5;"><i class="ph-bold ph-caret-up" style="font-size: 1.3rem;"></i></button>
 
-    <div id="compare-bar-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box;">
+    <div id="compare-bar-inner" style="max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; box-sizing: border-box; position: relative;">
         <div style="display: flex; align-items: center; gap: 20px; flex: 1; width: 100%;">
             <div id="compare-slots" style="display: flex; gap: 20px; flex: 1;">
                 <!-- Slots populated by JS -->
@@ -28,6 +28,21 @@ sticky_html = """
         <div id="compare-actions" style="display: flex; gap: 15px; flex-shrink: 0;">
             <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
             <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
+        </div>
+        
+        <!-- FLOATING SELECT DROPDOWN (anchor dynamically inside relative container) -->
+        <div id="compare-select-dropdown" style="display: none; position: absolute; background: white; border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 -10px 30px rgba(0,0,0,0.15); width: 320px; z-index: 100001; padding: 15px; box-sizing: border-box; font-family: inherit;">
+            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+                <span>Chọn sản phẩm so sánh</span>
+                <button onclick="hideCompareSelectDropdown()" style="background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;"><i class="ph ph-x"></i></button>
+            </div>
+            <div style="margin-bottom: 12px; position: relative;">
+                <input type="text" id="compare-search-input" oninput="filterCompareProducts()" placeholder="Nhập tên sản phẩm cần so sánh..." style="width: 100%; padding: 8px 12px 8px 32px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; outline: none; box-sizing: border-box; font-family: inherit; transition: all 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
+                <i class="ph ph-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-gray); font-size: 1rem; pointer-events: none;"></i>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto;" id="compare-select-list">
+                <!-- JS populated product items -->
+            </div>
         </div>
     </div>
 </div>
@@ -67,7 +82,6 @@ sticky_html = """
 <!-- Comparison Logic -->
 <script>
     // Ensure the sticky bar and modal are direct children of document.documentElement (HTML tag)
-    // This perfectly bypasses ANY transform or overflow bugs on the BODY tag!
     document.addEventListener("DOMContentLoaded", function() {
         const cb = document.getElementById('compare-bar');
         const cm = document.getElementById('compare-modal');
@@ -163,7 +177,7 @@ sticky_html = """
                 html += `
                     <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
                         <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <div style="flex: 1; min-width: 0;">
+                        <div style="flex: 1; min-width: 0; text-align: left;">
                             <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
                             <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
                         </div>
@@ -172,7 +186,7 @@ sticky_html = """
                 `;
             } else {
                 html += `
-                    <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit;">
+                    <div class="compare-slot-item" onclick="showCompareSelectDropdown(event, this)" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit; cursor: pointer;">
                         <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                         Thêm sản phẩm
                     </div>
@@ -182,6 +196,112 @@ sticky_html = """
         slots.innerHTML = html;
     }
     
+    var allProductsForCompare = [
+        { name: 'ASUS NUC AI 350', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price: '12.390.000đ' },
+        { name: 'MINISFORUM UM890 Pro', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420', price: '14.990.000đ' },
+        { name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)', img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', price: '14.200.000đ' },
+        { name: 'ASUS NUC 14 Essential Intel', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '4.490.000đ' },
+        { name: 'Mini PC GMK EVO X1 32G', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', price: '31.190.000đ' },
+        { name: 'AtomMan G7 PT Mini PC', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '34.490.000đ' }
+    ];
+
+    function showCompareSelectDropdown(event, slotElement) {
+        if(event) event.stopPropagation();
+        const dropdown = document.getElementById('compare-select-dropdown');
+        const listContainer = document.getElementById('compare-select-list');
+        const searchInput = document.getElementById('compare-search-input');
+        if (searchInput) searchInput.value = '';
+        
+        // Position dropdown above the slot relative to compare-bar-inner
+        const rect = slotElement.getBoundingClientRect();
+        const innerRect = document.getElementById('compare-bar-inner').getBoundingClientRect();
+        
+        dropdown.style.left = (rect.left - innerRect.left) + 'px';
+        dropdown.style.bottom = '95px';
+        dropdown.style.display = 'block';
+        
+        filterCompareProducts();
+        
+        // Auto-focus search input
+        setTimeout(() => {
+            if (searchInput) searchInput.focus();
+        }, 100);
+    }
+
+    function filterCompareProducts() {
+        const query = document.getElementById('compare-search-input')?.value.toLowerCase().trim() || '';
+        const listContainer = document.getElementById('compare-select-list');
+        if (!listContainer) return;
+        
+        // Filter out products already in compare list
+        let available = allProductsForCompare.filter(p => !compareList.some(item => item.name === p.name));
+        
+        if (query) {
+            available = available.filter(p => p.name.toLowerCase().includes(query));
+        }
+        
+        let html = '';
+        available.forEach(p => {
+            html += `
+                <div onclick="selectProductForCompare('${p.name}', '${p.img}', '${p.price}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.background='white';">
+                    <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white;">
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</div>
+                        <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary);">${p.price}</div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        if(available.length === 0) {
+            html = '<div style="font-size: 0.85rem; color: var(--text-gray); text-align: center; padding: 15px;">Không tìm thấy sản phẩm phù hợp</div>';
+        }
+        
+        listContainer.innerHTML = html;
+    }
+
+    function selectProductForCompare(name, img, price) {
+        if (compareList.length >= 2) return;
+        compareList.push({ name, img, price });
+        updateCompareBar();
+        hideCompareSelectDropdown();
+    }
+
+    function hideCompareSelectDropdown() {
+        const dropdown = document.getElementById('compare-select-dropdown');
+        if(dropdown) dropdown.style.display = 'none';
+    }
+
+    function openCompareDrawerDirect(name = 'ASUS NUC AI 350', img = '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price = '12.390.000đ') {
+        const idx = compareList.findIndex(p => p.name === name);
+        if (idx === -1) {
+            if (compareList.length >= 2) {
+                // Ignore
+            } else {
+                compareList.push({ name, img, price });
+            }
+        }
+        updateCompareBar();
+        
+        setTimeout(() => {
+            const slots = document.getElementById('compare-slots');
+            if (slots && compareList.length < 2) {
+                const emptySlot = slots.children[compareList.length];
+                if (emptySlot) {
+                    showCompareSelectDropdown(null, emptySlot);
+                }
+            }
+        }, 100);
+    }
+    
+    // Close dropdown on click outside
+    document.addEventListener('click', function(e) {
+        const dropdown = document.getElementById('compare-select-dropdown');
+        if (dropdown && dropdown.style.display === 'block' && !dropdown.contains(e.target) && !e.target.closest('.compare-slot-item') && !e.target.closest('.btn-nava-compare-trigger')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
     function executeCompare(isFullScreen = false) {
         const modal = document.getElementById('compare-modal');
         const modalContent = document.getElementById('compare-modal-content');

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nava Store - Đăng Nhập / Đăng Ký</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    
+    <html lang="vi">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Tài Khoản - Nava Store</title>
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+            <script src="https://unpkg.com/@phosphor-icons/web"></script>
+            
         <style>
             :root {
                 --primary: #003366;
@@ -69,10 +69,10 @@
                 position: relative;
                 z-index: 10;
                 overflow-y: auto;
-                scrollbar-width: none; /* Firefox */
+                scrollbar-width: none;
             }
             .glass-card::-webkit-scrollbar {
-                display: none; /* Chrome */
+                display: none;
             }
             .glass-card::before {
                 content: '';
@@ -88,20 +88,19 @@
             }
             .auth-title {
                 font-size: 1.8rem;
-                font-weight: 800;
+                font-weight: 850;
                 color: var(--text-dark);
-                text-align: center;
                 margin: 0 0 5px 0;
+                letter-spacing: -0.5px;
             }
             .auth-desc {
-                text-align: center;
                 color: var(--text-gray);
-                margin: 0 0 20px 0;
-                font-size: 0.9rem;
+                font-size: 0.92rem;
+                margin: 0 0 25px 0;
             }
             .form-group-nava {
-                margin-bottom: 15px;
                 position: relative;
+                margin-bottom: 18px;
             }
             .form-group-nava i {
                 position: absolute;
@@ -113,60 +112,77 @@
             }
             .input-nava {
                 width: 100%;
-                padding: 12px 15px 12px 42px;
+                padding: 14px 16px 14px 44px;
                 border: 1px solid var(--border-color);
                 border-radius: var(--radius-md);
-                background: #f8fafc;
-                color: var(--text-dark);
+                background: var(--bg-gray);
+                font-family: inherit;
                 font-size: 0.95rem;
-                outline: none;
+                color: var(--text-dark);
                 transition: all 0.3s;
                 box-sizing: border-box;
+                outline: none;
             }
             .input-nava:focus {
                 border-color: var(--primary);
-                box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
-                background: #fff;
+                background: white;
+                box-shadow: 0 0 0 4px rgba(0, 51, 102, 0.1);
             }
             .btn-nava {
                 width: 100%;
-                padding: 12px;
+                padding: 14px;
                 border-radius: var(--radius-md);
-                border: none;
-                font-size: 1.05rem;
                 font-weight: 700;
+                font-size: 1rem;
                 cursor: pointer;
                 transition: all 0.3s;
+                box-sizing: border-box;
+                border: 1px solid var(--border-color);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
+                gap: 10px;
             }
             .btn-primary-nava {
                 background: linear-gradient(90deg, var(--primary), var(--secondary));
                 color: white;
-                box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+                border: none;
+                box-shadow: 0 10px 20px rgba(0, 51, 102, 0.2);
             }
             .btn-primary-nava:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
+                box-shadow: 0 15px 25px rgba(0, 51, 102, 0.3);
+            }
+            .link-nava {
+                color: var(--primary);
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 0.95rem;
+                transition: color 0.2s;
+            }
+            .link-nava:hover {
+                color: var(--secondary);
+                text-decoration: underline;
             }
             .social-divider {
                 display: flex;
                 align-items: center;
                 text-align: center;
-                margin: 20px 0;
+                margin: 25px 0 20px;
                 color: var(--text-gray);
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                font-weight: 700;
+                letter-spacing: 1px;
             }
-            .social-divider::before, .social-divider::after {
+            .social-divider::before,
+            .social-divider::after {
                 content: '';
                 flex: 1;
                 border-bottom: 1px solid var(--border-color);
             }
-            .social-divider span {
-                padding: 0 10px;
-            }
+            .social-divider::before { margin-right: 10px; }
+            .social-divider::after { margin-left: 10px; }
+            
             .social-login-grid {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
@@ -174,35 +190,23 @@
             }
             .btn-social {
                 background: white;
-                border: 1px solid var(--border-color);
                 color: var(--text-dark);
                 font-size: 0.95rem;
                 padding: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+                transition: all 0.2s;
             }
             .btn-social:hover {
                 background: var(--bg-gray);
                 border-color: #cbd5e1;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             }
-            .link-nava {
-                color: var(--primary);
-                text-decoration: none;
-                font-weight: 600;
-                transition: 0.2s;
-            }
-            .link-nava:hover {
-                text-decoration: underline;
-            }
-            
-            /* Toggle forms */
-            #recover_customer_password { display: none; }
-            .show-recover #customer_login_wrapper { display: none; }
-            .show-recover #recover_customer_password { display: block; }
         </style>
     
-</head>
-<body>
-
-        <div class="auth-page-wrapper">
+        </head>
+        <body>
+    
+        <div class="auth-page-wrapper" id="register-container">
             <div class="glass-card">
                 <a href="demo_collection.html" class="link-nava" style="position: absolute; top: 25px; left: 25px; display: inline-flex; align-items: center; gap: 5px; font-size: 0.85rem;"><i class="ph-bold ph-arrow-left"></i> Quay lại</a>
                 <div style="text-align: center; margin-top: 10px;">
@@ -227,20 +231,25 @@
                     
                     <div class="form-group-nava">
                         <i class="ph-bold ph-phone"></i>
-                        <input type="text" placeholder="Số điện thoại" class="input-nava" pattern="\d+" name="Phone" required>
+                        <input type="tel" placeholder="Số điện thoại" class="input-nava" pattern="\d+" name="Phone" required>
                     </div>
                     
                     <div class="form-group-nava">
                         <i class="ph-bold ph-envelope"></i>
-                        <input type="email" placeholder="E-mail" class="input-nava" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" required>
+                        <input type="email" placeholder="E-mail" class="input-nava" pattern="[a-z0-9._%%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" required>
                     </div>
                     
-                    <div class="form-group-nava">
+                    <div class="form-group-nava" style="position: relative;">
                         <i class="ph-bold ph-lock"></i>
-                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" required>
+                        <input type="password" placeholder="Mật khẩu" class="input-nava" name="password" id="register_password" required style="padding-right: 40px;">
+                        <i class="ph ph-eye-slash" style="position: absolute; right: 15px; left: auto; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--text-gray); font-size: 1.1rem; z-index: 5;" onclick="togglePasswordVisibility('register_password', this)"></i>
                     </div>
                     
                     <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Đăng Ký Tài Khoản</button>
+                    
+                    <p style="text-align: center; margin-top: 15px; color: var(--text-gray); font-size: 0.8rem; line-height: 1.4;">
+                        Bằng việc đăng ký, bạn đồng ý với <a href="demo_policy.html#terms" class="link-nava" style="font-size: 0.8rem;">Điều khoản dịch vụ</a> và <a href="demo_policy.html#privacy" class="link-nava" style="font-size: 0.8rem;">Chính sách bảo mật</a> của Nava Store
+                    </p>
                 </form>
                 
                 <div class="social-divider"><span>HOẶC ĐĂNG NHẬP BẰNG</span></div>
@@ -259,4 +268,21 @@
                 </p>
             </div>
         </div>
-    </body></html>
+        
+        <script>
+            function togglePasswordVisibility(inputId, icon) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'ph ph-eye';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'ph ph-eye-slash';
+                }
+            }
+        </script>
+    
+        </body>
+    </html>
+    
