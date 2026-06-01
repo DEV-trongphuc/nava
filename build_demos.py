@@ -1940,7 +1940,7 @@ def build_product(base_dir, header_part, footer_part):
                         <!-- RAM Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                                     <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
                                     <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
@@ -1954,13 +1954,13 @@ def build_product(base_dir, header_part, footer_part):
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
+                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                         
                         <!-- SSD Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                                     <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
                                     <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
@@ -1972,7 +1972,7 @@ def build_product(base_dir, header_part, footer_part):
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
+                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                     </div>
                     

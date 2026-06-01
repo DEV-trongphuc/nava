@@ -1075,7 +1075,7 @@
                         <!-- RAM Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                                     <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
                                     <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
@@ -1089,13 +1089,13 @@
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
+                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                         
                         <!-- SSD Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 320px; flex: 1; position: relative;">
+                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
                                     <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
                                     <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
@@ -1107,7 +1107,7 @@
                                     <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 80px; flex-shrink: 0;">+0đ</span>
+                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                     </div>
                     
@@ -2805,18 +2805,20 @@
             <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
         </div>
         
-        <!-- FLOATING SELECT DROPDOWN (anchor dynamically inside relative container) -->
-        <div id="compare-select-dropdown" style="display: none; position: absolute; background: white; border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 -10px 30px rgba(0,0,0,0.15); width: 320px; z-index: 100001; padding: 15px; box-sizing: border-box; font-family: inherit;">
-            <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-                <span>Chọn sản phẩm so sánh</span>
-                <button onclick="hideCompareSelectDropdown()" style="background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;"><i class="ph ph-x"></i></button>
-            </div>
-            <div style="margin-bottom: 12px; position: relative;">
-                <input type="text" id="compare-search-input" oninput="filterCompareProducts()" placeholder="Nhập tên sản phẩm cần so sánh..." style="width: 100%; padding: 8px 12px 8px 32px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; outline: none; box-sizing: border-box; font-family: inherit; transition: all 0.2s;" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border-color)'">
-                <i class="ph ph-magnifying-glass" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-gray); font-size: 1rem; pointer-events: none;"></i>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; max-height: 220px; overflow-y: auto;" id="compare-select-list">
-                <!-- JS populated product items -->
+        <!-- COMPARE PRODUCT SELECT MODAL -->
+        <div id="compare-select-modal" style="display: none; position: fixed !important; inset: 0 !important; z-index: 2147483646 !important; background: rgba(15, 23, 42, 0.6) !important; backdrop-filter: blur(4px) !important; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease;" onclick="if(event.target===this) hideCompareSelectDropdown()">
+            <div id="compare-select-dropdown" style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); width: 90%; max-width: 850px; padding: 25px; box-sizing: border-box; font-family: inherit; position: relative; display: flex; flex-direction: column; transform: scale(0.95); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Chọn sản phẩm so sánh</span>
+                    <button onclick="hideCompareSelectDropdown()" style="background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; padding: 4px;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph ph-x"></i></button>
+                </div>
+                <div style="margin-bottom: 15px; position: relative;">
+                    <input type="text" id="compare-search-input" oninput="filterCompareProducts()" placeholder="Nhập tên sản phẩm cần so sánh..." style="width: 100%; padding: 10px 14px 10px 38px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.9rem; outline: none; box-sizing: border-box; font-family: inherit; background: var(--bg-gray); transition: all 0.2s; color: var(--text-dark);" onfocus="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-white)';" onblur="this.style.borderColor='var(--border-color)'; this.style.background='var(--bg-gray)'">
+                    <i class="ph ph-magnifying-glass" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-gray); font-size: 1.1rem; pointer-events: none;"></i>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; max-height: 420px; overflow-y: auto; padding-right: 4px;" id="compare-select-list">
+                    <!-- JS populated product items -->
+                </div>
             </div>
         </div>
     </div>
@@ -2982,18 +2984,18 @@
 
     function showCompareSelectDropdown(event, slotElement) {
         if(event) event.stopPropagation();
-        const dropdown = document.getElementById('compare-select-dropdown');
-        const listContainer = document.getElementById('compare-select-list');
+        const modal = document.getElementById('compare-select-modal');
+        const modalContent = document.getElementById('compare-select-dropdown');
         const searchInput = document.getElementById('compare-search-input');
         if (searchInput) searchInput.value = '';
         
-        // Position dropdown above the slot relative to compare-bar-inner
-        const rect = slotElement.getBoundingClientRect();
-        const innerRect = document.getElementById('compare-bar-inner').getBoundingClientRect();
-        
-        dropdown.style.left = (rect.left - innerRect.left) + 'px';
-        dropdown.style.bottom = '95px';
-        dropdown.style.display = 'block';
+        if (modal && modalContent) {
+            modal.style.setProperty('display', 'flex', 'important');
+            // Trigger reflow
+            void modal.offsetWidth;
+            modal.style.opacity = '1';
+            modalContent.style.transform = 'scale(1)';
+        }
         
         filterCompareProducts();
         
@@ -3018,7 +3020,7 @@
         let html = '';
         available.forEach(p => {
             html += `
-                <div onclick="selectProductForCompare('${p.name}', '${p.img}', '${p.price}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.background='white';">
+                <div onclick="selectProductForCompare('${p.name}', '${p.img}', '${p.price}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.background='transparent';">
                     <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white;">
                     <div style="flex: 1; min-width: 0; text-align: left;">
                         <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</div>
@@ -3043,8 +3045,15 @@
     }
 
     function hideCompareSelectDropdown() {
-        const dropdown = document.getElementById('compare-select-dropdown');
-        if(dropdown) dropdown.style.display = 'none';
+        const modal = document.getElementById('compare-select-modal');
+        const modalContent = document.getElementById('compare-select-dropdown');
+        if (modal && modalContent) {
+            modal.style.opacity = '0';
+            modalContent.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                modal.style.setProperty('display', 'none', 'important');
+            }, 250);
+        }
     }
 
     function openCompareDrawerDirect(name = 'ASUS NUC AI 350', img = '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price = '12.390.000đ') {
@@ -3069,11 +3078,11 @@
         }, 100);
     }
     
-    // Close dropdown on click outside
+    // Close modal on click outside (fallback check)
     document.addEventListener('click', function(e) {
-        const dropdown = document.getElementById('compare-select-dropdown');
-        if (dropdown && dropdown.style.display === 'block' && !dropdown.contains(e.target) && !e.target.closest('.compare-slot-item') && !e.target.closest('.btn-nava-compare-trigger')) {
-            dropdown.style.display = 'none';
+        const modal = document.getElementById('compare-select-modal');
+        if (modal && modal.style.display === 'flex' && e.target === modal) {
+            hideCompareSelectDropdown();
         }
     });
 
