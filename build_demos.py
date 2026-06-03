@@ -1714,9 +1714,24 @@ def build_product(base_dir, header_part, footer_part):
                     display: none;
                     flex-direction: column;
                     height: 360px;
+                    --glow-color: rgba(30, 58, 138, 0.15);
+                    --glow-border: var(--primary, #1e3a8a);
                 }
                 #nava-bottom-sheet.open {
                     transform: translateY(0);
+                }
+                @keyframes bs-glow-attention {
+                    0%, 100% {
+                        border-color: var(--border-color, #cbd5e1);
+                        box-shadow: none;
+                    }
+                    50% {
+                        border-color: var(--glow-border);
+                        box-shadow: 0 0 0 4px var(--glow-color), 0 4px 12px var(--glow-color);
+                    }
+                }
+                #nava-bottom-sheet.open .nava-dropdown-display {
+                    animation: bs-glow-attention 1.2s ease-in-out 3;
                 }
                 #nava-bottom-sheet .bs-header {
                     display: flex;
@@ -1798,7 +1813,7 @@ def build_product(base_dir, header_part, footer_part):
                         height: auto !important;
                     }
                     #nava-bottom-sheet .bs-body {
-                        overflow-y: auto;
+                        overflow: visible;
                     }
                     #nava-bottom-sheet .bs-options-row {
                         flex-direction: column;
@@ -1830,6 +1845,8 @@ def build_product(base_dir, header_part, footer_part):
                 }
                 [data-theme="dark"] #nava-bottom-sheet {
                     background: var(--bg-white, #1e293b) !important;
+                    --glow-color: rgba(102, 163, 255, 0.25);
+                    --glow-border: #66a3ff;
                 }
 
                 /* Spec badges styling */
