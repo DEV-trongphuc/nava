@@ -1,7 +1,8 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="vi">
         <head> 
     <meta name="google-site-verification" content="8m9SdTZclMsrpstXktnwKHPsJKygRQmVT-xc0TUrQeU" />
+    <meta name="google-site-verification" content="rXIf7nd16ck5ErUc3Th604TXn6AJTIpmReDgdXWJMH0" />
             <meta  http-equiv="content-Type" content="text/html; charset=utf-8"/>
             <meta name="theme-color" content="{{settings.main_color}}">
             <meta  http-equiv="Content-Security-Policy" content="block-all-mixed-content">
@@ -51,7 +52,7 @@
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
             <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
             <!-- Custom CSS -->
-            <link rel="stylesheet" href="assets/style.css">
+            <link rel="stylesheet" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/style.css?v=177ssphusc74ssssss0iss2299999999">
             <!-- Theme Script for FOUC -->
             <script>
                 const savedTheme = localStorage.getItem('nava-theme');

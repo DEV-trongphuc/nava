@@ -1,0 +1,160 @@
+<script>
+            window.addEventListener('load', function() {
+                const preloader = document.getElementById('nava-preloader');
+                if (preloader) {
+                    preloader.classList.add('nava-preloader-hidden');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                }
+            });
+            setTimeout(() => {
+                const preloader = document.getElementById('nava-preloader');
+                if (preloader && !preloader.classList.contains('nava-preloader-hidden')) {
+                    preloader.classList.add('nava-preloader-hidden');
+                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
+                }
+            }, 5000);
+        </script>
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cycle FAB images
+            setInterval(() => {
+                const imgs = document.querySelectorAll('.fab-cycle-img');
+                if (imgs.length > 0) {
+                    let activeIdx = -1;
+                    imgs.forEach((img, idx) => {
+                        if (img.classList.contains('active')) activeIdx = idx;
+                        img.classList.remove('active');
+                    });
+                    if (activeIdx !== -1) {
+                        const nextIdx = (activeIdx + 1) % imgs.length;
+                        imgs[nextIdx].classList.add('active');
+                    } else {
+                        imgs[0].classList.add('active');
+                    }
+                }
+            }, 2500);
+
+            // Toggle FAB menu
+            const fabMainBtn = document.getElementById('fabMainBtn');
+            if(fabMainBtn) {
+                fabMainBtn.addEventListener('click', function () {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.floating-social-wrapper')) {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.remove('active');
+                }
+            });
+        });
+        </script>
+
+<script src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/main.js?v=1777402299999999"></script>
+
+<script>
+            // Patch: Fetch shopee summary for realtime customer count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=summary', { headers: { 'Accept': 'application/json' } })
+                .then(res => res.json())
+                .then(data => {
+                    if(data && data.data && data.data.seller_rating_summary) {
+                        // Lấy số liệu gốc nhân 5 theo yêu cầu
+                        const total = (data.data.seller_rating_summary.rating_total || 0) * 5;
+                        const el = document.getElementById('realtime-customer-count');
+                        if (el) {
+                            el.dataset.target = total;
+                            // Wait for original animation to finish (2000ms), then force update
+                            setTimeout(() => {
+                                el.textContent = total.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                });
+
+            // Patch: Fetch shopee shop_base for realtime product count
+            fetch('https://automation.ideas.edu.vn/meta_report/shopee_proxy.php?type=shop_base', {
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if(data && data.data && typeof data.data.item_count !== 'undefined') {
+                        // Lấy item_count nhân 2
+                        const itemCount = data.data.item_count * 2;
+                        const el = document.getElementById('realtime-product-count');
+                        if (el) {
+                            el.dataset.target = itemCount;
+                            setTimeout(() => {
+                                el.textContent = itemCount.toLocaleString('vi-VN');
+                            }, 2500);
+                        }
+                    }
+                })
+                .catch(err => console.error('Fetch shop base error:', err));
+        </script>
+
+<script>
+        // Cycle benefit cards
+        setInterval(() => {
+            const active = document.querySelector('.bp-active');
+            if (active) {
+                const next = active.nextElementSibling || active.parentElement.firstElementChild;
+                active.classList.remove('bp-active');
+                next.classList.add('bp-active');
+            }
+        }, 4000);
+
+        
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.floating-social-wrapper')) {
+                document.getElementById('fabMenu').classList.remove('active');
+            }
+        });
+    </script>
+
+<script>
+            (function() {
+                function initTilt() {
+                    const cards = document.querySelectorAll('.benefit-card-mini, .policy-card');
+                    if (cards.length === 0) return; // Prevent errors if elements don't exist yet
+                    
+                    cards.forEach(card => {
+                        card.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease';
+                        
+                        card.addEventListener('mousemove', e => {
+                            const rect = card.getBoundingClientRect();
+                            const x = e.clientX - rect.left;
+                            const y = e.clientY - rect.top;
+                            
+                            const centerX = rect.width / 2;
+                            const centerY = rect.height / 2;
+                            
+                            // Calculate rotation based on mouse position
+                            const rotateX = ((y - centerY) / centerY) * -12; // Max 12 deg tilt
+                            const rotateY = ((x - centerX) / centerX) * 12;
+                            
+                            card.style.transition = 'transform 0.1s ease-out, box-shadow 0.4s ease';
+                            // Use setProperty with important to ensure it overrides any other CSS
+                            card.style.setProperty('transform', `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`, 'important');
+                        });
+                        
+                        card.addEventListener('mouseleave', () => {
+                            card.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease';
+                            card.style.setProperty('transform', 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)', 'important');
+                        });
+                    });
+                }
+                
+                // Run immediately
+                initTilt();
+                // Also run on DOMContentLoaded just in case
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initTilt);
+                }
+            })();
+        </script>

@@ -1,0 +1,509 @@
+
+Searching for 'video-thumb':
+--- Match found around index 28770 ---
+;
+    border-color: rgba(51, 133, 255, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 51, 102, 0.4);
+}
+
+.video-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+ 
+----------------------------------------
+--- Match found around index 28875 ---
+-thumb {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: 0.5s;
+}
+
+.video-card:hover .video-thumb img {
+    filter: brightness(1) scale(1.05);
+}
+
+.p
+----------------------------------------
+--- Match found around index 29024 ---
+0%;
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: 0.5s;
+}
+
+.video-card:hover .video-thumb img {
+    filter: brightness(1) scale(1.05);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 70px;
+    backgroun
+----------------------------------------
+--- Match found around index 52897 ---
+eY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.3);
+}
+
+.video-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.6s;
+}
+
+.video-card:hover .vid
+----------------------------------------
+--- Match found around index 52985 ---
+, 0.3);
+}
+
+.video-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.video-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.6s;
+}
+
+.video-card:hover .video-thumb img {
+    transform: scale(1.1);
+}
+
+.play-btn {
+    position: absolute;
+    top
+----------------------------------------
+--- Match found around index 53105 ---
+  width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.6s;
+}
+
+.video-card:hover .video-thumb img {
+    transform: scale(1.1);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(37, 
+----------------------------------------
+
+Searching for 'video-card':
+--- Match found around index 28405 ---
+;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.4s;
+
+----------------------------------------
+--- Match found around index 28619 ---
+ba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.4s;
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(51, 133, 255, 0.5);
+    box-shadow: 0 15px 35px rgba(0, 51, 102, 0.4);
+}
+
+.video-thumb {
+    position: relative;
+    width: 100%;
+    
+----------------------------------------
+--- Match found around index 29006 ---
+0%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.8);
+    transition: 0.5s;
+}
+
+.video-card:hover .video-thumb img {
+    filter: brightness(1) scale(1.05);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    height: 
+----------------------------------------
+--- Match found around index 29729 ---
+ulse 2s infinite;
+}
+
+.play-btn i {
+    color: white;
+    font-size: 2rem;
+    margin-left: 5px;
+}
+
+.video-card:hover .play-btn {
+    background: var(--primary);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-info {
+    padding: 25px 20px;
+}
+
+.video-title {
+    font-size: 1.15rem;
+    font-weight: 
+----------------------------------------
+--- Match found around index 52493 ---
+;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: 0.4s;
+
+----------------------------------------
+--- Match found around index 52755 ---
+gba(255, 255, 255, 0.05);
+    transition: 0.4s;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.video-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(0, 51, 102, 0.3);
+}
+
+.video-thumb {
+    position: relative;
+    aspect-ratio: 16/9;
+    ov
+----------------------------------------
+--- Match found around index 53087 ---
+deo-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.6s;
+}
+
+.video-card:hover .video-thumb img {
+    transform: scale(1.1);
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    ba
+----------------------------------------
+--- Match found around index 53594 ---
+rgba(37, 99, 235, 0.6);
+    opacity: 0.9;
+    transition: 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.video-card:hover .play-btn {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+}
+
+.video-info {
+    padding: 20px;
+}
+
+.video-info h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height
+----------------------------------------
+
+Searching for 'video-section':
+--- Match found around index 28107 ---
+tion-delay: 0.2s;
+}
+
+.delay-2 {
+    transition-delay: 0.4s;
+}
+
+/* --- VIDEO & BLOG SECTIONS --- */
+.video-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #091933 0%, #030812 100%);
+    color: white;
+    position: relative;
+}
+
+.video-section .section-title {
+    color: white;
+}
+
+.video-gri
+----------------------------------------
+--- Match found around index 28258 ---
+d: linear-gradient(180deg, #091933 0%, #030812 100%);
+    color: white;
+    position: relative;
+}
+
+.video-section .section-title {
+    color: white;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radi
+----------------------------------------
+--- Match found around index 52176 ---
+e */
+    .header.scrolled {
+        transform: translateY(0);
+    }
+}
+
+/* --- VIDEO SECTION --- */
+.video-section {
+    padding: 80px 0;
+    background: #020617;
+    position: relative;
+}
+
+.video-section .section-title {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.video-section .view-all-link {
+    color: #94
+----------------------------------------
+--- Match found around index 52266 ---
+N --- */
+.video-section {
+    padding: 80px 0;
+    background: #020617;
+    position: relative;
+}
+
+.video-section .section-title {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.video-section .view-all-link {
+    color: #94a3b8;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    g
+----------------------------------------
+--- Match found around index 52344 ---
+sition: relative;
+}
+
+.video-section .section-title {
+    color: white;
+    margin-bottom: 40px;
+}
+
+.video-section .view-all-link {
+    color: #94a3b8;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--ra
+----------------------------------------
+--- Match found around index 94679 ---
+ERFORMANCE OPTIMIZATION
+   ============================================ */
+.footer,
+.blog-section,
+.video-section,
+.brand-slider {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+}
+
+/* --- WARRANTY MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+----------------------------------------
+
+Searching for 'video-grid':
+--- Match found around index 28311 ---
+
+    color: white;
+    position: relative;
+}
+
+.video-section .section-title {
+    color: white;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: rgba
+----------------------------------------
+--- Match found around index 35866 ---
+columns: repeat(2, 1fr);
+    }
+
+    .pillars-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-visual {
+        min-height: 300px;
+    }
+
+    
+----------------------------------------
+--- Match found around index 52399 ---
+  color: white;
+    margin-bottom: 40px;
+}
+
+.video-section .view-all-link {
+    color: #94a3b8;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.video-card {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: rgba
+----------------------------------------
+--- Match found around index 56869 ---
+item-date {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+@media (max-width: 991px) {
+    .video-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .news-flex {
+        flex-direction: column;
+    }
+
+    .featured-content h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/* --- SEARCH BOX BUTTON FIX --- */
+----------------------------------------

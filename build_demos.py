@@ -1,8 +1,85 @@
 import os
 import re
 
-def clean_liquid_tags(text):
+def resolve_conditionals(text, template='index'):
+    def eval_cond(cond_str):
+        cond_str = cond_str.strip()
+        if "template contains" in cond_str:
+            val = cond_str.split("contains")[-1].strip().strip("'\"")
+            return val in template
+        if "template ==" in cond_str:
+            val = cond_str.split("==")[-1].strip().strip("'\"")
+            return template == val
+        if "template !=" in cond_str:
+            val = cond_str.split("!=")[-1].strip().strip("'\"")
+            return template != val
+        if "settings.use_sapo_app" in cond_str:
+            return False
+        if "settings.ena_popup_news" in cond_str:
+            return False
+        if "settings.ena_isocial_bubble" in cond_str:
+            return False
+        if "customer" in cond_str:
+            return False
+        return False
+
+    tokens = re.split(r'({%-?\s*.*?\s*-?%})', text)
+    output = []
+    stack = []
+    
+    for token in tokens:
+        if token.startswith('{%') and token.endswith('%}'):
+            tag_content = token[2:-2].strip()
+            if tag_content.startswith('-'): tag_content = tag_content[1:]
+            if tag_content.endswith('-'): tag_content = tag_content[:-1]
+            tag_content = tag_content.strip()
+            
+            parts = tag_content.split(None, 1)
+            cmd = parts[0] if parts else ""
+            args = parts[1] if len(parts) > 1 else ""
+            
+            if cmd == 'if' or cmd == 'unless':
+                parent_active = stack[-1][0] if stack else True
+                cond_val = eval_cond(args)
+                if cmd == 'unless':
+                    cond_val = not cond_val
+                
+                is_executed = parent_active and cond_val
+                stack.append([is_executed, is_executed, parent_active])
+            elif cmd == 'elsif':
+                if stack:
+                    parent_active = stack[-1][2]
+                    has_run = stack[-1][1]
+                    if parent_active and not has_run:
+                        cond_val = eval_cond(args)
+                        stack[-1][0] = cond_val
+                        stack[-1][1] = cond_val or has_run
+                    else:
+                        stack[-1][0] = False
+            elif cmd == 'else':
+                if stack:
+                    parent_active = stack[-1][2]
+                    has_run = stack[-1][1]
+                    stack[-1][0] = parent_active and not has_run
+            elif cmd == 'endif' or cmd == 'endunless':
+                if stack:
+                    stack.pop()
+            else:
+                current_active = stack[-1][0] if stack else True
+                if current_active:
+                    output.append(token)
+        else:
+            current_active = stack[-1][0] if stack else True
+            if current_active:
+                output.append(token)
+                
+    return "".join(output)
+
+def clean_liquid_tags(text, template='index'):
     text = re.sub(r'{%\s*comment\s*%}.*?{%\s*endcomment\s*%}', '', text, flags=re.DOTALL)
+    
+    # Evaluate conditionals
+    text = resolve_conditionals(text, template)
     
     # Convert asset_url and img_url liquid tags to static URLs
     def replace_asset(match):
@@ -68,6 +145,18 @@ def get_core_layout(base_dir):
     with open(os.path.join(base_dir, "theme.bwt"), "r", encoding="utf-8") as f:
         theme = f.read()
         
+    # Force stylesheet and fonts block to be kept for all templates in local compilation
+    theme_norm = theme.replace('\r\n', '\n')
+    theme_norm = theme_norm.replace(
+        "            {%- if template contains 'index' -%}\n            <!-- Google Fonts Optimized -->",
+        "            <!-- Google Fonts Optimized -->"
+    )
+    theme_norm = theme_norm.replace(
+        "            </script>\n            {%- endif -%}",
+        "            </script>"
+    )
+    theme = theme_norm.replace('\n', os.linesep)
+
     with open(os.path.join(base_dir, "extracted_footer.html"), "r", encoding="utf-8") as f:
         footer_content = f.read()
         
@@ -116,7 +205,7 @@ def build_index(base_dir, header_part, footer_part):
         index_content = f.read()
         
     full_index = header_part.replace(open(os.path.join(base_dir, "extracted_header.html"), "r", encoding="utf-8").read(), "") + index_content + footer_part
-    full_index = clean_liquid_tags(full_index)
+    full_index = clean_liquid_tags(full_index, 'index')
     full_index = inject_seo_metadata(
         full_index, 
         title="Nava Store - Mini PC & eGPU Chính Hãng", 
@@ -1241,7 +1330,7 @@ def build_collection(base_dir, header_part, footer_part):
             </script>
         </div>
     """
-    full_html = clean_liquid_tags(header_part + collection_html + local_footer_part)
+    full_html = clean_liquid_tags(header_part + collection_html + local_footer_part, 'collection')
     
     try:
         with open(os.path.join(base_dir, "post_build.py"), "r", encoding="utf-8") as pb_file:
@@ -1569,12 +1658,23 @@ def build_product(base_dir, header_part, footer_part):
                 [data-theme="dark"] .badge { background: var(--primary) !important; color: white !important; }
                 
 
-                /* Center select text in dropdown and align arrow */
+                /* Aligned text in dropdown and align arrow */
                 .nava-dropdown-display {
                     position: relative !important;
                     display: flex !important;
                     align-items: center !important;
-                    justify-content: center !important; /* Center the text content */
+                    justify-content: space-between !important;
+                    padding-right: 40px !important;
+                }
+                .nava-dropdown-selected-price {
+                    font-weight: 700;
+                    font-size: 0.9rem;
+                    color: var(--primary);
+                    margin-left: auto;
+                    margin-right: 5px;
+                }
+                [data-theme="dark"] .nava-dropdown-selected-price {
+                    color: #66a3ff;
                 }
                 .nava-dropdown-arrow {
                     position: absolute !important;
@@ -1585,6 +1685,151 @@ def build_product(base_dir, header_part, footer_part):
                 }
                 .nava-dropdown-wrapper.active .nava-dropdown-arrow {
                     transform: translateY(-50%) rotate(180deg) !important;
+                }
+
+                /* Bottom Sheet Overlay & Drawer */
+                #nava-bs-overlay {
+                    position: fixed;
+                    inset: 0;
+                    background: rgba(15, 23, 42, 0.6);
+                    backdrop-filter: blur(4px);
+                    z-index: 2147483640;
+                    display: none;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+                #nava-bottom-sheet {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    background: var(--bg-white, #ffffff);
+                    border-radius: 20px 20px 0 0;
+                    box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+                    z-index: 2147483641;
+                    transform: translateY(100%);
+                    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                    box-sizing: border-box;
+                    max-height: 85vh;
+                    display: none;
+                    flex-direction: column;
+                    height: 360px;
+                }
+                #nava-bottom-sheet.open {
+                    transform: translateY(0);
+                }
+                #nava-bottom-sheet .bs-header {
+                    display: flex;
+                    align-items: center;
+                    padding: 20px;
+                    border-bottom: 1px solid var(--border-color, #e2e8f0);
+                    position: relative;
+                    gap: 15px;
+                }
+                #nava-bottom-sheet .bs-header .bs-thumb {
+                    width: 70px;
+                    height: 70px;
+                    object-fit: contain;
+                    background: #fff;
+                    border-radius: 8px;
+                    border: 1px solid var(--border-color, #e2e8f0);
+                    padding: 4px;
+                }
+                #nava-bottom-sheet .bs-header .bs-header-info {
+                    flex: 1;
+                    min-width: 0;
+                }
+                #nava-bottom-sheet .bs-header .bs-price-val {
+                    font-size: 1.4rem;
+                    font-weight: 800;
+                    color: var(--primary);
+                }
+                #nava-bottom-sheet .bs-header .bs-close-btn {
+                    position: absolute;
+                    top: 15px;
+                    right: 15px;
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    color: var(--text-gray, #64748b);
+                    cursor: pointer;
+                    transition: color 0.2s;
+                }
+                #nava-bottom-sheet .bs-header .bs-close-btn:hover {
+                    color: #ef4444;
+                }
+                #nava-bottom-sheet .bs-body {
+                    padding: 24px 30px;
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    overflow: visible;
+                }
+                #nava-bottom-sheet .bs-options-row {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    width: 100%;
+                }
+                #nava-bottom-sheet .bs-option-col {
+                    flex: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                #nava-bottom-sheet .bs-qty-col {
+                    flex: 0 0 auto;
+                    align-items: flex-end;
+                    margin-left: auto;
+                }
+                #nava-bottom-sheet .nava-dropdown-list {
+                    top: auto;
+                    bottom: 100%;
+                    margin-top: 0;
+                    margin-bottom: 6px;
+                    transform: translateY(10px) scale(0.98);
+                }
+                #nava-bottom-sheet .nava-dropdown-wrapper.active .nava-dropdown-list {
+                    transform: translateY(0) scale(1);
+                }
+                @media (max-width: 768px) {
+                    #nava-bottom-sheet {
+                        height: auto !important;
+                    }
+                    #nava-bottom-sheet .bs-body {
+                        overflow-y: auto;
+                    }
+                    #nava-bottom-sheet .bs-options-row {
+                        flex-direction: column;
+                        align-items: stretch;
+                        gap: 15px;
+                    }
+                    #nava-bottom-sheet .bs-qty-col {
+                        align-items: flex-start;
+                        margin-left: 0;
+                    }
+                }
+                #nava-bottom-sheet .bs-buy-btn {
+                    width: 100%;
+                    height: 50px;
+                    border-radius: 8px;
+                    border: none;
+                    background: linear-gradient(90deg, var(--primary), var(--secondary));
+                    color: white;
+                    font-weight: 800;
+                    font-size: 1rem;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    transition: all 0.2s;
+                    box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);
+                }
+                #nava-bottom-sheet .bs-buy-btn:hover {
+                    box-shadow: 0 6px 20px rgba(0, 51, 102, 0.35);
+                    transform: translateY(-1px);
+                }
+                [data-theme="dark"] #nava-bottom-sheet {
+                    background: var(--bg-white, #1e293b) !important;
                 }
 
                 /* Spec badges styling */
@@ -1911,7 +2156,9 @@ def build_product(base_dir, header_part, footer_part):
                     <h1 class="prod-title">ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350</h1>
                     
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: #64748b; font-size: 0.9rem;">
-                        <span style="display: flex; align-items: center; gap: 4px; color: #f59e0b; font-weight: 600;"><i class="ph-fill ph-star"></i> 5.0</span>
+                        <a href="#danh-gia-shopee" id="rating-scroll-btn" style="display: flex; align-items: center; gap: 4px; color: #f59e0b; font-weight: 600; text-decoration: none;">
+                            <i class="ph-fill ph-star"></i> 5.0
+                        </a>
                         <span>|</span>
                         <span>Đã bán: 85</span>
                         <span>|</span>
@@ -1940,39 +2187,69 @@ def build_product(base_dir, header_part, footer_part):
                         <!-- RAM Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
-                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ram" style="max-width: 395px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
-                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
+                                    <span class="nava-dropdown-selected-price" id="ram-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
                                 </div>
                                 <ul class="nava-dropdown-list">
-                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')">NO RAM</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')">8GB - 4800</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')">8GB - 5600</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')">16GB - 4800</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')">16GB - 5600</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')">32GB - 4800</li>
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO RAM</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.890.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.090.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.790.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+4.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>32GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+6.990.000đ</span>
+                                    </li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ram-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                         
                         <!-- SSD Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
                             <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
-                            <div class="nava-dropdown-wrapper" style="max-width: 260px; flex: 1; position: relative;">
-                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box;">
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ssd" style="max-width: 395px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
-                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s;"></i>
+                                    <span class="nava-dropdown-selected-price" id="ssd-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
                                 </div>
                                 <ul class="nava-dropdown-list">
-                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')">NO SSD</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')">256GB</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')">500GB</li>
-                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')">1TB</li>
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO SSD</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>256GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>500GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.290.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>1TB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.990.000đ</span>
+                                    </li>
                                 </ul>
                             </div>
-                            <span class="variant-price-display" id="ssd-price-display" style="font-weight: 800; font-size: 0.95rem; color: var(--primary); text-align: right; width: 120px; flex-shrink: 0;">+0đ</span>
                         </div>
                     </div>
                     
@@ -1990,7 +2267,7 @@ def build_product(base_dir, header_part, footer_part):
                             </div>
                             <div class="prod-price" id="main-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">12.390.000đ</div>
                         </div>
-
+ 
                         <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
                         <div style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
                             <!-- Icon Cart Button -->
@@ -2003,32 +2280,20 @@ def build_product(base_dir, header_part, footer_part):
                                 TRẢ GÓP 0%
                             </button>
                             
-                            <!-- Mua Ngay Button with Subtext -->
-                            <button id="btn-buy-now-main" style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-family: inherit; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(0, 51, 102, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 51, 102, 0.2)';">
+                            <!-- Mua Ngay Button -->
+                            <button id="btn-buy-now-main" style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(0, 51, 102, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 51, 102, 0.2)';">
                                 <span style="font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">MUA NGAY</span>
-                                <span style="font-size: 0.65rem; opacity: 0.85; font-weight: 600;">Bảo hành chính hãng 36 tháng</span>
                             </button>
                         </div>
                     </div>
                     
-                    <div class="policy-box" style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; background: #f8fafc;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <h3 style="font-size: 1.05rem; font-weight: 800; color: #0f172a; margin: 0;">Chính sách sản phẩm</h3>
-                            <a href="#" style="font-size: 0.85rem; color: #1e3a8a; text-decoration: none; font-weight: 600;">Tìm hiểu thêm</a>
-                        </div>
-                        
+                    <div class="policy-box" style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; background: #f8fafc;">
                         <div class="policy-mobile-box" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
-                                <i class="ph ph-shield-check" style="font-size: 1.4rem; color: var(--primary);"></i> Hàng chính hãng - Bảo hành 36 tháng
+                            <div class="policy-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-shield-check" style="font-size: 1.3rem; color: var(--primary);"></i> Bảo hành chính hãng 36 tháng
                             </div>
-                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
-                                <i class="ph ph-truck" style="font-size: 1.4rem; color: var(--primary);"></i> Giao hàng miễn phí toàn quốc
-                            </div>
-                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
-                                <i class="ph ph-arrows-left-right" style="font-size: 1.4rem; color: var(--primary);"></i> 1 đổi 1 trong 30 ngày
-                            </div>
-                            <div class="policy-item" style="display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600;">
-                                <i class="ph ph-headset" style="font-size: 1.4rem; color: var(--primary);"></i> Hỗ trợ kỹ thuật trọn đời
+                            <div class="policy-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-truck" style="font-size: 1.3rem; color: var(--primary);"></i> Giao hàng miễn phí
                             </div>
                         </div>
                     </div>
@@ -2126,12 +2391,10 @@ def build_product(base_dir, header_part, footer_part):
                         <div class="desc-content-wrapper" id="desc-wrapper">
                             <div class="position-relative rte">
  <p>
-  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/g5x0nIzBEWU?si=daKxCL1mOebvtoCn" title="YouTube video player" width="560">
-  </iframe>
+  <lite-youtube videoid="g5x0nIzBEWU" style="background-image: url('https://img.youtube.com/vi/g5x0nIzBEWU/maxresdefault.jpg'); border-radius: 8px;"></lite-youtube>
  </p>
  <p>
-  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Wrc43VVRJnA?si=zAc-N5SDecqi95en" title="YouTube video player" width="560">
-  </iframe>
+  <lite-youtube videoid="Wrc43VVRJnA" style="background-image: url('https://img.youtube.com/vi/Wrc43VVRJnA/maxresdefault.jpg'); border-radius: 8px;"></lite-youtube>
  </p>
  <h2 data-pm-slice="1 1 []" dir="ltr">
   <strong>
@@ -2518,8 +2781,7 @@ def build_product(base_dir, header_part, footer_part):
   ASUS NUC AI 350 (PN54) là sự kết hợp hoàn hảo giữa hiệu suất mạnh mẽ, thiết kế nhỏ gọn, và công nghệ AI tiên tiến. Với bộ vi xử lý AMD Ryzen™ AI 300 Series, đồ họa Radeon™ 800M, và khả năng kết nối vượt trội, PN54 không chỉ đáp ứng nhu cầu hiện tại mà còn sẵn sàng cho tương lai. Độ bền chuẩn quân đội, bảo mật cao cấp, và cam kết bền vững khiến sản phẩm này trở thành lựa chọn hàng đầu cho các doanh nghiệp, nhà sáng tạo nội dung, và người dùng cá nhân. Hãy khám phá ASUS ExpertCenter PN54 ngay hôm nay để trải nghiệm công nghệ đỉnh cao trong tầm tay!
  </p>
  <p>
-  <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" frameborder="0" height="315" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/_er1aM1m2Ho?si=eHqkesK0LAb_zM1k" title="YouTube video player" width="560">
-  </iframe>
+  <lite-youtube videoid="_er1aM1m2Ho" style="background-image: url('https://img.youtube.com/vi/_er1aM1m2Ho/maxresdefault.jpg'); border-radius: 8px;"></lite-youtube>
  </p>
 </div>
                             <div class="desc-overlay"></div>
@@ -2620,6 +2882,24 @@ def build_product(base_dir, header_part, footer_part):
                 </div>
             </div>
             
+            <!-- Shopee Reviews Section -->
+            <div id="danh-gia-shopee" style="margin-bottom: 50px; background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color, #e2e8f0); padding: 32px; box-sizing: border-box; width: 100%;">
+                <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-dark, #0f172a); margin-top: 0; margin-bottom: 24px; display: flex; align-items: center; gap: 10px;">
+                    <i class="ph-fill ph-chat-centered-text" style="color: var(--primary, #1e3a8a); font-size: 1.6rem;"></i> ĐÁNH GIÁ SẢN PHẨM (TỪ SHOPEE)
+                </h2>
+                
+                <div class="shopee-rating-summary" id="shopeeRatingSummary" style="display: none;">
+                    <!-- JS will populate rating summary here -->
+                </div>
+                <div class="shopee-comments-list" id="shopeeCommentsList">
+                    <!-- JS will populate realtime reviews here -->
+                    <div class="text-center" style="padding: 40px; color: var(--text-gray);">
+                        <i class="ph ph-spinner ph-spin" style="font-size: 2rem; color: var(--primary, #1e3a8a);"></i>
+                        <p>Đang tải đánh giá từ Shopee...</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Recommended Products Section -->
             <div style="margin-top: 20px; margin-bottom: 80px; width: 100%;">
                 <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 24px; color: #0f172a; display: flex; justify-content: space-between; align-items: center;">
@@ -2825,6 +3105,111 @@ def build_product(base_dir, header_part, footer_part):
                 </div>
             </div>
             
+            <!-- Bottom Sheet Overlay & Drawer for quick configuration -->
+            <div id="nava-bs-overlay" onclick="closeBottomSheet()"></div>
+            <div id="nava-bottom-sheet">
+                <!-- Header: Thumbnail, Price, and Title -->
+                <div class="bs-header">
+                    <img class="bs-thumb" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
+                    <div class="bs-header-info">
+                        <div class="bs-price-val" id="bs-price">12.390.000đ</div>
+                        <div style="font-size: 0.9rem; color: var(--text-gray, #64748b); margin-top: 4px; font-weight: 600;">ASUS NUC AI 350</div>
+                    </div>
+                    <button class="bs-close-btn" onclick="closeBottomSheet()"><i class="ph ph-x"></i></button>
+                </div>
+                
+                <!-- Body: RAM and SSD selectors, Quantity selector -->
+                <div class="bs-body">
+                    <div class="bs-options-row">
+                        <!-- RAM Selector -->
+                        <div class="bs-option-col">
+                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;">RAM DDR5</span>
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ram" style="position: relative; width: 100%;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
+                                    <span class="nava-dropdown-selected" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
+                                    <span class="nava-dropdown-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO RAM</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.890.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.090.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.790.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+4.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>32GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+6.990.000đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- SSD Selector -->
+                        <div class="bs-option-col">
+                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;">SSD NVMe</span>
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ssd" style="position: relative; width: 100%;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
+                                    <span class="nava-dropdown-selected" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
+                                    <span class="nava-dropdown-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO SSD</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>256GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>500GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.290.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>1TB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.990.000đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Qty Selector -->
+                        <div class="bs-option-col bs-qty-col">
+                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;">Số lượng</span>
+                            <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 46px;">
+                                <button type="button" class="qty-adjust" onclick="adjustQty(-1)" style="width: 36px; height: 100%; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
+                                <input type="text" value="1" class="qty-val" id="qty-val-bs" readonly style="width: 40px; height: 100%; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none;">
+                                <button type="button" class="qty-adjust" onclick="adjustQty(1)" style="width: 36px; height: 100%; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions row: Add to cart & Buy now -->
+                    <div class="bs-actions-row" style="display: flex; gap: 15px; align-items: center; width: 100%; margin-top: 15px;">
+                        <button type="button" class="btn-add-cart btn-add-cart-bs" onclick="triggerAddToCart(event)" style="flex: none !important; width: 60px; height: 50px; display: flex; align-items: center; justify-content: center;" title="Thêm vào giỏ">
+                            <i class="ph ph-shopping-cart-simple" style="font-size: 1.4rem;"></i>
+                        </button>
+                        <button type="button" class="bs-buy-btn" onclick="triggerCheckout(event)" style="flex: 1; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-weight: 800; font-size: 1rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(0, 51, 102, 0.35)'" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 51, 102, 0.2)'">MUA NGAY</button>
+                    </div>
+                </div>
+            </div>
+            
             <script>
                 function toggleDescription() {
                     const wrapper = document.getElementById('desc-wrapper');
@@ -2911,32 +3296,112 @@ def build_product(base_dir, header_part, footer_part):
                     requestAnimationFrame(update);
                 }
                 
-                function selectVariantDropdown(element, type, price, name) {
-                    const wrapper = element.closest('.nava-dropdown-wrapper');
-                    const displayEl = wrapper.querySelector('.nava-dropdown-selected');
-                    if (displayEl) {
-                        displayEl.innerText = name;
-                    }
+                // Bottom Sheet State
+                let isBsOpen = false;
+                
+                window.openBottomSheet = function() {
+                    const overlay = document.getElementById('nava-bs-overlay');
+                    const bs = document.getElementById('nava-bottom-sheet');
+                    const stickyBar = document.getElementById('sticky-cart-bar');
                     
-                    const siblings = element.parentNode.querySelectorAll('.nava-dropdown-item');
-                    siblings.forEach(el => el.classList.remove('active'));
-                    element.classList.add('active');
+                    if (overlay && bs) {
+                        isBsOpen = true;
+                        if (stickyBar) {
+                            stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                        }
+                        overlay.style.display = 'block';
+                        bs.style.display = 'flex';
+                        void overlay.offsetWidth;
+                        void bs.offsetWidth;
+                        overlay.style.opacity = '1';
+                        bs.classList.add('open');
+                        document.body.style.overflow = 'hidden';
+                        
+                        // Hide compare bar when bottom sheet is open
+                        if (typeof updateCompareBar === 'function') {
+                            updateCompareBar();
+                        }
+                    }
+                };
+                
+                window.closeBottomSheet = function() {
+                    const overlay = document.getElementById('nava-bs-overlay');
+                    const bs = document.getElementById('nava-bottom-sheet');
+                    
+                    if (overlay && bs) {
+                        isBsOpen = false;
+                        overlay.style.opacity = '0';
+                        bs.classList.remove('open');
+                        setTimeout(() => {
+                            overlay.style.display = 'none';
+                            bs.style.display = 'none';
+                            document.body.style.overflow = '';
+                            toggleStickyBar();
+                            
+                            // Restore compare bar visibility
+                            if (typeof updateCompareBar === 'function') {
+                                updateCompareBar();
+                            }
+                        }, 300);
+                    }
+                };
+
+                window.openReviewImage = function(src) {
+                    let rLightbox = document.getElementById('review-lightbox');
+                    if (!rLightbox) {
+                        rLightbox = document.createElement('div');
+                        rLightbox.id = 'review-lightbox';
+                        rLightbox.innerHTML = `
+                            <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 2147483647; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.25s;" onclick="this.parentNode.style.display='none'; document.body.style.overflow=''">
+                                <button type="button" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem;"><i class="ph ph-x"></i></button>
+                                <img id="review-lightbox-img" src="" style="max-width: 90%; max-height: 90vh; object-fit: contain; border-radius: 8px; border: 2px solid rgba(255,255,255,0.1);">
+                            </div>
+                        `;
+                        document.body.appendChild(rLightbox);
+                    }
+                    rLightbox.querySelector('#review-lightbox-img').src = src;
+                    rLightbox.style.display = 'block';
+                    setTimeout(() => {
+                        rLightbox.querySelector('div').style.opacity = '1';
+                    }, 50);
+                    document.body.style.overflow = 'hidden';
+                };
+
+                function selectVariantDropdown(element, type, price, name) {
+                    // Sync all dropdowns of this type (main page and bottom sheet)
+                    const wrappers = document.querySelectorAll(`.nava-dropdown-wrapper[data-dropdown-type="${type}"]`);
+                    wrappers.forEach(wrapper => {
+                        const displayEl = wrapper.querySelector('.nava-dropdown-selected');
+                        if (displayEl) {
+                            displayEl.innerText = name;
+                        }
+                        const displayPriceEl = wrapper.querySelector('.nava-dropdown-selected-price');
+                        if (displayPriceEl) {
+                            displayPriceEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
+                        }
+                        
+                        const items = wrapper.querySelectorAll('.nava-dropdown-item');
+                        items.forEach(item => {
+                            const itemSpan = item.querySelector('span');
+                            const itemName = itemSpan ? itemSpan.innerText : item.innerText;
+                            if (itemName.trim() === name.trim()) {
+                                item.classList.add('active');
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                        
+                        // Close dropdown
+                        wrapper.classList.remove('active');
+                    });
                     
                     if (type === 'ram') { 
                         activeRamPrice = price; 
                         activeRamName = name; 
-                        const displayEl = document.getElementById('ram-price-display');
-                        if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
-                        }
                     }
                     if (type === 'ssd') { 
                         activeSsdPrice = price; 
                         activeSsdName = name; 
-                        const displayEl = document.getElementById('ssd-price-display');
-                        if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
-                        }
                     }
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
@@ -2944,6 +3409,7 @@ def build_product(base_dir, header_part, footer_part):
                     if (total !== currentPrice) {
                         animatePrice('main-price', currentPrice, total, 400);
                         animatePrice('sticky-price', currentPrice, total, 400);
+                        animatePrice('bs-price', currentPrice, total, 400);
                         currentPrice = total;
                     }
                     
@@ -2955,24 +3421,26 @@ def build_product(base_dir, header_part, footer_part):
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
-                    
-                    // Close the dropdown after selection (for touch devices)
-                    wrapper.classList.remove('active');
                 }
 
                 window.adjustQty = function(amount) {
-                    const qtyInput = document.getElementById('qty-val-main');
-                    if (qtyInput) {
-                        let currentVal = parseInt(qtyInput.value) || 1;
-                        let newVal = currentVal + amount;
-                        if (newVal < 1) newVal = 1;
-                        qtyInput.value = newVal;
+                    const qtyInputMain = document.getElementById('qty-val-main');
+                    const qtyInputBs = document.getElementById('qty-val-bs');
+                    
+                    let currentVal = 1;
+                    if (qtyInputMain) {
+                        currentVal = parseInt(qtyInputMain.value) || 1;
+                    } else if (qtyInputBs) {
+                        currentVal = parseInt(qtyInputBs.value) || 1;
                     }
+                    
+                    let newVal = currentVal + amount;
+                    if (newVal < 1) newVal = 1;
+                    
+                    if (qtyInputMain) qtyInputMain.value = newVal;
+                    if (qtyInputBs) qtyInputBs.value = newVal;
                 };
 
-                // Show sticky bar on scroll
-                // Show sticky bar on scroll
-                // Show sticky bar on scroll
                 function toggleStickyBar(e) {
                     const stickyBar = document.getElementById('sticky-cart-bar');
                     if (!stickyBar) return;
@@ -2980,7 +3448,6 @@ def build_product(base_dir, header_part, footer_part):
                     const threshold = window.innerWidth <= 768 ? 200 : 600;
                     let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
                     
-                    // Fallback for Sapo themes using wrapper scrolling
                     if (scrollY === 0) {
                         const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
                         for (let i=0; i<wrappers.length; i++) {
@@ -2988,14 +3455,13 @@ def build_product(base_dir, header_part, footer_part):
                         }
                     }
                     
-                    // Trust event target if it's a large scrollable area
                     if (e && e.target && e.target.scrollTop > scrollY) {
                         if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
                             scrollY = e.target.scrollTop;
                         }
                     }
                     
-                    if (scrollY > threshold) {
+                    if (scrollY > threshold && !isBsOpen) {
                         stickyBar.style.setProperty('transform', 'translateY(0)', 'important');
                         stickyBar.style.setProperty('display', 'block', 'important');
                     } else {
@@ -3008,22 +3474,30 @@ def build_product(base_dir, header_part, footer_part):
 
                     const stickyBar = document.getElementById('sticky-cart-bar');
                     if (stickyBar) {
-                        stickyBar.style.setProperty('z-index', '2147483647', 'important');
+                        stickyBar.style.setProperty('z-index', '1000', 'important');
                         if (stickyBar.parentNode !== scrollTarget) {
                             scrollTarget.appendChild(stickyBar);
                         }
                     }
+                    
+                    const bsOverlay = document.getElementById('nava-bs-overlay');
+                    const bsDrawer = document.getElementById('nava-bottom-sheet');
+                    if (bsOverlay && bsOverlay.parentNode !== scrollTarget) {
+                        scrollTarget.appendChild(bsOverlay);
+                    }
+                    if (bsDrawer && bsDrawer.parentNode !== scrollTarget) {
+                        scrollTarget.appendChild(bsDrawer);
+                    }
+                    
                     toggleStickyBar(); // Check immediately on load
                     
-                    // Toggle dropdowns disabled on click, only hover is enabled
                     document.querySelectorAll('.nava-dropdown-display').forEach(display => {
                         display.addEventListener('click', function(e) {
                             e.preventDefault();
-                            e.stopPropagation(); // Disable direct click toggle
+                            e.stopPropagation();
                         });
                     });
                     
-                    // Hover expansion on all screen sizes
                     document.querySelectorAll('.nava-dropdown-wrapper').forEach(wrapper => {
                         wrapper.addEventListener('mouseenter', function() {
                             wrapper.classList.add('active');
@@ -3033,7 +3507,6 @@ def build_product(base_dir, header_part, footer_part):
                         });
                     });
 
-                    // Redesign action listeners
                     const triggerCartOpen = (e) => {
                         if (e) e.preventDefault();
                         const headerCartBtn = document.getElementById('header-cart-btn');
@@ -3051,10 +3524,35 @@ def build_product(base_dir, header_part, footer_part):
                         btn.addEventListener('click', triggerCartOpen);
                     });
 
-                    // Buy Now listeners (redirect to demo_checkout.html)
-                    const triggerCheckout = (e) => {
+                    window.triggerAddToCart = (e) => {
                         if (e) e.preventDefault();
-                        window.location.href = 'demo_checkout.html';
+                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
+                            if (typeof showToast === 'function') {
+                                showToast('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
+                            } else {
+                                alert('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
+                            }
+                        } else {
+                            closeBottomSheet();
+                            triggerCartOpen(e);
+                        }
+                    };
+
+                    window.triggerCheckout = (e) => {
+                        if (e) e.preventDefault();
+                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
+                            if (isBsOpen) {
+                                if (typeof showToast === 'function') {
+                                    showToast('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
+                                } else {
+                                    alert('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
+                                }
+                            } else {
+                                openBottomSheet();
+                            }
+                        } else {
+                            window.location.href = 'demo_checkout.html';
+                        }
                     };
 
                     const btnBuyNowMain = document.getElementById('btn-buy-now-main');
@@ -3066,12 +3564,21 @@ def build_product(base_dir, header_part, footer_part):
                         btn.addEventListener('click', triggerCheckout);
                     });
                     
-                    // Close dropdowns on clicking outside
                     document.addEventListener('click', function() {
                         document.querySelectorAll('.nava-dropdown-wrapper').forEach(w => w.classList.remove('active'));
                     });
 
-                    // Bind scroll listeners
+                    const ratingBtn = document.getElementById('rating-scroll-btn');
+                    if (ratingBtn) {
+                        ratingBtn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const dest = document.getElementById('danh-gia-shopee');
+                            if (dest) {
+                                dest.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        });
+                    }
+
                     const scrollContainer = document.getElementById('nava-master-wrapper') || window;
                     scrollContainer.addEventListener('scroll', toggleStickyBar, { passive: true });
                     window.addEventListener('scroll', toggleStickyBar, true);
@@ -3190,7 +3697,7 @@ def build_product(base_dir, header_part, footer_part):
             </script>
         </div>
     """
-    full_html = clean_liquid_tags(header_part + product_html + local_footer_part)
+    full_html = clean_liquid_tags(header_part + product_html + local_footer_part, 'product')
     
     # Inject sticky compare bar HTML from post_build.py
     try:
@@ -3994,7 +4501,7 @@ def build_compare_page(base_dir, header_part, footer_part):
             </script>
         </div>
     """
-    full_html = clean_liquid_tags(header_part + compare_html + local_footer_part)
+    full_html = clean_liquid_tags(header_part + compare_html + local_footer_part, 'compare')
     full_html = inject_seo_metadata(
         full_html,
         title="So Sánh Sản Phẩm - Nava Store",
@@ -4126,23 +4633,68 @@ def build_cart_page(base_dir, header_part, footer_part):
                 <div class="cart-summary">
                     <h2 class="summary-title">Tóm Tắt Đơn Hàng</h2>
                     
-                    <div class="summary-row">
-                        <span>Tạm tính (2 sản phẩm)</span>
-                        <span style="color: var(--text-dark); font-weight: 700;">35.680.000đ</span>
-                    </div>
-                    
-                    <div class="summary-row">
+                    <div class="summary-row" style="align-items: center;">
                         <span>Phí vận chuyển</span>
-                        <span style="color: #10b981; font-weight: 700;">Miễn phí</span>
+                        <span class="ticket-badge ticket-green">Miễn phí</span>
                     </div>
                     
-                    <div class="summary-row" id="summary-discount-row">
+                    <div class="summary-row" id="summary-discount-row" style="align-items: center;">
                         <span>Giảm giá (Voucher)</span>
-                        <span id="summary-discount-value" style="color: var(--primary); font-weight: 700;">-356.800đ</span>
+                        <span id="summary-discount-value" class="ticket-badge ticket-blue">-356.800đ</span>
                     </div>
                     
                     <!-- NAVA Voucher Section (Shopee Style) -->
                     <style>
+                        /* Ticket Badge Styling for discounts and shipping */
+                        .ticket-badge {
+                            position: relative;
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            background: transparent;
+                            padding: 4px 14px;
+                            font-size: 0.85rem;
+                            font-weight: 700;
+                            border-radius: 6px;
+                            border: 1.5px solid currentColor;
+                            line-height: 1.2;
+                            box-sizing: border-box;
+                        }
+                        .ticket-badge::before,
+                        .ticket-badge::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            width: 6px;
+                            height: 8px;
+                            background: var(--bg-white, #ffffff);
+                            border: 1.5px solid currentColor;
+                            border-radius: 50%;
+                            transform: translateY(-50%);
+                            box-sizing: border-box;
+                            z-index: 2;
+                        }
+                        .ticket-badge::before {
+                            left: -4.5px;
+                            clip-path: inset(0 0 0 3px);
+                        }
+                        .ticket-badge::after {
+                            right: -4.5px;
+                            clip-path: inset(0 3px 0 0);
+                        }
+                        .ticket-green {
+                            color: #10b981 !important;
+                            background: rgba(16, 185, 129, 0.04);
+                        }
+                        .ticket-blue {
+                            color: var(--primary) !important;
+                            background: rgba(0, 51, 102, 0.04);
+                        }
+                        [data-theme="dark"] .ticket-badge::before,
+                        [data-theme="dark"] .ticket-badge::after {
+                            background: var(--bg-white, #1e293b);
+                        }
+
                         .shopee-voucher-container {
                             border: 1px solid var(--border-color);
                             background: var(--bg-gray);
@@ -4185,12 +4737,12 @@ def build_cart_page(base_dir, header_part, footer_part):
                             align-items: stretch;
                             background: var(--bg-white, #ffffff);
                             border: 1px solid var(--border-color);
-                            border-radius: 8px;
+                            border-radius: 12px;
                             overflow: hidden;
                             position: relative;
-                            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
                         }
-                        /* Ticket style circular notches */
+                        /* Ticket style circular notches centered at the boundary between left and right */
                         .voucher-ticket::before,
                         .voucher-ticket::after {
                             content: '';
@@ -4205,40 +4757,54 @@ def build_cart_page(base_dir, header_part, footer_part):
                         }
                         .voucher-ticket::before {
                             top: -7px;
-                            left: 83px; /* centered at 90px boundary */
+                            right: 63px; /* centered at 70px boundary: 70 - 7 = 63px */
                             clip-path: inset(7px 0 0 0); /* only show bottom half */
                         }
                         .voucher-ticket::after {
                             bottom: -7px;
-                            left: 83px; /* centered at 90px boundary */
+                            right: 63px; /* centered at 70px boundary: 70 - 7 = 63px */
                             clip-path: inset(0 0 7px 0); /* only show top half */
                         }
                         .voucher-left {
-                            background: rgba(0, 51, 102, 0.04);
-                            color: var(--primary);
-                            width: 90px;
+                            background: var(--bg-white);
+                            padding: 16px 20px;
+                            flex: 1;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: flex-start;
+                            text-align: left;
+                            border-right: 1px dashed var(--border-color);
+                            box-sizing: border-box;
+                        }
+                        .voucher-right {
+                            background: #003366;
+                            width: 70px;
                             flex-shrink: 0;
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-weight: 800;
-                            font-size: 0.85rem;
-                            text-align: center;
-                            letter-spacing: 0.5px;
-                            border-right: 1px dashed var(--border-color);
                             box-sizing: border-box;
                         }
-                        [data-theme="dark"] .voucher-left {
-                            background: rgba(51, 133, 255, 0.08);
-                            color: #66a3ff;
-                        }
-                        .voucher-right {
-                            padding: 12px 14px;
-                            flex: 1;
-                            font-size: 0.85rem;
+                        .voucher-checkbox {
+                            width: 24px;
+                            height: 24px;
+                            border-radius: 6px;
+                            background: rgba(255, 255, 255, 0.2);
+                            border: 1.5px solid #ffffff;
                             display: flex;
-                            flex-direction: column;
+                            align-items: center;
                             justify-content: center;
+                        }
+                        .voucher-checkbox i {
+                            color: #ffffff;
+                            font-size: 1rem;
+                        }
+                        [data-theme="dark"] .voucher-left {
+                            background: var(--bg-white);
+                        }
+                        [data-theme="dark"] .voucher-right {
+                            background: #002244;
                         }
                         .voucher-desc {
                             font-weight: 700;
@@ -4294,10 +4860,14 @@ def build_cart_page(base_dir, header_part, footer_part):
                             <span class="voucher-title">Khuyến mãi dành cho bạn</span>
                         </div>
                         <div class="voucher-ticket">
-                            <div class="voucher-left">1% OFF</div>
+                            <div class="voucher-left">
+                                <div class="voucher-desc" id="applied-voucher-title">Tự động áp dụng mã NAVAVIP</div>
+                                <div class="voucher-subtext" id="applied-voucher-sub">Đã giảm <span id="voucher-discount-amount" style="color: var(--primary); font-weight: 800;">356.800đ</span></div>
+                            </div>
                             <div class="voucher-right">
-                                <div class="voucher-desc" id="applied-voucher-title">Tự động áp dụng mã NAVA1</div>
-                                <div class="voucher-subtext" id="applied-voucher-sub">Đã giảm <span id="voucher-discount-amount" style="color: var(--primary); font-weight: 800;">356.800đ</span> (1%)</div>
+                                <div class="voucher-checkbox">
+                                    <i class="ph-bold ph-check"></i>
+                                </div>
                             </div>
                         </div>
                         <div class="kol-input-box">
@@ -4330,7 +4900,7 @@ def build_cart_page(base_dir, header_part, footer_part):
             let cartSubtotal = 35680000;
             let activeDiscountPercent = 1;
             let activeDiscountValue = 356800;
-            let appliedCode = 'NAVA1';
+            let appliedCode = 'NAVAVIP';
             
             function changeQty(btn, delta) {
                 const spinner = btn.closest('.qty-spinner');
@@ -4459,12 +5029,12 @@ def build_cart_page(base_dir, header_part, footer_part):
                     titleEl.innerText = 'Đã áp dụng mã NAVA50';
                     alertBox.style.display = 'block';
                     updateCartTotals();
-                } else if (code === 'NAVA1') {
+                } else if (code === 'NAVAVIP') {
                     activeDiscountPercent = 1;
-                    appliedCode = 'NAVA1';
+                    appliedCode = 'NAVAVIP';
                     alertBox.style.color = '#10b981';
-                    alertBox.innerText = 'Đã quay lại mã giảm giá mặc định NAVA1 (1%)';
-                    titleEl.innerText = 'Tự động áp dụng mã NAVA1';
+                    alertBox.innerText = 'Đã áp dụng mã giảm giá mặc định NAVAVIP';
+                    titleEl.innerText = 'Tự động áp dụng mã NAVAVIP';
                     alertBox.style.display = 'block';
                     updateCartTotals();
                 } else {
@@ -4499,7 +5069,7 @@ def build_cart_page(base_dir, header_part, footer_part):
             });
         </script>
     """
-    full_html = clean_liquid_tags(header_part + cart_html + local_footer_part)
+    full_html = clean_liquid_tags(header_part + cart_html + local_footer_part, 'cart')
     full_html = inject_seo_metadata(
         full_html,
         title="Giỏ Hàng - Nava Store",
@@ -4658,6 +5228,7 @@ def build_checkout_page(base_dir):
                             <span id="address-display" style="flex: 1; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">Thành phố Thủ Đức, TP Hồ Chí Minh</span>
                             <i class="ph-bold ph-caret-down" style="color: var(--text-muted); flex-shrink: 0;"></i>
                         </div>
+                        <input type="text" id="street-address-input" class="nava-input" placeholder="Số nhà, tên đường..." style="margin-top: 10px; display: block;" value="270 Đường Linh Trung">
                         <input type="hidden" id="province-select" value="HCM">
                         <input type="hidden" id="ward-select" value="1">
                     </div>
@@ -4861,7 +5432,7 @@ def build_checkout_page(base_dir):
                     
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
-                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đặt hàng thành công!')">ĐẶT HÀNG</button>
+                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="validateAndOrder()">ĐẶT HÀNG</button>
                     </div>
                 </div>
             </div>
@@ -4875,7 +5446,7 @@ def build_checkout_page(base_dir):
             <div class="sticky-price-label">Tổng thanh toán</div>
             <div class="sticky-price-val" id="sticky-total-price">35.323.200đ</div>
         </div>
-        <button class="btn-sticky-pay" onclick="alert('Đặt hàng thành công!')">THANH TOÁN</button>
+        <button class="btn-sticky-pay" onclick="validateAndOrder()">THANH TOÁN</button>
     </div>
 
     <!-- Address Modal -->
@@ -4898,6 +5469,34 @@ def build_checkout_page(base_dir):
     </div>
 
     <script>
+        function validateAndOrder() {
+            const fullname = document.getElementById('checkout-fullname').value.trim();
+            const phone = document.getElementById('checkout-phone').value.trim();
+            const streetInput = document.getElementById('street-address-input');
+            const streetVal = streetInput ? streetInput.value.trim() : '';
+            const addressDisplay = document.getElementById('address-display').textContent.trim();
+            
+            if (!fullname) {
+                alert('Vui lòng nhập Họ và tên');
+                document.getElementById('checkout-fullname').focus();
+                return;
+            }
+            if (!phone) {
+                alert('Vui lòng nhập Số điện thoại');
+                document.getElementById('checkout-phone').focus();
+                return;
+            }
+            if (!streetVal) {
+                alert('Vui lòng nhập Số nhà, tên đường');
+                if (streetInput) {
+                    streetInput.focus();
+                }
+                return;
+            }
+            
+            alert('Đặt hàng thành công!');
+        }
+
         // Copy to clipboard function with premium feedback
         function copyToClipboard(elementId, btn) {
             const el = document.getElementById(elementId);
@@ -5047,6 +5646,13 @@ def build_checkout_page(base_dir):
                             displayEl.style.color = 'var(--text-dark)';
                         }
                         
+                        const streetInput = document.getElementById('street-address-input');
+                        if (streetInput) {
+                            streetInput.style.display = 'block';
+                            streetInput.value = '';
+                            setTimeout(() => { streetInput.focus(); }, 150);
+                        }
+                        
                         if (cleanName.includes("Hà Nội") || cleanName.includes("Hồ Chí Minh") || cleanName.includes("HCM")) {
                             if(provinceSelectHidden) provinceSelectHidden.value = 'HCM';
                             if (hoatocShipping) hoatocShipping.style.display = 'flex';
@@ -5109,7 +5715,7 @@ def build_checkout_page(base_dir):
             
             let discountPercent = parseFloat(localStorage.getItem('nava_discount_percent')) || 1;
             let discountVal = Math.round(subtotal * (discountPercent / 100));
-            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVA1';
+            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVAVIP';
             
             function updatePaymentState() {
                 paymentRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));
@@ -5434,7 +6040,7 @@ def build_policy_pages(base_dir, header_part, footer_part):
             });
         </script>
     """
-    full_html = clean_liquid_tags(header_part + policy_html + local_footer_part)
+    full_html = clean_liquid_tags(header_part + policy_html + local_footer_part, 'page')
     full_html = inject_seo_metadata(
         full_html,
         title="Chính Sách & Điều Khoản - Nava Store",

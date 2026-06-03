@@ -145,6 +145,7 @@
                             <span id="address-display" style="flex: 1; font-weight: 600; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">Thành phố Thủ Đức, TP Hồ Chí Minh</span>
                             <i class="ph-bold ph-caret-down" style="color: var(--text-muted); flex-shrink: 0;"></i>
                         </div>
+                        <input type="text" id="street-address-input" class="nava-input" placeholder="Số nhà, tên đường..." style="margin-top: 10px; display: block;" value="270 Đường Linh Trung">
                         <input type="hidden" id="province-select" value="HCM">
                         <input type="hidden" id="ward-select" value="1">
                     </div>
@@ -348,7 +349,7 @@
                     
                     <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
                         <a href="demo_cart.html" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 5px; transition: 0.2s;"><i class="ph-bold ph-caret-left"></i> Quay lại giỏ hàng</a>
-                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="alert('Đặt hàng thành công!')">ĐẶT HÀNG</button>
+                        <button class="btn-pay" style="width: auto; margin-top: 0; padding: 14px 30px;" onclick="validateAndOrder()">ĐẶT HÀNG</button>
                     </div>
                 </div>
             </div>
@@ -362,7 +363,7 @@
             <div class="sticky-price-label">Tổng thanh toán</div>
             <div class="sticky-price-val" id="sticky-total-price">35.323.200đ</div>
         </div>
-        <button class="btn-sticky-pay" onclick="alert('Đặt hàng thành công!')">THANH TOÁN</button>
+        <button class="btn-sticky-pay" onclick="validateAndOrder()">THANH TOÁN</button>
     </div>
 
     <!-- Address Modal -->
@@ -385,6 +386,34 @@
     </div>
 
     <script>
+        function validateAndOrder() {
+            const fullname = document.getElementById('checkout-fullname').value.trim();
+            const phone = document.getElementById('checkout-phone').value.trim();
+            const streetInput = document.getElementById('street-address-input');
+            const streetVal = streetInput ? streetInput.value.trim() : '';
+            const addressDisplay = document.getElementById('address-display').textContent.trim();
+            
+            if (!fullname) {
+                alert('Vui lòng nhập Họ và tên');
+                document.getElementById('checkout-fullname').focus();
+                return;
+            }
+            if (!phone) {
+                alert('Vui lòng nhập Số điện thoại');
+                document.getElementById('checkout-phone').focus();
+                return;
+            }
+            if (!streetVal) {
+                alert('Vui lòng nhập Số nhà, tên đường');
+                if (streetInput) {
+                    streetInput.focus();
+                }
+                return;
+            }
+            
+            alert('Đặt hàng thành công!');
+        }
+
         // Copy to clipboard function with premium feedback
         function copyToClipboard(elementId, btn) {
             const el = document.getElementById(elementId);
@@ -534,6 +563,13 @@
                             displayEl.style.color = 'var(--text-dark)';
                         }
                         
+                        const streetInput = document.getElementById('street-address-input');
+                        if (streetInput) {
+                            streetInput.style.display = 'block';
+                            streetInput.value = '';
+                            setTimeout(() => { streetInput.focus(); }, 150);
+                        }
+                        
                         if (cleanName.includes("Hà Nội") || cleanName.includes("Hồ Chí Minh") || cleanName.includes("HCM")) {
                             if(provinceSelectHidden) provinceSelectHidden.value = 'HCM';
                             if (hoatocShipping) hoatocShipping.style.display = 'flex';
@@ -596,7 +632,7 @@
             
             let discountPercent = parseFloat(localStorage.getItem('nava_discount_percent')) || 1;
             let discountVal = Math.round(subtotal * (discountPercent / 100));
-            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVA1';
+            let discountCode = localStorage.getItem('nava_discount_code') || 'NAVAVIP';
             
             function updatePaymentState() {
                 paymentRadios.forEach(r => r.closest('.radio-option').classList.remove('active'));

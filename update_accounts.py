@@ -734,9 +734,13 @@ addresses_content = f"""
 </script>
 """
 
-for filename, content in [("account.html", account_content), ("change_pass.html", change_pass_content), ("addresses.html", addresses_content)]:
+for filename, content, template_name in [
+    ("account.html", account_content, "customers"),
+    ("change_pass.html", change_pass_content, "customers"),
+    ("addresses.html", addresses_content, "addresses")
+]:
     full_html = header_part + content + footer_part
-    full_html = clean_liquid_tags(full_html)
+    full_html = clean_liquid_tags(full_html, template_name)
     with open(os.path.join(base_dir, filename), "w", encoding="utf-8") as f:
         f.write(full_html)
-    print(f"Generated {{filename}}")
+    print(f"Generated {filename}")

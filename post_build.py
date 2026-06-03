@@ -25,9 +25,8 @@ sticky_html = """
                 <!-- Slots populated by JS -->
             </div>
         </div>
-        <div id="compare-actions" style="display: flex; gap: 15px; flex-shrink: 0;">
-            <button onclick="clearCompare()" style="padding: 12px 24px; border-radius: 10px; border: 1px solid var(--border-color); background: var(--bg-gray); color: var(--text-dark); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Xóa tất cả</button>
-            <button id="compare-submit" onclick="executeCompare()" disabled style="padding: 12px 35px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
+        <div id="compare-actions" style="display: flex; flex-shrink: 0; min-width: 180px;">
+            <button id="compare-submit" onclick="executeCompare()" disabled style="width: 100%; justify-content: center; padding: 12px 50px; border-radius: 10px; border: none; background: var(--primary); color: white; font-size: 1.05rem; font-weight: 700; cursor: not-allowed; opacity: 0.5; transition: all 0.2s; box-shadow: 0 4px 15px rgba(14,165,233,0.3); display: flex; align-items: center; gap: 8px; font-family: inherit; white-space: nowrap;"><i class="ph-bold ph-magic-wand"></i> So sánh ngay</button>
         </div>
         
         <!-- COMPARE PRODUCT SELECT MODAL -->
@@ -150,7 +149,11 @@ sticky_html = """
         const submitBtn = document.getElementById('compare-submit');
         const expandBtn = document.getElementById('compare-expand');
         
-        if (compareList.length > 0) {
+        // Hide compare bar if bottom sheet is currently open
+        const bs = document.getElementById('nava-bottom-sheet');
+        const isBsOpen = bs && (bs.classList.contains('open') || bs.style.display === 'flex');
+        
+        if (compareList.length > 0 && !isBsOpen) {
             bar.style.setProperty('display', 'block', 'important');
         } else {
             bar.style.setProperty('display', 'none', 'important');
@@ -209,6 +212,12 @@ sticky_html = """
 
     function showCompareSelectDropdown(event, slotElement) {
         if(event) event.stopPropagation();
+        
+        // Close bottom sheet if open
+        if (typeof closeBottomSheet === 'function') {
+            closeBottomSheet();
+        }
+        
         const modal = document.getElementById('compare-select-modal');
         const modalContent = document.getElementById('compare-select-dropdown');
         const searchInput = document.getElementById('compare-search-input');
@@ -312,6 +321,11 @@ sticky_html = """
     });
 
     function executeCompare(isFullScreen = false) {
+        // Close bottom sheet if open
+        if (typeof closeBottomSheet === 'function') {
+            closeBottomSheet();
+        }
+        
         const modal = document.getElementById('compare-modal');
         const modalContent = document.getElementById('compare-modal-content');
         const loading = document.getElementById('compare-loading');
