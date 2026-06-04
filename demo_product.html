@@ -1122,6 +1122,9 @@
                     background: rgba(51, 133, 255, 0.1);
                 }
 
+                .desktop-qty-label { display: inline; }
+                .mobile-qty-label { display: none; }
+
                 /* Simple Policy */
                 .simple-policies { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 24px; border-top: 1px dashed #cbd5e1; }
                 .sp-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; }
@@ -1129,9 +1132,27 @@
                 
                 @media (max-width: 768px) {
                     .prod-title { font-size: 1.4rem; margin-bottom: 12px; }
-                    .prod-price { font-size: 1.8rem; }
+                    .prod-price { font-size: 1.4rem; }
                     .prod-price-wrap { margin-bottom: 20px; padding-bottom: 16px; flex-direction: column; gap: 4px; border-bottom: none; }
                     
+                    .desktop-qty-label { display: none !important; }
+                    .mobile-qty-label { display: inline !important; }
+
+                    /* Narrow quantity selector on mobile */
+                    .qty-selector {
+                        height: 32px !important;
+                    }
+                    .qty-selector .qty-adjust {
+                        width: 28px !important;
+                        height: 100% !important;
+                        font-size: 0.95rem !important;
+                    }
+                    .qty-selector .qty-val {
+                        width: 28px !important;
+                        height: 100% !important;
+                        font-size: 0.85rem !important;
+                    }
+
                     /* Fix product details grid padding */
                     .desc-column { padding: 16px !important; }
                     .specs-column { padding: 16px !important; }
@@ -1156,6 +1177,60 @@
                     
                     /* Fix gallery thumbnails cutoff on mobile */
                     .thumbnail-list { justify-content: flex-start !important; padding-left: 8px !important; padding-right: 8px !important; }
+
+                    /* Make slide/gallery images smaller on mobile */
+                    .main-image-container {
+                        max-width: 300px !important;
+                        margin: 0 auto 20px auto !important;
+                        aspect-ratio: 1/1 !important;
+                        padding: 15px !important;
+                    }
+                    .gallery-thumb {
+                        width: 56px !important;
+                        height: 56px !important;
+                        padding: 4px !important;
+                    }
+
+                    /* Stack Quantity & Price vertically to avoid overlap */
+                    .qty-price-row {
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                        gap: 12px !important;
+                    }
+                    .qty-price-row .prod-price {
+                        font-size: 1.3rem !important;
+                        margin-top: 4px !important;
+                    }
+                    
+                    /* Compact action buttons row */
+                    .action-buttons-row {
+                        height: 46px !important;
+                        gap: 8px !important;
+                    }
+                    .action-buttons-row #btn-cart-icon {
+                        width: 46px !important;
+                        height: 46px !important;
+                    }
+                    .action-buttons-row button {
+                        height: 46px !important;
+                        font-size: 0.8rem !important;
+                        padding: 0 8px !important;
+                    }
+                    .action-buttons-row #btn-buy-now-main span {
+                        font-size: 0.85rem !important;
+                    }
+
+                    /* Reduce review paddings on mobile */
+                    #danh-gia-shopee {
+                        padding: 16px !important;
+                    }
+                    .sr-overview-card,
+                    .sr-distribution-card {
+                        padding: 15px !important;
+                    }
+                    .shopee-comment-item {
+                        padding: 15px !important;
+                    }
                 }
                 
                 /* Magnifier */
@@ -1184,7 +1259,7 @@
                         <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[4].click()"></div>
                     </div>
                     
-                    <div class="thumbnail-list" id="thumbnail-list" style="display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
+                    <div class="thumbnail-list" id="thumbnail-list" style="position: relative; display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
                         <div class="gallery-thumb active" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973')">
                             <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
@@ -1241,7 +1316,7 @@
                     <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px;">
                         <!-- RAM Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">RAM DDR5</span>
                             <div class="nava-dropdown-wrapper" data-dropdown-type="ram" style="max-width: 395px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
@@ -1279,7 +1354,7 @@
                         
                         <!-- SSD Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">SSD NVMe</span>
                             <div class="nava-dropdown-wrapper" data-dropdown-type="ssd" style="max-width: 395px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
@@ -1311,9 +1386,9 @@
                     <!-- Actions (Updated to column N layout) -->
                     <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
                         <!-- Row 1: Quantity Spinner & Price -->
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
+                        <div class="qty-price-row" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);">Số lượng</span>
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
                                 <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray);">
                                     <button class="qty-adjust" onclick="adjustQty(-1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
                                     <input type="text" value="1" class="qty-val" id="qty-val-main" readonly style="width: 36px; height: 32px; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); outline: none;">
@@ -1324,7 +1399,7 @@
                         </div>
  
                         <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
-                        <div style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
+                        <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
                             <!-- Icon Cart Button -->
                             <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
@@ -2246,7 +2321,7 @@
                         
                         <!-- Qty Selector -->
                         <div class="bs-option-col bs-qty-col">
-                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;">Số lượng</span>
+                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
                             <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 46px;">
                                 <button type="button" class="qty-adjust" onclick="adjustQty(-1)" style="width: 36px; height: 100%; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
                                 <input type="text" value="1" class="qty-val" id="qty-val-bs" readonly style="width: 40px; height: 100%; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none;">
@@ -2301,7 +2376,17 @@
                     dots.forEach(d => d.classList.remove('active'));
                     if (dots[index]) dots[index].classList.add('active');
                     
-                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    const container = document.getElementById('thumbnail-list');
+                    if (container) {
+                        const containerWidth = container.clientWidth;
+                        const elementLeft = element.offsetLeft;
+                        const elementWidth = element.clientWidth;
+                        const targetScrollLeft = elementLeft - (containerWidth / 2) + (elementWidth / 2);
+                        container.scrollTo({
+                            left: targetScrollLeft,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
                 
                 function navigateGallery(direction) {
@@ -2323,6 +2408,8 @@
                 let activeSsdPrice = 0;
                 let activeRamName = 'NO RAM';
                 let activeSsdName = 'NO SSD';
+                let warnedBarebone = false;
+                let warnedBareboneCart = false;
                 let currentPrice = basePrice;
 
                 function animatePrice(elementId, startValue, endValue, duration = 400) {
@@ -2458,6 +2545,8 @@
                         activeSsdPrice = price; 
                         activeSsdName = name; 
                     }
+                    warnedBarebone = false;
+                    warnedBareboneCart = false;
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
                     
@@ -2581,33 +2670,21 @@
 
                     window.triggerAddToCart = (e) => {
                         if (e) e.preventDefault();
-                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
-                            if (typeof showToast === 'function') {
-                                showToast('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
-                            } else {
-                                alert('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
-                            }
-                        } else {
-                            closeBottomSheet();
-                            triggerCartOpen(e);
+                        if (window.innerWidth <= 768 && !isBsOpen) {
+                            openBottomSheet();
+                            return;
                         }
+                        closeBottomSheet();
+                        triggerCartOpen(e);
                     };
 
                     window.triggerCheckout = (e) => {
                         if (e) e.preventDefault();
-                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
-                            if (isBsOpen) {
-                                if (typeof showToast === 'function') {
-                                    showToast('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
-                                } else {
-                                    alert('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
-                                }
-                            } else {
-                                openBottomSheet();
-                            }
-                        } else {
-                            window.location.href = 'demo_checkout.html';
+                        if (window.innerWidth <= 768 && !isBsOpen) {
+                            openBottomSheet();
+                            return;
                         }
+                        window.location.href = 'demo_checkout.html';
                     };
 
                     const btnBuyNowMain = document.getElementById('btn-buy-now-main');

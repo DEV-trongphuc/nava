@@ -1,0 +1,4 @@
+Line 151:                     <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-blue" id="cart-continue-shopping">Tiếp tục mua sắm</a>
+Line 177:                 <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width="44" height="44"></a>
+Line 179:                 <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" width="44" height="44"></a>
+Line 180:                 <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" width="44" height="44"></a>

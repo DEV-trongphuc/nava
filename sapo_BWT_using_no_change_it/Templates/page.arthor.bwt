@@ -1,0 +1,26 @@
+<div class="d-none">
+	{% include 'breadcrumb' %}
+</div>
+<link rel="preload" as="style"  href="{{ 'pagestyle_arthor.scss.css' | asset_url }}" type="text/css">
+{{ 'pagestyle_arthor.scss.css' | asset_url | stylesheet_tag }}
+<div class="com_info">
+	<div class="container pt-4">
+		<div class="col-main rounded-10 m_white_bg_module p-2 p-lg-4 page-title arthor_main">
+			<div class="information-blocks main_article">
+				<div class="heading-article d-flex justify-content-center align-items-center">
+					<div class="avata d-flex justify-content-center align-items-center m_white_bg_module modal-open">
+						{%-capture avata-%}{{page.alias}}.jpg{%-endcapture-%}
+						<img alt="{{page.title}}" src="{{ avata | file_url}}" onError="this.src='{{'no_image.jpg' | asset_url}}'"> 
+					</div>
+					<div class="name">
+						<h1 class="title m-0">{{page.title}}</h1>
+						<span class="sup d-inline-block mt-1 mt-lg-2">{{settings.blog_author_text}}</span>
+					</div>
+				</div>
+				<div class="content-page rte ">
+					{{ page.content | default: settings.other_updating }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

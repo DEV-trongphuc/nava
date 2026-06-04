@@ -1,0 +1,150 @@
+Term 'variant': found 3 matches
+;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sc-product-variant {
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+.sc-helpful {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.sc-helpful i 
+========================================
+);
+}
+
+.sr-count {
+    min-width: 50px;
+    text-align: right;
+    color: var(--text-gray);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Comments List: Fullwidth */
+.shopee-comments-list {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.shopee-comment-ite
+========================================
+;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sc-product-variant {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-top: 4px;
+}
+
+@media (max-width: 768px) {
+    .shopee-rating-summary {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .sr-overview-ca
+========================================
+Term 'select': found 4 matches
+133, 255, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    backgr
+========================================
+
+    cursor: grabbing;
+}
+
+.hero-slider img,
+.hero-image img {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-white);
+    border: 1px solid var(--border-color);
+    border-radius: var(
+========================================
+hite;
+}
+
+.pillar-card p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+
+/* --- CUSTOM SCROLLBAR & SELECTION --- */
+::-webkit-scrollbar {
+    width: 6px;
+    /* slightly thinner for a modern look */
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 4px;
+    tr
+========================================
+Term 'qty-selector': found 0 matches
+Term 'custom-select': found 0 matches

@@ -1,0 +1,608 @@
+{%- include 'setup_price_pr' -%}
+{%- assign variantCount = product.variants | size -%}
+{%- assign productContent = product.content | split: "<h6>" | first -%}
+{%- include 'breadcrumb' -%}
+{%- assign videos = '' -%}
+{%- assign shopee = '' -%}
+{%- assign fbt = '' -%}
+{%- assign specs = false -%}
+{%- for tag in product.tags -%}
+{%- if tag contains 'video_' -%}
+{%- assign videos = tag | split: 'video_' | last -%}
+{%- endif -%}
+{%- if tag contains 'shopee_' -%}
+{%- assign shopee = tag | split: 'shopee_' | last -%}
+{%- endif -%}
+{%- if tag contains 'addon_' -%}
+{%- assign link = tag | remove: 'addon_' -%}
+{%- assign fbt = fbt | append: ',' | append: link   -%}
+{%- endif -%}
+{%- endfor -%}
+
+{%- assign fbt = fbt | remove_first: ',' | split: ',' -%}
+
+<div itemscope itemtype="http://schema.org/Product">
+    {%-include 'schema_product'-%}
+    
+    <style>
+        html, body { max-width: 100vw; overflow-x: hidden; }
+        .nava-breadcrumb, .thumbnail-list { overscroll-behavior-x: contain; box-sizing: border-box; }
+        .nava-product-layout { 
+            display: flex; flex-direction: column; gap: 30px; margin-top: 20px; width: 100%; box-sizing: border-box; 
+            background: var(--bg-white, #ffffff); padding: 20px; border-radius: 16px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color);
+        }
+        .nava-prod-gallery { width: 100%; box-sizing: border-box; }
+        .nava-prod-info { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
+        @media (min-width: 992px) {
+            .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 50px; padding: 35px; }
+            .nava-prod-gallery { width: 50%; position: sticky; top: 130px; }
+            .nava-prod-info { width: 50%; }
+        }
+        
+        /* Gallery */
+        .main-image-container { 
+            background: #ffffff; 
+            border-radius: 16px; 
+            padding: 20px; 
+            text-align: center; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border-color);
+        }
+        .main-image-container img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        
+        .thumbnail-list { 
+            display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth;
+            padding: 5px 0; margin-bottom: 25px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+        }
+        .thumbnail-list::-webkit-scrollbar { display: none; }
+        .thumbnail-item { 
+            width: 70px; height: 70px; border-radius: 10px; border: 1px solid var(--border-color); 
+            padding: 5px; flex-shrink: 0; cursor: pointer; transition: 0.2s; background: #ffffff;
+        }
+        .thumbnail-item.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .thumbnail-item img { width: 100%; height: 100%; object-fit: contain; }
+        
+        /* Specs pills */
+        .prod-specs-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .spec-pill { 
+            background: var(--bg-gray); border: 1px solid var(--border-color); 
+            border-radius: 6px; padding: 4px 10px; font-size: 0.78rem; font-weight: 600; 
+            color: var(--text-gray); display: inline-flex; align-items: center; gap: 5px;
+        }
+        
+        /* Bottom Sticky Bar Mobile */
+        .mobile-bottom-buybar {
+            position: fixed !important; bottom: 0 !important; left: 0 !important; right: 0 !important; width: 100% !important;
+            background: rgba(255, 255, 255, 0.98) !important; backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border-color) !important; padding: 12px 20px !important;
+            display: none; align-items: center; justify-content: space-between; z-index: 9999 !important;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important; box-sizing: border-box !important;
+        }
+        @media (max-width: 768px) {
+            .mobile-bottom-buybar { display: flex !important; }
+            body { padding-bottom: 80px !important; }
+        }
+        
+        /* Custom Select for Swatches */
+        .custom-select-wrapper { position: relative; margin-bottom: 15px; width: 100%; }
+        .custom-select-display {
+            display: flex; align-items: center; justify-content: space-between;
+            border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 15px;
+            background: var(--bg-white); cursor: pointer; transition: 0.2s; font-size: 0.9rem;
+            font-weight: 600; color: var(--text-dark);
+        }
+        .custom-select-display:hover { border-color: var(--primary); }
+        .custom-select-list {
+            position: absolute; top: 100%; left: 0; width: 100%; margin-top: 5px;
+            padding: 5px; background: var(--bg-white); border: 1px solid var(--border-color);
+            border-radius: 10px; box-shadow: var(--shadow-md); z-index: 1000; list-style: none;
+            display: none; max-height: 250px; overflow-y: auto; margin-bottom: 0;
+        }
+        .custom-select-wrapper.active .custom-select-list { display: block; }
+        .custom-select-list li {
+            padding: 8px 12px; cursor: pointer; border-radius: 6px; font-size: 0.88rem; transition: 0.15s;
+        }
+        .custom-select-list li:hover { background: var(--bg-gray); color: var(--primary); }
+        .custom-select-list li.selected { background: rgba(0,51,102,0.05); color: var(--primary); font-weight: 700; }
+
+        /* Collapsible Description */
+        .desc-content-wrapper {
+            position: relative;
+            max-height: 800px;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .desc-content-wrapper.expanded {
+            max-height: 10000px;
+        }
+        .desc-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), var(--bg-white, #ffffff));
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        [data-theme="dark"] .desc-overlay {
+            background: linear-gradient(to bottom, rgba(21,29,43,0), var(--bg-white, #151d2b));
+        }
+        .desc-content-wrapper.expanded .desc-overlay {
+            opacity: 0;
+        }
+        .btn-show-more {
+            background: var(--bg-white, #fff);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            font-weight: 700;
+            padding: 10px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .btn-show-more:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+        
+        /* Specs Column overrides to match nava-spec-grid */
+        .specs-column {
+            background: var(--bg-gray, #f8fafc) !important;
+            border-radius: 16px !important;
+            padding: 24px !important;
+            border: 1px solid var(--border-color, #e2e8f0) !important;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .specs-column h2, .specs-column h3 {
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: var(--text-dark, #0f172a) !important;
+            margin-bottom: 20px !important;
+            padding: 0 !important;
+            border: none !important;
+        }
+        /* Style standard tables rendered inside specs-column */
+        .specs-column table {
+            width: 100% !important;
+            border-collapse: collapse !important;
+            border: none !important;
+            margin: 0 !important;
+        }
+        .specs-column tr {
+            display: grid !important;
+            grid-template-columns: 120px 1fr !important;
+            gap: 16px !important;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid var(--border-color, #e2e8f0) !important;
+            background: transparent !important;
+        }
+        .specs-column tr:last-child {
+            border-bottom: none !important;
+        }
+        .specs-column td {
+            padding: 0 !important;
+            border: none !important;
+            font-size: 0.85rem !important;
+            line-height: 1.4 !important;
+        }
+        .specs-column td:first-child {
+            color: var(--text-gray, #64748b) !important;
+            font-weight: 500 !important;
+        }
+        .specs-column td:last-child {
+            color: var(--text-dark, #0f172a);
+            font-weight: 600 !important;
+            word-break: break-word !important;
+        }
+        
+        /* specs lists overrides */
+        .specs-column ul {
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+        }
+        .specs-column li {
+            display: grid !important;
+            grid-template-columns: 120px 1fr !important;
+            gap: 16px !important;
+            padding: 12px 0 !important;
+            border-bottom: 1px solid var(--border-color, #e2e8f0) !important;
+            font-size: 0.85rem !important;
+        }
+        .specs-column li:last-child {
+            border-bottom: none !important;
+        }
+        .specs-column li span:first-child {
+            color: var(--text-gray, #64748b) !important;
+            font-weight: 500 !important;
+        }
+        .specs-column li span:last-child {
+            color: var(--text-dark, #0f172a);
+            font-weight: 600 !important;
+            word-break: break-word !important;
+        }
+
+        .specs-column h2:not(.specs-custom-title), .specs-column h3 {
+            display: none !important;
+        }
+
+        .desktop-qty-label { display: inline; }
+        .mobile-qty-label { display: none; }
+        @media (max-width: 575px) {
+            .desktop-qty-label { display: none !important; }
+            .mobile-qty-label { display: inline !important; }
+        }
+    </style>
+
+    <div class="container mt-3 mb-3">
+        <div class="nava-product-layout">
+            <!-- Left: Gallery -->
+            <div class="nava-prod-gallery">
+                <div class="main-image-container">
+                    {%-if videos != ''-%}
+                    <div class="box_video embed-responsive embed-responsive-16by9 w-100 h-100" id="main-product-video">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{videos}}?rel=0&autoplay=1&mute=1" allow='autoplay; encrypted-media' allowfullscreen style="width: 100%; height: 100%; border: none; border-radius: 12px;"></iframe>
+                    </div>
+                    {%-else-%}
+                    <img id="main-product-image" src="{{ product.images[0].src | default: 'no_image.jpg' | img_url: 'large' }}" alt="{{ product.name }}">
+                    {%-endif-%}
+                </div>
+                
+                <div class="thumbnail-list" id="thumbnail-list">
+                    {%-if videos != ''-%}
+                    <div class="thumbnail-item active" onclick="switchMainMedia(this, 'video')">
+                        <div class="w-100 h-100 d-flex flex-column align-items-center justify-content-center" style="font-size: 0.65rem; font-weight: bold; color: var(--text-gray);">
+                            <i class="ph-fill ph-video-camera" style="font-size: 1.4rem; color: #ef4444; margin-bottom: 2px;"></i>
+                            <span>Video</span>
+                        </div>
+                    </div>
+                    {%-endif-%}
+                    {%-for image in product.images-%}
+                    <div class="thumbnail-item {% if forloop.first and videos == '' %}active{% endif %}" onclick="switchMainMedia(this, 'image', '{{ image.src | img_url: 'large' }}')">
+                        <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | default: product.name }}">
+                    </div>
+                    {%-endfor-%}
+                </div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="nava-prod-info">
+                <h1 class="prod-title" style="font-size: 1.6rem; font-weight: 800; color: var(--text-dark); margin-bottom: 12px; line-height: 1.3;">
+                    {{ product.name }}
+                </h1>
+                
+                <div class="prod-specs-pills">
+                    {%-if product.vendor != null-%}
+                    <div class="spec-pill"><i class="ph ph-buildings"></i> {{ product.vendor }}</div>
+                    {%-endif-%}
+                    <div class="spec-pill"><i class="ph ph-cpu"></i> 100% Chính Hãng</div>
+                </div>
+
+                <div style="border-bottom: 1px dashed var(--border-color); margin-bottom: 20px; padding-bottom: 10px;"></div>
+
+                <form action="/cart/add" method="post" enctype="multipart/form-data" id="nava-product-form">
+                    <input type="hidden" name="productAlias" value="{{ product.alias}}" />
+                    
+                    <div class="product-control w-100">
+                        {%-unless product.variants.size <= 1 and product.variants.first.title contains 'Default'-%}
+                        {%- if settings.product_swatch_enable and product.variants.size > 0 -%}
+                        {%- for option in product.options -%}
+                        {%- include 'swatch' with option -%}
+                        {%- endfor -%}
+                        {%- endif -%}
+                        {%-endunless-%}
+                        
+                        <div class="box-variant clearfix {% if settings.product_swatch_enable and product.variants.size > 0%} d-none {%endif%}">
+                            {%- if variantCount > 1 -%} 
+                            <fieldset class="form-group">
+                                <select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
+                                    {%- for variant in product.variants -%}
+                                    <option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id }}">{{ variant.id }} {{ variant.title }} - {{ variant.price | money }}</option>
+                                    {%- endfor -%}
+                                </select>
+                            </fieldset>
+                            {%- else -%}
+                            <input type="hidden" name="variantId" value="{{ product.variants[0].id }}" />
+                            {%- endif -%}
+                        </div>
+                        
+                        <div class="qty-price-row {% if contacts == true %}d-none{%else%}{%if product.available%}d-flex{%else%}{%if product.variants.size > 0%}d-flex{%else%}d-none{%endif%}{%endif%}{%endif%}" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+                                <div class="qty-selector custom-btn-number form-inline border-0 d-inline-flex align-items-center" style="border: 1px solid var(--border-color) !important; border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 32px;">
+                                    <button class="qty-btn" style="width: 32px; height: 100%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark);" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button"><i class="ph-bold ph-minus"></i></button>
+                                    <input type="number" name="quantity" min="1" value="1" class="form-control prd_quantity text-center border-0 qty-val" id="qtym" style="width: 36px; height: 100%; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none; padding: 0; margin: 0; text-align: center;" readonly>
+                                    <button class="qty-btn" style="width: 32px; height: 100%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark);" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button"><i class="ph-bold ph-plus"></i></button>
+                                </div>
+                            </div>
+                            <div class="prod-price-wrap d-flex align-items-baseline gap-2" style="margin: 0;">
+                                {%- if contacts == true -%}
+                                <span class="prod-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin: 0;">{{settings.noPrice}}</span>
+                                {%- else -%}
+                                <span class="prod-price" id="selected-variant-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">{{product.selected_or_first_available_variant.price | money }}</span>
+                                {%- if product.selected_or_first_available_variant.compare_at_price > product.selected_or_first_available_variant.price -%}
+                                <del class="old-price" id="selected-variant-compare-price" style="color: var(--text-muted); font-size: 1.05rem; font-weight: 600; margin-left: 8px;">{{ product.selected_or_first_available_variant.compare_at_price | money }}</del>
+                                {%- endif -%}
+                                {%- endif -%}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action buttons -->
+                    <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px; margin-bottom: 25px; margin-top: 15px;">
+                        <!-- Icon Cart Button -->
+                        <button type="button" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} js-addToCart align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; transition: all 0.2s; padding: 0; flex-shrink: 0;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+                        </button>
+                        
+                        <!-- Trả góp 0% Button -->
+                        <button type="button" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} js-buynow align-items-center justify-content-center font-weight-bold" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; padding: 0;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            TRẢ GÓP 0%
+                        </button>
+                        
+                        <!-- Mua Ngay Button -->
+                        <button type="button" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} js-buynow align-items-center justify-content-center font-weight-bold" style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2); padding: 0;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+                            MUA NGAY
+                        </button>
+                    </div>
+                </form>
+
+                {%-if shopee != ''-%}
+                <div class="shopee_link mt-3 mb-3 text-center">
+                    <a href="{{shopee}}" title="{{settings.shopee_buy}}" class="d-block sitdown modal-open position-relative">
+                        <img class="lazy" alt="{{settings.shopee_buy}}" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{'shopee_buy.png' | asset_url}}">
+                    </a>
+                </div>
+                {%-endif-%}
+
+                <!-- Status details card -->
+                <div class="product-info-box" style="margin-top: 20px; border: 1px solid var(--border-color); border-radius: 12px; padding: 15px; background: var(--bg-gray);">
+                    <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--text-gray);">
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Trạng thái:</span>
+                            <span style="font-weight: 700; color: var(--primary);">
+                                {%- if product.available -%}
+                                {%- if product.selected_or_first_available_variant.inventory_management == "" -%}
+                                Pre-Order (9 ngày)
+                                {%- else -%} 
+                                {%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                                {{settings.available}}
+                                {%- else -%}
+                                Pre-Order (9 ngày)
+                                {%- endif -%} 
+                                {%- endif -%}
+                                {%- else -%}
+                                Pre-Order (9 ngày)
+                                {%- endif -%}
+                            </span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span>Bảo hành:</span>
+                            <span style="font-weight: 700; color: var(--text-dark);">Chính hãng 36 tháng</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Down: Specs & Content -->
+        <div class="row mt-4">
+            <div class="col-12 col-lg-4 order-lg-2 mb-3 mb-lg-0 specs-column" style="position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;" class="specs-header-row">
+                    <h2 class="specs-custom-title" style="font-size: 1.25rem !important; font-weight: 800 !important; color: var(--text-dark, #0f172a) !important; margin: 0 !important; padding: 0 !important; border: none !important;">{{ settings.compare_keyword | default: 'Thông số kỹ thuật' }}</h2>
+                    {%-if settings.enable_compare-%}
+                    <label class="btn-nava-compare-trigger compare-btn-wrap" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; margin-bottom: 0;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
+                        <input type="checkbox" class="compare-checkbox d-none" value="{{ product.url }}" data-type="{{product.type}}">
+                        <i class="ph-bold ph-arrows-left-right"></i> So sánh
+                    </label>
+                    {%-endif-%}
+                </div>
+                {%-include 'product_specs' with product.content, keyword: settings.compare_keyword -%}
+            </div>
+            <div class="col-12 col-lg-8 order-lg-1">
+                <div class="p-3 rounded-16 bg-white border" style="box-shadow: var(--shadow-sm); border-radius: 16px; position: relative;">
+                    <h3 class="special-content_title font-weight-bold d-block w-100 pt-2 pb-2 mb-3" style="font-size: 1.25rem; font-weight: 800; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; color: var(--text-dark);">Đặc điểm nổi bật</h3> 
+                    <div class="desc-content-wrapper" id="desc-wrapper">
+                        <div class="product-content rte" style="font-size: 0.95rem; line-height: 1.6; color: var(--text-dark);">
+                            {%- if productContent != '' and productContent != null -%}
+                            {{ productContent }}
+                            {%- else -%}
+                            {{ settings.other_updating }}
+                            {%- endif -%}
+                        </div>
+                        <div class="desc-overlay"></div>
+                    </div>
+                    <div style="text-align: center; margin-top: 20px; position: relative; z-index: 5;">
+                        <button type="button" class="btn-show-more" onclick="toggleDescription()" id="btn-show-desc">Xem thêm <i class="ph-bold ph-caret-down"></i></button>
+                    </div>
+                </div>
+                
+                {%-if settings.product_review-%}
+                {% include 'product-reviews' %}
+                {%-endif-%}
+                {%-if settings.enable_product_relate-%}
+                {%-include 'm_relate_product'-%}
+                {%-endif-%}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Bottom Buy Bar -->
+<div class="mobile-bottom-buybar">
+    <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 0.72rem; color: var(--text-gray); margin-bottom: 2px;">Giá ưu đãi</span>
+        <span id="sticky-price" style="font-size: 1.15rem; font-weight: 900; color: var(--primary);">{{product.selected_or_first_available_variant.price | money }}</span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+        <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="ph-bold ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
+        <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
+    </div>
+</div>
+
+<!-- Video Popup Modal -->
+{%-if videos != ''-%}
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Video</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{%-endif-%}
+
+<!-- Specs Modal -->
+{%-if specs-%}
+<div class="modal fade" id="specModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content modal-open rounded-10">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">{{settings.compare_keyword | default: 'Thông số kỹ thuật'}}</h5>
+                <button type="button" class="btn btn-close rounded-10" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body max-height-popup"></div>
+        </div>
+    </div>
+</div>
+{%-endif-%}
+
+<script>
+    var productAlias = '{{product.alias}}';
+
+    function switchMainMedia(thumb, type, url) {
+        // Toggle active class on thumbnails
+        document.querySelectorAll('.thumbnail-item').forEach(el => el.classList.remove('active'));
+        thumb.classList.add('active');
+        
+        const mainImg = document.getElementById('main-product-image');
+        const mainVideo = document.getElementById('main-product-video');
+        
+        // Find main container
+        const container = document.querySelector('.main-image-container');
+        
+        if (type === 'video') {
+            if (mainImg) mainImg.style.display = 'none';
+            if (mainVideo) {
+                mainVideo.style.display = 'block';
+            } else {
+                container.innerHTML = `
+                    <div class="box_video embed-responsive embed-responsive-16by9 w-100 h-100" id="main-product-video">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{videos}}?rel=0&autoplay=1&mute=1" allow='autoplay; encrypted-media' allowfullscreen style="width: 100%; height: 100%; border: none; border-radius: 12px;"></iframe>
+                    </div>
+                `;
+            }
+        } else {
+            if (mainVideo) mainVideo.style.display = 'none';
+            if (mainImg) {
+                mainImg.src = url;
+                mainImg.style.display = 'block';
+            } else {
+                container.innerHTML = `<img id="main-product-image" src="${url}" alt="{{ product.name }}">`;
+            }
+        }
+        
+        // Scroll thumbnail list to center the clicked item
+        const list = document.getElementById('thumbnail-list');
+        if (list) {
+            const listWidth = list.offsetWidth;
+            const itemLeft = thumb.offsetLeft;
+            const itemWidth = thumb.offsetWidth;
+            const scrollPos = itemLeft - (listWidth / 2) + (itemWidth / 2);
+            list.scrollTo({ left: scrollPos, behavior: 'smooth' });
+        }
+    }
+</script>
+
+<script>
+    // Custom select bindings for Swatches
+    document.addEventListener('click', function(e) {
+        const display = e.target.closest('.custom-select-display');
+        if (display) {
+            const wrap = display.closest('.custom-select-wrapper');
+            wrap.classList.toggle('active');
+            return;
+        }
+        
+        const li = e.target.closest('.custom-select-list li');
+        if (li) {
+            const wrap = li.closest('.custom-select-wrapper');
+            const realSelect = wrap.previousElementSibling;
+            wrap.querySelector('.custom-select-text').textContent = li.textContent.trim();
+            
+            // Mark selected
+            wrap.querySelectorAll('.custom-select-list li').forEach(item => item.classList.remove('selected'));
+            li.classList.add('selected');
+            
+            if (realSelect) {
+                realSelect.value = li.dataset.value;
+                realSelect.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            wrap.classList.remove('active');
+            return;
+        }
+        
+        if (!e.target.closest('.custom-select-wrapper')) {
+            document.querySelectorAll('.custom-select-wrapper').forEach(el => el.classList.remove('active'));
+        }
+    });
+
+    document.addEventListener('change', function(e) {
+        const sel = e.target;
+        if (sel.id === 'product-selectors') {
+            // Update prices dynamically
+            const priceVal = sel.selectedOptions[0]?.text.split('-').pop().trim();
+            const priceEl = document.getElementById('selected-variant-price');
+            const stickyPriceEl = document.getElementById('sticky-price');
+            if (priceEl && priceVal) priceEl.innerText = priceVal;
+            if (stickyPriceEl && priceVal) stickyPriceEl.innerText = priceVal;
+        }
+    });
+
+    function toggleDescription() {
+        const wrapper = document.getElementById('desc-wrapper');
+        const btn = document.getElementById('btn-show-desc');
+        if (wrapper && btn) {
+            if (wrapper.classList.contains('expanded')) {
+                wrapper.classList.remove('expanded');
+                btn.innerHTML = 'Xem thêm <i class="ph-bold ph-caret-down"></i>';
+                wrapper.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                wrapper.classList.add('expanded');
+                btn.innerHTML = 'Thu gọn <i class="ph-bold ph-caret-up"></i>';
+            }
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle bottom buy bar events
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.bar-add-cart')) {
+                e.preventDefault();
+                const btn = document.querySelector('button.js-addToCart');
+                if (btn) btn.click();
+            }
+            if (e.target.closest('.bar-buy-now')) {
+                e.preventDefault();
+                const btn = document.querySelector('button.js-buynow');
+                if (btn) btn.click();
+            }
+        });
+    });
+</script>

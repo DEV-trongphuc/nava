@@ -415,6 +415,7 @@
             .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
             .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
             
+            .compare-grid-scroll-wrapper { width: 100%; }
             .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
             
             /* Header Row */
@@ -442,13 +443,29 @@
             .remove-btn:hover { background: #ef4444; color: white; }
             
             @media (max-width: 768px) {
-                .compare-grid { grid-template-columns: 100px 1fr 1fr !important; }
+                .compare-grid-scroll-wrapper {
+                    overflow-x: auto;
+                    width: 100%;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none;
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--border-color);
+                }
+                .compare-grid-scroll-wrapper::-webkit-scrollbar {
+                    display: none;
+                }
+                .compare-grid {
+                    grid-template-columns: 120px 180px 180px 180px !important;
+                    width: max-content;
+                    border: none !important;
+                    border-radius: 0 !important;
+                }
                 .compare-label { font-size: 0.75rem; padding: 10px; }
-                .compare-cell { font-size: 0.85rem; padding: 10px; }
+                .compare-cell { font-size: 0.8rem; padding: 10px; }
                 .compare-prod-img { width: 80px; height: 80px; }
-                .compare-prod-title { font-size: 1rem; }
-                .compare-prod-price { font-size: 1.1rem; }
-                .col-3-compare { display: none !important; }
+                .compare-prod-title { font-size: 0.9rem !important; }
+                .compare-prod-price { font-size: 1.05rem !important; }
+                .col-3-compare { display: flex !important; }
             }
 
             /* Dark Mode Styling Overrides */
@@ -492,6 +509,7 @@
                 <h1>So Sánh Sản Phẩm</h1>
             </div>
             
+            <div class="compare-grid-scroll-wrapper">
             <div class="compare-grid">
                 <!-- Header -->
                 <div class="compare-row-header">
@@ -640,6 +658,7 @@
                     <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
                     <div class="compare-cell col-3-compare">12 tháng cửa hàng</div>
                 </div>
+            </div>
             </div>
             
             <!-- Recently Viewed Section -->

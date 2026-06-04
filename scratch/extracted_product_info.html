@@ -1,0 +1,262 @@
+             font-size: 0.8rem !important;
+                        padding: 0 8px !important;
+                    }
+                    .action-buttons-row #btn-buy-now-main span {
+                        font-size: 0.85rem !important;
+                    }
+
+                    /* Reduce review paddings on mobile */
+                    #danh-gia-shopee {
+                        padding: 16px !important;
+                    }
+                    .sr-overview-card,
+                    .sr-distribution-card {
+                        padding: 15px !important;
+                    }
+                    .shopee-comment-item {
+                        padding: 15px !important;
+                    }
+                }
+                
+                /* Magnifier */
+                .main-image-container { position: relative; overflow: hidden; cursor: zoom-in; }
+                #main-product-img { width: 100%; height: 100%; object-fit: contain; }
+            </style>
+            
+            <div class="nava-product-layout" style="margin-bottom: 60px;">
+                <!-- Gallery -->
+                <div class="nava-prod-gallery">
+                    <div class="main-image-container" id="main-image-container" onclick="window.openLightbox(event)">
+                        <span class="badge" style="position: absolute; top: 16px; left: 16px; background: var(--primary); color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; z-index: 2;">MỚI NHẤT</span>
+                        
+                        <button type="button" onclick="window.openLightbox(event)" style="position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.8); border: 1px solid var(--border-color); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-dark); z-index: 5; backdrop-filter: blur(4px); transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.05);" onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.borderColor='var(--primary)';" onmouseout="this.style.background='rgba(255,255,255,0.8)'; this.style.color='var(--text-dark)'; this.style.borderColor='var(--border-color)';"><i class="ph-bold ph-arrows-out"></i></button>
+                        
+                        <div class="gallery-nav-btn gallery-nav-prev" onclick="event.stopPropagation(); navigateGallery(-1)"><i class="ph-bold ph-caret-left"></i></div>
+                        <img id="main-product-img" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
+                        <div class="gallery-nav-btn gallery-nav-next" onclick="event.stopPropagation(); navigateGallery(1)"><i class="ph-bold ph-caret-right"></i></div>
+                    </div>
+                    
+                    <div class="gallery-dots">
+                        <div class="gallery-dot active" onclick="document.querySelectorAll('.gallery-thumb')[0].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[1].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[2].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[3].click()"></div>
+                        <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[4].click()"></div>
+                    </div>
+                    
+                    <div class="thumbnail-list" id="thumbnail-list" style="position: relative; display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
+                        <div class="gallery-thumb active" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/w692-01a37475-f53f-4188-84a0-d46b8f01d6d6.png')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/w692-01a37475-f53f-4188-84a0-d46b8f01d6d6.png" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/bia1-fc2ef492-2792-4c14-9b3f-5c7d6995afdc.png')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/bia1-fc2ef492-2792-4c14-9b3f-5c7d6995afdc.png" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350.jpg')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/asus-nuc-ai-350.jpg" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div class="gallery-thumb" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/asus-nuc-ai-350-2.jpg')">
+                            <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/asus-nuc-ai-350-2.jpg" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info -->
+                <div class="nava-prod-info">
+                    <div class="prod-brand">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg" alt="ASUS">
+                    </div>
+                    <h1 class="prod-title">ASUS NUC AI 350 (ExpertCenter PN54) Mini PC Ryzen AI 7 350</h1>
+                    
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; color: #64748b; font-size: 0.9rem;">
+                        <a href="#danh-gia-shopee" id="rating-scroll-btn" style="display: flex; align-items: center; gap: 4px; color: #f59e0b; font-weight: 600; text-decoration: none;">
+                            <i class="ph-fill ph-star"></i> 5.0
+                        </a>
+                        <span>|</span>
+                        <span>Đã bán: 85</span>
+                        <span>|</span>
+                        <span style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
+                    </div>
+                    
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 24px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-cpu" style="color: var(--primary);"></i> Ryzen AI 7
+                            </a>
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-graphics-card" style="color: var(--primary);"></i> Radeon 860M
+                            </a>
+                            <a href="#thong-so" class="prod-spec-tag" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; text-decoration: none; color: var(--text-dark); font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 6px;">
+                                <i class="ph ph-brain" style="color: var(--primary);"></i> 50 TOPS
+                            </a>
+                        </div>
+                        <button type="button" class="btn-nava-compare-trigger" onclick="openCompareDrawerDirect()" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
+                            <i class="ph-bold ph-arrows-left-right"></i> So sánh
+                        </button>
+                    </div>
+                    
+                    <!-- Variants (Horizontal Full Width Rows) -->
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px;">
+                        <!-- RAM Row -->
+                        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">RAM DDR5</span>
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ram" style="max-width: 395px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
+                                    <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
+                                    <span class="nava-dropdown-selected-price" id="ram-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ram', 0, 'NO RAM')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO RAM</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 1890000, '8GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.890.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 2090000, '8GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>8GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.090.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 3790000, '16GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.790.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 4190000, '16GB - 5600')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>16GB - 5600</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+4.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ram', 6990000, '32GB - 4800')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>32GB - 4800</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+6.990.000đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- SSD Row -->
+                        <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">SSD NVMe</span>
+                            <div class="nava-dropdown-wrapper" data-dropdown-type="ssd" style="max-width: 395px; flex: 1; position: relative;">
+                                <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
+                                    <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
+                                    <span class="nava-dropdown-selected-price" id="ssd-selected-price" style="font-weight: 700; font-size: 0.9rem; color: var(--primary); margin-left: auto; margin-right: 5px;">+0đ</span>
+                                    <i class="ph-bold ph-caret-down nava-dropdown-arrow" style="color: var(--text-gray); transition: transform 0.2s; position: absolute; right: 15px; top: 50%; transform: translateY(-50%);"></i>
+                                </div>
+                                <ul class="nava-dropdown-list">
+                                    <li class="nava-dropdown-item active" onclick="selectVariantDropdown(this, 'ssd', 0, 'NO SSD')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>NO SSD</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+0đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 1190000, '256GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>256GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+1.190.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 2290000, '500GB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>500GB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+2.290.000đ</span>
+                                    </li>
+                                    <li class="nava-dropdown-item" onclick="selectVariantDropdown(this, 'ssd', 3990000, '1TB')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+                                        <span>1TB</span>
+                                        <span style="color: var(--primary); font-weight: 700;">+3.990.000đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Actions (Updated to column N layout) -->
+                    <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+                        <!-- Row 1: Quantity Spinner & Price -->
+                        <div class="qty-price-row" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+                                <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray);">
+                                    <button class="qty-adjust" onclick="adjustQty(-1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
+                                    <input type="text" value="1" class="qty-val" id="qty-val-main" readonly style="width: 36px; height: 32px; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); outline: none;">
+                                    <button class="qty-adjust" onclick="adjustQty(1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">+</button>
+                                </div>
+                            </div>
+                            <div class="prod-price" id="main-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">12.390.000đ</div>
+                        </div>
+ 
+                        <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
+                        <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
+                            <!-- Icon Cart Button -->
+                            <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                                <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+                            </button>
+                            
+                            <!-- Trả góp 0% Button -->
+                            <button onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                                TRẢ GÓP 0%
+                            </button>
+                            
+                            <!-- Mua Ngay Button -->
+                            <button id="btn-buy-now-main" style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(0, 51, 102, 0.35)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(0, 51, 102, 0.2)';">
+                                <span style="font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px;">MUA NGAY</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="policy-box" style="border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 16px; background: #f8fafc;">
+                        <div class="policy-mobile-box" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <div class="policy-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-shield-check" style="font-size: 1.3rem; color: var(--primary);"></i> Bảo hành chính hãng 36 tháng
+                            </div>
+                            <div class="policy-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #334155; font-weight: 600;">
+                                <i class="ph ph-truck" style="font-size: 1.3rem; color: var(--primary);"></i> Giao hàng miễn phí
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            
+            <!-- Product Details Grid -->
+            <div style="margin-bottom: 80px; width: 100%;">
+                <style>
+                    .product-details-grid { display: flex; flex-direction: column; gap: 30px; }
+                    .desc-column { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 32px; flex: 1; min-width: 0; }
+                    .desc-column iframe { display: block; margin: 0 auto 20px auto; border-radius: 16px; width: 100%; aspect-ratio: 16/9; height: auto; border: none; }
+                    .desc-column img { max-width: 100%; height: auto; display: block; margin: 24px auto; border-radius: 12px; }
+                    .desc-column p { line-height: 1.8; color: #475569; margin-bottom: 20px; font-size: 0.95rem; }
+                    .desc-column h2 { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-top: 32px; margin-bottom: 16px; }
+                    .desc-column h3 { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 24px; margin-bottom: 12px; }
+                    .desc-column hr { border: 0; border-top: 1px dashed #e2e8f0; margin: 32px 0; }
+                    .desc-column ul { margin-bottom: 20px; padding-left: 20px; }
+                    .desc-column li { margin-bottom: 8px; line-height: 1.7; color: #475569; font-size: 0.95rem; }
+                    
+                    .desc-content-wrapper {
+                        position: relative;
+                        max-height: 1200px;
+                        overflow: hidden;
+                        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                    }
+                    .desc-content-wrapper.expanded {
+                        max-height: 5000px;
+                    }
+                    .desc-overlay {
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 140px;
+                        background: linear-gradient(to bottom, rgba(255,255,255,0), #ffffff);
+                        pointer-events: none;
+                        transition: opacity 0.3s ease;
+                    }
+                    [data-theme="dark"] .desc-overlay {
+                        background: linear-gradient(to bottom, rgba(15,23,42,0), var(--bg-white, #1e293b));
+                    }
+                    .desc-content-wrapper.expanded .desc-overlay {
+                        opacity: 0;
+                    }
+                    .btn-show-more {
+                        background: #fff;
+                        border: 1px solid var(--primary);
+                        color: var(--primary)

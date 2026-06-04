@@ -405,7 +405,7 @@ def build_collection(base_dir, header_part, footer_part):
                     #sortToggleBtn > i:first-child { font-size: 1.4rem !important; margin: 0 !important; }
                     .ai-btn { padding: 8px 12px !important; }
                     .product-card { padding: 10px !important; min-width: 0; }
-                    .card-title { font-size: 0.85rem !important; height: auto !important; max-height: 36px !important; margin-bottom: 6px !important; }
+                    .card-title { font-size: 0.85rem !important; height: auto !important; max-height: 36px !important; margin-bottom: 6px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
                     .card-specs { gap: 4px !important; margin-bottom: 8px !important; }
                     .spec-pill { padding: 2px 4px !important; font-size: 0.6rem !important; }
                     /* Force the price row to wrap properly on very small screens */
@@ -2084,6 +2084,9 @@ def build_product(base_dir, header_part, footer_part):
                     background: rgba(51, 133, 255, 0.1);
                 }
 
+                .desktop-qty-label { display: inline; }
+                .mobile-qty-label { display: none; }
+
                 /* Simple Policy */
                 .simple-policies { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 24px; border-top: 1px dashed #cbd5e1; }
                 .sp-item { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: #334155; font-weight: 600; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0; }
@@ -2091,9 +2094,27 @@ def build_product(base_dir, header_part, footer_part):
                 
                 @media (max-width: 768px) {
                     .prod-title { font-size: 1.4rem; margin-bottom: 12px; }
-                    .prod-price { font-size: 1.8rem; }
+                    .prod-price { font-size: 1.4rem; }
                     .prod-price-wrap { margin-bottom: 20px; padding-bottom: 16px; flex-direction: column; gap: 4px; border-bottom: none; }
                     
+                    .desktop-qty-label { display: none !important; }
+                    .mobile-qty-label { display: inline !important; }
+
+                    /* Narrow quantity selector on mobile */
+                    .qty-selector {
+                        height: 32px !important;
+                    }
+                    .qty-selector .qty-adjust {
+                        width: 28px !important;
+                        height: 100% !important;
+                        font-size: 0.95rem !important;
+                    }
+                    .qty-selector .qty-val {
+                        width: 28px !important;
+                        height: 100% !important;
+                        font-size: 0.85rem !important;
+                    }
+
                     /* Fix product details grid padding */
                     .desc-column { padding: 16px !important; }
                     .specs-column { padding: 16px !important; }
@@ -2118,6 +2139,60 @@ def build_product(base_dir, header_part, footer_part):
                     
                     /* Fix gallery thumbnails cutoff on mobile */
                     .thumbnail-list { justify-content: flex-start !important; padding-left: 8px !important; padding-right: 8px !important; }
+
+                    /* Make slide/gallery images smaller on mobile */
+                    .main-image-container {
+                        max-width: 300px !important;
+                        margin: 0 auto 20px auto !important;
+                        aspect-ratio: 1/1 !important;
+                        padding: 15px !important;
+                    }
+                    .gallery-thumb {
+                        width: 56px !important;
+                        height: 56px !important;
+                        padding: 4px !important;
+                    }
+
+                    /* Stack Quantity & Price vertically to avoid overlap */
+                    .qty-price-row {
+                        flex-direction: column !important;
+                        align-items: flex-start !important;
+                        gap: 12px !important;
+                    }
+                    .qty-price-row .prod-price {
+                        font-size: 1.3rem !important;
+                        margin-top: 4px !important;
+                    }
+                    
+                    /* Compact action buttons row */
+                    .action-buttons-row {
+                        height: 46px !important;
+                        gap: 8px !important;
+                    }
+                    .action-buttons-row #btn-cart-icon {
+                        width: 46px !important;
+                        height: 46px !important;
+                    }
+                    .action-buttons-row button {
+                        height: 46px !important;
+                        font-size: 0.8rem !important;
+                        padding: 0 8px !important;
+                    }
+                    .action-buttons-row #btn-buy-now-main span {
+                        font-size: 0.85rem !important;
+                    }
+
+                    /* Reduce review paddings on mobile */
+                    #danh-gia-shopee {
+                        padding: 16px !important;
+                    }
+                    .sr-overview-card,
+                    .sr-distribution-card {
+                        padding: 15px !important;
+                    }
+                    .shopee-comment-item {
+                        padding: 15px !important;
+                    }
                 }
                 
                 /* Magnifier */
@@ -2146,7 +2221,7 @@ def build_product(base_dir, header_part, footer_part):
                         <div class="gallery-dot" onclick="document.querySelectorAll('.gallery-thumb')[4].click()"></div>
                     </div>
                     
-                    <div class="thumbnail-list" id="thumbnail-list" style="display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
+                    <div class="thumbnail-list" id="thumbnail-list" style="position: relative; display: flex; justify-content: center; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none;">
                         <div class="gallery-thumb active" onclick="changeMainImage(this, '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973')">
                             <img src="//bizweb.dktcdn.net/thumb/compact/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" style="width: 100%; height: 100%; object-fit: contain;">
                         </div>
@@ -2203,7 +2278,7 @@ def build_product(base_dir, header_part, footer_part):
                     <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; border-bottom: 1px dashed var(--border-color); padding-bottom: 20px;">
                         <!-- RAM Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">RAM DDR5</span>
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">RAM DDR5</span>
                             <div class="nava-dropdown-wrapper" data-dropdown-type="ram" style="max-width: 395px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ram-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO RAM</span>
@@ -2241,7 +2316,7 @@ def build_product(base_dir, header_part, footer_part):
                         
                         <!-- SSD Row -->
                         <div style="display: flex; align-items: center; gap: 15px; width: 100%;">
-                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 90px; flex-shrink: 0;">SSD NVMe</span>
+                            <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark); width: 120px; flex-shrink: 0;">SSD NVMe</span>
                             <div class="nava-dropdown-wrapper" data-dropdown-type="ssd" style="max-width: 395px; flex: 1; position: relative;">
                                 <div class="nava-dropdown-display" style="width: 100%; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 15px; padding-right: 40px; background: var(--bg-gray); cursor: default; display: flex; justify-content: space-between; align-items: center; box-sizing: border-box; position: relative;">
                                     <span class="nava-dropdown-selected" id="ssd-selected-text" style="font-weight: 700; font-size: 0.9rem; color: var(--text-dark);">NO SSD</span>
@@ -2273,9 +2348,9 @@ def build_product(base_dir, header_part, footer_part):
                     <!-- Actions (Updated to column N layout) -->
                     <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
                         <!-- Row 1: Quantity Spinner & Price -->
-                        <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
+                        <div class="qty-price-row" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);">Số lượng</span>
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
                                 <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray);">
                                     <button class="qty-adjust" onclick="adjustQty(-1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
                                     <input type="text" value="1" class="qty-val" id="qty-val-main" readonly style="width: 36px; height: 32px; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); outline: none;">
@@ -2286,7 +2361,7 @@ def build_product(base_dir, header_part, footer_part):
                         </div>
  
                         <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
-                        <div style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
+                        <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
                             <!-- Icon Cart Button -->
                             <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
@@ -3208,7 +3283,7 @@ def build_product(base_dir, header_part, footer_part):
                         
                         <!-- Qty Selector -->
                         <div class="bs-option-col bs-qty-col">
-                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;">Số lượng</span>
+                            <span class="bs-option-label-v2" style="font-weight: 700; font-size: 0.85rem; color: var(--text-gray, #64748b); margin-bottom: 6px; display: block;"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
                             <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 46px;">
                                 <button type="button" class="qty-adjust" onclick="adjustQty(-1)" style="width: 36px; height: 100%; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
                                 <input type="text" value="1" class="qty-val" id="qty-val-bs" readonly style="width: 40px; height: 100%; text-align: center; border: none; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none;">
@@ -3263,7 +3338,17 @@ def build_product(base_dir, header_part, footer_part):
                     dots.forEach(d => d.classList.remove('active'));
                     if (dots[index]) dots[index].classList.add('active');
                     
-                    element.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    const container = document.getElementById('thumbnail-list');
+                    if (container) {
+                        const containerWidth = container.clientWidth;
+                        const elementLeft = element.offsetLeft;
+                        const elementWidth = element.clientWidth;
+                        const targetScrollLeft = elementLeft - (containerWidth / 2) + (elementWidth / 2);
+                        container.scrollTo({
+                            left: targetScrollLeft,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
                 
                 function navigateGallery(direction) {
@@ -3285,6 +3370,8 @@ def build_product(base_dir, header_part, footer_part):
                 let activeSsdPrice = 0;
                 let activeRamName = 'NO RAM';
                 let activeSsdName = 'NO SSD';
+                let warnedBarebone = false;
+                let warnedBareboneCart = false;
                 let currentPrice = basePrice;
 
                 function animatePrice(elementId, startValue, endValue, duration = 400) {
@@ -3420,6 +3507,8 @@ def build_product(base_dir, header_part, footer_part):
                         activeSsdPrice = price; 
                         activeSsdName = name; 
                     }
+                    warnedBarebone = false;
+                    warnedBareboneCart = false;
                     
                     const total = basePrice + activeRamPrice + activeSsdPrice;
                     
@@ -3543,33 +3632,21 @@ def build_product(base_dir, header_part, footer_part):
 
                     window.triggerAddToCart = (e) => {
                         if (e) e.preventDefault();
-                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
-                            if (typeof showToast === 'function') {
-                                showToast('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
-                            } else {
-                                alert('Vui lòng chọn cấu hình RAM và SSD trước khi thêm vào giỏ hàng!');
-                            }
-                        } else {
-                            closeBottomSheet();
-                            triggerCartOpen(e);
+                        if (window.innerWidth <= 768 && !isBsOpen) {
+                            openBottomSheet();
+                            return;
                         }
+                        closeBottomSheet();
+                        triggerCartOpen(e);
                     };
 
                     window.triggerCheckout = (e) => {
                         if (e) e.preventDefault();
-                        if (activeRamName === 'NO RAM' || activeSsdName === 'NO SSD') {
-                            if (isBsOpen) {
-                                if (typeof showToast === 'function') {
-                                    showToast('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
-                                } else {
-                                    alert('Vui lòng chọn cấu hình RAM và SSD trước khi mua hàng!');
-                                }
-                            } else {
-                                openBottomSheet();
-                            }
-                        } else {
-                            window.location.href = 'demo_checkout.html';
+                        if (window.innerWidth <= 768 && !isBsOpen) {
+                            openBottomSheet();
+                            return;
                         }
+                        window.location.href = 'demo_checkout.html';
                     };
 
                     const btnBuyNowMain = document.getElementById('btn-buy-now-main');
@@ -3937,6 +4014,14 @@ def build_auth_pages(base_dir):
                 border-color: #cbd5e1;
                 box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             }
+            @media (max-width: 480px) {
+                .glass-card { padding: 25px 20px !important; border-radius: var(--radius-md) !important; }
+                .auth-title { font-size: 1.5rem !important; }
+                .input-nava { padding: 12px 14px 12px 40px !important; font-size: 0.9rem !important; }
+                .btn-nava { padding: 12px !important; font-size: 0.95rem !important; }
+                .btn-social { padding: 8px !important; font-size: 0.85rem !important; }
+                .social-divider { margin: 20px 0 15px !important; }
+            }
         </style>
     """
 
@@ -4169,6 +4254,7 @@ def build_compare_page(base_dir, header_part, footer_part):
             .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
             .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
             
+            .compare-grid-scroll-wrapper { width: 100%; }
             .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
             
             /* Header Row */
@@ -4196,13 +4282,29 @@ def build_compare_page(base_dir, header_part, footer_part):
             .remove-btn:hover { background: #ef4444; color: white; }
             
             @media (max-width: 768px) {
-                .compare-grid { grid-template-columns: 100px 1fr 1fr !important; }
+                .compare-grid-scroll-wrapper {
+                    overflow-x: auto;
+                    width: 100%;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none;
+                    border-radius: var(--radius-lg);
+                    border: 1px solid var(--border-color);
+                }
+                .compare-grid-scroll-wrapper::-webkit-scrollbar {
+                    display: none;
+                }
+                .compare-grid {
+                    grid-template-columns: 120px 180px 180px 180px !important;
+                    width: max-content;
+                    border: none !important;
+                    border-radius: 0 !important;
+                }
                 .compare-label { font-size: 0.75rem; padding: 10px; }
-                .compare-cell { font-size: 0.85rem; padding: 10px; }
+                .compare-cell { font-size: 0.8rem; padding: 10px; }
                 .compare-prod-img { width: 80px; height: 80px; }
-                .compare-prod-title { font-size: 1rem; }
-                .compare-prod-price { font-size: 1.1rem; }
-                .col-3-compare { display: none !important; }
+                .compare-prod-title { font-size: 0.9rem !important; }
+                .compare-prod-price { font-size: 1.05rem !important; }
+                .col-3-compare { display: flex !important; }
             }
 
             /* Dark Mode Styling Overrides */
@@ -4246,6 +4348,7 @@ def build_compare_page(base_dir, header_part, footer_part):
                 <h1>So Sánh Sản Phẩm</h1>
             </div>
             
+            <div class="compare-grid-scroll-wrapper">
             <div class="compare-grid">
                 <!-- Header -->
                 <div class="compare-row-header">
@@ -4394,6 +4497,7 @@ def build_compare_page(base_dir, header_part, footer_part):
                     <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
                     <div class="compare-cell col-3-compare">12 tháng cửa hàng</div>
                 </div>
+            </div>
             </div>
             
             <!-- Recently Viewed Section -->
@@ -4585,11 +4689,53 @@ def build_cart_page(base_dir, header_part, footer_part):
                 .nava-cart-page { margin-top: 30px; }
             }
             @media (max-width: 575px) {
-                .cart-item { flex-direction: column; align-items: flex-start; }
-                .cart-item-img { width: 80px; height: 80px; }
-                .qty-btn { width: 40px !important; height: 40px !important; font-size: 1.25rem !important; }
-                .qty-spinner { border-radius: 24px !important; }
-                .qty-input { width: 45px !important; height: 40px !important; font-size: 1.1rem !important; }
+                .nava-cart-page { margin-top: 15px !important; padding-bottom: 80px !important; }
+                .cart-title { font-size: 1.25rem !important; margin-bottom: 20px !important; gap: 8px !important; line-height: 1.3; }
+                .cart-title i { font-size: 1.5rem !important; }
+                
+                .cart-items-container { padding: 15px !important; }
+                .cart-item { display: grid !important; grid-template-columns: 80px 1fr !important; gap: 10px 15px !important; align-items: flex-start !important; }
+                .cart-item-img { width: 80px !important; height: 80px !important; grid-row: span 2; }
+                .cart-item-details { width: 100%; }
+                .cart-item-title { font-size: 0.92rem !important; line-height: 1.3; font-weight: 700 !important; }
+                .cart-item-variant { font-size: 0.75rem !important; margin-bottom: 6px !important; }
+                .cart-item-price { font-size: 1.05rem !important; }
+                
+                .cart-item-actions { grid-column: 2; display: flex !important; align-items: center; justify-content: space-between; margin-top: 5px; gap: 10px; width: 100%; box-sizing: border-box; }
+                .qty-spinner { height: 32px !important; border-radius: 6px !important; display: inline-flex !important; align-items: center !important; overflow: hidden !important; }
+                .qty-btn { width: 30px !important; height: 30px !important; font-size: 0.85rem !important; padding: 0 !important; margin: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; }
+                .qty-input { width: 30px !important; height: 30px !important; font-size: 0.85rem !important; padding: 0 !important; margin: 0 !important; text-align: center !important; }
+                .cart-item-remove { width: 32px !important; height: 32px !important; display: flex !important; align-items: center !important; justify-content: center !important; padding: 0 !important; }
+                .cart-item-remove i { font-size: 1rem !important; }
+
+                /* Order Summary mobile optimizations */
+                .cart-summary { padding: 15px !important; }
+                .summary-title { font-size: 1.05rem !important; margin-bottom: 15px !important; padding-bottom: 10px !important; }
+                .summary-row { font-size: 0.85rem !important; margin-bottom: 12px !important; }
+                .summary-total { margin-top: 15px !important; padding-top: 15px !important; }
+                .summary-total-label { font-size: 1.05rem !important; }
+                .summary-total-price { font-size: 1.25rem !important; }
+                .btn-checkout-nava { padding: 12px !important; font-size: 0.95rem !important; margin-top: 15px !important; }
+                
+                /* Badges on mobile */
+                .ticket-badge { padding: 3px 8px !important; font-size: 0.75rem !important; margin-right: 4px !important; }
+                .ticket-badge::before { left: -3.5px !important; width: 4px !important; height: 6px !important; }
+                .ticket-badge::after { right: -3.5px !important; width: 4px !important; height: 6px !important; }
+
+                /* Voucher section mobile */
+                .shopee-voucher-container { padding: 10px !important; margin: 15px 0 !important; }
+                .voucher-header { margin-bottom: 8px !important; gap: 8px !important; }
+                .voucher-tag { font-size: 0.65rem !important; padding: 3px 6px !important; }
+                .voucher-title { font-size: 0.8rem !important; }
+                .voucher-ticket::before { right: 53px !important; }
+                .voucher-ticket::after { right: 53px !important; }
+                .voucher-left { padding: 10px !important; }
+                .voucher-right { width: 60px !important; }
+                .voucher-desc { font-size: 0.78rem !important; }
+                .voucher-subtext { font-size: 0.72rem !important; }
+                .kol-input-box { margin-top: 10px !important; gap: 6px !important; }
+                .kol-input { padding: 8px 10px !important; font-size: 0.82rem !important; }
+                .kol-btn { padding: 8px 14px !important; font-size: 0.82rem !important; }
             }
         </style>
         
@@ -4600,7 +4746,7 @@ def build_cart_page(base_dir, header_part, footer_part):
                 <span style="color: var(--primary); font-weight: bold;">Giỏ hàng</span>
             </div>
             
-            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (2 sản phẩm)</h1>
+            <h1 class="cart-title"><i class="ph-fill ph-shopping-cart"></i> <span>Giỏ hàng của bạn (<span id="cart-qty-title">2</span> sản phẩm)</span></h1>
             
             <div class="cart-grid">
                 <!-- Left: Cart Items -->
@@ -4649,6 +4795,11 @@ def build_cart_page(base_dir, header_part, footer_part):
                 <!-- Right: Summary -->
                 <div class="cart-summary">
                     <h2 class="summary-title">Tóm Tắt Đơn Hàng</h2>
+                    
+                    <div class="summary-row" style="align-items: center;">
+                        <span id="summary-qty-label">Tạm tính (2 sản phẩm)</span>
+                        <span id="summary-subtotal-val" style="font-weight: 700; color: var(--text-dark);">35.680.000đ</span>
+                    </div>
                     
                     <div class="summary-row" style="align-items: center;">
                         <span>Phí vận chuyển</span>
@@ -4953,15 +5104,15 @@ def build_cart_page(base_dir, header_part, footer_part):
                 // Update item count in UI
                 const titleEl = document.querySelector('.cart-title');
                 if (titleEl) {
-                    titleEl.innerHTML = `<i class="ph-fill ph-shopping-cart"></i> Giỏ Hàng Của Bạn (${itemCount} sản phẩm)`;
+                    titleEl.innerHTML = `<i class="ph-fill ph-shopping-cart"></i> <span>Giỏ hàng của bạn (${itemCount} sản phẩm)</span>`;
                 }
                 
-                const summaryQtyEl = document.querySelector('.summary-row span:first-child');
+                const summaryQtyEl = document.getElementById('summary-qty-label');
                 if (summaryQtyEl) {
                     summaryQtyEl.textContent = `Tạm tính (${itemCount} sản phẩm)`;
                 }
                 
-                const summarySubtotalEl = document.querySelector('.summary-row span:last-child');
+                const summarySubtotalEl = document.getElementById('summary-subtotal-val');
                 if (summarySubtotalEl) {
                     summarySubtotalEl.textContent = subtotal.toLocaleString('vi-VN') + 'đ';
                 }
@@ -5160,19 +5311,23 @@ def build_checkout_page(base_dir):
         
         /* Mobile Sticky Bottom Bar styles */
         .mobile-sticky-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 20px;
+            border-top: 1px solid var(--border-color) !important;
+            padding: 12px 20px !important;
             display: none;
             align-items: center;
             justify-content: space-between;
-            z-index: 9999;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+            z-index: 9999 !important;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important;
         }
         .mobile-sticky-bar .sticky-price-label {
             font-size: 0.8rem;
@@ -5198,10 +5353,20 @@ def build_checkout_page(base_dir):
         
         @media (max-width: 991px) {
             .checkout-grid { grid-template-columns: 1fr; }
-            .order-summary { position: static; order: -1; margin-bottom: 30px; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .mobile-sticky-bar { display: flex; }
+            .order-summary { position: static; order: -1; margin-bottom: 20px; padding: 20px 15px !important; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 10px !important; }
+            .mobile-sticky-bar { display: flex !important; }
             body { padding-bottom: 90px !important; }
+            .checkout-card { padding: 20px 15px !important; margin-bottom: 20px !important; }
+            .checkout-grid { margin: 20px auto !important; }
+            .section-title { font-size: 1.15rem !important; margin-bottom: 15px !important; }
+            
+            /* Tighter spacing & padding for forms on mobile */
+            .input-group { margin-bottom: 12px !important; }
+            .input-group label { font-size: 0.85rem !important; margin-bottom: 6px !important; }
+            .nava-input { padding: 10px 12px !important; font-size: 0.9rem !important; }
+            .radio-option { padding: 12px 14px !important; }
+            .radio-label { font-size: 0.9rem !important; }
         }
         
     </style>
@@ -5886,9 +6051,39 @@ def build_policy_pages(base_dir, header_part, footer_part):
             .note-block { background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.2); color: #1e3a8a; }
             
             @media (max-width: 768px) {
-                .policy-grid { grid-template-columns: 1fr; }
-                .policy-sidebar { position: static; }
-                .policy-hero h1 { font-size: 1.5rem; }
+                .policy-grid { grid-template-columns: 1fr; gap: 15px; }
+                .policy-sidebar {
+                    position: sticky;
+                    top: 60px;
+                    z-index: 10;
+                    background: var(--bg-white);
+                    padding: 10px !important;
+                    margin: 0 -15px 10px;
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                }
+                .policy-sidebar h3 { display: none !important; }
+                .policy-menu {
+                    flex-direction: row !important;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                    gap: 8px;
+                    padding-bottom: 5px;
+                    scrollbar-width: none;
+                }
+                .policy-menu::-webkit-scrollbar { display: none; }
+                .policy-menu li { margin: 0; }
+                .policy-menu-link {
+                    padding: 8px 14px !important;
+                    font-size: 0.85rem !important;
+                }
+                
+                .policy-content { padding: 20px 15px !important; }
+                .policy-hero h1 { font-size: 1.4rem; }
+                .policy-hero { padding: 15px 10px !important; }
+                .policy-tab-content h2 { font-size: 1.2rem !important; }
             }
         </style>
         

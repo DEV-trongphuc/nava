@@ -60,19 +60,23 @@
         
         /* Mobile Sticky Bottom Bar styles */
         .mobile-sticky-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            background: rgba(255, 255, 255, 0.98) !important;
             backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-color);
-            padding: 12px 20px;
+            border-top: 1px solid var(--border-color) !important;
+            padding: 12px 20px !important;
             display: none;
             align-items: center;
             justify-content: space-between;
-            z-index: 9999;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.08);
+            z-index: 9999 !important;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important;
         }
         .mobile-sticky-bar .sticky-price-label {
             font-size: 0.8rem;
@@ -98,10 +102,20 @@
         
         @media (max-width: 991px) {
             .checkout-grid { grid-template-columns: 1fr; }
-            .order-summary { position: static; order: -1; margin-bottom: 30px; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .mobile-sticky-bar { display: flex; }
+            .order-summary { position: static; order: -1; margin-bottom: 20px; padding: 20px 15px !important; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 10px !important; }
+            .mobile-sticky-bar { display: flex !important; }
             body { padding-bottom: 90px !important; }
+            .checkout-card { padding: 20px 15px !important; margin-bottom: 20px !important; }
+            .checkout-grid { margin: 20px auto !important; }
+            .section-title { font-size: 1.15rem !important; margin-bottom: 15px !important; }
+            
+            /* Tighter spacing & padding for forms on mobile */
+            .input-group { margin-bottom: 12px !important; }
+            .input-group label { font-size: 0.85rem !important; margin-bottom: 6px !important; }
+            .nava-input { padding: 10px 12px !important; font-size: 0.9rem !important; }
+            .radio-option { padding: 12px 14px !important; }
+            .radio-label { font-size: 0.9rem !important; }
         }
         
     </style>

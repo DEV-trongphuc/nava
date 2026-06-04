@@ -1,0 +1,104 @@
+{%- include 'breadcrumb' -%}
+<div class="com_info">
+	<div class="container mt-3 mb-3">
+		<div class="rounded-10 p-2 p-md-3 bg-white col-main page-title">
+			<h1 class="font-weight-bold pt-2 pt-lg-0 mb-2 mb-lg-3 mt-0">
+				{{page.title}}
+			</h1>
+			<div class="m-auto bg-white d-block">
+				<div class="row">
+					<div class="col-md-6 col-12">
+						{%- if settings.edit_contact_page == 'page_option' -%}
+						<div class="content_ct rte">
+							{{ page.content | default: settings.other_updating }}
+						</div>
+						{%- elsif settings.edit_contact_page == 'many_option' -%}
+						{%- for store_address in store.addresses -%}
+						{%- assign name = store_address.name -%}
+						{%- assign address = store_address.address -%}
+						{%- assign district = store_address.district -%}
+						{%- assign province = store_address.province -%}
+						<div class="margin-bottom-10">
+							<p class="mb-2"><b>{{store_address.name}}:</b>
+								{%- if address != null and address != '' -%} {{ address }}{%- endif -%}{%- if district != null and district != ''-%}, {{ district }}{%- endif -%}{%- if province != null and province != '' -%}, {{ province }}{%- endif -%}</p>
+							<p class="mb-2">
+								{%- if store_address.phone != null -%}
+								<b>Hotline:</b> 
+								<a href="tel:{{store_address.phone|replace:' ',''}}" title="{{store_address.phone}}">{{store_address.phone}}
+								</a>
+								{%- endif- %}
+							</p>
+							<p class="mb-2">
+								{%- if store_address.email != null -%}							
+								<b>Email:</b> 
+								<a href="mailto:{{store_address.email|replace:' ',''}}" title="{{store_address.email}}">{{store_address.email}} 
+								</a>							
+								{%- endif -%}
+							</p>
+						</div>
+						{%- endfor -%}
+						{%- elsif  settings.edit_contact_page == 'default_option' -%}
+						<address class="vcard mb-4">
+							{%if settings.footer_address != null and settings.footer_address != ''%}
+							<p class="adr mb-1"><b>{{settings.contact_add}} </b>{{settings.footer_address}}</p>
+							{%else%}
+							<p class="adr mb-1"><b>{{settings.contact_add}} </b>{{store.address}}</p>
+							{%endif%}
+							{%if settings.footer_email != null and settings.footer_email != ''%}
+							<p class="mb-1"><b>Email: </b><a href="mailto:{{settings.footer_email}}" title="{{settings.footer_email}}">{{settings.footer_email}}</a></p>
+							{%else%}
+							<p class="mb-1"><b>Email: </b><a href="mailto:{{store.customer_email}}" title="{{store.customer_email}}">{{store.customer_email}}</a></p>
+							{%endif%}
+							{%if settings.footer_phone != null and settings.footer_phone != ''%}
+							<p class="mb-1"><b>Hotline: </b><a href="tel:{{settings.footer_phone | remove: ' ' | remove: '.'}}" title="{{settings.footer_phone}}">{{settings.footer_phone}}</a></p>
+							{%else%}
+							<p class="mb-1"><b>Hotline: </b><a href="tel:{{store.phone_number}}" title="{{store.phone_number}}">{{store.phone_number}}</a></p>
+							{%endif%}
+							{%if settings.mst != null and settings.mst != ''%}
+							<p class="mb-1">{{settings.mst}}</p>
+							{%endif%}
+						</address>
+						{%- endif -%}
+						<div class="mt-3">
+							{%- form 'contact' -%}
+							{%- if form.posted_successfully -%}
+							<p class=text-success>
+								{{settings.form_contact_success_noti}}
+							</p>
+							{%- endif -%}
+							{%- include 'form-errors-custom' -%}
+							{%comment%}
+							<input name="form_type" type="hidden" value="contact"><input name="utf8" type="hidden" value="?">               
+							{%endcomment%}
+							<div class="customer-name row">
+								<div class="col-12 form-group">
+									<input type="text" class="form-control" name="contact[Name]" placeholder="{{settings.form_contact_name | append: ' *'}}" required>
+								</div>   
+								<div class="col-12 form-group">
+									<input type="email" class="form-control" name="contact[email]" placeholder="{{settings.form_contact_mail | append: ' *'}}" required>
+								</div>
+								<div class="col-12 form-group">
+									<textarea name="contact[Body]" placeholder="{{settings.form_contact_content | append: ' *'}}" class="form-control" rows="3"></textarea>                        
+								</div>
+							</div>
+							<span class="require d-block mb-3"><em class="required">* </em>{{settings.form_contact_require}}</span>
+							<div class="buttons-set">
+								<button type="submit" title="Submit" class="sitdown rounded-10 modal-open position-relative book-submit btn btn-primary text-center d-flex align-items-center font-weight-bold subml">{{settings.form_contact_submit}}</button>
+							</div>
+							{%- endform -%}
+						</div>
+					</div>
+					<div class="col-md-6 col-12">
+						<div class="google-map">
+							{%- if settings.iframe_map != null -%}
+							{{settings.iframe_map}}
+							{%- else -%}
+							<p class="a-center error">{{settings.no_iframe_map}}</p>
+							{%- endif -%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

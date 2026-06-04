@@ -1,0 +1,20 @@
+{% include 'breadcrumb' %}
+<div class="com_info">
+	<div class="container mt-3 mb-3">
+		<div class="col-main page-title rounded-10 p-2 p-md-3 bg-white">
+			<h1 class="font-weight-bold pt-2 pt-lg-0 mt-0 mb-3 page_name text-center">
+				{{page.title}}
+			</h1>
+			<div id="compare-select" class="w-full grid grid-flow-col grid-cols-2 gap-y-4 gap-x-2 mb-2 bg-white {%comment%}sticky{%endcomment%} top-0 z-20"></div>
+			<div id="compare-summary" class="w-full grid grid-flow-col grid-cols-2 gap-y-4 gap-x-2 mb-2"></div>
+			<div id="compare-detail" class="grid grid-flow-row gap-1 border-bottom"></div>
+			
+			
+		</div>
+		
+		
+	</div>
+	<div class="container mb-3">
+		{%include 'm_product_recent_compare'%}
+	</div>
+</div>

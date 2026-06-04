@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head> 
+        <meta name="google-site-verification" content="8m9SdTZclMsrpstXktnwKHPsJKygRQmVT-xc0TUrQeU" />
+        <meta name="google-site-verification" content="rXIf7nd16ck5ErUc3Th604TXn6AJTIpmReDgdXWJMH0" />
+        <meta http-equiv="content-Type" content="text/html; charset=utf-8"/>
+        <meta name="theme-color" content="{{settings.main_color}}">
+        <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
+        <link rel="canonical" href="{{ canonical_url }}"/>
+        <meta name='revisit-after' content='2 days' />
+        <link rel="preconnect" href="https://bizweb.dktcdn.net" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">			
+        <title>{%include 'title_sn'%}</title>
+        <!-- ================= Page description ================== -->
+        {%- if page_description != "" -%}
+        <meta name="description" content="{{ page_description | strip_html | remove: '"' }}">
+        {%- endif -%}
+        <!-- ================= Meta ================== -->
+        {%if template contains 'index'%}{%if settings.home_page_keywords != '' and settings.home_page_keywords != null%}<meta name="keywords" content="{{settings.home_page_keywords}}"/>{%else%}<meta name="keywords" content="{{store.name}}, {{store.domain}}"/>{%endif%}{%elsif template contains 'product'%}<meta name="keywords" content="{{product.name}}, {%for collection in product.collections%}{{collection.name}}, {%endfor%}{%if product.tags.size > 0%}{% for tag in product.tags %}{{tag}}, {%endfor%}{%endif%}{{store.name}}, {{store.domain}}"/>{%elsif template contains 'collection'%}<meta name="keywords" content="{{collection.name }}, {{store.name}}, {{store.domain}}"/>{%elsif template contains 'blog'%}<meta name="keywords" content="{{blog.name }}, {{store.name}}, {{store.domain}}"/>{%elsif template contains 'article'%}<meta name="keywords" content="{{article.title}}, {{blog.name}}, {%if article.tags.size > 0%}{% for tag in article.tags %}{{tag}}, {%endfor%}{%endif%} {{store.name}}, {{store.domain}}"/>{%else%}<meta name="keywords" content="{{page_title}}, {{store.name}}, {{store.domain}}"/>{%endif%}		
+        <meta name="robots" content="noodp,index,follow" />
+        <link rel="shortcut icon" href="{{ 'favicon.png' | asset_url }}" type="image/x-icon" />  
+        <link rel="preload" href="{{ 'logo.png' | asset_url | img_url: 'compact' }}" as="image" media="(min-width: 992px)" />
+        {%- include 'fb-open-graph-tags' -%}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+        <link rel="preload" as="image" href="{{'slide-img1.png' | asset_url | img_url: 'large'}}" media="screen and (max-width: 480px)">
+        <link rel="preload" as="image" href="{{'slide-img2.png' | asset_url | img_url: 'large'}}" media="screen and (max-width: 480px)">
+        {%-include 'head_styles'-%}
+        {%-if template contains 'addresses'-%}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" integrity="sha512-6ORWJX/LrnSjBzwefdNUyLCMTIsGoNP6NftMy2UAm1JBm6PRZCO1d7OHBStWpVFZLO+RerTvqX/Z9mBFfCJZ4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="preload" as="script" href="{{ 'boostrap_min.js' | asset_url }}" />
+        {{ 'boostrap_min.js' | asset_url | script_tag }} 
+        {%-else-%}
+        {%-if settings.use_sapo_app-%}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        {{ 'api.jquery.js' | bizweb_asset_url | script_tag }}
+        {%-else-%}
+        <link rel="preload" as="script" href="{{ 'cash.min.js' | asset_url }}" />
+        <script src="{{'cash.min.js' | asset_url}}"></script>
+        {%-endif-%}
+        {%-endif-%}
+        <link rel="preload" as="script" href="{{ 'axios.min.js' | asset_url }}" />
+        {{ 'axios.min.js'  | asset_url | script_tag }}
+
+        {%- if template contains 'index' or template contains 'product' or template contains 'cart' or template contains 'collection' or template contains 'compare' or template contains 'customers' -%}
+        <!-- Google Fonts Optimized -->
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <!-- Phosphor Icons Optimized -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/light/style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">
+        <!-- Dynamic CSS Loader for Sapo BWT -->
+        {{ 'style.css' | asset_url | stylesheet_tag }}
+        <!-- Theme Script for FOUC -->
+        <script>
+            const savedTheme = localStorage.getItem('nava-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        </script>
+        {%- endif -%}
+
+        <!-- Lite YouTube Embed -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.css" />
+        <script src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.js" defer></script>
+
+        {{ content_for_header }}
+
+        {%if template contains 'customers'%}{{ 'custom.scss.css' | asset_url | stylesheet_tag }}{{ 'common.js' | bizweb_asset_url | script_tag }}{{ 'bizweb-api.js' | bizweb_asset_url | script_tag }}{{ 'customer.js'  | bizweb_asset_url | script_tag }}{%endif%}
+        {%-if template contains 'product'-%}
+        <script rel="dns-prefetch">var ProductReviewsAppUtil=ProductReviewsAppUtil || {};{% if customer %}ProductReviewsAppUtil.customer={id: '{{customer.id}}',name: '{{customer.name}}',email: '{{customer.email}}', phone: '{{customer.phone}}'};{% endif %}ProductReviewsAppUtil.store={name: '{{store.name}}'};</script>
+        {%-endif-%}
+        {%-include 'schema'-%}
+        <style>
+            img {
+                -webkit-user-drag: none;
+                user-drag: none;
+                -webkit-touch-callout: none;
+            }
+            #marquee-container {
+                width: 100%;
+                overflow: hidden;
+                white-space: nowrap;
+                box-sizing: border-box;
+                position: relative;
+                height: 40px;
+            }
+            #marquee-text {
+                position: absolute;
+                white-space: nowrap;
+                will-change: transform;
+            }
+        </style>
+        
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PVC2Z8LJ');</script>
+        <!-- End Google Tag Manager -->
+    </head>
+    <body id="body_m" {% if customer %}class="customer-logged-in"{% endif %} >
+        <div class="page-body">
+            <div class="hidden-md hidden-lg opacity_menu"></div>
+            <div class="opacity_filter"></div>
+            <div id="body_overlay" class="position-fixed d-none"></div>
+            <div class="w-100 clearfix">
+                {%- unless template contains 'index' -%}
+                {%- include 'header' -%}  
+                {%- endunless -%}
+                <div class="col-right position-relative">
+                    <div class="contentWarp {%if template == 'page.arthor'%}pb-5{%endif%}">
+                        {{ content_for_layout }}
+                    </div>
+                    {%- unless template contains 'index' -%}
+                    {%- include 'footer' -%}
+                    {%- endunless -%}
+                </div>
+            </div>
+            <div onclick="scrollToTop(100);" class="back_top d-flex position-fixed justify-content-center align-items-center" role="button" aria-label="Lên đầu trang">
+                <img alt="" aria-hidden="true" src="{{'to-top-arrow2.png' | asset_url}}" width="17" height="9">
+            </div>
+            {%-if template != 'product'-%}
+            {%-include 'mew_mobi_bar'-%}
+            {%-endif-%}
+            <div class="toast-container"></div>
+            {%-include 'footer_scripts'-%}
+            {%-include 'svg-cache'-%}
+        </div>
+        {%-if settings.ena_popup_news-%}
+        {%include 'popup_news'%}
+        {%-endif-%}
+        {%if settings.ena_isocial_bubble%}
+        {%include 'isocial_bubble'%}
+        {%endif%}
+
+        <!-- Cart Drawer -->
+        <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+        <div class="cart-drawer" id="cart-drawer">
+            <div class="cart-drawer-header">
+                <h2>Giỏ hàng của bạn</h2>
+                <button class="cart-close-btn" id="cart-close-btn" aria-label="Đóng giỏ hàng"><i class="ph ph-x"></i></button>
+            </div>
+            <div class="cart-drawer-body" id="cart-drawer-body">
+                <div class="cart-empty-state" id="cart-empty-state" style="display: none;">
+                    <i class="ph-light ph-shopping-cart"></i>
+                    <p>Giỏ hàng của bạn đang trống</p>
+                    <a href="https://navastore.vn/tat-ca-san-pham" class="btn-pill btn-blue" id="cart-continue-shopping">Tiếp tục mua sắm</a>
+                </div>
+                <div class="cart-loading-state" id="cart-loading-state">
+                    <div class="cart-spinner"></div>
+                </div>
+                <div class="cart-items-list" id="cart-items-list"></div>
+            </div>
+            <div class="cart-drawer-footer" id="cart-drawer-footer" style="display: none;">
+                <div class="cart-total">
+                    <span>Tổng tiền:</span>
+                    <strong id="cart-total-price">0đ</strong>
+                </div>
+                <a href="/cart" class="btn-pill btn-blue cart-checkout-btn">Thanh toán ngay <i class="ph ph-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Floating Social Button -->
+        <div class="floating-social-wrapper">
+            <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
+                <img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
+                <img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" class="fab-cycle-img" width="50" height="50">
+                <img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" class="fab-cycle-img" width="50" height="50">
+                <img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" class="fab-cycle-img" width="50" height="50">
+                <img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" class="fab-cycle-img" width="50" height="50">
+            </button>
+            <div class="fab-menu" id="fabMenu">
+                <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width="44" height="44"></a>
+                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" width="44" height="44"></a>
+                <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" width="44" height="44"></a>
+                <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" width="44" height="44"></a>
+                <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" width="44" height="44"></a>
+            </div>
+        </div>
+        <style>
+        .floating-social-wrapper {
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
+            top: auto !important;
+            transform: none !important;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .fab-main {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            position: relative;
+            z-index: 1001;
+            overflow: hidden;
+            padding: 0;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+        .fab-main:hover {
+            transform: scale(1.05);
+        }
+        .fab-cycle-img {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .fab-cycle-img.active {
+            opacity: 1;
+        }
+        .fab-menu {
+            position: absolute;
+            bottom: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .fab-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .fab-item {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            border: 2px solid white;
+        }
+        .fab-item:hover {
+            transform: scale(1.1) translateY(-2px);
+        }
+        .fab-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        </style>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cycle FAB images
+            setInterval(() => {
+                const imgs = document.querySelectorAll('.fab-cycle-img');
+                if (imgs.length > 0) {
+                    let activeIdx = -1;
+                    imgs.forEach((img, idx) => {
+                        if (img.classList.contains('active')) activeIdx = idx;
+                        img.classList.remove('active');
+                    });
+                    if (activeIdx !== -1) {
+                        const nextIdx = (activeIdx + 1) % imgs.length;
+                        imgs[nextIdx].classList.add('active');
+                    } else {
+                        imgs[0].classList.add('active');
+                    }
+                }
+            }, 2500);
+
+            // Toggle FAB menu
+            const fabMainBtn = document.getElementById('fabMainBtn');
+            if(fabMainBtn) {
+                fabMainBtn.addEventListener('click', function () {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.floating-social-wrapper')) {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.remove('active');
+                }
+            });
+        });
+        </script>
+        
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVC2Z8LJ"
+        height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        
+        {{ 'main.js' | asset_url | script_tag }}
+    </body>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("img").forEach(function (img) {
+                if (!img.hasAttribute("alt") || img.alt.trim() === "minipc navastore maytinh #miniPC phukien egpu Minisforum MINISFORUM eGPU Laptop NavaStore") {
+                    let fileName = img.src.split('/').pop().split('.')[0];
+                    img.alt = fileName.replace(/[-_]/g, ' ');
+                }
+            });
+        });
+    </script>
+</html>

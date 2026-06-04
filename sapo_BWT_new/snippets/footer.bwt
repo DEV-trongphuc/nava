@@ -1,0 +1,62 @@
+<footer class="footer">
+    <div class="container footer-grid">
+        <div class="footer-col brand">
+            <div class="logo">
+                <img src="{{ 'logo.png' | asset_url }}" alt="Nava Store" class="footer-logo-img" loading="lazy" decoding="async" width="125" height="50" style="object-fit: contain;">
+            </div>
+            <p class="footer-desc">Trung tâm phân phối tiên phong chuyên cung cấp các giải pháp Mini PC & eGPU cao cấp, tái thiết lập hoàn toàn chuẩn mực của một chiếc máy tính cá nhân.</p>
+            <div class="footer-socials">
+                <a href="https://shopee.vn/navastore.vn" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" loading="lazy" decoding="async" width="32" height="32"></a>
+                <a href="https://www.lazada.vn/shop/nava-store" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" loading="lazy" decoding="async" width="32" height="32"></a>
+                <a href="https://www.tiktok.com/@navastore.vn" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok" loading="lazy" decoding="async" width="32" height="32"></a>
+                <a href="https://www.facebook.com/navastore.vn/" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook" loading="lazy" decoding="async" width="32" height="32"></a>
+                <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube" loading="lazy" decoding="async" width="32" height="32"></a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-title">Danh Mục Chính</h4>
+            <ul>
+                <li><a href="https://navastore.vn/minipc">Mini PC Gaming & Đồ Họa</a></li>
+                <li><a href="https://navastore.vn/minipc">Mini PC AI & Văn phòng</a></li>
+                <li><a href="https://navastore.vn/egpu">Hệ thống eGPU gắn ngoài</a></li>
+                <li><a href="https://navastore.vn/nas">Giải pháp NAS/Server</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-title">Hỗ trợ khách hàng</h4>
+            <ul>
+                <li><a href="/chinh-sach-bao-mat#warranty" id="open-warranty-modal-footer">Chính sách bảo hành</a></li>
+                <li><a href="/chinh-sach-bao-mat#installment">Hướng dẫn trả góp</a></li>
+                <li><a href="/chinh-sach-bao-mat#shipping">Giao hàng & Đổi trả</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4 class="footer-title">Liên hệ</h4>
+            <ul>
+                <li><i class="ph-fill ph-phone"></i> 0972178527</li>
+                <li><i class="ph-fill ph-envelope-simple"></i> info@navatek.vn</li>
+                <li><i class="ph-fill ph-buildings"></i> MST: 8080980349-001</li>
+                <li><i class="ph-fill ph-scroll"></i> ĐKKD: 41Y8016466</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-company-info container">
+        <div class="company-details">
+            <div class="detail-item">
+                <i class="ph-fill ph-map-pin"></i>
+                <span><strong>Văn phòng:</strong> 702 Võ Nguyên Giáp, Hiệp Phú, Thủ Đức, Hồ Chí Minh</span>
+            </div>
+            <div class="detail-item">
+                <i class="ph-fill ph-wrench"></i>
+                <span><strong>Trung tâm bảo hành:</strong> 270 đường Linh Trung, P.Linh Trung, TP. Thủ Đức, TP.HCM</span>
+            </div>
+        </div>
+        <div class="certifications">
+            <a href="https://online.gov.vn" target="_blank" rel="noopener"><img src="https://bizweb.dktcdn.net/100/543/817/files/logosalenoti.png?v=1742207130127" alt="Bộ Công Thương" loading="lazy" decoding="async" width="150" height="57" style="object-fit: contain;"></a>
+            <a href="https://www.dmca.com" target="_blank" rel="noopener"><img src="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617" alt="DMCA" loading="lazy" decoding="async" width="120" height="24" style="object-fit: contain;"></a>
+        </div>
+    </div>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 NAVA STORE. Định Nghĩa Lại Sức Mạnh Điện Toán.</p>
+    </div>
+</footer>

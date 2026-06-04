@@ -1,0 +1,53 @@
+{%-include 'setup_price_sn'-%}
+<div class="product-item position-relative p-2 rounded-10 bg-white h-100 {%if settings.ena_shadow_item%}box_shadow{%endif%}">
+	{%-if contact == false-%}
+	{%-if on_sale-%}
+	<div class="sale-label sale-top-right position-absolute font-weight-bold">Giảm {{discount}}</div>
+	{%-endif-%}
+	{%-endif-%}
+	<a href="{{ product.url}}" class="thumb d-block modal-open position-relative" title="{{ product.name }}">
+		<div class="position-relative w-100 m-0 ratio1by1 has-edge aspect zoom">
+			<img src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ product.featured_image.src | img_url: 'large'}}" decoding="async" class="d-block img img-cover position-absolute lazy" alt="{{ product.name }}">
+		</div>
+		{%-include 'tag_product'-%}
+		{%if pre_order%}
+		{%comment%} NHAN PRE-ORDER{%endcomment%}
+		<div class="label-bottom-right position-absolute">
+			<img src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{'pre-order.png' | asset_url}}" decoding="async" class="d-block img img-cover lazy" alt="PreOrder">
+		</div>
+		
+		{%endif%}
+	</a>
+	<div class="item-info mt-1 position-relative">
+		<h3 class="item-title font-weight-bold">
+			<a class="line_{{settings.line_tit_grid_pr}}" href="{{ product.url }}" title="{{ product.name }}">
+				{{ product.name | replace: '<', '&lt;'}} 
+			</a>
+		</h3>
+		{%-if settings.product_review-%}
+		<div class="sapo-product-reviews-badge" data-id="{{ product.id }}"></div>
+		{%-endif-%}
+		<div class="d-flex flex-wrap justify-content-between">
+			<div class="item-price">
+				{%-if contact == false-%}
+				{%-if on_sale-%}
+				<span class="special-price font-weight-bold">{{ dq-price | money }}</span>
+				<del class="old-price"> {{ dq-compare-price | money }}</del>
+				{%-else-%}
+				<span class="regular-price font-weight-bold">{{ dq-price | money }}</span>
+				{%-endif-%}
+				{%-else-%}
+				<span class="regular-price  font-weight-bold">{{settings.noPrice}}</span> 
+				{%-endif-%}
+			</div>
+			{%-if settings.enable_compare-%}
+			<label class="compare-label position-relative d-flex align-items-center m-0">
+				<input type="checkbox" class="compare-checkbox d-none" value="{{ product.url }}" data-type="{{product.type}}"> 
+				<span class="compare-checkbox mr-1 rounded-circle"></span>
+				{{settings.compare_tit}}
+			</label>
+			{%-endif-%}
+		</div>
+		{%include 'product-grid-item_buynow'%}
+	</div>
+</div>

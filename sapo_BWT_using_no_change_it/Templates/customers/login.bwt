@@ -1,0 +1,97 @@
+{% layout 'theme.login' %}
+<section class="login-layout d-flex align-items-center justify-content-center justify-content-lg-end">
+	<div class="box_log position-relative">
+		<div class="b_big position-relative pl-xl-5 pr-xl-5 pt-xl-4 pb-xl-4 p-3 border-mew squa-mew">
+			<div class="registered-users">
+				<div class="content">
+					{%- form 'customer_login' -%}
+					<h3 class="font-weight-bold text-white text-center m-0">{{settings.login_text}}</h3>
+					{%comment%}
+					<ul class="breadcrumb text-white d-flex justify-content-center pl-0 pr-0 mb-2 w-100 small">					
+						<li class="home whites">
+							<a href="/" title="{{store.name}}">{{settings.breadcrumb_home}}</a>						
+							<span class="slash-divider ml-1 mr-1">/</span>
+						</li>
+						<li>{{ page_title }}</li>
+					</ul>
+					{%endcomment%}
+					<div class="form-group">
+						<label for="customer_email" class="col-form-label d-none">{{settings.login_mail}}<span class="text-danger">*</span></label>
+						<input type="email" placeholder="{{settings.login_mail}}" class="border-mew mew-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" id="customer_email" required>
+					</div>
+					<div class="form-group">
+						<label for="customer_password" class="d-none col-form-label">{{settings.login_pass}}<span class="text-danger">*</span></label>
+						<input type="password" placeholder="{{settings.login_pass}}" class="border-mew mew-control" name="password" id="customer_password" required>
+					</div>
+					<div class="form-group d-flex justify-content-between align-items-center">
+						<button type="submit" class="btn btn-primary  d-flex   font-weight-bold  btn_login  ">{{settings.login_text}}</button>
+						<a href="#recover" class="whites font-weight-bold" onclick="toggleRecoverPasswordForm();return false;" id="RecoverPassword">{{settings.login_forgot_pass}}</a>
+					</div>
+					{%- for field in form.errors -%}
+					<div class="form-error text-left mb-4 text-danger pl-3 pr-3 pt-2 pb-2 bg-white">
+						{{ form.errors.messages[field] }} <br/>
+					</div>
+					{%- endfor -%}
+					{%- endform -%}
+
+					{%- form 'recover_customer_password' -%}
+					{%- if form.posted_successfully -%}
+					{%- assign reset_success = true -%}
+					<p class="passed alert-warning p-2 rounded-10">{{settings.forgot_pass_success_noti}}</p>
+					{%- endif -%}
+					<div id="recover_password" class="d-none">
+						<h3 class="font-weight-bold mb-3 text-white text-center">{{settings.forgot_pass_title}}</h3>                     
+						<p class="line_cus whites text-center">{{settings.forgot_pass_content}}</p>
+						<div class="form-error mb-4 text-danger" >
+							{%- for field in form.errors -%}
+							{{ form.errors.messages[field] }} <br/>
+							{%- endfor -%}
+						</div>
+						<div class="form-group">
+							<label for="customer_email1" class="col-form-label d-none">{{settings.login_mail}}<span class="text-danger">*</span></label>
+							<input type="email" class="border-mew mew-control" placeholder="{{settings.login_mail}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" id="customer_email1" required>
+						</div>
+						<div class="form-group d-flex justify-content-between align-items-center">
+							<button type="submit" class="btn btn-primary border-mew mew-control btn_login max_width font-weight-bold" title="{{settings.forgot_pass_submit}}">{{settings.forgot_pass_submit}}</button>
+							<a href="#" class="whites font-weight-bold" onclick="toggleRecoverPasswordForm();return false;" title="{{settings.forgot_pass_cancel}}">{{settings.forgot_pass_cancel}}</a>
+						</div>
+					</div>
+					{%- endform -%} 
+					{%-if settings.use_login_social-%}
+					<div class="login_isocial">
+						<div class="log_iso position-relative text-center">
+							<span class="d-inline-block position-relative">{{settings.login_social_text}}</span>
+						</div>
+						{{ social_login.script }} 
+						<div class="d-flex align-items-center justify-content-center">
+							{{ social_login.facebook_button }} 
+							{{ social_login.google_button }}
+						</div>
+					</div>
+					{%-endif-%}
+				</div>
+			</div>
+			<div class="new-users">
+				<h3 class="font-weight-bold mb-3 mt-4 text-white text-center">{{settings.register_text}}</h3>
+				<div class="content">
+					<p class="line_cus whites text-center">{{settings.register_content}}</p>
+					<div class="buttons-set text-center">
+						<button class="btn btn-primary border-mew mew-control font-weight-bold mb-2" onclick="window.location.href='/account/register'">{{settings.register_create}}</button>
+						<button class="btn btn-primary border-mew mew-control font-weight-bold" onclick="window.location.href='/'">{{settings.register_back}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>  
+	var formRecoverPassword = $("#recover_password"),
+		formLogin = $("#customer_login"),
+		notiRecoverSuccess = $("#note-reset");
+	function toggleRecoverPasswordForm() {
+		formRecoverPassword.toggleClass("d-none");
+		formLogin.toggleClass("d-none");
+	}
+	if (window.location.hash == "#recover") { toggleRecoverPasswordForm() }
+</script>

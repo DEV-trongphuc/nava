@@ -1,0 +1,82 @@
+File size: 230959 chars
+Search for 'Số lượng': found 2 matches
+Snippet near match of 'Số lượng':
+iv style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+                                <div class="qty-selector" style="display: inline-flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--bg-gray);">
+                                    <button class="qty-adjust" onclick="adjustQty(-1)" style="width: 32px; height: 32px; border: none; background: transparent; cursor: pointer; font-weight: bold; color: var(--text-dark); transition: 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'">-</button>
+                                    <input type="text" value="1" class="qty-val" id="qty-val-main" readonly style="width: 36px; height: 32px; text-align: center; borde
+==================================================
+Search for '12.390.000': found 5 matches
+Snippet near match of '12.390.000':
+                      </div>
+                            <div class="prod-price" id="main-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">12.390.000đ</div>
+                        </div>
+ 
+                        <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
+                        <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
+                            <!-- Icon Cart Button -->
+                            <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                                <i class="ph-bold ph-shop
+==================================================
+Search for 'price': found 88 matches
+Snippet near match of 'price':
+prod-brand img { height: 24px; object-fit: contain; }
+                .prod-title { font-size: 1.8rem; font-weight: 700; color: #0f172a; line-height: 1.3; margin-bottom: 16px; }
+                .prod-price-wrap { display: flex; align-items: baseline; gap: 12px; margin-bottom: 30px; padding-bottom: 24px; border-bottom: 1px solid #e2e8f0; }
+                .prod-price { font-size: 2.2rem; font-weight: 700; color: var(--primary); }
+                .prod-vat { font-size: 0.85rem; color: #64748b; }
+                
+                /* Flat Variants completely redesigned */
+                .variants-row-container {
+                    display: flex;
+                    gap: 16px;
+                    margin-bottom: 24px;
+                }
+                .variants-row-container .variant-group {
+                    flex: 1;
+                    margin-bottom: 0;
+                }
+                .variant-group { margin-bottom: 24px; }
+                .variant-label { font-weight: 600; font-size:
+==================================================
+Search for 'product-form': found 0 matches
+Search for 'prod-info': found 3 matches
+Snippet near match of 'prod-info':
+r-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,0.03); border: 1px solid #e2e8f0;
+                }
+                .nava-prod-gallery { width: 100%; box-sizing: border-box; }
+                .nava-prod-info { width: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
+                @media (min-width: 992px) {
+                    .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 60px; padding: 40px; }
+                    .nava-prod-gallery { width: 55%; position: sticky; top: 130px; }
+                    .nava-prod-info { width: 45%; }
+                }
+                
+                /* Clean Gallery */
+                .main-image-container { 
+                    background: #ffffff; 
+                    border-radius: 16px; 
+                    padding: 24px; 
+                    text-align: center; 
+                    margin-bottom: 32px; 
+                    display: flex; 
+                    align-items: center; 
+                   
+==================================================
+Search for 'custom-select': found 0 matches
+Search for 'specs': found 22 matches
+Snippet near match of 'specs':
+column li { color: var(--text-gray) !important; }
+                [data-theme="dark"] .desc-column strong { color: var(--text-dark) !important; }
+                
+                [data-theme="dark"] .specs-column { background: var(--bg-gray); border-color: var(--border-color); }
+                [data-theme="dark"] .specs-column h2 { color: var(--text-dark) !important; }
+                [data-theme="dark"] .nava-spec-row { border-color: var(--border-color); }
+                [data-theme="dark"] .nava-spec-label { color: var(--text-gray) !important; }
+                [data-theme="dark"] .nava-spec-value { color: var(--text-dark) !important; }
+                [data-theme="dark"] .specs-column .action-btn { background: var(--bg-white) !important; border-color: var(--border-color) !important; color: var(--primary) !important; }
+                [data-theme="dark"] .specs-column .action-btn:hover { background: var(--bg-gray) !important; }
+                
+                [data-theme="dark"] .
+==================================================

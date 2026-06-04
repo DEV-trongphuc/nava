@@ -1,0 +1,233 @@
+<style>
+    .sidebar-block { margin-bottom: 35px; }
+    .sidebar-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 20px; color: var(--text-dark, #0f172a); display: flex; align-items: center; gap: 10px; }
+    .sidebar-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary, #2563eb); border-radius: 2px; }
+    
+    .category-list { list-style: none; padding: 0; margin: 0; }
+    .category-list li { margin-bottom: 10px; }
+    .category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-dark, #0f172a); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .category-list a:hover { color: var(--primary, #2563eb); }
+    .category-list .count { margin-left: auto; color: var(--text-gray, #64748b); font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+    
+    .brand-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .brand-item { border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: var(--bg-white, #ffffff); transition: all 0.2s; }
+    .brand-item:hover { border-color: var(--primary, #2563eb); box-shadow: 0 4px 12px rgba(59,130,246,0.1); transform: translateY(-1px); }
+    .brand-item.active { border-color: var(--primary, #2563eb); background: rgba(59,130,246,0.05); }
+
+    /* Dual Range Slider Styling */
+    .range-slider { position: relative; height: 20px; margin-top: 15px; margin-bottom: 20px; }
+    .range-slider input[type="range"] { position: absolute; width: 100%; height: 4px; background: transparent; -webkit-appearance: none; pointer-events: none; outline: none; margin: 0; top: 8px; z-index: 3; }
+    .range-slider input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; pointer-events: auto; width: 16px; height: 16px; background: var(--primary, #2563eb); border-radius: 50%; cursor: pointer; border: 2px solid #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.25); transition: transform 0.1s; }
+    .range-slider input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .range-slider input[type="range"]::-moz-range-thumb { pointer-events: auto; width: 16px; height: 16px; background: var(--primary, #2563eb); border-radius: 50%; cursor: pointer; border: 2px solid #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.25); }
+    .slider-track { position: absolute; height: 4px; background: var(--border-color, #e2e8f0); width: 100%; top: 8px; border-radius: 2px; z-index: 1; }
+    .slider-highlight { position: absolute; height: 4px; background: var(--primary, #2563eb); top: 8px; border-radius: 2px; z-index: 2; }
+</style>
+
+<!-- Category List -->
+<div class="sidebar-block">
+    <h4 class="sidebar-title">Danh mục sản phẩm</h4>
+    <ul class="category-list">
+        <!-- Item 1: Mini PC -->
+        {%- assign cat_minipc = collections['minipc'] | default: collections['mini-pc'] -%}
+        <li>
+            <a href="/minipc" {% if collection.handle == 'minipc' or collection.handle == 'mini-pc' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <img src="{{ 'icon_dmenu_3.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Mini PC">
+                Mini PC
+                <span class="count">({{ cat_minipc.products_count | default: 145 }}) <i class="ph-bold ph-caret-down"></i></span>
+            </a>
+        </li>
+        
+        <!-- Item 2: eGPU -->
+        {%- assign cat_egpu = collections['egpu'] -%}
+        <li>
+            <a href="/egpu" {% if collection.handle == 'egpu' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <img src="{{ 'icon_dmenu_4.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="eGPU">
+                eGPU
+                <span class="count">({{ cat_egpu.products_count | default: 14 }})</span>
+            </a>
+        </li>
+        
+        <!-- Item 3: RAM/SSD -->
+        {%- assign cat_ram = collections['ram-ssd'] | default: collections['ram'] -%}
+        <li>
+            <a href="/ram-ssd" {% if collection.handle == 'ram-ssd' or collection.handle == 'ram' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <img src="{{ 'icon_dmenu_6.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="RAM/SSD">
+                RAM/SSD
+                <span class="count">({{ cat_ram.products_count | default: 11 }})</span>
+            </a>
+        </li>
+        
+        <!-- Item 4: Màn hình -->
+        {%- assign cat_screen = collections['man-hinh'] | default: collections['screen'] -%}
+        <li>
+            <a href="/man-hinh" {% if collection.handle == 'man-hinh' or collection.handle == 'screen' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <i class="ph-fill ph-monitor" style="font-size: 22px; color: #475569;"></i>
+                Màn hình
+                <span class="count">({{ cat_screen.products_count | default: 28 }})</span>
+            </a>
+        </li>
+        
+        <!-- Item 5: Phụ kiện -->
+        {%- assign cat_accessory = collections['phu-kien'] | default: collections['accessories'] -%}
+        <li>
+            <a href="/phu-kien" {% if collection.handle == 'phu-kien' or collection.handle == 'accessories' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <img src="{{ 'icon_dmenu_7.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Phụ kiện">
+                Phụ kiện
+                <span class="count">({{ cat_accessory.products_count | default: 25 }})</span>
+            </a>
+        </li>
+        
+        <!-- Item 6: Like new -->
+        {%- assign cat_likenew = collections['like-new'] -%}
+        <li>
+            <a href="/like-new" {% if collection.handle == 'like-new' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <i class="ph-fill ph-device-mobile" style="font-size: 22px; color: #475569;"></i>
+                Like new
+                <span class="count">({{ cat_likenew.products_count | default: 6 }})</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Price Filter Range -->
+<div class="sidebar-block">
+    <h4 class="sidebar-title">Lọc giá</h4>
+    <div style="margin-bottom: 20px; padding: 0 5px;">
+        <div class="range-slider">
+            <div class="slider-track"></div>
+            <div class="slider-highlight" id="sliderHighlight"></div>
+            <input type="range" min="0" max="50000000" value="4000000" id="slider-1" oninput="slideOne()">
+            <input type="range" min="0" max="50000000" value="30000000" id="slider-2" oninput="slideTwo()">
+        </div>
+        <div class="price-inputs" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px;">
+            <input type="text" id="priceInputMin" placeholder="4.000.000đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
+            <span style="color: #94a3b8; font-weight: bold;">-</span>
+            <input type="text" id="priceInputMax" placeholder="30.000.000đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
+        </div>
+        <button onclick="applySapoPriceFilter()" style="width: 100%; margin-top: 15px; background: var(--primary, #2563eb); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.88rem; transition: background 0.2s;">
+            Áp dụng lọc giá
+        </button>
+    </div>
+</div>
+
+<!-- Brand Filter -->
+<div class="sidebar-block">
+    <h4 class="sidebar-title">Thương hiệu</h4>
+    <div class="brand-list">
+        <div class="brand-item" id="brand-asus" onclick="toggleBrandFilter('ASUS')" title="ASUS">
+            <img src="{{ 'asus.png' | asset_url }}" alt="ASUS" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-beelink" onclick="toggleBrandFilter('Beelink')" title="Beelink">
+            <img src="{{ 'beelink.png' | asset_url }}" alt="Beelink" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-beikong" onclick="toggleBrandFilter('BEIKONG')" title="BEIKONG">
+            <img src="{{ 'beikong.png' | asset_url }}" alt="BEIKONG" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-bmax" onclick="toggleBrandFilter('BMAX')" title="BMAX">
+            <img src="{{ 'bmax.png' | asset_url }}" alt="BMAX" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-aostar" onclick="toggleBrandFilter('AOOSTAR')" title="AOOSTAR">
+            <img src="{{ 'aostar.png' | asset_url }}" alt="AOOSTAR" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-gmktec" onclick="toggleBrandFilter('GMKTEC')" title="GMKTEC">
+            <img src="{{ 'gmktec.png' | asset_url }}" alt="GMKTEC" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-minisforum" onclick="toggleBrandFilter('Minisforum')" title="Minisforum">
+            <img src="{{ 'minisforum.png' | asset_url }}" alt="Minisforum" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="brand-item" id="brand-msi" onclick="toggleBrandFilter('MSI')" title="MSI">
+            <img src="{{ 'msi.png' | asset_url }}" alt="MSI" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dual range slider functionality
+    var slider1 = document.getElementById("slider-1");
+    var slider2 = document.getElementById("slider-2");
+    var highlight = document.getElementById("sliderHighlight");
+    var minValInput = document.getElementById("priceInputMin");
+    var maxValInput = document.getElementById("priceInputMax");
+    var minGap = 2000000; // 2M minimum gap
+
+    function slideOne() {
+        if(parseInt(slider2.value) - parseInt(slider1.value) <= minGap) {
+            slider1.value = parseInt(slider2.value) - minGap;
+        }
+        minValInput.value = formatCurrency(slider1.value);
+        updateHighlight();
+    }
+
+    function slideTwo() {
+        if(parseInt(slider2.value) - parseInt(slider1.value) <= minGap) {
+            slider2.value = parseInt(slider1.value) + minGap;
+        }
+        maxValInput.value = formatCurrency(slider2.value);
+        updateHighlight();
+    }
+
+    function updateHighlight() {
+        var minPercent = (slider1.value / slider1.max) * 100;
+        var maxPercent = (slider2.value / slider2.max) * 100;
+        highlight.style.left = minPercent + "%";
+        highlight.style.width = (maxPercent - minPercent) + "%";
+    }
+
+    function formatCurrency(val) {
+        return parseInt(val).toLocaleString('vi-VN') + 'đ';
+    }
+
+    function applySapoPriceFilter() {
+        var minPrice = slider1.value;
+        var maxPrice = slider2.value;
+        var filterVal = minPrice + "_" + maxPrice;
+        
+        let url = new URL(window.location.href);
+        url.searchParams.set('price', filterVal);
+        window.location.href = url.toString();
+    }
+
+    function toggleBrandFilter(brandName) {
+        let url = new URL(window.location.href);
+        let currentVendor = url.searchParams.get('vendor');
+        
+        if (currentVendor && currentVendor.toLowerCase() === brandName.toLowerCase()) {
+            url.searchParams.delete('vendor');
+        } else {
+            url.searchParams.set('vendor', brandName);
+        }
+        window.location.href = url.toString();
+    }
+
+    // Set initial values from URL on load
+    document.addEventListener("DOMContentLoaded", function() {
+        let url = new URL(window.location.href);
+        
+        // Brand highlighting
+        let currentVendor = url.searchParams.get('vendor');
+        if (currentVendor) {
+            let activeId = "brand-" + currentVendor.toLowerCase();
+            let activeEl = document.getElementById(activeId);
+            if (activeEl) {
+                activeEl.classList.add("active");
+            }
+        }
+
+        // Price range initializing
+        let currentPriceRange = url.searchParams.get('price');
+        if (currentPriceRange && currentPriceRange.includes('_')) {
+            let parts = currentPriceRange.split('_');
+            let minP = parseInt(parts[0]);
+            let maxP = parseInt(parts[1]);
+            if (!isNaN(minP) && !isNaN(maxP)) {
+                slider1.value = minP;
+                slider2.value = maxP;
+            }
+        }
+        
+        // Initialize UI display
+        slideOne();
+        slideTwo();
+    });
+</script>

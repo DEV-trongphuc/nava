@@ -7365,3 +7365,328 @@ lite-youtube:hover > .lty-playbtn {
     transform: translate(-50%, -50%) scale(1.2) !important;
     opacity: 1 !important;
 }
+
+/* --- COLLECTION & PRODUCT CARD PREMIUM STYLES --- */
+.nava-collection-layout { display: flex; flex-direction: column; gap: 40px; }
+.nava-sidebar { width: 100%; }
+.nava-main { width: 100%; min-width: 0; }
+
+.sidebar-block { margin-bottom: 35px; }
+.sidebar-title { font-weight: 800; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 20px; color: var(--text-dark); display: flex; align-items: center; gap: 10px; }
+.sidebar-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; }
+
+.category-list { list-style: none; padding: 0; margin: 0; }
+.category-list li { margin-bottom: 10px; }
+.category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; padding: 8px 12px; border-radius: var(--radius-sm); }
+.category-list a:hover, .category-list a.active { color: var(--primary); background: rgba(14, 165, 233, 0.05); padding-left: 15px; }
+.category-list a img { flex-shrink: 0; }
+.category-list .count { margin-left: auto; background: var(--bg-gray); padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; color: var(--text-gray); display: flex; align-items: center; gap: 4px; }
+
+.price-filter-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
+.price-filter-inputs input { width: 50%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-dark); font-size: 0.9rem; transition: border-color 0.3s; }
+.price-filter-inputs input:focus { border-color: var(--primary); outline: none; }
+
+.brand-list { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; box-sizing: border-box; }
+.brand-item { width: calc(50% - 4px); display: flex; align-items: center; justify-content: center; padding: 6px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.3s; background: transparent; height: 48px; box-sizing: border-box; }
+.brand-item img { max-height: 20px; max-width: 85%; width: auto; object-fit: contain; filter: grayscale(100%) brightness(1.5); opacity: 0.7; transition: all 0.3s; }
+.brand-item:hover { border-color: var(--primary); background: rgba(14, 165, 233, 0.05); }
+.brand-item:hover img { filter: grayscale(0%) brightness(1); opacity: 1; }
+
+.sort-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; background: var(--bg-white); padding: 15px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.sort-label { font-weight: 700; margin-right: 10px; color: var(--text-dark); }
+.sort-btn { padding: 8px 18px; border-radius: 20px; border: 1px solid transparent; background: var(--bg-gray); color: var(--text-gray); font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.sort-btn:hover { background: rgba(14, 165, 233, 0.1); color: var(--primary); }
+.sort-btn.active { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); }
+
+/* Product Card Premium design */
+.product-card {
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: var(--bg-white);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    overflow: hidden;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    border-color: var(--primary);
+}
+
+.card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% -20%, rgba(0, 51, 102, 0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+[data-theme="dark"] .card-glow {
+    background: radial-gradient(circle at 50% -20%, rgba(51, 133, 255, 0.06) 0%, transparent 60%);
+}
+.product-card:hover .card-glow {
+    opacity: 1;
+}
+
+.card-specs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.spec-pill {
+    background: var(--bg-gray);
+    color: var(--text-gray);
+    border: 1px solid var(--border-color);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-block;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+.spec-pill.secondary {
+    background: var(--bg-gray);
+    color: var(--text-gray);
+}
+.product-card:hover .spec-pill {
+    border-color: rgba(0, 51, 102, 0.15);
+}
+[data-theme="dark"] .product-card:hover .spec-pill {
+    border-color: rgba(51, 133, 255, 0.25);
+}
+
+.card-title {
+    height: 2.8em;
+    line-height: 1.4;
+    overflow: hidden;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color: var(--text-dark);
+    transition: color 0.2s;
+}
+.product-card:hover .card-title {
+    color: var(--primary);
+}
+
+.card-image-wrap:hover .product-img {
+    opacity: 0;
+}
+.card-image-wrap:hover .product-img-hover {
+    opacity: 1;
+}
+
+.compare-btn:hover {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    transform: scale(1.1);
+}
+
+/* Responsive Overrides */
+@media (min-width: 992px) {
+    .nava-collection-layout { flex-direction: row; align-items: flex-start; }
+    .nava-sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 120px; }
+    .nava-main { flex: 1; min-width: 0; }
+}
+
+@media (max-width: 991px) {
+    #nava-col-container { margin-top: 0 !important; padding-top: 25px !important; }
+    .nava-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 85%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-white);
+        z-index: 1000;
+        transition: 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 20px 0 50px rgba(0,0,0,0.1);
+        padding: 20px 0;
+    }
+    .nava-sidebar.active { left: 0; }
+    .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 999; display: none; backdrop-filter: blur(3px); }
+    .sidebar-overlay.active { display: block; }
+    .brand-list { flex-wrap: nowrap; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; margin: 0 -5px; padding: 0 5px 10px; }
+    .brand-item { scroll-snap-align: start; flex: 0 0 100px; }
+}
+
+@media (max-width: 575px) {
+    #nava-col-container { padding: 10px 10px 80px !important; margin-top: 0 !important; }
+    .product-card { padding: 10px !important; min-width: 0; }
+    .card-title { font-size: 0.85rem !important; height: auto !important; max-height: 36px !important; margin-bottom: 6px !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
+    .card-specs { gap: 4px !important; margin-bottom: 8px !important; }
+    .spec-pill { padding: 2px 4px !important; font-size: 0.6rem !important; }
+}
+
+/* --- SIDEBAR FILTER & SORT BAR OVERRIDES --- */
+.aside-filter .aside-item .title-head,
+.filter-container .aside-title {
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    text-transform: uppercase !important;
+    margin-bottom: 20px !important;
+    color: var(--text-dark) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+}
+.aside-filter .aside-item .title-head::before,
+.filter-container .aside-title::before {
+    content: '';
+    display: block;
+    width: 4px;
+    height: 18px;
+    background: var(--primary);
+    border-radius: 2px;
+}
+
+.nav-link.d-flex.justify-content-between {
+    padding: 8px 12px !important;
+    border-radius: 8px !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    color: var(--text-dark) !important;
+    transition: all 0.3s !important;
+    text-decoration: none !important;
+    background: transparent !important;
+    margin-bottom: 4px !important;
+}
+.nav-link.d-flex.justify-content-between:hover {
+    color: var(--primary) !important;
+    background: rgba(14, 165, 233, 0.05) !important;
+    padding-left: 15px !important;
+}
+.nav-link.d-flex.justify-content-between.font-weight-bold {
+    color: var(--primary) !important;
+    background: rgba(14, 165, 233, 0.08) !important;
+    padding-left: 15px !important;
+    font-weight: 700 !important;
+}
+.nav-link.d-flex.justify-content-between small {
+    margin-left: auto !important;
+    background: var(--bg-gray) !important;
+    padding: 2px 8px !important;
+    border-radius: 10px !important;
+    font-size: 0.8rem !important;
+    color: var(--text-gray) !important;
+    font-weight: 500 !important;
+    border: 1px solid var(--border-color) !important;
+}
+[data-theme="dark"] .nav-link.d-flex.justify-content-between small {
+    background: var(--border-color) !important;
+}
+
+/* Price filter overrides */
+#filter-khoanggia-tu,
+#filter-khoanggia-den {
+    padding: 12px !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color) !important;
+    background: var(--bg-gray) !important;
+    color: var(--text-dark) !important;
+    font-size: 0.9rem !important;
+    height: 44px !important;
+    box-sizing: border-box !important;
+}
+#filter-khoanggia-tu:focus,
+#filter-khoanggia-den:focus {
+    border-color: var(--primary) !important;
+    background: var(--bg-white) !important;
+}
+a.js-filter-pricerange {
+    background: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 20px !important;
+    font-size: 0.9rem !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    text-align: center !important;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.15) !important;
+    transition: all 0.2s !important;
+}
+a.js-filter-pricerange:hover {
+    background: var(--primary-light) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Sort bar overrides to match demo */
+.sort-by,
+[class*="sort-by"],
+.sort-bar {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 25px !important;
+    background: var(--bg-white) !important;
+    padding: 12px 20px !important;
+    border-radius: 16px !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Hide the radio inputs inside sort labels */
+.sort-by label input[type="radio"],
+[class*="sort-by"] label input[type="radio"] {
+    display: none !important;
+}
+
+/* Style the sort labels as buttons */
+.sort-by label,
+[class*="sort-by"] label {
+    padding: 8px 18px !important;
+    border-radius: 20px !important;
+    border: 1px solid transparent !important;
+    background: var(--bg-gray) !important;
+    color: var(--text-gray) !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    margin: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.sort-by label:hover,
+[class*="sort-by"] label:hover {
+    background: rgba(14, 165, 233, 0.08) !important;
+    color: var(--primary) !important;
+}
+
+/* Style the active checked sort label */
+.sort-by label:has(input:checked),
+[class*="sort-by"] label:has(input:checked),
+.sort-by label.active,
+[class*="sort-by"] label.active {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 4px 10px rgba(0, 51, 102, 0.2) !important;
+}
+
+.sort-by label:has(input:checked) span,
+[class*="sort-by"] label:has(input:checked) span {
+    color: white !important;
+}
+
+/* Style for the "Sắp xếp" text label itself */
+.sort-by .title-sort,
+.sort-by span.sort-label,
+[class*="sort-by"] > span:first-child {
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    margin-right: 10px !important;
+    font-size: 0.95rem !important;
+}

@@ -1,0 +1,35 @@
+{%- include 'breadcrumb' -%} 
+<section class="cart-layout mt-3 mb-3">
+	<div class="container" style="min-height: 350px">
+		<div class="rounded-10 p-2 p-md-3 bg-white">
+			<h1 class="cart-name font-weight-bold text-uppercase pb-2 pt-2 mb-2">
+				{{ settings.cartStringsTitle }}
+			</h1>
+			<div class="row js-cart d-none">
+				<div class="col-12 mb-3 d-none d-lg-block">
+					<a class="btn-clearcart js-clearcart text-danger" href="javascript:;" role="button" title="{{settings.cartStringsClear}}">
+						{{settings.cartStringsClear}}
+					</a>
+				</div>
+				<div class="basket cart__basket col-md-8">
+				</div>
+				<div class="summary cart__summary col-md-4">
+					<dl class="total mb-4 p-3 d-flex align-items-center clearfix flex-wrap justify-content-end rounded-10">
+						<dt class="text-uppercase font-weight-bold roun">{{settings.cartStringsTotal}}</dt>
+						<dd class="cart__summary_total font-weight-bold ml-auto mb-0">0{{store.money_format}}</dd>
+					</dl>
+					<a class="d-none d-lg-block text-white btn btn-checkout rounded-10 mb-0 mb-lg-3 text-uppercase font-weight-bold py-2 py-lg-3 px-3 px-lg-4" href="/checkout" role="button">{{settings.cartStringsCheckout}}</a>
+					
+					{%-if settings.enable_gift_code-%}
+					{%include 'm_gift'%}
+					{%-endif-%}
+				</div>
+			</div>
+			<div class="row cart__empty d-none">
+				<div class="col-md-12">
+					<div class="alert alert-warning" role="alert">{{settings.cartStringsEmpty}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

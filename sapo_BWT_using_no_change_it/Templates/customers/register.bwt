@@ -1,0 +1,81 @@
+{% layout 'theme.login' %}
+<section class="register-layout d-flex align-items-center justify-content-center justify-content-lg-end">
+	<div class="box_log position-relative">
+		<div class="b_big position-relative pl-xl-5 pr-xl-5 pt-xl-4 pb-xl-4 p-3 border-mew squa-mew">
+			{%- form 'customer_register' -%}
+			<h2 class="font-weight-bold m-0 whites text-center">{{settings.register_title}}</h2>
+			{%comment%}
+			<ul class="breadcrumb whites d-flex justify-content-center pl-0 pr-0 mb-2 w-100 small">					
+				<li class="home">
+					<a href="/" title="{{store.name}}">{{settings.breadcrumb_home}}</a>						
+					<span class="slash-divider ml-1 mr-1">/</span>
+				</li>
+				<li>{{ page_title }}</li>
+			</ul>
+			{%endcomment%}
+			<div class="form-signup text-danger mb-2 text-center" >
+				{%- for field in form.errors -%}
+				{{ form.errors.messages[field] }} <br/>
+				{%- endfor -%}
+			</div>
+			<div class="form-group">
+				<label for="firstName" class="d-none col-form-label">{{settings.register_firstname}}<span class="text-danger">*</span></label>
+				<input type="text" placeholder="{{settings.register_firstname}}" class="border-mew mew-control" name="firstName" required>
+			</div>
+			<div class="form-group">
+				<label for="lastName" class="d-none col-form-label">{{settings.register_lastname}}<span class="text-danger">*</span></label>
+				<input type="text" placeholder="{{settings.register_lastname}}" class="border-mew mew-control" name="lastName" required>
+			</div>
+			<div class="form-group">
+				<label for="Phone" class="d-none col-form-label">{{settings.register_phone}}<span class="text-danger">*</span></label>
+				<input type="text" placeholder="{{settings.register_phone}}" pattern="\d+" class="border-mew mew-control" name="Phone" required>
+			</div>
+			{%comment%}
+			<div class="form-group">
+				<label for="dob" class="d-none col-form-label">{{settings.register_birthday}}</label>
+				<input type="date" placeholder="YYYY-MM-DD" class="border-mew mew-control" name="dob">
+			</div>
+			<div class="form-group">
+				<label for="Gender" class="d-none col-form-label">{{settings.register_gender}}</label>
+				<select class="ui-select border-mew mew-control" name="Gender">
+					<option selected="selected" value="male">{{settings.register_gender_male}}</option>
+					<option value="female">{{settings.register_gender_female}}</option>
+					<option value="other">{{settings.register_gender_other}}</option>
+				</select>
+			</div>
+			{%endcomment%}
+			<div class="form-group">
+				<label for="email" class="d-none col-form-label">{{settings.register_mail}}<span class="text-danger">*</span></label>
+				<input type="email" placeholder="{{settings.register_mail}}" class="border-mew mew-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" required>
+			</div>
+			<div class="form-group">
+				<label for="create_password" class="d-none col-form-label">{{settings.register_pass}}<span class="text-danger">*</span></label>
+				<input type="password" placeholder="{{settings.register_pass}}" class="border-mew mew-control" name="password" required>
+			</div>
+			<div class="form-group d-flex justify-content-center align-items-center mb-2">
+				<button type="submit" class="btn_login btn btn-primary border-mew mew-control font-weight-bold" style="max-width: 100%;">{{settings.register_text}}</button>
+			</div>
+			{%- endform -%} 
+			{%-if settings.use_login_social-%}
+			<div class="login_isocial">
+				<div class="log_iso position-relative text-center">
+					<span class="d-inline-block position-relative">{{settings.login_social_text}}</span>
+				</div>
+				{{ social_login.script }} 
+				<div class="d-flex align-items-center justify-content-center">
+					{{ social_login.facebook_button }} 
+					{{ social_login.google_button }}
+				</div>
+			</div>
+			{%-endif-%}
+			<div class="new-users mt-4">
+				<div class="content">
+					<div class="buttons-set text-center">
+						<a href="/account/login" title="{{settings.login_text}}" class="btn btn-primary border-mew mew-control font-weight-bold mb-2">{{settings.login_text}}</a>
+						<button class="btn btn-primary border-mew mew-control font-weight-bold" onclick="window.location.href='/'">{{settings.register_back}}</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

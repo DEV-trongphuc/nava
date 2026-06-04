@@ -1,0 +1,28 @@
+<ul class="pagination d-flex justify-content-center clearfix mt-4 mb-4">
+	{%- if paginate.previous -%}
+	<li class="page-item mr-1 ml-1"><a class="page-link rounded-10 text-center" onclick="doSearch({{ paginate.current_page | minus: 1 }})" href="javascript:;" title="{{settings.pagination_prev}}">&#xab;</a></li>
+	{%- else -%} 
+	<li class="page-item mr-1 ml-1 disabled"><a class="page-link rounded-10 text-center" href="#" title="{{settings.pagination_prev}}">&#xab;</a></li>
+	{%- endif -%}
+	{%- for part in paginate.parts -%}
+	{%- if part.is_link -%}
+	<li class="page-item mr-1 ml-1"><a class="page-link rounded-10 text-center" onclick="doSearch({{ part.title }})" href="javascript:;" title="{{settings.pagination_page}} {{ part.title }}">{{ part.title }}</a></li>
+	{%- else -%}
+	{%- if part.title == paginate.current_page -%}
+	<li class="active page-item disabled mr-1 ml-1"><a class="page-link rounded-10 text-center" href="javascript:;" title="{{settings.pagination_page}} {{ part.title }}">{{ part.title }}</a></li>
+	{%- else -%}
+	<li class="page-item mr-1 ml-1"><a class="page-link rounded-10 text-center" href="javascript:;" title="{{settings.pagination_page}} {{ part.title }}">{{ part.title }}</a></li>
+	{%- endif -%}
+	{%- endif -%}
+	{%- endfor -%}
+	{%- if paginate.next -%}
+	<li class="page-item mr-1 ml-1"><a class="page-link rounded-10 text-center" onclick="doSearch({{ paginate.current_page | plus: 1 }})" href="javascript:;" title="{{settings.pagination_next}}">&#xbb;</a></li>
+	{%- else -%}
+	<li class="page-item mr-1 ml-1 disabled"><a class="page-link rounded-10 text-center" href="#" title="{{settings.pagination_next}}">&#xbb;</a></li>
+	{%- endif -%}
+</ul>
+{%-comment-%}
+<script>
+	var cuPage = {{ paginate.current_page }};
+</script>
+{%-endcomment-%}

@@ -1,0 +1,603 @@
+{%- include 'setup_price_pr' -%}
+{%- assign variantCount = product.variants | size -%}
+{%- assign productContent = product.content | split: "<h6>" | first -%}
+{%- include 'breadcrumb' -%}
+{%- assign videos = '' -%}
+{%- assign shopee = '' -%}
+{%- assign fbt = '' -%}
+{%- assign specs = false -%}
+{%- for tag in product.tags -%}
+{%- if tag contains 'video_' -%}
+{%- assign videos = tag | split: 'video_' | last -%}
+{%- endif -%}
+{%- if tag contains 'shopee_' -%}
+{%- assign shopee = tag | split: 'shopee_' | last -%}
+{%- endif -%}
+{%- if tag contains 'addon_' -%}
+{%- assign link = tag | remove: 'addon_' -%}
+{%- assign fbt = fbt | append: ',' | append: link   -%}
+{%- endif -%}
+{%- endfor -%}
+
+{%- assign fbt = fbt | remove_first: ',' | split: ',' -%}
+
+
+<div itemscope itemtype="http://schema.org/Product">
+	{%-include 'schema_product'-%}
+	<div class="container mt-3 mb-3">
+		<div class="rounded-10 p-2 p-md-3 bg-white">
+			<section class="product-layout product-layout2 ">
+				<div class="row">
+					<div class="product-layout_col-left col-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 mb-3">
+						<div class="product-main-slide swiper-container mb-3">
+
+							<div class="swiper-wrapper" >
+								{%-if videos != ''-%}
+								<div class="swiper-slide">
+									<div class="box_video modal-open shadow_product">
+										<div class="embed-responsive embed-responsive-1by1">
+											<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{videos}}?rel=0&autoplay=1&mute=1" allow='autoplay; encrypted-media' allowfullscreen></iframe>
+										</div>
+									</div>
+								</div>
+								{%-endif-%}
+								{%-if product.images.size < 1-%}
+								<div class="swiper-slide {{image.alt | handleize}}">
+									<picture class="position-relative d-block aspect ratio1by1 modal-open rounded-10">
+										<source media="(min-width: 1200px)" srcset="{{ 'no_image.jpg' | asset_url }}">
+										<source media="(min-width: 575px)" srcset="{{ 'no_image.jpg' | asset_url }}">
+										<img src="{{ 'no_image.jpg' | asset_url }}" alt="{{ image.alt | default : product.name}}" class="d-block m-auto img position-absolute img-contain gradient-load"/>
+									</picture>
+								</div>
+								{%-else-%}
+								{%-for image in product.images-%}
+								<div class="swiper-slide {{image.alt | handleize}}">
+									<picture class="position-relative d-block aspect ratio1by1 modal-open rounded-10">
+										<source media="(min-width: 1200px)" srcset="{{ image.src }}">
+										<source media="(min-width: 575px)" srcset="{{ image.src | img_url:'large' }}">
+										<img src="{{ image.src | img_url:'large' }}" alt="{{ image.alt | default : product.name}}" class="d-block m-auto img position-absolute img-contain gradient-load" data-zoom-image="{{ image.src }}"/>
+									</picture>
+								</div>
+								{%-endfor-%}
+								{%-endif-%}
+								<div class="swiper-button-prev mew_product_main-slide_prev"></div>
+								<div class="swiper-button-next mew_product_main-slide_next"></div>
+							</div>
+						</div>
+						{%comment%}SLIDE ANH - DA AN {%endcomment%}
+						<div class="d-none product-thumb-slide swiper-container {%if product.images.size < 1%} d-none{%endif%}">
+							<div class="swiper-wrapper">
+
+								{%-if videos != ''-%}
+								<div class="swiper-slide m_thumb_pl border rounded-10 modal-open crp d-flex flex-column item-video justify-content-center align-items-center">
+									<svg width="32" height="32">
+										<use href="#svg-video" />
+									</svg>
+									<span class="small">Video</span>
+								</div>
+								{%-endif-%}
+								{%-for image in product.images-%}
+								<div class="swiper-slide m_thumb_pl border rounded-10 modal-open crp {{image.alt | handleize}}">
+
+									<div class="position-relative w-100 m-0 ratio1by1 aspect">
+										<img src="{{ image.src | img_url:'compact' }}" data-img="{{ image.src }}" alt="{{ image.alt | default: product.name}}" class="d-block img position-absolute w-100 h-100">
+									</div>
+								</div>
+								{%-endfor-%}
+							</div>
+						</div>
+					</div>
+					<div class="product-layout_col-right col-12 col-sm-12 col-md-7 col-lg-7 col-xl-5 product-warp mb-3">
+						{%if fbt.size > 1%}
+						<div class="mobile_open_box_swatch">
+							<h1 class="product-name font-weight-bold mb-3">{{ product.name | replace: '<', '&lt;'}}</h1>
+							{%comment%}TEN SP + NUT SO SANH
+							{%-if settings.enable_compare-%}
+							<label class="align-items-center border compare-label d-inline-flex m-0 position-relative px-2 py-1 rounded-10">
+								<input type="checkbox" class="compare-checkbox d-none" value="{{ product.url }}" data-type="{{product.type}}"> 
+								<span class="compare-checkbox mr-1 position-relative"></span>
+								{{settings.compare_tit}}
+							</label>
+							{%-endif-%}
+							{%endcomment%}
+							{%-if settings.product_review-%}
+							<div class="sapo-product-reviews-badge d-flex" data-id="{{ product.id }}"></div>
+							{%-endif-%}
+							{%include 'm_frequently'%}
+						</div>
+						{% include 'm_list_tag_pr' %}
+						{%include 'mew_mobi_bar_frequently'%}
+						{%else%}
+						<form action="/cart/add" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="productAlias" value="{{ product.alias}}" />
+							<div id="o_sw_buy" class="mobile_open_box_swatch">
+								<h1 class="product-name font-weight-bold mb-3">{{ product.name | replace: '<', '&lt;'}}</h1>
+								{%comment%}TEN SP + NUT SO SANH
+								{%-if settings.enable_compare-%}
+								<label class="align-items-center border compare-label d-inline-flex m-0 position-relative px-2 py-1 rounded-10">
+									<input type="checkbox" class="compare-checkbox d-none" value="{{ product.url }}" data-type="{{product.type}}"> 
+									<span class="compare-checkbox mr-1 position-relative"></span>
+									{{settings.compare_tit}}
+								</label>
+								{%-endif-%}
+								{%endcomment%}
+								{%-if settings.product_review-%}
+								<div class="sapo-product-reviews-badge d-flex" data-id="{{ product.id }}"></div>
+								{%-endif-%}
+								<div class="d-flex product-price font-weight-bold pt-2 pb-2 pl-3 pr-3 rounded-10 mb-2">
+									<div>
+										{%- if variantCount > 1 -%}
+										{%- if contacts == true -%}
+										<span class="special-price m-0" style="color: #003366;">{{settings.noPrice}}</span>
+										{%- else -%}
+										<span class="special-price m-0"style="color: #003366;">{{product.selected_or_first_available_variant.price| money }}</span>
+										<del class="old-price ml-2"style="color: #003366;">{{ product.selected_or_first_available_variant.compare_at_price | money }}</del>
+										{%- endif -%}
+										{%- else -%}
+										{%- if contacts == true -%}
+										<span class="special-price m-0"style="color: #003366;">{{settings.noPrice}}</span>
+										{%- else -%}
+										{%- if product.variants[0].compare_at_price > product.variants[0].price -%}
+										<span class="special-price m-0"style="color: #003366;">{{ product.variants[0].price  | money }}</span>
+										<del class="old-price ml-2"style="color: #003366;">{{ product.variants[0].compare_at_price | money }}</del>
+										{%- else -%}
+										<span class="special-price m-0"style="color: #003366;">{{ product.variants[0].price | money }}</span>
+										{%- endif -%}
+										{%- endif -%}
+										{%- endif -%}
+									</div>
+								</div>
+								<div class="d-flex align-items-start flex-column">
+									<div class="product-control w-100">
+										{%-unless product.variants.size <= 1 and product.variants.first.title contains 'Default'-%}
+										{%- if settings.product_swatch_enable and product.variants.size > 0 -%}
+										{%- for option in product.options -%}
+										{%- include 'swatch' with option -%}
+										{%- endfor -%}
+										{%- endif -%}
+										{%-endunless-%}
+										<div class="box-variant clearfix {% if settings.product_swatch_enable and product.variants.size > 0%} d-none {%endif%}">
+											{%- if variantCount > 1 -%} 
+											<fieldset class="form-group">
+												<select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
+													{%- for variant in product.variants -%}
+													<option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} value="{{ variant.id | esacpe }}">{{ variant.id }} {{ variant.title | esacpe}} - {{ variant.price | money }}</option>
+													{%- endfor -%}
+												</select>
+											</fieldset>
+											{%- else -%}
+											<input type="hidden" name="variantId" value="{{ product.variants[0].id }}" />
+											{%- endif -%}
+										</div>
+										<div class="product-quantity {% if contacts == true %}d-none{%else%}{%if product.available%}d-sm-flex{%else%}d-none{%endif%}{%endif%} align-items-center clearfix">
+											<header class="font-weight-bold mb-2" style="min-width: 100px;">{{settings.product_quantity}}</header>
+											<div class="custom-btn-number form-inline border-0">	
+												<button class="mr-2 mb-2 border rounded-10 bg-white justify-content-center align-items-center d-flex" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button">
+													<svg width="12" height="12">
+														<use href="#svg-minus" />
+													</svg>
+												</button>
+												<input type="number"  name="quantity" min="1" value="1" class="form-control prd_quantity text-center border rounded-10 mr-2 mb-2" id="qtym">
+												<button class="mb-2 border rounded-10 bg-white justify-content-center align-items-center d-flex" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button">
+													<svg width="14" height="14">
+														<use href="#svg-plus" />
+													</svg>
+												</button>
+											</div>	
+										</div>
+									</div>
+								</div>
+								<div class="align-items-stretch d-flex justify-content-between gap_6 mt-2">
+									{%-if settings.enable_compare-%}
+									<label class="align-items-center btn compare-labels d-flex flex-column justify-content-center mb-0 position-relative product-action_buy px-2 px-lg-3 py-1 rounded-10">
+										<svg width="20" height="20">
+											<use href="#svg-compare"></use>
+										</svg>
+										<input type="checkbox" class="compare-checkbox d-none" value="{{ product.url }}" data-type="{{product.type}}"> 
+										<span class="compare-checkbox position-absolute"></span>
+										<b class="add-compare">Thêm so sánh</b>
+										<b class="remove-compare">Bỏ so sánh</b>
+									</label>
+									{%-endif-%}
+									<button type="button" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} flex-column font-weight-bold align-items-center justify-content-center product-action_buy px-2 px-lg-3 py-1 rounded-10 js-addToCart position-relative">
+										<span class="plus-icon position-relative">
+											<svg width="26" height="20"  viewBox="0 0 28.95 35.07">
+												<path d="M10,10.54V5.35A4.44,4.44,0,0,1,14.47.9h0a4.45,4.45,0,0,1,4.45,4.45v5.19" class="cls-1"></path>
+												<path d="M23.47,34.17h-18A4.58,4.58,0,0,1,.91,29.24L2.5,8.78A1.44,1.44,0,0,1,3.94,7.46H25a1.43,1.43,0,0,1,1.43,1.32L28,29.24A4.57,4.57,0,0,1,23.47,34.17Z" class="cls-1"></path>
+											</svg>
+										</span>
+										<span class="font-weight-bold">{{settings.addToCart}}</span>
+									</button>
+									<button type="button" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} gap_6 justify-content-center align-items-center product-action_buynow font-weight-bold rounded-10 py-2 px-2 px-lg-3 js-buynow position-relative" style="flex: 1;">
+										<svg width="20" height="26">
+											<use href="#svg-buy-now" />
+										</svg>
+										<span class="font-weight-bold">{{settings.buyNow}}</span>
+									</button>
+								</div>
+								{%-if settings.ena_installment-%}
+								<div class="align-items-center align-items-lg-center align-items-stretch d-flex flex-lg-row justify-content-between gap_6 mt-2 mb-3">
+									<a href="{{settings.installment_url}}" title="Trả góp" class="btn {%if contacts%}d-none{%else%}{%if product.available%}d-flex{%else%}d-none{%endif%}{%endif%} gap_6 justify-content-center align-items-center product-action_buy font-weight-bold rounded-10 py-2 px-2 px-lg-3" style="flex: 1;">
+										<svg width="26" height="26">
+											<use href="#svg-installment" />
+										</svg>
+										{{settings.installment_btn}}
+									</a>
+									<a href="tel:{{settings.hotline_buy | remove: ' ' | remove: '.'}}" class="btn_out mb-2 mb-lg-0 btn {%if contacts%}d-none{%else%}{%unless product.available%}d-flex{%else%}d-none{%endunless%}{%endif%} w-100 justify-content-center flex-column align-items-center rounded-10 pt-2 pb-2 sitdown product-action_buynow font-weight-bold text-white position-relative">
+										<span class="text-uppercase font-weight-bold">{{settings.soldOut}}</span>
+
+										<small>{{settings.sup_soldOut}}</small>
+									</a>
+								</div>
+								{%-endif-%}
+							</div>
+							{% include 'm_list_tag_pr' %}
+							{%comment%} duoi nut mua hang
+							{%- if productContent != '' or product.summary != '' -%}
+							<div class="product-summary small mb-3">
+								{%-if product.summary != null and product.summary != ''-%}
+								{{product.summary}}
+								{%-else-%}
+								<p class="alert-warning py-2 px-3 rounded-10 m-0">
+									{{settings.other_updating}}
+								</p>
+								{%-endif-%}
+							</div>
+							{%- endif -%}
+							{%endcomment%}
+							{%include 'mew_mobi_bar_product'%}
+						</form>
+						{%endif%}
+
+						{%-if shopee != ''-%}
+						<div class="shopee_link mt-3 mb-3 text-center">
+							<a href="{{shopee}}" title="{{settings.shopee_buy}}" class="d-block sitdown modal-open position-relative">
+								<img class="lazy" alt="{{settings.shopee_buy}}" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{'shopee_buy.png' | asset_url}}">
+							</a>
+						</div>
+						{%-endif-%}
+					</div>
+					{%comment%}goi ngay - code uu dai{%endcomment%}
+					<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3 product-warp">
+						{%comment%} 
+						<div class="linehot_pro alert alert-warning mb-3 d-flex align-items-center rounded-10">
+							<img class="mr-3 lazy" alt="{{settings.hotline_buy}}" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{'customer-service.png' | asset_url}}">
+							<div class="b_cont font-weight-bold">
+								<span class="d-block">
+									{% capture hotlineHtml %}<a href="tel:{{settings.hotline_buy | remove: ' ' | remove: '.'}}" title="{{settings.hotline_buy}}">{{settings.hotline_buy}}</a>{% endcapture %}
+									{{settings.hotline_text | replace: '[hotline]', hotlineHtml}}
+								</span> 
+							</div>
+						</div>
+						{%endcomment%}
+						{%comment%}thong bao con hang - chay hang {%endcomment%}
+						<div class="product-info position-relative mb-3 p-2 border rounded-10">
+							<span class="in_1">
+								{{settings.other_status}}:
+								{%- if product.available -%}
+								{%- if product.selected_or_first_available_variant.inventory_management == "" -%}
+								<span class="inventory_quantity"style="color: #003366;">Pre-Order (9 ngày)</span>
+								{%- else -%} 
+								{%- if product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+								<span class="inventory_quantity" style="color: #003366;">{{settings.available}}</span>
+								{%- else -%}
+								<span class="inventory_quantity" style="color: #003366;">Pre-Order (9 ngày)</span>
+								{%- endif -%} 
+								{%- endif -%}
+								{%- else -%}
+								<span class="inventory_quantity" style="color: #003366;">Pre-Order (9 ngày)</span>
+								{%- endif -%}
+							</span>
+							{%-if product.vendor != null and product.vendor != ''-%}
+							<div class="in_1">
+								{{settings.filter_vendor_title}}: <span id="vendor" style="color: #003366;">{{product.vendor | default: settings.other_updating}}</span>
+							</div>
+							{%-endif-%}
+							{%-if product.type != null and product.type != ''-%}
+							<div class="in_1">{{settings.filter_type_title}}: <span id="type"style="color: #003366;">{{product.type | default: settings.other_updating}}</span></div>
+							{%-endif-%}
+						</div>
+
+						{%-if settings.enable_gift_code-%}
+						{%include 'm_gift'%}
+						{%-endif-%}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 col-12 order-lg-2 mb-3 mb-lg-0">
+						{%-include 'product_specs' with product.content, keyword: settings.compare_keyword -%}
+					</div>
+					<div class="col-md-8 col-12 order-lg-1">
+						<div class="p-2 box_shadow rounded-10 modal-open pl-lg-3 pr-lg-3 mb-3">
+							<h3 class="special-content_title font-weight-bold d-block w-100 pt-2 pb-2 mb-0">{{settings.product_content_title}}</h3> 
+							<div class="product-content pt-2 pb-2 mewcontent">
+								{%- if productContent != '' and productContent != null -%}
+								<div class="position-relative rte">
+									{{productContent}}
+								</div>
+								{%- else -%}
+								<div class="content_coll position-relative">
+									{{settings.other_updating}}
+								</div>
+								{%- endif -%}
+							</div>
+						</div>
+						{%-if settings.product_review-%}
+						{% include 'product-reviews' %}
+						{%-endif-%}
+						{%-if settings.enable_product_relate-%}
+						{%-include 'm_relate_product'-%}
+						{%-endif-%}
+					</div>
+				</div>
+			</section>
+		</div>
+		{%if settings.enable_product_recents%}
+		<div class="template-product mt-3">
+			{%-include 'm_product_recent'-%}
+		</div>
+		{%endif%}
+	</div>
+</div>
+{%-if videos != ''-%}
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold">Video</h5>
+				<button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">
+				<div class="embed-responsive embed-responsive-16by9"></div>
+			</div>
+		</div>
+	</div>
+</div>
+{%-endif-%}
+{%-if specs-%}
+<div class="modal fade" id="specModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+		<div class="modal-content modal-open rounded-10">
+			<div class="modal-header">
+				<h5 class="modal-title fw-bold">{{settings.compare_keyword | default: 'Thông số kỹ thuật'}}</h5>
+				<button type="button" class="btn btn-close rounded-10" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body max-height-popup"></div>
+		</div>
+	</div>
+</div>
+{%-endif-%}
+{%-if settings.color_file.size > 0 -%}
+<script>
+	const colorUrlFile = '{{settings.color_file}}';
+	const mainColor = '{{settings.main_color}}';
+</script>
+{%-endif-%}
+<script>
+	var productAlias = '{{product.alias}}';
+</script>
+<script>
+	// Toggle dropdown
+	document.addEventListener('click', function(e){
+		const display = e.target.closest('.custom-select-display');
+		if (display) {
+			const wrap = display.closest('.custom-select-wrapper');
+			if (wrap.classList.contains('disabled')) return;
+			const list = wrap.querySelector('.custom-select-list');
+			const expanded = display.getAttribute('aria-expanded') === 'true';
+			display.setAttribute('aria-expanded', String(!expanded));
+			list.setAttribute('aria-hidden', String(expanded));
+			return;
+		}
+
+		// Chọn option (li)
+		const li = e.target.closest('.custom-select-list li');
+		if (li) {
+			const wrap = li.closest('.custom-select-wrapper');
+			if (wrap.classList.contains('disabled')) return;
+
+			// Tìm select thật ngay trước wrapper (ưu tiên cấu trúc bạn đang dùng)
+			let realSelect = wrap.previousElementSibling;
+			if (!realSelect || !realSelect.matches('select[data-fbt-item-id]')) {
+				// fallback nếu HTML bị thay đổi vị trí
+				realSelect = wrap.parentElement.querySelector('select[data-fbt-item-id]');
+			}
+
+			// Cập nhật text hiển thị
+			wrap.querySelector('.custom-select-text').textContent = (li.textContent || '').trim();
+
+			// Gán value cho select thật + phát 'change' để mọi logic cũ chạy
+			if (realSelect) {
+				realSelect.value = li.dataset.value;
+				realSelect.dispatchEvent(new Event('change', { bubbles: true }));
+			}
+
+			// Đóng dropdown
+			const display = wrap.querySelector('.custom-select-display');
+			const list = wrap.querySelector('.custom-select-list');
+			display.setAttribute('aria-expanded', 'false');
+			list.setAttribute('aria-hidden', 'true');
+			return;
+		}
+
+		// Click ngoài -> đóng tất cả
+		if (!e.target.closest('.custom-select-wrapper')) {
+			document.querySelectorAll('.custom-select-wrapper').forEach(wrap => {
+				wrap.querySelector('.custom-select-display')?.setAttribute('aria-expanded', 'false');
+				wrap.querySelector('.custom-select-list')?.setAttribute('aria-hidden', 'true');
+			});
+			}
+			});
+
+				// Đồng bộ ngược: nếu chỗ khác đổi select thật -> cập nhật text (phòng khi code cũ set value bằng JS)
+				document.addEventListener('change', function(e){
+				const sel = e.target;
+				if (!(sel.matches && sel.matches('select[data-fbt-item-id]'))) return;
+
+				const wrap = sel.nextElementSibling && sel.nextElementSibling.classList.contains('custom-select-wrapper')
+					? sel.nextElementSibling
+				: sel.parentElement.querySelector('.custom-select-wrapper');
+
+				if (!wrap) return;
+
+				const selectedOpt = sel.selectedOptions && sel.selectedOptions[0];
+				const text = selectedOpt ? selectedOpt.textContent.trim() : '';
+				wrap.querySelector('.custom-select-text').textContent = text || 'Bỏ chọn';
+			});
+</script>
+
+
+<script>
+
+	document.addEventListener('DOMContentLoaded', function() {
+		document.querySelectorAll('.item-child select[data-fbt-item-id]').forEach(select => {
+			select.addEventListener('change', function() {
+				const checkbox = this.closest('[data-fbt-item]').querySelector('.i-check');
+				if (this.value === 'no-select') {
+					checkbox.checked = false;
+				} else {
+					checkbox.checked = true;
+				}
+				checkbox.dispatchEvent(new Event('change'));
+			});
+			if (select.value === 'no-select') {
+				const checkbox = select.closest('[data-fbt-item]').querySelector('.i-check');
+				checkbox.checked = false;
+			}
+		});
+		var triggerElement = document.querySelector('.js-buy-frequently');
+
+		if (triggerElement) {
+			triggerElement.addEventListener('click', function (e) {
+				e.preventDefault();
+
+				var button = document.querySelector('frequently-buy-together button.buy_now:not(.not-submit)');
+				if (button) {
+					button.click();
+				}
+			});
+		}
+	});
+
+	$('frequently-buy-together button:not(.not-submit)').on('click', async function (e) {
+	  const $btn = $(e.currentTarget);
+	  const parent = $btn.closest('frequently-buy-together');
+	  const arrItem = parent[0].handleArray();
+
+	  if (!arrItem.length) {
+		createToast('error', toastString.toastAddErrorTitle, 'Hãy chọn ít nhất 1 sản phẩm');
+		return;
+	  }
+
+	  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+	  const isRetryable = (err) => {
+		const status = err?.status || err?.response?.status;
+		return (
+		  status === 429 ||
+		  (status >= 500 && status <= 599) ||
+		  /network|timeout|fetch/i.test(String(err?.message || err))
+		);
+	  };
+
+	  const addItemWithRetry = async (variantId, quantity, maxRetry = 2) => {
+		let attempt = 0;
+		while (true) {
+		  try {
+			return await mewService.addItem(variantId, quantity);
+		  } catch (err) {
+			attempt++;
+			if (attempt > maxRetry || !isRetryable(err)) throw err;
+
+			const wait = 250 * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 150);
+			await sleep(wait);
+		  }
+		}
+	  };
+
+	  try {
+		$btn.addClass('loading');
+
+		const isBuyNow = !!$btn.closest('.buy_now').length;
+
+		if (isBuyNow) {
+		  await fetch('/cart/clear.js', { method: 'POST' });
+		  await sleep(150);
+		}
+
+		const successes = [];
+		const failures = [];
+		for (const item of arrItem) {
+		  try {
+			await addItemWithRetry(item.variantId, item.quantity, 2);
+			successes.push(item);
+			await sleep(80);
+		  } catch (err) {
+			failures.push({ item, err });
+		  }
+		}
+
+		if (successes.length > 0) {
+		  $(document).trigger('changeCart');
+
+		  if (isBuyNow) {
+			await sleep(100);
+			window.location.href = '/checkout';
+		  } else {
+			createToast('success', toastString.toastAddSuccessTitle,
+			  `Thêm ${successes.length}/${arrItem.length} sản phẩm vào giỏ hàng`);
+		  }
+		}
+
+		if (failures.length > 0) {
+		  const errorMessages = failures
+			.map(f => f.err?.message || f.err)
+			.join(', ');
+
+		  createToast('error', toastString.toastAddErrorTitle,
+			`Thất bại khi thêm ${failures.length} sản phẩm: ${errorMessages}`);
+		}
+
+	  } catch (error) {
+		createToast('error', toastString.toastAddErrorTitle, error.message || error);
+	  } finally {
+		$btn.removeClass('loading');
+	  }
+	});
+
+	{%-if fbt.size > 1-%}
+	document.addEventListener('click', function(e) {
+		if (e.target.closest('.bar-add-cart')) {
+			e.preventDefault();
+			var addToCartBtn = document.querySelector('.tg-addcart');
+			if (addToCartBtn) {
+				addToCartBtn.click();
+			}
+		}
+		if (e.target.closest('.bar-buy-now')) {
+			e.preventDefault();
+			var addToCartBtn = document.querySelector('.tg-buy-now');
+			if (addToCartBtn) {
+				addToCartBtn.click();
+			}
+		}
+	});
+	{%else%}
+	document.addEventListener('click', function(e) {
+		if (e.target.closest('.bar-add-cart')) {
+			e.preventDefault();
+			var addToCartBtn = document.querySelector('button.js-addToCart');
+			if (addToCartBtn) {
+				addToCartBtn.click();
+			}
+		}
+		if (e.target.closest('.bar-buy-now')) {
+			e.preventDefault();
+			var addToCartBtn = document.querySelector('button.js-buynow');
+			if (addToCartBtn) {
+				addToCartBtn.click();
+			}
+		}
+	});
+	{%-endif-%}
+</script>

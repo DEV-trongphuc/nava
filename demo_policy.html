@@ -441,9 +441,39 @@
             .note-block { background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.2); color: #1e3a8a; }
             
             @media (max-width: 768px) {
-                .policy-grid { grid-template-columns: 1fr; }
-                .policy-sidebar { position: static; }
-                .policy-hero h1 { font-size: 1.5rem; }
+                .policy-grid { grid-template-columns: 1fr; gap: 15px; }
+                .policy-sidebar {
+                    position: sticky;
+                    top: 60px;
+                    z-index: 10;
+                    background: var(--bg-white);
+                    padding: 10px !important;
+                    margin: 0 -15px 10px;
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                }
+                .policy-sidebar h3 { display: none !important; }
+                .policy-menu {
+                    flex-direction: row !important;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
+                    gap: 8px;
+                    padding-bottom: 5px;
+                    scrollbar-width: none;
+                }
+                .policy-menu::-webkit-scrollbar { display: none; }
+                .policy-menu li { margin: 0; }
+                .policy-menu-link {
+                    padding: 8px 14px !important;
+                    font-size: 0.85rem !important;
+                }
+                
+                .policy-content { padding: 20px 15px !important; }
+                .policy-hero h1 { font-size: 1.4rem; }
+                .policy-hero { padding: 15px 10px !important; }
+                .policy-tab-content h2 { font-size: 1.2rem !important; }
             }
         </style>
         

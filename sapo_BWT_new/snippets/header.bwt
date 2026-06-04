@@ -1,0 +1,109 @@
+<!-- Header Premium (Double Menu) -->
+<header class="header">
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-container">
+            <div class="logo">
+                <a href="/">
+                    <img src="{{ 'logo.png' | asset_url }}" alt="Nava Store" class="header-logo-img" loading="lazy" decoding="async" width="160" height="60" style="object-fit: contain;">
+                </a>
+            </div>
+            <button class="theme-toggle-btn desktop-theme-toggle" aria-label="Chuyển đổi giao diện" style="margin-right: 10px;">
+                <div class="toggle-track">
+                    <div class="toggle-thumb">
+                        <i class="ph-fill ph-sun icon-sun"></i>
+                        <i class="ph-fill ph-moon icon-moon"></i>
+                    </div>
+                </div>
+            </button>
+            <form action="/search" method="GET" class="search-box">
+                <input type="text" name="query" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?" required>
+                <button type="submit" aria-label="Tìm kiếm"><i class="ph ph-magnifying-glass"></i></button>
+            </form>
+            <div class="top-actions">
+                {% if customer %}
+                <a href="/account" class="action-item"><i class="ph ph-user-check" style="color: var(--primary);"></i>
+                    <div><small>Xin chào,</small><br><strong>{{ customer.first_name | default: customer.name }}</strong></div>
+                </a>
+                {% else %}
+                <a href="/account/login" class="action-item"><i class="ph ph-user"></i>
+                    <div><small>Tài khoản</small><br><strong>Đăng nhập</strong></div>
+                </a>
+                {% endif %}
+
+                <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
+                    <div class="cart-icon-wrapper" style="position: relative;">
+                        <i class="ph ph-shopping-cart"></i>
+                        <span class="cart-count-badge" id="cart-count-badge" {% if cart.item_count > 0 %}style="display: flex;"{% else %}style="display: none;"{% endif %}>{{ cart.item_count }}</span>
+                    </div>
+                    Giỏ hàng
+                </a>
+                <button class="mobile-search-toggle" aria-label="Tìm kiếm"><i class="ph ph-magnifying-glass"></i></button>
+                <button class="mobile-menu-toggle" aria-label="Menu di động"><i class="ph ph-list"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="menu-bar">
+        <div class="container menu-container">
+            <div class="all-categories">
+                <i class="ph ph-list"></i>
+            </div>
+            <ul class="main-nav">
+                <li class="nav-item">
+                    <a href="/" class="active"><img src="{{ 'icon_dmenu_1.png' | asset_url }}" alt="Trang chủ" loading="lazy" decoding="async" width="22" height="22"> <span>Trang chủ</span></a>
+                </li>
+                
+                <!-- Mega Dropdown: Mini PC -->
+                <li class="nav-item has-dropdown">
+                    <a href="/minipc"><img src="{{ 'icon_dmenu_3.png' | asset_url }}" alt="Mini PC" loading="lazy" decoding="async" width="22" height="22"> <span>Mini PC</span> <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="dropdown-menu mega-grid mini-pc-menu">
+                        <a href="/asus" class="mega-card"><img src="{{ 'asus.png' | asset_url }}" alt="ASUS" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/asrock" class="mega-card"><img src="{{ 'asrock.png' | asset_url }}" alt="ASRock" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/aoostar" class="mega-card"><img src="{{ 'aoostar.png' | asset_url }}" alt="AOOSTAR" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/beelink" class="mega-card"><img src="https://bizweb.dktcdn.net/100/543/817/files/beelink.png?v=1770949197367" alt="BEELINK" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/beikong" class="mega-card"><img src="{{ 'beikong.png' | asset_url }}" alt="BEIKONG" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/gmktec" class="mega-card"><img src="https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823" alt="GMKtec" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/msi" class="mega-card"><img src="{{ 'msi.png' | asset_url }}" alt="MSI" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/minisforum" class="mega-card"><img src="https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957" alt="MINISFORUM" width="80" height="30" style="object-fit: contain;"></a>
+                        <a href="/zotac" class="mega-card"><img src="https://bizweb.dktcdn.net/100/543/817/files/zotac.png?v=1770718398287" alt="ZOTAC" width="80" height="30" style="object-fit: contain;"></a>
+                    </div>
+                </li>
+
+                <!-- Mega Dropdown: eGPU -->
+                <li class="nav-item has-dropdown">
+                    <a href="/egpu"><img src="{{ 'icon_dmenu_4.png' | asset_url }}" alt="eGPU" loading="lazy" decoding="async" width="22" height="22"> <span>eGPU</span> <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="dropdown-menu mega-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <a href="/dock-egpu" class="mega-card"><img src="{{ 'icon_dmenu_4.png' | asset_url }}" alt="DOCK eGPU" width="22" height="22"><span>DOCK eGPU</span></a>
+                        <a href="/egpu-aio" class="mega-card"><img src="{{ 'icon_dmenu_4.png' | asset_url }}" alt="ALL IN ONE" width="22" height="22"><span>ALL IN ONE</span></a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/nas"><img src="{{ 'icon_dmenu_5.png' | asset_url }}" alt="NAS" loading="lazy" decoding="async" width="22" height="22"> <span>NAS / SERVER</span></a>
+                </li>
+
+                <!-- Mega Dropdown: Linh Kiện -->
+                <li class="nav-item has-dropdown">
+                    <a href="/collections/all"><img src="{{ 'icon_dmenu_6.png' | asset_url }}" alt="Linh Kiện" loading="lazy" decoding="async" width="22" height="22"> <span>Linh Kiện</span> <i class="ph-bold ph-caret-down"></i></a>
+                    <div class="dropdown-menu mega-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <a href="/ram-ssd" class="mega-card"><img src="{{ 'icon_dmenu_6.png' | asset_url }}" alt="RAM/SSD" width="22" height="22"><span>RAM/SSD</span></a>
+                        <a href="/man-hinh" class="mega-card"><i class="ph-fill ph-monitor" style="font-size: 36px; color: var(--primary);"></i><span>Màn hình</span></a>
+                        <a href="/vga" class="mega-card"><i class="ph-fill ph-graphics-card" style="font-size: 36px; color: var(--primary);"></i><span>VGA</span></a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a href="/phu-kien"><img src="{{ 'icon_dmenu_7.png' | asset_url }}" alt="Phụ kiện" loading="lazy" decoding="async" width="22" height="22"> <span>Phụ kiện</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/like-new"><img src="{{ 'icon_dmenu_8.png' | asset_url }}" alt="Like new" loading="lazy" decoding="async" width="22" height="22"> <span>Like new</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="/chinh-sach-bao-mat#warranty" id="open-warranty-modal-header"><img src="{{ 'icon_dmenu_9.png' | asset_url }}" alt="Bảo hành" loading="lazy" decoding="async" width="22" height="22"> <span>Bảo hành</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>

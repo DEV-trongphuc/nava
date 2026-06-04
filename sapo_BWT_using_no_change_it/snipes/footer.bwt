@@ -1,0 +1,725 @@
+{%comment%}LOOP BRAND - TD{%endcomment%} 
+{% include 'brand-logo' %}
+
+<footer class="bg-white pt-5">
+	<div class="foo_mid mb-4">
+		<div class="container">
+			<div class="row">
+				{%comment%} 
+				
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 footer-left">
+					{%comment%}
+					<a href="http://online.gov.vn/Home/WebDetails/127667" title="{{store.name}}" >
+						<img alt="Logo {{store.name}}" class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{'logo_foo.png' | asset_url}}">
+					</a>
+					<a href="//www.dmca.com/Protection/Status.aspx?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617"  alt="DMCA.com Protection Status" /></a>  
+					<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+					{%endcomment%}
+					<address class="vcard mb-4">
+						
+						 <table>
+        
+        <tbody>
+            <tr>
+                <td style="width=100px">MST</td>
+                <td>8080980349-001</td>
+               
+            </tr>
+          
+            <tr>
+                <td>Mail:</td>
+                <td>hi@navastore.vn</td>
+               
+            </tr>
+        </tbody>
+    </table>
+						
+						
+						{%comment%}
+						<p class="adr"><b>MST:</b> 8080980349-001</p>
+						
+						{%if settings.footer_address != null and settings.footer_address != ''%}
+						<p class="adr"><b>{{settings.contact_add}} </b>{{settings.footer_address}}</p>
+						{%else%}
+						<p class="adr"><b>{{settings.contact_add}} </b>{{store.address}}</p>
+						{%endif%}
+						<p class="adr"><b>Kho hàng:</b> Linh Trung, P. Linh Trung, TP. Thủ Đức</p>
+						{%if settings.footer_email != null and settings.footer_email != ''%}
+						<p><b>Email: </b><a href="mailto:{{settings.footer_email}}" title="{{settings.footer_email}}">{{settings.footer_email}}</a></p>
+						{%else%}
+						<p><b>Email: </b><a href="mailto:{{store.customer_email}}" title="{{store.customer_email}}">{{store.customer_email}}</a></p>
+						{%endif%}
+						{%if settings.footer_phone != null and settings.footer_phone != ''%}
+						<p><b>Hotline: </b><a href="tel:{{settings.footer_phone | remove: ' ' | remove: '.'}}" title="{{settings.footer_phone}}">{{settings.footer_phone}}</a></p>
+						{%else%}
+						<p><b>Hotline: </b><a href="tel:{{store.phone_number}}" title="{{store.phone_number}}">{{store.phone_number}}</a></p>
+						{%endif%}
+						{%if settings.mst != null and settings.mst != ''%}
+						<p>{{settings.mst}}</p>
+						{%endif%}
+						{%endcomment%}
+					</address>
+				</div>
+			{%endcomment%}	
+				
+				{%comment%} COT CHINH SACH
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 footer-left">
+					<h3 class="footer-title mb-2 position-relative font-weight-bold">{{settings.col_foo_1}}</h3>
+					<ul class="links">
+						{% for link in linklists[settings.footer_linklist_1].links %}
+						<li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				{%endcomment%}
+				
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 footer-left">
+					<h3 class="footer-title mb-2 position-relative font-weight-bold">{{settings.col_foo_1_1}}</h3>
+					<div class="social position-relative pb-2">
+						<a href="https://oa.zalo.me/3182872871563786385" target="_blank" class="position-relative iso sitdown modal-open d-inline-block zalo mr-1" title="Zalo">
+							<img src="https://bizweb.dktcdn.net/100/543/817/files/zalo.png?v=1741922900520"  alt="zalo" width=32 height=32>
+						</a>
+						<a href="{{settings.link_fb}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block facebook mr-1" title="Facebook">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'facebook.png' | asset_url }}" alt="facebook" width=32 height=32>
+						</a>
+						{%comment%} tw 
+						<a href="{{settings.link_tw}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block twitter mr-1" title="Twitter">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'twitter.png' | asset_url }}" alt="twitter" width=32 height=32>
+						</a>{%endcomment%}
+						{%comment%} ins
+						<a href="{{settings.link_ins}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block instagram mr-1" title="Instagram+">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'instagram.png' | asset_url }}" alt="instagram" width=32 height=32>
+						</a>
+						{%endcomment%}
+						<a href="{{settings.link_yt}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block youtube mr-1" title="Youtube">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'youtube.png' | asset_url }}" alt="youtube" width=32 height=32>
+						</a>
+						{%comment%} SHOPEE {%endcomment%}
+						<a href="{{settings.link_sp}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block shopee mr-1" title="Shopee">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width=32 height=32>
+						</a>
+						
+						{%comment%} LAZADA {%endcomment%}
+						<a href="{{settings.link_lz}}" target="_blank" class="position-relative iso sitdown modal-open d-inline-block lazada mr-1" title="Lazada">
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'lazada.jpg' | asset_url }}" alt="Lazada" width=32 height=32>
+						</a>
+						
+						{%comment%} TIKTOK {%endcomment%}
+						<a href="https://www.tiktok.com/@navastore.vn" target="_blank" class="position-relative iso sitdown modal-open d-inline-block zalo mr-1" title="Tiktok">
+							<img src="https://bizweb.dktcdn.net/100/543/817/files/logo-tiktok.png?v=1743577458100"  alt="Tiktok" width=32 height=32>
+						</a>
+						
+					</div>
+					{% if settings.display_payment %}
+					<p class="mb-3 position-relative">{{settings.col_foo_1_2}}</p>
+					<div class="footer-column-1">
+						<div class="payment-accept">
+							{% if settings.display_payment_method_1 %}
+							<img class="first lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'payment-1.png' | asset_url }}" alt="payment-1">
+							{% endif %}
+							{% if settings.display_payment_method_2 %}
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'payment-2.png' | asset_url }}" alt="payment-2"> 
+							{% endif %}
+							{% if settings.display_payment_method_3 %}
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'payment-3.png' | asset_url }}" alt="payment-3"> 
+							{% endif %}
+							{% if settings.display_payment_method_4 %}
+							<img class="lazy" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ 'payment-4.png' | asset_url }}" alt="payment-4">
+							{% endif %}
+						</div>
+					</div>
+					{% endif %}
+				</div>
+				
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 footer-left">
+					<h3 class="footer-title mb-2 position-relative font-weight-bold">{{settings.col_foo_1}}</h3>
+					<ul class="links">
+						{% for link in linklists[settings.footer_linklist_1].links %}
+						<li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<style>
+.footer-left .content ul {
+  list-style: none; /* Xóa dấu đầu dòng mặc định */
+  padding: 0; /* Xóa padding mặc định */
+  margin: 0; /* Xóa margin mặc định */
+  display: flex; /* Sắp xếp các thẻ li theo hàng ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  flex-wrap: wrap; /* Cho phép các thẻ li tự động xuống hàng */
+}
+
+.footer-left .content ul li {
+  margin-right: 5px; /* Giảm khoảng cách giữa các thẻ li */
+  margin-bottom: 5px; /* Khoảng cách dưới mỗi thẻ li khi xuống hàng */
+  font-size: 80%; /* Giữ kích thước chữ 75% */
+}
+
+.footer-left .content ul li:not(:last-child)::after {
+  content: "/"; /* Thêm dấu / sau mỗi li, trừ li cuối cùng */
+  margin-left: 0px; /* Giảm khoảng cách bên trái của dấu / */
+  color: #000; /* Màu của dấu /, có thể thay đổi */
+}
+
+.footer-left .content ul li a {
+  text-decoration: none; /* Xóa gạch chân của liên kết */
+  color: #000; /* Màu chữ, có thể thay đổi */
+}
+
+.footer-left .content ul li a:hover {
+  color: #007bff; /* Màu khi hover, có thể thay đổi */
+}
+
+.footer-left .content {
+  width: 100%; /* Đảm bảo container có đủ không gian */
+}
+</style>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">DANH MỤC SẢN PHẨM</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/minipc">Mini PC</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/egpu">eGPU</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/minisforum">Minisforum</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/asus">ASUS</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/aoostar">AOOSTAR</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/beelink">BeeLink</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/keikong">BeiKong</a>
+                </li>
+                <li>
+                  <a href="#">FEVM</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gmktec">GMKtec</a>
+                </li>
+                <li>
+                  <a href="#">Morefine</a>
+                </li>
+                <li>
+                  <a href="#">NAVA</a>
+                </li>
+                <li>
+                  <a href="#">Geekom</a>
+                </li>
+                   <li>
+                  <a href="#">Dreamquest</a>
+                </li>
+                 <li>
+                  <a href="#">HiGole</a>
+                </li>
+                 <li>
+                  <a href="#">SZBox</a>
+                </li>
+                 <li>
+                  <a href="#">Trycoo</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ram-ssd?q=collections:3847247%20AND%20vendor:(SAMSUNG)&page=1&view=grid">SAMSUNG</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/ram-ssd?q=collections:3847247%20AND%20vendor:(Crucial)&page=1&view=grid">Crucial</a>
+                </li>
+                 <li>
+                  <a href="#">Micron</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/ram-ssd?q=collections:3847247%20AND%20vendor:(SK%20Hynix)&page=1&view=grid">SK Hynix</a>
+                </li>
+              
+              </ul>
+            </div>
+          </div>
+				</div>
+         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">MINISFORUM</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-3">UM890 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/um790-pro-mini-pc-ryzen-9-7940hs-radeon-780m-rdna3-may-tinh-minisforum-amd-nho-gon-nhe-manh-mat-em-cao-ca-p">UM790 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/minisforum-um780-pro-mini-pc-gaming-amd-ryzen-7-7840hs-radeon-780m-may-tinh-780-r7-nava">UM780 PRO</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um870-slim-may-tinh-gaming-amd-ryzen-7-8745h-780m">UM870 Slim</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ai-minisforum-ai-x1-hx370-radeon-890m-ddr5-ssd-gen4-hieu-suat-dinh-cao-choi-game-ho-tro-ai-manh-me">X1 370</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-ms-01-mini-workstation-minisforum-bang-thong-10gbps-may-tram-nho-gon-toc-do-cao-co-khe-pcie">MS-01</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/tablet-minisforum-v3-se-amd-ryzen-7-7735u-may-tinh-bang-windows-3-trong-1">TABLET V3</a>
+                </li>
+              
+                <li>
+                  <a href="https://navastore.vn/minisforum-hx99g-amd-ryzen-r9-6900hx-6600m">HX99G</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/minisforum-hx100g-amd-ryzen-r7-7840hs-6600m">HX100G</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gaming-itx-minisforum-129i7-rtx-4060-i9-12900hk-may-tinh-pc-choi-game-aaa-3a">ITX 12900HK</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gaming-itx-minisforum-790s7-129i7-rtx-4060-r9-7940hx-i9-12900hk-may-tinh-pc-choi-game-aaa-3a-1">ITX 7945HX</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-ms-01-mini-workstation-minisforum-bang-thong-10gbps-may-tram-nho-gon-toc-do-cao-co-khe-pcie">MS01-12600H</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-ms-01-mini-workstation-minisforum-bang-thong-10gbps-may-tram-nho-gon-toc-do-cao-co-khe-pcie">MS01-12900H</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-ms-01-mini-workstation-minisforum-bang-thong-10gbps-may-tram-nho-gon-toc-do-cao-co-khe-pcie">MS01-13900H</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/atomman-x7-ti-intel-core-ultra-9-185h-oculink-1080p-camera-wi-fi-7-usb4">X7 Ti</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um690-slim-amd-r9-6900hx-radeon-680m-usb4-may-tinh-ryzen-9">UM690 Slim</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um560xt-amd-r5-5600h-radeon-usb4-may-tinh-ryzen-5">UM560 XT</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um580d-amd-r7-5800h-radeon-usb4-may-tinh-ryzen-7">UM580D</a>
+                </li>
+                 <li>
+                  <a href="#">UM760 Slim</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+				</div>
+         <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">ASUS</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/rog-nuc-2025-nuc15jnk-rtx5080">ROG NUC15</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-970-intel-core-ultra-9-rtx-4070-8gb-rnuc14srku9189a0i">ROG NUC970</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-9-rtx-4070-8gb-rnuc14srku9189a1i">ROG NUC14 LED-U9</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-7-rtx-4060-8gb-rnuc14srku7168a1i">ROG NUC14 LED-U7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-9-rtx-4060-8gb-rnuc14srku910001i">ROG NUC14-U9</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-7-rtx-4060-8gb-rnuc14srku710001i">ROG NUC14-U7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-expertcenter-pn64-b-s7210mv-core-i7-13700h-iris-xe-wifi-6e-bluetooth-5-2">PN64-i7</a>
+                </li>
+              
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-expertcenter-pn64-b-s5209mv-core-i5-13500h-iris-xe-wifi-6e-bluetooth-5-2">PN64-i5</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-expertcenter-pn64-b-s5188md-core-i5-12500h-iris-xe-wifi-6e-bluetooth-5-2">PN64-i5</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-expertcenter-pn64-b-s3187md-core-i3-1220p-iris-xe-wifi-6e-bluetooth-5-2">PN64-i3</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-14-pro-plus-rnuc14rvsu700001i-ultra-7-155h-arc-graphics">NUC14 PRO+ -u7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-14-pro-plus-rnuc14rvsu500001i-ultra-5-125h-arc-graphics">NUC14 PRO+ -u5</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ho-tro-ai-asus-nuc-14-pro-rnuc14rvhu700001i-ultra-7-155h-2xnvme-sata-2x-hdmi-2-1-2x-dp-1-4a-vesa-mount">NUC14 PRO-u7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ho-tro-ai-asus-nuc-14-pro-rnuc14rvhu500001i-ultra-5-125h-2xnvme-sata-2x-hdmi-2-1-2x-dp-1-4a-vesa-mount">NUC14 PRO-u5</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-ho-tro-ai-asus-nuc-14-pro-rnuc14rvhi300001i-intel-core-3-100u-2xnvme-sata-2x-hdmi-2-1-2x-dp-1-4a-vesa-mount">NUC14 PRO-i3</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-13-pro-desk-edition-rnuc13vyki50006-core-i5-1340p-ddr4-3200-iris-xe-nvme-pcie4-0-wi-fi-bluetooth">NUC13 PRO-Desk</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-13-pro-rnuc13anhi70000-core-i7-1360p-ddr4-3200-iris-xe-nvme-pcie4-0-wi-fi-bluetooth">NUC13 PRO-i7</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-13-pro-rnuc13anhi500001i-core-i5-1340p-ddr4-3200-iris-xe-nvme-pcie4-0-wi-fi-bluetooth">NUC13 PRO-i5</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-13-pro-rnuc13anhi300001i-core-i3-1315u-ddr4-3200-iris-xe-nvme-pcie4-0-wi-fi-bluetooth">NUC13 PRO-i3</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc12-pro-tall-rnuc12wshi700000i-core-i7-1260p-2xddr4-3200-3xnvme-sata-2x-hdmi-2-1-2x-thunderbolt-vesa">NUC12 PRO-i7</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc12-pro-rnuc12wshi500000i-core-i5-1240p-2xddr4-3200-3xnvme-sata-2x-hdmi-2-1-2x-thunderbolt-vesa">NUC12 PRO-i5</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc12-pro-tall-rnuc12wshi300000i-core-i3-1220p-2xddr4-3200-3xnvme-sata-2x-hdmi-2-1-2x-thunderbolt-vesa">NUC12 PRO-i3</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+				</div>
+				
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">MINI PC AI</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/asus-nuc-14-pro-ai-ultra-9-288v-intel-arc-140v-32gb-lpddr5x-8533-sieu-may-tinh-mini-manh-me-voi-cong-nghe-ai-tien-tien">NUC14 PRO AI-U9 288V</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/asus-nuc-14-pro-ai-ultra-7-258v-intel-arc-140v-32gb-lpddr5x-8533-sieu-may-tinh-mini-manh-me-voi-cong-nghe-ai-tien-tien">NUC14 PRO AI-U7 258V</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/asus-nuc-14-pro-ai-ultra-5-228v-intel-arc-140v-32gb-lpddr5x-8533-sieu-may-tinh-mini-manh-me-voi-cong-nghe-ai-tien-tien">NUC14 PRO AI-U5 228V</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-14-pro-plus-rnuc14rvsu700001i-ultra-7-155h-arc-graphics">NUC14 PRO+ U7 155H</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-asus-nuc-14-pro-plus-rnuc14rvsu500001i-ultra-5-125h-arc-graphics">NUC14 PRO+ U5 125H</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ho-tro-ai-asus-nuc-14-pro-rnuc14rvhu700001i-ultra-7-155h-2xnvme-sata-2x-hdmi-2-1-2x-dp-1-4a-vesa-mount">NUC14 PRO U7 155H</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ho-tro-ai-asus-nuc-14-pro-rnuc14rvhu500001i-ultra-5-125h-2xnvme-sata-2x-hdmi-2-1-2x-dp-1-4a-vesa-mount">NUC14 PRO U5 125H</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-aoostar-gem-12-pro-r7-8845hs-amd-readeon-780m-man-lcd-tien-dung">GEM12+ PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser9-beelink-amd-ryzen-ai-9-hx-370-radeon-890m-may-tinh-mini-pc">SER9 AI370</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser9-beelink-amd-ryzen-ai-9-hx-365-radeon-880m-may-tinh-mini-pc">SER9 AI365</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/fevm-fa880-amd-r7-8845hs-minipc-oculink-usb4">FA880 AI</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-gmk-evo-x1-chuyen-ket-hop-egpu-manh-me-em-ai-thiet-ke-doc-dao-ryzen-ai-9-hx370-890m">EVO X1 HX370</a>
+                </li>
+               
+                <li>
+                  <a href="https://navastore.vn/gmk-evo-x2-ram-64gb-lpddr5x-8000mhz-ryzen-ai-max-395-radeon-8060s-dinh-cao-suc-manh-em-ai-thiet-ke-doc-dao">EVO X2 AI395</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-2">UM880 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-3">UM890 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ai-minisforum-ai-x1-hx370-radeon-890m-ddr5-ssd-gen4-hieu-suat-dinh-cao-choi-game-ho-tro-ai-manh-me">X1 370</a>
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+				</div>
+				
+				<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">GAMING</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-3">UM890 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser-8-beelink-amd-ryzen-8845hs-radeon-780m-may-tinh-mini-pc-minisforum-r7-8000">SER8-8745HS</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser-8-beelink-amd-ryzen-8845hs-radeon-780m-may-tinh-mini-pc-minisforum-r7-8000-1">SER8-8845HS</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um870-slim-may-tinh-gaming-amd-ryzen-7-8745h-780m">UM870 Slim</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-ai-minisforum-ai-x1-hx370-radeon-890m-ddr5-ssd-gen4-hieu-suat-dinh-cao-choi-game-ho-tro-ai-manh-me">X1 370</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-aoostar-gem-12-max-r7-8745hs-amd-readeon-780m">GEM12 MAX</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-aoostar-gem-12-pro-r7-8845hs-amd-readeon-780m-man-lcd-tien-dung">GEM12+ PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/rog-nuc-2025-nuc15jnk-rtx5080">ROG NUC15</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-970-intel-core-ultra-9-rtx-4070-8gb-rnuc14srku9189a0i">ROG NUC970</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-9-rtx-4070-8gb-rnuc14srku9189a1i">ROG NUC14 LED-U9</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-7-rtx-4060-8gb-rnuc14srku7168a1i">ROG NUC14 LED-U7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-9-rtx-4060-8gb-rnuc14srku910001i">ROG NUC14-U9</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-asus-rog-nuc-14-performance-intel-core-ultra-7-rtx-4060-8gb-rnuc14srku710001i">ROG NUC14-U7</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/minisforum-hx99g-amd-ryzen-r9-6900hx-6600m">HX99G</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/minisforum-hx100g-amd-ryzen-r7-7840hs-6600m">HX100G</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gaming-itx-minisforum-129i7-rtx-4060-i9-12900hk-may-tinh-pc-choi-game-aaa-3a">ITX 12900HK</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gaming-itx-minisforum-790s7-129i7-rtx-4060-r9-7940hx-i9-12900hk-may-tinh-pc-choi-game-aaa-3a-1">ITX 7945HX</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/gt37-aoostar-mini-pc-ai-amd-ryzen-ai-9-hx-370-5-1ghz-nhan-ai-80-tops">GT37</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser9-beelink-amd-ryzen-ai-9-hx-365-radeon-880m-may-tinh-mini-pc">SER9-365</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/ser9-beelink-amd-ryzen-ai-9-hx-370-radeon-890m-may-tinh-mini-pc">SER9-370</a>
+                </li>
+                 <li>
+                  <a href="https://navastore.vn/aoostar-god-x-gaming-minii-pc-gpu-rx-6600le-ryzen-9-6900hx-do-hoa-cao-cap-cho-gamer-creator">GOD X</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/fevm-fa880-amd-r7-8845hs-minipc-oculink-usb4">FA880 AI</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/fn60g-mini-pc-lap-san-rtx-4060-rx-6600m-dung-chip-intel-12-den-14th-chay-duoc-mac-os-sang-trong-va-cao-cap-2">FN60G V2</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/mini-pc-gmk-evo-x1-chuyen-ket-hop-egpu-manh-me-em-ai-thiet-ke-doc-dao-ryzen-ai-9-hx370-890m">EVO X1</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/gmk-evo-x2-ram-64gb-lpddr5x-8000mhz-ryzen-ai-max-395-radeon-8060s-dinh-cao-suc-manh-em-ai-thiet-ke-doc-dao">EVO X2</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/mini-pc-gmk-k11-ryzen-9-8945hs-oculink-may-tinh-amd-gaming-nucbox-r9-egpu-gmktec">K11</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/nhan-ban-tu-gmk-k6-7840hs-k8-plus-ryzen-7-8845hs-may-tinh-amd-gaming-mini-pc-windows-11-pro-dual-lan-2-5gbps-the-he-8000">K8 PLUS</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/minipc-gmk-m7-manh-me-em-ai-thiet-ke-doc-dao-ryzen-7-6850h-680m">M7</a>
+                </li>
+				  
+                 <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um690-slim-amd-r9-6900hx-radeon-680m-usb4-may-tinh-ryzen-9">UM690 Slim</a>
+                </li>
+                
+                 <li>
+                  <a href="#">UM760 Slim</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+				</div>
+				
+					<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-xs-12 footer-left">
+            <h3 class="footer-title mb-2 position-relative font-weight-bold">VĂN PHÒNG</h3>
+          <div class="col-lg-25 item">
+            <div class="content">
+              <ul>
+                <li>
+                  <a href="https://navastore.vn/asus-nuc-14-essential-core-3-n355-mini-pc-sieu-ben-sieu-manh-cho-cong-viec-va-giai-tri">NUC14 N150</a>
+                </li>
+				   <li>
+                  <a href="https://navastore.vn/mini-pc-ask-hand-mn355-2x-ddr4-2x-m-2-ssd-may-tinh-nho-gon-hieu-nang-manh-me">MN355</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-n100-n150-n200-gmk-g3-plus-beelink-eq14-morefine-m8-intel-gen-12th-twin-lake-25w-t8-tiny-1">GMK G3</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nucbox-m5-amd-ryzen-7-5825u-win11-pro-ma-y-tinh-mini-pc-gmktec">GMK M5+</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/nucbox-m6-win11-pro-ma-y-tinh-mini-pc-gmktec">GMK M6</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-n100-n150-n200-gmk-g3-plus-beelink-eq14-morefine-m8-intel-gen-12th-twin-lake-25w-t8-tiny-2">EQ14</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-beelink-eqr6-6600h">EQR6</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/m11-n200">M11 N200</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/morefine-m6s-n100-type-c-12gb-ddr5-nvme-win11-pro-nho-gon-usbc-mini-pc-1">M6S N150</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/nava-morefine-m8-intel-n100-mini-pc-win11-pro">M8 N150</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um560xt-amd-r5-5600h-radeon-usb4-may-tinh-ryzen-5">UM560 XT</a>
+                </li>
+                  <li>
+                  <a href="https://navastore.vn/mini-pc-minisforum-um580d-amd-r7-5800h-radeon-usb4-may-tinh-ryzen-7">UM580D</a>
+                </li>
+               
+                <li>
+                  <a href="https://navastore.vn/trycoo-mini-pc-intel-n100-16gb-ram-ddr4-512gb-m-2-ssd-mini-pc-van-phong-gia-re">Wi-6</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/dreamquest-mini-pc-intel-n150-3-6ghz-micro-may-tinh-cho-van-phong-va-doanh-nghiep-ho-tro-linux">DreamQuest PRO+</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/higole-gole-2-pro-n5095-16gb-256gb">GOLE 2 PRO</a>
+                </li>
+                <li>
+                  <a href="https://navastore.vn/mini-pc-bmax-b7-a-pro-r5-7430u-2x-ddr4-1x-m-2-suc-manh-cong-nghe-trong-thiet-ke-nho-gon">B7 A PRO</a>
+                </li>
+               
+              </ul>
+            </div>
+          </div>
+				</div>
+				
+			
+				
+			</div>
+		</div>
+	</div>
+	{%comment%} FOOTER_MENU
+	<div class="container">
+		<div class="foo_mid border-top pt-4 pb-4">
+			<ul class="links_sm list-unstyled row mb-0">
+				{% for link in linklists[settings.footer_linklist_2].links %}
+				<li class="col-6 col-sm-4 col-md-3 col-lg-2 m-0"><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	
+	{%endcomment%}
+	
+	<div class="d-flex justify-content-center align-items-center" >
+		
+				<div class="justify-content-center ">
+					<div class="d-flex justify-content-center align-items-center">
+						
+					
+						<a href="http://online.gov.vn/Home/WebDetails/127667" title="{{store.name}}" >
+							<img   src="https://bizweb.dktcdn.net/100/543/817/files/logosalenoti.png?v=1742207130127" style="width:100px; height:36px ;margin-top:3px;margin-right:5px" >
+						</a>
+					<a href="//www.dmca.com/Protection/Status.aspx?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617" title="DMCA.com Protection Status" class="dmca-badge"> <img src ="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617"  alt="DMCA.com Protection Status" style="width:80px; height:22px;margin-right:10px "/></a> 	
+					 
+					<script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
+					</div>
+					<address class="vcard mb-4">
+						{%comment%}	
+						 <table class="justify-content-center align-items-center">
+        
+        					<tbody>
+            					<tr>
+                					<td style="width=100px">MST</td>
+                					<td>8080980349-001</td>
+               
+            					</tr>
+          
+            					<tr>
+                					<td>Mail:</td>
+                					<td>hi@navastore.vn</td>
+               
+           						</tr>
+        					</tbody>
+    					</table>
+						{%endcomment%}				
+						
+						
+						{%comment%}	
+						<p class="adr text-center" style="font-size: 0.7em;color:WHITE">Vận hành website: Trần Bình Nam</p>
+						{%endcomment%}	
+						<p class="adr text-center" style="font-size: 0.7em;">Giấy chứng nhận ĐKKD số 41Y8016466</p>
+						<p class="adr text-center" style="font-size: 0.7em;">Văn phòng: 702 Võ Nguyên Giáp, Hiệp Phú, Thủ Đức, Hồ Chí Minh</p>
+						<p class="adr text-center" style="font-size: 0.7em;">Hotline 0972178527 - Email info@navatek.vn - MST 8080980349-001</p>
+						<p class="adr text-center" style="font-size: 0.7em;">Trung tâm bảo hành: 270 đường Linh Trung, P.Linh Trung, TP. Thủ Đức, TP.HCM</p>
+						
+						
+							
+						{%comment%}	
+						{%if settings.footer_address != null and settings.footer_address != ''%}
+						<p class="adr"><b>{{settings.contact_add}} </b>{{settings.footer_address}}</p>
+						{%else%}
+						<p class="adr"><b>{{settings.contact_add}} </b>{{store.address}}</p>
+						{%endif%}
+						{%comment%}	<p class="adr"><b>Kho hàng:</b> Linh Trung, P. Linh Trung, TP. Thủ Đức</p>{%endcomment%}
+						{%if settings.footer_email != null and settings.footer_email != ''%}
+						<p><b>Email: </b><a href="mailto:{{settings.footer_email}}" title="{{settings.footer_email}}">{{settings.footer_email}}</a></p>
+						{%else%}
+						<p><b>Email: </b><a href="mailto:{{store.customer_email}}" title="{{store.customer_email}}">{{store.customer_email}}</a></p>
+						{%endif%}
+						{%if settings.footer_phone != null and settings.footer_phone != ''%}
+						<p><b>Hotline: </b><a href="tel:{{settings.footer_phone | remove: ' ' | remove: '.'}}" title="{{settings.footer_phone}}">{{settings.footer_phone}}</a></p>
+						{%else%}
+						<p><b>Hotline: </b><a href="tel:{{store.phone_number}}" title="{{store.phone_number}}">{{store.phone_number}}</a></p>
+						{%endif%}
+						{%if settings.mst != null and settings.mst != ''%}
+						<p>{{settings.mst}}</p>
+						{%endif%}
+						{%endcomment%}
+					</address>
+				</div>
+	</div>
+	{%comment%}	
+	<p class="text-center" style="color:WHITE ;">Địa chỉ: 270 đường Linh Trung,P.Linh Trung, TP. Thủ Đức, TP.HCM</p>
+	{%endcomment%}
+	{%comment%} BAN QUYEN THUOC VE{%endcomment%}
+	<div class="foo_bot pt-2 pb-2 border-top">
+		<div class="container">
+			<div class="row bgk align-items-center">
+				<div class="col-12">
+					{% if template != 'index' %}
+					{% if settings.custorm_bq %}
+					<div class="coppyright">{% if settings.content_bq != null and settings.content_bq != '' %}{{settings.content_bq}} {% endif %}</div>
+					{% else %}
+					<div class="coppyright">{{settings.copyright_default}} MewTheme.</div>
+					{% endif %}
+					{%else%}
+					{% if settings.custorm_bq %}
+					<div class="coppyright">{% if settings.content_bq != null and settings.content_bq != '' %}{{settings.content_bq}}{% endif %}</div>
+					{% else %}
+					<div class="coppyright">{{settings.copyright_default}} MewTheme.</div>
+					{% endif %}
+					{%endif%}
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</footer>

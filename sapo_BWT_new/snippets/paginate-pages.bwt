@@ -1,0 +1,77 @@
+<style>
+    .nava-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .nava-pagination .page-node {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-white, #ffffff);
+        color: var(--text-color, #0f172a);
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        font-size: 0.95rem;
+        box-sizing: border-box;
+    }
+    .nava-pagination .page-node:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        background: rgba(14, 165, 233, 0.05);
+        transform: translateY(-2px);
+    }
+    .nava-pagination .page-node.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    }
+    .nava-pagination .page-node.deco {
+        cursor: default;
+        border-color: transparent;
+        background: transparent;
+        color: var(--text-gray);
+    }
+    .nava-pagination .page-node.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
+
+<div class="nava-pagination">
+    {% if paginate.previous %}
+        <a href="{{ paginate.previous.url }}" class="page-node prev-page" title="{{ paginate.previous.title }}"><i class="ph ph-caret-left"></i></a>
+    {% else %}
+        <span class="page-node disabled"><i class="ph ph-caret-left"></i></span>
+    {% endif %}
+    
+    {% for part in paginate.parts %}
+        {% if part.is_link %}
+            <a href="{{ part.url }}" class="page-node">{{ part.title }}</a>
+        {% else %}
+            {% if part.title == paginate.current_page %}
+                <span class="page-node active">{{ part.title }}</span>
+            {% else %}
+                <span class="page-node deco">{{ part.title }}</span>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if paginate.next %}
+        <a href="{{ paginate.next.url }}" class="page-node next-page" title="{{ paginate.next.title }}"><i class="ph ph-caret-right"></i></a>
+    {% else %}
+        <span class="page-node disabled"><i class="ph ph-caret-right"></i></span>
+    {% endif %}
+</div>

@@ -1,0 +1,52 @@
+{% include 'breadcrumb' %}
+<div class="com_info">
+    <style>
+        .nava-compare-card { background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); padding: 25px; box-shadow: var(--shadow-sm); }
+        .page_name { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
+        
+        /* Custom styled containers for Sapo dynamic compare script output */
+        #compare-select {
+            display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; margin-bottom: 20px;
+        }
+        #compare-summary {
+            display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; margin-bottom: 20px;
+        }
+        #compare-detail {
+            display: flex !important; flex-direction: column; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: var(--bg-white);
+        }
+        
+        /* Responsive scrollable compare grid wrapper for mobile */
+        .compare-scroll-container {
+            width: 100%; overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            #compare-select, #compare-summary {
+                min-width: 600px !important; /* Ensure columns have enough space to not stack */
+            }
+            #compare-detail {
+                min-width: 600px !important;
+            }
+            .page_name { font-size: 1.3rem !important; }
+            .nava-compare-card { padding: 15px !important; }
+        }
+    </style>
+    
+    <div class="container mt-3 mb-3">
+        <div class="col-main page-title nava-compare-card">
+            <h1 class="page_name text-center">
+                {{page.title | default: 'So Sánh Sản Phẩm'}}
+            </h1>
+            
+            <div class="compare-scroll-container">
+                <div id="compare-select"></div>
+                <div id="compare-summary"></div>
+                <div id="compare-detail"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mb-3">
+        {%include 'm_product_recent_compare'%}
+    </div>
+</div>

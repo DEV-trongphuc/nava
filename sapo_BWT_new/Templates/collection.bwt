@@ -1,0 +1,534 @@
+<div class="opacity_filter"></div>
+{%- assign product_per_page = settings.collection_results_per_page | default: 12 -%}
+{%- include 'breadcrumb' -%}
+
+<style>
+    .nava-col-layout { padding: 24px; background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+    
+    .product-grid { 
+        display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; 
+    }
+    @media (max-width: 1199px) {
+        .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+    }
+    @media (max-width: 991px) {
+        .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+    }
+    @media (max-width: 575px) {
+        #nava-col-container { padding: 10px 10px 80px !important; margin-top: 0 !important; }
+        .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+        
+        /* Collection Page title sizing */
+        .collection-title-mobile { font-size: 1.2rem !important; font-weight: 800 !important; }
+    }
+
+    /* Scrollable Sidebar on Desktop */
+    @media (min-width: 992px) {
+        .nava-sidebar {
+            position: sticky !important;
+            top: 120px !important;
+            max-height: calc(100vh - 140px) !important;
+            overflow-y: auto !important;
+            scrollbar-width: thin !important;
+            scrollbar-color: var(--primary, #2563eb) transparent !important;
+        }
+        .nava-sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .nava-sidebar::-webkit-scrollbar-thumb {
+            background: var(--primary, #2563eb) !important;
+            border-radius: 4px;
+        }
+    }
+
+    /* Bottom Collapsible Description */
+    .category-gallery {
+        width: 100% !important;
+        box-sizing: border-box;
+        background: var(--bg-white, #ffffff);
+        border-radius: 16px;
+        border: 1px solid var(--border-color, #e2e8f0);
+        padding: 25px !important;
+        box-shadow: var(--shadow-sm);
+        margin-top: 40px !important;
+    }
+    .content_coll {
+        max-height: 250px;
+        overflow: hidden;
+        position: relative;
+        transition: max-height 0.4s ease;
+    }
+    .content_coll.expanded {
+        max-height: none;
+    }
+    .bg_cl {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to bottom, rgba(255,255,255,0), var(--bg-white, #ffffff));
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    [data-theme="dark"] .bg_cl {
+        background: linear-gradient(to bottom, rgba(21,29,43,0), var(--bg-white, #151d2b));
+    }
+    .content_coll.expanded .bg_cl {
+        opacity: 0;
+    }
+    .view_mores a {
+        background: var(--bg-white, #fff) !important;
+        border: 1px solid var(--primary) !important;
+        color: var(--primary) !important;
+        font-weight: 700 !important;
+        padding: 10px 28px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        font-size: 0.9rem !important;
+        transition: all 0.2s !important;
+        text-decoration: none !important;
+    }
+    .view_mores a:hover {
+        background: var(--primary) !important;
+        color: #fff !important;
+    }
+</style>
+
+<section class="collection-layout mt-3 mb-3" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 0 auto !important; padding: 10px 30px 80px;">
+    
+    <!-- Techy Hero Banner -->
+    <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
+        <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
+        <div style="position: relative; z-index: 2;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
+                🏆 Partner Giao Diện Mới
+            </span>
+            <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-dark); letter-spacing: -0.5px;">{{ collection.name }}</h1>
+            <p style="color: var(--text-gray); max-width: 650px; font-size: 1.05rem; margin: 0; line-height: 1.6;">
+                {%- if collection.description != '' and collection.description != null -%}
+                    {{ collection.description | strip_html | truncate: 160 }}
+                {%- else -%}
+                    Hệ thống cung cấp các dòng sản phẩm {{ collection.name }} chính hãng với chất lượng dịch vụ bảo hành cao cấp nhất.
+                {%- endif -%}
+            </p>
+        </div>
+        <div style="position: relative; z-index: 2; opacity: 0.9;" class="hero-image-wrap">
+            {%- if collection.image -%}
+                <img src="{{ collection.image.src | img_url: 'large' }}" alt="{{ collection.name }}" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
+            {%- else -%}
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" alt="{{ collection.name }}" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
+            {%- endif -%}
+        </div>
+    </div>
+
+    <div class="nava-collection-layout">
+        <!-- Sidebar Filter -->
+        <div class="nava-sidebar">
+            <div class="filter-sidebar" style="background: var(--bg-white); padding: 25px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); box-sizing: border-box; width: 100%;">
+                {%- include 'sidebar-collection' -%}
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="nava-main">
+            <!-- AI Search Bar & Sort (single unified bar) -->
+            <div style="display: flex; align-items: center; margin-bottom: 25px; gap: 16px; flex-wrap: nowrap; overflow: visible; position: relative;">
+                <!-- AI Search Bar -->
+                <div id="ai-search-widget" style="flex: 1; min-width: 0; position: relative;">
+                    <style>
+                        .ai-glow-wrap { background: linear-gradient(90deg, #1d4ed8, #3b82f6, #38bdf8, #3b82f6, #1d4ed8); background-size: 300% 100%; animation: glow-anim 5s ease infinite; border-radius: 50px; padding: 2px; box-shadow: 0 6px 20px rgba(59,130,246,0.2); }
+                        @keyframes glow-anim { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+                        .ai-inner { background: var(--bg-white, #fff); border-radius: 48px; display: flex; align-items: center; padding: 5px 6px 5px 18px; gap: 10px; }
+                        .ai-input { flex: 1; border: none; outline: none; background: transparent; font-size: 1rem; color: var(--text-color, #1e293b); font-weight: 500; min-width: 0; }
+                        .ai-input::placeholder { color: var(--text-gray, #94a3b8); }
+                        .ai-btn { background: linear-gradient(270deg, #1e3a8a, #3b82f6, #38bdf8, #3b82f6, #1e3a8a); background-size: 300% 100%; animation: glow-anim 5s ease infinite; border: none; color: white; padding: 8px 18px; border-radius: 40px; font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(30,58,138,0.35); white-space: nowrap; flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+                        .ai-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 15px rgba(59,130,246,0.5); }
+                        @keyframes pulse-sparkle { 0%,100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+                        .ai-results-dropdown { position: absolute; top: calc(100% + 12px); left: 0; right: 0; background: var(--bg-white, #fff); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.12); border: 1px solid var(--border-color, #e2e8f0); z-index: 999; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-8px); transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
+                        .ai-results-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+                        .ai-result-header { padding: 14px 20px 10px; font-size: 0.8rem; color: var(--text-gray, #64748b); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--border-color, #f1f5f9); }
+                        .ai-result-item { display: flex; align-items: center; gap: 14px; padding: 12px 20px; border-bottom: 1px solid var(--border-color, #f8fafc); cursor: pointer; transition: background 0.15s; text-decoration: none; }
+                        .ai-result-item:hover { background: var(--bg-gray, #f8fafc); }
+                        .ai-result-img { width: 64px; height: 64px; object-fit: contain; border-radius: 10px; background: transparent; padding: 6px; flex-shrink: 0; border: 1px solid var(--border-color, #f1f5f9); }
+                        .ai-result-info h5 { margin: 0 0 4px; font-size: 0.9rem; color: var(--text-color, #1e293b); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px; }
+                        .ai-result-price { display: inline-block; color: white; background: linear-gradient(135deg,#1e3a8a,#2563eb); font-weight: 700; font-size: 0.82rem; padding: 3px 10px; border-radius: 20px; margin-top: 4px; }
+                        .ai-view-more { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(37,99,235,0.1)); color: #2563eb; font-weight: 700; font-size: 0.92rem; text-decoration: none; transition: background 0.2s; }
+                        .ai-view-more:hover { background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(37,99,235,0.15)); }
+                        .ai-loading-row { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; color: var(--text-gray, #64748b); font-size: 0.95rem; }
+                        @keyframes ai-spin { 100% { transform: rotate(360deg); } }
+                        .ai-spinner { width: 18px; height: 18px; border: 2px solid var(--border-color, #dbeafe); border-top-color: #3b82f6; border-radius: 50%; animation: ai-spin 0.7s linear infinite; }
+                        
+                        /* Sort Dropdown styles */
+                        .sort-pill-btn { display: flex; align-items: center; gap: 6px; background: var(--bg-white, #fff); border: 1px solid var(--border-color, #e2e8f0); color: var(--text-dark, #0f172a); padding: 12px 20px; border-radius: 40px; font-weight: 700; font-size: 0.92rem; cursor: pointer; white-space: nowrap; box-shadow: var(--shadow-sm); transition: all 0.2s; flex-shrink: 0; }
+                        .sort-pill-btn:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(59,130,246,0.15); }
+                        .sort-drop-menu { position: absolute; top: calc(100% + 8px); right: 0; background: var(--bg-white, #fff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; padding: 6px 0; min-width: 180px; box-shadow: 0 12px 30px rgba(0,0,0,0.1); display: none; z-index: 999; }
+                        .sort-drop-menu.show { display: block; }
+                        .sort-drop-menu a { display: block; padding: 10px 18px; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.15s; }
+                        .sort-drop-menu a:hover { background: var(--bg-gray); color: var(--primary); }
+                    </style>
+                    <div class="ai-glow-wrap">
+                        <div class="ai-inner">
+                            <i class="ph-fill ph-sparkle" style="font-size: 1.4rem; color: #3b82f6; flex-shrink: 0; animation: pulse-sparkle 2s infinite;"></i>
+                            <input type="text" class="ai-input" id="aiSearchInput" placeholder="Mô tả AI... (VD: Mini PC chơi game Wukong giá dưới 15 củ)">
+                            <button class="ai-btn" id="aiSearchBtn"><i class="ph-bold ph-magnifying-glass"></i> Tìm kiếm AI</button>
+                        </div>
+                    </div>
+                    <!-- AI Results -->
+                    <div class="ai-results-dropdown" id="aiResultsDropdown">
+                        <div class="ai-result-header" id="aiResultHeader">🤖 AI đang phân tích...</div>
+                        <div id="aiLoading"><div class="ai-loading-row"><div class="ai-spinner"></div> Đang tìm sản phẩm phù hợp...</div></div>
+                        <div id="aiResultsList" style="display:none;">
+                            <!-- AI Analysis Summary -->
+                            <div style="padding: 15px 20px; border-bottom: 1px solid #f1f5f9; background: #f8fafc;">
+                                <div style="display: flex; gap: 10px; align-items: flex-start;">
+                                    <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; box-shadow: 0 4px 10px rgba(37,99,235,0.2);"><i class="ph-bold ph-robot"></i></div>
+                                    <div>
+                                        <div style="font-size: 0.9rem; color: #334155; line-height: 1.5;" id="aiSummaryText">
+                                            <strong>Phân tích:</strong> Đang xử lý yêu cầu...
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Recommendation items list -->
+                            <div style="padding: 10px 20px 5px; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #f1f5f9;">
+                                Sản phẩm phù hợp đề xuất
+                            </div>
+                            <div id="aiFilteredResults">
+                                <!-- recommendations injected by JS -->
+                            </div>
+                            <a href="javascript:;" onclick="submitAISearchRedirect();" class="ai-view-more">Xem thêm kết quả tìm kiếm &nbsp;<i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sort Pill Dropdown -->
+                <div style="position: relative; flex-shrink: 0;">
+                    <button class="sort-pill-btn" id="sortToggleBtn" onclick="document.getElementById('sortDropMenu').classList.toggle('show'); event.stopPropagation();">
+                        <i class="ph ph-faders" style="color: var(--primary); font-size: 1.25rem;"></i>
+                        <span id="sortLabel">Mặc định</span>
+                        <i class="ph ph-caret-down" style="color:#94a3b8; font-size:0.85rem;"></i>
+                    </button>
+                    <div class="sort-drop-menu" id="sortDropMenu">
+                        <a href="javascript:;" onclick="applySort('default')"><i class="ph ph-list-dashes" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Mặc định</a>
+                        <a href="javascript:;" onclick="applySort('price_min:asc')"><i class="ph ph-sort-ascending" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Giá tăng dần</a>
+                        <a href="javascript:;" onclick="applySort('price_min:desc')"><i class="ph ph-sort-descending" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Giá giảm dần</a>
+                        <a href="javascript:;" onclick="applySort('created_on:desc')"><i class="ph ph-sparkle" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Mới nhất</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quick Filter Pills -->
+            <div class="quick-filters" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; margin-bottom: 25px; -webkit-overflow-scrolling: touch;">
+                <style>.quick-filters::-webkit-scrollbar { display: none; }</style>
+                <button onclick="applyFilterTag('Tất cả', '')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; font-weight: 600; font-size: 0.85rem; cursor: pointer;">Tất cả</button>
+                <button onclick="applyFilterTag('Dưới 10 triệu', '0-10000000')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Dưới 10 triệu</button>
+                <button onclick="applyFilterTag('Core Ultra 9', 'Ultra 9')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Core Ultra 9</button>
+                <button onclick="applyFilterTag('Ryzen AI 9', 'Ryzen AI')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Ryzen AI 9</button>
+                <button onclick="applyFilterTag('RAM 32GB', '32GB')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">RAM 32GB</button>
+                <button onclick="applyFilterTag('Máy bộ eGPU', 'eGPU')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Máy bộ eGPU</button>
+            </div>
+            
+            <!-- Collection list -->
+            <div class="collection">
+                {%- paginate collection.products by product_per_page -%}
+                <script>
+                    window.navaProducts = [
+                        {%- for prod in collection.products -%}
+                        {
+                            name: {{ prod.name | json }},
+                            price: "{%- if prod.price == 0 -%}Liên hệ{%- else -%}{{ prod.price | money }}{%- endif -%}",
+                            img: "{{ prod.featured_image.src | img_url: 'large' }}",
+                            url: "{{ prod.url }}",
+                            desc: {{ prod.description | strip_html | truncate: 150 | json }}
+                        }{%- unless forloop.last -%},{%- endunless -%}
+                        {%- endfor -%}
+                    ];
+                </script>
+                <div class="category-products position-relative mt-3 mb-3">
+                    {%- if collection.products.size > 0 -%}
+                    <div class="product-grid">
+                        {%- for product in collection.products -%}
+                            {%if forloop.index > 2%}
+                            {%- include 'product-grid-item' -%}         
+                            {%else%}
+                            {%- include 'product-grid-item-no-lazy' -%} 
+                            {%endif%}
+                        {%- endfor -%}
+                    </div>
+                    {%- else -%}
+                    <p class="text-center alert alert-warning">{{settings.emptyCollection}}</p>
+                    {%- endif -%}
+                    
+                    {%- if paginate.pages > 1 -%}
+                    <div style="margin-top: 30px;">
+                        {%- include 'collection-paginate-pages' -%}
+                      </div>
+                      {%- endif -%}
+                      {%- endpaginate -%}
+                  </div>
+              </div>
+              
+          </div> <!-- Close nava-main -->
+      </div> <!-- Close nava-collection-layout -->
+
+      <!-- Content detail description collapse (moved outside nava-collection-layout to span full container width!) -->
+      {% assign mycontent2 = collection.description | split:'<p>####</p>' | last%}
+      {% assign mycontent3 = mycontent2 | split:'<h5>' | first%}
+      {%- if mycontent3 != '' and mycontent3 != null -%}
+      {%- assign long = mycontent3.size -%}
+      <div class="category-gallery pb-3 pt-3">
+          <div class="content_coll position-relative rte" id="content-coll-container" style="font-size: 0.92rem; line-height: 1.6; color: var(--text-gray);">
+              {{mycontent3}}
+              {%- if mycontent3 != '' and long > 800-%}
+              <div class="bg_cl" id="content-coll-overlay"></div>
+              {%- endif -%}
+          </div>
+          {%- if mycontent3 != '' and long > 800-%}
+          <div class="view_mores text-center mb-2" style="margin-top: 15px;">
+              <a href="javascript:;" id="btn-coll-show-more" class="one font-weight-bold" onclick="toggleCollectionDesc()" title="{{settings.seemore_text}}">{{settings.seemore_text}} <i class="ph-bold ph-caret-down"></i></a>
+          </div>
+          {%- endif -%}
+      </div>
+      {%- endif -%}
+  </section>
+
+  <script>
+      var colId = {% if collection.id > 0 %}{{collection.id }}{% else %}0{% endif %};
+      var selectedViewData = 'data';
+      var isFilterRange = {%if settings.filter_price_type == 'checkbox'%}false{%else%}true{%endif%};
+      
+      // Handle sort options
+      function applySort(val) {
+          if (typeof doSearchSort === 'function') {
+              doSearchSort(val);
+          } else {
+              let url = new URL(window.location.href);
+              url.searchParams.set('sortby', val);
+              window.location.href = url.toString();
+          }
+          document.getElementById('sortDropMenu').classList.remove('show');
+      }
+      
+      // Close dropdown on click outside
+      document.addEventListener('click', function(e) {
+          if (!e.target.closest('#sortToggleBtn') && !e.target.closest('#sortDropMenu')) {
+              const menu = document.getElementById('sortDropMenu');
+              if (menu) menu.classList.remove('show');
+          }
+      });
+      
+      // Handle quick filter tag click
+      function applyFilterTag(label, filterVal) {
+          if (label === 'Tất cả') {
+              window.location.href = window.location.pathname;
+              return;
+          }
+          // Highlight active filter tag
+          document.querySelectorAll('.quick-filters button').forEach(btn => {
+              if (btn.innerText === label) {
+                  btn.style.background = 'var(--primary)';
+                  btn.style.color = 'white';
+                  btn.style.borderColor = 'var(--primary)';
+              } else {
+                  btn.style.background = 'var(--bg-white)';
+                  btn.style.color = 'var(--text-dark)';
+                  btn.style.borderColor = 'var(--border-color)';
+              }
+          });
+          
+          if (filterVal.includes('-')) {
+              // Trigger price filter
+              const [min, max] = filterVal.split('-');
+              const minInput = document.getElementById('filter-khoanggia-tu');
+              const maxInput = document.getElementById('filter-khoanggia-den');
+              const applyBtn = document.querySelector('.js-filter-pricerange');
+              if (minInput && maxInput && applyBtn) {
+                  minInput.value = min;
+                  maxInput.value = max;
+                  applyBtn.click();
+              } else {
+                  // Fallback
+                  let url = new URL(window.location.href);
+                  url.searchParams.set('price', filterVal);
+                  window.location.href = url.toString();
+              }
+          } else {
+              // Trigger text search/filter
+              let url = new URL(window.location.href);
+              url.searchParams.set('q', filterVal);
+              window.location.href = url.toString();
+          }
+      }
+      
+      // AI Search Functionality
+      (function() {
+          var aiSearchInput = document.getElementById('aiSearchInput');
+          var btn = document.getElementById('aiSearchBtn');
+          var drop = document.getElementById('aiResultsDropdown');
+          var loading = document.getElementById('aiLoading');
+          var list = document.getElementById('aiResultsList');
+          var header = document.getElementById('aiResultHeader');
+          var summary = document.getElementById('aiSummaryText');
+          var filteredList = document.getElementById('aiFilteredResults');
+          var timer = null;
+          
+          // Load actual products of the collection from global variable initialized inside paginate block
+          var navaProducts = window.navaProducts || [];
+          
+          function doAISearch() {
+              var q = aiSearchInput.value.trim();
+              if (!q) { drop.classList.remove('active'); return; }
+              drop.classList.add('active');
+              loading.style.display = 'block';
+              list.style.display = 'none';
+              header.textContent = '🤖 AI đang phân tích: "' + q + '"...';
+              
+              // Call the local PHP proxy calling Google Gemini API
+              fetch('/gemini_proxy.php', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                      query: q,
+                      products: navaProducts
+                  })
+              })
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Proxy returned HTTP ' + response.status);
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  loading.style.display = 'none';
+                  list.style.display = 'block';
+                  header.textContent = '✨ HOÀN TẤT PHÂN TÍCH & TÌM KIẾM AI';
+                  
+                  if (data.error) {
+                      throw new Error(data.message || 'Lỗi không xác định từ Proxy');
+                  }
+                  
+                  // Render AI Summary
+                  summary.innerHTML = '<strong>Phân tích nhu cầu:</strong> ' + (data.explanation || 'Không có phân tích.');
+                  
+                  // Render Recommended Products
+                  var recommendedIndexes = data.recommended_indexes || [];
+                  var html = '';
+                  
+                  if (recommendedIndexes.length === 0) {
+                      html = '<div style="padding: 15px 20px; text-align: center; color: #64748b;">Không tìm thấy sản phẩm nào phù hợp trực tiếp.</div>';
+                  } else {
+                      recommendedIndexes.forEach(index => {
+                          var prod = navaProducts[index];
+                          if (prod) {
+                              html += `
+                                  <a href="${prod.url}" class="ai-result-item">
+                                      <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
+                                      <div class="ai-result-info">
+                                          <h5>${prod.name}</h5>
+                                          <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prod.desc}</div>
+                                          <div class="ai-result-price">${prod.price}</div>
+                                      </div>
+                                  </a>
+                              `;
+                          }
+                      });
+                  }
+                  filteredList.innerHTML = html;
+              })
+              .catch(err => {
+                  console.warn('Gemini API search failed or key not configured. Using local fallback search.', err);
+                  // Run local keyword search fallback
+                  doLocalFallbackSearch(q);
+              });
+          }
+          
+          function doLocalFallbackSearch(q) {
+              loading.style.display = 'none';
+              list.style.display = 'block';
+              header.textContent = '🔍 TÌM KIẾM ĐỊA PHƯƠNG (FALLBACK)';
+              
+              var queryWords = q.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+              var matches = [];
+              
+              navaProducts.forEach((prod, index) => {
+                  var score = 0;
+                  var nameLower = prod.name.toLowerCase();
+                  var descLower = prod.desc.toLowerCase();
+                  
+                  if (queryWords.length === 0) {
+                      // Match whole string if short
+                      if (nameLower.includes(q.toLowerCase())) score += 10;
+                  } else {
+                      queryWords.forEach(word => {
+                          if (nameLower.indexOf(word) !== -1) score += 10;
+                          if (descLower.indexOf(word) !== -1) score += 2;
+                      });
+                  }
+                  
+                  if (score > 0) {
+                      matches.push({ index: index, score: score });
+                  }
+              });
+              
+              // Sort by match score descending
+              matches.sort((a, b) => b.score - a.score);
+              
+              summary.innerHTML = '<strong>Kết quả tìm kiếm:</strong> Hệ thống tìm thấy ' + matches.length + ' sản phẩm khớp với từ khóa <em>"' + q + '"</em> của bạn.';
+              
+              var html = '';
+              if (matches.length === 0) {
+                  html = '<div style="padding: 15px 20px; text-align: center; color: #64748b;">Không tìm thấy sản phẩm nào khớp với từ khóa của bạn.</div>';
+              } else {
+                  // Show top 3 matches
+                  matches.slice(0, 3).forEach(match => {
+                      var prod = navaProducts[match.index];
+                      html += `
+                          <a href="${prod.url}" class="ai-result-item">
+                              <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
+                              <div class="ai-result-info">
+                                  <h5>${prod.name}</h5>
+                                  <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prod.desc}</div>
+                                  <div class="ai-result-price">${prod.price}</div>
+                              </div>
+                          </a>
+                      `;
+                  });
+              }
+              filteredList.innerHTML = html;
+          }
+          
+          window.submitAISearchRedirect = function() {
+              var q = aiSearchInput.value.trim();
+              if(q) {
+                  window.location.href = '/search?q=' + encodeURIComponent(q);
+              }
+          };
+          
+          aiSearchInput.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doAISearch, 700); });
+          aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doAISearch(); } });
+          btn.addEventListener('click', function() { clearTimeout(timer); doAISearch(); });
+          document.addEventListener('click', function(e) { if (!document.getElementById('ai-search-widget').contains(e.target)) drop.classList.remove('active'); });
+      })();
+
+      window.toggleCollectionDesc = function() {
+          const container = document.getElementById('content-coll-container');
+          const btn = document.getElementById('btn-coll-show-more');
+          if (container && btn) {
+              if (container.classList.contains('expanded')) {
+                  container.classList.remove('expanded');
+                  btn.innerHTML = 'Xem thêm <i class="ph-bold ph-caret-down"></i>';
+                  container.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                  container.classList.add('expanded');
+                  btn.innerHTML = 'Thu gọn <i class="ph-bold ph-caret-up"></i>';
+              }
+          }
+      };
+  </script>

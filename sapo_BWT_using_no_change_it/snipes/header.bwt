@@ -1,0 +1,375 @@
+<div class="menubar w-100 text-right d-flex d-lg-none position-fixed align-items-center scroll_down {%if template != 'index'%}bg_no_index{%endif%}">
+	<a href="/" title="{{ store.name }}" class="mr-auto ml-2">
+		<img alt="{{ store.name }}" src="{{ 'logo_mobi.png' | asset_url | img_url: 'small' }}" class="img-fluid mb_logo" style="height:36px">
+	</a>
+	{%if template != 'cart'%}
+	<a class="mb_cart btn-cart position-relative d-flex flex-column justify-content-center align-items-center mr-2" title="{{settings.cartStringsTitle}}" href="/cart">
+		<span class="b_ico_Cart text-center d-flex justify-content-center align-items-center position-relative">
+			<svg width="25" height="25" >
+				<use href="#svg-cart-mb" />
+			</svg>
+			<span class="btn-cart-indicator position-absolute d-none font-weight-bold text-center text-white"></span>
+		</span>
+		<small class="font-weight-bold text-white mt-1">{{settings.cartStringsTitle }}</small>
+	</a>
+	{%else%}
+	<a class="mb_cart btn-cart position-relative d-flex flex-column justify-content-center align-items-center mr-2" title="{{settings.breadcrumb_loyalty}}" href="{{settings.url_loyalty}}">
+		<span class="b_ico_Cart text-center d-flex justify-content-center align-items-center position-relative">
+			<svg width="22" height="22" fill="#fff">
+				<use href="#svg-vip" />
+			</svg>
+		</span>
+		<small class="font-weight-bold text-white mt-1">{{settings.breadcrumb_loyalty}}</small>
+	</a>
+	{%endif%}
+</div>
+<div class="bg_head position-fixed w-100 scroll_down {%if template != 'index'%}d-none{%endif%}"></div>
+<div class="col-left position-fixed d-flex flex-column pt-2 pb-2">
+	<div class="container position-relative">
+		<div class="row align-items-center">
+			<div class="col-12 col-lg-2 d-none d-lg-flex justify-content-around">
+				<a href="/" title="{{ store.name }}" class="logo d-block">
+					<picture class="position-relative w-100 m-0 ratio1by1 d-block aspect">
+						<img alt="{{ shop.name }}" src="{{ 'logo.png' | asset_url }}" class="img-fluid d-block img position-absolute">
+					</picture>
+				</a> 
+				{%if settings.url_logo_head_1%}
+
+
+				<a href="{{settings.url_logo_head_1}}" title="{{ shop.name }}" class="logo d-block">
+					<picture class="position-relative w-100 m-0 ratio1by1 d-block aspect">
+						<img alt="{{ shop.name }}" src="{{'logo_head_1.png' | asset_url}}" class="img-fluid d-block img position-absolute">
+					</picture>
+				</a>
+
+
+				{%endif%}
+
+				{%if settings.url_logo_head_2%}
+
+
+				<a href="{{settings.url_logo_head_2}}" title="{{ shop.name }}" class="logo d-block">
+					<picture class="position-relative w-100 m-0 ratio1by1 d-block aspect">
+						<img alt="{{ shop.name }}" src="{{'logo_head_2.png' | asset_url}}" class="img-fluid d-block img position-absolute">
+					</picture>
+				</a>
+
+
+				{%endif%}
+			</div>
+			<div class="col-12 col-lg-10">
+				<div class="d-lg-flex align-items-center position-static pr-menu">
+					{%comment%} he thong chi nhanh cua hang
+					{%-if settings.use_store-%}
+					<div class="mr-2 mr-xl-3 level0 position-relative cls">
+						<a href="{{settings.store_url}}" title="{{settings.store_title}}" class="align-items-center d-flex head_svg p-1 pl-xl-2 pr-xl-2 rounded-10">
+							<small>{{settings.store_title}}
+								<b class="d-block">{{settings.store_title_bold}}</b>
+							</small>
+						</a>
+					</div>
+					{%-endif-%}
+					{%endcomment%}
+					<div class="search-block mr-3">
+						<form action="/search" method="get" class="js-search-form left-search position-relative mt-4 mt-lg-0 pt-2 pb-2 pt-lg-1 pb-lg-1">
+							<input type="text" id="js-search-form" placeholder="{{settings.search_placeholder}}" value="{{search.terms}}" maxlength="70" name="query" class="rounded-10 form-control pl-2 pl-lg-3 pr-5" autocomplete="off" required>
+							<input type="submit" class="border-0 position-absolute p-0">
+							{%-if settings.use_quick_search-%}
+							<div class="w-100 position-absolute rounded-10 searchResult px-2 d-none">
+								<div class="overflow-auto search-result-warpper">
+									<div class="d-block text-left h6 searchResult_products_text mt-2 p-2 rounded-10 text-white">{{settings.quick_search_heading}} (<span>0</span>)</div>
+									<div class="searchResult_products"></div>
+									{%if settings.use_quick_search_article == 'true'%}
+									<div class="d-block text-left h6 searchResult_articles_text mt-2 p-2 rounded-10 text-white">{{settings.quick_search_article_heading}} (<span>0</span>)</div>
+									<div class="searchResult_articles"></div>
+									{%endif%}
+									{%if settings.use_quick_search_page == 'true'%}
+									<div class="d-block text-left h6 searchResult_pages_text mt-2 p-2 rounded-10 text-white">{{settings.quick_search_page_heading}} (<span>0</span>)</div>
+									<div class="searchResult_pages"></div>
+									{%endif%}
+									<a href="/search?type=product&q=" class="btn border-0 rounded-0 w-100 my-0 all-result d-block mb-2 font-weight-bold">{{settings.quick_search_btn_text}}</a>
+								</div>
+							</div>
+							{%-endif-%}
+						</form>
+					</div>
+					{%comment%} trang chu | gioi thieu
+					{%-if settings.enable_mn_blog_head-%}
+					<div class="blog-block">
+						<div class="blog_head text-center d-flex align-items-center">
+							{% for link in linklists[settings.blog_head].links limit: 2 %}
+							<a class="pl-2 pl-xl-3 pr-2 pr-xl-3 d-inline-block position-relative" href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a>
+							{% endfor %}
+						</div>
+					</div>
+					{%-endif-%}
+					{%endcomment%}
+					{%comment%} hotline
+					<div class="info-block mr-3">
+						<a href="tel:{{settings.top_phone_number | remove: ' ' | remove: '.'}}" title="{{settings.top_phone_number}}" class="align-items-center d-flex">
+							<span class="play0 d-none d-xl-block">
+								<svg width="32" height="32">
+									<use href="#svg-phone" />
+								</svg>
+							</span>
+							<b><small>{{settings.txt_hotline}}</small> <br>{{settings.top_phone_number}}</b>
+						</a>
+					</div>
+					{%endcomment%}
+					<div class="navigation-bottom mt-auto mt-lg-0">
+						<div class="b_use d-none d-lg-flex align-items-stretch">
+							{% if customer %}
+							<div id="js-login-toggle" class="btn-account d-none d-lg-flex align-items-center justify-content-center mr-3">
+								<svg width="24" height="24" class="mr-2 d-none d-xl-block">
+									<use href="#svg-account"/>
+								</svg>
+								<div id="m_login" class="pop_login">
+									<a href="/account" class="item_login d-block font-weight-bold small" title="{{settings.account_order_greeting | append: ', '}}{{ customer.first_name }}">{{settings.account_order_greeting | append: ', '}}{{ customer.first_name }}</a>
+									<a href="/account/logout" class="item_login d-block font-weight-bold small" title="{{settings.account_logout}}">{{settings.account_logout}}</a>
+								</div>
+							</div>
+							<a class="p-1 btn-cart position-relative d-inline-flex head_svg justify-content-center align-items-center rounded-10" title="{{settings.cartStringsTitle}}" href="/cart">
+								<span class="b_ico_Cart text-center d-flex justify-content-center align-items-center position-relative">
+									<svg width="25" height="25" >
+										<use href="#svg-cart-mb" />
+									</svg>
+									<span class="btn-cart-indicator position-absolute d-none font-weight-bold text-center text-white"></span>
+								</span>
+								<small class="d-none d-xl-block ml-lg-1">{{settings.cartStringsTitle }}</small>
+							</a>
+							{% else %}
+							<div id="js-login-toggle" class="btn-account d-none d-lg-flex align-items-center justify-content-center mr-3">
+								<svg width="24" height="24" class="mr-2 d-none d-xl-block">
+									<use href="#svg-account"/>
+								</svg>
+								<div id="m_login" class="pop_login">
+									<a href="/account/login" class="item_login d-block font-weight-bold small" title="{{settings.login_text}}">{{settings.login_text}}</a>
+									{%comment%} nut dang ky
+									<a href="/account/register" class="item_login d-block font-weight-bold small" title="{{settings.register_text}}">{{settings.register_text}}</a>
+									{%endcomment%}
+								</div>
+							</div>
+							<a class="p-1 btn-cart position-relative d-inline-flex head_svg justify-content-center align-items-center rounded-10" title="{{settings.cartStringsTitle}}" href="/cart">
+								<span class="b_ico_Cart text-center d-flex justify-content-center align-items-center position-relative">
+									<svg width="25" height="25" >
+										<use href="#svg-cart-mb" />
+									</svg>
+									<span class="btn-cart-indicator position-absolute d-none font-weight-bold text-center text-white"></span>
+								</span>
+								<small class="d-none d-xl-block ml-lg-1">{{settings.cartStringsTitle }}</small>
+							</a>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="navigation-block mr-lg-auto d-none d-lg-block bg-white position-relative">
+	<div class="container">
+		<ul id="menu_pc" class="p-lg-0 m-0 list-unstyled position-static d-lg-flex justify-content-between">
+			<li class="main-menu py-2 position-relative">
+				<span class="icon">
+					<svg width="32" height="32">
+						<use href="#svg-mmenu"/>
+					</svg>
+				</span>
+				<div class="mega-x-menu position-absolute">
+					<ul class="bg-white list-unstyled m-0 x-box shadow">
+						{%-for link in linklists[settings.menu_x_site].links -%}
+						{%- if settings.display_megamenu_x -%}
+						{%- assign items_list = settings.megamenu_items_x | split:"," -%}
+						{%- endif -%}
+						{%- assign test = link.title | downcase -%}
+						<li class="level0 cls pt-1 pt-lg-2 pb-lg-2 pb-1 px-3 {% if settings.display_megamenu_x and items_list contains test %}mega{%else%}not-mega position-relative{%endif%}">
+							<a href="{{link.url}}" title="{{link.title}}" class="d-flex gap_5 align-items-center {%if linklists[link.alias] != null%}pr-3 js-checkMenu{%endif%} position-relative {%if link.active%}active{%endif%}">
+								{%-capture enaicond-%}enaiconx_{{forloop.index}}{%-endcapture-%}
+								{%-capture icond-%}icon_xmenu_{{forloop.index}}.png{%-endcapture-%}
+								{%if settings[enaicond]%}
+								<p class="icon-menu m-0">
+									<picture class="position-relative m-0 ratio1by1 d-block aspect">
+										<img class="lazy d-block img img-cover position-absolute" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ icond | asset_url | img_url: 'small'}}" alt="{{link.title}}">
+									</picture>
+								</p>
+								{%endif%}
+								<span>{{link.title}}</span>
+								{%-if linklists[link.alias] != null-%}
+								<i class="right_icon align-items-center justify-content-center position-absolute d-none d-lg-block mg"></i>
+								{%-endif-%}
+							</a>
+							{%-if linklists[link.alias] != null-%}
+							<i class="js-submenu down_icon d-flex align-items-center justify-content-center position-absolute d-lg-none"></i>
+							<ul class="lvdiv lv1 list-group p-0 list-unstyled text-left shadow-sm {% if settings.display_megamenu_x and items_list contains test %}pt-lg-2 p-3{%else%}py-lg-2 rounded-10{%endif%}">
+								{%-for childlink in linklists[link.alias].links-%}
+								<li class="{% unless settings.display_megamenu_x and items_list contains test %}no{%endunless%} level1 {% if settings.display_megamenu_x and items_list contains test %}mb-3{%else%}pr-lg-2 pb-lg-2 pl-2{%endif%} position-relative cls">
+									<a href="{{ childlink.url }}" class="py-1 py-lg-2 {% if settings.display_megamenu_x and items_list contains test %}{%else%}pr-5 pl-3{%endif%} position-relative {%if childlink.active%}active{%endif%} js-checkMenu" title="{{ childlink.title }}">
+										{{ childlink.title }}
+										{% unless settings.display_megamenu_x and items_list contains test %}
+										{%-if linklists[childlink.alias] != null-%}
+										<i class="right_icon align-items-center justify-content-center position-absolute d-none d-lg-flex mg"></i>
+										{%-endif-%}
+										{%endunless%}
+									</a>
+									{%-if linklists[childlink.alias] != null-%}test
+									<i class="js-submenu down_icon d-flex align-items-center justify-content-center position-absolute d-lg-none"></i>
+									<ul class="lv2 list-group p-0 list-unstyled rounded-10 {% unless settings.display_megamenu_x and items_list contains test %}py-lg-2{%endunless%}">
+										{%-for childlink2 in linklists[childlink.alias].links-%}
+										<li class="level2 {% if settings.display_megamenu_x and items_list contains test %}px-2 px-lg-0{%else%}px-2{%endif%}"> 
+											<a href="{{ childlink2.url }}" class="py-1 {% unless settings.display_megamenu_x and items_list contains test %}py-lg-2{%endunless%} position-relative {%if childlink2.active%}active{%endif%}" title="{{ childlink2.title }}">{{ childlink2.title }}</a>
+										</li>
+										{%-endfor-%}
+									</ul>
+									{%-endif-%}
+								</li>
+								{%-endfor-%}
+							</ul>
+							{%-endif-%}
+						</li>
+						{%-endfor-%}
+					</ul>
+				</div>
+			</li>
+			{%-for link in linklists[settings.menu_site].links -%}
+			{%- if settings.display_megamenu -%}
+			{%- assign items_list = settings.megamenu_items | split:"," -%}
+			{%- endif -%}
+			{%- assign test = link.title | downcase -%}
+			<li class="level0 cls pt-1 pt-lg-2 pb-lg-2 pb-1 h-auto {% if settings.display_megamenu and items_list contains test %}mega{%else%}not-mega{%endif%} position-relative">
+				<a href="{{link.url}}" title="{{link.title}}" class="h-100 d-inline-flex gap_5 align-items-center pl-lg-3 {%if linklists[link.alias] != null%}pr-4 js-checkMenu{%else%}pr-lg-3 pr-2{%endif%} position-relative {%if link.active%}active{%endif%}">
+					{%-capture enaicond-%}enaicond_{{forloop.index}}{%-endcapture-%}
+					{%-capture icond-%}icon_dmenu_{{forloop.index}}.png{%-endcapture-%}
+					{%if settings[enaicond]%}
+					<p class="icon-menu mx-auto m-0">
+						<picture class="position-relative m-0 ratio1by1 d-block aspect">
+							<img class="lazy d-block img img-cover position-absolute" src="{{'placeholder_1x1.png' | asset_url}}" data-src="{{ icond | asset_url | img_url: 'small'}}" alt="{{link.title}}">
+						</picture>
+					</p>
+					{%endif%}
+					<span>{{link.title}}</span>
+					{%-if linklists[link.alias] != null-%}
+					<i class="down_icon align-items-center justify-content-center position-absolute d-none d-lg-block mg"></i>
+					{%-endif-%}
+				</a>
+				{%-if linklists[link.alias] != null-%}
+				<i class="js-submenu down_icon d-flex align-items-center justify-content-center position-absolute d-lg-none"></i>
+				{% if settings.display_megamenu and items_list contains test %}<div class="lvdiv lv1">{%endif%}
+				<ul class="{% if settings.display_megamenu and items_list contains test %}container d-flex flex-wrap  py-3{%else%}list-group lvdiv lv1 p-0 py-lg-2{%endif%} list-unstyled rounded-10 text-left">
+					{%-for childlink in linklists[link.alias].links-%}
+					<li class="{% unless settings.display_megamenu and items_list contains test %}no{%endunless%} level1 pr-lg-2 {% if settings.display_megamenu and items_list contains test %}pb-lg-2{%endif%} pl-2 position-relative cls"
+						style="--sttlv1: {{forloop.index}};"
+						>
+						<a href="{{ childlink.url }}" class="py-1 py-lg-2 {% unless settings.display_megamenu and items_list contains test %}pr-5 pl-3{%endunless%} position-relative {%if childlink.active%}active{%endif%} js-checkMenu" title="{{ childlink.title }}">
+							{{ childlink.title }}
+							{% unless settings.display_megamenu and items_list contains test %}
+							{%-if linklists[childlink.alias] != null-%}
+							<i class="right_icon align-items-center justify-content-center position-absolute d-none d-lg-flex mg"></i>
+							{%-endif-%}
+							{%endunless%}
+						</a>
+						{%-if linklists[childlink.alias] != null-%}
+						<i class="js-submenu down_icon d-flex align-items-center justify-content-center position-absolute d-lg-none"></i>
+						<ul class="lv2 list-group p-0 list-unstyled rounded-10 {% unless settings.display_megamenu and items_list contains test %}py-lg-2{%endunless%}">
+							{%-for childlink2 in linklists[childlink.alias].links-%}
+							<li class="level2 {% if settings.display_megamenu and items_list contains test %}px-2 px-lg-0{%else%}px-2{%endif%}" style="--sttlv2: {{forloop.index}};"> 
+								<a href="{{ childlink2.url }}" class="py-1 {% unless settings.display_megamenu and items_list contains test %}py-lg-2{%endunless%} position-relative {%if childlink2.active%}active{%endif%}" title="{{ childlink2.title }}">{{ childlink2.title }}</a>
+							</li>
+							{%-endfor-%}
+						</ul>
+						{%-endif-%}
+					</li>
+					{%-endfor-%}
+				</ul>
+				{% if settings.display_megamenu and items_list contains test %}</div>{%endif%}
+				{%-endif-%}
+			</li>
+			{%-endfor-%}
+		</ul>
+	</div>
+</div>
+{%include 'menu_mobile'%}
+{%if settings.menu_long_scroll%}
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		let vW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+		if (vW > 991) {
+			const slider = document.getElementById('menu_pc');
+			const dropDownMenus = document.querySelectorAll('.lvdiv');
+			let isDown = false;
+			let startX;
+			let scrollLeft;
+			let dragDistance = 0;
+			let shouldScroll = slider.offsetWidth < slider.scrollWidth;
+
+			slider.querySelectorAll("a").forEach(el => {
+				el.addEventListener("click", function (e) {
+					if (dragDistance > 5) {
+						e.preventDefault();
+						e.stopImmediatePropagation();
+					}
+				});
+			});
+
+			const updateDropdownPosition = () => {
+				slider.querySelectorAll('.not-mega').forEach(function (item) {
+					item.querySelectorAll('.lvdiv').forEach(el => {
+						const paddingLeft = parseInt(getComputedStyle(item).paddingLeft, 10) || 0;
+						el.style.left = (item.getBoundingClientRect().left - slider.getBoundingClientRect().left + paddingLeft) + 'px';
+					});
+				});
+			};
+
+			slider.addEventListener("mousedown", e => {
+				isDown = true;
+				slider.classList.add("active");
+				startX = e.pageX - slider.offsetLeft;
+				scrollLeft = slider.scrollLeft;
+				dragDistance = 0;
+			});
+
+			slider.addEventListener("mouseleave", () => {
+				isDown = false;
+				slider.classList.remove("active");
+			});
+
+			slider.addEventListener("mouseup", () => {
+				isDown = false;
+				slider.classList.remove("active");
+				updateDropdownPosition();
+
+				setTimeout(() => { dragDistance = 0; }, 100);
+			});
+
+			slider.addEventListener("mousemove", e => {
+				if (!isDown) return;
+				e.preventDefault();
+				const x = e.pageX - slider.offsetLeft;
+				const walk = (x - startX) * 2;
+				dragDistance += Math.abs(walk);
+				slider.scrollLeft = scrollLeft - walk;
+				updateDropdownPosition();
+			});
+
+			slider.addEventListener("wheel", (e) => {
+				if (!shouldScroll || e.target.closest('.mega .lvdiv')) return;
+
+				e.preventDefault();
+				const delta = e.wheelDelta / 120 || -e.deltaY / 3;
+				const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+
+				if (delta < 0 && slider.scrollLeft === maxScrollLeft) {
+					e.stopPropagation();
+					window.scrollBy({ top: 50, behavior: 'smooth' });
+				} else if (delta > 0 && slider.scrollLeft === 0) {
+					e.stopPropagation();
+					window.scrollBy({ top: -50, behavior: 'smooth' });
+				} else {
+					slider.scrollLeft -= delta * 30;
+					dragDistance = 10;
+				}
+				updateDropdownPosition();
+			});
+		}
+	});
+</script>
+{%endif%}

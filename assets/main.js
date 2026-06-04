@@ -955,7 +955,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cartItemsList.innerHTML = '';
         cartFooter.style.display = 'none';
 
-        fetch('https://navastore.vn/cart.js')
+        fetch('/cart.js')
             .then(res => res.json())
             .then(cart => {
                 updateCartUI(cart);
@@ -969,7 +969,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial check on page load if token exists in localStorage
     if (localStorage.getItem('cart')) {
-        fetch('https://navastore.vn/cart.js')
+        fetch('/cart.js')
             .then(res => res.json())
             .then(cart => {
                 if (cart && cart.item_count > 0 && cartCountBadge) {
