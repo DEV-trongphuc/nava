@@ -34,7 +34,8 @@
         }
         @media (max-width: 991px) {
             .breadcrumbs {
-                margin-top: -58px !important;
+                margin-top: 15px !important;
+                margin-bottom: 15px !important;
             }
         }
         .contentWarp .container.nava-product-container {
@@ -91,6 +92,15 @@
             cursor: zoom-in;
         }
         .main-image-container img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        @media (max-width: 767px) {
+            .main-image-container {
+                padding: 0 !important;
+            }
+            .main-image-container img {
+                max-width: 100% !important;
+                max-height: 100% !important;
+            }
+        }
         
         .thumbnail-list { 
             display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth;
@@ -127,10 +137,20 @@
             border-top: 1px solid var(--border-color) !important; padding: 12px 20px !important;
             display: none; align-items: center; justify-content: space-between; z-index: 9999 !important;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important; box-sizing: border-box !important;
+            transform: translateY(120%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1) !important;
+        }
+        .mobile-bottom-buybar.active {
+            transform: translateY(0) !important;
         }
         @media (max-width: 768px) {
             .mobile-bottom-buybar { display: flex !important; }
             body { padding-bottom: 80px !important; }
+        }
+        @media (max-width: 991px) {
+            .mew_mobi_bar {
+                display: none !important;
+            }
         }
         
         /* Gallery Dots styling */
@@ -246,8 +266,9 @@
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .desc-content-wrapper.expanded {
-            max-height: 10000px;
+        .desc-content-wrapper.expanded,
+        #desc-wrapper.expanded {
+            max-height: none !important;
         }
         .desc-overlay {
             position: absolute;
@@ -1571,11 +1592,16 @@
 <!-- Mobile Bottom Buy Bar -->
 <div class="mobile-bottom-buybar">
     {%- if product.available -%}
-    <div style="display: flex; flex-direction: column;">
-        <span style="font-size: 0.72rem; color: var(--text-gray); margin-bottom: 2px;">Giá ưu đãi</span>
-        <span id="sticky-price" style="font-size: 1.15rem; font-weight: 900; color: var(--primary);">{{selected_variant.price | money }}</span>
+    <div class="mobile-buybar-left" style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;">
+        <div class="buybar-thumb-wrap" style="width: 44px; height: 44px; background: #fff; border-radius: 8px; border: 1px solid var(--border-color); padding: 4px; flex-shrink: 0;">
+            <img id="sticky-avatar" src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.name | escape }}" style="width: 100%; height: 100%; object-fit: contain;">
+        </div>
+        <div style="display: flex; flex-direction: column; min-width: 0; flex: 1;">
+            <span id="sticky-title" style="font-size: 0.72rem; color: var(--text-gray); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;">{{ product.name }}</span>
+            <span id="sticky-price" style="font-size: 1.05rem; font-weight: 900; color: var(--primary); margin-top: 1px;">{{selected_variant.price | money }}</span>
+        </div>
     </div>
-    <div style="display: flex; gap: 8px;">
+    <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
         <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="ph-bold ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
         <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
     </div>
@@ -1967,6 +1993,7 @@
             display.addEventListener('click', function(e) {
                 if (window.innerWidth >= 992 && !wrapper.closest('#nava-bottom-sheet')) return;
                 e.stopPropagation();
+                wrapper.classList.remove('closed');
                 const isActive = wrapper.classList.contains('active');
                 
                 document.querySelectorAll('.nava-custom-select-wrapper').forEach(w => {
@@ -2129,6 +2156,48 @@
         }
     }
 
+    function toggleStickyBar() {
+        const stickyBar = document.querySelector('.mobile-bottom-buybar');
+        if (!stickyBar) return;
+        
+        // Hide mobile sticky bottom bar when bottom sheet is open
+        if (typeof isBsOpen !== 'undefined' && isBsOpen) {
+            stickyBar.classList.remove('active');
+            return;
+        }
+        
+        let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        
+        // Check master wrapper scroll
+        const wrapper = document.getElementById('nava-master-wrapper');
+        if (wrapper) {
+            scrollY = Math.max(scrollY, wrapper.scrollTop);
+        }
+        
+        // Determine threshold: past the price element
+        const priceEl = document.getElementById('selected-variant-price');
+        if (priceEl) {
+            const rect = priceEl.getBoundingClientRect();
+            // Since getBoundingClientRect is relative to the viewport:
+            // if rect.bottom is less than 60px (or similar header height), it is scrolled past the top of viewport.
+            const triggerShow = rect.bottom < 60;
+            if (triggerShow) {
+                stickyBar.classList.add('active');
+            } else {
+                stickyBar.classList.remove('active');
+            }
+            return;
+        }
+        
+        // Fallback threshold
+        const threshold = window.innerWidth <= 768 ? 200 : 600;
+        if (scrollY > threshold) {
+            stickyBar.classList.add('active');
+        } else {
+            stickyBar.classList.remove('active');
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         // Handle bottom buy bar events
         document.addEventListener('click', function(e) {
@@ -2153,6 +2222,15 @@
                 }
             }
         });
+        
+        // Register scroll events for mobile sticky buybar
+        const scrollContainer = document.getElementById('nava-master-wrapper') || window;
+        scrollContainer.addEventListener('scroll', toggleStickyBar, { passive: true });
+        window.addEventListener('scroll', toggleStickyBar, true);
+        
+        // Initial check
+        setTimeout(toggleStickyBar, 100);
+        
         initNavaProductEnforcement();
     });
 
@@ -2766,13 +2844,35 @@ function syncSwatches() {
         } else if (priceVal === 0) {
             mobileBuyBar.innerHTML = `<a href="tel:0972178527" class="bar-buy-now text-center d-flex align-items-center justify-content-center font-weight-bold" style="width: 100%; height: 44px; background: var(--primary); border: none; border-radius: 8px; color: white !important; font-size: 0.88rem; text-decoration: none; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">LIÊN HỆ: 0972.178.527</a>`;
         } else {
+            let optString = '';
+            const selectEl = document.querySelector('.box-variant #product-selectors');
+            if (selectEl) {
+                const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+                if (activeOption) {
+                    const textParts = activeOption.text.split('-');
+                    let titlePart = textParts[0].trim();
+                    titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+                    const opts = titlePart.split('/').map(v => v.trim()).filter(v => v !== '' && v.toUpperCase() !== 'DEFAULT TITLE');
+                    if (opts.length > 0) {
+                        optString = ' - ' + opts.join(', ');
+                    }
+                }
+            }
+            const activeImgEl = document.querySelector('.product-image-block img, .gallery-item img, #product-gallery img, .thumbnail-item img, .main-image-wrap img');
+            const imgSrc = activeImgEl ? activeImgEl.src : (window.currentProductData?.img || '');
             const formattedPrice = formatVietnameseCurrency(priceVal);
+            
             mobileBuyBar.innerHTML = `
-                <div style="display: flex; flex-direction: column;">
-                    <span style="font-size: 0.72rem; color: var(--text-gray); margin-bottom: 2px;">Giá ưu đãi</span>
-                    <span id="sticky-price" style="font-size: 1.15rem; font-weight: 900; color: var(--primary);">${formattedPrice}</span>
+                <div class="mobile-buybar-left" style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;">
+                    <div class="buybar-thumb-wrap" style="width: 44px; height: 44px; background: #fff; border-radius: 8px; border: 1px solid var(--border-color); padding: 4px; flex-shrink: 0;">
+                        <img id="sticky-avatar" src="${imgSrc}" alt="${(window.currentProductData?.name || '').replace(/"/g, '&quot;')}" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; min-width: 0; flex: 1;">
+                        <span id="sticky-title" style="font-size: 0.72rem; color: var(--text-gray); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;">${window.currentProductData?.name || ''}${optString}</span>
+                        <span id="sticky-price" style="font-size: 1.05rem; font-weight: 900; color: var(--primary); margin-top: 1px;">${formattedPrice}</span>
+                    </div>
                 </div>
-                <div style="display: flex; gap: 8px;">
+                <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
                     <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="ph-bold ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
                     <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
                 </div>
@@ -3006,13 +3106,7 @@ function openBottomSheet() {
         bs.classList.add('open');
         document.body.style.overflow = 'hidden';
         
-        // Automatically open/expand the dropdown lists on mobile bottom sheet
-        setTimeout(() => {
-            const bsDropdowns = bs.querySelectorAll('.nava-dropdown-wrapper, .nava-custom-select-wrapper, .custom-select-wrapper');
-            bsDropdowns.forEach(w => {
-                w.classList.add('active');
-            });
-        }, 100);
+        // Auto-open option dropdowns disabled to avoid cluttering mobile UI
         
         // Trigger glow animation for options
         const displays = bs.querySelectorAll('.nava-custom-select-display, .swatch, .nava-dropdown-display');
@@ -3034,9 +3128,12 @@ function closeBottomSheet() {
         overlay.style.opacity = '0';
         bs.classList.remove('open');
         
-        // Show sticky bar again
+        // Show sticky bar again if scrolled past threshold
         if (stickyBar) {
-            stickyBar.style.setProperty('transform', 'translateY(0)', 'important');
+            stickyBar.style.removeProperty('transform');
+            if (typeof toggleStickyBar === 'function') {
+                toggleStickyBar();
+            }
         }
         
         setTimeout(() => {
@@ -3383,6 +3480,15 @@ function initNavaProductEnforcement() {
             if (wrapper) {
                 wrapper.classList.add('closed');
                 wrapper.classList.remove('active'); // also remove active just in case
+            }
+        }
+        
+        // Fix: Remove closed class when clicking on a dropdown display box to reopen it
+        const display = e.target.closest('.custom-select-display, .nava-custom-select-display, .nava-dropdown-display');
+        if (display) {
+            const wrapper = display.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+            if (wrapper) {
+                wrapper.classList.remove('closed');
             }
         }
     });

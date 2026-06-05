@@ -147,7 +147,9 @@
             </p>
         </div>
         <div style="position: relative; z-index: 2; opacity: 0.9;" class="hero-image-wrap">
-            {%- if collection.image -%}
+            {%- if collection.alias == 'asus' or collection.name == 'ASUS' -%}
+                <img src="{{ 'asus.png' | asset_url }}" alt="{{ collection.name }}" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
+            {%- elsif collection.image -%}
                 <img src="{{ collection.image.src | img_url: 'large' }}" alt="{{ collection.name }}" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
             {%- else -%}
                 <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" alt="{{ collection.name }}" style="max-width: 250px; max-height: 80px; object-fit: contain; filter: drop-shadow(0 10px 20px rgba(14,165,233,0.2));">
@@ -532,10 +534,12 @@
       document.addEventListener('DOMContentLoaded', function() {
           const url = new URL(window.location.href);
           
-          // Dynamic brand logo replacement in banner if filtered by vendor
+          // Dynamic brand logo replacement in banner if filtered by vendor or if collection is asus
           const vendorQuery = url.searchParams.get('vendor');
-          if (vendorQuery) {
-              const vendorLower = vendorQuery.toLowerCase().trim();
+          const isAsusCollection = {% if collection.alias == 'asus' or collection.name == 'ASUS' %}true{% else %}false{% endif %};
+          const activeVendor = vendorQuery || (isAsusCollection ? 'asus' : null);
+          if (activeVendor) {
+              const vendorLower = activeVendor.toLowerCase().trim();
               const brandLogos = {
                   'asus': "{{ 'asus.png' | asset_url }}",
                   'minisforum': "https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957",
@@ -797,9 +801,61 @@
                   filteredList.innerHTML = html;
               })
               .catch(err => {
-                  console.warn('Gemini API search failed or key not configured. Redirecting to standard search page.', err);
-                  drop.classList.remove('active');
-                  window.location.href = '/search?q=' + encodeURIComponent(q);
+                  console.warn('Gemini API search failed or key not configured. Performing standard search fallback without redirecting.', err);
+                  // fallback to standard search parsing from HTML, showing it in the dropdown list
+                  fetch('/search?q=' + encodeURIComponent(q) + '&type=product')
+                  .then(response => response.text())
+                  .then(html => {
+                      loading.style.display = 'none';
+                      list.style.display = 'block';
+                      header.textContent = '🔍 KẾT QUẢ TÌM KIẾM';
+                      
+                      const parser = new DOMParser();
+                      const doc = parser.parseFromString(html, 'text/html');
+                      const cards = doc.querySelectorAll('.product-card');
+                      
+                      summary.innerHTML = '<strong>Tìm kiếm hệ thống:</strong> Tìm thấy ' + cards.length + ' sản phẩm phù hợp cho từ khóa <em>"' + q + '"</em>.';
+                      
+                      let htmlContent = '';
+                      if (cards.length === 0) {
+                          htmlContent = '<div style="padding: 15px 20px; text-align: center; color: #64748b;">Không tìm thấy sản phẩm phù hợp.</div>';
+                      } else {
+                          const limit = Math.min(cards.length, 5);
+                          for (let i = 0; i < limit; i++) {
+                              const card = cards[i];
+                              const titleEl = card.querySelector('.card-title');
+                              const imgEl = card.querySelector('.product-img');
+                              const priceEl = card.querySelector('.card-content span[style*="font-weight: 800"]') || card.querySelector('.card-content span:last-child');
+                              
+                              const title = titleEl ? titleEl.textContent.trim() : 'Sản phẩm';
+                              const img = imgEl ? imgEl.getAttribute('src') : 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                              const price = priceEl ? priceEl.textContent.trim() : 'Liên hệ';
+                              
+                              const onclickAttr = card.getAttribute('onclick') || '';
+                              const urlMatch = onclickAttr.match(/href='([^']+)'/) || onclickAttr.match(/href="([^"]+)"/);
+                              const url = urlMatch ? urlMatch[1] : '#';
+                              
+                              htmlContent += `
+                                  <a href="${url}" class="ai-result-item">
+                                      <img src="${img}" class="ai-result-img" alt="${title.replace(/"/g, '&quot;')}">
+                                      <div class="ai-result-info">
+                                          <h5>${title}</h5>
+                                          <div class="ai-result-price">${price}</div>
+                                      </div>
+                                  </a>
+                              `;
+                          }
+                      }
+                      filteredList.innerHTML = htmlContent;
+                  })
+                  .catch(fallbackErr => {
+                      console.error('Fallback search also failed:', fallbackErr);
+                      loading.style.display = 'none';
+                      list.style.display = 'block';
+                      header.textContent = '❌ LỖI TÌM KIẾM';
+                      summary.innerHTML = '<strong>Lỗi:</strong> Không thể tải kết quả tìm kiếm lúc này.';
+                      filteredList.innerHTML = '';
+                  });
               });
           }
           

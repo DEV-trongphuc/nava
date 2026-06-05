@@ -118,7 +118,55 @@
                     {%- unless template contains 'index' -%}
                     {%- include 'footer' -%}
                     {%- endunless -%}
+                
+                <!-- Mobile Sidebar Drawer -->
+                <div class="sidebar-overlay"></div>
+                <div class="sidebar-drawer">
+                    <div class="sidebar-header"
+                        style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 20px; border-bottom: 1px solid var(--border-color);">
+                        <div class="logo" style="flex-shrink: 0;">
+                            <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1775454528082"
+                                alt="NAVA" class="header-logo-img" style="height: 35px; width: auto;" loading="lazy"
+                                decoding="async" width="140" height="35">
+                        </div>
+                        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Chuyển đổi giao diện" style="margin-right: auto; margin-left: 20px;">
+                            <div class="toggle-track">
+                                <div class="toggle-thumb">
+                                    <i class="ph-fill ph-sun icon-sun"></i>
+                                    <i class="ph-fill ph-moon icon-moon"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <button class="sidebar-close" aria-label="Đóng menu"
+                            style="flex-shrink: 0; background: none; border: none; font-size: 1.5rem; color: var(--text-gray); padding: 0;"><i
+                                class="ph ph-x"></i></button>
+                    </div>
+                    <div class="sidebar-content">
+                        <ul class="mobile-nav">
+                            <!-- Content will be cloned or manually added here -->
+                        </ul>
+                    </div>
+                    <div class="sidebar-footer"
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-top: 1px solid var(--border-color);">
+                        <div>
+                            <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: var(--text-gray);">Hotline: <strong>0972 178 527</strong></p>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-gray);">Email: info@navatek.vn</p>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://zalo.me/3182872871563786385" target="_blank" title="Chat Zalo" aria-label="Chat Zalo"
+                                style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
+                                <img src="https://zalo-chat-static.zadn.vn/v1/favicon-96x96.v1.png" alt="Zalo" width="40" height="40"
+                                    style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
+                            </a>
+                            <a href="https://m.me/navastore" target="_blank" title="Messenger" aria-label="Messenger"
+                                style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
+                                <img src="https://static.xx.fbcdn.net/rsrc.php/yb/r/M8rOX7S5AN3.svg" alt="Messenger" width="40" height="40"
+                                    style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
+                            </a>
+                        </div>
+                    </div>
                 </div>
+                <div class="toast-container"></div>
             </div>
             <div onclick="scrollToTop(100);" class="back_top d-flex position-fixed justify-content-center align-items-center" role="button" aria-label="Lên đầu trang">
                 <img alt="" aria-hidden="true" src="{{'to-top-arrow2.png' | asset_url}}" width="17" height="9">
@@ -126,7 +174,6 @@
             {%-if template != 'product'-%}
             {%-include 'mew_mobi_bar'-%}
             {%-endif-%}
-            <div class="toast-container"></div>
             {%-include 'footer_scripts'-%}
             {%-include 'svg-cache'-%}
         </div>
@@ -489,18 +536,24 @@
                 }
             });
 
-            // Relocation fallback helper (ensures modals and social bubble are placed correctly inside the visible content wrapper)
+            // Relocation fallback helper (ensures modals, sidebars, and social bubble are placed correctly inside the visible content wrapper)
             function forceRelocateCompareAndSocial() {
                 const cb = document.getElementById('compare-bar');
                 const cm = document.getElementById('compare-modal');
                 const csm = document.getElementById('compare-select-modal');
                 const social = document.querySelector('.floating-social-wrapper');
+                const sbd = document.querySelector('.sidebar-drawer');
+                const sbo = document.querySelector('.sidebar-overlay');
+                const toast = document.querySelector('.toast-container');
                 const targetParent = document.getElementById('nava-master-wrapper') || document.body;
                 if (targetParent) {
                     if (cb && cb.parentNode !== targetParent) targetParent.appendChild(cb);
                     if (cm && cm.parentNode !== targetParent) targetParent.appendChild(cm);
                     if (csm && csm.parentNode !== targetParent) targetParent.appendChild(csm);
                     if (social && social.parentNode !== targetParent) targetParent.appendChild(social);
+                    if (sbd && sbd.parentNode !== targetParent) targetParent.appendChild(sbd);
+                    if (sbo && sbo.parentNode !== targetParent) targetParent.appendChild(sbo);
+                    if (toast && toast.parentNode !== targetParent) targetParent.appendChild(toast);
                 }
             }
             forceRelocateCompareAndSocial();
