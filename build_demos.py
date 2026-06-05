@@ -2093,7 +2093,7 @@ def build_product(base_dir, header_part, footer_part):
                 .sp-item i { font-size: 1.2rem; color: var(--primary); background: #fff; padding: 6px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
                 
                 @media (max-width: 768px) {
-                    .prod-title { font-size: 1.4rem; margin-bottom: 12px; }
+                    .prod-title { font-size: 1.15rem !important; margin-bottom: 12px; }
                     .prod-price { font-size: 1.4rem; }
                     .prod-price-wrap { margin-bottom: 20px; padding-bottom: 16px; flex-direction: column; gap: 4px; border-bottom: none; }
                     
@@ -2463,7 +2463,7 @@ def build_product(base_dir, header_part, footer_part):
                         color: #fff;
                     }
                     
-                    .specs-column { background: #f8fafc; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; }
+                    .specs-column { background: #ffffff; border-radius: 16px; padding: 24px; border: 1px solid #e2e8f0; }
                     .nava-spec-grid { display: flex; flex-direction: column; }
                     .nava-spec-row { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
                     .nava-spec-row:last-child { border-bottom: none; }
@@ -2472,7 +2472,26 @@ def build_product(base_dir, header_part, footer_part):
                     @media (min-width: 992px) {
                         .product-details-grid { flex-direction: row; align-items: flex-start; gap: 40px; }
                         .desc-column { flex: 1; min-width: 0; }
-                        .specs-column { width: 380px; flex-shrink: 0; position: sticky; top: 130px; }
+                        .specs-column { width: 380px; flex-shrink: 0; position: sticky; top: 160px; }
+                        .nava-spec-grid {
+                            max-height: calc(100vh - 280px);
+                            overflow-y: auto;
+                            padding-right: 8px;
+                        }
+                        /* Scrollbar styling */
+                        .nava-spec-grid::-webkit-scrollbar {
+                            width: 6px;
+                        }
+                        .nava-spec-grid::-webkit-scrollbar-track {
+                            background: transparent;
+                        }
+                        .nava-spec-grid::-webkit-scrollbar-thumb {
+                            background: #cbd5e1;
+                            border-radius: 3px;
+                        }
+                        .nava-spec-grid::-webkit-scrollbar-thumb:hover {
+                            background: #94a3b8;
+                        }
                     }
                 </style>
                 

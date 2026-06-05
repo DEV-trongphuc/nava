@@ -1,0 +1,26 @@
+{%-assign h6keyword = keyword | default: 'Thông số kỹ thuật' | handleize-%}
+{%-assign description_parts = product_specs | split: "<h6>"-%}
+{%-for part in description_parts-%}
+{%-assign tab_title = part | split: "</h6>" | first | downcase | handleize-%}
+{%-assign fp = part | append: " " | split: "</h6>" | last-%}
+{%-assign p = part | append: " " | split: "</h6>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines-%}
+{%-if p != "" or fp contains "<img" or fp contains "<iframe"-%}
+{%-if forloop.index0 != 0 and tab_title == h6keyword-%}
+<div class="rounded-10 modal-open spec-tables">
+	<div class="border rounded-10 small modal-open">
+		<h3 class="special-content_title font-weight-bold d-block w-100 mb-0 border-bottom">{{settings.compare_keyword}}</h3>
+		<div class="special-content {%if forloop.index < 3%}h4-none{%endif%}">
+			{{ part | split: "</h6>" | last | replace: "<div", "<span" | replace: "</div", "</span" }} 
+		</div>
+	</div>
+	{%comment%}
+	<a href="javascript:;" title="{{settings.view_table}}" class="view_table border rounded-10 modal-open d-block p-2 small mb-2 mt-3 text-center font-weight-bold" data-bs-toggle="modal" data-bs-target="#specModal">
+		{{settings.view_table}}
+	</a>
+	{%endcomment%}
+</div>
+{%-assign specs = true-%}
+{%-break-%}
+{%-endif-%}
+{%-endif-%}
+{%-endfor-%}

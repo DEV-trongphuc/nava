@@ -1,0 +1,47 @@
+{%-layout none-%}
+{%-assign h6keyword = settings.compare_keyword | default: 'Thông số kỹ thuật' | handleize-%}
+{
+	"infor": {
+		"id": "{{product.id}}",
+		"name": {{product.name | json}},
+		"url": "{{product.url}}",
+		"thumbnail": "{{ product.featured_image.src | img_url: 'medium' }}",
+		"type": "{{ product.type | default: settings.other_updating}}",
+		"vendor": "{{ product.vendor | default: settings.other_updating}}",
+		"price": "<b class=text-rose-600>{%if product.available%}{%if product.price_varies%}{%if product.price_min != 0 %}{{product.price_min | money}}{%else%}{{settings.noPrice}}{%endif%}{%else%}{%if product.variants[0].price == 0 %}{{settings.noPrice}}{%else%}{{product.variants[0].price | money}}{%endif%}{%endif%}{%else%}{{settings.soldOut}}{%endif%}</b>"
+	},
+	"spec":{
+		{%-assign description_parts = product.content | strip_newlines | split: "<h6>"-%}
+		{%-for part in description_parts-%}
+		{%-assign tab_title = part | split: "</h6>" | first | downcase | handleize-%}
+		{%-assign fp = part | append: " " | split: "</h6>" | last-%}
+		{%-assign p = part | append: " " | split: "</h6>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines-%}
+		{%-if p != "" or fp contains "<img" or fp contains "<iframe"-%}
+		{%-if forloop.index0 != 0 and tab_title == h6keyword-%}
+			{%-assign allSpec = part | split: "</h6>" | last | split: "<h4>"-%}
+			{%-for partSpec in allSpec-%}
+				{%-assign textSpec = partSpec | split: "</h4>" | first | strip-%}
+				{%-if forloop.index0 != 0-%}
+					"{{forloop.index0}}": {
+						"alias": "{{textSpec | handleize}}",
+						"name": {{textSpec | json}},
+						"content": [
+							{%-assign detailSpecs = partSpec | split: "</h4>" | last | split: "<tr>"-%} 
+							{%-for detailSpec in detailSpecs-%}
+								{%-if forloop.index0 != 0-%}
+									{
+										{%-assign specs = detailSpec | split: "</tr>" | first  | strip_newlines | split: "</td>	<td>" -%}
+										"alias": "{{specs | first | remove: "<td>" | remove: "</td>" | strip_html | json | replace: "\\n", '' | replace: "\\t", '' | replace: "\t", '' | replace: "\n", '' | handleize}}",
+										"name": {{specs | first | remove: "<td>" | remove: "</td>" | strip_html | json | replace: "\\n", '' | replace: "\\t", '' | replace: "\t", '' | replace: "\n", ''}},
+										"infor": {{specs | last | remove: "<td>" | remove: "</td>" | strip | json }}
+									}{% unless forloop.last %},{% endunless %}
+								{%-endif-%}
+							{%-endfor-%}]}{% unless forloop.last %},{% endunless %}
+				{%-endif-%}
+			{%-endfor-%}
+			{%-break-%}
+		{%-endif-%}
+		{%-endif-%}
+		{%-endfor-%}
+	}
+}

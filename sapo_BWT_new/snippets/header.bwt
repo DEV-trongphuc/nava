@@ -31,7 +31,7 @@
                 </a>
                 {% endif %}
 
-                <a href="/cart" class="action-item cart-btn" id="header-cart-btn">
+                <a href="/cart" class="action-item cart-btn" id="header-cart-btn" onclick="window.location.href='/cart'; event.stopPropagation();">
                     <div class="cart-icon-wrapper" style="position: relative;">
                         <i class="ph ph-shopping-cart"></i>
                         <span class="cart-count-badge" id="cart-count-badge" {% if cart.item_count > 0 %}style="display: flex;"{% else %}style="display: none;"{% endif %}>{{ cart.item_count }}</span>

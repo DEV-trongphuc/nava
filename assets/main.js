@@ -2,43 +2,45 @@
 // NAVA PRE-LOAD INTERCEPTORS & FALLBACKS (PAGESPEED INSIGHTS OPTIMIZATION)
 // =========================================================================
 
-// 1. Suppress platform-level and third-party warnings from Console logs
-const originalConsoleError = console.error;
-console.error = function (...args) {
-    const msg = args.join(' ');
-    if (msg.includes('FedCM') || msg.includes('GoogleOneTap') || msg.includes('RecentProducts') || msg.includes('recentCompare')) {
-        return;
-    }
-    originalConsoleError.apply(console, args);
-};
+(function() {
+    // 1. Suppress platform-level and third-party warnings from Console logs
+    const originalConsoleError = console.error;
+    console.error = function (...args) {
+        const msg = args.join(' ');
+        if (msg.includes('FedCM') || msg.includes('GoogleOneTap') || msg.includes('RecentProducts') || msg.includes('recentCompare')) {
+            return;
+        }
+        originalConsoleError.apply(console, args);
+    };
 
-// 2. Intercept iframe creation to block Google One Tap dynamic injection (fixes cookie warnings and network DNS errors)
-const originalCreateElement = document.createElement;
-document.createElement = function (tagName) {
-    const el = originalCreateElement.call(document, tagName);
-    if (tagName.toLowerCase() === 'iframe') {
-        const originalSetAttribute = el.setAttribute;
-        el.setAttribute = function (name, value) {
-            if (name === 'src' && value && value.includes('GoogleOneTap')) {
-                // Block third-party cookie source
-                return;
-            }
-            originalSetAttribute.call(el, name, value);
-        };
-        Object.defineProperty(el, 'src', {
-            set: function (val) {
-                if (val && val.includes('GoogleOneTap')) {
+    // 2. Intercept iframe creation to block Google One Tap dynamic injection (fixes cookie warnings and network DNS errors)
+    const originalCreateElement = document.createElement;
+    document.createElement = function (tagName) {
+        const el = originalCreateElement.call(document, tagName);
+        if (tagName.toLowerCase() === 'iframe') {
+            const originalSetAttribute = el.setAttribute;
+            el.setAttribute = function (name, value) {
+                if (name === 'src' && value && value.includes('GoogleOneTap')) {
+                    // Block third-party cookie source
                     return;
                 }
-                el.setAttribute('src', val);
-            },
-            get: function () {
-                return el.getAttribute('src');
-            }
-        });
-    }
-    return el;
-};
+                originalSetAttribute.call(el, name, value);
+            };
+            Object.defineProperty(el, 'src', {
+                set: function (val) {
+                    if (val && val.includes('GoogleOneTap')) {
+                        return;
+                    }
+                    el.setAttribute('src', val);
+                },
+                get: function () {
+                    return el.getAttribute('src');
+                }
+            });
+        }
+        return el;
+    };
+})();
 
 // 3. Fallback definition to prevent ReferenceError: RecentProducts is not defined
 if (typeof window.RecentProducts === 'undefined') {
@@ -980,7 +982,84 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.error('Error fetching initial cart data:', err));
     }
 
-});
+    // ----------------------------------------------------
+    // NAVA FLY TO CART ANIMATION & BADGE REFRESH
+    // ----------------------------------------------------
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.js-addToCart');
+        if (!btn) return;
+        
+        const productImg = document.getElementById('main-product-image') || document.querySelector('.main-image-container img') || document.querySelector('.product-gallery img');
+        const cartBtn = document.getElementById('header-cart-btn');
+        
+        if (productImg && cartBtn) {
+            // Create flying cloned image
+            const clone = productImg.cloneNode(true);
+            const rectImg = productImg.getBoundingClientRect();
+            const rectCart = cartBtn.getBoundingClientRect();
+            
+            clone.style.position = 'fixed';
+            clone.style.zIndex = '999999';
+            clone.style.top = rectImg.top + 'px';
+            clone.style.left = rectImg.left + 'px';
+            clone.style.width = rectImg.width + 'px';
+            clone.style.height = rectImg.height + 'px';
+            clone.style.borderRadius = '50%';
+            clone.style.objectFit = 'cover';
+            clone.style.pointerEvents = 'none';
+            clone.style.transition = 'all 0.9s cubic-bezier(0.42, 0, 0.58, 1)';
+            
+            document.body.appendChild(clone);
+            
+            // Trigger transition
+            requestAnimationFrame(() => {
+                clone.style.top = (rectCart.top + rectCart.height / 2 - 15) + 'px';
+                clone.style.left = (rectCart.left + rectCart.width / 2 - 15) + 'px';
+                clone.style.width = '30px';
+                clone.style.height = '30px';
+                clone.style.opacity = '0.2';
+            });
+            
+            // Wobble cart icon when reached and update local badge immediately
+            setTimeout(() => {
+                clone.remove();
+                
+                // Add wobble animation class
+                cartBtn.classList.add('nava-wobble');
+                setTimeout(() => {
+                    cartBtn.classList.remove('nava-wobble');
+                }, 600);
+                
+                // Optimistically increment badge count
+                if (cartCountBadge) {
+                    cartCountBadge.style.display = 'flex';
+                    const qtyInput = document.getElementById('qtym');
+                    const qtyVal = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+                    const currentCount = parseInt(cartCountBadge.textContent) || 0;
+                    cartCountBadge.textContent = currentCount + qtyVal;
+                }
+            }, 900);
+        }
+    });
+
+    // Listen to MewTheme's add-to-cart events to fetch Sapo's real cart data and open drawer
+    const handleCartChangedEvent = () => {
+        fetch('/cart.js')
+            .then(res => res.json())
+            .then(cart => {
+                updateCartUI(cart);
+                // Open drawer automatically
+                toggleCartDrawer(true);
+            })
+            .catch(err => console.error('Error reloading cart data:', err));
+    };
+
+    document.addEventListener('changeCart', handleCartChangedEvent);
+    if (window.jQuery || window.$) {
+        $(document).on('changeCart', handleCartChangedEvent);
+    }
+
+
 
 
 // ============================================
@@ -1315,7 +1394,452 @@ if (shopeeList) {
     fixDynamicIframeTitles();
     setInterval(fixDynamicIframeTitles, 2000);
 
+    // Dynamic injection of Compare Bar & Modal HTML if missing
+    if (!document.getElementById('compare-bar')) {
+        const compareBarHtml = `
+            <div id="compare-bar" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 999999; background: var(--bg-white, #ffffff); border-top: 1px solid var(--border-color, #e2e8f0); box-shadow: 0 -5px 25px rgba(0,0,0,0.1); padding: 15px 20px; display: none;">
+                <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="ph-bold ph-arrows-left-right" style="font-size: 1.5rem; color: var(--primary, #003366);"></i>
+                        <h4 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--text-dark, #0f172a);">So sánh sản phẩm</h4>
+                    </div>
+                    <div id="compare-slots" style="display: flex; gap: 15px; flex: 1; max-width: 700px; min-width: 300px;"></div>
+                    <div style="display: flex; gap: 10px;">
+                        <button id="compare-clear" onclick="clearCompare()" style="background: transparent; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px 18px; font-weight: 700; color: var(--text-gray); cursor: pointer; font-size: 0.9rem;">Xóa hết</button>
+                        <button id="compare-expand" onclick="executeCompare(true)" style="background: transparent; border: 1px solid var(--primary); border-radius: 8px; padding: 10px 18px; font-weight: 700; color: var(--primary); cursor: pointer; font-size: 0.9rem;" disabled>Mở rộng</button>
+                        <button id="compare-submit" onclick="executeCompare()" style="background: var(--primary, #003366); border: none; border-radius: 8px; padding: 10px 22px; font-weight: 700; color: white; cursor: pointer; font-size: 0.9rem;" disabled>So sánh ngay</button>
+                    </div>
+                </div>
+            </div>
+            <div id="compare-modal" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999999; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+                <div id="compare-modal-content" style="background: var(--bg-white, #ffffff); border-radius: 16px; width: 95%; max-width: 1100px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; transform: scale(0.95); transition: transform 0.3s ease; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+                    <div style="padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; background: var(--bg-gray, #f8fafc);">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="ph-bold ph-arrows-left-right" style="font-size: 1.4rem; color: var(--primary, #003366);"></i>
+                            <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: var(--text-dark);">So sánh chi tiết</h3>
+                        </div>
+                        <button onclick="closeCompareModal()" style="background: transparent; border: none; font-size: 1.5rem; color: var(--text-gray); cursor: pointer; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%;" onmouseover="this.style.background='rgba(0,0,0,0.05)'" onmouseout="this.style.background='transparent'"><i class="ph-bold ph-x"></i></button>
+                    </div>
+                    <div style="flex: 1; overflow-y: auto; padding: 25px;" id="compare-modal-body">
+                        <div id="compare-loading" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 0; gap: 15px;">
+                            <div style="width: 40px; height: 40px; border: 4px solid var(--border-color); border-top-color: var(--primary); border-radius: 50%; animation: ai-spin 0.8s linear infinite;"></div>
+                            <div style="font-weight: 700; color: var(--text-gray);">Đang phân tích cấu hình...</div>
+                        </div>
+                        <div id="compare-result" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = compareBarHtml;
+        while (tempDiv.firstChild) {
+            document.body.appendChild(tempDiv.firstChild);
+        }
+    }
+
     fetchShopeeReviews();
 }
+});
+
+// =========================================================================
+// NAVA COMPARE SYSTEM GLOBAL FUNCTIONS
+// =========================================================================
+window.compareList = [];
+
+window.toggleCompare = function(btn, name, img, price) {
+    console.log('--- toggleCompare called ---');
+    
+    if (window.currentProductData) {
+        window.compareList = [{
+            name: window.currentProductData.name,
+            img: window.currentProductData.img,
+            price: window.currentProductData.price,
+            url: window.currentProductData.url
+        }];
+        
+        if (btn) {
+            btn.style.background = 'var(--primary, #003366)';
+            btn.style.color = 'white';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = 'ph-bold ph-check';
+        }
+        
+        window.showCompareSelectDropdown(null);
+        window.updateCompareBar();
+        return;
+    }
+    
+    const idx = window.compareList.findIndex(p => p.name === name);
+    if (idx > -1) {
+        window.compareList.splice(idx, 1);
+        if (btn) {
+            btn.style.background = 'var(--bg-white, #ffffff)';
+            btn.style.color = 'var(--text-dark, #0f172a)';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = 'ph ph-arrows-left-right';
+        }
+    } else {
+        if (window.compareList.length >= 2) {
+            alert('Chỉ có thể so sánh tối đa 2 sản phẩm cùng lúc!');
+            return;
+        }
+        window.compareList.push({ name, img, price, url: btn ? btn.getAttribute('data-url') || window.location.pathname : window.location.pathname });
+        if (btn) {
+            btn.style.background = 'var(--primary, #003366)';
+            btn.style.color = 'white';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = 'ph-bold ph-check';
+        }
+    }
+    window.updateCompareBar();
+};
+
+window.removeCompare = function(name) {
+    window.compareList = window.compareList.filter(p => p.name !== name);
+    document.querySelectorAll('.compare-btn, .compare-btn-wrap').forEach(btn => {
+        const btnName = btn.getAttribute('data-name');
+        if (btnName === name || (window.currentProductData && window.currentProductData.name === name)) {
+            btn.style.background = 'var(--bg-white, #ffffff)';
+            btn.style.color = 'var(--text-dark, #0f172a)';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = 'ph ph-arrows-left-right';
+        }
+    });
+    window.updateCompareBar();
+};
+
+window.clearCompare = function() {
+    window.compareList = [];
+    document.querySelectorAll('.compare-btn, .compare-btn-wrap').forEach(btn => {
+        btn.style.background = 'var(--bg-white, #ffffff)';
+        btn.style.color = 'var(--text-dark, #0f172a)';
+        const icon = btn.querySelector('i');
+        if (icon) icon.className = 'ph ph-arrows-left-right';
+    });
+    window.updateCompareBar();
+};
+
+window.hideCompareBar = function() {
+    const bar = document.getElementById('compare-bar');
+    if (bar) bar.style.setProperty('display', 'none', 'important');
+};
+
+window.updateCompareBar = function() {
+    const bar = document.getElementById('compare-bar');
+    const slots = document.getElementById('compare-slots');
+    const submitBtn = document.getElementById('compare-submit');
+    const expandBtn = document.getElementById('compare-expand');
+    if (!bar || !slots) return;
+    
+    if (window.compareList.length > 0) {
+        bar.style.setProperty('display', 'block', 'important');
+    } else {
+        bar.style.setProperty('display', 'none', 'important');
+    }
+    
+    if (window.compareList.length === 2) {
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.style.cursor = 'pointer';
+            submitBtn.style.opacity = '1';
+        }
+        if (expandBtn) {
+            expandBtn.disabled = false;
+            expandBtn.style.cursor = 'pointer';
+            expandBtn.style.opacity = '1';
+        }
+    } else {
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.style.cursor = 'not-allowed';
+            submitBtn.style.opacity = '0.5';
+        }
+        if (expandBtn) {
+            expandBtn.disabled = true;
+            expandBtn.style.cursor = 'not-allowed';
+            expandBtn.style.opacity = '0.5';
+        }
+    }
+    
+    let html = '';
+    for (let i = 0; i < 2; i++) {
+        if (i < window.compareList.length) {
+            const p = window.compareList[i];
+            html += `
+                <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray, #f8fafc); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color, #e2e8f0); flex: 1; position: relative; font-family: inherit;">
+                    <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white, #ffffff); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <div style="flex: 1; min-width: 0;">
+                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
+                        <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary, #003366);">${p.price}</div>
+                    </div>
+                    <button onclick="removeCompare('${p.name.replace(/'/g, "\\'")}')" style="background: none; border: none; color: var(--text-gray, #64748b); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray, #64748b)'"><i class="ph-bold ph-x"></i></button>
+                </div>
+            `;
+        } else {
+            html += `
+                <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color, #e2e8f0); flex: 1; color: var(--text-gray, #64748b); font-size: 0.95rem; font-family: inherit;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray, #f8fafc); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
+                    Thêm sản phẩm
+                </div>
+            `;
+        }
+    }
+    slots.innerHTML = html;
+};
+
+window.showCompareSelectDropdown = function(event) {
+    if (event) event.stopPropagation();
+    const modal = document.getElementById('compare-select-modal');
+    const modalContent = document.getElementById('compare-select-dropdown');
+    const searchInput = document.getElementById('compare-search-input');
+    if (searchInput) searchInput.value = '';
+    
+    if (modal && modalContent) {
+        modal.style.setProperty('display', 'flex', 'important');
+        void modal.offsetWidth;
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'scale(1)';
+    }
+    
+    window.filterCompareProducts();
+    
+    setTimeout(() => {
+        if (searchInput) searchInput.focus();
+    }, 100);
+};
+
+window.hideCompareSelectDropdown = function() {
+    const modal = document.getElementById('compare-select-modal');
+    const modalContent = document.getElementById('compare-select-dropdown');
+    if (modal && modalContent) {
+        modal.style.opacity = '0';
+        modalContent.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            modal.style.setProperty('display', 'none', 'important');
+        }, 250);
+    }
+};
+
+window.filterCompareProducts = function() {
+    const query = document.getElementById('compare-search-input')?.value.toLowerCase().trim() || '';
+    const listContainer = document.getElementById('compare-select-list');
+    if (!listContainer) return;
+    
+    const products = window.currentCollectionProducts || [];
+    let available = products.filter(p => !window.compareList.some(item => item.name === p.name));
+    
+    if (query) {
+        available = available.filter(p => p.name.toLowerCase().includes(query));
+    }
+    
+    let html = '';
+    available.forEach(p => {
+        const escapedName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        html += `
+            <div onclick="selectProductForCompare('${escapedName}', '${p.img}', '${p.price}', '${p.url}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
+                <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
+                <div style="flex: 1; min-width: 0; text-align: left;">
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</div>
+                    <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${p.price}</div>
+                </div>
+            </div>
+        `;
+    });
+    
+    if (available.length === 0) {
+        html = '<div style="font-size: 0.85rem; color: var(--text-gray, #64748b); text-align: center; padding: 15px;">Không tìm thấy sản phẩm phù hợp</div>';
+    }
+    
+    listContainer.innerHTML = html;
+};
+
+window.selectProductForCompare = function(name, img, price, url) {
+    if (window.compareList.length >= 2) return;
+    window.compareList.push({ name, img, price, url });
+    window.updateCompareBar();
+    window.hideCompareSelectDropdown();
+    
+    if (window.compareList.length === 2) {
+        window.executeCompare();
+    }
+};
+
+window.executeCompare = function(isFullScreen = false) {
+    const modal = document.getElementById('compare-modal');
+    const modalContent = document.getElementById('compare-modal-content');
+    const loading = document.getElementById('compare-loading');
+    const result = document.getElementById('compare-result');
+    if (!modal || !modalContent) return;
+    
+    modal.style.setProperty('display', 'flex', 'important');
+    
+    if (isFullScreen) {
+        modalContent.style.width = '100%';
+        modalContent.style.maxWidth = '100%';
+        modalContent.style.height = '100vh';
+        modalContent.style.maxHeight = '100vh';
+        modalContent.style.borderRadius = '0';
+        modalContent.style.transform = 'translateY(100vh)';
+        
+        void modal.offsetWidth;
+        
+        modalContent.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'translateY(0)';
+    } else {
+        modalContent.style.width = '95%';
+        modalContent.style.maxWidth = '1100px';
+        modalContent.style.height = 'auto';
+        modalContent.style.maxHeight = '90vh';
+        modalContent.style.borderRadius = '16px';
+        modalContent.style.transform = 'scale(0.95)';
+        
+        void modal.offsetWidth;
+        
+        modalContent.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+        modal.style.opacity = '1';
+        modalContent.style.transform = 'scale(1)';
+    }
+    
+    if (loading) loading.style.display = 'flex';
+    if (result) result.style.display = 'none';
+    
+    const p1 = window.compareList[0];
+    const p2 = window.compareList[1];
+    if (!p1 || !p2) {
+        if (loading) loading.style.display = 'none';
+        if (result) {
+            result.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-gray);">Cần tối thiểu 2 sản phẩm để đối chiếu.</div>';
+            result.style.display = 'block';
+        }
+        return;
+    }
+    
+    Promise.all([
+        fetch(p1.url.includes('?') ? p1.url + '&view=data' : p1.url + '?view=data').then(res => res.json()).catch(err => {
+            console.error('Fetch p1 error:', err);
+            return { infor: { name: p1.name, thumbnail: p1.img, price: p1.price, url: p1.url }, spec: {} };
+        }),
+        fetch(p2.url.includes('?') ? p2.url + '&view=data' : p2.url + '?view=data').then(res => res.json()).catch(err => {
+            console.error('Fetch p2 error:', err);
+            return { infor: { name: p2.name, thumbnail: p2.img, price: p2.price, url: p2.url }, spec: {} };
+        })
+    ]).then(([data1, data2]) => {
+        if (loading) loading.style.display = 'none';
+        
+        let tableHtml = `
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
+                    <img src="${data1.infor.thumbnail || p1.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data1.infor.name || p1.name}</h4>
+                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${data1.infor.price || p1.price}</div>
+                </div>
+                <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
+                    <img src="${data2.infor.thumbnail || p2.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data2.infor.name || p2.name}</h4>
+                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${data2.infor.price || p2.price}</div>
+                </div>
+            </div>
+            
+            <div style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; overflow: hidden; font-family: inherit;">
+        `;
+        
+        const specsMap1 = {};
+        const specsMap2 = {};
+        
+        if (data1.spec) {
+            Object.values(data1.spec).forEach(group => {
+                if (group.content) {
+                    group.content.forEach(item => {
+                        if (item.name && item.infor) {
+                            specsMap1[item.name.trim()] = item.infor;
+                        }
+                    });
+                }
+            });
+        }
+        
+        if (data2.spec) {
+            Object.values(data2.spec).forEach(group => {
+                if (group.content) {
+                    group.content.forEach(item => {
+                        if (item.name && item.infor) {
+                            specsMap2[item.name.trim()] = item.infor;
+                        }
+                    });
+                }
+            });
+        }
+        
+        const allKeys = Array.from(new Set([
+            ...Object.keys(specsMap1),
+            ...Object.keys(specsMap2)
+        ]));
+        
+        if (allKeys.length === 0) {
+            tableHtml += `
+                <div style="padding: 30px; text-align: center; color: var(--text-gray, #64748b);">
+                    Chưa có thông số chi tiết cấu hình để so sánh.
+                </div>
+            `;
+        } else {
+            allKeys.forEach((key, index) => {
+                const val1 = specsMap1[key] || '-';
+                const val2 = specsMap2[key] || '-';
+                const bg = index % 2 === 0 ? 'var(--bg-gray, #f8fafc)' : 'var(--bg-white, #ffffff)';
+                
+                tableHtml += `
+                    <div style="display: grid; grid-template-columns: 140px 1fr 1fr; border-bottom: 1px solid var(--border-color, #e2e8f0); background: ${bg}; font-size: 0.9rem;">
+                        <div style="padding: 12px 15px; font-weight: 800; color: var(--text-gray, #64748b); border-right: 1px solid var(--border-color, #e2e8f0); display: flex; align-items: center;">${key}</div>
+                        <div style="padding: 12px 15px; border-right: 1px solid var(--border-color, #e2e8f0); font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4;">${val1}</div>
+                        <div style="padding: 12px 15px; font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4;">${val2}</div>
+                    </div>
+                `;
+            });
+        }
+        
+        tableHtml += `
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(0,51,102,0.05), rgba(15,23,42,0.02)); border-radius: 12px; border: 1px solid rgba(0,51,102,0.2); display: flex; gap: 15px;">
+                <i class="ph-fill ph-storefront" style="color: var(--primary, #003366); font-size: 2rem;"></i>
+                <div>
+                    <h4 style="margin: 0 0 5px 0; color: var(--text-dark, #0f172a); font-weight: 800;">Đề xuất từ Nava Store</h4>
+                    <p style="margin: 0; color: var(--text-gray, #64748b); line-height: 1.5; font-size: 0.9rem;">Nếu bạn ưu tiên hiệu năng mạnh mẽ để chơi game hoặc làm đồ họa nặng, hãy chọn sản phẩm có cấu hình cao hơn. Cả hai sản phẩm đều được phân phối chính hãng và hỗ trợ trả góp 0% tại Nava Store.</p>
+                </div>
+            </div>
+        `;
+        
+        if (result) {
+            result.innerHTML = tableHtml;
+            result.style.display = 'block';
+        }
+    }).catch(err => {
+        console.error('Specs fetch error:', err);
+        if (loading) loading.style.display = 'none';
+        if (result) {
+            result.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-gray);">Có lỗi xảy ra khi tải dữ liệu so sánh.</div>';
+            result.style.display = 'block';
+        }
+    });
+};
+
+window.closeCompareModal = function() {
+    const modal = document.getElementById('compare-modal');
+    const modalContent = document.getElementById('compare-modal-content');
+    if (!modal || !modalContent) return;
+    
+    modal.style.opacity = '0';
+    if (modalContent.style.width === '100%') {
+        modalContent.style.transform = 'translateY(100vh)';
+    } else {
+        modalContent.style.transform = 'scale(0.95)';
+    }
+    setTimeout(() => {
+        modal.style.setProperty('display', 'none', 'important');
+    }, 300);
+};
+
+
 
 

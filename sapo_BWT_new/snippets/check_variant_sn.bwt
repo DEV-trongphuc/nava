@@ -1,0 +1,13 @@
+{%- if variant.price == 0 -%}
+disabled="disabled"
+{%- else -%}
+{%- if variant.inventory_management == 'bizweb' and variant.inventory_quantity <= 0 -%}
+		{% if variant.inventory_policy == 'deny' -%}
+		disabled="disabled"
+		{%- else -%}
+		checked
+		{%- endif -%}
+	{%- else %}
+	checked
+	{%- endif -%}
+{%- endif -%}

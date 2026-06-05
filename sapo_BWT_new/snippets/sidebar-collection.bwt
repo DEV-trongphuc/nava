@@ -9,11 +9,10 @@
     .category-list a:hover { color: var(--primary, #2563eb); }
     .category-list .count { margin-left: auto; color: var(--text-gray, #64748b); font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
     
-    .brand-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .brand-item { border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: var(--bg-white, #ffffff); transition: all 0.2s; }
-    .brand-item:hover { border-color: var(--primary, #2563eb); box-shadow: 0 4px 12px rgba(59,130,246,0.1); transform: translateY(-1px); }
-    .brand-item.active { border-color: var(--primary, #2563eb); background: rgba(59,130,246,0.05); }
-
+    .nava-brand-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .nava-brand-item { border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: var(--bg-white, #ffffff); transition: all 0.2s; }
+    .nava-brand-item:hover { border-color: var(--primary, #2563eb); box-shadow: 0 4px 12px rgba(59,130,246,0.1); transform: translateY(-1px); }
+    .nava-brand-item.active { border-color: var(--primary, #2563eb); background: rgba(59,130,246,0.05); }
     /* Dual Range Slider Styling */
     .range-slider { position: relative; height: 20px; margin-top: 15px; margin-bottom: 20px; }
     .range-slider input[type="range"] { position: absolute; width: 100%; height: 4px; background: transparent; -webkit-appearance: none; pointer-events: none; outline: none; margin: 0; top: 8px; z-index: 3; }
@@ -114,30 +113,36 @@
 <!-- Brand Filter -->
 <div class="sidebar-block">
     <h4 class="sidebar-title">Thương hiệu</h4>
-    <div class="brand-list">
-        <div class="brand-item" id="brand-asus" onclick="toggleBrandFilter('ASUS')" title="ASUS">
+    <div class="nava-brand-list">
+        <div class="nava-brand-item" id="brand-asus" onclick="toggleBrandFilter('ASUS')" title="ASUS">
             <img src="{{ 'asus.png' | asset_url }}" alt="ASUS" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-beelink" onclick="toggleBrandFilter('Beelink')" title="Beelink">
+        <div class="nava-brand-item" id="brand-beelink" onclick="toggleBrandFilter('Beelink')" title="Beelink">
             <img src="{{ 'beelink.png' | asset_url }}" alt="Beelink" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-beikong" onclick="toggleBrandFilter('BEIKONG')" title="BEIKONG">
+        <div class="nava-brand-item" id="brand-beikong" onclick="toggleBrandFilter('BEIKONG')" title="BEIKONG">
             <img src="{{ 'beikong.png' | asset_url }}" alt="BEIKONG" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-bmax" onclick="toggleBrandFilter('BMAX')" title="BMAX">
+        <div class="nava-brand-item" id="brand-bmax" onclick="toggleBrandFilter('BMAX')" title="BMAX">
             <img src="{{ 'bmax.png' | asset_url }}" alt="BMAX" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-aostar" onclick="toggleBrandFilter('AOOSTAR')" title="AOOSTAR">
-            <img src="{{ 'aostar.png' | asset_url }}" alt="AOOSTAR" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        <div class="nava-brand-item" id="brand-aostar" onclick="toggleBrandFilter('AOOSTAR')" title="AOOSTAR">
+            <img src="{{ 'aoostar.png' | asset_url }}" alt="AOOSTAR" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-gmktec" onclick="toggleBrandFilter('GMKTEC')" title="GMKTEC">
+        <div class="nava-brand-item" id="brand-gmktec" onclick="toggleBrandFilter('GMKTEC')" title="GMKTEC">
             <img src="{{ 'gmktec.png' | asset_url }}" alt="GMKTEC" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-minisforum" onclick="toggleBrandFilter('Minisforum')" title="Minisforum">
+        <div class="nava-brand-item" id="brand-minisforum" onclick="toggleBrandFilter('Minisforum')" title="Minisforum">
             <img src="{{ 'minisforum.png' | asset_url }}" alt="Minisforum" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="brand-item" id="brand-msi" onclick="toggleBrandFilter('MSI')" title="MSI">
+        <div class="nava-brand-item" id="brand-msi" onclick="toggleBrandFilter('MSI')" title="MSI">
             <img src="{{ 'msi.png' | asset_url }}" alt="MSI" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="nava-brand-item" id="brand-asrock" onclick="toggleBrandFilter('ASRock')" title="ASRock">
+            <img src="{{ 'asrock.png' | asset_url }}" alt="ASRock" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
+        </div>
+        <div class="nava-brand-item" id="brand-zotac" onclick="toggleBrandFilter('ZOTAC')" title="ZOTAC">
+            <img src="{{ 'zotac.png' | asset_url }}" alt="ZOTAC" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
     </div>
 </div>

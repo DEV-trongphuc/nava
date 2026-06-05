@@ -1,0 +1,70 @@
+<div class="breadcrumbs mt-3">
+	<div class="container position-relative">
+		<ul class="breadcrumb align-items-center m-0 pl-0 pr-0 small pt-2 pb-2">					
+			<li class="home">
+				<a href="/" title="{{settings.breadcrumb_home}}">
+					<svg width="14" height="14">
+						<use href="#svg-home" />
+					</svg>	
+					{{settings.breadcrumb_home}}
+				</a>						
+				<span class="slash-divider ml-2 mr-2">/</span>
+			</li>
+			{%- if template contains 'product' -%}
+			{%- if product.collections.size > 0 -%}
+			<li>
+				<a href="{{ product.collections.first.url }}" title="{{ product.collections.first.name }}">{{ product.collections.first.name | replace: '<', '&lt;'}}</a>						
+				<span class="slash-divider ml-2 mr-2">/</span>
+			</li>
+			{%- endif -%}
+			<li class="active-crumb"><span>{{ product.name | replace: '<', '&lt;'}}</span></li>
+			{%- elsif template contains 'collection' and collection.alias -%}
+			{%- if current_tags -%}					
+			{% capture url %}/collections/{{ collection.alias }}{% endcapture %}
+			<li>						
+				<a href="{{ collection.url }}" title="{{ collection.name}}">{{ collection.name | replace: '<', '&lt;'}}</a>												
+				<span class="slash-divider ml-2 mr-2">/</span>
+			</li>					
+			<li >{{ current_tags | join: ', ' }}</li>
+			{%- else -%}
+			<li >{%if collection.name == 'All' or collection.name == 'Tất cả sản phẩm'%}{{settings.breadcrumb_all_products}}{%else%} {{ collection.name | replace: '<', '&lt;'}}{%endif%}</li>
+			{%- endif -%}
+			{%- elsif template == 'article' -%}
+			<li>
+				<a href="{{ blog.url }}" title="{%if blog.name == 'Tất cả tin tức'%}{{settings.breadcrumb_blog_all }}{%else%}{{ blog.name }}{%endif%}"><span>{%if blog.name == 'Tất cả tin tức'%}{{settings.breadcrumb_blog_all }}{%else%}{{ blog.name | replace: '<', '&lt;'}}{%endif%}</span></a>	
+				<span class="slash-divider ml-2 mr-2">/</span>
+			</li>
+			<li >{{ article.title }}</li>
+			{%- elsif template == 'blog' -%}
+			{%- if current_tags -%}
+			<li><a href="{{ blog.url }}" title="{{ blog.name }}">{{ blog.name | replace: '<', '&lt;'}}</a>
+				<span class="slash-divider ml-2 mr-2">/</span>
+			</li>
+			<li >{{current_tags}}</li>
+			{%- else -%}
+			<li >{{ blog.name }}</li>
+			{%- endif -%}
+			{%- elsif template contains 'search' -%}
+			<li>{{settings.breadcrumb_search | replace: '[keyword]', searchTerm}}</li>
+			{%- elsif template == 'customers/register' -%}
+			<li>{{settings.breadcrumb_signup }}</li>
+			{%- elsif template == 'customers/login' -%}
+			<li>{{settings.breadcrumb_login }}</li>
+			{%- elsif template == 'customers/account' -%}
+			<li>{{settings.breadcrumb_customer }}</li>
+			{%- elsif template == 'customers/addresses' -%}
+			<li>{{settings.breadcrumb_address_book }}</li>
+			{%- elsif template == 'customers/orders' -%}
+			<li>{{settings.breadcrumb_orders }}</li>
+			{%- elsif template == 'customers/order' -%}
+			<li>{{settings.breadcrumb_order_detail }}</li>
+			{%- elsif template == '404' -%}
+			<li>{{settings.breadcrumb_404 }}</li>
+			{%- elsif template == 'cart' -%}
+			<li>{{settings.cartStringsTitle }}</li>
+			{%- else -%}
+			<li>{{ page_title }}</li>
+			{%- endif -%}
+		</ul>
+	</div>
+</div>

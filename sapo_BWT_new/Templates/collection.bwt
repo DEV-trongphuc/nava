@@ -1,6 +1,6 @@
 <div class="opacity_filter"></div>
 {%- assign product_per_page = settings.collection_results_per_page | default: 12 -%}
-{%- include 'breadcrumb' -%}
+
 
 <style>
     .nava-col-layout { padding: 24px; background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }

@@ -1,0 +1,39 @@
+Line 6048:     .floating-social-wrapper {
+        margin-top: 10px;
+        margin-bottom: 60px;
+        height: 75px;
+    }
+
+    .floating-social-wrapper {
+        bottom: -230px !important;
+    }
+
+    .benefit-pair {
+        gap: 8px;
+==================================================
+Line 6144: .floating-social-wrapper {
+    line-height: 1.3;
+    white-space: nowrap;
+}
+
+/* TASK 2: FAB Menu */
+.floating-social-wrapper {
+    position: fixed;
+    /* top: 50%; */
+    transform: translateY(-50%);
+    right: 20px;
+    z-index: 999;
+==================================================
+Line 6294: .floating-social-wrapper {
+    /* Giảm margin bù đắp */
+}
+
+
+/* TASK 2: FAB Menu (Restored) */
+.floating-social-wrapper {
+    position: fixed;
+    bottom: 110px;
+    right: 20px;
+    z-index: 999999;
+    display: flex;
+==================================================
