@@ -1,0 +1,584 @@
+Push ( at 2539:36 - Stack size: 1
+Pop ) at 2539:37 matching ( from 2539:36 - Stack size: 0
+Push { at 2539:39 - Stack size: 1
+Push ( at 2541:30 - Stack size: 2
+Push ( at 2541:48 - Stack size: 3
+Pop ) at 2541:50 matching ( from 2541:48 - Stack size: 2
+Push { at 2541:52 - Stack size: 3
+Push ( at 2542:12 - Stack size: 4
+Push ( at 2542:29 - Stack size: 5
+Pop ) at 2542:48 matching ( from 2542:29 - Stack size: 4
+Pop ) at 2542:49 matching ( from 2542:12 - Stack size: 3
+Push { at 2542:51 - Stack size: 4
+Push ( at 2543:29 - Stack size: 5
+Pop ) at 2543:30 matching ( from 2543:29 - Stack size: 4
+Push ( at 2544:57 - Stack size: 5
+Pop ) at 2544:83 matching ( from 2544:57 - Stack size: 4
+Push ( at 2545:16 - Stack size: 5
+Pop ) at 2545:28 matching ( from 2545:16 - Stack size: 4
+Push { at 2545:30 - Stack size: 5
+Push ( at 2546:55 - Stack size: 6
+Pop ) at 2546:99 matching ( from 2546:55 - Stack size: 5
+Push ( at 2547:20 - Stack size: 6
+Pop ) at 2547:28 matching ( from 2547:20 - Stack size: 5
+Push { at 2547:30 - Stack size: 6
+Push ( at 2548:34 - Stack size: 7
+Pop ) at 2548:35 matching ( from 2548:34 - Stack size: 6
+Push ( at 2549:31 - Stack size: 7
+Push ( at 2549:32 - Stack size: 8
+Pop ) at 2549:33 matching ( from 2549:32 - Stack size: 7
+Push { at 2549:38 - Stack size: 8
+Push ( at 2553:50 - Stack size: 9
+Pop ) at 2553:101 matching ( from 2553:50 - Stack size: 8
+Push ( at 2553:110 - Stack size: 9
+Push { at 2553:121 - Stack size: 10
+Push ( at 2555:58 - Stack size: 11
+Pop ) at 2555:76 matching ( from 2555:58 - Stack size: 10
+Push ( at 2556:76 - Stack size: 11
+Pop ) at 2556:93 matching ( from 2556:76 - Stack size: 10
+Push ( at 2556:119 - Stack size: 11
+Pop ) at 2556:120 matching ( from 2556:119 - Stack size: 10
+Push ( at 2557:32 - Stack size: 11
+Push ( at 2557:33 - Stack size: 12
+Push ( at 2557:52 - Stack size: 13
+Pop ) at 2557:58 matching ( from 2557:52 - Stack size: 12
+Push ( at 2557:81 - Stack size: 13
+Pop ) at 2557:88 matching ( from 2557:81 - Stack size: 12
+Pop ) at 2557:89 matching ( from 2557:33 - Stack size: 11
+Push ( at 2557:94 - Stack size: 12
+Pop ) at 2557:128 matching ( from 2557:94 - Stack size: 11
+Pop ) at 2557:129 matching ( from 2557:32 - Stack size: 10
+Push ( at 2558:32 - Stack size: 11
+Push ( at 2558:33 - Stack size: 12
+Push ( at 2558:52 - Stack size: 13
+Pop ) at 2558:58 matching ( from 2558:52 - Stack size: 12
+Push ( at 2558:81 - Stack size: 13
+Pop ) at 2558:88 matching ( from 2558:81 - Stack size: 12
+Pop ) at 2558:89 matching ( from 2558:33 - Stack size: 11
+Push ( at 2558:94 - Stack size: 12
+Pop ) at 2558:128 matching ( from 2558:94 - Stack size: 11
+Pop ) at 2558:129 matching ( from 2558:32 - Stack size: 10
+Pop } at 2559:25 matching { from 2553:121 - Stack size: 9
+Pop ) at 2559:26 matching ( from 2553:110 - Stack size: 8
+Push ( at 2561:28 - Stack size: 9
+Pop ) at 2561:59 matching ( from 2561:28 - Stack size: 8
+Push { at 2561:61 - Stack size: 9
+Push ( at 2562:45 - Stack size: 10
+Pop ) at 2562:46 matching ( from 2562:45 - Stack size: 9
+Pop } at 2563:25 matching { from 2561:61 - Stack size: 8
+Pop } at 2564:21 matching { from 2549:38 - Stack size: 7
+Pop ) at 2564:27 matching ( from 2549:31 - Stack size: 6
+Pop } at 2565:17 matching { from 2547:30 - Stack size: 5
+Pop } at 2566:13 matching { from 2545:30 - Stack size: 4
+Push { at 2566:20 - Stack size: 5
+Push ( at 2567:56 - Stack size: 6
+Pop ) at 2567:74 matching ( from 2567:56 - Stack size: 5
+Push ( at 2568:20 - Stack size: 6
+Pop ) at 2568:28 matching ( from 2568:20 - Stack size: 5
+Push { at 2568:30 - Stack size: 6
+Push ( at 2569:34 - Stack size: 7
+Pop ) at 2569:35 matching ( from 2569:34 - Stack size: 6
+Push ( at 2570:31 - Stack size: 7
+Push ( at 2570:32 - Stack size: 8
+Pop ) at 2570:33 matching ( from 2570:32 - Stack size: 7
+Push { at 2570:38 - Stack size: 8
+Push ( at 2574:66 - Stack size: 9
+Pop ) at 2574:139 matching ( from 2574:66 - Stack size: 8
+Push ( at 2575:28 - Stack size: 9
+Push ( at 2575:43 - Stack size: 10
+Push ( at 2575:78 - Stack size: 11
+Pop ) at 2575:79 matching ( from 2575:78 - Stack size: 10
+Push ( at 2575:89 - Stack size: 11
+Pop ) at 2575:98 matching ( from 2575:89 - Stack size: 10
+Push ( at 2575:137 - Stack size: 11
+Pop ) at 2575:138 matching ( from 2575:137 - Stack size: 10
+Push ( at 2575:148 - Stack size: 11
+Pop ) at 2575:154 matching ( from 2575:148 - Stack size: 10
+Push ( at 2575:193 - Stack size: 11
+Pop ) at 2575:194 matching ( from 2575:193 - Stack size: 10
+Push ( at 2575:204 - Stack size: 11
+Pop ) at 2575:212 matching ( from 2575:204 - Stack size: 10
+Pop ) at 2575:213 matching ( from 2575:43 - Stack size: 9
+Pop ) at 2575:214 matching ( from 2575:28 - Stack size: 8
+Push ( at 2576:66 - Stack size: 9
+Pop ) at 2576:139 matching ( from 2576:66 - Stack size: 8
+Push ( at 2577:28 - Stack size: 9
+Push ( at 2577:43 - Stack size: 10
+Push ( at 2577:78 - Stack size: 11
+Pop ) at 2577:79 matching ( from 2577:78 - Stack size: 10
+Push ( at 2577:89 - Stack size: 11
+Pop ) at 2577:98 matching ( from 2577:89 - Stack size: 10
+Push ( at 2577:137 - Stack size: 11
+Pop ) at 2577:138 matching ( from 2577:137 - Stack size: 10
+Push ( at 2577:148 - Stack size: 11
+Pop ) at 2577:154 matching ( from 2577:148 - Stack size: 10
+Push ( at 2577:193 - Stack size: 11
+Pop ) at 2577:194 matching ( from 2577:193 - Stack size: 10
+Push ( at 2577:204 - Stack size: 11
+Pop ) at 2577:212 matching ( from 2577:204 - Stack size: 10
+Pop ) at 2577:213 matching ( from 2577:43 - Stack size: 9
+Pop ) at 2577:214 matching ( from 2577:28 - Stack size: 8
+Push ( at 2579:28 - Stack size: 9
+Pop ) at 2579:59 matching ( from 2579:28 - Stack size: 8
+Push { at 2579:61 - Stack size: 9
+Push ( at 2580:45 - Stack size: 10
+Pop ) at 2580:46 matching ( from 2580:45 - Stack size: 9
+Pop } at 2581:25 matching { from 2579:61 - Stack size: 8
+Pop } at 2582:21 matching { from 2570:38 - Stack size: 7
+Pop ) at 2582:27 matching ( from 2570:31 - Stack size: 6
+Pop } at 2583:17 matching { from 2568:30 - Stack size: 5
+Pop } at 2584:13 matching { from 2566:20 - Stack size: 4
+Pop } at 2585:9 matching { from 2542:51 - Stack size: 3
+Push ( at 2586:12 - Stack size: 4
+Push ( at 2586:29 - Stack size: 5
+Pop ) at 2586:43 matching ( from 2586:29 - Stack size: 4
+Pop ) at 2586:44 matching ( from 2586:12 - Stack size: 3
+Push { at 2586:46 - Stack size: 4
+Push ( at 2587:29 - Stack size: 5
+Pop ) at 2587:30 matching ( from 2587:29 - Stack size: 4
+Push ( at 2588:57 - Stack size: 5
+Pop ) at 2588:83 matching ( from 2588:57 - Stack size: 4
+Push ( at 2589:16 - Stack size: 5
+Pop ) at 2589:28 matching ( from 2589:16 - Stack size: 4
+Push { at 2589:30 - Stack size: 5
+Push ( at 2590:55 - Stack size: 6
+Pop ) at 2590:99 matching ( from 2590:55 - Stack size: 5
+Push ( at 2591:20 - Stack size: 6
+Pop ) at 2591:28 matching ( from 2591:20 - Stack size: 5
+Push { at 2591:30 - Stack size: 6
+Push ( at 2592:34 - Stack size: 7
+Pop ) at 2592:35 matching ( from 2592:34 - Stack size: 6
+Pop } at 2593:17 matching { from 2591:30 - Stack size: 5
+Pop } at 2594:13 matching { from 2589:30 - Stack size: 4
+Push { at 2594:20 - Stack size: 5
+Push ( at 2595:56 - Stack size: 6
+Pop ) at 2595:70 matching ( from 2595:56 - Stack size: 5
+Push ( at 2596:20 - Stack size: 6
+Pop ) at 2596:28 matching ( from 2596:20 - Stack size: 5
+Push { at 2596:30 - Stack size: 6
+Push ( at 2597:34 - Stack size: 7
+Pop ) at 2597:35 matching ( from 2597:34 - Stack size: 6
+Pop } at 2598:17 matching { from 2596:30 - Stack size: 5
+Pop } at 2599:13 matching { from 2594:20 - Stack size: 4
+Pop } at 2600:9 matching { from 2586:46 - Stack size: 3
+Pop } at 2601:5 matching { from 2541:52 - Stack size: 2
+Pop ) at 2601:6 matching ( from 2541:30 - Stack size: 1
+Push ( at 2604:30 - Stack size: 2
+Push ( at 2604:48 - Stack size: 3
+Pop ) at 2604:50 matching ( from 2604:48 - Stack size: 2
+Push { at 2604:52 - Stack size: 3
+Push ( at 2605:37 - Stack size: 4
+Pop ) at 2605:254 matching ( from 2605:37 - Stack size: 3
+Push ( at 2606:12 - Stack size: 4
+Pop ) at 2606:16 matching ( from 2606:12 - Stack size: 3
+Push { at 2606:18 - Stack size: 4
+Push ( at 2611:54 - Stack size: 5
+Pop ) at 2611:127 matching ( from 2611:54 - Stack size: 4
+Push ( at 2612:16 - Stack size: 5
+Pop ) at 2612:27 matching ( from 2612:16 - Stack size: 4
+Push { at 2612:29 - Stack size: 5
+Push ( at 2613:64 - Stack size: 6
+Pop ) at 2613:65 matching ( from 2613:64 - Stack size: 5
+Push ( at 2614:20 - Stack size: 6
+Push ( at 2614:34 - Stack size: 7
+Pop ) at 2614:43 matching ( from 2614:34 - Stack size: 6
+Push ( at 2614:61 - Stack size: 7
+Pop ) at 2614:67 matching ( from 2614:61 - Stack size: 6
+Push ( at 2614:85 - Stack size: 7
+Pop ) at 2614:93 matching ( from 2614:85 - Stack size: 6
+Pop ) at 2614:94 matching ( from 2614:20 - Stack size: 5
+Push { at 2614:96 - Stack size: 6
+Pop } at 2616:17 matching { from 2614:96 - Stack size: 5
+Pop } at 2617:13 matching { from 2612:29 - Stack size: 4
+Push ( at 2618:54 - Stack size: 5
+Pop ) at 2618:127 matching ( from 2618:54 - Stack size: 4
+Push ( at 2619:16 - Stack size: 5
+Pop ) at 2619:27 matching ( from 2619:16 - Stack size: 4
+Push { at 2619:29 - Stack size: 5
+Push ( at 2620:64 - Stack size: 6
+Pop ) at 2620:65 matching ( from 2620:64 - Stack size: 5
+Push ( at 2621:20 - Stack size: 6
+Push ( at 2621:34 - Stack size: 7
+Pop ) at 2621:43 matching ( from 2621:34 - Stack size: 6
+Push ( at 2621:61 - Stack size: 7
+Pop ) at 2621:67 matching ( from 2621:61 - Stack size: 6
+Push ( at 2621:85 - Stack size: 7
+Pop ) at 2621:93 matching ( from 2621:85 - Stack size: 6
+Pop ) at 2621:94 matching ( from 2621:20 - Stack size: 5
+Push { at 2621:96 - Stack size: 6
+Pop } at 2623:17 matching { from 2621:96 - Stack size: 5
+Pop } at 2624:13 matching { from 2619:29 - Stack size: 4
+Push ( at 2627:38 - Stack size: 5
+Pop ) at 2627:64 matching ( from 2627:38 - Stack size: 4
+Push ( at 2627:73 - Stack size: 5
+Push { at 2627:84 - Stack size: 6
+Push ( at 2628:53 - Stack size: 7
+Pop ) at 2628:54 matching ( from 2628:53 - Stack size: 6
+Push ( at 2629:45 - Stack size: 7
+Pop ) at 2629:65 matching ( from 2629:45 - Stack size: 6
+Push ( at 2629:81 - Stack size: 7
+Pop ) at 2629:89 matching ( from 2629:81 - Stack size: 6
+Push ( at 2629:115 - Stack size: 7
+Pop ) at 2629:116 matching ( from 2629:115 - Stack size: 6
+Push ( at 2630:43 - Stack size: 7
+Pop ) at 2630:49 matching ( from 2630:43 - Stack size: 6
+Push ( at 2630:68 - Stack size: 7
+Pop ) at 2630:74 matching ( from 2630:68 - Stack size: 6
+Push ( at 2630:93 - Stack size: 7
+Pop ) at 2630:100 matching ( from 2630:93 - Stack size: 6
+Push ( at 2631:43 - Stack size: 7
+Pop ) at 2631:49 matching ( from 2631:43 - Stack size: 6
+Push ( at 2631:68 - Stack size: 7
+Pop ) at 2631:74 matching ( from 2631:68 - Stack size: 6
+Push ( at 2631:93 - Stack size: 7
+Pop ) at 2631:100 matching ( from 2631:93 - Stack size: 6
+Push ( at 2633:20 - Stack size: 7
+Push ( at 2633:30 - Stack size: 8
+Push ( at 2633:43 - Stack size: 9
+Pop ) at 2633:52 matching ( from 2633:43 - Stack size: 8
+Push ( at 2633:69 - Stack size: 9
+Pop ) at 2633:77 matching ( from 2633:69 - Stack size: 8
+Push ( at 2633:94 - Stack size: 9
+Pop ) at 2633:100 matching ( from 2633:94 - Stack size: 8
+Push ( at 2633:117 - Stack size: 9
+Pop ) at 2633:129 matching ( from 2633:117 - Stack size: 8
+Pop ) at 2633:130 matching ( from 2633:30 - Stack size: 7
+Pop ) at 2633:131 matching ( from 2633:20 - Stack size: 6
+Push { at 2633:133 - Stack size: 7
+Pop } at 2635:17 matching { from 2633:133 - Stack size: 6
+Push ( at 2636:20 - Stack size: 7
+Push ( at 2636:30 - Stack size: 8
+Push ( at 2636:43 - Stack size: 9
+Pop ) at 2636:52 matching ( from 2636:43 - Stack size: 8
+Push ( at 2636:69 - Stack size: 9
+Pop ) at 2636:77 matching ( from 2636:69 - Stack size: 8
+Push ( at 2636:94 - Stack size: 9
+Pop ) at 2636:100 matching ( from 2636:94 - Stack size: 8
+Push ( at 2636:117 - Stack size: 9
+Pop ) at 2636:129 matching ( from 2636:117 - Stack size: 8
+Pop ) at 2636:130 matching ( from 2636:30 - Stack size: 7
+Pop ) at 2636:131 matching ( from 2636:20 - Stack size: 6
+Push { at 2636:133 - Stack size: 7
+Pop } at 2638:17 matching { from 2636:133 - Stack size: 6
+Pop } at 2639:13 matching { from 2627:84 - Stack size: 5
+Pop ) at 2639:14 matching ( from 2627:73 - Stack size: 4
+Push ( at 2642:38 - Stack size: 5
+Pop ) at 2642:76 matching ( from 2642:38 - Stack size: 4
+Push ( at 2642:85 - Stack size: 5
+Push { at 2642:95 - Stack size: 6
+Push ( at 2643:52 - Stack size: 7
+Pop ) at 2643:53 matching ( from 2643:52 - Stack size: 6
+Push ( at 2644:52 - Stack size: 7
+Pop ) at 2644:53 matching ( from 2644:52 - Stack size: 6
+Push ( at 2645:20 - Stack size: 7
+Push ( at 2645:34 - Stack size: 8
+Pop ) at 2645:40 matching ( from 2645:34 - Stack size: 7
+Push ( at 2645:57 - Stack size: 8
+Pop ) at 2645:63 matching ( from 2645:57 - Stack size: 7
+Pop ) at 2645:64 matching ( from 2645:20 - Stack size: 6
+Push { at 2645:66 - Stack size: 7
+Push ( at 2646:24 - Stack size: 8
+Push ( at 2646:37 - Stack size: 9
+Pop ) at 2646:46 matching ( from 2646:37 - Stack size: 8
+Push ( at 2646:63 - Stack size: 9
+Pop ) at 2646:71 matching ( from 2646:63 - Stack size: 8
+Push ( at 2646:88 - Stack size: 9
+Pop ) at 2646:94 matching ( from 2646:88 - Stack size: 8
+Pop ) at 2646:95 matching ( from 2646:24 - Stack size: 7
+Pop } at 2647:17 matching { from 2645:66 - Stack size: 6
+Push ( at 2648:20 - Stack size: 7
+Push ( at 2648:34 - Stack size: 8
+Pop ) at 2648:40 matching ( from 2648:34 - Stack size: 7
+Push ( at 2648:57 - Stack size: 8
+Pop ) at 2648:63 matching ( from 2648:57 - Stack size: 7
+Pop ) at 2648:64 matching ( from 2648:20 - Stack size: 6
+Push { at 2648:66 - Stack size: 7
+Push ( at 2649:24 - Stack size: 8
+Push ( at 2649:37 - Stack size: 9
+Pop ) at 2649:46 matching ( from 2649:37 - Stack size: 8
+Push ( at 2649:63 - Stack size: 9
+Pop ) at 2649:71 matching ( from 2649:63 - Stack size: 8
+Push ( at 2649:88 - Stack size: 9
+Pop ) at 2649:94 matching ( from 2649:88 - Stack size: 8
+Pop ) at 2649:95 matching ( from 2649:24 - Stack size: 7
+Pop } at 2650:17 matching { from 2648:66 - Stack size: 6
+Pop } at 2651:13 matching { from 2642:95 - Stack size: 5
+Pop ) at 2651:14 matching ( from 2642:85 - Stack size: 4
+Push ( at 2654:52 - Stack size: 5
+Pop ) at 2654:86 matching ( from 2654:52 - Stack size: 4
+Push ( at 2655:16 - Stack size: 5
+Push [ at 2655:81 - Stack size: 6
+Pop ] at 2655:83 matching [ from 2655:81 - Stack size: 5
+Pop ) at 2655:84 matching ( from 2655:16 - Stack size: 4
+Push { at 2655:86 - Stack size: 5
+Push [ at 2656:57 - Stack size: 6
+Pop ] at 2656:59 matching [ from 2656:57 - Stack size: 5
+Push ( at 2656:77 - Stack size: 6
+Pop ) at 2656:78 matching ( from 2656:77 - Stack size: 5
+Push ( at 2657:20 - Stack size: 6
+Push ( at 2657:37 - Stack size: 7
+Pop ) at 2657:46 matching ( from 2657:37 - Stack size: 6
+Push ( at 2657:67 - Stack size: 7
+Pop ) at 2657:76 matching ( from 2657:67 - Stack size: 6
+Pop ) at 2657:77 matching ( from 2657:20 - Stack size: 5
+Push { at 2657:79 - Stack size: 6
+Pop } at 2660:17 matching { from 2657:79 - Stack size: 5
+Pop } at 2661:13 matching { from 2655:86 - Stack size: 4
+Push ( at 2664:38 - Stack size: 5
+Pop ) at 2664:89 matching ( from 2664:38 - Stack size: 4
+Push ( at 2664:98 - Stack size: 5
+Push { at 2664:109 - Stack size: 6
+Push ( at 2666:46 - Stack size: 7
+Pop ) at 2666:64 matching ( from 2666:46 - Stack size: 6
+Push ( at 2667:64 - Stack size: 7
+Pop ) at 2667:81 matching ( from 2667:64 - Stack size: 6
+Push ( at 2667:107 - Stack size: 7
+Pop ) at 2667:108 matching ( from 2667:107 - Stack size: 6
+Push ( at 2668:49 - Stack size: 7
+Pop ) at 2668:55 matching ( from 2668:49 - Stack size: 6
+Push ( at 2668:78 - Stack size: 7
+Pop ) at 2668:85 matching ( from 2668:78 - Stack size: 6
+Push ( at 2669:49 - Stack size: 7
+Pop ) at 2669:55 matching ( from 2669:49 - Stack size: 6
+Push ( at 2669:78 - Stack size: 7
+Pop ) at 2669:85 matching ( from 2669:78 - Stack size: 6
+Push ( at 2671:20 - Stack size: 7
+Push ( at 2671:30 - Stack size: 8
+Pop ) at 2671:64 matching ( from 2671:30 - Stack size: 7
+Pop ) at 2671:65 matching ( from 2671:20 - Stack size: 6
+Push { at 2671:67 - Stack size: 7
+Pop } at 2673:17 matching { from 2671:67 - Stack size: 6
+Push ( at 2674:20 - Stack size: 7
+Push ( at 2674:30 - Stack size: 8
+Pop ) at 2674:64 matching ( from 2674:30 - Stack size: 7
+Pop ) at 2674:65 matching ( from 2674:20 - Stack size: 6
+Push { at 2674:67 - Stack size: 7
+Pop } at 2676:17 matching { from 2674:67 - Stack size: 6
+Pop } at 2677:13 matching { from 2664:109 - Stack size: 5
+Pop ) at 2677:14 matching ( from 2664:98 - Stack size: 4
+Push ( at 2680:16 - Stack size: 5
+Pop ) at 2680:45 matching ( from 2680:16 - Stack size: 4
+Push { at 2680:47 - Stack size: 5
+Push ( at 2681:33 - Stack size: 6
+Pop ) at 2681:34 matching ( from 2681:33 - Stack size: 5
+Push ( at 2682:34 - Stack size: 6
+Pop ) at 2682:35 matching ( from 2682:34 - Stack size: 5
+Push ( at 2684:32 - Stack size: 6
+Pop ) at 2684:33 matching ( from 2684:32 - Stack size: 5
+Push ( at 2685:51 - Stack size: 6
+Pop ) at 2685:71 matching ( from 2685:51 - Stack size: 5
+Push ( at 2686:20 - Stack size: 6
+Pop ) at 2686:23 matching ( from 2686:20 - Stack size: 5
+Push { at 2686:25 - Stack size: 6
+Push ( at 2687:40 - Stack size: 7
+Pop ) at 2687:58 matching ( from 2687:40 - Stack size: 6
+Push ( at 2689:37 - Stack size: 7
+Pop ) at 2689:55 matching ( from 2689:37 - Stack size: 6
+Pop } at 2690:17 matching { from 2686:25 - Stack size: 5
+Pop } at 2692:13 matching { from 2680:47 - Stack size: 4
+Push ( at 2696:52 - Stack size: 5
+Pop ) at 2696:77 matching ( from 2696:52 - Stack size: 4
+Push ( at 2696:105 - Stack size: 5
+Pop ) at 2696:116 matching ( from 2696:105 - Stack size: 4
+Push ( at 2696:144 - Stack size: 5
+Pop ) at 2696:159 matching ( from 2696:144 - Stack size: 4
+Push ( at 2697:16 - Stack size: 5
+Pop ) at 2697:24 matching ( from 2697:16 - Stack size: 4
+Push { at 2697:26 - Stack size: 5
+Push ( at 2698:59 - Stack size: 6
+Pop ) at 2698:60 matching ( from 2698:59 - Stack size: 5
+Push ( at 2698:73 - Stack size: 6
+Pop ) at 2698:74 matching ( from 2698:73 - Stack size: 5
+Push ( at 2699:57 - Stack size: 6
+Push [ at 2699:59 - Stack size: 7
+Pop ] at 2699:63 matching [ from 2699:59 - Stack size: 6
+Pop ) at 2699:70 matching ( from 2699:57 - Stack size: 5
+Push ( at 2700:20 - Stack size: 6
+Push ( at 2700:90 - Stack size: 7
+Pop ) at 2700:100 matching ( from 2700:90 - Stack size: 6
+Push ( at 2700:123 - Stack size: 7
+Pop ) at 2700:133 matching ( from 2700:123 - Stack size: 6
+Pop ) at 2700:134 matching ( from 2700:20 - Stack size: 5
+Push { at 2700:136 - Stack size: 6
+Pop } at 2702:17 matching { from 2700:136 - Stack size: 5
+Pop } at 2703:13 matching { from 2697:26 - Stack size: 4
+Push ( at 2704:54 - Stack size: 5
+Pop ) at 2704:97 matching ( from 2704:54 - Stack size: 4
+Push ( at 2704:124 - Stack size: 5
+Pop ) at 2704:143 matching ( from 2704:124 - Stack size: 4
+Push ( at 2705:16 - Stack size: 5
+Pop ) at 2705:27 matching ( from 2705:16 - Stack size: 4
+Push { at 2705:29 - Stack size: 5
+Push ( at 2706:65 - Stack size: 6
+Pop ) at 2706:66 matching ( from 2706:65 - Stack size: 5
+Push ( at 2706:79 - Stack size: 6
+Pop ) at 2706:80 matching ( from 2706:79 - Stack size: 5
+Push ( at 2707:58 - Stack size: 6
+Push [ at 2707:60 - Stack size: 7
+Pop ] at 2707:64 matching [ from 2707:60 - Stack size: 6
+Pop ) at 2707:71 matching ( from 2707:58 - Stack size: 5
+Push ( at 2708:20 - Stack size: 6
+Push ( at 2708:89 - Stack size: 7
+Pop ) at 2708:99 matching ( from 2708:89 - Stack size: 6
+Push ( at 2708:125 - Stack size: 7
+Pop ) at 2708:135 matching ( from 2708:125 - Stack size: 6
+Pop ) at 2708:136 matching ( from 2708:20 - Stack size: 5
+Push { at 2708:138 - Stack size: 6
+Pop } at 2710:17 matching { from 2708:138 - Stack size: 5
+Pop } at 2711:13 matching { from 2705:29 - Stack size: 4
+Push ( at 2712:16 - Stack size: 5
+Push [ at 2712:81 - Stack size: 6
+Pop ] at 2712:83 matching [ from 2712:81 - Stack size: 5
+Pop ) at 2712:84 matching ( from 2712:16 - Stack size: 4
+Push { at 2712:86 - Stack size: 5
+Push [ at 2713:62 - Stack size: 6
+Pop ] at 2713:64 matching [ from 2713:62 - Stack size: 5
+Push ( at 2714:42 - Stack size: 6
+Push ( at 2714:68 - Stack size: 7
+Pop ) at 2714:81 matching ( from 2714:68 - Stack size: 6
+Pop ) at 2714:93 matching ( from 2714:42 - Stack size: 5
+Push ( at 2715:20 - Stack size: 6
+Pop ) at 2715:35 matching ( from 2715:20 - Stack size: 5
+Push { at 2715:37 - Stack size: 6
+Pop } at 2717:17 matching { from 2715:37 - Stack size: 5
+Pop } at 2718:13 matching { from 2712:86 - Stack size: 4
+Push ( at 2719:55 - Stack size: 5
+Pop ) at 2719:94 matching ( from 2719:55 - Stack size: 4
+Push ( at 2720:16 - Stack size: 5
+Pop ) at 2720:28 matching ( from 2720:16 - Stack size: 4
+Push { at 2720:30 - Stack size: 5
+Push ( at 2721:42 - Stack size: 6
+Push ( at 2721:67 - Stack size: 7
+Pop ) at 2721:80 matching ( from 2721:67 - Stack size: 6
+Pop ) at 2721:92 matching ( from 2721:42 - Stack size: 5
+Push ( at 2722:20 - Stack size: 6
+Pop ) at 2722:35 matching ( from 2722:20 - Stack size: 5
+Push { at 2722:37 - Stack size: 6
+Pop } at 2724:17 matching { from 2722:37 - Stack size: 5
+Pop } at 2725:13 matching { from 2720:30 - Stack size: 4
+Push ( at 2726:42 - Stack size: 5
+Push ( at 2726:81 - Stack size: 6
+Push [ at 2726:83 - Stack size: 7
+Pop ] at 2726:87 matching [ from 2726:83 - Stack size: 6
+Pop ) at 2726:94 matching ( from 2726:81 - Stack size: 5
+Pop ) at 2726:99 matching ( from 2726:42 - Stack size: 4
+Push ( at 2727:45 - Stack size: 5
+Push ( at 2727:75 - Stack size: 6
+Push [ at 2727:77 - Stack size: 7
+Pop ] at 2727:81 matching [ from 2727:77 - Stack size: 6
+Pop ) at 2727:88 matching ( from 2727:75 - Stack size: 5
+Pop ) at 2727:93 matching ( from 2727:45 - Stack size: 4
+Push ( at 2728:16 - Stack size: 5
+Pop ) at 2728:60 matching ( from 2728:16 - Stack size: 4
+Push { at 2728:62 - Stack size: 5
+Pop } at 2730:13 matching { from 2728:62 - Stack size: 4
+Push ( at 2732:16 - Stack size: 5
+Pop ) at 2732:31 matching ( from 2732:16 - Stack size: 4
+Push { at 2732:33 - Stack size: 5
+Push ( at 2733:33 - Stack size: 6
+Pop ) at 2733:34 matching ( from 2733:33 - Stack size: 5
+Push ( at 2734:34 - Stack size: 6
+Pop ) at 2734:35 matching ( from 2734:34 - Stack size: 5
+Push ( at 2735:20 - Stack size: 6
+Push ( at 2735:71 - Stack size: 7
+Pop ) at 2735:84 matching ( from 2735:71 - Stack size: 6
+Push ( at 2735:111 - Stack size: 7
+Pop ) at 2735:125 matching ( from 2735:111 - Stack size: 6
+Pop ) at 2735:126 matching ( from 2735:20 - Stack size: 5
+Push { at 2735:128 - Stack size: 6
+Pop } at 2737:17 matching { from 2735:128 - Stack size: 5
+Pop } at 2739:13 matching { from 2732:33 - Stack size: 4
+Pop } at 2740:9 matching { from 2606:18 - Stack size: 3
+Pop } at 2741:5 matching { from 2604:52 - Stack size: 2
+Pop ) at 2741:12 matching ( from 2604:30 - Stack size: 1
+Push ( at 2744:15 - Stack size: 2
+Pop ) at 2744:33 matching ( from 2744:15 - Stack size: 1
+Push ( at 2747:20 - Stack size: 2
+Pop ) at 2747:21 matching ( from 2747:20 - Stack size: 1
+Push ( at 2750:15 - Stack size: 2
+Push ( at 2750:24 - Stack size: 3
+Pop ) at 2750:25 matching ( from 2750:24 - Stack size: 2
+Push { at 2750:27 - Stack size: 3
+Push ( at 2751:26 - Stack size: 4
+Pop ) at 2751:27 matching ( from 2751:26 - Stack size: 3
+Push ( at 2752:33 - Stack size: 4
+Pop ) at 2752:34 matching ( from 2752:33 - Stack size: 3
+Pop } at 2753:5 matching { from 2750:27 - Stack size: 2
+Pop ) at 2753:11 matching ( from 2750:15 - Stack size: 1
+Push ( at 2756:15 - Stack size: 2
+Pop ) at 2756:40 matching ( from 2756:15 - Stack size: 1
+Push ( at 2757:15 - Stack size: 2
+Pop ) at 2757:41 matching ( from 2757:15 - Stack size: 1
+Push ( at 2760:31 - Stack size: 2
+Pop ) at 2760:32 matching ( from 2760:31 - Stack size: 1
+Push { at 2760:34 - Stack size: 2
+Push ( at 2761:34 - Stack size: 3
+Pop ) at 2761:76 matching ( from 2761:34 - Stack size: 2
+Push ( at 2761:85 - Stack size: 3
+Push { at 2761:94 - Stack size: 4
+Push ( at 2762:46 - Stack size: 5
+Pop ) at 2762:73 matching ( from 2762:46 - Stack size: 4
+Push ( at 2763:48 - Stack size: 5
+Pop ) at 2763:59 matching ( from 2763:48 - Stack size: 4
+Push ( at 2763:82 - Stack size: 5
+Pop ) at 2763:107 matching ( from 2763:82 - Stack size: 4
+Push ( at 2764:16 - Stack size: 5
+Pop ) at 2764:35 matching ( from 2764:16 - Stack size: 4
+Push { at 2764:37 - Stack size: 5
+Push ( at 2765:36 - Stack size: 6
+Pop ) at 2765:88 matching ( from 2765:36 - Stack size: 5
+Pop } at 2767:13 matching { from 2764:37 - Stack size: 4
+Pop } at 2768:9 matching { from 2761:94 - Stack size: 3
+Pop ) at 2768:10 matching ( from 2761:85 - Stack size: 2
+Push ( at 2770:43 - Stack size: 3
+Pop ) at 2770:69 matching ( from 2770:43 - Stack size: 2
+Push ( at 2771:12 - Stack size: 3
+Pop ) at 2771:52 matching ( from 2771:12 - Stack size: 2
+Push { at 2771:54 - Stack size: 3
+Pop } at 2773:9 matching { from 2771:54 - Stack size: 2
+Pop } at 2774:5 matching { from 2760:34 - Stack size: 1
+Push ( at 2776:15 - Stack size: 2
+Pop ) at 2776:38 matching ( from 2776:15 - Stack size: 1
+Push ( at 2777:15 - Stack size: 2
+Pop ) at 2777:39 matching ( from 2777:15 - Stack size: 1
+Push ( at 2780:30 - Stack size: 2
+Push ( at 2780:49 - Stack size: 3
+Pop ) at 2780:51 matching ( from 2780:49 - Stack size: 2
+Push { at 2780:53 - Stack size: 3
+Push ( at 2781:12 - Stack size: 4
+Push ( at 2781:29 - Stack size: 5
+Pop ) at 2781:53 matching ( from 2781:29 - Stack size: 4
+Push ( at 2781:74 - Stack size: 5
+Pop ) at 2781:100 matching ( from 2781:74 - Stack size: 4
+Pop ) at 2781:101 matching ( from 2781:12 - Stack size: 3
+Push { at 2781:103 - Stack size: 4
+Push ( at 2782:25 - Stack size: 5
+Pop ) at 2782:26 matching ( from 2782:25 - Stack size: 4
+Pop } at 2783:9 matching { from 2781:103 - Stack size: 3
+Pop } at 2784:5 matching { from 2780:53 - Stack size: 2
+Pop ) at 2784:6 matching ( from 2780:30 - Stack size: 1
+Push ( at 2787:39 - Stack size: 2
+Pop ) at 2787:65 matching ( from 2787:39 - Stack size: 1
+Push ( at 2788:8 - Stack size: 2
+Pop ) at 2788:12 matching ( from 2788:8 - Stack size: 1
+Push { at 2788:14 - Stack size: 2
+Push ( at 2789:41 - Stack size: 3
+Pop ) at 2789:50 matching ( from 2789:41 - Stack size: 2
+Push ( at 2790:12 - Stack size: 3
+Push ( at 2790:44 - Stack size: 4
+Pop ) at 2790:66 matching ( from 2790:44 - Stack size: 3
+Pop ) at 2790:67 matching ( from 2790:12 - Stack size: 2
+Push { at 2790:69 - Stack size: 3
+Push ( at 2791:51 - Stack size: 4
+Pop ) at 2791:65 matching ( from 2791:51 - Stack size: 3
+Push ( at 2792:16 - Stack size: 4
+Pop ) at 2792:26 matching ( from 2792:16 - Stack size: 3
+Push { at 2792:28 - Stack size: 4
+Push ( at 2793:55 - Stack size: 5
+Pop ) at 2793:64 matching ( from 2793:55 - Stack size: 4
+Push ( at 2797:36 - Stack size: 5
+Pop ) at 2797:55 matching ( from 2797:36 - Stack size: 4
+Pop } at 2798:13 matching { from 2792:28 - Stack size: 3
+Pop } at 2799:9 matching { from 2790:69 - Stack size: 2
+Pop } at 2800:5 matching { from 2788:14 - Stack size: 1
+Pop } at 2801:1 matching { from 2539:39 - Stack size: 0

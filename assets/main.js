@@ -1465,26 +1465,6 @@ window.compareList = [];
 window.toggleCompare = function(btn, name, img, price) {
     console.log('--- toggleCompare called ---');
     
-    if (window.currentProductData) {
-        window.compareList = [{
-            name: window.currentProductData.name,
-            img: window.currentProductData.img,
-            price: window.currentProductData.price,
-            url: window.currentProductData.url
-        }];
-        
-        if (btn) {
-            btn.style.background = 'var(--primary, #003366)';
-            btn.style.color = 'white';
-            const icon = btn.querySelector('i');
-            if (icon) icon.className = 'ph-bold ph-check';
-        }
-        
-        window.showCompareSelectDropdown(null);
-        window.updateCompareBar();
-        return;
-    }
-    
     const idx = window.compareList.findIndex(p => p.name === name);
     if (idx > -1) {
         window.compareList.splice(idx, 1);
@@ -1607,7 +1587,7 @@ window.updateCompareBar = function() {
             html += `
                 <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray, #f8fafc); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color, #e2e8f0); flex: 1; max-width: 380px; min-width: 0; position: relative; font-family: inherit; box-sizing: border-box;">
                     <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white, #ffffff); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <div style="flex: 1; min-width: 0; text-align: left;">
+                    <div class="compare-slot-info" style="flex: 1; min-width: 0; text-align: left;">
                         <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;" title="${escapedNameForAttr}">${p.name}</div>
                         <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
                     </div>
@@ -1618,12 +1598,33 @@ window.updateCompareBar = function() {
             html += `
                 <div class="compare-slot-item" onclick="window.showCompareSelectDropdown(event)" style="cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color, #e2e8f0); flex: 1; max-width: 380px; min-width: 0; color: var(--text-gray, #64748b); font-size: 0.95rem; font-family: inherit; box-sizing: border-box;">
                     <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray, #f8fafc); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
-                    Thêm sản phẩm
+                    <span class="compare-slot-text">Thêm sản phẩm</span>
                 </div>
             `;
         }
     }
     slots.innerHTML = html;
+};
+
+window.openCompareDrawerDirect = function(name, img, price, url) {
+    const activeName = name || (window.currentProductData && window.currentProductData.name) || 'ASUS NUC AI 350';
+    const activeImg = img || (window.currentProductData && window.currentProductData.img) || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+    const activePrice = price || (window.currentProductData && window.currentProductData.price) || '12.390.000đ';
+    const activeUrl = url || (window.currentProductData && window.currentProductData.url) || window.location.pathname;
+
+    const idx = window.compareList.findIndex(p => p.name === activeName);
+    if (idx === -1) {
+        if (window.compareList.length >= 2) {
+            window.compareList = [];
+        }
+        window.compareList.push({ name: activeName, img: activeImg, price: activePrice, url: activeUrl });
+    }
+    window.updateCompareBar();
+    if (window.compareList.length === 1) {
+        window.showCompareSelectDropdown(null);
+    } else if (window.compareList.length === 2) {
+        window.executeCompare();
+    }
 };
 
 window.showCompareSelectDropdown = function(event) {
@@ -1664,7 +1665,17 @@ window.filterCompareProducts = function() {
     const listContainer = document.getElementById('compare-select-list');
     if (!listContainer) return;
     
-    const products = window.currentCollectionProducts || window.navaProducts || [];
+    let products = window.currentCollectionProducts || window.navaProducts || [];
+    if (!products || products.length === 0) {
+        products = [
+            { name: 'ASUS NUC AI 350', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price: '12.390.000đ', url: 'demo_product.html' },
+            { name: 'MINISFORUM UM890 Pro', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420', price: '14.990.000đ', url: 'demo_product.html' },
+            { name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)', img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', price: '14.200.000đ', url: 'demo_product.html' },
+            { name: 'ASUS NUC 14 Essential Intel', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '4.490.000đ', url: 'demo_product.html' },
+            { name: 'Mini PC GMK EVO X1 32G', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', price: '31.190.000đ', url: 'demo_product.html' },
+            { name: 'AtomMan G7 PT Mini PC', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '34.490.000đ', url: 'demo_product.html' }
+        ];
+    }
     let available = products.filter(p => p && p.name && !window.compareList.some(item => item && item.name === p.name));
     
     let displayList = available;
@@ -1675,6 +1686,14 @@ window.filterCompareProducts = function() {
     }
     
     let html = '';
+    if (!query && displayList.length > 0) {
+        html += `
+            <div style="grid-column: 1 / -1; font-size: 0.85rem; font-weight: 700; color: var(--text-gray, #64748b); text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;">
+                <i class="ph-fill ph-sparkles" style="color: var(--primary);"></i> Sản phẩm liên quan gợi ý
+            </div>
+        `;
+    }
+    
     displayList.forEach(p => {
         if (!p || !p.name) return;
         const escapedName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');

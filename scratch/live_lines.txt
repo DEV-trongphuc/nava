@@ -1,0 +1,100 @@
+4068:                         .join(', ');
+4069: 
+4070:                     createToast('error', toastString.toastAddErrorTitle,
+4071:                         `Thất bại khi thêm ${failures.length} sản phẩm: ${errorMessages}`);
+4072:                 }
+4073: 
+4074:             } catch (error) {
+4075:                 createToast('error', toastString.toastAddErrorTitle, error.message || error);
+4076:             } finally {
+4077:                 $btn.removeClass('loading');
+4078:             }
+4079:         });
+4080:     });
+4081: }
+4082: </script>
+4083:                     </div>
+4084: <footer class="footer">
+4085:     <div class="container footer-grid">
+4086:         <div class="footer-col brand">
+4087:             <div class="logo">
+4088:                 <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1780635269707" alt="Nava Store" class="footer-logo-img" loading="lazy" decoding="async" width="125" height="50" style="object-fit: contain;">
+4089:             </div>
+4090:             <p class="footer-desc">Trung tâm phân phối tiên phong chuyên cung cấp các giải pháp Mini PC & eGPU cao cấp, tái thiết lập hoàn toàn chuẩn mực của một chiếc máy tính cá nhân.</p>
+4091:             <div class="footer-socials">
+4092:                 <a href="https://shopee.vn/navastore.vn" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" loading="lazy" decoding="async" width="32" height="32"></a>
+4093:                 <a href="https://www.lazada.vn/shop/nava-store" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" loading="lazy" decoding="async" width="32" height="32"></a>
+4094:                 <a href="https://www.tiktok.com/@navastore.vn" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok" loading="lazy" decoding="async" width="32" height="32"></a>
+4095:                 <a href="https://www.facebook.com/navastore.vn/" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook" loading="lazy" decoding="async" width="32" height="32"></a>
+4096:                 <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube" loading="lazy" decoding="async" width="32" height="32"></a>
+4097:             </div>
+4098:         </div>
+4099:         <div class="footer-col">
+4100:             <h4 class="footer-title">Danh Mục Chính</h4>
+4101:             <ul>
+4102:                 <li><a href="https://navastore.vn/minipc">Mini PC Gaming & Đồ Họa</a></li>
+4103:                 <li><a href="https://navastore.vn/minipc">Mini PC AI & Văn phòng</a></li>
+4104:                 <li><a href="https://navastore.vn/egpu">Hệ thống eGPU gắn ngoài</a></li>
+4105:                 <li><a href="https://navastore.vn/nas">Giải pháp NAS/Server</a></li>
+4106:             </ul>
+4107:         </div>
+4108:         <div class="footer-col">
+4109:             <h4 class="footer-title">Hỗ trợ khách hàng</h4>
+4110:             <ul>
+4111:                 <li><a href="/chinh-sach-bao-mat#warranty" id="open-warranty-modal-footer">Chính sách bảo hành</a></li>
+4112:                 <li><a href="/chinh-sach-bao-mat#installment">Hướng dẫn trả góp</a></li>
+4113:                 <li><a href="/chinh-sach-bao-mat#shipping">Giao hàng & Đổi trả</a></li>
+4114:             </ul>
+4115:         </div>
+4116:         <div class="footer-col">
+4117:             <h4 class="footer-title">Liên hệ</h4>
+4118:             <ul>
+4119:                 <li><i class="ph-fill ph-phone"></i> 0972178527</li>
+4120:                 <li><i class="ph-fill ph-envelope-simple"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3aaada5ac83ada2b5a2b7a6a8edb5ad">[email&#160;protected]</a></li>
+4121:                 <li><i class="ph-fill ph-buildings"></i> MST: 8080980349-001</li>
+4122:                 <li><i class="ph-fill ph-scroll"></i> ĐKKD: 41Y8016466</li>
+4123:             </ul>
+4124:         </div>
+4125:     </div>
+4126:     <div class="footer-company-info container">
+4127:         <div class="company-details">
+4128:             <div class="detail-item">
+4129:                 <i class="ph-fill ph-map-pin"></i>
+4130:                 <span><strong>Văn phòng:</strong> 702 Võ Nguyên Giáp, Hiệp Phú, Thủ Đức, Hồ Chí Minh</span>
+4131:             </div>
+4132:             <div class="detail-item">
+4133:                 <i class="ph-fill ph-wrench"></i>
+4134:                 <span><strong>Trung tâm bảo hành:</strong> 270 đường Linh Trung, P.Linh Trung, TP. Thủ Đức, TP.HCM</span>
+4135:             </div>
+4136:         </div>
+4137:         <div class="certifications">
+4138:             <a href="https://online.gov.vn" target="_blank" rel="noopener"><img src="https://bizweb.dktcdn.net/100/543/817/files/logosalenoti.png?v=1742207130127" alt="Bộ Công Thương" loading="lazy" decoding="async" width="150" height="57" style="object-fit: contain;"></a>
+4139:             <a href="https://www.dmca.com" target="_blank" rel="noopener"><img src="https://images.dmca.com/Badges/dmca_protected_16_120.png?ID=f55dbae2-71d9-4c58-84e6-1813dd7ec617" alt="DMCA" loading="lazy" decoding="async" width="120" height="24" style="object-fit: contain;"></a>
+4140:         </div>
+4141:     </div>
+4142:     <div class="container footer-bottom">
+4143:         <p>&copy; 2026 NAVA STORE. Định Nghĩa Lại Sức Mạnh Điện Toán.</p>
+4144:     </div>
+4145: </footer>                </div>
+4146:             </div>
+4147:             <div onclick="scrollToTop(100);" class="back_top d-flex position-fixed justify-content-center align-items-center" role="button" aria-label="Lên đầu trang">
+4148:                 <img alt="" aria-hidden="true" src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/to-top-arrow2.png?1780635269707" width="17" height="9">
+4149:             </div>
+4150:             <div class="toast-container"></div>
+4151: <template id="cart-item-template">
+4152: 	<div class="d-flex cart__basket__item product mb-4 rounded-10 ux-card position-relative clearfix">
+4153: 		<img src="" class="js-img position-absolute" />
+4154: 		<div class="col-12 d-flex p-0">
+4155: 			<p class="item-title clearfix mb-2">
+4156: 				<a href="" title="" class="js-titlte font-weight-bold"></a>
+4157: 				<span class="js-variant-titlte d-block"></span>
+4158: 			</p>
+4159: 			<span class="js-price price font-weight-bold ml-auto text-right clearfix"></span>
+4160: 		</div>
+4161: 		<div class="js-number-input number-input d-inline-flex rounded-10">
+4162: 			<button class="position-relative m-0 border-0 step-down-qty js-step-qty"></button>
+4163: 			<input class="js-quantity text-center" readonly="" min="1" name="Lines" value="" size="2" type="number" data-variantid="">
+4164: 			<button class="position-relative m-0 border-0 step-up-qty js-step-qty plus"></button>
+4165: 		</div>
+4166: 		<button class="btn btn-outline-danger remove ml-auto js-remove-item-cart rounded-10" title="" data-variantid=""></button>
+4167: 	</div>

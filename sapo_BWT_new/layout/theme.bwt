@@ -303,6 +303,76 @@
         <!-- End Google Tag Manager (noscript) -->
         
         <!-- Nava Sticky Compare Bar & Comparison Modal -->
+        <style>
+            @media (max-width: 768px) {
+                #compare-bar {
+                    padding: 12px 0 !important;
+                }
+                #compare-bar-inner {
+                    gap: 10px !important;
+                    padding: 0 10px !important;
+                    flex-wrap: nowrap !important;
+                }
+                /* Hide product names and prices inside slots on mobile */
+                .compare-slot-info, .compare-slot-text {
+                    display: none !important;
+                }
+                /* Hide close button text and keep icon only or adjust slot size */
+                .compare-slot-item {
+                    padding: 5px !important;
+                    max-width: 60px !important;
+                    height: 60px !important;
+                    justify-content: center !important;
+                }
+                .compare-slot-item img {
+                    width: 100% !important;
+                    height: 100% !important;
+                    object-fit: contain !important;
+                    padding: 0 !important;
+                    box-shadow: none !important;
+                }
+                /* Reposition delete button of individual slot as a top-right corner badge */
+                .compare-slot-item button {
+                    position: absolute !important;
+                    top: -8px !important;
+                    right: -8px !important;
+                    background: #ef4444 !important;
+                    color: white !important;
+                    border-radius: 50% !important;
+                    width: 18px !important;
+                    height: 18px !important;
+                    font-size: 0.7rem !important;
+                    padding: 0 !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+                }
+                /* Make actions button fit */
+                #compare-actions {
+                    min-width: 110px !important;
+                    flex: 1 !important;
+                }
+                #compare-submit {
+                    padding: 10px 15px !important;
+                    font-size: 0.85rem !important;
+                    border-radius: 8px !important;
+                    justify-content: center !important;
+                }
+                /* Position global compare bar close button to top-right out of the way */
+                #compare-bar > button[onclick="hideCompareBar()"] {
+                    width: 28px !important;
+                    height: 28px !important;
+                    top: -14px !important;
+                    right: 10px !important;
+                    font-size: 0.9rem !important;
+                }
+                /* Adjust VS circle size */
+                #compare-slots + div, #compare-slots > div {
+                    align-self: center !important;
+                }
+            }
+        </style>
         <div id="compare-bar" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #003366; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: none; background: var(--bg-white) !important; box-shadow: 0 -10px 50px rgba(0,0,0,0.15) !important; border-top: 1px solid var(--border-color) !important; padding: 25px 0 !important;">
             <!-- Nút X tắt nhanh -->
             <button onclick="hideCompareBar()" style="position: absolute; top: -18px; right: 25px; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-white); border: 1px solid var(--border-color); color: var(--text-gray); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.2s;" onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)'"><i class="ph-bold ph-x" style="font-size: 1.1rem;"></i></button>

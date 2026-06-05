@@ -1,0 +1,38 @@
+{%- assign current_product = product -%}
+{%- assign current_collection = collection -%}
+{%- if current_collection == null and product.collections.size > 0 -%}
+  {%- assign current_collection = product.collections.first -%}
+{%- endif -%}
+
+{%- if current_collection and current_collection.products.size > 1 -%}
+<div class="mt-5 mb-5" style="width: 100%;">
+  <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 24px; color: var(--text-dark, #0f172a); display: flex; justify-content: space-between; align-items: center;">
+    Sản phẩm liên quan
+  </h2>
+  
+  <style>
+    .related-product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+    @media (max-width: 1199px) { .related-product-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 991px) { .related-product-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 575px) { .related-product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
+  </style>
+
+  <div class="related-product-grid">
+    {%- assign count = 0 -%}
+    {%- for prod in current_collection.products -%}
+      {%- if prod.id != current_product.id -%}
+        {%- assign product = prod -%}
+        {%- include 'product-grid-item' -%}
+        {%- assign count = count | plus: 1 -%}
+        {%- if count >= 4 -%}{%- break -%}{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+{%- assign product = current_product -%}
+{%- endif -%}

@@ -374,8 +374,8 @@
               
               let show = true;
               
-              // Hide products with no price / "Liên hệ" (price === 0) always
-              if (price === 0) {
+              // Hide products with no price / "Liên hệ" (price === 0) only if a price filter is active
+              if (price === 0 && hasPriceFilter) {
                   show = false;
               }
               

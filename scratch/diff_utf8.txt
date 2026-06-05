@@ -1,0 +1,424 @@
+diff --git a/sapo_BWT_new/Templates/product.bwt b/sapo_BWT_new/Templates/product.bwt
+index 0182256..26c49b3 100644
+--- a/sapo_BWT_new/Templates/product.bwt
++++ b/sapo_BWT_new/Templates/product.bwt
+@@ -695,7 +695,8 @@
+             width: 100% !important;
+         }
+         
+-        frequently-buy-together .custom-btn-number {
++        frequently-buy-together .custom-btn-number,
++        #nava-bottom-sheet .custom-btn-number {
+             background: transparent !important;
+             border: none !important;
+             display: flex !important;
+@@ -707,7 +708,8 @@
+             padding: 0 !important;
+             width: fit-content !important;
+         }
+-        frequently-buy-together .custom-btn-number label {
++        frequently-buy-together .custom-btn-number label,
++        #nava-bottom-sheet .custom-btn-number label {
+             background: transparent !important;
+             color: var(--text-dark, #0f172a) !important;
+             font-weight: 700 !important;
+@@ -717,10 +719,13 @@
+             flex-shrink: 0 !important;
+         }
+         frequently-buy-together .custom-btn-number button,
+-        frequently-buy-together .custom-btn-number input {
++        frequently-buy-together .custom-btn-number input,
++        #nava-bottom-sheet .custom-btn-number button,
++        #nava-bottom-sheet .custom-btn-number input {
+             margin: 0 !important;
+         }
+-        frequently-buy-together .custom-btn-number button:first-of-type {
++        frequently-buy-together .custom-btn-number button:first-of-type,
++        #nava-bottom-sheet .custom-btn-number button:first-of-type {
+             border-radius: 8px 0 0 8px !important;
+             border: 1.5px solid var(--border-color, #cbd5e1) !important;
+             border-right: none !important;
+@@ -735,7 +740,8 @@
+             color: var(--text-dark) !important;
+             box-shadow: none !important;
+         }
+-        frequently-buy-together .custom-btn-number input {
++        frequently-buy-together .custom-btn-number input,
++        #nava-bottom-sheet .custom-btn-number input {
+             border-radius: 0 !important;
+             border-top: 1.5px solid var(--border-color, #cbd5e1) !important;
+             border-bottom: 1.5px solid var(--border-color, #cbd5e1) !important;
+@@ -753,7 +759,8 @@
+             display: inline-block !important;
+             flex-shrink: 0 !important;
+         }
+-        frequently-buy-together .custom-btn-number button:last-of-type {
++        frequently-buy-together .custom-btn-number button:last-of-type,
++        #nava-bottom-sheet .custom-btn-number button:last-of-type {
+             border-radius: 0 8px 8px 0 !important;
+             border: 1.5px solid var(--border-color, #cbd5e1) !important;
+             border-left: none !important;
+@@ -768,10 +775,12 @@
+             color: var(--text-dark) !important;
+             box-shadow: none !important;
+         }
+-        frequently-buy-together .custom-btn-number button:hover {
++        frequently-buy-together .custom-btn-number button:hover,
++        #nava-bottom-sheet .custom-btn-number button:hover {
+             background: rgba(0, 51, 102, 0.05) !important;
+         }
+-        frequently-buy-together .custom-btn-number button svg {
++        frequently-buy-together .custom-btn-number button svg,
++        #nava-bottom-sheet .custom-btn-number button svg {
+             width: 12px !important;
+             height: 12px !important;
+             fill: none !important;
+@@ -801,7 +810,8 @@
+                 gap: 12px !important;
+                 margin-bottom: 18px !important;
+             }
+-            frequently-buy-together .custom-btn-number {
++            frequently-buy-together .custom-btn-number,
++            #nava-bottom-sheet .custom-btn-number {
+                 width: auto !important;
+                 justify-content: flex-start !important;
+             }
+@@ -957,13 +967,14 @@
+         #nava-bottom-sheet {
+             position: fixed;
+             bottom: 0;
+-            left: 0;
++            left: 50%;
++            transform: translateX(-50%) translateY(100%);
+             width: 100%;
++            max-width: 550px;
+             background: var(--bg-white, #ffffff);
+             border-radius: 20px 20px 0 0;
+             box-shadow: 0 -10px 40px rgba(0,0,0,0.15);
+             z-index: 2147483641;
+-            transform: translateY(100%);
+             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+             box-sizing: border-box;
+             max-height: 85vh;
+@@ -973,7 +984,7 @@
+             --glow-border: var(--primary, #003366);
+         }
+         #nava-bottom-sheet.open {
+-            transform: translateY(0);
++            transform: translateX(-50%) translateY(0);
+         }
+         @keyframes bs-glow-attention {
+             0%, 100% {
+@@ -986,9 +997,9 @@
+             }
+         }
+         @keyframes bs-shake {
+-            0%, 100% { transform: translateY(0); }
+-            15%, 45%, 75% { transform: translateY(-5px); }
+-            30%, 60%, 90% { transform: translateY(3px); }
++            0%, 100% { transform: translateX(-50%) translateY(0); }
++            15%, 45%, 75% { transform: translateX(-50%) translateY(-5px); }
++            30%, 60%, 90% { transform: translateX(-50%) translateY(3px); }
+         }
+         .bs-shake-active {
+             animation: bs-shake 0.5s ease-in-out;
+@@ -1225,22 +1236,20 @@
+                         <div class="btn-group-instock" style="display: {% if product.available %}flex{% else %}none{% endif %}; align-items: center; gap: 10px; width: 100%;">
+                             <!-- Icon Cart Button -->
+                             <button id="btn-add-to-cart" type="button" class="btn js-addToCart align-items-center justify-content-center" 
+-                                    {% if selected_variant.price == 0 %}disabled style="opacity: 0.5; pointer-events: none; width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; transition: all 0.2s; padding: 0; flex-shrink: 0;"{% else %}style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; transition: all 0.2s; padding: 0; flex-shrink: 0;"{% endif %}
+-                                    onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
++                                    {% if selected_variant.price == 0 %}disabled style="opacity: 1; pointer-events: none; width: 50px; height: 50px; border-radius: 8px; border: 1px solid #cbd5e1; background: #cbd5e1; color: #94a3b8; cursor: not-allowed; transition: all 0.2s; padding: 0; flex-shrink: 0;"{% else %}style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; transition: all 0.2s; padding: 0; flex-shrink: 0;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'"{% endif %}>
+                                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+                             </button>
+                             
+                             <!-- Trả góp 0% Button -->
+                             <button id="btn-installment" type="button" class="btn js-buynow align-items-center justify-content-center font-weight-bold" 
+-                                    {% if selected_variant.price == 0 %}disabled style="opacity: 0.5; pointer-events: none; flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; padding: 0;"{% else %}style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; padding: 0;"{% endif %}
+-                                    onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
++                                    {% if selected_variant.price == 0 %}disabled style="opacity: 1; pointer-events: none; flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #cbd5e1; color: #94a3b8; font-family: inherit; font-size: 0.95rem; cursor: not-allowed; text-transform: uppercase; transition: all 0.2s; padding: 0;"{% else %}style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; padding: 0;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'"{% endif %}>
+                                 TRẢ GÓP 0%
+                             </button>
+                             
+                             <!-- Mua Ngay Button -->
+                             <button id="btn-buy-now" type="button" class="btn js-buynow align-items-center justify-content-center font-weight-bold" 
+-                                    {% if selected_variant.price == 0 %}disabled style="opacity: 0.5; pointer-events: none; flex: 1.5; height: 50px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2); padding: 0;"{% else %}style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2); padding: 0;"{% endif %}
+-                                    onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
++                                    {% if selected_variant.price == 0 %}style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: #334155; color: white; cursor: pointer; transition: all 0.2s; padding: 0;"{% else %}style="flex: 1.5; height: 50px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2); padding: 0;"{% endif %}
++                                    onmouseover="{% if selected_variant.price == 0 %}this.style.background='#475569'{% else %}this.style.opacity='0.9'{% endif %}" onmouseout="{% if selected_variant.price == 0 %}this.style.background='#334155'{% else %}this.style.opacity='1'{% endif %}">
+                                 {% if selected_variant.price == 0 %}LIÊN HỆ{% else %}MUA NGAY{% endif %}
+                             </button>
+                         </div>
+@@ -1408,10 +1417,23 @@
+         
+         <!-- Actions row: Add to cart & Buy now -->
+         <div class="bs-actions-row" style="display: flex; gap: 15px; align-items: center; width: 100%; margin-top: 15px;">
+-            <button type="button" class="btn-add-cart btn-add-cart-bs" style="flex: none !important; width: 60px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; color: var(--primary); cursor: pointer;" title="Thêm vào giỏ">
++            <button type="button" class="btn-add-cart btn-add-cart-bs" 
++                    {% if selected_variant.price == 0 %}
++                    disabled style="flex: none !important; width: 60px; height: 50px; display: flex; align-items: center; justify-content: center; background: #cbd5e1; border: 1px solid #cbd5e1; border-radius: 8px; color: #94a3b8; cursor: not-allowed; pointer-events: none;"
++                    {% else %}
++                    style="flex: none !important; width: 60px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; color: var(--primary); cursor: pointer;"
++                    {% endif %}
++                    title="Thêm vào giỏ">
+                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+             </button>
+-            <button type="button" class="bs-buy-btn" style="flex: 1; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-weight: 800; font-size: 1rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);">MUA NGAY</button>
++            <button type="button" class="bs-buy-btn" 
++                    {% if selected_variant.price == 0 %}
++                    style="flex: 1; height: 50px; border-radius: 8px; border: none; background: #334155; color: white; font-weight: 800; font-size: 1rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(51, 65, 85, 0.2);"
++                    {% else %}
++                    style="flex: 1; height: 50px; border-radius: 8px; border: none; background: linear-gradient(90deg, var(--primary), var(--secondary)); color: white; font-weight: 800; font-size: 1rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);"
++                    {% endif %}>
++                {% if selected_variant.price == 0 %}LIÊN HỆ{% else %}MUA NGAY{% endif %}
++            </button>
+         </div>
+     </div>
+ </div>
+@@ -1690,7 +1712,7 @@
+             wrapper.appendChild(list);
+             
+             display.addEventListener('click', function(e) {
+-                if (window.innerWidth >= 992) return;
++                if (window.innerWidth >= 992 && !wrapper.closest('#nava-bottom-sheet')) return;
+                 e.stopPropagation();
+                 const isActive = wrapper.classList.contains('active');
+                 
+@@ -2143,34 +2165,47 @@ function syncSwatches() {
+         if (priceVal === 0) {
+             if (statusEl) {
+                 statusEl.innerText = 'Liên hệ';
+-                statusEl.style.color = '#22c55e';
++                statusEl.style.color = '#003366';
+             }
+             if (btnAddToCart) {
+                 btnAddToCart.disabled = true;
+-                btnAddToCart.style.opacity = '0.5';
++                btnAddToCart.style.background = '#cbd5e1';
++                btnAddToCart.style.borderColor = '#cbd5e1';
++                btnAddToCart.style.color = '#94a3b8';
++                btnAddToCart.style.opacity = '1';
+                 btnAddToCart.style.pointerEvents = 'none';
+             }
+             if (btnInstallment) {
+                 btnInstallment.disabled = true;
+-                btnInstallment.style.opacity = '0.5';
++                btnInstallment.style.background = '#cbd5e1';
++                btnInstallment.style.borderColor = '#cbd5e1';
++                btnInstallment.style.color = '#94a3b8';
++                btnInstallment.style.opacity = '1';
+                 btnInstallment.style.pointerEvents = 'none';
+             }
+             if (btnBuyNow) {
+-                btnBuyNow.disabled = true;
++                btnBuyNow.disabled = false;
+                 btnBuyNow.innerText = 'LIÊN HỆ';
+-                btnBuyNow.style.opacity = '0.5';
+-                btnBuyNow.style.pointerEvents = 'none';
++                btnBuyNow.style.background = '#334155';
++                btnBuyNow.style.color = 'white';
++                btnBuyNow.style.opacity = '1';
++                btnBuyNow.style.pointerEvents = 'auto';
+                 btnBuyNow.style.setProperty('flex', '1.5', 'important');
+             }
+             if (bsBuyBtn) {
+-                bsBuyBtn.disabled = true;
++                bsBuyBtn.disabled = false;
+                 bsBuyBtn.innerText = 'LIÊN HỆ';
+-                bsBuyBtn.style.opacity = '0.5';
+-                bsBuyBtn.style.pointerEvents = 'none';
++                bsBuyBtn.style.background = '#334155';
++                bsBuyBtn.style.color = 'white';
++                bsBuyBtn.style.opacity = '1';
++                bsBuyBtn.style.pointerEvents = 'auto';
+             }
+             if (bsAddCartBtn) {
+                 bsAddCartBtn.disabled = true;
+-                bsAddCartBtn.style.opacity = '0.5';
++                bsAddCartBtn.style.background = '#cbd5e1';
++                bsAddCartBtn.style.borderColor = '#cbd5e1';
++                bsAddCartBtn.style.color = '#94a3b8';
++                bsAddCartBtn.style.opacity = '1';
+                 bsAddCartBtn.style.pointerEvents = 'none';
+             }
+         } else {
+@@ -2180,17 +2215,25 @@ function syncSwatches() {
+             }
+             if (btnAddToCart) {
+                 btnAddToCart.disabled = false;
++                btnAddToCart.style.background = 'transparent';
++                btnAddToCart.style.borderColor = 'var(--primary)';
++                btnAddToCart.style.color = 'var(--primary)';
+                 btnAddToCart.style.opacity = '';
+                 btnAddToCart.style.pointerEvents = '';
+             }
+             if (btnInstallment) {
+                 btnInstallment.disabled = false;
++                btnInstallment.style.background = 'transparent';
++                btnInstallment.style.borderColor = 'var(--primary)';
++                btnInstallment.style.color = 'var(--primary)';
+                 btnInstallment.style.opacity = '';
+                 btnInstallment.style.pointerEvents = '';
+             }
+             if (btnBuyNow) {
+                 btnBuyNow.disabled = false;
+                 btnBuyNow.innerText = 'MUA NGAY';
++                btnBuyNow.style.background = 'var(--primary)';
++                btnBuyNow.style.color = 'white';
+                 btnBuyNow.style.opacity = '';
+                 btnBuyNow.style.pointerEvents = '';
+                 btnBuyNow.style.setProperty('flex', '1.5', 'important');
+@@ -2198,11 +2241,16 @@ function syncSwatches() {
+             if (bsBuyBtn) {
+                 bsBuyBtn.disabled = false;
+                 bsBuyBtn.innerText = 'MUA NGAY';
++                bsBuyBtn.style.background = 'linear-gradient(90deg, var(--primary), var(--secondary))';
++                bsBuyBtn.style.color = 'white';
+                 bsBuyBtn.style.opacity = '';
+                 bsBuyBtn.style.pointerEvents = '';
+             }
+             if (bsAddCartBtn) {
+                 bsAddCartBtn.disabled = false;
++                bsAddCartBtn.style.background = 'var(--bg-gray)';
++                bsAddCartBtn.style.borderColor = 'var(--border-color)';
++                bsAddCartBtn.style.color = 'var(--primary)';
+                 bsAddCartBtn.style.opacity = '';
+                 bsAddCartBtn.style.pointerEvents = '';
+             }
+@@ -2346,25 +2394,8 @@ function showNudgeBanner() {
+         document.body.appendChild(banner);
+         
+         banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+-            if (window.innerWidth <= 768) {
+-                hideNudgeBanner();
+-                openBottomSheet();
+-            } else {
+-                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+-                if (selectorBlock) {
+-                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+-                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+-                    displays.forEach(d => {
+-                        d.style.transition = 'all 0.3s';
+-                        d.style.borderColor = '#ef4444';
+-                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+-                        setTimeout(() => {
+-                            d.style.borderColor = '';
+-                            d.style.boxShadow = '';
+-                        }, 1500);
+-                    });
+-                }
+-            }
++            hideNudgeBanner();
++            openBottomSheet();
+         });
+     }
+     
+@@ -2649,54 +2680,24 @@ function initNavaProductEnforcement() {
+                 e.preventDefault();
+                 e.stopPropagation();
+                 
+-                if (window.innerWidth <= 768) {
+-                    openBottomSheet();
+-                    const bs = document.getElementById('nava-bottom-sheet');
+-                    if (bs) {
+-                        bs.classList.remove('bs-shake-active');
+-                        void bs.offsetWidth; // Reflow
+-                        bs.classList.add('bs-shake-active');
+-                    }
+-                } else {
+-                    showNudgeBanner();
+-                    
+-                    const banner = document.getElementById('ram-ssd-nudge-banner');
+-                    if (banner) {
+-                        banner.style.transform = 'translateX(-50%) translateY(0)';
+-                        banner.style.opacity = '1';
+-                        banner.classList.add('nudge-shake-active');
+-                        setTimeout(() => {
+-                            banner.classList.remove('nudge-shake-active');
+-                        }, 2200);
+-                    }
+-                    
+-                    const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant, .swatch, frequently-buy-together, .nava-custom-fbt-container');
+-                    if (selectorBlock) {
+-                        selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+-                        const displays = document.querySelectorAll('.nava-dropdown-display, .swatch, .single-option-selector, .nava-custom-select-display');
+-                        displays.forEach(d => {
+-                            d.style.transition = 'all 0.3s';
+-                            d.style.borderColor = '#ef4444';
+-                            d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+-                            setTimeout(() => {
+-                                d.style.borderColor = '';
+-                                d.style.boxShadow = '';
+-                            }, 1500);
+-                        });
+-                    }
++                openBottomSheet();
++                const bs = document.getElementById('nava-bottom-sheet');
++                if (bs) {
++                    bs.classList.remove('bs-shake-active');
++                    void bs.offsetWidth; // Reflow
++                    bs.classList.add('bs-shake-active');
+                 }
+                 return;
+             }
+             
+             // Block if price is contact-only (Liên hệ / 0)
++            let isContactPrice = false;
+             const priceEl = document.getElementById('selected-variant-price') || document.getElementById('bs-price') || document.getElementById('sticky-price');
+             if (priceEl) {
+                 const priceText = priceEl.textContent.trim().toLowerCase();
+                 const cleanPriceText = priceText.replace(/[^\d]/g, '');
+                 if (cleanPriceText === '0' || cleanPriceText === '' || priceText.includes('liên hệ') || priceText.includes('contact')) {
+-                    e.preventDefault();
+-                    e.stopPropagation();
+-                    return;
++                    isContactPrice = true;
+                 }
+             }
+             const fbtTotalEl = document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+@@ -2704,35 +2705,35 @@ function initNavaProductEnforcement() {
+                 const fbtTotalText = fbtTotalEl.textContent.trim().toLowerCase();
+                 const cleanFbtText = fbtTotalText.replace(/[^\d]/g, '');
+                 if (cleanFbtText === '0' || cleanFbtText === '' || fbtTotalText.includes('liên hệ') || fbtTotalText.includes('contact')) {
+-                    e.preventDefault();
+-                    e.stopPropagation();
+-                    return;
++                    isContactPrice = true;
+                 }
+             }
+-            const selectEl = document.querySelector('.box-variant #product-selectors');
+             if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+                 const activeOption = selectEl.selectedOptions[0];
+                 const rawPrice = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+                 if (rawPrice === 0) {
+-                    e.preventDefault();
+-                    e.stopPropagation();
+-                    return;
++                    isContactPrice = true;
+                 }
+             }
+             const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+             if (hiddenInput) {
+                 const rawPrice = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+                 if (rawPrice === 0) {
+-                    e.preventDefault();
+-                    e.stopPropagation();
+-                    return;
++                    isContactPrice = true;
+                 }
+             }
+             const basePriceVal = {% if selected_variant.price %}{{ selected_variant.price }}{% else %}0{% endif %};
+             const productPriceVal = {% if product.price %}{{ product.price }}{% else %}0{% endif %};
+             if (basePriceVal === 0 || productPriceVal === 0) {
++                isContactPrice = true;
++            }
++            
++            if (isContactPrice) {
+                 e.preventDefault();
+                 e.stopPropagation();
++                if (btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now')) {
++                    window.location.href = 'tel:0972178527';
++                }
+                 return;
+             }
+         }
