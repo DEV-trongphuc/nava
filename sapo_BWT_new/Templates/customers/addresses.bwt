@@ -1,288 +1,399 @@
-<style>
-    .layout-address { background: var(--bg-gray); padding: 30px 0; }
-    .account-info { 
-        background: var(--bg-white, #ffffff) !important; border: 1px solid var(--border-color) !important;
-        border-radius: 16px !important; padding: 25px !important; box-shadow: var(--shadow-sm) !important;
-    }
-    .form-control {
-        width: 100%; padding: 10px 14px; border: 1.5px solid var(--border-color) !important; border-radius: 10px !important;
-        background: #f8fafc !important; font-family: inherit; font-size: 0.9rem; color: var(--text-dark);
-        transition: 0.25s; box-sizing: border-box; outline: none; height: auto !important;
-    }
-    .form-control:focus { background: white !important; border-color: var(--primary) !important; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1) !important; }
-    .btn-primary {
-        background: var(--primary) !important; color: white !important; border: none !important;
-        border-radius: 10px !important; font-weight: 700; font-size: 0.92rem; cursor: pointer;
-        transition: 0.2s; box-shadow: 0 4px 12px rgba(0,51,102,0.15); height: auto !important; padding: 10px 20px !important;
-    }
-    .btn-primary:hover { background: var(--secondary) !important; }
-    .modal-content { border-radius: 20px !important; border: none !important; box-shadow: var(--shadow-lg) !important; }
-    .modal-header { border-bottom: 1px solid var(--border-color) !important; }
-    .modal-body { padding: 25px !important; }
-    .item_address { border-bottom: 1px solid var(--border-color) !important; padding: 20px 0 !important; }
-</style>
 {%- include 'breadcrumb' -%}
 <section class="layout-address pt-3 pb-3">
-	<div class="container">
-		<div class="row">
-			<div class="col-12 col-lg-8">
-				{% if form.posted_successfully %}
-				<div class="alert alert-success" role="alert">
-					{{settings.account_changepass_success}}
-				</div>
-				{% endif %}
-				<div class="row mb-3">
-					{%-include 'mew_account_action_top'-%}
-				</div>
-				<div class="row mb-3 mb-lg-0">
-					<div class="col-12">
-						<div class="account-info bg-white rounded-10 p-3">
-							<h1 class="font-weight-bold sml d-none" style="color: var(--mainColor);">{{settings.addresss_title}}</h1>
-							<button class="btn-add-addr btn-edit-addr btn btn-primary btn-more font-weight-bold" type="button"{%comment%}onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;"{%endcomment%}>
-								{{settings.addresss_add}}
-							</button> 							
-							<div id="add_address" class="form-list modal_address modal fade">
-								<div class="modal-dialog modal-lg" role="document">
-									<div class="modal-content">
-										<div class="modal-header">
-											<h2 class="font-weight-bold modal-title" style="color: var(--mainColor);">
-												{{settings.addresss_add}}
-											</h2>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-d-none="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											{% form 'customer_address', customer.new_address %}
-											<div class="pop_bottom">
-												<div class="form_address row">
-													<div class="field col-12 col-md-6">
-														<fieldset class="form-group">
-															<label>{{settings.account_infor_name}}</label>
-															<input type="text" name="FullName" class="form-control" data-validation-error-msg="Không được để trống" data-validation="required" value="{{form.last_name}}{{form.first_name}}" autocapitalize="words">
-														</fieldset>
-													</div>
-													<div class="field col-12 col-md-6">
-														<fieldset class="form-group">
-															<label>{{settings.account_infor_phone}}</label>
-															<input type="number" class="form-control" id="Phone" pattern="\d+" name="Phone" maxlength="12" value="{{form.phone}}">
-														</fieldset>
-													</div>
-													<div class="field col-12 col-md-6">
-														<fieldset class="form-group">
-															<label>{{settings.account_infor_company}}</label>
-															<input type="text" class="form-control" name="Company" value="{{form.company}}" >
-														</fieldset>
-													</div>
-													<div class="field col-12 col-md-6">
-														<fieldset class="form-group">
-															<label>{{settings.account_infor_address}}</label>
-															<input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
-														</fieldset>
-													</div>
-													<div class="field col-12">
-														<fieldset class="form-group select-field">
-															<label>{{settings.account_infor_country}}</label>
-															<select name="Country" class="form-control vn-fix add mySelect2" id="mySelect1" data-default="{{form.country | default: 'Vietnam'}}" >{{ country_option_tags }}</select>
-														</fieldset>
-													</div>
-													<div class="group-country col-12">
-														<div class="row">
-															<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																<label>{{settings.account_infor_city}}</label>
-																<select name="Province" value="{{form.province}}" class="form-control add" id="mySelect2" data-address-type="province" data-address-zone="billing" data-select2-id="select2-data-billingProvince"></select>
-															</fieldset>
-															<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																<label>{{settings.account_infor_district}}</label>
-																<select name="District" class="form-control add" value="{{form.district}}" id="mySelect3" data-address-type="district" data-address-zone="billing" data-select2-id="select2-data-billingDistrict"></select>
-															</fieldset>
-															<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																<label>{{settings.account_infor_ward}}</label>
-																<select name="Ward" class="form-control add" value="{{form.ward}}" id="mySelect4" data-address-type="ward" data-address-zone="billing" data-select2-id="select2-data-billingWard"></select>
-															</fieldset>
-														</div>
-													</div>
-													<div class="field col-12">
-														<fieldset class="form-group">
-															<label>{{settings.account_infor_zip}}</label>
-															<input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
-														</fieldset>
-													</div>
-												</div>
-												<div class="checkbox">
-													<label class="c-input c-checkbox">
-														<input type="checkbox" id="address_default_address_{{form.id}}" name="IsDefault" value="true">
-														<span class="c-indicator">{{settings.account_infor_is_default}}</span> 
-													</label>
-												</div>	
-												<div class="btn-row">
-													<button type="button" class="btn btn-dark-address btn-outline article-readmore btn-close close" data-dismiss="modal" aria-label="Close">{{settings.addresss_cancel}}</button>
-													{%comment%}
-													<button class="btn btn-dark-address btn-outline article-readmore btn-close" type="button"  onclick="Bizweb.CustomerAddress.toggleNewForm(); return false;"  >Hủy</button>
-													{%endcomment%}
-													<button class="btn btn-primary btn-submit" id="addnew" type="submit">{{settings.addresss_add}}</button>	
-												</div>
-											</div>
-											{% endform %}
-										</div>
-									</div>
-								</div>
-							</div>
-							{%- paginate customer.addresses by 6 -%}
-							<div class="total_address">
-								{%- for address in customer.addresses -%}      
-								<div id="view_address_{{address.id}}" class="customer_address item_address pt-3 pb-3 {%unless forloop.last%}border-bottom{%endunless%}">
-									<div class="address_info position-relative pr-5">
-										<div class="address-group">
-											<div class="address form-signup">
-												<p class=mb-1><strong>{{settings.account_infor_name | append: ': '}}</strong>{{address.last_name }} {{ address.first_name }}
-													{% if address.id == customer.default_address.id %}
-													<span class="address-default text-success">{{settings.account_infor_default | prepend: '(' | append: ')'}}</span>
-													{% endif %}
-												</p>
-												<p class=mb-1>
-													<b>{{settings.account_infor_address  | append: ': '}}</b>
-													{%- if address.address1 != null and address.address1 != "" -%}
-													{{address.address1}},
-													{%- endif%}
-													{%- if address.ward != null and address.ward != "" -%}
-													{{ address.ward}},
-													{%- endif%}
-													{%- if address.district != null and address.district != "" -%}
-													{{ address.district }},
-													{%- endif%}
-													{%- if address.province != null and address.province != "" -%}
-													{{ address.province}},
-													{%- endif%}
-													{%- if address.country != null and address.country != "" -%}
-													{{ address.country }}
-													{%- endif -%}
-												</p>
-												{%- if address.phone != null and  address.phone != "" -%}
-												<p class=mb-1><b>{{settings.account_infor_phone | append: ': '}}</b> {{ address.phone }}</p>
-												{%- endif -%}
-												{%- if address.company != null and address.company != "" -%}
-												<p class=mb-1><b>{{settings.account_infor_company | append: ': '}}</b> {{ address.company }}</p>
-												{%- endif -%}
-											</div>
-										</div>
-										<div id="tool_address_{{address.id}}" class="btn-address position-absolute">
-											<button title="{{settings.addresss_edit}}" class="p-0 justify-content-center d-flex align-items-center btn-edit-addr btn btn-primary btn-edit mb-2" type="button" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
-												{%-include 'svg_edit'-%}
-											</button>
-											<button title="{{settings.addresss_delete}}" class="{% if address.id == customer.default_address.id %}d-none {%else%}d-flex {% endif %}p-0 justify-content-center align-items-center btn btn-dark-address btn-edit-addr btn-delete" type="button" onclick="Bizweb.CustomerAddress.destroy({{address.id}});return false">
-												{%-include 'svg_remove'-%}
-											</button>
-										</div>
-									</div>
-								</div>
-								{%- endfor -%} 
+    <style>
+        .layout-address .modal-dialog {
+            max-width: 600px !important;
+        }
+        .layout-address .modal-content {
+            border-radius: var(--radius-lg) !important;
+            border: none !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        }
+        .layout-address .modal-header {
+            padding: 20px 25px !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        .layout-address .modal-title {
+            font-size: 1.2rem !important;
+            font-weight: 800 !important;
+            margin: 0 !important;
+        }
+        .layout-address .modal-body {
+            padding: 25px !important;
+        }
+        .layout-address .form-group label {
+            display: block !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 8px !important;
+            color: var(--text-dark) !important;
+        }
+        .layout-address .form-control {
+            width: 100% !important;
+            padding: 12px 15px !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            background: #f8fafc !important;
+            font-size: 0.95rem !important;
+            color: var(--text-dark) !important;
+            outline: none !important;
+            transition: 0.3s !important;
+            height: auto !important;
+        }
+        .layout-address .form-control:focus {
+            border-color: #0284c7 !important;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
+            background: #fff !important;
+        }
+        .layout-address .btn-row {
+            display: flex !important;
+            justify-content: flex-end !important;
+            gap: 10px !important;
+            margin-top: 20px !important;
+        }
+        .layout-address .btn-submit {
+            background: linear-gradient(90deg, #0284c7, #2563eb) !important;
+            color: white !important;
+            border: none !important;
+            padding: 10px 20px !important;
+            border-radius: var(--radius-md) !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+        }
+        .layout-address .btn-submit:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
+        }
+        .layout-address .btn-close {
+            background: #f1f5f9 !important;
+            color: var(--text-dark) !important;
+            border: 1px solid var(--border-color) !important;
+            padding: 10px 20px !important;
+            border-radius: var(--radius-md) !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+        }
+        
+        .layout-address .item_address {
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            padding: 20px !important;
+            position: relative !important;
+            margin-bottom: 15px !important;
+            background: #fff !important;
+            transition: 0.2s !important;
+        }
+        .layout-address .item_address:hover {
+            border-color: var(--primary) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+        }
+        .layout-address .item_address.default_address_card {
+            border-color: var(--primary) !important;
+            background: rgba(0, 51, 102, 0.02) !important;
+        }
+        .layout-address .btn-address {
+            top: 20px !important;
+            right: 20px !important;
+            display: flex !important;
+            gap: 10px !important;
+        }
+        .layout-address .btn-address button {
+            border: none !important;
+            background: #f1f5f9 !important;
+            width: 32px !important;
+            height: 32px !important;
+            border-radius: 8px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: var(--text-gray) !important;
+            cursor: pointer !important;
+            transition: 0.2s !important;
+        }
+        .layout-address .btn-address button:hover {
+            background: var(--border-color) !important;
+            color: var(--text-dark) !important;
+        }
+        .layout-address .btn-address button.btn-delete:hover {
+            background: #fee2e2 !important;
+            color: #ef4444 !important;
+        }
+        .select2-container .select2-selection--single {
+            height: 48px !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            background-color: #f8fafc !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection--arrow {
+            height: 46px !important;
+        }
+    </style>
+    
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
+            {%- include 'nava_account_sidebar' -%}
+            
+            <div class="dashboard-main-wrapper">
+                <div class="dashboard-content">
+                    <div class="content-header" style="flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+                        <h1 class="content-title">
+                            <i class="ph-fill ph-map-pin" style="color: var(--primary);"></i> 
+                            {{settings.addresss_title}}
+                        </h1>
+                        <button class="btn-add-addr btn-edit-addr btn-nava btn-nava-primary" type="button">
+                            <i class="ph-bold ph-plus"></i> {{settings.addresss_add}}
+                        </button>
+                    </div>
+                    
+                    {% if form.posted_successfully %}
+                    <div class="alert alert-success" role="alert">
+                        {{settings.account_changepass_success}}
+                    </div>
+                    {% endif %}
 
-								{%- for address in customer.addresses -%}
-								<div id="edit_address_{{address.id}}" class="form-list modal_address modal modal_edit_address">
-									<div class="modal-dialog modal-lg" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h2 class="font-weight-bold modal-title" style="color: var(--mainColor);">
-													{{settings.addresss_edit}}
-												</h2>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-d-none="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												{%- form 'customer_address', address -%}
-												<div class="pop_bottom">
-													<div class="form_address row">
-														<div class="field col-12 col-md-6">
-															<fieldset class="form-group">
-																<label>{{settings.account_infor_name}}</label>
-																<input type="text" name="FullName" class="form-control" required value="{{form.last_name}} {{form.first_name}}" autocapitalize="words">
-															</fieldset>
-															<p class="error-msg"></p>
-														</div>
-														<div class="field col-12 col-md-6">
-															<fieldset class="form-group">
-																<label>{{settings.account_infor_phone}}</label>
-																<input type="number" pattern="\d+" class="form-control" id="Phone" name="Phone" maxlength="12" value="{{form.phone}}">
-															</fieldset>	
-														</div>
-														<div class="field col-12 col-md-6">
-															<fieldset class="form-group">
-																<label>{{settings.account_infor_company}}</label>
-																<input type="text" class="form-control" name="Company" value="{{form.company}}" >
-															</fieldset>
-														</div>
-														<div class="field col-12 col-md-6">
-															<fieldset class="form-group">
-																<label>{{settings.account_infor_address}}</label>
-																<input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
-															</fieldset>
-														</div>
-														<div class="field col-12">
-															<fieldset class="form-group select-field">
-																<label>{{settings.account_infor_country}}</label>
-																<select name="Country" class="form-control mySelect2" id="mySelect2_{{address.id}}" data-default="{{form.country}}" >{{form.country}}{{ country_option_tags }}</select>
-															</fieldset>
-														</div>
-														<div class="group-country col-12">
-															<div class="row">
-																<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																	<label>{{settings.account_infor_city}}</label>
-																	<select name="Province" value="{{form.province}}" data-default="{{form.province}}" class="form-control add province myselect" id="mySelect3_{{address.id}}"  data-address-type="province" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingProvince"></select>
-																</fieldset>
-																<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																	<label>{{settings.account_infor_district}}</label>
-																	<select name="District" class="form-control add  district myselect" data-default="{{form.district}}" value="{{form.district}}" id="mySelect4_{{address.id}}" data-address-type="district" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingDistrict"></select>
-																</fieldset>
-																<fieldset class="form-group select-field not-vn col-12 col-md-4">
-																	<label>{{settings.account_infor_ward}}</label>
-																	<select name="Ward" class="form-control add ward myselect" data-default="{{form.ward}}"value="{{form.ward}}" id="mySelect5_{{address.id}}" data-address-type="ward" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingWard"></select>
-																</fieldset>
-															</div>
-														</div>
-														<div class="field col-12">
-															<fieldset class="form-group">
-																<label>{{settings.account_infor_zip}}</label>
-																<input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
-															</fieldset>
-														</div>
-													</div>
-													<div class="checkbox {% if address.id == customer.default_address.id %}d-none {% endif %}">
-														<label class="c-input c-checkbox">
-															<input type="checkbox" name="IsDefault" value="true">
-															<span class="c-indicator">{{settings.account_infor_is_default}}</span> 
-														</label>
-													</div>	
-													<div class="btn-row">	
-														<button class="btn btn-dark-address btn-fix-addr article-readmore btn-close close" type="button" data-form="edit_address_{{address.id}}"  data-dismiss="modal" aria-label="Close">
-															{{settings.addresss_cancel}}
-														</button>										
-														<button class="btn btn-primary btn-submit" id="update"><span>{{settings.addresss_edit}}</span></button>																	
-													</div>
-												</div>
-												{%- endform -%}
-											</div>
-										</div>
-									</div>
-								</div>
-								{%- endfor -%}
-							</div> 
-							{%- if paginate.pages > 1 -%}      
-							<div>
-								{% include 'paginate-pages' -%} 
-							</div>
-							{%- endif %}
-							{%- endpaginate -%}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-lg-4">
-				<div class="row mb-3 h-100">
-					{%-include 'mew_account_action_bottom'-%}
-				</div>
-			</div>
-		</div>
-	</div>
+                    <div id="add_address" class="form-list modal_address modal fade">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2 class="modal-title" style="color: var(--mainColor);">
+                                        {{settings.addresss_add}}
+                                    </h2>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    {% form 'customer_address', customer.new_address %}
+                                    <div class="pop_bottom">
+                                        <div class="form_address row">
+                                            <div class="field col-12 col-md-6">
+                                                <fieldset class="form-group">
+                                                    <label>{{settings.account_infor_name}}</label>
+                                                    <input type="text" name="FullName" class="form-control" data-validation-error-msg="Không được để trống" data-validation="required" value="{{form.last_name}}{{form.first_name}}" autocapitalize="words">
+                                                </fieldset>
+                                            </div>
+                                            <div class="field col-12 col-md-6">
+                                                <fieldset class="form-group">
+                                                    <label>{{settings.account_infor_phone}}</label>
+                                                    <input type="number" class="form-control" id="Phone" pattern="\d+" name="Phone" maxlength="12" value="{{form.phone}}">
+                                                </fieldset>
+                                            </div>
+                                            <div class="field col-12 col-md-6">
+                                                <fieldset class="form-group">
+                                                    <label>{{settings.account_infor_company}}</label>
+                                                    <input type="text" class="form-control" name="Company" value="{{form.company}}" >
+                                                </fieldset>
+                                            </div>
+                                            <div class="field col-12 col-md-6">
+                                                <fieldset class="form-group">
+                                                    <label>{{settings.account_infor_address}}</label>
+                                                    <input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
+                                                </fieldset>
+                                            </div>
+                                            <div class="field col-12">
+                                                <fieldset class="form-group select-field">
+                                                    <label>{{settings.account_infor_country}}</label>
+                                                    <select name="Country" class="form-control vn-fix add mySelect2" id="mySelect1" data-default="{{form.country | default: 'Vietnam'}}" >{{ country_option_tags }}</select>
+                                                </fieldset>
+                                            </div>
+                                            <div class="group-country col-12">
+                                                <div class="row">
+                                                    <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                        <label>{{settings.account_infor_city}}</label>
+                                                        <select name="Province" value="{{form.province}}" class="form-control add" id="mySelect2" data-address-type="province" data-address-zone="billing" data-select2-id="select2-data-billingProvince"></select>
+                                                    </fieldset>
+                                                    <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                        <label>{{settings.account_infor_district}}</label>
+                                                        <select name="District" class="form-control add" value="{{form.district}}" id="mySelect3" data-address-type="district" data-address-zone="billing" data-select2-id="select2-data-billingDistrict"></select>
+                                                    </fieldset>
+                                                    <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                        <label>{{settings.account_infor_ward}}</label>
+                                                        <select name="Ward" class="form-control add" value="{{form.ward}}" id="mySelect4" data-address-type="ward" data-address-zone="billing" data-select2-id="select2-data-billingWard"></select>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="field col-12">
+                                                <fieldset class="form-group">
+                                                    <label>{{settings.account_infor_zip}}</label>
+                                                    <input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label class="c-input c-checkbox" style="display: flex; align-items: center; gap: 8px;">
+                                                <input type="checkbox" id="address_default_address_{{form.id}}" name="IsDefault" value="true">
+                                                <span class="c-indicator">{{settings.account_infor_is_default}}</span> 
+                                            </label>
+                                        </div>    
+                                        <div class="btn-row">
+                                            <button type="button" class="btn-close close" data-dismiss="modal" aria-label="Close">{{settings.addresss_cancel}}</button>
+                                            <button class="btn-submit" id="addnew" type="submit">{{settings.addresss_add}}</button>    
+                                        </div>
+                                    </div>
+                                    {% endform %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {%- paginate customer.addresses by 6 -%}
+                    <div class="total_address">
+                        {%- for address in customer.addresses -%}      
+                        <div id="view_address_{{address.id}}" class="customer_address item_address {% if address.id == customer.default_address.id %}default_address_card{% endif %}">
+                            <div class="address_info position-relative pr-5">
+                                <div class="address-group">
+                                    <div class="address form-signup">
+                                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                                            <h3 style="margin: 0; font-size: 1.1rem; font-weight: 800; color: var(--text-dark);">{{address.last_name }} {{ address.first_name }}</h3>
+                                            {% if address.id == customer.default_address.id %}
+                                            <span class="badge-status badge-success">{{settings.account_infor_default}}</span>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        {%- if address.phone != null and  address.phone != "" -%}
+                                        <div style="color: var(--text-gray); font-size: 0.95rem; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                            <i class="ph-fill ph-phone" style="font-size: 1.1rem; color: var(--text-dark);"></i> {{ address.phone }}
+                                        </div>
+                                        {%- endif -%}
+                                        
+                                        <div style="color: var(--text-gray); font-size: 0.95rem; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;">
+                                            <i class="ph-fill ph-map-pin-line" style="font-size: 1.1rem; color: var(--text-dark); margin-top: 3px;"></i> 
+                                            <span>
+                                                {%- if address.address1 != null and address.address1 != "" -%}
+                                                {{address.address1}},
+                                                {%- endif%}
+                                                {%- if address.ward != null and address.ward != "" -%}
+                                                {{ address.ward}},
+                                                {%- endif%}
+                                                {%- if address.district != null and address.district != "" -%}
+                                                {{ address.district }},
+                                                {%- endif%}
+                                                {%- if address.province != null and address.province != "" -%}
+                                                {{ address.province}},
+                                                {%- endif%}
+                                                {%- if address.country != null and address.country != "" -%}
+                                                {{ address.country }}
+                                                {%- endif -%}
+                                            </span>
+                                        </div>
+                                        
+                                        {%- if address.company != null and address.company != "" -%}
+                                        <p class="mb-1 mt-2"><b>{{settings.account_infor_company | append: ': '}}</b> {{ address.company }}</p>
+                                        {%- endif -%}
+                                    </div>
+                                </div>
+                                <div id="tool_address_{{address.id}}" class="btn-address">
+                                    <button title="{{settings.addresss_edit}}" class="btn-edit-addr btn-edit" type="button" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
+                                        {%-include 'svg_edit'-%}
+                                    </button>
+                                    <button title="{{settings.addresss_delete}}" class="{% if address.id == customer.default_address.id %}d-none {%else%}d-flex {% endif %}btn-delete" type="button" onclick="Bizweb.CustomerAddress.destroy({{address.id}});return false">
+                                        {%-include 'svg_remove'-%}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {%- endfor -%} 
+
+                        {%- for address in customer.addresses -%}
+                        <div id="edit_address_{{address.id}}" class="form-list modal_address modal modal_edit_address">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" style="color: var(--mainColor);">
+                                            {{settings.addresss_edit}}
+                                        </h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {%- form 'customer_address', address -%}
+                                        <div class="pop_bottom">
+                                            <div class="form_address row">
+                                                <div class="field col-12 col-md-6">
+                                                    <fieldset class="form-group">
+                                                        <label>{{settings.account_infor_name}}</label>
+                                                        <input type="text" name="FullName" class="form-control" required value="{{form.last_name}} {{form.first_name}}" autocapitalize="words">
+                                                    </fieldset>
+                                                    <p class="error-msg"></p>
+                                                </div>
+                                                <div class="field col-12 col-md-6">
+                                                    <fieldset class="form-group">
+                                                        <label>{{settings.account_infor_phone}}</label>
+                                                        <input type="number" pattern="\d+" class="form-control" id="Phone" name="Phone" maxlength="12" value="{{form.phone}}">
+                                                    </fieldset>    
+                                                </div>
+                                                <div class="field col-12 col-md-6">
+                                                    <fieldset class="form-group">
+                                                        <label>{{settings.account_infor_company}}</label>
+                                                        <input type="text" class="form-control" name="Company" value="{{form.company}}" >
+                                                    </fieldset>
+                                                </div>
+                                                <div class="field col-12 col-md-6">
+                                                    <fieldset class="form-group">
+                                                        <label>{{settings.account_infor_address}}</label>
+                                                        <input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
+                                                    </fieldset>
+                                                </div>
+                                                <div class="field col-12">
+                                                    <fieldset class="form-group select-field">
+                                                        <label>{{settings.account_infor_country}}</label>
+                                                        <select name="Country" class="form-control mySelect2" id="mySelect2_{{address.id}}" data-default="{{form.country}}" >{{form.country}}{{ country_option_tags }}</select>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="group-country col-12">
+                                                    <div class="row">
+                                                        <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                            <label>{{settings.account_infor_city}}</label>
+                                                            <select name="Province" value="{{form.province}}" data-default="{{form.province}}" class="form-control add province myselect" id="mySelect3_{{address.id}}"  data-address-type="province" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingProvince"></select>
+                                                        </fieldset>
+                                                        <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                            <label>{{settings.account_infor_district}}</label>
+                                                            <select name="District" class="form-control add  district myselect" data-default="{{form.district}}" value="{{form.district}}" id="mySelect4_{{address.id}}" data-address-type="district" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingDistrict"></select>
+                                                        </fieldset>
+                                                        <fieldset class="form-group select-field not-vn col-12 col-md-4">
+                                                            <label>{{settings.account_infor_ward}}</label>
+                                                            <select name="Ward" class="form-control add ward myselect" data-default="{{form.ward}}"value="{{form.ward}}" id="mySelect5_{{address.id}}" data-address-type="ward" data-address-zone="{{address.id}}" data-select2-id="select2-data-billingWard"></select>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                                <div class="field col-12">
+                                                    <fieldset class="form-group">
+                                                        <label>{{settings.account_infor_zip}}</label>
+                                                        <input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                            <div class="checkbox {% if address.id == customer.default_address.id %}d-none {% endif %}" style="display: flex; align-items: center; gap: 8px;">
+                                                <label class="c-input c-checkbox">
+                                                    <input type="checkbox" name="IsDefault" value="true">
+                                                    <span class="c-indicator">{{settings.account_infor_is_default}}</span> 
+                                                </label>
+                                            </div>    
+                                            <div class="btn-row">    
+                                                <button class="btn-close close" type="button" data-form="edit_address_{{address.id}}" data-dismiss="modal" aria-label="Close">
+                                                    {{settings.addresss_cancel}}
+                                                </button>                                        
+                                                <button class="btn-submit" id="update"><span>{{settings.addresss_edit}}</span></button>                                                                    
+                                            </div>
+                                        </div>
+                                        {%- endform -%}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%- endfor -%}
+                    </div> 
+                    {%- if paginate.pages > 1 -%}      
+                    <div class="mt-3 text-right">
+                        {% include 'paginate-pages' -%} 
+                    </div>
+                    {%- endif %}
+                    {%- endpaginate -%}
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

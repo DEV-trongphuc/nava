@@ -650,9 +650,9 @@
                             style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 25px; align-items: center; max-width: 100%; margin-left: auto; margin-right: auto;">
                             <img src="https://nava-one.vercel.app/assets/icon/word.png" alt="Word" class="software-badge-icon" width="32" height="32">
                             <img src="https://nava-one.vercel.app/assets/icon/excel_logo.png" alt="Excel" class="software-badge-icon" width="32" height="32">
-                            <img src="https://nava-one.vercel.app/assets/icon/ppt_logo.webp" alt="PowerPoint" class="software-badge-icon" width="32" height="32">
+                            <img src="https://nava-one.vercel.app/assets/icon/ppt_logo.jpg" alt="PowerPoint" class="software-badge-icon" width="32" height="32">
                             <img src="https://nava-one.vercel.app/assets/icon/canvalogo.jpg" alt="Canva" class="software-badge-icon" width="32" height="32">
-                            <img src="https://nava-one.vercel.app/assets/icon/capcut_logo.png" alt="Capcut" class="software-badge-icon" width="32" height="32">
+                            <img src="https://nava-one.vercel.app/assets/icon/capcut_logo.jpg" alt="Capcut" class="software-badge-icon" width="32" height="32">
                         </div>
                         <h3 class="customer-card-title">Set-up Văn Phòng Tối Giản
                         </h3>

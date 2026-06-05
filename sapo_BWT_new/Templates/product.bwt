@@ -128,7 +128,46 @@
             body { padding-bottom: 80px !important; }
         }
         
+        /* Gallery Dots styling */
+        .gallery-dots {
+            display: flex !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            margin-top: 15px !important;
+            margin-bottom: 15px !important;
+            z-index: 10 !important;
+            position: relative !important;
+            width: 100% !important;
+        }
+        .gallery-dot {
+            width: 8px !important;
+            height: 8px !important;
+            border-radius: 50% !important;
+            background: var(--border-color, #cbd5e1) !important;
+            cursor: pointer !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        }
+        .gallery-dot.active {
+            background: var(--primary, #003366) !important;
+            width: 20px !important;
+            border-radius: 4px !important;
+        }
+        [data-theme="dark"] .gallery-dot {
+            background: #475569 !important;
+        }
+        [data-theme="dark"] .gallery-dot.active {
+            background: var(--primary, #66a3ff) !important;
+        }
+
         /* Custom Select for Swatches */
+        .custom-select-wrapper.closed .custom-select-list,
+        .nava-custom-select-wrapper.closed .nava-custom-select-list,
+        .nava-dropdown-wrapper.closed .nava-dropdown-list {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transform: translateY(8px) scale(0.97) !important;
+        }
         .custom-select-wrapper { position: relative; margin-bottom: 15px; width: 100%; }
         .custom-select-display {
             display: flex; align-items: center; justify-content: space-between;
@@ -241,7 +280,7 @@
         @media (min-width: 992px) {
             .specs-column {
                 position: sticky !important;
-                top: 160px !important;
+                top: 110px !important;
                 z-index: 99;
                 align-self: flex-start !important;
             }
@@ -344,6 +383,83 @@
         }
         [data-theme="dark"] .product-content.rte img {
             background-color: transparent !important;
+        }
+        [data-theme="dark"] .specs-column td:first-child,
+        [data-theme="dark"] .specs-column li span:first-child {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .specs-column td:last-child,
+        [data-theme="dark"] .specs-column li span:last-child {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .swatch-element label {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .swatch-element:hover label {
+            border-color: #3385ff !important;
+            color: #3385ff !important;
+            background: rgba(51, 133, 255, 0.08) !important;
+        }
+        [data-theme="dark"] .swatch-element input:checked + label {
+            border-color: #3385ff !important;
+            color: #3385ff !important;
+            background: rgba(51, 133, 255, 0.15) !important;
+            box-shadow: 0 0 0 1px #3385ff !important;
+        }
+        [data-theme="dark"] .nava-custom-select-display {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .nava-custom-select-display:hover {
+            border-color: #3385ff !important;
+        }
+        [data-theme="dark"] .nava-custom-select-wrapper.active .nava-custom-select-display {
+            border-color: #3385ff !important;
+            box-shadow: 0 0 0 3px rgba(51, 133, 255, 0.15) !important;
+        }
+        [data-theme="dark"] .nava-custom-select-text .opt-name {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .nava-custom-select-text .opt-price {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .nava-custom-select-list {
+            background: #151d2b !important;
+            border-color: #334155 !important;
+        }
+        [data-theme="dark"] .nava-custom-select-list li {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .nava-custom-select-list li:hover {
+            background: #1e293b !important;
+            color: #3385ff !important;
+        }
+        [data-theme="dark"] .nava-custom-select-list li.selected {
+            background: rgba(51, 133, 255, 0.15) !important;
+            color: #3385ff !important;
+        }
+        [data-theme="dark"] .nava-custom-select-list li .opt-price {
+            color: #94a3b8 !important;
+        }
+        [data-theme="dark"] .custom-btn-number button:first-of-type,
+        [data-theme="dark"] .custom-btn-number button:last-of-type,
+        [data-theme="dark"] .custom-btn-number input {
+            background: #1e293b !important;
+            border-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .custom-btn-number button:hover {
+            background: rgba(51, 133, 255, 0.1) !important;
+        }
+        [data-theme="dark"] .nava-custom-fbt-label {
+            color: #cbd5e1 !important;
+        }
+        [data-theme="dark"] .mobile-bottom-buybar {
+            background: rgba(21, 29, 43, 0.98) !important;
+            border-top-color: #334155 !important;
         }
 
         .desktop-qty-label { display: inline; }
@@ -1165,6 +1281,20 @@
                     {%-endif-%}
                 </div>
                 
+                <!-- Gallery Slide Dots -->
+                <div class="gallery-dots">
+                    {%-if videos != blank-%}
+                    <div class="gallery-dot active" onclick="clickGalleryDot(0)"></div>
+                    {%-endif-%}
+                    {%-for image in product.images-%}
+                    {%- assign dot_index = forloop.index0 -%}
+                    {%- if videos != blank -%}
+                        {%- assign dot_index = forloop.index -%}
+                    {%- endif -%}
+                    <div class="gallery-dot {% if forloop.first and videos == blank %}active{% endif %}" onclick="clickGalleryDot({{ dot_index }})"></div>
+                    {%-endfor-%}
+                </div>
+                
                 {%- assign image_count = product.images | size -%}
                 {%- if videos != '' -%}
                   {%- assign image_count = image_count | plus: 1 -%}
@@ -1337,7 +1467,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;" class="specs-header-row">
                     <h2 class="specs-custom-title" style="font-size: 1.25rem !important; font-weight: 800 !important; color: var(--text-dark, #0f172a) !important; margin: 0 !important; padding: 0 !important; border: none !important;">{{ settings.compare_keyword | default: 'Thông số kỹ thuật' }}</h2>
                     {%-if settings.enable_compare-%}
-                    <div class="btn-nava-compare-trigger compare-btn-wrap" onclick="window.openCompareDrawerDirect('{{ product.name | escape }}', '{{ product.images[0].src | img_url: 'medium' }}', '{%- if selected_variant.price == 0 -%}Liên hệ{%- else -%}{{ selected_variant.price | money }}{%- endif -%}', '{{ product.url }}')" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; margin-bottom: 0;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
+                    <div class="btn-nava-compare-trigger compare-btn-wrap" data-name="{{ product.name | escape }}" onclick="window.openCompareDrawerDirect('{{ product.name | escape }}', '{{ product.images[0].src | img_url: 'medium' }}', '{%- if selected_variant.price == 0 -%}Liên hệ{%- else -%}{{ selected_variant.price | money }}{%- endif -%}', '{{ product.url }}')" style="background: transparent; border: 1px solid var(--border-color); border-radius: 6px; padding: 6px 12px; font-weight: 700; font-size: 0.85rem; color: var(--text-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; margin-bottom: 0;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-dark)';">
                         <i class="ph-bold ph-arrows-left-right"></i> So sánh
                     </div>
                     {%-endif-%}
@@ -1482,7 +1612,7 @@
 
 <script>
     var productAlias = '{{product.alias}}';
-    window.mainProductAvailable = {% if product.available %}true{% else %}false{% endif %};
+    window.mainProductAvailable = {{ product.available | json }};
 
     // Gallery images array for Lightbox
     const galleryImages = [
@@ -1613,10 +1743,29 @@
         });
     }
 
+    window.clickGalleryDot = function(index) {
+        const thumbs = document.querySelectorAll('.thumbnail-item');
+        if (thumbs[index]) {
+            thumbs[index].click();
+        }
+    };
+
     function switchMainMedia(thumb, type, url) {
         // Toggle active class on thumbnails
         document.querySelectorAll('.thumbnail-item').forEach(el => el.classList.remove('active'));
         thumb.classList.add('active');
+        
+        // Update gallery dots active state
+        const thumbs = Array.from(document.querySelectorAll('.thumbnail-item'));
+        const activeIndex = thumbs.indexOf(thumb);
+        const dots = document.querySelectorAll('.gallery-dot');
+        dots.forEach((dot, idx) => {
+            if (idx === activeIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
         
         const mainImg = document.getElementById('main-product-image');
         const mainVideo = document.getElementById('main-product-video');
@@ -2129,8 +2278,22 @@ function syncSwatches() {
         // Also check Frequently Bought Together select elements
         const isFbtActive = !!document.querySelector('frequently-buy-together');
         if (isFbtActive) {
-            isDefaultRam = false;
-            isDefaultSsd = false;
+            let hasFbtRam = false;
+            let hasFbtSsd = false;
+            document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                const parent = select.closest('[data-fbt-item]');
+                const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                if (labelText.includes('RAM') || labelText.includes('DRAM')) {
+                    hasFbtRam = true;
+                }
+                if (labelText.includes('SSD') || labelText.includes('NVME')) {
+                    hasFbtSsd = true;
+                }
+            });
+
+            isDefaultRam = !hasFbtRam;
+            isDefaultSsd = !hasFbtSsd;
+
             document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
                 const val = select.value;
                 const parent = select.closest('[data-fbt-item]');
@@ -2138,11 +2301,19 @@ function syncSwatches() {
                 const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
                 const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
                 
-                if (isRam && (val === 'no-select' || val === '')) {
-                    isDefaultRam = true;
+                if (isRam) {
+                    if (val === 'no-select' || val === '') {
+                        isDefaultRam = true;
+                    } else {
+                        isDefaultRam = false;
+                    }
                 }
-                if (isSsd && (val === 'no-select' || val === '')) {
-                    isDefaultSsd = true;
+                if (isSsd) {
+                    if (val === 'no-select' || val === '') {
+                        isDefaultSsd = true;
+                    } else {
+                        isDefaultSsd = false;
+                    }
                 }
             });
         }
@@ -2631,6 +2802,9 @@ function updateBottomSheetPrice() {
 }
 
 function openBottomSheet() {
+    if (window.innerWidth >= 992) {
+        return; // Don't show bottom-sheet modal on PC/desktop
+    }
     const overlay = document.getElementById('nava-bs-overlay');
     const bs = document.getElementById('nava-bottom-sheet');
     const optionsContainer = document.getElementById('nava-bs-options-container');
@@ -2682,6 +2856,14 @@ function openBottomSheet() {
         overlay.style.opacity = '1';
         bs.classList.add('open');
         document.body.style.overflow = 'hidden';
+        
+        // Automatically open/expand the dropdown lists on mobile bottom sheet
+        setTimeout(() => {
+            const bsDropdowns = bs.querySelectorAll('.nava-dropdown-wrapper, .nava-custom-select-wrapper, .custom-select-wrapper');
+            bsDropdowns.forEach(w => {
+                w.classList.add('active');
+            });
+        }, 100);
         
         // Trigger glow animation for options
         const displays = bs.querySelectorAll('.nava-custom-select-display, .swatch, .nava-dropdown-display');
@@ -2795,8 +2977,40 @@ function initNavaProductEnforcement() {
         const btn = e.target.closest('#btn-add-to-cart, #btn-installment, #btn-buy-now, .bar-add-cart, .bar-buy-now, .js-addToCart, .js-buynow, .btn-add-cart-sticky, .btn-buy-now-sticky, .btn-add-cart-bs, .bs-buy-btn, .tg-addcart, .tg-buy-now, .buy_now');
         if (btn) {
             const selectEl = document.querySelector('.box-variant #product-selectors');
-            let isDefaultRam = false;
-            let isDefaultSsd = false;
+            
+            let hasRamOption = false;
+            let hasSsdOption = false;
+            
+            if (document.querySelector('[data-dropdown-type="ram"]') || document.querySelector('#ram-selected-text')) {
+                hasRamOption = true;
+            }
+            if (document.querySelector('[data-dropdown-type="ssd"]') || document.querySelector('#ssd-selected-text')) {
+                hasSsdOption = true;
+            }
+            
+            document.querySelectorAll('.single-option-selector').forEach(select => {
+                const val = select.value.toUpperCase();
+                const label = select.closest('.selector-wrapper')?.querySelector('label')?.textContent.toUpperCase() || '';
+                if (val.includes('RAM') || label.includes('RAM') || label.includes('DRAM')) hasRamOption = true;
+                if (val.includes('SSD') || label.includes('SSD') || label.includes('NVME')) hasSsdOption = true;
+            });
+            
+            document.querySelectorAll('.swatch input[type="radio"]').forEach(radio => {
+                const val = radio.value.toUpperCase();
+                const name = radio.name.toUpperCase();
+                if (name.includes('RAM') || val.includes('RAM')) hasRamOption = true;
+                if (name.includes('SSD') || val.includes('SSD')) hasSsdOption = true;
+            });
+            
+            document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                const parent = select.closest('[data-fbt-item]');
+                const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                if (labelText.includes('RAM') || labelText.includes('DRAM')) hasRamOption = true;
+                if (labelText.includes('SSD') || labelText.includes('NVME')) hasSsdOption = true;
+            });
+
+            let isDefaultRam = !hasRamOption;
+            let isDefaultSsd = !hasSsdOption;
             
             // 1. Check nava custom dropdowns
             const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
@@ -2858,41 +3072,23 @@ function initNavaProductEnforcement() {
                 const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
                 const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
                 
-                if (isRam && (val === 'no-select' || val === '')) {
-                    isDefaultRam = true;
+                if (isRam) {
+                    if (val === 'no-select' || val === '') {
+                        isDefaultRam = true;
+                    } else {
+                        isDefaultRam = false;
+                    }
                 }
-                if (isSsd && (val === 'no-select' || val === '')) {
-                    isDefaultSsd = true;
+                if (isSsd) {
+                    if (val === 'no-select' || val === '') {
+                        isDefaultSsd = true;
+                    } else {
+                        isDefaultSsd = false;
+                    }
                 }
             });
             
-            // Determine if options are not configured
-            let isUnconfigured = false;
-            if (window.mainProductAvailable) {
-                if (isDefaultRam || isDefaultSsd) isUnconfigured = true;
-            } else {
-                if (isDefaultRam && isDefaultSsd) isUnconfigured = true;
-            }
-
-            // Only block and open bottom sheet if it's the FIRST click (modal is closed)
-            if (isUnconfigured && !isBsOpen) {
-                const isBsBtn = btn.classList.contains('btn-add-cart-bs') || btn.classList.contains('bs-buy-btn');
-                if (!isBsBtn) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
-                    openBottomSheet();
-                    const bs = document.getElementById('nava-bottom-sheet');
-                    if (bs) {
-                        bs.classList.remove('bs-shake-active');
-                        void bs.offsetWidth; // Reflow
-                        bs.classList.add('bs-shake-active');
-                    }
-                    return;
-                }
-            }
-            
-            // Block if price is contact-only (Liên hệ / 0)
+            // 1. Block if price is contact-only (Liên hệ / 0) - check this FIRST!
             let isContactPrice = false;
             const priceEl = document.getElementById('selected-variant-price') || document.getElementById('bs-price') || document.getElementById('sticky-price');
             if (priceEl) {
@@ -2938,8 +3134,79 @@ function initNavaProductEnforcement() {
                 }
                 return;
             }
+
+            // 2. Only check for configuration warnings if it is NOT a contact price
+            // Determine if options are not configured
+            let isUnconfigured = false;
+            if (window.mainProductAvailable) {
+                if (isDefaultRam || isDefaultSsd) isUnconfigured = true;
+            } else {
+                if (isDefaultRam && isDefaultSsd) isUnconfigured = true;
+            }
+
+            // Only block and warn if it's the FIRST click (modal is closed)
+            if (isUnconfigured && !isBsOpen) {
+                const isBsBtn = btn.classList.contains('btn-add-cart-bs') || btn.classList.contains('bs-buy-btn');
+                if (!isBsBtn) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    if (window.innerWidth >= 992) {
+                        // On PC/desktop, highlight options and scroll to them instead of showing a modal
+                        const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                        if (selectorBlock) {
+                            selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                            displays.forEach(d => {
+                                d.style.transition = 'all 0.3s';
+                                d.style.borderColor = '#ef4444';
+                                d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                setTimeout(() => {
+                                    d.style.borderColor = '';
+                                    d.style.boxShadow = '';
+                                }, 1500);
+                            });
+                        }
+                    } else {
+                        // On mobile, show bottom sheet modal
+                        openBottomSheet();
+                        const bs = document.getElementById('nava-bottom-sheet');
+                        if (bs) {
+                            bs.classList.remove('bs-shake-active');
+                            void bs.offsetWidth; // Reflow
+                            bs.classList.add('bs-shake-active');
+                        }
+                    }
+                    return;
+                }
+            }
         }
     }, true); // Capture phase is critical to run before other listeners
+
+    // Close custom dropdowns on selecting an option (especially for desktop hover)
+    document.addEventListener('click', function(e) {
+        const li = e.target.closest('.custom-select-list li, .nava-custom-select-list li, .nava-dropdown-item');
+        if (li) {
+            const wrapper = li.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+            if (wrapper) {
+                wrapper.classList.add('closed');
+                wrapper.classList.remove('active'); // also remove active just in case
+            }
+        }
+    });
+
+    // Remove closed class on mouseleave so hover can open it again next time
+    document.addEventListener('mouseover', function(e) {
+        const wrapper = e.target.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+        if (wrapper) {
+            if (!wrapper._hasMouseLeaveListener) {
+                wrapper._hasMouseLeaveListener = true;
+                wrapper.addEventListener('mouseleave', function() {
+                    this.classList.remove('closed');
+                });
+            }
+        }
+    });
 
     // Sync swatches on load
     setTimeout(syncSwatches, 100);

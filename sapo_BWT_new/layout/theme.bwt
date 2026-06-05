@@ -166,6 +166,12 @@
 
         <!-- Floating Social Button -->
         <div class="floating-social-wrapper">
+            <!-- Quick Compare FAB -->
+            <button class="fab-compare" id="fabCompareBtn" onclick="window.executeCompare()" title="So sánh sản phẩm" style="width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 2px solid white !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important; cursor: pointer !important; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important; color: white !important; display: none; align-items: center; justify-content: center; position: relative !important; margin-bottom: 12px; transition: transform 0.3s ease !important; outline: none; padding: 0;" onmouseover="this.style.transform='scale(1.08)';" onmouseout="this.style.transform='scale(1)';">
+                <i class="ph-bold ph-scales" style="font-size: 1.4rem;"></i>
+                <span id="fabCompareBadge" style="position: absolute !important; top: -5px !important; right: -5px !important; background: #ef4444 !important; color: white !important; border-radius: 50% !important; min-width: 20px !important; height: 20px !important; font-size: 0.75rem !important; font-weight: 700 !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 2px solid white !important; box-sizing: border-box !important; padding: 0 2px !important;">0</span>
+            </button>
+            
             <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
                 <img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
                 <img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" class="fab-cycle-img" width="50" height="50">
@@ -173,7 +179,7 @@
                 <img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" class="fab-cycle-img" width="50" height="50">
             </button>
-            <div class="fab-menu" id="fabMenu" style="opacity: 0; visibility: hidden;">
+            <div class="fab-menu" id="fabMenu">
                 <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width="44" height="44"></a>
                 <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" width="44" height="44"></a>
                 <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" width="44" height="44"></a>
@@ -181,84 +187,7 @@
                 <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" width="44" height="44"></a>
             </div>
         </div>
-        <style>
-        .floating-social-wrapper {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            top: auto !important;
-            transform: none !important;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .fab-main {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            position: relative;
-            z-index: 1001;
-            overflow: hidden;
-            padding: 0;
-            background: white;
-            transition: transform 0.3s ease;
-        }
-        .fab-main:hover {
-            transform: scale(1.05);
-        }
-        .fab-cycle-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .fab-cycle-img.active {
-            opacity: 1;
-        }
-        .fab-menu {
-            position: absolute;
-            bottom: 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-            z-index: 1000;
-        }
-        .fab-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .fab-item {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            overflow: hidden;
-            border: 2px solid white;
-        }
-        .fab-item:hover {
-            transform: scale(1.1) translateY(-2px);
-        }
-        .fab-item img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        </style>
+        
         <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Cycle FAB images
@@ -304,6 +233,118 @@
         
         <!-- Nava Sticky Compare Bar & Comparison Modal -->
         <style>
+            /* Floating Social Button Styles */
+            .floating-social-wrapper {
+                position: fixed !important;
+                bottom: 20px !important;
+                right: 20px !important;
+                top: auto !important;
+                transform: none !important;
+                flex-direction: column !important;
+                z-index: 2147483640 !important;
+                display: flex !important;
+                align-items: center !important;
+                transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+            @media (max-width: 768px) {
+                .floating-social-wrapper {
+                    bottom: 20px !important;
+                }
+                /* Mobile Comparison Modal UI Optimizations */
+                #compare-modal-content {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: 100vh !important;
+                    max-height: 100vh !important;
+                    border-radius: 0 !important;
+                }
+                #compare-modal-content > div:first-child {
+                    padding: 15px 20px !important;
+                }
+                #compare-body {
+                    padding: 15px !important;
+                }
+                .ai-compare-box {
+                    padding: 15px !important;
+                    margin-bottom: 15px !important;
+                }
+            }
+            .fab-main {
+                width: 50px !important;
+                height: 50px !important;
+                border-radius: 50% !important;
+                border: 2px solid white !important;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+                cursor: pointer !important;
+                position: relative !important;
+                z-index: 51 !important;
+                overflow: hidden !important;
+                padding: 0 !important;
+                background: white !important;
+                transition: transform 0.3s ease !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+            }
+            .fab-main:hover {
+                transform: scale(1.05) !important;
+            }
+            .fab-cycle-img {
+                position: absolute !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+                opacity: 0 !important;
+                transition: opacity 0.5s ease !important;
+            }
+            .fab-cycle-img.active {
+                opacity: 1 !important;
+            }
+            .fab-menu {
+                position: absolute !important;
+                bottom: 60px !important;
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 12px !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                transform: translateY(20px) !important;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+                pointer-events: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                align-items: center !important;
+            }
+            .fab-menu.active {
+                opacity: 1 !important;
+                visibility: visible !important;
+                transform: translateY(0) !important;
+                pointer-events: auto !important;
+            }
+            .fab-item {
+                width: 44px !important;
+                height: 44px !important;
+                border-radius: 50% !important;
+                background: white !important;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.15) !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                transition: transform 0.3s ease !important;
+                overflow: hidden !important;
+                border: 2px solid white !important;
+            }
+            .fab-item:hover {
+                transform: scale(1.1) translateY(-2px) !important;
+            }
+            .fab-item img {
+                width: 100% !important;
+                height: 100% !important;
+                object-fit: cover !important;
+            }
+
             @media (max-width: 768px) {
                 #compare-bar {
                     padding: 12px 0 !important;
@@ -394,7 +435,7 @@
         </div>
 
         <!-- COMPARE PRODUCT SELECT MODAL -->
-        <div id="compare-select-modal" style="display: none; position: fixed !important; inset: 0 !important; z-index: 2147483646 !important; background: rgba(15, 23, 42, 0.6) !important; backdrop-filter: blur(4px) !important; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease;" onclick="if(event.target===this) hideCompareSelectDropdown()">
+        <div id="compare-select-modal" style="display: none; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; z-index: 2147483648 !important; background: rgba(15, 23, 42, 0.6) !important; backdrop-filter: blur(4px) !important; align-items: center; justify-content: center;" onclick="if(event.target===this) hideCompareSelectDropdown()">
             <div id="compare-select-dropdown" style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); width: 90%; max-width: 850px; padding: 25px; box-sizing: border-box; font-family: inherit; position: relative; display: flex; flex-direction: column; transform: scale(0.95); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);">
                 <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <span>Chọn sản phẩm so sánh</span>
@@ -410,7 +451,7 @@
             </div>
         </div>
 
-        <div id="compare-modal" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #003366; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; background: rgba(15,23,42,0.8) !important; backdrop-filter: blur(8px) !important; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+        <div id="compare-modal" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #003366; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; z-index: 2147483647 !important; background: rgba(15,23,42,0.8) !important; backdrop-filter: blur(8px) !important; display: none; align-items: center; justify-content: center;">
             <div style="background: var(--bg-white); width: 95%; max-width: 1100px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);" id="compare-modal-content">
                 <!-- Header -->
                 <div style="padding: 25px 30px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-gray);">
@@ -447,6 +488,24 @@
                     img.alt = fileName.replace(/[-_]/g, ' ');
                 }
             });
+
+            // Relocation fallback helper (ensures modals and social bubble are placed correctly inside the visible content wrapper)
+            function forceRelocateCompareAndSocial() {
+                const cb = document.getElementById('compare-bar');
+                const cm = document.getElementById('compare-modal');
+                const csm = document.getElementById('compare-select-modal');
+                const social = document.querySelector('.floating-social-wrapper');
+                const targetParent = document.getElementById('nava-master-wrapper') || document.body;
+                if (targetParent) {
+                    if (cb && cb.parentNode !== targetParent) targetParent.appendChild(cb);
+                    if (cm && cm.parentNode !== targetParent) targetParent.appendChild(cm);
+                    if (csm && csm.parentNode !== targetParent) targetParent.appendChild(csm);
+                    if (social && social.parentNode !== targetParent) targetParent.appendChild(social);
+                }
+            }
+            forceRelocateCompareAndSocial();
+            setInterval(forceRelocateCompareAndSocial, 500);
+            window.addEventListener('load', forceRelocateCompareAndSocial);
         });
     </script>
 </html>

@@ -1,0 +1,41 @@
+1: {%- include 'setup_price_pr' -%}
+5: {%- include 'breadcrumb' -%}
+26: {%-include 'schema_product'-%}
+276: /* Style standard tables rendered inside specs-column */
+1295: {%- include 'm_frequently' -%}
+1297: {%- include 'm_list_tag_pr' -%}
+1306: {%- include 'swatch' with option -%}
+1423: {%-include 'product_specs' with specs_content, keyword: settings.compare_keyword -%}
+1445: {% include 'product-reviews' %}
+1447: {%-include 'm_relate_product'-%}
+1454: {%- include 'mew_mobi_bar_frequently' -%}
+1600: currentLightboxIndex = galleryImages.findIndex(src => cleanSrc(currentSrc).includes(cleanSrc(src)));
+1736: // Custom FBT Rendering and Bidirectional Sync logic
+1792: if (labelText.toLowerCase().includes('ram')) name = 'NO RAM';
+1793: else if (labelText.toLowerCase().includes('ssd')) name = 'NO SSD';
+2126: if (newVal === 0 || text.includes('liên hệ') || text.includes('contact')) {
+2189: if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+2199: if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+2215: const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+2216: const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+2559: if (text.includes('ram') || text.includes('dram')) hasRam = true;
+2560: if (text.includes('ssd') || text.includes('nvme')) hasSsd = true;
+2574: if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2582: if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2590: if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+2882: if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2889: if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2898: const isRam = val.includes('RAM') || label.includes('RAM') || label.includes('DRAM');
+2899: const isSsd = val.includes('SSD') || label.includes('SSD') || label.includes('NVME');
+2901: if (isRam && (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+2904: if (isSsd && (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+2913: if (name.includes('RAM') || val.includes('RAM')) {
+2914: if (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultRam = true;
+2916: if (name.includes('SSD') || val.includes('SSD')) {
+2917: if (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultSsd = true;
+2924: if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+2935: const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+2936: const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+2978: if (cleanPriceText === '0' || cleanPriceText === '' || priceText.includes('liên hệ') || priceText.includes('contact')) {
+2986: if (cleanFbtText === '0' || cleanFbtText === '' || fbtTotalText.includes('liên hệ') || fbtTotalText.includes('contact')) {
+3027: // Render custom FBT instead of formatting native ones

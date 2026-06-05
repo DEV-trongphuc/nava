@@ -1,8 +1,13 @@
-import re
+def main():
+    filepath = 'build_demos.py'
+    with open(filepath, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+    
+    print(f"=== Occurrences of syncSwatches in {filepath} ===")
+    for idx, line in enumerate(lines):
+        if 'syncSwatches' in line:
+            # print up to 50 chars of the line
+            print(f"Line {idx+1}: {line.strip()[:100]}")
 
-with open('build_demos.py', 'r', encoding='utf-8') as f:
-    lines = f.readlines()
-
-for i, line in enumerate(lines):
-    if 'collection' in line.lower() and ('html' in line or 'write' in line or 'template' in line):
-        print(f"Line {i+1}: {line.strip()[:120]}")
+if __name__ == '__main__':
+    main()

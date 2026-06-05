@@ -6,6 +6,20 @@
     .breadcrumbs { display: none !important; }
     .nava-col-layout { padding: 24px; background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
     
+    /* Solid white background for collection cards, no gradient/glow. Automatically dark in dark mode. */
+    .product-card {
+        background: var(--bg-white) !important;
+    }
+    .product-card .card-glow {
+        display: none !important;
+    }
+    
+    /* Remove shadow from collection card images */
+    .product-card .product-img,
+    .product-card:hover .product-img {
+        filter: none !important;
+    }
+
     .product-grid { 
         display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: 20px !important; 
     }
@@ -16,7 +30,7 @@
         .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
     }
     @media (max-width: 575px) {
-        #nava-col-container { padding: 10px 10px 80px !important; margin-top: 0 !important; }
+        #nava-col-container { padding: 0 10px 80px !important; margin-top: -58px !important; }
         .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
         
         /* Collection Page title sizing */
@@ -162,12 +176,76 @@
                         .sort-drop-menu.show { display: block; }
                         .sort-drop-menu a { display: block; padding: 10px 18px; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.15s; }
                         .sort-drop-menu a:hover { background: var(--bg-gray); color: var(--primary); }
+                        
+                        @media (max-width: 767px) {
+                            #nava-col-container {
+                                padding-top: 0 !important;
+                                padding-left: 12px !important;
+                                padding-right: 12px !important;
+                                padding-bottom: 80px !important;
+                                margin-top: -58px !important;
+                            }
+                            .collection-hero {
+                                padding: 15px 20px !important;
+                                margin-top: 5px !important;
+                                margin-bottom: 20px !important;
+                            }
+                            .collection-hero h1 {
+                                font-size: 1.5rem !important;
+                                margin-bottom: 8px !important;
+                            }
+                            .collection-hero p {
+                                font-size: 0.85rem !important;
+                                line-height: 1.5 !important;
+                            }
+                            .hero-image-wrap {
+                                display: none !important;
+                            }
+                            
+                            .ai-inner { padding: 4px 4px 4px 12px !important; gap: 6px !important; }
+                            .ai-btn span { display: none !important; }
+                            .ai-btn { padding: 8px 12px !important; }
+                            .ai-input { font-size: 0.85rem !important; }
+                            
+                            /* AI search widget & dropdown positioning on mobile */
+                            #ai-search-widget {
+                                position: static !important;
+                            }
+                            .ai-results-dropdown {
+                                left: 0 !important;
+                                right: 0 !important;
+                                width: 100% !important;
+                            }
+                            .ai-result-item {
+                                padding: 10px 15px !important;
+                                gap: 10px !important;
+                            }
+                            .ai-result-info h5 {
+                                font-size: 0.85rem !important;
+                                max-width: 200px !important;
+                            }
+                            
+                            /* Sort button to icon-only circular pill on mobile */
+                            .sort-pill-btn {
+                                width: 42px !important;
+                                height: 42px !important;
+                                padding: 0 !important;
+                                justify-content: center !important;
+                                border-radius: 50% !important;
+                            }
+                            #sortLabel {
+                                display: none !important;
+                            }
+                            .sort-pill-btn .ph-caret-down {
+                                display: none !important;
+                            }
+                        }
                     </style>
                     <div class="ai-glow-wrap">
                         <div class="ai-inner">
                             <i class="ph-fill ph-sparkle" style="font-size: 1.4rem; color: #3b82f6; flex-shrink: 0; animation: pulse-sparkle 2s infinite;"></i>
-                            <input type="text" class="ai-input" id="aiSearchInput" placeholder="Mô tả AI... (VD: Mini PC chơi game Wukong giá dưới 15 củ)">
-                            <button class="ai-btn" id="aiSearchBtn"><i class="ph-bold ph-magnifying-glass"></i> Tìm kiếm AI</button>
+                            <input type="text" class="ai-input" id="aiSearchInput" placeholder="Máy chơi được Wukong tầm 15 củ">
+                            <button class="ai-btn" id="aiSearchBtn"><i class="ph-bold ph-magnifying-glass"></i> <span>Tìm kiếm AI</span></button>
                         </div>
                     </div>
                     <!-- AI Results -->
@@ -228,20 +306,22 @@
             
             <!-- Collection list -->
             <div class="collection">
-                {%- paginate collection.products by product_per_page -%}
                 <script>
                     window.navaProducts = [
                         {%- for prod in collection.products -%}
+                        {%- if prod.price > 0 -%}
                         {
                             name: {{ prod.name | json }},
-                            price: "{%- if prod.price == 0 -%}Liên hệ{%- else -%}{{ prod.price | money }}{%- endif -%}",
+                            price: "{{ prod.price | money }}",
                             img: "{%- if prod.featured_image -%}{{ prod.featured_image.src | img_url: 'large' }}{%- else -%}{%- endif -%}",
                             url: "{{ prod.url }}",
                             desc: {{ prod.description | strip_html | truncate: 150 | json }}
-                        }{%- unless forloop.last -%},{%- endunless -%}
+                        },
+                        {%- endif -%}
                         {%- endfor -%}
-                    ];
+                    ].slice(0, 40);
                 </script>
+                {%- paginate collection.products by product_per_page -%}
                 <div class="category-products position-relative mt-3 mb-3">
                     {%- if collection.products.size > 0 -%}
                     <div class="product-grid">
@@ -429,6 +509,33 @@
       document.addEventListener('DOMContentLoaded', function() {
           const url = new URL(window.location.href);
           
+          // Dynamic brand logo replacement in banner if filtered by vendor
+          const vendorQuery = url.searchParams.get('vendor');
+          if (vendorQuery) {
+              const vendorLower = vendorQuery.toLowerCase().trim();
+              const brandLogos = {
+                  'asus': "{{ 'asus.png' | asset_url }}",
+                  'minisforum': "{{ 'minisforum.png' | asset_url }}",
+                  'beelink': "{{ 'beelink.png' | asset_url }}",
+                  'gmktec': "{{ 'gmktec.png' | asset_url }}",
+                  'aoostar': "{{ 'aoostar.png' | asset_url }}",
+                  'beikong': "{{ 'beikong.png' | asset_url }}",
+                  'msi': "{{ 'msi.png' | asset_url }}",
+                  'bmax': "{{ 'bmax.png' | asset_url }}"
+              };
+              
+              const logoUrl = brandLogos[vendorLower];
+              if (logoUrl) {
+                  const heroImg = document.querySelector('.hero-image-wrap img');
+                  if (heroImg) {
+                      heroImg.src = logoUrl;
+                      heroImg.style.maxWidth = '180px';
+                      heroImg.style.maxHeight = '70px';
+                      heroImg.style.objectFit = 'contain';
+                  }
+              }
+          }
+          
           // Set sort dropdown label on load
           const sortby = url.searchParams.get('sortby');
           let labelText = 'Mặc định';
@@ -488,10 +595,63 @@
           function doAISearch() {
               var q = aiSearchInput.value.trim();
               if (!q) { drop.classList.remove('active'); return; }
+              
+              // Reset all filters so that all products can be analyzed
+              var url = new URL(window.location.href);
+              if (url.searchParams.has('price') || url.searchParams.has('vendor') || url.searchParams.has('q')) {
+                  url.searchParams.delete('price');
+                  url.searchParams.delete('vendor');
+                  url.searchParams.delete('q');
+                  window.history.pushState({}, '', url.pathname + url.search);
+              }
+              
+              document.querySelectorAll('.product-grid .product-card').forEach(function(card) {
+                  card.style.display = 'flex';
+              });
+              
+              document.querySelectorAll('.quick-filters button').forEach(function(btn) {
+                  if (btn.innerText.trim() === 'Tất cả') {
+                      btn.style.background = 'var(--primary)';
+                      btn.style.color = 'white';
+                      btn.style.borderColor = 'var(--primary)';
+                  } else {
+                      btn.style.background = 'var(--bg-white)';
+                      btn.style.color = 'var(--text-dark)';
+                      btn.style.borderColor = 'var(--border-color)';
+                  }
+              });
+              
+              document.querySelectorAll('.nava-brand-item').forEach(function(item) {
+                  item.classList.remove('active');
+                  item.style.borderColor = '';
+                  item.style.background = '';
+              });
+              
+              var s1 = document.getElementById("slider-1");
+              var s2 = document.getElementById("slider-2");
+              if (s1 && s2) {
+                  s1.value = s1.min;
+                  s2.value = s2.max;
+                  if (typeof slideOne === 'function') slideOne();
+                  if (typeof slideTwo === 'function') slideTwo();
+              }
+              
+              var sortLabelEl = document.getElementById('sortLabel');
+              if (sortLabelEl) sortLabelEl.textContent = 'Mặc định';
+
               drop.classList.add('active');
               loading.style.display = 'block';
               list.style.display = 'none';
               header.textContent = '🤖 AI đang phân tích: "' + q + '"...';
+              
+              // Filter out products with "Liên hệ" or invalid price (> 0 only)
+              var cleanProducts = navaProducts.filter(function(p) {
+                  if (!p || !p.price) return false;
+                  var priceLower = p.price.toLowerCase();
+                  if (priceLower.includes('liên hệ')) return false;
+                  var priceVal = parseInt(p.price.replace(/[^\d]/g, '')) || 0;
+                  return priceVal > 0;
+              });
               
               // Call the PHP proxy hosted on ideas.edu.vn
               fetch('https://automation.ideas.edu.vn/meta_report/gemini_proxy.php', {
@@ -501,7 +661,7 @@
                   },
                   body: JSON.stringify({
                       query: q,
-                      products: navaProducts
+                      products: cleanProducts
                   })
               })
               .then(response => {
@@ -612,9 +772,9 @@
                   filteredList.innerHTML = html;
               })
               .catch(err => {
-                  console.warn('Gemini API search failed or key not configured. Using local fallback search.', err);
-                  // Run local keyword search fallback
-                  doLocalFallbackSearch(q);
+                  console.warn('Gemini API search failed or key not configured. Redirecting to standard search page.', err);
+                  drop.classList.remove('active');
+                  window.location.href = '/search?q=' + encodeURIComponent(q);
               });
           }
           

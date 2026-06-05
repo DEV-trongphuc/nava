@@ -1,0 +1,2 @@
+FOUND IN FILENAME: f:\BAO_SAPO\sapo_new\sapo_BWT_new\snippets\m_relate_product.bwt
+FOUND IN FILE CONTENTS: f:\BAO_SAPO\sapo_new\scratch\search_code.py

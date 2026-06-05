@@ -24,14 +24,16 @@
 
   <div class="related-product-grid">
     {%- assign count = 0 -%}
+    {%- assign is_related = true -%}
     {%- for prod in current_collection.products -%}
       {%- if prod.id != current_product.id -%}
         {%- assign product = prod -%}
-        {%- include 'product-grid-item' -%}
+        {%- include 'product-grid-item' -%}{%- comment -%}is_related flag will style this card{%- endcomment -%}
         {%- assign count = count | plus: 1 -%}
         {%- if count >= 4 -%}{%- break -%}{%- endif -%}
       {%- endif -%}
     {%- endfor -%}
+    {%- assign is_related = false -%}
   </div>
 </div>
 {%- assign product = current_product -%}

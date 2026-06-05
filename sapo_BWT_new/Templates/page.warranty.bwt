@@ -1,0 +1,278 @@
+{% include 'breadcrumb' %}
+<div class="com_info">
+    <style>
+        .breadcrumbs .container {
+            max-width: 1200px !important;
+            padding: 0 15px !important;
+            width: 100% !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            box-sizing: border-box !important;
+        }
+        .nava-policy-page { max-width: 1200px; margin: 30px auto 50px; padding: 0 15px; }
+        .policy-hero { text-align: center; margin-bottom: 25px; padding: 25px 20px; background: linear-gradient(135deg, rgba(0, 51, 102, 0.08), rgba(0, 76, 153, 0.03)); border-radius: var(--radius-md); border: 1px solid rgba(0, 51, 102, 0.15); }
+        .policy-hero h1 { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin: 0 0 6px 0; }
+        .policy-hero p { color: var(--text-gray); font-size: 0.95rem; margin: 0; }
+        
+        .policy-grid { display: grid; grid-template-columns: 240px 1fr; gap: 20px; }
+        
+        .policy-sidebar { position: sticky; top: 120px; background: var(--bg-white); border-radius: var(--radius-md); padding: 15px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); height: fit-content; z-index: 9; }
+        .policy-sidebar h3 { font-size: 1.05rem; font-weight: 800; color: var(--text-dark); margin: 0 0 15px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+        .policy-menu { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+        .policy-menu-link { display: flex; align-items: center; gap: 10px; padding: 12px 15px; color: var(--text-gray); text-decoration: none; border-radius: var(--radius-md); font-weight: 600; font-size: 0.92rem; transition: all 0.2s; border: 1px solid transparent; white-space: nowrap; }
+        .policy-menu-link:hover { background: var(--bg-gray); color: var(--text-dark); }
+        .policy-menu-link.active { background: rgba(0, 51, 102, 0.05); color: var(--primary); border-color: rgba(0, 51, 102, 0.15); }
+        
+        .policy-content { background: var(--bg-white); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); min-height: 400px; }
+        
+        .policy-tab-content { display: none; }
+        .policy-tab-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .policy-tab-content h2 { font-size: 1.4rem; font-weight: 800; color: var(--text-dark); margin: 0 0 20px 0; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .policy-tab-content h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); margin: 25px 0 12px 0; }
+        .policy-tab-content p { color: var(--text-gray); line-height: 1.6; font-size: 0.95rem; margin-bottom: 15px; }
+        .policy-tab-content ul { padding-left: 20px; color: var(--text-gray); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        .policy-tab-content li { margin-bottom: 8px; }
+        
+        .warranty-block { border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px 20px; margin-bottom: 20px; background: var(--bg-gray); }
+        .warranty-block h3 { margin-top: 0 !important; }
+        .note-block { background: rgba(59, 130, 246, 0.05); border-color: rgba(59, 130, 246, 0.2); color: #1e3a8a; }
+        
+        @media (max-width: 768px) {
+            .policy-grid { grid-template-columns: 1fr; gap: 15px; }
+            .policy-sidebar {
+                position: sticky;
+                top: 60px;
+                z-index: 10;
+                background: var(--bg-white);
+                padding: 10px !important;
+                margin: 0 -15px 10px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            }
+            .policy-sidebar h3 { display: none !important; }
+            .policy-menu {
+                flex-direction: row !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                gap: 8px;
+                padding-bottom: 5px;
+                scrollbar-width: none;
+            }
+            .policy-menu::-webkit-scrollbar { display: none; }
+            .policy-menu li { margin: 0; }
+            .policy-menu-link {
+                padding: 8px 14px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .policy-content { padding: 20px 15px !important; }
+            .policy-hero h1 { font-size: 1.4rem; }
+            .policy-hero { padding: 15px 10px !important; }
+            .policy-tab-content h2 { font-size: 1.2rem !important; }
+        }
+    </style>
+    
+    <div class="nava-policy-page">
+        <div class="policy-hero">
+            <h1>Chính Sách & Điều Khoản</h1>
+            <p>Thông tin chi tiết về các chính sách bán hàng, bảo hành và bảo mật tại Nava Store</p>
+        </div>
+        
+        <div class="policy-grid">
+            <!-- Sidebar -->
+            <div class="policy-sidebar">
+                <h3>Danh mục chính sách</h3>
+                <ul class="policy-menu">
+                    <li><a href="#warranty" onclick="switchPolicyTab('warranty'); return false;" id="tab-btn-warranty" class="policy-menu-link active"><i class="ph-bold ph-shield-check"></i> Chính sách bảo hành</a></li>
+                    <li><a href="#shipping" onclick="switchPolicyTab('shipping'); return false;" id="tab-btn-shipping" class="policy-menu-link"><i class="ph-bold ph-truck"></i> Chính sách vận chuyển</a></li>
+                    <li><a href="#return" onclick="switchPolicyTab('return'); return false;" id="tab-btn-return" class="policy-menu-link"><i class="ph-bold ph-arrow-counter-clockwise"></i> Chính sách hoàn trả</a></li>
+                    <li><a href="#privacy" onclick="switchPolicyTab('privacy'); return false;" id="tab-btn-privacy" class="policy-menu-link"><i class="ph-bold ph-lock-key"></i> Chính sách bảo mật</a></li>
+                    <li><a href="#terms" onclick="switchPolicyTab('terms'); return false;" id="tab-btn-terms" class="policy-menu-link"><i class="ph-bold ph-file-text"></i> Điều khoản dịch vụ</a></li>
+                </ul>
+            </div>
+            
+            <!-- Content Column with CTA -->
+            <div style="display: flex; flex-direction: column; gap: 25px;">
+                <div class="policy-content" id="policy-main-content" style="margin-bottom: 0;">
+                    <!-- Tab 1: Warranty -->
+                    <div class="policy-tab-content active" id="policy-tab-warranty">
+                        <h2>Chính Sách Bảo Hành</h2>
+                        <p>Nava Store cam kết mang đến chính sách bảo hành tối ưu nhất cho quý khách hàng đối với tất cả các dòng sản phẩm Mini PC, eGPU và linh kiện công nghệ bán ra.</p>
+                        
+                        <!-- Detailed Brand Warranties -->
+                        <div class="warranty-block" style="background: var(--bg-white);">
+                            <h3 style="font-weight: 800; color: var(--text-dark); margin-bottom: 15px;"><i class="ph-fill ph-shield-check" style="color: var(--primary);"></i> Thời Hạn Bảo Hành Theo Dòng Sản Phẩm</h3>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                                <li style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Mini PC Minisforum:</strong> Bảo hành <strong>2 năm</strong> từ nhà sản xuất, miễn phí gửi bảo hành 1 năm đầu.
+                                </li>
+                                <li style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Mini PC Beelink, Aoostar, GMKtec, Morefine, FEVM:</strong> Bảo hành <strong>12 tháng</strong>, miễn phí gửi bảo hành 6 tháng đầu.
+                                </li>
+                                <li style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Mini PC Firebat, Trycoo...:</strong> Bảo hành <strong>6 tháng</strong> từ nhà sản xuất.
+                                </li>
+                                <li style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Linh kiện RAM (Samsung, Hynix...):</strong> Bảo hành <strong>3 năm</strong> từ nhà sản xuất.
+                                </li>
+                                <li style="margin-bottom: 12px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Linh kiện SSD Samsung, Lexar, Predator:</strong> Bảo hành <strong>3 năm</strong> từ nhà sản xuất.
+                                </li>
+                                <li style="margin-bottom: 0; font-size: 0.95rem;">
+                                    <strong style="color: var(--primary);">Linh kiện SSD Hynix:</strong> Bảo hành <strong>1 năm</strong> từ nhà sản xuất.
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warranty-block warranty-eligible">
+                            <h3><i class="ph-fill ph-check-circle" style="color: #10b981;"></i> Điều Kiện Được Bảo Hành:</h3>
+                            <ul>
+                                <li>Sản phẩm được bán ra bởi Nava Store và có tem bảo hành của Nava Store hoặc tem bảo hành từ nhà cung cấp/sản xuất (còn nguyên vẹn).</li>
+                                <li>Sản phẩm trong thời hạn bảo hành hợp lệ, đầy đủ phụ kiện và bao bì theo yêu cầu.</li>
+                                <li>Sản phẩm lỗi do kỹ thuật hoặc từ nhà sản xuất, được xác định bởi Nava Store hoặc nhà phân phối.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warranty-block warranty-ineligible">
+                            <h3><i class="ph-fill ph-warning-circle" style="color: #ef4444;"></i> Không Đủ Điều Kiện Bảo Hành:</h3>
+                            <ul>
+                                <li>Sản phẩm hết hạn hoặc không đáp ứng điều kiện bảo hành.</li>
+                                <li>Sản phẩm mất tem, mờ tem, cạo sửa, chắp vá.</li>
+                                <li>Hư hại do va đập, cấn móp, cháy nổ, dính chất lỏng, hoặc lỗi do người dùng.</li>
+                                <li>Sản phẩm có dấu hiệu tự ý tháo mở, sửa chữa.</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="warranty-block note-block">
+                            <h3><i class="ph-fill ph-info" style="color: #3b82f6;"></i> Lưu ý thêm:</h3>
+                            <p>- Nếu sản phẩm lỗi trong vòng 15 ngày đầu, quý khách sẽ được đổi sản phẩm mới cùng model.</p>
+                            <p>- Thời gian bảo hành thông thường là từ 7 đến 15 ngày làm việc tùy thuộc vào linh kiện lỗi cần xử lý.</p>
+                        </div>
+                        
+                        <!-- Support & Contact Info -->
+                        <div class="warranty-block note-block" style="background: rgba(0, 51, 102, 0.03); border-color: rgba(0, 51, 102, 0.15); color: var(--text-dark);">
+                            <h3 style="font-weight: 800; color: var(--text-dark); margin-bottom: 12px;"><i class="ph-fill ph-phone" style="color: var(--primary);"></i> Thông Tin Liên Hệ Bảo Hành</h3>
+                            <p>Khi cần bảo hành, quý khách vui lòng liên hệ bộ phận hỗ trợ kỹ thuật của Nava Store:</p>
+                            <ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;"><strong>Hotline hỗ trợ:</strong> <a href="tel:0972178527" style="color: var(--primary); font-weight: 700; text-decoration: none;">0972 178 527</a></li>
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;"><strong>Zalo OA:</strong> <a href="https://zalo.me/3182872871563786385" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: none;">Nava Store</a></li>
+                                <li style="margin-bottom: 8px; font-size: 0.95rem;"><strong>Fanpage:</strong> <a href="https://www.facebook.com/navastore.vn/" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: none;">facebook.com/navastore.vn</a></li>
+                                <li style="margin-bottom: 0; font-size: 0.95rem; line-height: 1.5;"><strong>Địa chỉ nhận bảo hành:</strong> 270 đường Linh Trung, P.Linh Trung, TP. Thủ Đức, TP.HCM (Giờ làm việc: Thứ 2 – Thứ 7, 9:00 AM – 5:00 PM)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Tab 2: Shipping -->
+                    <div class="policy-tab-content" id="policy-tab-shipping">
+                        <h2>Chính Sách Giao Nhận & Vận Chuyển</h2>
+                        <p>Chúng tôi cung cấp dịch vụ giao hàng toàn quốc nhanh chóng và an toàn tuyệt đối với mọi đơn hàng.</p>
+                        
+                        <h3>1. Thời gian giao hàng dự kiến:</h3>
+                        <ul>
+                            <li><strong>Khu vực nội thành TP.HCM:</strong> Giao nhanh trong vòng 2-4 giờ (với tùy chọn Hoả Tốc) hoặc trong vòng 24 giờ.</li>
+                            <li><strong>Các tỉnh thành khác:</strong> Thời gian từ 2-4 ngày làm việc tuỳ thuộc địa chỉ của quý khách.</li>
+                        </ul>
+                        
+                        <h3>2. Phí vận chuyển:</h3>
+                        <ul>
+                            <li>Miễn phí vận chuyển Standard (Freeship) cho mọi đơn hàng Mini PC, eGPU trên toàn quốc.</li>
+                            <li>Phí giao hàng hoả tốc áp dụng mức phí cố định 39.000đ cho khu vực TP.HCM.</li>
+                        </ul>
+                        
+                        <h3>3. Đồng kiểm khi nhận hàng:</h3>
+                        <p>Quý khách hàng được quyền mở gói hàng đồng kiểm ngoại quan cùng với nhân viên giao nhận. Vui lòng quay video clip khui hộp để đảm bảo quyền lợi đổi trả tối đa khi xảy ra sự cố nứt vỡ, móp méo sản phẩm do vận chuyển.</p>
+                    </div>
+                    
+                    <!-- Tab 3: Return -->
+                    <div class="policy-tab-content" id="policy-tab-return">
+                        <h2>Chính Sách Đổi Trả & Hoàn Tiền</h2>
+                        <p>Chính sách bảo vệ khách hàng vượt trội tại Nava Store cho phép đổi trả hàng trong vòng 15 ngày.</p>
+                        
+                        <h3>1. Thời hạn đổi trả hàng:</h3>
+                        <p>Quý khách có thể yêu cầu đổi hàng hoặc hoàn trả tiền trong vòng tối đa 15 ngày kể từ ngày nhận hàng (xác nhận theo phiếu giao hàng hoặc hệ thống đơn vị vận chuyển).</p>
+                        
+                        <h3>2. Điều kiện đổi trả:</h3>
+                        <ul>
+                            <li>Sản phẩm lỗi kỹ thuật từ nhà sản xuất.</li>
+                            <li>Sản phẩm giao không đúng loại, không đúng model, thiếu phụ kiện so với đơn hàng đã đặt.</li>
+                            <li>Sản phẩm phải còn nguyên hộp, tem mác niêm phong ban đầu, không trầy xước cấn móp cọ xát và đầy đủ quà tặng đi kèm nếu có.</li>
+                        </ul>
+                        
+                        <h3>3. Chi phí vận chuyển đổi trả:</h3>
+                        <p>Nava Store sẽ chịu 100% chi phí vận chuyển phát sinh khi thực hiện đổi trả do lỗi kỹ thuật hoặc lỗi giao sai từ phía cửa hàng.</p>
+                    </div>
+                    
+                    <!-- Tab 4: Privacy -->
+                    <div class="policy-tab-content" id="policy-tab-privacy">
+                        <h2>Chính Sách Bảo Mật Thông Tin</h2>
+                        <p>Nava Store tôn trọng và cam kết bảo vệ thông tin riêng tư cá nhân của khách hàng khi truy cập và mua hàng tại hệ thống.</p>
+                        
+                        <h3>1. Thu thập thông tin:</h3>
+                        <p>Chúng tôi chỉ thu thập thông tin cơ bản liên quan đến giao dịch đặt hàng gồm: Họ tên, Số điện thoại, Email và Địa chỉ giao nhận hàng.</p>
+                        
+                        <h3>2. Mục đích sử dụng:</h3>
+                        <p>Thông tin thu thập chỉ được dùng để xác nhận đơn hàng, xử lý giao hàng, cung cấp dịch vụ bảo hành sửa chữa, và gửi thông báo chương trình khuyến mãi nếu được sự đồng ý của khách hàng.</p>
+                        
+                        <h3>3. Cam kết bảo mật:</h3>
+                        <p>Thông tin của khách hàng được mã hoá và lưu trữ trên hệ thống an toàn. Chúng tôi tuyệt đối không bán, chia sẻ hay tiết lộ thông tin khách hàng cho bên thứ ba ngoại trừ đơn vị vận chuyển trung gian phục vụ giao nhận đơn hàng.</p>
+                    </div>
+                    
+                    <!-- Tab 5: Terms -->
+                    <div class="policy-tab-content" id="policy-tab-terms">
+                        <h2>Điều Khoản Dịch Vụ</h2>
+                        <p>Chào mừng bạn đến với trang web của Nava Store. Bằng cách truy cập và sử dụng dịch vụ tại đây, bạn đồng ý với các điều khoản dưới đây:</p>
+                        
+                        <h3>1. Bản quyền nội dung:</h3>
+                        <p>Mọi hình ảnh, văn bản, thông số kỹ thuật sản phẩm và thiết kế giao diện trên website thuộc sở hữu độc quyền của Nava Store. Nghiêm cấm mọi hành vi sao chép trái phép.</p>
+                        
+                        <h3>2. Giá cả & Mô tả sản phẩm:</h3>
+                        <p>Nava Store luôn cố gắng cung cấp thông tin giá cả chính xác nhất. Tuy nhiên, nếu có sai sót kỹ thuật hiển thị sai giá trị thực tế, chúng tôi có quyền từ chối hoặc hủy đơn hàng đó sau khi liên hệ giải thích với quý khách.</p>
+                        
+                        <h3>3. Trách nhiệm người dùng:</h3>
+                        <p>Người dùng cam kết cung cấp thông tin liên hệ chính xác, trung thực khi thực hiện đặt mua hàng để đảm bảo quyền lợi vận chuyển và dịch vụ hậu mãi chăm sóc khách hàng tốt nhất.</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 5px;">
+                    <a href="/tat-ca-san-pham" class="btn-nava btn-primary-nava" style="display: inline-flex; width: auto; padding: 14px 35px; text-decoration: none; border-radius: var(--radius-md); font-weight: 700; color: white; background: linear-gradient(90deg, var(--primary), var(--primary-light)); align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 51, 102, 0.2);">
+                        <i class="ph-bold ph-shopping-bag"></i> Tiếp tục mua sắm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchPolicyTab(tabId) {
+        // Hide all tab contents
+        document.querySelectorAll('.policy-tab-content').forEach(el => el.classList.remove('active'));
+        // Remove active class from all links
+        document.querySelectorAll('.policy-menu-link').forEach(el => el.classList.remove('active'));
+        
+        // Show current tab & set active link
+        const targetTab = document.getElementById('policy-tab-' + tabId);
+        const targetLink = document.getElementById('tab-btn-' + tabId);
+        if (targetTab) targetTab.classList.add('active');
+        if (targetLink) targetLink.classList.add('active');
+        
+        // Update URL hash without jumping page
+        if (history.pushState) {
+            history.pushState(null, null, '#' + tabId);
+        } else {
+            window.location.hash = tabId;
+        }
+    }
+    
+    // Check hash on load
+    window.addEventListener('DOMContentLoaded', () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash && ['warranty', 'shipping', 'return', 'privacy', 'terms'].includes(hash)) {
+            switchPolicyTab(hash);
+        }
+    });
+</script>

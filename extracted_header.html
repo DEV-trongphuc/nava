@@ -107,20 +107,20 @@
             <div class="preloader-text">NAVA STORE</div>
         </div>
         <script>
-            window.addEventListener('load', function() {
-                const preloader = document.getElementById('nava-preloader');
-                if (preloader) {
-                    preloader.classList.add('nava-preloader-hidden');
-                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
-                }
-            });
-            setTimeout(() => {
+            function hideNavaPreloader() {
                 const preloader = document.getElementById('nava-preloader');
                 if (preloader && !preloader.classList.contains('nava-preloader-hidden')) {
                     preloader.classList.add('nava-preloader-hidden');
                     setTimeout(() => { preloader.style.display = 'none'; }, 600);
                 }
-            }, 5000);
+            }
+            if (document.readyState === 'complete') {
+                hideNavaPreloader();
+            } else {
+                window.addEventListener('load', hideNavaPreloader);
+                // Fail-safe timeout
+                setTimeout(hideNavaPreloader, 3000);
+            }
         </script>
         <!-- Background Decor (Glowing Orbs & Logo) -->
         <div class="bg-glow orb-1"></div>

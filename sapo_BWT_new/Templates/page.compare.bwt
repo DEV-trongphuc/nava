@@ -1,18 +1,11 @@
-{% include 'breadcrumb' %}
 <div class="com_info">
     <style>
         .nava-compare-card { background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); padding: 25px; box-shadow: var(--shadow-sm); }
         .page_name { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
         
-        /* Custom styled containers for Sapo dynamic compare script output */
-        #compare-select {
-            display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; margin-bottom: 20px;
-        }
-        #compare-summary {
-            display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; margin-bottom: 20px;
-        }
-        #compare-detail {
-            display: flex !important; flex-direction: column; border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: var(--bg-white);
+        /* Hide Sapo native elements */
+        #compare-select, #compare-summary, #compare-detail {
+            display: none !important;
         }
         
         /* Responsive scrollable compare grid wrapper for mobile */
@@ -20,33 +13,259 @@
             width: 100%; overflow-x: auto; scrollbar-width: thin; -webkit-overflow-scrolling: touch; margin-bottom: 30px;
         }
         
+        /* Row hover highlights */
+        .compare-row-item:hover {
+            background: rgba(14, 165, 233, 0.02) !important;
+        }
+        
         @media (max-width: 768px) {
-            #compare-select, #compare-summary {
-                min-width: 600px !important; /* Ensure columns have enough space to not stack */
-            }
-            #compare-detail {
-                min-width: 600px !important;
+            #nava-compare-custom-grid {
+                min-width: 780px !important; /* Keep columns wide enough on mobile scroll */
             }
             .page_name { font-size: 1.3rem !important; }
             .nava-compare-card { padding: 15px !important; }
         }
+        .com_info .container {
+            max-width: 1200px !important;
+            width: 100% !important;
+            padding: 15px !important;
+            margin: 0 auto !important;
+        }
     </style>
     
-    <div class="container mt-3 mb-3">
+    <div class="container mt-3 mb-3" style="max-width: 1200px !important; margin: 0 auto !important; padding: 0 15px !important;">
         <div class="col-main page-title nava-compare-card">
             <h1 class="page_name text-center">
                 {{page.title | default: 'So Sánh Sản Phẩm'}}
             </h1>
             
+            <!-- AI Compare Box placeholder (Static, non-scrollable, padded) -->
+            <div id="nava-compare-ai-box-placeholder" style="margin-bottom: 20px;"></div>
+
             <div class="compare-scroll-container">
-                <div id="compare-select"></div>
-                <div id="compare-summary"></div>
-                <div id="compare-detail"></div>
+                <div id="nava-compare-custom-grid"></div>
             </div>
         </div>
     </div>
     
-    <div class="container mb-3">
+    <div class="container mb-3" style="max-width: 1200px !important; margin: 0 auto !important;">
         {%include 'm_product_recent_compare'%}
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Override the select callback for adding items directly from search dropdown
+        window.selectProductForCompare = function(name, img, price, url) {
+            if (window.compareList.length >= 3) return;
+            window.compareList.push({ name, img, price, url });
+            localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
+            window.updateCompareBar();
+            window.hideCompareSelectDropdown();
+            renderComparePageInline();
+        };
+
+        renderComparePageInline();
+    });
+
+    function renderComparePageInline() {
+        const container = document.getElementById('nava-compare-custom-grid');
+        if (!container) return;
+        
+        if (!window.compareList || window.compareList.length === 0) {
+            // Clear AI placeholder
+            const aiPlaceholder = document.getElementById('nava-compare-ai-box-placeholder');
+            if (aiPlaceholder) aiPlaceholder.innerHTML = '';
+            
+            container.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px; color: var(--text-gray);">
+                    <i class="ph ph-scales" style="font-size: 3.5rem; color: #cbd5e1; margin-bottom: 15px; display: block;"></i>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px;">Chưa có sản phẩm để so sánh</h3>
+                    <p style="margin-bottom: 20px;">Vui lòng chọn sản phẩm để bắt đầu so sánh.</p>
+                    <button onclick="window.showCompareSelectDropdown(event);" style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary, #003366); color: white; padding: 12px 28px; border-radius: 8px; font-weight: 700; border: none; cursor: pointer; font-family: inherit; box-shadow: 0 4px 12px rgba(0,51,102,0.15); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                        <i class="ph-bold ph-plus"></i> Chọn sản phẩm so sánh
+                    </button>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = `
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px 0; gap: 15px;">
+                <div style="width: 40px; height: 40px; border: 4px solid var(--border-color, #e2e8f0); border-top-color: var(--primary, #003366); border-radius: 50%; animation: ai-spin 0.8s linear infinite;"></div>
+                <div style="font-weight: 700; color: var(--text-gray);">Đang tải thông số sản phẩm...</div>
+            </div>
+        `;
+        
+        const numProducts = window.compareList.length;
+        const promises = window.compareList.map(p => {
+            return fetch(p.url.includes('?') ? p.url + '&view=data' : p.url + '?view=data')
+                .then(res => res.text())
+                .then(text => window.getProductSpecs(text, p))
+                .catch(err => {
+                    console.error('Fetch error for ' + p.name, err);
+                    return { infor: { name: p.name, thumbnail: p.img, price: p.price, url: p.url }, spec: {} };
+                });
+        });
+        
+        Promise.all(promises).then(results => {
+            const formatPrice = (priceStr) => {
+                if (!priceStr || priceStr === 0 || priceStr === '0' || priceStr === '0đ' || priceStr === '0₫' || (typeof priceStr === 'string' && (priceStr.trim() === '0đ' || priceStr.trim() === '0₫' || priceStr.trim() === '0' || priceStr.trim().startsWith('0')))) {
+                    return 'Liên hệ';
+                }
+                return priceStr;
+            };
+            
+            // Build cards grid - always 4 columns for clean header alignment
+            let topCardsHtml = `<div style="display: grid; grid-template-columns: 160px 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px;">`;
+            
+            // Empty corner slot
+            topCardsHtml += `<div style="display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--text-gray);">Sản phẩm</div>`;
+            
+            results.forEach((res, rIdx) => {
+                topCardsHtml += `
+                    <div style="text-align: center; padding: 20px 15px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; box-sizing: border-box;">
+                        <button onclick="removeCompare('${res.infor.name.replace(/'/g, "\\'")}'); renderComparePageInline();" style="position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: #fee2e2; border: none; color: #ef4444; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#ef4444'; this.style.color='white';" onmouseout="this.style.background='#fee2e2'; this.style.color='#ef4444';">
+                            <i class="ph-bold ph-x"></i>
+                        </button>
+                        <a href="${res.infor.url}" style="display: block; margin-bottom: 12px;">
+                            <img src="${res.infor.thumbnail}" style="width: 110px; height: 110px; object-fit: contain; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 6px; border: 1px solid var(--border-color, #e2e8f0); transition: transform 0.25s;" onmouseover="this.style.transform='translateY(-4px)';" onmouseout="this.style.transform='none';">
+                        </a>
+                        <a href="${res.infor.url}" style="text-decoration: none; display: block; margin-bottom: 8px; flex: 1;">
+                            <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)';" onmouseout="this.style.color='var(--text-dark)';">${res.infor.name}</h4>
+                        </a>
+                        <div style="color: var(--primary, #003366); font-weight: 900; font-size: 1.15rem; margin-bottom: 15px;">${formatPrice(res.infor.price)}</div>
+                        <a href="${res.infor.url}" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; padding: 10px; font-weight: 700; font-size: 0.85rem; border-radius: 8px; background: var(--primary, #003366); color: white; text-decoration: none; box-shadow: 0 4px 12px rgba(0,51,102,0.1); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                            <i class="ph ph-shopping-cart-simple"></i> Xem chi tiết
+                        </a>
+                    </div>
+                `;
+            });
+            
+            // Add slots for adding more products if less than 3
+            if (numProducts < 3) {
+                const emptySlotsCount = 3 - numProducts;
+                for (let i = 0; i < emptySlotsCount; i++) {
+                    topCardsHtml += `
+                        <div onclick="window.showCompareSelectDropdown(event);" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 2px dashed var(--border-color, #e2e8f0); border-radius: 12px; padding: 25px 15px; background: transparent; color: var(--text-gray, #64748b); transition: all 0.2s; box-sizing: border-box; text-align: center; justify-content: center;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-gray)';">
+                            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--bg-gray, #f8fafc); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);"><i class="ph ph-plus" style="font-size: 1.4rem;"></i></div>
+                            <span style="font-weight: 700; font-size: 0.9rem;">Thêm sản phẩm</span>
+                        </div>
+                    `;
+                }
+            }
+            topCardsHtml += `</div>`;
+            
+            const specsMaps = results.map(res => {
+                const specsMap = {};
+                if (res.spec) {
+                    Object.values(res.spec).forEach(group => {
+                        if (group.content) {
+                            group.content.forEach(item => {
+                                if (item.name && item.infor) {
+                                    specsMap[item.name.trim()] = item.infor;
+                                }
+                            });
+                        }
+                    });
+                }
+                return specsMap;
+            });
+
+            // Expose specs globally for page AI query
+            window.currentCompareResults = results;
+            window.currentCompareSpecs = specsMaps;
+
+            let aiCompareBoxHtml = `
+                <div class="ai-compare-box" style="padding: 24px; background: linear-gradient(135deg, #002b5c, #00509e); border-radius: 16px; text-align: left; box-shadow: 0 10px 30px rgba(0, 43, 92, 0.15); margin-bottom: 25px;">
+                    <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        <i class="ph-fill ph-sparkle" style="color: #38bdf8; font-size: 1.35rem;"></i> So Sánh & Tư Vấn Cấu Hình Bằng NAVA AI
+                    </div>
+                    <div style="display: flex; gap: 12px; margin-bottom: 0; align-items: center;">
+                        <input type="text" id="aiCompareNeeds" placeholder="Nhập nhu cầu & ngân sách (Ví dụ: Chơi game Wukong, tầm 15 triệu)..." style="flex: 1; padding: 14px 22px; border: none; border-radius: 30px; font-size: 0.9rem; font-family: inherit; outline: none; background: #ffffff; color: #0f172a; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); width: 100%; height: 48px; box-sizing: border-box;">
+                        <button onclick="window.runAICompareInline();" style="height: 48px; padding: 0 32px; background: linear-gradient(135deg, #38bdf8 0%, #0066ff 100%); color: #ffffff; border-radius: 30px; font-weight: 800; border: none; cursor: pointer; transition: all 0.25s ease; font-family: inherit; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(56,189,248,0.25); box-sizing: border-box;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(56,189,248,0.4)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(56,189,248,0.25)';">
+                            <i class="ph-bold ph-sparkles"></i> Phân tích
+                        </button>
+                    </div>
+                    <div id="aiCompareResultInline" style="display: none; padding: 20px; background: #ffffff; border-radius: 12px; font-size: 0.92rem; line-height: 1.65; color: #0f172a; position: relative; max-height: 300px; overflow-y: auto; margin-top: 18px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    </div>
+                </div>
+            `;
+            
+            // Render the AI Compare Box in its static placeholder block
+            const aiPlaceholder = document.getElementById('nava-compare-ai-box-placeholder');
+            if (aiPlaceholder) aiPlaceholder.innerHTML = aiCompareBoxHtml;
+            
+            let tableHtml = topCardsHtml + `
+                <div style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; overflow: hidden; font-family: inherit; box-shadow: var(--shadow-sm);">
+            `;
+            
+            // Gather unique spec keys across all products
+            const allKeys = Array.from(new Set(specsMaps.flatMap(map => Object.keys(map))));
+            
+            if (allKeys.length === 0) {
+                tableHtml += `
+                    <div style="padding: 30px; text-align: center; color: var(--text-gray, #64748b); font-size: 0.95rem;">
+                        Chưa có thông số chi tiết cấu hình để so sánh.
+                    </div>
+                `;
+            } else {
+                // Grid columns layout: 1 column for keys (160px) + 3 columns for products
+                const gridCols = `160px ` + `1fr `.repeat(3);
+                
+                allKeys.forEach((key, index) => {
+                    const bg = index % 2 === 0 ? 'var(--bg-gray, #f8fafc)' : 'var(--bg-white, #ffffff)';
+                    
+                    tableHtml += `
+                        <div class="compare-row-item" style="display: grid; grid-template-columns: ${gridCols}; border-bottom: 1px solid var(--border-color, #e2e8f0); background: ${bg}; font-size: 0.9rem; transition: background 0.15s;">
+                            <div style="padding: 14px 16px; font-weight: 800; color: var(--text-gray, #64748b); border-right: 1px solid var(--border-color, #e2e8f0); display: flex; align-items: center;">${key}</div>
+                    `;
+                    
+                    // Render compared products specs
+                    for (let rIdx = 0; rIdx < 3; rIdx++) {
+                        const val = (rIdx < numProducts) ? (specsMaps[rIdx][key] || '-') : '-';
+                        const hasRightBorder = rIdx < 2 ? 'border-right: 1px solid var(--border-color, #e2e8f0);' : '';
+                        tableHtml += `
+                            <div style="padding: 14px 16px; ${hasRightBorder} font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4; display: flex; align-items: center; justify-content: center; text-align: center;">${val}</div>
+                        `;
+                    }
+                    
+                    tableHtml += `</div>`;
+                });
+            }
+            
+            tableHtml += `
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(0,51,102,0.03), rgba(15,23,42,0.005)); border-radius: 12px; border: 1px solid rgba(0,51,102,0.12); display: flex; gap: 15px;">
+                    <i class="ph-fill ph-storefront" style="color: var(--primary, #003366); font-size: 2rem; flex-shrink: 0;"></i>
+                    <div>
+                        <h4 style="margin: 0 0 6px 0; color: var(--text-dark, #0f172a); font-weight: 800; font-size: 1rem;">Đề xuất tư vấn từ Nava Store</h4>
+                        <p style="margin: 0; color: var(--text-gray, #64748b); line-height: 1.5; font-size: 0.9rem;">Nếu bạn ưu tiên hiệu năng mạnh mẽ để chơi game hoặc làm đồ họa nặng, hãy chọn sản phẩm có cấu hình cao hơn. Tất cả sản phẩm tại Nava Store đều được cam kết phân phối chính hãng 100% kèm chế độ hậu mãi và bảo hành chu đáo.</p>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = tableHtml;
+            colorMarkScoresToBrandBlue();
+        }).catch(err => {
+            console.error('Specs fetch error:', err);
+            container.innerHTML = '<div style="padding: 30px; text-align: center; color: var(--text-gray);">Có lỗi xảy ra khi tải dữ liệu so sánh.</div>';
+        });
+    }
+    window.runAICompareInline = function() {
+        const needs = document.getElementById('aiCompareNeeds')?.value || '';
+        if (!window.currentCompareResults || window.currentCompareResults.length === 0) return;
+        
+        const payload = window.currentCompareResults.map((res, rIdx) => {
+            return {
+                name: res.infor.name,
+                price: res.infor.price,
+                url: res.infor.url,
+                specs: window.currentCompareSpecs[rIdx] || {}
+            };
+        });
+        
+        window.runAICompare(needs, payload, 'aiCompareResultInline');
+    };
+</script>

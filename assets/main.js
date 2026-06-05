@@ -1114,10 +1114,11 @@ if (shopeeList) {
         // Update realtime customer stat in hero section
         const realtimeCustomerCountEl = document.getElementById('realtime-customer-count');
         if (realtimeCustomerCountEl) {
-            realtimeCustomerCountEl.dataset.target = total;
+            const customerCount = total * 5;
+            realtimeCustomerCountEl.dataset.target = customerCount;
             // If it already animated (text content is not 0), update the text content
             if (realtimeCustomerCountEl.textContent !== '0') {
-                realtimeCustomerCountEl.textContent = total.toLocaleString('vi-VN');
+                realtimeCustomerCountEl.textContent = customerCount.toLocaleString('vi-VN');
             }
         }
 
@@ -1445,11 +1446,22 @@ if (shopeeList) {
 function relocateCompareElements() {
     const cb = document.getElementById('compare-bar');
     const cm = document.getElementById('compare-modal');
-    if (cb && cb.parentNode !== document.documentElement) {
-        document.documentElement.appendChild(cb);
-    }
-    if (cm && cm.parentNode !== document.documentElement) {
-        document.documentElement.appendChild(cm);
+    const csm = document.getElementById('compare-select-modal');
+    const social = document.querySelector('.floating-social-wrapper');
+    const targetParent = document.getElementById('nava-master-wrapper') || document.body;
+    if (targetParent) {
+        if (cb && cb.parentNode !== targetParent) {
+            targetParent.appendChild(cb);
+        }
+        if (cm && cm.parentNode !== targetParent) {
+            targetParent.appendChild(cm);
+        }
+        if (csm && csm.parentNode !== targetParent) {
+            targetParent.appendChild(csm);
+        }
+        if (social && social.parentNode !== targetParent) {
+            targetParent.appendChild(social);
+        }
     }
 }
 if (document.readyState === 'loading') {
@@ -1461,6 +1473,16 @@ if (document.readyState === 'loading') {
 setInterval(relocateCompareElements, 1000);
 
 window.compareList = [];
+try {
+    window.compareList = JSON.parse(localStorage.getItem('navaCompareList')) || [];
+} catch(e) {
+    window.compareList = [];
+}
+const isComparePageInitial = window.location.pathname.includes('so-sanh-san-pham') || window.location.pathname.includes('demo_compare.html');
+if (!isComparePageInitial && window.compareList.length > 2) {
+    window.compareList = window.compareList.slice(0, 2);
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
+}
 
 window.toggleCompare = function(btn, name, img, price) {
     console.log('--- toggleCompare called ---');
@@ -1468,27 +1490,21 @@ window.toggleCompare = function(btn, name, img, price) {
     const idx = window.compareList.findIndex(p => p.name === name);
     if (idx > -1) {
         window.compareList.splice(idx, 1);
-        if (btn) {
-            btn.style.background = 'var(--bg-white, #ffffff)';
-            btn.style.color = 'var(--text-dark, #0f172a)';
-            const icon = btn.querySelector('i');
-            if (icon) {
-                icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
-            }
-        }
     } else {
-        if (window.compareList.length >= 2) {
-            alert('Chỉ có thể so sánh tối đa 2 sản phẩm cùng lúc!');
+        const isComparePage = window.location.pathname.includes('so-sanh-san-pham') || window.location.pathname.includes('demo_compare.html');
+        const maxLimit = isComparePage ? 3 : 2;
+        if (window.compareList.length >= maxLimit) {
+            window.compareList.shift();
+            window.compareList.push({ name, img, price, url: btn ? btn.getAttribute('data-url') || window.location.pathname : window.location.pathname });
+            localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
+            window.updateCompareBar();
+            window.executeCompare();
             return;
         }
         window.compareList.push({ name, img, price, url: btn ? btn.getAttribute('data-url') || window.location.pathname : window.location.pathname });
-        if (btn) {
-            btn.style.background = 'var(--primary, #003366)';
-            btn.style.color = 'white';
-            const icon = btn.querySelector('i');
-            if (icon) icon.className = 'ph-bold ph-check';
-        }
     }
+    
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
     window.updateCompareBar();
     
     // Auto-open compare search modal if on product page (compare-btn-wrap) and only 1 product compared
@@ -1501,30 +1517,13 @@ window.toggleCompare = function(btn, name, img, price) {
 
 window.removeCompare = function(name) {
     window.compareList = window.compareList.filter(p => p.name !== name);
-    document.querySelectorAll('.compare-btn, .compare-btn-wrap').forEach(btn => {
-        const btnName = btn.getAttribute('data-name');
-        if (btnName === name || (window.currentProductData && window.currentProductData.name === name)) {
-            btn.style.background = 'var(--bg-white, #ffffff)';
-            btn.style.color = 'var(--text-dark, #0f172a)';
-            const icon = btn.querySelector('i');
-            if (icon) {
-                icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
-            }
-        }
-    });
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
     window.updateCompareBar();
 };
 
 window.clearCompare = function() {
     window.compareList = [];
-    document.querySelectorAll('.compare-btn, .compare-btn-wrap').forEach(btn => {
-        btn.style.background = 'var(--bg-white, #ffffff)';
-        btn.style.color = 'var(--text-dark, #0f172a)';
-        const icon = btn.querySelector('i');
-        if (icon) {
-            icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
-        }
-    });
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
     window.updateCompareBar();
 };
 
@@ -1533,20 +1532,43 @@ window.hideCompareBar = function() {
     if (bar) bar.style.setProperty('display', 'none', 'important');
 };
 
-window.updateCompareBar = function() {
+window.updateCompareBar = function(isInit = false) {
+    const isComparePage = window.location.pathname.includes('so-sanh-san-pham') || window.location.pathname.includes('demo_compare.html');
+    if (!isComparePage && window.compareList.length > 2) {
+        window.compareList = window.compareList.slice(0, 2);
+        localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
+    }
+
     const bar = document.getElementById('compare-bar');
     const slots = document.getElementById('compare-slots');
     const submitBtn = document.getElementById('compare-submit');
     const expandBtn = document.getElementById('compare-expand');
-    if (!bar || !slots) return;
+    if (!bar || !slots) {
+        console.warn('DIAGNOSTIC - updateCompareBar: bar or slots not found', { bar, slots });
+        return;
+    }
     
-    if (window.compareList.length > 0) {
+    if (window.compareList.length > 0 && !isComparePage && !isInit) {
         bar.style.setProperty('display', 'block', 'important');
     } else {
         bar.style.setProperty('display', 'none', 'important');
     }
     
-    if (window.compareList.length === 2) {
+    // Sync Floating Compare FAB
+    const fabCompareBtn = document.getElementById('fabCompareBtn');
+    const fabCompareBadge = document.getElementById('fabCompareBadge');
+    if (fabCompareBtn) {
+        if (window.compareList.length > 0) {
+            fabCompareBtn.style.setProperty('display', 'flex', 'important');
+            if (fabCompareBadge) {
+                fabCompareBadge.textContent = window.compareList.length;
+            }
+        } else {
+            fabCompareBtn.style.setProperty('display', 'none', 'important');
+        }
+    }
+    
+    if (window.compareList.length >= 2) {
         if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.style.cursor = 'pointer';
@@ -1570,8 +1592,29 @@ window.updateCompareBar = function() {
         }
     }
     
+    // Sync button states on the page
+    document.querySelectorAll('.compare-btn, .compare-btn-wrap').forEach(btn => {
+        const name = btn.getAttribute('data-name') || (window.currentProductData && window.currentProductData.name);
+        if (!name) return;
+        const isInList = window.compareList.some(p => p.name === name);
+        if (isInList) {
+            btn.style.background = 'var(--primary, #003366)';
+            btn.style.color = 'white';
+            const icon = btn.querySelector('i');
+            if (icon) icon.className = 'ph-bold ph-check';
+        } else {
+            btn.style.background = 'var(--bg-white, #ffffff)';
+            btn.style.color = 'var(--text-dark, #0f172a)';
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
+            }
+        }
+    });
+    
+    const maxSlots = isComparePage ? 3 : 2;
     let html = '';
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < maxSlots; i++) {
         if (i > 0) {
             html += `
                 <div style="display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; background: var(--primary, #003366); font-size: 0.75rem; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0 -5px; z-index: 2; align-self: center; flex-shrink: 0; user-select: none;">VS</div>
@@ -1607,44 +1650,60 @@ window.updateCompareBar = function() {
 };
 
 window.openCompareDrawerDirect = function(name, img, price, url) {
+    console.log('--- openCompareDrawerDirect called ---', { name, img, price, url });
     const activeName = name || (window.currentProductData && window.currentProductData.name) || 'ASUS NUC AI 350';
     const activeImg = img || (window.currentProductData && window.currentProductData.img) || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
     const activePrice = price || (window.currentProductData && window.currentProductData.price) || '12.390.000đ';
     const activeUrl = url || (window.currentProductData && window.currentProductData.url) || window.location.pathname;
 
+    console.log('Using active properties:', { activeName, activeImg, activePrice, activeUrl });
+
     const idx = window.compareList.findIndex(p => p.name === activeName);
     if (idx === -1) {
-        if (window.compareList.length >= 2) {
+        const isComparePage = window.location.pathname.includes('so-sanh-san-pham') || window.location.pathname.includes('demo_compare.html');
+        const maxLimit = isComparePage ? 3 : 2;
+        if (window.compareList.length >= maxLimit) {
+            console.log('Compare list full, resetting');
             window.compareList = [];
         }
         window.compareList.push({ name: activeName, img: activeImg, price: activePrice, url: activeUrl });
     }
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
     window.updateCompareBar();
     if (window.compareList.length === 1) {
+        console.log('compareList length is 1, calling showCompareSelectDropdown');
         window.showCompareSelectDropdown(null);
-    } else if (window.compareList.length === 2) {
+    } else if (window.compareList.length >= 2) {
+        console.log('compareList length is >= 2, calling executeCompare');
         window.executeCompare();
     }
 };
 
 window.showCompareSelectDropdown = function(event) {
+    console.log('--- showCompareSelectDropdown called ---', event);
     if (event) event.stopPropagation();
     const modal = document.getElementById('compare-select-modal');
     const modalContent = document.getElementById('compare-select-dropdown');
     const searchInput = document.getElementById('compare-search-input');
+    console.log('Modal elements found:', { modal, modalContent, searchInput });
     if (searchInput) searchInput.value = '';
     
     if (modal && modalContent) {
+        console.log('Opening compare-select-modal...');
         modal.style.setProperty('display', 'flex', 'important');
-        void modal.offsetWidth;
-        modal.style.opacity = '1';
         modalContent.style.transform = 'scale(1)';
+        console.log('Modal style set to flex');
+    } else {
+        console.warn('Could not find compare-select-modal or compare-select-dropdown in DOM!');
     }
     
     window.filterCompareProducts();
     
     setTimeout(() => {
-        if (searchInput) searchInput.focus();
+        if (searchInput) {
+            console.log('Focusing searchInput');
+            searchInput.focus();
+        }
     }, 100);
 };
 
@@ -1652,92 +1711,168 @@ window.hideCompareSelectDropdown = function() {
     const modal = document.getElementById('compare-select-modal');
     const modalContent = document.getElementById('compare-select-dropdown');
     if (modal && modalContent) {
-        modal.style.opacity = '0';
         modalContent.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-            modal.style.setProperty('display', 'none', 'important');
-        }, 250);
+        modal.style.setProperty('display', 'none', 'important');
     }
 };
 
 window.filterCompareProducts = function() {
-    const query = document.getElementById('compare-search-input')?.value.toLowerCase().trim() || '';
+    const query = document.getElementById('compare-search-input')?.value.trim() || '';
     const listContainer = document.getElementById('compare-select-list');
     if (!listContainer) return;
     
-    let products = window.currentCollectionProducts || window.navaProducts || [];
-    if (!products || products.length === 0) {
-        products = [
-            { name: 'ASUS NUC AI 350', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price: '12.390.000đ', url: 'demo_product.html' },
-            { name: 'MINISFORUM UM890 Pro', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420', price: '14.990.000đ', url: 'demo_product.html' },
-            { name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)', img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', price: '14.200.000đ', url: 'demo_product.html' },
-            { name: 'ASUS NUC 14 Essential Intel', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '4.490.000đ', url: 'demo_product.html' },
-            { name: 'Mini PC GMK EVO X1 32G', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', price: '31.190.000đ', url: 'demo_product.html' },
-            { name: 'AtomMan G7 PT Mini PC', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '34.490.000đ', url: 'demo_product.html' }
-        ];
-    }
-    let available = products.filter(p => p && p.name && !window.compareList.some(item => item && item.name === p.name));
-    
-    let displayList = available;
-    if (query) {
-        displayList = available.filter(p => p.name.toLowerCase().includes(query));
-    } else {
-        displayList = available.slice(0, 6);
-    }
-    
-    let html = '';
-    if (!query && displayList.length > 0) {
-        html += `
-            <div style="grid-column: 1 / -1; font-size: 0.85rem; font-weight: 700; color: var(--text-gray, #64748b); text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;">
-                <i class="ph-fill ph-sparkles" style="color: var(--primary);"></i> Sản phẩm liên quan gợi ý
-            </div>
-        `;
-    }
-    
-    displayList.forEach(p => {
-        if (!p || !p.name) return;
-        const escapedName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        let displayPrice = p.price;
-        if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
-            displayPrice = 'Liên hệ';
+    // Default recommendations if no query
+    const renderDefault = () => {
+        let products = window.currentCollectionProducts || window.navaProducts || [];
+        if (!products || products.length === 0) {
+            products = [
+                { name: 'ASUS NUC AI 350', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973', price: '12.390.000đ', url: '/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming' },
+                { name: 'MINISFORUM UM890 Pro', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420', price: '14.990.000đ', url: '/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa' },
+                { name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)', img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png', price: '14.200.000đ', url: '/mini-pc-gmk-nucbox-k6-amd-ryzen-7-7840hs' },
+                { name: 'ASUS NUC 14 Essential Intel', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '4.490.000đ', url: '/mini-pc-asus-nuc-14-essential' },
+                { name: 'Mini PC GMK EVO X1 32G', img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-gmk-evo-x1-ai.jpg', price: '31.190.000đ', url: '/mini-pc-gmk-evo-x1-ai' },
+                { name: 'AtomMan G7 PT Mini PC', img: '//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png', price: '34.490.000đ', url: '/atomman-g7-pt-mini-pc' }
+            ];
         }
-        const imgUrl = p.img || '';
-        const urlStr = p.url || '#';
-        html += `
-            <div onclick="selectProductForCompare('${escapedName}', '${imgUrl}', '${p.price || 0}', '${urlStr}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
-                <img src="${imgUrl}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
-                <div style="flex: 1; min-width: 0; text-align: left;">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapedName}">${p.name}</div>
-                    <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
-                </div>
+        
+        let available = products.filter(p => p && p.name && !window.compareList.some(item => item && item.name === p.name));
+        let displayList = available.slice(0, 6);
+        
+        let html = `
+            <div style="grid-column: 1 / -1; font-size: 0.85rem; font-weight: 700; color: var(--text-gray, #64748b); text-transform: uppercase; margin-bottom: 5px; display: flex; align-items: center; gap: 6px;">
+                <i class="ph-fill ph-sparkles" style="color: var(--primary);"></i> Sản phẩm gợi ý
             </div>
         `;
-    });
+        
+        displayList.forEach(p => {
+            const escapedName = p.name.replace(/'/g, "\'").replace(/"/g, '&quot;');
+            let displayPrice = p.price;
+            if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+                displayPrice = 'Liên hệ';
+            }
+            html += `
+                <div onclick="selectProductForCompare('${escapedName}', '${p.img}', '${p.price || 0}', '${p.url}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
+                    <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.name}">${p.name}</div>
+                        <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        listContainer.innerHTML = html;
+    };
     
-    if (available.length === 0) {
-        html = '<div style="font-size: 0.85rem; color: var(--text-gray, #64748b); text-align: center; padding: 15px;">Không tìm thấy sản phẩm phù hợp</div>';
+    if (query.length < 2) {
+        renderDefault();
+        return;
     }
     
-    listContainer.innerHTML = html;
+    listContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; color: var(--text-gray);">
+            <i class="ph-bold ph-spinner ph-spin" style="font-size: 1.2rem;"></i> Đang tìm kiếm sản phẩm...
+        </div>
+    `;
+    
+    if (window.compareSearchDebounce) clearTimeout(window.compareSearchDebounce);
+    
+    window.compareSearchDebounce = setTimeout(() => {
+        fetch('/search?q=' + encodeURIComponent(query) + '&type=product')
+            .then(res => res.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const cards = doc.querySelectorAll('.product-card');
+                
+                let foundList = [];
+                cards.forEach(card => {
+                    const titleEl = card.querySelector('.card-title');
+                    const imgEl = card.querySelector('.product-img') || card.querySelector('img');
+                    const priceEl = card.querySelector('.card-content span[style*="font-weight: 800"]') || card.querySelector('.card-content span:last-child');
+                    
+                    const title = titleEl ? titleEl.textContent.trim() : '';
+                    const img = imgEl ? imgEl.getAttribute('src') || imgEl.getAttribute('data-src') || '' : '';
+                    const price = priceEl ? priceEl.textContent.trim() : 'Liên hệ';
+                    
+                    const onclickAttr = card.getAttribute('onclick') || '';
+                    const urlMatch = onclickAttr.match(/href='([^']+)'/) || onclickAttr.match(/href="([^"]+)"/);
+                    const url = urlMatch ? urlMatch[1] : '#';
+                    
+                    if (title && !window.compareList.some(item => item && item.name === title)) {
+                        foundList.push({ name: title, img, price, url });
+                    }
+                });
+                
+                if (foundList.length === 0) {
+                    listContainer.innerHTML = '<div style="grid-column: 1 / -1; font-size: 0.85rem; color: var(--text-gray); text-align: center; padding: 15px;">Không tìm thấy sản phẩm phù hợp</div>';
+                    return;
+                }
+                
+                let htmlContent = '';
+                const limit = Math.min(foundList.length, 8);
+                for (let i = 0; i < limit; i++) {
+                    const p = foundList[i];
+                    const escapedName = p.name.replace(/'/g, "\'").replace(/"/g, '&quot;');
+                    let displayPrice = p.price;
+                    if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+                        displayPrice = 'Liên hệ';
+                    }
+                    htmlContent += `
+                        <div onclick="selectProductForCompare('${escapedName}', '${p.img}', '${p.price}', '${p.url}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
+                            <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
+                            <div style="flex: 1; min-width: 0; text-align: left;">
+                                <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${p.name}">${p.name}</div>
+                                <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                listContainer.innerHTML = htmlContent;
+            })
+            .catch(err => {
+                console.error('Realtime comparison search error:', err);
+                listContainer.innerHTML = '<div style="grid-column: 1 / -1; font-size: 0.85rem; color: var(--text-gray); text-align: center; padding: 15px;">Có lỗi xảy ra khi tìm kiếm</div>';
+            });
+    }, 250);
 };
 
 window.selectProductForCompare = function(name, img, price, url) {
-    if (window.compareList.length >= 2) return;
+    const isComparePage = window.location.pathname.includes('so-sanh-san-pham') || window.location.pathname.includes('demo_compare.html');
+    const maxLimit = isComparePage ? 3 : 2;
+    
+    if (window.compareList.length >= maxLimit) {
+        window.compareList.shift();
+    }
     window.compareList.push({ name, img, price, url });
+    localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
     window.updateCompareBar();
     window.hideCompareSelectDropdown();
     
-    if (window.compareList.length === 2) {
+    if (isComparePage && typeof renderComparePageInline === 'function') {
+        renderComparePageInline();
+    }
+    
+    if (window.compareList.length >= 2) {
         window.executeCompare();
     }
 };
 
 window.executeCompare = function(isFullScreen = false) {
+    if (window.compareList.length > 2) {
+        window.compareList = window.compareList.slice(0, 2);
+        localStorage.setItem('navaCompareList', JSON.stringify(window.compareList));
+        window.updateCompareBar();
+    }
+    console.log('--- executeCompare called ---', { isFullScreen, compareList: window.compareList });
     const modal = document.getElementById('compare-modal');
     const modalContent = document.getElementById('compare-modal-content');
     const loading = document.getElementById('compare-loading');
     const result = document.getElementById('compare-result');
-    if (!modal || !modalContent) return;
+    if (!modal || !modalContent) {
+        console.warn('Could not find compare-modal or compare-modal-content in DOM!');
+        return;
+    }
     
     modal.style.setProperty('display', 'flex', 'important');
     
@@ -1745,54 +1880,42 @@ window.executeCompare = function(isFullScreen = false) {
         modalContent.style.width = '100%';
         modalContent.style.maxWidth = '100%';
         modalContent.style.height = '100vh';
-        modalContent.style.maxHeight = '100vh';
-        modalContent.style.borderRadius = '0';
-        modalContent.style.transform = 'translateY(100vh)';
-        
-        void modal.offsetWidth;
-        
-        modalContent.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        modal.style.opacity = '1';
-        modalContent.style.transform = 'translateY(0)';
     } else {
         modalContent.style.width = '95%';
         modalContent.style.maxWidth = '1100px';
-        modalContent.style.height = 'auto';
-        modalContent.style.maxHeight = '90vh';
-        modalContent.style.borderRadius = '16px';
-        modalContent.style.transform = 'scale(0.95)';
-        
-        void modal.offsetWidth;
-        
-        modalContent.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-        modal.style.opacity = '1';
-        modalContent.style.transform = 'scale(1)';
+        modalContent.style.height = '';
     }
     
-    if (loading) loading.style.display = 'flex';
-    if (result) result.style.display = 'none';
-    
-    const p1 = window.compareList[0];
-    const p2 = window.compareList[1];
-    if (!p1 || !p2) {
+    if (window.compareList.length < 1) {
         if (loading) loading.style.display = 'none';
         if (result) {
-            result.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-gray);">Cần tối thiểu 2 sản phẩm để đối chiếu.</div>';
+            result.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px; color: var(--text-gray);">
+                    <i class="ph ph-scales" style="font-size: 3.5rem; color: #cbd5e1; margin-bottom: 15px; display: block;"></i>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px;">Chưa có sản phẩm để so sánh</h3>
+                    <p style="margin-bottom: 20px;">Vui lòng chọn sản phẩm để bắt đầu so sánh.</p>
+                    <button onclick="window.showCompareSelectDropdown(event);" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #38bdf8 0%, #0066ff 100%); color: white; padding: 12px 28px; border-radius: 30px; font-weight: 700; border: none; cursor: pointer; font-family: inherit; box-shadow: 0 4px 12px rgba(56,189,248,0.2); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                        <i class="ph-bold ph-plus"></i> Chọn sản phẩm so sánh
+                    </button>
+                </div>
+            `;
             result.style.display = 'block';
         }
         return;
     }
     
-    Promise.all([
-        fetch(p1.url.includes('?') ? p1.url + '&view=data' : p1.url + '?view=data').then(res => res.json()).catch(err => {
-            console.error('Fetch p1 error:', err);
-            return { infor: { name: p1.name, thumbnail: p1.img, price: p1.price, url: p1.url }, spec: {} };
-        }),
-        fetch(p2.url.includes('?') ? p2.url + '&view=data' : p2.url + '?view=data').then(res => res.json()).catch(err => {
-            console.error('Fetch p2 error:', err);
-            return { infor: { name: p2.name, thumbnail: p2.img, price: p2.price, url: p2.url }, spec: {} };
-        })
-    ]).then(([data1, data2]) => {
+    const numProducts = window.compareList.length;
+    const promises = window.compareList.map(p => {
+        return fetch(p.url.includes('?') ? p.url + '&view=data' : p.url + '?view=data')
+            .then(res => res.text())
+            .then(text => window.getProductSpecs(text, p))
+            .catch(err => {
+                console.error('Fetch error for ' + p.name, err);
+                return { infor: { name: p.name, thumbnail: p.img, price: p.price, url: p.url }, spec: {} };
+            });
+    });
+    
+    Promise.all(promises).then(results => {
         if (loading) loading.style.display = 'none';
         
         const formatPrice = (priceStr) => {
@@ -1802,54 +1925,90 @@ window.executeCompare = function(isFullScreen = false) {
             return priceStr;
         };
         
-        let tableHtml = `
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-                <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
-                    <img src="${data1.infor.thumbnail || p1.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
-                    <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data1.infor.name || p1.name}</h4>
-                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${formatPrice(data1.infor.price || p1.price)}</div>
+        // Dynamically build top cards with aligned 3 columns
+        let topCardsHtml = `<div style="display: grid; grid-template-columns: 140px 1fr 1fr; gap: 20px; margin-bottom: 30px;">`;
+        topCardsHtml += `<div style="display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--text-gray, #64748b); font-size: 0.95rem;">Sản phẩm</div>`;
+        
+        for (let rIdx = 0; rIdx < 2; rIdx++) {
+            if (rIdx < numProducts) {
+                const res = results[rIdx];
+                topCardsHtml += `
+                    <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; box-sizing: border-box;">
+                        <button onclick="removeCompare('${res.infor.name.replace(/'/g, "\\'")}'); executeCompare();" style="position: absolute; top: 10px; right: 10px; width: 26px; height: 26px; border-radius: 50%; background: #fee2e2; border: none; color: #ef4444; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; transition: all 0.2s; z-index: 10;" onmouseover="this.style.background='#ef4444'; this.style.color='white';" onmouseout="this.style.background='#fee2e2'; this.style.color='#ef4444';">
+                            <i class="ph-bold ph-x"></i>
+                        </button>
+                        <a href="${res.infor.url}" style="display: block; margin-bottom: 12px;">
+                            <img src="${res.infor.thumbnail}" style="width: 110px; height: 110px; object-fit: contain; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 6px; border: 1px solid var(--border-color, #e2e8f0); transition: transform 0.25s;" onmouseover="this.style.transform='translateY(-4px)';" onmouseout="this.style.transform='none';">
+                        </a>
+                        <a href="${res.infor.url}" style="text-decoration: none; display: block; margin-bottom: 8px; flex: 1;">
+                            <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)';" onmouseout="this.style.color='var(--text-dark)';">${res.infor.name}</h4>
+                        </a>
+                        <div style="color: var(--primary, #003366); font-weight: 900; font-size: 1.15rem; margin-bottom: 15px;">${formatPrice(res.infor.price)}</div>
+                        <a href="${res.infor.url}" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; padding: 10px; font-weight: 700; font-size: 0.85rem; border-radius: 8px; background: var(--primary, #003366); color: white; text-decoration: none; box-shadow: 0 4px 12px rgba(0,51,102,0.1); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
+                            <i class="ph ph-shopping-cart-simple"></i> Xem chi tiết
+                        </a>
+                    </div>
+                `;
+            } else {
+                topCardsHtml += `
+                    <div onclick="window.showCompareSelectDropdown(event);" style="cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 2px dashed var(--border-color, #e2e8f0); border-radius: 12px; padding: 25px 15px; background: transparent; color: var(--text-gray, #64748b); transition: all 0.2s; box-sizing: border-box; text-align: center; justify-content: center; height: 100%; min-height: 200px;" onmouseover="this.style.borderColor='var(--primary)'; this.style.color='var(--primary)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.color='var(--text-gray)';">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--bg-gray, #f8fafc); display: flex; align-items: center; justify-content: center; border: 1px solid var(--border-color);"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
+                        <span style="font-weight: 700; font-size: 0.9rem;">Thêm sản phẩm</span>
+                    </div>
+                `;
+            }
+        }
+        topCardsHtml += `</div>`;
+        
+        const specsMaps = results.map(res => {
+            const specsMap = {};
+            if (res.spec) {
+                Object.values(res.spec).forEach(group => {
+                    if (group.content) {
+                        group.content.forEach(item => {
+                            if (item.name && item.infor) {
+                                specsMap[item.name.trim()] = item.infor;
+                            }
+                        });
+                    }
+                });
+            }
+            return specsMap;
+        });
+
+        // Expose specs globally for modal AI query
+        window.currentModalResults = results;
+        window.currentModalSpecs = specsMaps;
+
+        let aiCompareBoxHtml = '';
+        if (numProducts >= 2) {
+            aiCompareBoxHtml = `
+                <div class="ai-compare-box" style="margin-bottom: 25px; padding: 24px; background: linear-gradient(135deg, #002b5c, #00509e); border-radius: 16px; text-align: left; box-shadow: 0 10px 30px rgba(0, 43, 92, 0.15);">
+                    <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        <i class="ph-fill ph-sparkle" style="color: #38bdf8; font-size: 1.35rem;"></i> So Sánh & Tư Vấn Cấu Hình Bằng NAVA AI
+                    </div>
+                    <div style="display: flex; gap: 12px; margin-bottom: 0; align-items: center;">
+                        <input type="text" id="aiCompareNeedsModal" placeholder="Nhập nhu cầu của bạn (ví dụ: Chơi game Wukong, ngân sách 20tr...)" style="flex: 1; padding: 14px 22px; border: none; border-radius: 30px; font-size: 0.9rem; font-family: inherit; outline: none; background: #ffffff; color: #0f172a; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); width: 100%; height: 48px; box-sizing: border-box;">
+                        <button onclick="window.runAICompareModal();" style="height: 48px; padding: 0 32px; background: linear-gradient(135deg, #38bdf8 0%, #0066ff 100%); color: #ffffff; border-radius: 30px; font-weight: 800; border: none; cursor: pointer; transition: all 0.25s ease; font-family: inherit; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(56,189,248,0.25); box-sizing: border-box;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(56,189,248,0.4)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(56,189,248,0.25)';">
+                            <i class="ph-bold ph-sparkles"></i> Phân tích
+                        </button>
+                    </div>
+                    <div id="aiCompareResultModal" style="display: none; margin-top: 18px; padding: 20px; background: #ffffff; border-radius: 12px; font-size: 0.92rem; line-height: 1.65; color: #0f172a; position: relative; max-height: 300px; overflow-y: auto; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                    </div>
                 </div>
-                <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
-                    <img src="${data2.infor.thumbnail || p2.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
-                    <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data2.infor.name || p2.name}</h4>
-                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${formatPrice(data2.infor.price || p2.price)}</div>
-                </div>
-            </div>
-            
-            <div style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; overflow: hidden; font-family: inherit;">
+            `;
+        }
+
+        // Mobile responsive horizontal scroll wrapper for the compare table & top cards
+        let tableHtml = aiCompareBoxHtml + `
+            <div class="modal-compare-scroll-wrapper" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0 2px;">
+                <div style="min-width: 800px; padding-bottom: 10px;">
+                    ${topCardsHtml}
+                    <div style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; overflow: hidden; font-family: inherit;">
         `;
         
-        const specsMap1 = {};
-        const specsMap2 = {};
-        
-        if (data1.spec) {
-            Object.values(data1.spec).forEach(group => {
-                if (group.content) {
-                    group.content.forEach(item => {
-                        if (item.name && item.infor) {
-                            specsMap1[item.name.trim()] = item.infor;
-                        }
-                    });
-                }
-            });
-        }
-        
-        if (data2.spec) {
-            Object.values(data2.spec).forEach(group => {
-                if (group.content) {
-                    group.content.forEach(item => {
-                        if (item.name && item.infor) {
-                            specsMap2[item.name.trim()] = item.infor;
-                        }
-                    });
-                }
-            });
-        }
-        
-        const allKeys = Array.from(new Set([
-            ...Object.keys(specsMap1),
-            ...Object.keys(specsMap2)
-        ]));
+        // Gather unique spec keys across all products
+        const allKeys = Array.from(new Set(specsMaps.flatMap(map => Object.keys(map))));
         
         if (allKeys.length === 0) {
             tableHtml += `
@@ -1858,25 +2017,33 @@ window.executeCompare = function(isFullScreen = false) {
                 </div>
             `;
         } else {
+            const gridCols = `140px 1fr 1fr`;
             allKeys.forEach((key, index) => {
-                const val1 = specsMap1[key] || '-';
-                const val2 = specsMap2[key] || '-';
                 const bg = index % 2 === 0 ? 'var(--bg-gray, #f8fafc)' : 'var(--bg-white, #ffffff)';
                 
                 tableHtml += `
-                    <div style="display: grid; grid-template-columns: 140px 1fr 1fr; border-bottom: 1px solid var(--border-color, #e2e8f0); background: ${bg}; font-size: 0.9rem;">
+                    <div style="display: grid; grid-template-columns: ${gridCols}; border-bottom: 1px solid var(--border-color, #e2e8f0); background: ${bg}; font-size: 0.9rem;">
                         <div style="padding: 12px 15px; font-weight: 800; color: var(--text-gray, #64748b); border-right: 1px solid var(--border-color, #e2e8f0); display: flex; align-items: center;">${key}</div>
-                        <div style="padding: 12px 15px; border-right: 1px solid var(--border-color, #e2e8f0); font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4;">${val1}</div>
-                        <div style="padding: 12px 15px; font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4;">${val2}</div>
-                    </div>
                 `;
+                
+                for (let rIdx = 0; rIdx < 2; rIdx++) {
+                    const val = (rIdx < numProducts) ? (specsMaps[rIdx][key] || '-') : '-';
+                    const hasRightBorder = rIdx < 1 ? 'border-right: 1px solid var(--border-color, #e2e8f0);' : '';
+                    tableHtml += `
+                        <div style="padding: 12px 15px; ${hasRightBorder} font-weight: 600; color: var(--text-dark, #0f172a); line-height: 1.4; display: flex; align-items: center; justify-content: center; text-align: center;">${val}</div>
+                    `;
+                }
+                
+                tableHtml += `</div>`;
             });
         }
         
         tableHtml += `
+                    </div>
+                </div>
             </div>
             
-            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(0,51,102,0.05), rgba(15,23,42,0.02)); border-radius: 12px; border: 1px solid rgba(0,51,102,0.2); display: flex; gap: 15px;">
+            <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, rgba(0,51,102,0.05), rgba(15,23,42,0.02)); border-radius: 12px; border: 1px solid rgba(0,51,102,0.2); display: flex; gap: 15px; text-align: left;">
                 <i class="ph-fill ph-storefront" style="color: var(--primary, #003366); font-size: 2rem;"></i>
                 <div>
                     <h4 style="margin: 0 0 5px 0; color: var(--text-dark, #0f172a); font-weight: 800;">Đề xuất từ Nava Store</h4>
@@ -1905,15 +2072,7 @@ window.closeCompareModal = function() {
     const modalContent = document.getElementById('compare-modal-content');
     if (!modal || !modalContent) return;
     
-    modal.style.opacity = '0';
-    if (modalContent.style.width === '100%') {
-        modalContent.style.transform = 'translateY(100vh)';
-    } else {
-        modalContent.style.transform = 'scale(0.95)';
-    }
-    setTimeout(() => {
-        modal.style.setProperty('display', 'none', 'important');
-    }, 300);
+    modal.style.setProperty('display', 'none', 'important');
 };
 
 function colorMarkScoresToBrandBlue() {
@@ -1930,7 +2089,144 @@ if (document.readyState === 'loading') {
 }
 setInterval(colorMarkScoresToBrandBlue, 1000);
 
+// Initialize compare bar state on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        window.updateCompareBar(true);
+    });
+} else {
+    window.updateCompareBar(true);
+}
 
+window.getProductSpecs = function(resText, p) {
+    try {
+        const cleansed = resText.replace(/,\s*([\]}])/g, '$1');
+        const data = JSON.parse(cleansed);
+        if (data && data.spec && Object.keys(data.spec).length > 0) {
+            return data;
+        }
+    } catch (e) {}
+    
+    // Parse HTML fallback
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(resText, 'text/html');
+    const spec = {};
+    let groupIdx = 1;
+    
+    // Find specifications table or headers
+    const specTables = doc.querySelectorAll('.spec-tables table, .special-content table, .product-description table, .product-content table, table');
+    if (specTables.length > 0) {
+        specTables.forEach((table, tIdx) => {
+            const groupName = "Thông số " + (tIdx + 1);
+            const content = [];
+            const rows = table.querySelectorAll('tr');
+            rows.forEach(row => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length >= 2) {
+                    const name = cells[0].textContent.trim();
+                    const infor = cells[1].textContent.trim();
+                    if (name && name.length < 100 && infor) {
+                        content.push({ name, infor });
+                    }
+                }
+            });
+            if (content.length > 0) {
+                spec[groupIdx++] = { name: groupName, content: content };
+            }
+        });
+    }
+    
+    return {
+        infor: { name: p.name, thumbnail: p.img, price: p.price, url: p.url },
+        spec: spec
+    };
+};
 
+window.runAICompare = function(promptText, productsData, resultContainerId) {
+    const resultDiv = document.getElementById(resultContainerId);
+    if (!resultDiv) return;
+    
+    resultDiv.style.display = 'block';
+    resultDiv.innerHTML = `
+        <style>
+            @keyframes ai-shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+            @keyframes ai-pulse {
+                0%, 100% { transform: scale(1); opacity: 0.8; }
+                50% { transform: scale(1.1); opacity: 1; }
+            }
+            .ai-loading-line {
+                height: 12px;
+                margin-bottom: 12px;
+                border-radius: 6px;
+                background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+                background-size: 200% 100%;
+                animation: ai-shimmer 1.5s infinite linear;
+            }
+        </style>
+        <div style="padding: 10px 0;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: #00509e;">
+                <i class="ph-fill ph-sparkle" style="color: #38bdf8; font-size: 1.4rem; animation: ai-pulse 1.2s infinite ease-in-out;"></i>
+                <span style="font-weight: 800; font-size: 0.95rem; color: #003366;">NAVA AI đang phân tích & đối chiếu cấu hình...</span>
+            </div>
+            <div class="ai-loading-line" style="width: 90%;"></div>
+            <div class="ai-loading-line" style="width: 95%;"></div>
+            <div class="ai-loading-line" style="width: 75%;"></div>
+        </div>
+    `;
+    
+    const queryStr = "Hãy so sánh chi tiết và đối chiếu các sản phẩm này. " + 
+                     "Yêu cầu (Nhu cầu & Tài chính): " + (promptText.trim() || "chung chung mặc định") + ". " + 
+                     "Hãy đánh giá ưu nhược điểm từng máy dựa trên các thông số kỹ thuật được cung cấp, và đưa ra đề xuất lựa chọn tối ưu nhất.";
+                     
+    fetch('https://automation.ideas.edu.vn/meta_report/gemini_proxy.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            query: queryStr,
+            products: productsData
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data && data.explanation) {
+            let html = data.explanation
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
+            
+            resultDiv.innerHTML = `
+                <div style="position: absolute; top: 12px; right: 12px; font-size: 0.75rem; color: #003366; font-weight: 800; display: flex; align-items: center; gap: 4px; background: rgba(0, 51, 102, 0.08); padding: 4px 8px; border-radius: 4px;">
+                    <i class="ph-fill ph-sparkle" style="color: #003366;"></i> NAVA AI
+                </div>
+                <div style="padding-top: 15px; text-align: left; font-size: 0.9rem; line-height: 1.6;">${html}</div>
+            `;
+        } else {
+            resultDiv.innerHTML = '<span style="color: #ef4444; font-weight: 600;">Không nhận được phản hồi phân tích từ AI. Vui lòng thử lại.</span>';
+        }
+    })
+    .catch(err => {
+        console.error('AI Compare error:', err);
+        resultDiv.innerHTML = '<span style="color: #ef4444; font-weight: 600;">Có lỗi xảy ra khi gọi AI so sánh. Vui lòng thử lại sau.</span>';
+    });
+};
 
-
+window.runAICompareModal = function() {
+    const promptVal = document.getElementById('aiCompareNeedsModal')?.value || '';
+    if (!window.currentModalResults || window.currentModalResults.length === 0) return;
+    
+    const payload = window.currentModalResults.map((res, rIdx) => {
+        return {
+            name: res.infor.name,
+            price: res.infor.price,
+            url: res.infor.url,
+            specs: window.currentModalSpecs[rIdx] || {}
+        };
+    });
+    
+    window.runAICompare(promptVal, payload, 'aiCompareResultModal');
+};

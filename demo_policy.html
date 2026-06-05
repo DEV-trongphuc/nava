@@ -18,22 +18,22 @@
             <!-- ================= Meta ================== -->
             		
             <meta name="robots" content="noodp,index,follow" />
-            <link rel="shortcut icon" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/favicon.png" type="image/x-icon" />  
-            <link rel="preload" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" as="image" media="(min-width: 992px)" />
+            <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon" />  
+            <link rel="preload" href="assets/logo.png" as="image" media="(min-width: 992px)" />
             
             <link rel="dns-prefetch" href="https://fonts.googleapis.com">
             <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-            <link rel="preload" as="image" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/slide-img1.png" media="screen and (max-width: 480px)">
-            <link rel="preload" as="image" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/slide-img2.png" media="screen and (max-width: 480px)">
+            <link rel="preload" as="image" href="assets/slide-img1.png" media="screen and (max-width: 480px)">
+            <link rel="preload" as="image" href="assets/slide-img2.png" media="screen and (max-width: 480px)">
             
             
             
-            <link rel="preload" as="script" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/cash.min.js" />
-            <script src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/cash.min.js"></script>
+            <link rel="preload" as="script" href="assets/cash.min.js" />
+            <script src="assets/cash.min.js"></script>
             
             
-            <link rel="preload" as="script" href="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/axios.min.js" />
-            <script src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/axios.min.js"></script>
+            <link rel="preload" as="script" href="assets/axios.min.js" />
+            <script src="assets/axios.min.js"></script>
 
             <!-- Google Fonts Optimized -->
             <link href="https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -218,20 +218,20 @@
             <div class="preloader-text">NAVA STORE</div>
         </div>
         <script>
-            window.addEventListener('load', function() {
-                const preloader = document.getElementById('nava-preloader');
-                if (preloader) {
-                    preloader.classList.add('nava-preloader-hidden');
-                    setTimeout(() => { preloader.style.display = 'none'; }, 600);
-                }
-            });
-            setTimeout(() => {
+            function hideNavaPreloader() {
                 const preloader = document.getElementById('nava-preloader');
                 if (preloader && !preloader.classList.contains('nava-preloader-hidden')) {
                     preloader.classList.add('nava-preloader-hidden');
                     setTimeout(() => { preloader.style.display = 'none'; }, 600);
                 }
-            }, 5000);
+            }
+            if (document.readyState === 'complete') {
+                hideNavaPreloader();
+            } else {
+                window.addEventListener('load', hideNavaPreloader);
+                // Fail-safe timeout
+                setTimeout(hideNavaPreloader, 3000);
+            }
         </script>
         <!-- Background Decor (Glowing Orbs & Logo) -->
         <div class="bg-glow orb-1"></div>
@@ -815,6 +815,12 @@
         
         <!-- Floating Social Button -->
         <div class="floating-social-wrapper">
+            <!-- Quick Compare FAB -->
+            <button class="fab-compare" id="fabCompareBtn" onclick="window.executeCompare()" title="So sánh sản phẩm" style="width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 2px solid white !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important; cursor: pointer !important; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important; color: white !important; display: none; align-items: center; justify-content: center; position: relative !important; margin-bottom: 12px; transition: transform 0.3s ease !important; outline: none; padding: 0;" onmouseover="this.style.transform='scale(1.08)';" onmouseout="this.style.transform='scale(1)';">
+                <i class="ph-bold ph-scales" style="font-size: 1.4rem;"></i>
+                <span id="fabCompareBadge" style="position: absolute !important; top: -5px !important; right: -5px !important; background: #ef4444 !important; color: white !important; border-radius: 50% !important; min-width: 20px !important; height: 20px !important; font-size: 0.75rem !important; font-weight: 700 !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 2px solid white !important; box-sizing: border-box !important; padding: 0 2px !important;">0</span>
+            </button>
+            
             <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
                 <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
                 <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" class="fab-cycle-img" width="50" height="50">
@@ -1051,7 +1057,7 @@
                     </div>
                 </div>
                 <div onclick="scrollToTop(100);" class="back_top d-flex position-fixed justify-content-center align-items-center" role="button" aria-label="Lên đầu trang">
-                    <img alt="" aria-hidden="true" src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/to-top-arrow2.png" width="17" height="9">
+                    <img alt="" aria-hidden="true" src="assets/to-top-arrow2.png" width="17" height="9">
                 </div>
                 
                 

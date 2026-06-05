@@ -108,7 +108,7 @@
                     <a href="/like-new"><img src="{{ 'icon_dmenu_8.png' | asset_url }}" alt="Like new" loading="lazy" decoding="async" width="22" height="22"> <span>Like new</span></a>
                 </li>
                 <li class="nav-item">
-                    <a href="/chinh-sach-bao-mat#warranty" id="open-warranty-modal-header"><img src="{{ 'icon_dmenu_9.png' | asset_url }}" alt="Bảo hành" loading="lazy" decoding="async" width="22" height="22"> <span>Bảo hành</span></a>
+                    <a href="/chinh-sach-bao-hanh"><img src="{{ 'icon_dmenu_9.png' | asset_url }}" alt="Bảo hành" loading="lazy" decoding="async" width="22" height="22"> <span>Bảo hành</span></a>
                 </li>
             </ul>
         </div>

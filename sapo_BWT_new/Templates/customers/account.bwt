@@ -1,58 +1,248 @@
 {%- include 'breadcrumb' -%}
 <section class="signup layout-account pt-3 pb-3">
-    <style>
-        .layout-account { background: var(--bg-gray); padding: 30px 0; }
-        .account-info { 
-            background: var(--bg-white, #ffffff) !important; border: 1px solid var(--border-color) !important;
-            border-radius: 16px !important; padding: 25px !important; box-shadow: var(--shadow-sm) !important;
-        }
-        .account-info h1 { font-size: 1.3rem; font-weight: 800; margin-bottom: 20px; color: var(--primary) !important; }
-        .account-info p { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
-        .account-info p:last-child { border-bottom: none; padding-bottom: 0; }
-        .account-info b { color: var(--text-gray); font-weight: 600; }
-    </style>
-    
-	<div class="container">
-		<div class="row">
-			<div class="col-12 col-lg-8">
-				{% if form.posted_successfully %}
-				<div class="alert alert-success" role="alert">
-					{{settings.account_changepass_success}}
-				</div>
-				{% endif %}
-				<div class="row mb-3">
-					{%-include 'mew_account_action_top'-%}
-				</div>
-				<div class="row mb-3 mb-lg-0">
-					<div class="col-12">
-						<div class="account-info bg-white rounded-10 p-3">
-							<h1 class="font-weight-bold mt-0 sml">{{settings.account_personal_infor}}</h1>
-							<p class="mb-1"><b>{{settings.account_infor_name | append: ': '}}</b> {{ customer.name }}</p>
-							<p class="mb-1"><b>{{settings.account_infor_mail | append: ': '}}</b> {{ customer.email }}</p>
-							{%if customer.phone != null and  customer.phone != ''%}
-							<p class="mb-1"><b>{{settings.account_infor_phone | append: ': '}}</b> {{ customer.phone }}</p>
-							{%endif%}
-							{%if customer.dob != null and  customer.dob != ''%}
-							<p class="mb-1"><b>{{settings.account_infor_dob | append: ': '}}</b> {{ customer.dob }}</p>
-							{%endif%}
-							{%- if customer.default_address.company != null and customer.default_address.company != "" -%}
-							<p class="mb-1"><b>{{settings.account_infor_company | append: ': '}}</b> {{ customer.default_address.company }}</p>
-							{%- endif -%}
-							{%- if customer.default_address.phone != null and customer.default_address.phone != "" -%}
-							<p class="mb-1"><b>{{settings.account_infor_phone | append: ': '}}</b> {{ customer.default_address.phone }} </p>
-							{%- endif -%}
-							{%- if customer.default_address -%}
-							<p class="mb-1"><b>{{settings.account_infor_address  | append: ': '}}</b> {% if customer.default_address.address1 != null and customer.default_address.address1 != "" %}{{ customer.default_address.address1 }},{%endif%} {% if customer.default_address.district != null and customer.default_address.district != "" %}{{ customer.default_address.district }},{%endif%} {% if customer.default_address.city != null and customer.default_address.city != "" %}{{ customer.default_address.city }},{%endif%} {% if customer.default_address.country != null and customer.default_address.country != "" %}{{ customer.default_address.country }}{%endif%}</p>
-							{%- endif -%}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-12 col-lg-4">
-				<div class="row mb-3 h-100">
-					{%-include 'mew_account_action_bottom'-%}
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
+            {%- include 'nava_account_sidebar' -%}
+            
+            <div class="dashboard-main-wrapper">
+                <div class="dashboard-content">
+                    {% if form.posted_successfully %}
+                    <div class="alert alert-success" role="alert">
+                        {{settings.account_changepass_success}}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="content-header" style="flex-wrap: wrap; gap: 15px;">
+                        <h1 class="content-title">
+                            <i class="ph-fill ph-user-circle" style="color: var(--primary);"></i> 
+                            {{settings.account_personal_infor}}
+                        </h1>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-grid">
+                            <!-- Left Column -->
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div class="info-item">
+                                    <label>{{settings.account_infor_name}}</label>
+                                    <div>{{ customer.name }}</div>
+                                </div>
+                                <div class="info-item">
+                                    <label>{{settings.account_infor_mail}}</label>
+                                    <div>{{ customer.email }}</div>
+                                </div>
+                            </div>
+                            <!-- Right Column -->
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div class="info-item">
+                                    <label>{{settings.account_infor_phone}}</label>
+                                    <div>
+                                        {% if customer.phone != null and customer.phone != '' %}
+                                            {{ customer.phone }}
+                                        {% elsif customer.default_address.phone != null and customer.default_address.phone != '' %}
+                                            {{ customer.default_address.phone }}
+                                        {% else %}
+                                            --
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <label>{{settings.account_infor_address}}</label>
+                                    <div>
+                                        {% if customer.default_address %}
+                                            {% if customer.default_address.address1 != null and customer.default_address.address1 != "" %}{{ customer.default_address.address1 }},{% endif %}
+                                            {% if customer.default_address.district != null and customer.default_address.district != "" %}{{ customer.default_address.district }},{% endif %}
+                                            {% if customer.default_address.city != null and customer.default_address.city != "" %}{{ customer.default_address.city }},{% endif %}
+                                            {% if customer.default_address.country != null and customer.default_address.country != "" %}{{ customer.default_address.country }}{% endif %}
+                                        {% else %}
+                                            Chưa có địa chỉ mặc định
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders Section -->
+                    <div class="section-title">
+                        {{settings.order_title}}
+                    </div>
+                    
+                    <div class="table-container" style="margin-bottom: 40px;">
+                        {%- paginate customer.orders by 6 -%}
+                        <table class="table-nava">
+                            <thead>
+                                <tr>
+                                    <th>Mã ĐH</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Trạng thái thanh toán</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái giao hàng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%- if customer.orders.size > 0 -%}
+                                {%- for order in customer.orders -%}
+                                <tr>
+                                    <td><a href="{{order.customer_url}}" class="link-primary">{{ order.name }}</a></td>
+                                    <td style="color: var(--text-gray);">{{ order.created_on | date: "dd/MM/yyyy" }}</td>
+                                    <td>
+                                        {%- case order.status -%}
+                                        {%- when 'cancelled' -%}
+                                            <span class="badge-status badge-warning" style="background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important;">Đã hủy</span>
+                                        {%- else -%}
+                                            {%- case order.financial_status -%}
+                                            {%- when 'paid' -%}
+                                                <span class="badge-status badge-success">{{settings.order_detail_payment_paid}}</span>
+                                            {%- when 'pending' -%}
+                                                <span class="badge-status badge-warning">{{settings.order_detail_payment_unpaid}}</span>
+                                            {%- when 'partially_paid' -%}
+                                                <span class="badge-status badge-warning">{{settings.order_detail_payment_partial}}</span>
+                                            {%- when 'partially_refunded' -%}
+                                                <span class="badge-status badge-success" style="background: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important;">Hoàn tiền một phần</span>
+                                            {%- when 'refunded' -%}
+                                                <span class="badge-status badge-success" style="background: rgba(59, 130, 246, 0.1) !important; color: #3b82f6 !important;">{{settings.order_detail_refunded}}</span>
+                                            {%- else -%}
+                                                <span class="badge-status badge-warning">{{ order.financial_status }}</span>
+                                            {%- endcase -%}
+                                        {%- endcase -%}
+                                    </td>
+                                    <td style="font-weight: 700; color: var(--primary);">{{ order.total_price | money }}</td>
+                                    <td>
+                                        {%- case order.status -%}
+                                        {%- when 'cancelled' -%}
+                                            <span class="badge-status badge-warning" style="background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important;">Đã hủy</span>
+                                        {%- else -%}
+                                            {%- case order.fulfillment_status -%}
+                                            {%- when 'fulfilled' -%}
+                                                <span class="badge-status badge-success">{{settings.order_detail_fulfilled}}</span>
+                                            {%- when 'partial' -%}
+                                                <span class="badge-status badge-warning">{{settings.order_detail_partial}}</span>
+                                            {%- else -%}
+                                                <span class="badge-status badge-warning" style="background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important;">{{settings.order_detail_not_ship}}</span>
+                                            {%- endcase -%}
+                                        {%- endcase -%}
+                                    </td>
+                                </tr>
+                                {%- endfor -%}
+                                {%- else -%}
+                                <tr>
+                                    <td colspan="5" style="text-align: center; padding: 30px; color: var(--text-gray);">
+                                        {{settings.order_created_noorder}}
+                                    </td>
+                                </tr>
+                                {%- endif -%}
+                            </tbody>
+                        </table>
+                        <div class="paginate-pages pull-right page-account text-right col-xs-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                            {%- if paginate.pages > 1 -%}
+                            {%- include 'paginate-pages' -%}
+                            {%- endif -%}
+                        </div>
+                        {%- endpaginate -%}
+                    </div>
+
+                    <!-- Recently Viewed Section -->
+                    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+                    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+                    <div class="template-product mt-5" style="width: 100%; margin-top: 50px;">
+                        <div class="box_product_1 rounded-10 bg-white py-3 px-2 p-lg-3" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm);">
+                            <div class="t1 align-items-center d-flex justify-content-between mb-3">
+                                <h3 class="special-content_title font-weight-bold position-relative m-0" style="font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+                                    <i class="ph-fill ph-clock-counter-clockwise" style="color: var(--primary); font-size: 1.5rem;"></i>
+                                    <span class="position-relative">Sản phẩm đã xem</span>
+                                </h3>
+                            </div>
+                            <div class="swiper js-recent-slider p-2 pb-3 pb-lg-2" style="position: relative; overflow: hidden; list-style: none; padding: 0; z-index: 1;">
+                                <div class="swiper-wrapper js-recent-container" id="recent-products-wrapper">
+                                    <!-- Dynamic cards -->
+                                </div>
+                                <!-- Navigation -->
+                                <div class="swiper-button-prev recent-prev" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; --swiper-navigation-size: 14px;"></div>
+                                <div class="swiper-button-next recent-next" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; --swiper-navigation-size: 14px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const container = document.getElementById('recent-products-wrapper');
+                            if (container) {
+                                let items = [];
+                                try {
+                                    items = JSON.parse(localStorage.getItem('mewRecent')) || [];
+                                } catch(e) {}
+                                
+                                if (items.length > 0) {
+                                    let html = '';
+                                    items.forEach(item => {
+                                        const name = item.name || item.title || item;
+                                        const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+                                        const price = item.price || 'Liên hệ';
+                                        const url = item.url || '#';
+                                        
+                                        html += `
+                                            <div class="swiper-slide" style="height: auto;">
+                                                <div class="product-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px; background: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; box-sizing: border-box;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.05)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
+                                                    <a href="${url}" style="text-decoration: none; display: block; margin-bottom: 10px;">
+                                                        <img src="${img}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
+                                                    </a>
+                                                    <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${name}</a>
+                                                    <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${price}</div>
+                                                    <a href="${url}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
+                                                </div>
+                                            </div>
+                                        `;
+                                    });
+                                    container.innerHTML = html;
+                                    
+                                    const swiperRecent = new Swiper('.js-recent-slider', {
+                                        slidesPerView: 2,
+                                        spaceBetween: 15,
+                                        navigation: {
+                                            nextEl: '.recent-next',
+                                            prevEl: '.recent-prev',
+                                        },
+                                        breakpoints: {
+                                            576: { slidesPerView: 2 },
+                                            768: { slidesPerView: 3 },
+                                            992: { slidesPerView: 4 }
+                                        }
+                                    });
+                                    
+                                    function updateRecentNavVisibility() {
+                                        const swiperEl = document.querySelector('.js-recent-slider');
+                                        if (swiperEl) {
+                                            const prevBtn = swiperEl.querySelector('.recent-prev');
+                                            const nextBtn = swiperEl.querySelector('.recent-next');
+                                            if (prevBtn && nextBtn) {
+                                                let currentSlidesPerView = 2;
+                                                const width = window.innerWidth;
+                                                if (width >= 992) currentSlidesPerView = 4;
+                                                else if (width >= 768) currentSlidesPerView = 3;
+                                                else if (width >= 576) currentSlidesPerView = 2;
+                                                
+                                                if (items.length <= currentSlidesPerView) {
+                                                    prevBtn.style.setProperty('display', 'none', 'important');
+                                                    nextBtn.style.setProperty('display', 'none', 'important');
+                                                } else {
+                                                    prevBtn.style.removeProperty('display');
+                                                    nextBtn.style.removeProperty('display');
+                                                }
+                                            }
+                                        }
+                                    }
+                                    updateRecentNavVisibility();
+                                    swiperRecent.on('resize', updateRecentNavVisibility);
+                                    swiperRecent.on('update', updateRecentNavVisibility);
+                                } else {
+                                    document.querySelector('.template-product').style.display = 'none';
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

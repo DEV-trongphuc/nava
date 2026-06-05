@@ -12,9 +12,11 @@
         --radius-md: 12px;
         --radius-lg: 24px;
     }
+    body, html, h1, h2, h3, h4, h5, h6, input, button, select, textarea, span, a, p, div {
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }
     body {
         margin: 0; padding: 0; overflow: hidden;
-        font-family: 'Plus Jakarta Sans', sans-serif;
         background: var(--bg-gray); color: var(--text-dark);
         -webkit-font-smoothing: antialiased;
     }
@@ -37,7 +39,7 @@
     .glass-card {
         background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.8); border-radius: var(--radius-lg);
-        padding: 30px 40px; width: 100%; max-width: 440px; max-height: 95vh;
+        padding: 40px 45px; width: 100%; max-width: 460px; max-height: 95vh;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); position: relative;
         z-index: 10; overflow-y: auto; scrollbar-width: none; box-sizing: border-box;
     }
@@ -155,7 +157,7 @@
             <button type="submit" class="btn-nava btn-primary-nava" style="margin-top: 5px;">Đăng Ký Tài Khoản</button>
             
             <p style="text-align: center; margin-top: 15px; color: var(--text-gray); font-size: 0.8rem; line-height: 1.4;">
-                Bằng việc đăng ký, bạn đồng ý với <a href="/chinh-sach-bao-mat" class="link-nava" style="font-size: 0.8rem;">Điều khoản dịch vụ</a> và <a href="/chinh-sach-bao-mat" class="link-nava" style="font-size: 0.8rem;">Chính sách bảo mật</a> của Nava Store
+                Bằng việc đăng ký, bạn đồng ý với <a href="/chinh-sach-bao-hanh#terms" class="link-nava" style="font-size: 0.8rem;">Điều khoản dịch vụ</a> và <a href="/chinh-sach-bao-hanh#privacy" class="link-nava" style="font-size: 0.8rem;">Chính sách bảo mật</a> của Nava Store
             </p>
         {%- endform -%}
         

@@ -25,9 +25,9 @@
         <div class="footer-col">
             <h4 class="footer-title">Hỗ trợ khách hàng</h4>
             <ul>
-                <li><a href="/chinh-sach-bao-mat#warranty" id="open-warranty-modal-footer">Chính sách bảo hành</a></li>
+                <li><a href="/chinh-sach-bao-hanh">Chính sách bảo hành</a></li>
                 <li><a href="/chinh-sach-bao-mat#installment">Hướng dẫn trả góp</a></li>
-                <li><a href="/chinh-sach-bao-mat#shipping">Giao hàng & Đổi trả</a></li>
+                <li><a href="/chinh-sach-bao-hanh#shipping">Giao hàng & Đổi trả</a></li>
             </ul>
         </div>
         <div class="footer-col">
