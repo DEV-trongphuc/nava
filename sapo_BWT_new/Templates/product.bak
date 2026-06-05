@@ -703,7 +703,7 @@
             flex-wrap: nowrap !important;
             align-items: center !important;
             gap: 0 !important;
-            height: 38px !important;
+            height: 32px !important;
             padding: 0 !important;
             width: fit-content !important;
         }
@@ -722,11 +722,11 @@
         }
         frequently-buy-together .custom-btn-number button:first-of-type {
             border-radius: 8px 0 0 8px !important;
-            border: 1.5px solid var(--border-color, #cbd5e1) !important;
+            border: 1px solid var(--border-color, #cbd5e1) !important;
             border-right: none !important;
             background: var(--bg-gray, #f4f6fa) !important;
-            width: 38px !important;
-            height: 38px !important;
+            width: 32px !important;
+            height: 32px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -737,13 +737,13 @@
         }
         frequently-buy-together .custom-btn-number input {
             border-radius: 0 !important;
-            border-top: 1.5px solid var(--border-color, #cbd5e1) !important;
-            border-bottom: 1.5px solid var(--border-color, #cbd5e1) !important;
+            border-top: 1px solid var(--border-color, #cbd5e1) !important;
+            border-bottom: 1px solid var(--border-color, #cbd5e1) !important;
             border-left: none !important;
             border-right: none !important;
             background: var(--bg-gray, #f4f6fa) !important;
-            width: 44px !important;
-            height: 38px !important;
+            width: 36px !important;
+            height: 32px !important;
             padding: 0 !important;
             text-align: center !important;
             font-weight: 700 !important;
@@ -752,14 +752,15 @@
             box-shadow: none !important;
             display: inline-block !important;
             flex-shrink: 0 !important;
+            color: var(--text-dark) !important;
         }
         frequently-buy-together .custom-btn-number button:last-of-type {
             border-radius: 0 8px 8px 0 !important;
-            border: 1.5px solid var(--border-color, #cbd5e1) !important;
+            border: 1px solid var(--border-color, #cbd5e1) !important;
             border-left: none !important;
             background: var(--bg-gray, #f4f6fa) !important;
-            width: 38px !important;
-            height: 38px !important;
+            width: 32px !important;
+            height: 32px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -770,13 +771,14 @@
         }
         frequently-buy-together .custom-btn-number button:hover {
             background: rgba(0, 51, 102, 0.05) !important;
+            color: var(--primary) !important;
         }
         frequently-buy-together .custom-btn-number button svg {
             width: 12px !important;
             height: 12px !important;
             fill: none !important;
             stroke: currentColor !important;
-            stroke-width: 3px !important;
+            stroke-width: 2px !important;
         }
         
         frequently-buy-together span[data-fbt-total] {
@@ -802,8 +804,8 @@
                 margin-bottom: 18px !important;
             }
             frequently-buy-together .custom-btn-number {
-                width: auto !important;
-                justify-content: flex-start !important;
+                width: 100% !important;
+                justify-content: space-between !important;
             }
             frequently-buy-together .d-block.font-weight-bold.order-lg-1 {
                 display: flex !important;
@@ -2137,9 +2139,6 @@ function syncSwatches() {
             btnBuyNow.style.pointerEvents = '';
         }
         
-        const bsBuyBtn = document.querySelector('.bs-buy-btn');
-        const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
-        
         if (priceVal === 0) {
             if (statusEl) {
                 statusEl.innerText = 'Liên hệ';
@@ -2162,17 +2161,6 @@ function syncSwatches() {
                 btnBuyNow.style.pointerEvents = 'none';
                 btnBuyNow.style.setProperty('flex', '1.5', 'important');
             }
-            if (bsBuyBtn) {
-                bsBuyBtn.disabled = true;
-                bsBuyBtn.innerText = 'LIÊN HỆ';
-                bsBuyBtn.style.opacity = '0.5';
-                bsBuyBtn.style.pointerEvents = 'none';
-            }
-            if (bsAddCartBtn) {
-                bsAddCartBtn.disabled = true;
-                bsAddCartBtn.style.opacity = '0.5';
-                bsAddCartBtn.style.pointerEvents = 'none';
-            }
         } else {
             if (statusEl) {
                 statusEl.innerText = 'Còn hàng';
@@ -2189,22 +2177,8 @@ function syncSwatches() {
                 btnInstallment.style.pointerEvents = '';
             }
             if (btnBuyNow) {
-                btnBuyNow.disabled = false;
                 btnBuyNow.innerText = 'MUA NGAY';
-                btnBuyNow.style.opacity = '';
-                btnBuyNow.style.pointerEvents = '';
                 btnBuyNow.style.setProperty('flex', '1.5', 'important');
-            }
-            if (bsBuyBtn) {
-                bsBuyBtn.disabled = false;
-                bsBuyBtn.innerText = 'MUA NGAY';
-                bsBuyBtn.style.opacity = '';
-                bsBuyBtn.style.pointerEvents = '';
-            }
-            if (bsAddCartBtn) {
-                bsAddCartBtn.disabled = false;
-                bsAddCartBtn.style.opacity = '';
-                bsAddCartBtn.style.pointerEvents = '';
             }
         }
     }
@@ -2389,6 +2363,9 @@ function hideNudgeBanner() {
 }
 
 var isBsOpen = false;
+const productControl = document.querySelector('.product-control');
+const qtyRow = document.querySelector('.qty-price-row');
+const form = document.getElementById('nava-product-form');
 
 function openBottomSheet() {
     const overlay = document.getElementById('nava-bs-overlay');
@@ -2404,27 +2381,14 @@ function openBottomSheet() {
             stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
         }
         
-        const isFbtActive = !!document.querySelector('frequently-buy-together');
-        if (isFbtActive) {
-            const fbtOptions = document.querySelector('.nava-custom-fbt-container');
-            if (fbtOptions) {
-                optionsContainer.appendChild(fbtOptions);
-            }
-            const fbtQty = document.querySelector('frequently-buy-together .custom-btn-number');
-            const bsQtyContainer = document.getElementById('nava-bs-qty-container');
-            if (fbtQty && bsQtyContainer) {
-                bsQtyContainer.appendChild(fbtQty);
-            }
-        } else {
-            const productControl = document.querySelector('.product-control');
-            if (productControl) {
-                optionsContainer.appendChild(productControl);
-            }
-            const qtySelector = document.querySelector('.qty-selector');
-            const bsQtyContainer = document.getElementById('nava-bs-qty-container');
-            if (qtySelector && bsQtyContainer) {
-                bsQtyContainer.appendChild(qtySelector);
-            }
+        // Move product control and quantity selector into bottom sheet
+        if (productControl) {
+            optionsContainer.appendChild(productControl);
+        }
+        const qtySelector = document.querySelector('.qty-selector');
+        const bsQtyContainer = document.getElementById('nava-bs-qty-container');
+        if (qtySelector && bsQtyContainer) {
+            bsQtyContainer.appendChild(qtySelector);
         }
         
         // Display bottom sheet
@@ -2466,111 +2430,60 @@ function closeBottomSheet() {
             bs.style.display = 'none';
             document.body.style.overflow = '';
             
-            const isFbtActive = !!document.querySelector('frequently-buy-together');
-            if (isFbtActive) {
-                const fbtOptions = document.querySelector('.nava-custom-fbt-container');
-                const fbtEl = document.querySelector('frequently-buy-together');
-                if (fbtOptions && fbtEl) {
-                    const pb3Row = fbtEl.querySelector('.pb-3');
-                    if (pb3Row) {
-                        fbtEl.insertBefore(fbtOptions, pb3Row);
-                    } else {
-                        fbtEl.appendChild(fbtOptions);
-                    }
+            // Move product control back to main layout
+            if (productControl && form) {
+                if (qtyRow) {
+                    form.insertBefore(productControl, qtyRow);
+                } else {
+                    form.appendChild(productControl);
                 }
-                const fbtQty = document.querySelector('.custom-btn-number');
-                const pb3Row = document.querySelector('frequently-buy-together .pb-3');
-                if (fbtQty && pb3Row) {
-                    pb3Row.insertBefore(fbtQty, pb3Row.firstChild);
-                }
-            } else {
-                const productControl = document.querySelector('.product-control');
-                const form = document.getElementById('nava-product-form');
-                const qtyRow = document.querySelector('.qty-price-row');
-                if (productControl && form) {
-                    if (qtyRow) {
-                        form.insertBefore(productControl, qtyRow);
-                    } else {
-                        form.appendChild(productControl);
-                    }
-                }
-                const qtySelector = document.querySelector('.qty-selector');
-                const qtyLabelWrap = document.querySelector('.qty-price-row > div:first-child');
-                if (qtySelector && qtyLabelWrap) {
-                    qtyLabelWrap.appendChild(qtySelector);
-                }
+            }
+            // Move quantity selector back to main layout
+            const qtySelector = document.querySelector('.qty-selector');
+            const qtyLabelWrap = document.querySelector('.qty-price-row > div:first-child');
+            if (qtySelector && qtyLabelWrap) {
+                qtyLabelWrap.appendChild(qtySelector);
             }
         }, 300);
     }
 }
 
-function initNavaProductEnforcement() {
+// Bind native variant selectors
+document.addEventListener('DOMContentLoaded', function() {
     // Handle bottom sheet quick configuration buttons click
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-add-cart-bs')) {
             e.preventDefault();
-            const isFbtActive = !!document.querySelector('frequently-buy-together');
-            if (isFbtActive) {
-                const realBtn = document.querySelector('frequently-buy-together button.tg-addcart');
-                if (realBtn) {
-                    realBtn.click();
-                    setTimeout(() => {
-                        // Close bottom sheet if not blocked by options check
-                        let isDefaultRam = false;
-                        let isDefaultSsd = false;
-                        document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
-                            const val = select.value;
-                            const parent = select.closest('[data-fbt-item]');
-                            const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
-                            if ((labelText.includes('RAM') || labelText.includes('DRAM')) && (val === 'no-select' || val === '')) isDefaultRam = true;
-                            if ((labelText.includes('SSD') || labelText.includes('NVME')) && (val === 'no-select' || val === '')) isDefaultSsd = true;
-                        });
-                        
-                        if (!isDefaultRam && !isDefaultSsd) {
-                            closeBottomSheet();
-                        }
-                    }, 100);
-                }
-            } else {
-                const realBtn = document.getElementById('btn-add-to-cart');
-                if (realBtn) {
-                    realBtn.click();
-                    setTimeout(() => {
-                        // Close bottom sheet if not blocked by options check
-                        let isDefaultRam = false;
-                        let isDefaultSsd = false;
-                        const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
-                        if (ramDisplay && (ramDisplay.textContent.toUpperCase().includes('NO RAM') || ramDisplay.textContent.toUpperCase().includes('0GB') || ramDisplay.textContent.toUpperCase().includes('TRỐNG'))) isDefaultRam = true;
-                        const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
-                        if (ssdDisplay && (ssdDisplay.textContent.toUpperCase().includes('NO SSD') || ssdDisplay.textContent.toUpperCase().includes('0GB') || ssdDisplay.textContent.toUpperCase().includes('TRỐNG'))) isDefaultSsd = true;
-                        
-                        if (!isDefaultRam && !isDefaultSsd) {
-                            closeBottomSheet();
-                        }
-                    }, 100);
-                }
+            const realBtn = document.getElementById('btn-add-to-cart');
+            if (realBtn) {
+                realBtn.click();
+                setTimeout(() => {
+                    // Close bottom sheet if not blocked by options check
+                    let isDefaultRam = false;
+                    let isDefaultSsd = false;
+                    const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+                    if (ramDisplay && (ramDisplay.textContent.toUpperCase().includes('NO RAM') || ramDisplay.textContent.toUpperCase().includes('0GB') || ramDisplay.textContent.toUpperCase().includes('TRỐNG'))) isDefaultRam = true;
+                    const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+                    if (ssdDisplay && (ssdDisplay.textContent.toUpperCase().includes('NO SSD') || ssdDisplay.textContent.toUpperCase().includes('0GB') || ssdDisplay.textContent.toUpperCase().includes('TRỐNG'))) isDefaultSsd = true;
+                    
+                    if (!isDefaultRam && !isDefaultSsd) {
+                        closeBottomSheet();
+                    }
+                }, 100);
             }
         }
         if (e.target.closest('.bs-buy-btn')) {
             e.preventDefault();
-            const isFbtActive = !!document.querySelector('frequently-buy-together');
-            if (isFbtActive) {
-                const realBtn = document.querySelector('frequently-buy-together button.tg-buy-now');
-                if (realBtn) {
-                    realBtn.click();
-                }
-            } else {
-                const realBtn = document.getElementById('btn-buy-now');
-                if (realBtn) {
-                    realBtn.click();
-                }
+            const realBtn = document.getElementById('btn-buy-now');
+            if (realBtn) {
+                realBtn.click();
             }
         }
     });
 
     // Intercept checkout clicks in capture phase to validate options selection and contact price
     document.addEventListener('click', function(e) {
-        const btn = e.target.closest('#btn-add-to-cart, #btn-installment, #btn-buy-now, .bar-add-cart, .bar-buy-now, .js-addToCart, .js-buynow, .btn-add-cart-sticky, .btn-buy-now-sticky, .btn-add-cart-bs, .bs-buy-btn, .tg-addcart, .tg-buy-now, .buy_now');
+        const btn = e.target.closest('#btn-add-to-cart, #btn-installment, #btn-buy-now, .bar-add-cart, .bar-buy-now, .js-addToCart, .js-buynow, .btn-add-cart-sticky, .btn-buy-now-sticky, .btn-add-cart-bs, .bs-buy-btn');
         if (btn) {
             let isDefaultRam = false;
             let isDefaultSsd = false;
@@ -2627,22 +2540,6 @@ function initNavaProductEnforcement() {
                     isDefaultSsd = true;
                 }
             }
-
-            // 5. Check Frequently Bought Together select elements
-            document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
-                const val = select.value;
-                const parent = select.closest('[data-fbt-item]');
-                const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
-                const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
-                const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
-                
-                if (isRam && (val === 'no-select' || val === '')) {
-                    isDefaultRam = true;
-                }
-                if (isSsd && (val === 'no-select' || val === '')) {
-                    isDefaultSsd = true;
-                }
-            });
             
             // Block if RAM or SSD options are not configured
             if (isDefaultRam || isDefaultSsd) {
@@ -2670,7 +2567,7 @@ function initNavaProductEnforcement() {
                         }, 2200);
                     }
                     
-                    const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant, .swatch, frequently-buy-together, .nava-custom-fbt-container');
+                    const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant, .swatch');
                     if (selectorBlock) {
                         selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         const displays = document.querySelectorAll('.nava-dropdown-display, .swatch, .single-option-selector, .nava-custom-select-display');
@@ -2688,49 +2585,10 @@ function initNavaProductEnforcement() {
                 return;
             }
             
-            // Block if price is contact-only (Liên hệ / 0)
-            const priceEl = document.getElementById('selected-variant-price') || document.getElementById('bs-price') || document.getElementById('sticky-price');
-            if (priceEl) {
-                const priceText = priceEl.textContent.trim().toLowerCase();
-                const cleanPriceText = priceText.replace(/[^\d]/g, '');
-                if (cleanPriceText === '0' || cleanPriceText === '' || priceText.includes('liên hệ') || priceText.includes('contact')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                }
-            }
-            const fbtTotalEl = document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
-            if (fbtTotalEl) {
-                const fbtTotalText = fbtTotalEl.textContent.trim().toLowerCase();
-                const cleanFbtText = fbtTotalText.replace(/[^\d]/g, '');
-                if (cleanFbtText === '0' || cleanFbtText === '' || fbtTotalText.includes('liên hệ') || fbtTotalText.includes('contact')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                }
-            }
-            const selectEl = document.querySelector('.box-variant #product-selectors');
-            if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
-                const activeOption = selectEl.selectedOptions[0];
-                const rawPrice = parseInt(activeOption.getAttribute('data-price') || '0', 10);
-                if (rawPrice === 0) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                }
-            }
-            const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
-            if (hiddenInput) {
-                const rawPrice = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
-                if (rawPrice === 0) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    return;
-                }
-            }
-            const basePriceVal = {% if selected_variant.price %}{{ selected_variant.price }}{% else %}0{% endif %};
-            const productPriceVal = {% if product.price %}{{ product.price }}{% else %}0{% endif %};
-            if (basePriceVal === 0 || productPriceVal === 0) {
+            // Block if price is contact-only (Liên hệ)
+            const priceEl = document.getElementById('selected-variant-price');
+            const priceText = priceEl ? priceEl.textContent.trim() : '';
+            if (priceText === '0đ' || priceText === '0 đ' || priceText === '0' || priceText.toLowerCase() === 'liên hệ') {
                 e.preventDefault();
                 e.stopPropagation();
                 return;

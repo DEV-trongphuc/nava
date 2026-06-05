@@ -308,10 +308,8 @@ def build_collection(base_dir, header_part, footer_part):
                 .product-card:hover .quick-view-btn { opacity: 1; visibility: visible; transform: translate(-50%, -50%); }
                 .quick-view-btn:hover { background: rgba(255, 255, 255, 0.8); }
                 
-                .product-img { transition: opacity 0.4s; }
-                .product-img-hover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1; }
-                .product-card:hover .product-img { opacity: 0; }
-                .product-card:hover .product-img-hover { opacity: 1; }
+                .product-img { transition: transform 0.4s ease; }
+                .product-card:hover .product-img { transform: scale(1.05); }
                 
                 /* Collapsible Category Description Section */
                 .category-description-section {
@@ -445,14 +443,14 @@ def build_collection(base_dir, header_part, footer_part):
                                     .range-fill { position: absolute; height: 100%; background: var(--primary); top: 0; border-radius: 2px; }
                                 </style>
                                 <div class="range-slider">
-                                    <div class="range-track"><div class="range-fill" id="priceFill" style="left: 10%; right: 25%;"></div></div>
-                                    <input type="range" min="0" max="40000000" step="500000" value="4000000" id="priceMin" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
-                                    <input type="range" min="0" max="40000000" step="500000" value="30000000" id="priceMax" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
+                                    <div class="range-track"><div class="range-fill" id="priceFill" style="left: 0%; right: 0%;"></div></div>
+                                    <input type="range" min="0" max="50000000" step="500000" value="0" id="priceMin" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
+                                    <input type="range" min="0" max="50000000" step="500000" value="50000000" id="priceMax" oninput="updatePriceVisuals()" onchange="if(typeof applyFiltersAndSort === 'function') applyFiltersAndSort()">
                                 </div>
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                                    <input type="text" id="priceInputMin" value="4.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
+                                    <input type="text" id="priceInputMin" value="0đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                     <span style="color: var(--text-gray); flex-shrink: 0; font-weight: bold;">-</span>
-                                    <input type="text" id="priceInputMax" value="30.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
+                                    <input type="text" id="priceInputMax" value="50.000.000đ" readonly style="flex: 1; min-width: 0; padding: 8px 4px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 0.85rem; color: var(--text-dark); font-weight: 700; text-align: center; outline: none; box-shadow: inset 0 1px 2px rgba(0,0,0,0.02); background: var(--bg-gray);">
                                 </div>
                                 <script>
                                     function updatePriceVisuals() {
@@ -462,8 +460,8 @@ def build_collection(base_dir, header_part, footer_part):
                                         document.getElementById('priceInputMin').value = minVal.toLocaleString('vi-VN') + 'đ';
                                         document.getElementById('priceInputMax').value = maxVal.toLocaleString('vi-VN') + 'đ';
                                         const fill = document.getElementById('priceFill');
-                                        fill.style.left = (minVal / 40000000 * 100) + '%';
-                                        fill.style.right = (100 - (maxVal / 40000000 * 100)) + '%';
+                                        fill.style.left = (minVal / 50000000 * 100) + '%';
+                                        fill.style.right = (100 - (maxVal / 50000000 * 100)) + '%';
                                     }
                                 </script>
                             </div>
@@ -598,9 +596,8 @@ def build_collection(base_dir, header_part, footer_part):
                                             header.textContent = '\u2728 HOÀN TẤT PHÂN TÍCH & TÌM KIẾM';
                                         }, 1200);
                                     }
-                                    aiSearchInput.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doSearch, 700); });
-                                    aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doSearch(); } });
-                                    btn.addEventListener('click', function() { clearTimeout(timer); doSearch(); });
+                                    aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { doSearch(); } });
+                                    btn.addEventListener('click', function() { doSearch(); });
                                     document.addEventListener('click', function(e) { if (!document.getElementById('ai-search-widget').contains(e.target)) drop.classList.remove('active'); });
                                 })();
                             </script>
@@ -1192,7 +1189,7 @@ def build_collection(base_dir, header_part, footer_part):
                         const minInput = document.getElementById('priceMin');
                         const maxInput = document.getElementById('priceMax');
                         const minVal = minInput ? parseInt(minInput.value) : 0;
-                        const maxVal = maxInput ? parseInt(maxInput.value) : 40000000;
+                        const maxVal = maxInput ? parseInt(maxInput.value) : 50000000;
                         
                         const sortLabelEl = document.getElementById('sortLabel');
                         const sortMethod = sortLabelEl ? sortLabelEl.textContent.trim() : 'Mặc định';
@@ -3546,6 +3543,111 @@ def build_product(base_dir, header_part, footer_part):
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+
+                    if (typeof checkRAMSSDPrompt === 'function') {
+                        checkRAMSSDPrompt();
+                    }
+                }
+
+                function checkRAMSSDPrompt() {
+                    let hasRam = true;
+                    let hasSsd = true;
+                    
+                    let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                    let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                    
+                    if (isDefaultRam || isDefaultSsd) {
+                        showNudgeBanner();
+                    } else {
+                        hideNudgeBanner();
+                    }
+                }
+                
+                function showNudgeBanner() {
+                    let banner = document.getElementById('ram-ssd-nudge-banner');
+                    let isAlreadyVisible = false;
+                    if (banner && banner.style.opacity === '1') {
+                        isAlreadyVisible = true;
+                    }
+                    
+                    if (!banner) {
+                        if (!document.getElementById('nudge-banner-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'nudge-banner-style';
+                            style.innerHTML = `
+                                @keyframes nudge-shake {
+                                    0%, 100% { transform: translateX(-50%) translateY(0); }
+                                    15%, 45%, 75% { transform: translateX(-52%) translateY(-1px); }
+                                    30%, 60%, 90% { transform: translateX(-48%) translateY(1px); }
+                                }
+                                .nudge-shake-active {
+                                    animation: nudge-shake 0.7s ease-in-out 3;
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
+                        
+                        banner = document.createElement('div');
+                        banner.id = 'ram-ssd-nudge-banner';
+                        banner.style.cssText = `
+                            position: fixed; bottom: 85px; left: 50%; 
+                            transform: translateX(-50%) translateY(120px); 
+                            width: calc(100% - 32px); max-width: 480px; 
+                            background: rgba(255, 255, 255, 0.95); 
+                            backdrop-filter: blur(12px); 
+                            border: 1.5px solid rgba(239, 68, 68, 0.35); 
+                            border-radius: 16px; padding: 14px 20px; 
+                            box-shadow: 0 10px 35px rgba(239, 68, 68, 0.15), 0 5px 15px rgba(0,0,0,0.08); 
+                            z-index: 99999; display: flex; align-items: center; gap: 12px; 
+                            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
+                            opacity: 0; box-sizing: border-box; font-family: inherit;
+                        `;
+                        banner.innerHTML = `
+                            <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="ph-fill ph-warning-octagon" style="font-size: 1.4rem;"></i></div>
+                            <div style="flex: 1; text-align: left;">
+                                <div style="font-size: 0.88rem; font-weight: 800; color: #ef4444; margin-bottom: 2px;">Chưa chọn cấu hình RAM & SSD</div>
+                                <div style="font-size: 0.78rem; font-weight: 600; color: #64748b;">Vui lòng chọn cấu hình ở trên để nhận báo giá & mua hàng!</div>
+                            </div>
+                            <button id="nudge-banner-btn" style="background: var(--primary, #003366); border: none; border-radius: 8px; color: white; padding: 8px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; white-space: nowrap; transition: 0.2s;">Chọn ngay</button>
+                        `;
+                        document.body.appendChild(banner);
+                        
+                        banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+                            const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                            if (selectorBlock) {
+                                selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                displays.forEach(d => {
+                                    d.style.transition = 'all 0.3s';
+                                    d.style.borderColor = '#ef4444';
+                                    d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                    setTimeout(() => {
+                                        d.style.borderColor = '';
+                                        d.style.boxShadow = '';
+                                    }, 1500);
+                                });
+                            }
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        banner.style.transform = 'translateX(-50%) translateY(0)';
+                        banner.style.opacity = '1';
+                        if (!isAlreadyVisible) {
+                            banner.classList.add('nudge-shake-active');
+                            setTimeout(() => {
+                                banner.classList.remove('nudge-shake-active');
+                            }, 2200);
+                        }
+                    }, 100);
+                }
+                
+                function hideNudgeBanner() {
+                    const banner = document.getElementById('ram-ssd-nudge-banner');
+                    if (banner) {
+                        banner.style.transform = 'translateX(-50%) translateY(120px)';
+                        banner.style.opacity = '0';
+                    }
                 }
 
                 window.adjustQty = function(amount) {
@@ -3616,6 +3718,9 @@ def build_product(base_dir, header_part, footer_part):
                     
                     toggleStickyBar(); // Check immediately on load
                     
+                    // Call checkRAMSSDPrompt on load
+                    setTimeout(checkRAMSSDPrompt, 100);
+                    
                     document.querySelectorAll('.nava-dropdown-display').forEach(display => {
                         display.addEventListener('click', function(e) {
                             e.preventDefault();
@@ -3651,20 +3756,96 @@ def build_product(base_dir, header_part, footer_part):
 
                     window.triggerAddToCart = (e) => {
                         if (e) e.preventDefault();
-                        if (window.innerWidth <= 768 && !isBsOpen) {
-                            openBottomSheet();
+                        
+                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                        
+                        if (isDefaultRam || isDefaultSsd) {
+                            if (window.innerWidth <= 768) {
+                                openBottomSheet();
+                                const bs = document.getElementById('nava-bottom-sheet');
+                                if (bs) {
+                                    bs.classList.remove('bs-shake-active');
+                                    void bs.offsetWidth; // Reflow
+                                    bs.classList.add('bs-shake-active');
+                                }
+                            } else {
+                                showNudgeBanner();
+                                const banner = document.getElementById('ram-ssd-nudge-banner');
+                                if (banner) {
+                                    banner.style.transform = 'translateX(-50%) translateY(0)';
+                                    banner.style.opacity = '1';
+                                    banner.classList.add('nudge-shake-active');
+                                    setTimeout(() => {
+                                        banner.classList.remove('nudge-shake-active');
+                                    }, 2200);
+                                }
+                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                                if (selectorBlock) {
+                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                    displays.forEach(d => {
+                                        d.style.transition = 'all 0.3s';
+                                        d.style.borderColor = '#ef4444';
+                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                        setTimeout(() => {
+                                            d.style.borderColor = '';
+                                            d.style.boxShadow = '';
+                                        }, 1500);
+                                    });
+                                }
+                            }
                             return;
                         }
+                        
                         closeBottomSheet();
                         triggerCartOpen(e);
                     };
 
                     window.triggerCheckout = (e) => {
                         if (e) e.preventDefault();
-                        if (window.innerWidth <= 768 && !isBsOpen) {
-                            openBottomSheet();
+                        
+                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                        
+                        if (isDefaultRam || isDefaultSsd) {
+                            if (window.innerWidth <= 768) {
+                                openBottomSheet();
+                                const bs = document.getElementById('nava-bottom-sheet');
+                                if (bs) {
+                                    bs.classList.remove('bs-shake-active');
+                                    void bs.offsetWidth; // Reflow
+                                    bs.classList.add('bs-shake-active');
+                                }
+                            } else {
+                                showNudgeBanner();
+                                const banner = document.getElementById('ram-ssd-nudge-banner');
+                                if (banner) {
+                                    banner.style.transform = 'translateX(-50%) translateY(0)';
+                                    banner.style.opacity = '1';
+                                    banner.classList.add('nudge-shake-active');
+                                    setTimeout(() => {
+                                        banner.classList.remove('nudge-shake-active');
+                                    }, 2200);
+                                }
+                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                                if (selectorBlock) {
+                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                    displays.forEach(d => {
+                                        d.style.transition = 'all 0.3s';
+                                        d.style.borderColor = '#ef4444';
+                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                        setTimeout(() => {
+                                            d.style.borderColor = '';
+                                            d.style.boxShadow = '';
+                                        }, 1500);
+                                    });
+                                }
+                            }
                             return;
                         }
+                        
                         window.location.href = 'demo_checkout.html';
                     };
 

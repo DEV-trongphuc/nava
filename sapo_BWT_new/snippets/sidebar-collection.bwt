@@ -9,6 +9,14 @@
     .category-list a:hover { color: var(--primary, #2563eb); }
     .category-list .count { margin-left: auto; color: var(--text-gray, #64748b); font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
     
+    .category-list li.has-sub > a { position: relative; }
+    .sub-category-list { list-style: none; padding-left: 32px; margin-top: 5px; margin-bottom: 10px; }
+    .sub-category-list li { margin-bottom: 6px; }
+    .sub-category-list a { font-size: 0.88rem !important; font-weight: 500 !important; color: var(--text-gray, #64748b) !important; }
+    .sub-category-list a:hover, .sub-category-list a.active { color: var(--primary, #2563eb) !important; }
+    .parent-cat .caret-icon { transition: transform 0.2s; }
+    .parent-cat.open .caret-icon { transform: rotate(180deg); }
+
     .nava-brand-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
     .nava-brand-item { border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: var(--bg-white, #ffffff); transition: all 0.2s; }
     .nava-brand-item:hover { border-color: var(--primary, #2563eb); box-shadow: 0 4px 12px rgba(59,130,246,0.1); transform: translateY(-1px); }
@@ -29,22 +37,39 @@
     <ul class="category-list">
         <!-- Item 1: Mini PC -->
         {%- assign cat_minipc = collections['minipc'] | default: collections['mini-pc'] -%}
-        <li>
-            <a href="/minipc" {% if collection.handle == 'minipc' or collection.handle == 'mini-pc' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+        <li class="has-sub">
+            <a href="javascript:;" class="parent-cat" id="parent-minipc" onclick="toggleSubCategory(this)">
                 <img src="{{ 'icon_dmenu_3.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Mini PC">
                 Mini PC
-                <span class="count">({{ cat_minipc.products_count | default: 145 }}) <i class="ph-bold ph-caret-down"></i></span>
+                <span class="count">({{ cat_minipc.products_count | default: 145 }}) <i class="ph-bold ph-caret-down caret-icon"></i></span>
             </a>
+            <ul class="sub-category-list" id="sub-minipc" style="display: none;">
+                <li><a href="/minipc" class="sub-cat-item">Tất cả Mini PC</a></li>
+                <li><a href="/minipc?vendor=ASUS" class="sub-cat-item">ASUS</a></li>
+                <li><a href="/minipc?vendor=Beelink" class="sub-cat-item">Beelink</a></li>
+                <li><a href="/minipc?vendor=Minisforum" class="sub-cat-item">Minisforum</a></li>
+                <li><a href="/minipc?vendor=GMKtec" class="sub-cat-item">GMKtec</a></li>
+                <li><a href="/minipc?vendor=AOOSTAR" class="sub-cat-item">AOOSTAR</a></li>
+                <li><a href="/minipc?vendor=Beikong" class="sub-cat-item">Beikong</a></li>
+                <li><a href="/minipc?vendor=MSI" class="sub-cat-item">MSI</a></li>
+                <li><a href="/minipc?vendor=ASRock" class="sub-cat-item">ASRock</a></li>
+                <li><a href="/minipc?vendor=Zotac" class="sub-cat-item">Zotac</a></li>
+            </ul>
         </li>
         
         <!-- Item 2: eGPU -->
         {%- assign cat_egpu = collections['egpu'] -%}
-        <li>
-            <a href="/egpu" {% if collection.handle == 'egpu' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+        <li class="has-sub">
+            <a href="javascript:;" class="parent-cat" id="parent-egpu" onclick="toggleSubCategory(this)">
                 <img src="{{ 'icon_dmenu_4.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="eGPU">
                 eGPU
-                <span class="count">({{ cat_egpu.products_count | default: 14 }})</span>
+                <span class="count">({{ cat_egpu.products_count | default: 14 }}) <i class="ph-bold ph-caret-down caret-icon"></i></span>
             </a>
+            <ul class="sub-category-list" id="sub-egpu" style="display: none;">
+                <li><a href="/egpu" class="sub-cat-item">Tất cả eGPU</a></li>
+                <li><a href="/dock-egpu" class="sub-cat-item">DOCK eGPU</a></li>
+                <li><a href="/egpu-aio" class="sub-cat-item">ALL IN ONE</a></li>
+            </ul>
         </li>
         
         <!-- Item 3: RAM/SSD -->
@@ -96,13 +121,13 @@
         <div class="range-slider">
             <div class="slider-track"></div>
             <div class="slider-highlight" id="sliderHighlight"></div>
-            <input type="range" min="0" max="50000000" value="4000000" id="slider-1" oninput="slideOne()">
-            <input type="range" min="0" max="50000000" value="30000000" id="slider-2" oninput="slideTwo()">
+            <input type="range" min="0" max="200000000" value="0" id="slider-1" oninput="slideOne()">
+            <input type="range" min="0" max="200000000" value="200000000" id="slider-2" oninput="slideTwo()">
         </div>
         <div class="price-inputs" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px;">
-            <input type="text" id="priceInputMin" placeholder="4.000.000đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
+            <input type="text" id="priceInputMin" placeholder="0đ" value="0đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
             <span style="color: #94a3b8; font-weight: bold;">-</span>
-            <input type="text" id="priceInputMax" placeholder="30.000.000đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
+            <input type="text" id="priceInputMax" placeholder="200.000.000đ" value="200.000.000đ" readonly style="width: 45%; border: 1px solid var(--border-color, #e2e8f0); padding: 8px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; text-align: center; color: var(--text-dark, #0f172a); background: var(--bg-gray, #f8fafc);">
         </div>
         <button onclick="applySapoPriceFilter()" style="width: 100%; margin-top: 15px; background: var(--primary, #2563eb); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.88rem; transition: background 0.2s;">
             Áp dụng lọc giá
@@ -229,10 +254,70 @@
                 slider1.value = minP;
                 slider2.value = maxP;
             }
+        } else {
+            // Default: no price filter (0 - 50M)
+            slider1.value = 0;
+            slider2.value = 200000000;
         }
         
         // Initialize UI display
         slideOne();
         slideTwo();
+
+        // Auto-expand active category
+        const path = window.location.pathname;
+        const vendor = url.searchParams.get('vendor');
+        
+        if (path.includes('minipc') || path.includes('mini-pc')) {
+            const subList = document.getElementById('sub-minipc');
+            const parent = document.getElementById('parent-minipc');
+            if (subList && parent) {
+                subList.style.display = 'block';
+                parent.classList.add('open');
+            }
+        } else if (path.includes('egpu') || path.includes('dock-egpu') || path.includes('egpu-aio')) {
+            const subList = document.getElementById('sub-egpu');
+            const parent = document.getElementById('parent-egpu');
+            if (subList && parent) {
+                subList.style.display = 'block';
+                parent.classList.add('open');
+            }
+        }
+        
+        // Highlight active subcategory item
+        document.querySelectorAll('.sub-cat-item').forEach(item => {
+            const href = item.getAttribute('href');
+            if (href) {
+                try {
+                    const itemUrl = new URL(href, window.location.origin);
+                    if (itemUrl.pathname === path) {
+                        const itemVendor = itemUrl.searchParams.get('vendor');
+                        if (!itemVendor || itemVendor.toLowerCase() === (vendor || '').toLowerCase()) {
+                            item.classList.add('active');
+                            item.style.color = 'var(--primary)';
+                            item.style.fontWeight = '700';
+                        }
+                    }
+                } catch(e) {}
+            }
+        });
     });
+
+    window.toggleSubCategory = function(el) {
+        if (window.event) {
+            window.event.preventDefault();
+            window.event.stopPropagation();
+        }
+        const parentLi = el.closest('li');
+        const subList = parentLi.querySelector('.sub-category-list');
+        if (subList) {
+            const isOpen = subList.style.display !== 'none';
+            subList.style.display = isOpen ? 'none' : 'block';
+            if (isOpen) {
+                el.classList.remove('open');
+            } else {
+                el.classList.add('open');
+            }
+        }
+    };
 </script>

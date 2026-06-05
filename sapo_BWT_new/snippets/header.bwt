@@ -16,9 +16,16 @@
                     </div>
                 </div>
             </button>
-            <form action="/search" method="GET" class="search-box">
-                <input type="text" name="query" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?" required>
+            <form action="/search" method="GET" class="search-box" style="position: relative;">
+                <input type="text" name="q" id="header-search-input" placeholder="Bạn cần tìm Mini PC, eGPU hay linh kiện...?" required autocomplete="off">
                 <button type="submit" aria-label="Tìm kiếm"><i class="ph ph-magnifying-glass"></i></button>
+                <div class="search-autocomplete-dropdown" id="header-search-autocomplete" style="display: none;">
+                    <div class="autocomplete-loading" style="display: none; padding: 15px; text-align: center; color: var(--text-gray); font-weight: 600; font-size: 0.9rem;">
+                        <i class="ph-bold ph-spinner" style="animation: spin 1s infinite linear; font-size: 1.1rem; margin-right: 6px; display: inline-block; vertical-align: middle;"></i> Đang tìm kiếm...
+                    </div>
+                    <div class="autocomplete-results" id="header-search-results"></div>
+                    <a href="javascript:;" id="autocomplete-view-all" style="display: none; text-align: center; padding: 12px; font-weight: 700; font-size: 0.85rem; color: var(--primary); border-top: 1px solid var(--border-color); text-decoration: none; transition: background 0.2s;" onmouseover="this.style.background='var(--bg-gray)'" onmouseout="this.style.background='transparent'">Xem tất cả kết quả</a>
+                </div>
             </form>
             <div class="top-actions">
                 {% if customer %}
@@ -107,3 +114,180 @@
         </div>
     </div>
 </header>
+
+<style>
+    .search-autocomplete-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        width: 100%;
+        background: var(--bg-white, #ffffff);
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 12px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        z-index: 9999;
+        max-height: 400px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        animation: autocompleteSlideDown 0.2s ease;
+        scrollbar-width: none;
+    }
+    .search-autocomplete-dropdown::-webkit-scrollbar {
+        display: none;
+    }
+    @keyframes autocompleteSlideDown {
+        from { opacity: 0; transform: translateY(-5px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .autocomplete-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .autocomplete-item:last-child {
+        border-bottom: none;
+    }
+    .autocomplete-item:hover {
+        background: var(--bg-gray, #f8fafc);
+    }
+    .autocomplete-item-img {
+        width: 45px;
+        height: 45px;
+        object-fit: contain;
+        background: white;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        padding: 2px;
+        flex-shrink: 0;
+    }
+    .autocomplete-item-info {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+    }
+    .autocomplete-item-title {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--text-dark, #0f172a);
+        margin-bottom: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .autocomplete-item-price {
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: var(--primary, #2563eb);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('header-search-input');
+        const dropdown = document.getElementById('header-search-autocomplete');
+        const resultsContainer = document.getElementById('header-search-results');
+        const loading = dropdown.querySelector('.autocomplete-loading');
+        const viewAll = document.getElementById('autocomplete-view-all');
+        let debounceTimer = null;
+
+        if (!input) return;
+
+        input.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            const q = input.value.trim();
+
+            if (q.length < 2) {
+                dropdown.style.display = 'none';
+                return;
+            }
+
+            // Show loading state
+            dropdown.style.display = 'flex';
+            loading.style.display = 'block';
+            resultsContainer.innerHTML = '';
+            viewAll.style.display = 'none';
+
+            debounceTimer = setTimeout(function() {
+                fetch('/search?q=' + encodeURIComponent(q) + '&type=product')
+                    .then(response => response.text())
+                    .then(html => {
+                        loading.style.display = 'none';
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const cards = doc.querySelectorAll('.product-card');
+
+                        if (cards.length === 0) {
+                            resultsContainer.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-gray); font-size: 0.9rem; font-weight: 600;">Không tìm thấy sản phẩm phù hợp</div>';
+                            return;
+                        }
+
+                        let htmlContent = '';
+                        // Limit to 5 results for clean dropdown UI
+                        const limit = Math.min(cards.length, 5);
+                        for (let i = 0; i < limit; i++) {
+                            const card = cards[i];
+                            const titleEl = card.querySelector('.card-title');
+                            const imgEl = card.querySelector('.product-img');
+                            const priceEl = card.querySelector('.card-content span[style*="font-weight: 800"]') || card.querySelector('.card-content span:last-child');
+
+                            const title = titleEl ? titleEl.textContent.trim() : 'Sản phẩm';
+                            const img = imgEl ? imgEl.getAttribute('src') : '';
+                            const price = priceEl ? priceEl.textContent.trim() : 'Liên hệ';
+                            
+                            const onclickAttr = card.getAttribute('onclick') || '';
+                            const urlMatch = onclickAttr.match(/href='([^']+)'/) || onclickAttr.match(/href="([^"]+)"/);
+                            const url = urlMatch ? urlMatch[1] : '#';
+
+                            htmlContent += `
+                                <div class="autocomplete-item" onclick="window.location.href='${url}'">
+                                    <img src="${img}" class="autocomplete-item-img" alt="${title.replace(/"/g, '&quot;')}">
+                                    <div class="autocomplete-item-info">
+                                        <div class="autocomplete-item-title">${title}</div>
+                                        <div class="autocomplete-item-price">${price}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        resultsContainer.innerHTML = htmlContent;
+
+                        if (cards.length > 5) {
+                            viewAll.style.display = 'block';
+                            viewAll.onclick = function() {
+                                input.form.submit();
+                            };
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Autocomplete search failed:', err);
+                        loading.style.display = 'none';
+                        resultsContainer.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-gray); font-size: 0.9rem;">Lỗi tìm kiếm</div>';
+                    });
+            }, 300); // 300ms debounce
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // Re-open dropdown on focus if input has value
+        input.addEventListener('focus', function() {
+            if (input.value.trim().length >= 2) {
+                dropdown.style.display = 'flex';
+            }
+        });
+    });
+</script>
+

@@ -19,15 +19,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 header('Content-Type: application/json; charset=utf-8');
 
 // --- CONFIGURATION ---
-// You can set the API key via environment variable or fill it directly below:
-$apiKey = getenv('GEMINI_API_KEY');
-if (empty($apiKey)) {
-    // Fill in your Gemini API key here
-    $apiKey = "YOUR_GEMINI_API_KEY_HERE"; 
+// Fill in your Gemini API key here (preferred):
+$apiKey = "YOUR_GEMINI_API_KEY_HERE"; 
+
+// If not filled above, try reading from environment variable:
+if (empty($apiKey) || $apiKey === "YOUR_GEMINI_API_KEY_HERE") {
+    $apiKey = getenv('GEMINI_API_KEY');
 }
 
 // Model to use
-$model = "gemini-2.5-flash"; // Or gemini-2.0-flash / gemini-2.5-flash-lite (if available)
+$model = "gemini-2.5-flash";
+
+// API Base URL (can be changed to a reverse proxy mirror if Google is blocked on your server)
+$apiBaseUrl = "https://generativelanguage.googleapis.com";
+
+// Optional: HTTP Proxy server if your host needs a proxy to reach Google APIs (e.g. "http://127.0.0.1:8080")
+$proxy = "";
+
 
 // Validate API Key
 if (empty($apiKey) || $apiKey === "YOUR_GEMINI_API_KEY_HERE") {
@@ -125,7 +133,7 @@ $geminiPayload = [
 ];
 
 // Execute API call via Curl
-$url = "https://generativelanguage.googleapis.com/v1beta/models/" . $model . ":generateContent?key=" . $apiKey;
+$url = $apiBaseUrl . "/v1beta/models/" . $model . ":generateContent?key=" . $apiKey;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -137,6 +145,12 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 ]);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Bypass SSL verification for legacy server environments if needed
 curl_setopt($ch, CURLOPT_TIMEOUT, 15); // 15 seconds timeout
+
+// Set proxy if configured
+if (!empty($proxy)) {
+    curl_setopt($ch, CURLOPT_PROXY, $proxy);
+}
+
 
 $response = curl_exec($ch);
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);

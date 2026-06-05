@@ -2584,6 +2584,111 @@
                         let optString = opts.length > 0 ? ` - ${opts.join(', ')}` : '';
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
+
+                    if (typeof checkRAMSSDPrompt === 'function') {
+                        checkRAMSSDPrompt();
+                    }
+                }
+
+                function checkRAMSSDPrompt() {
+                    let hasRam = true;
+                    let hasSsd = true;
+                    
+                    let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                    let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                    
+                    if (isDefaultRam || isDefaultSsd) {
+                        showNudgeBanner();
+                    } else {
+                        hideNudgeBanner();
+                    }
+                }
+                
+                function showNudgeBanner() {
+                    let banner = document.getElementById('ram-ssd-nudge-banner');
+                    let isAlreadyVisible = false;
+                    if (banner && banner.style.opacity === '1') {
+                        isAlreadyVisible = true;
+                    }
+                    
+                    if (!banner) {
+                        if (!document.getElementById('nudge-banner-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'nudge-banner-style';
+                            style.innerHTML = `
+                                @keyframes nudge-shake {
+                                    0%, 100% { transform: translateX(-50%) translateY(0); }
+                                    15%, 45%, 75% { transform: translateX(-52%) translateY(-1px); }
+                                    30%, 60%, 90% { transform: translateX(-48%) translateY(1px); }
+                                }
+                                .nudge-shake-active {
+                                    animation: nudge-shake 0.7s ease-in-out 3;
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
+                        
+                        banner = document.createElement('div');
+                        banner.id = 'ram-ssd-nudge-banner';
+                        banner.style.cssText = `
+                            position: fixed; bottom: 85px; left: 50%; 
+                            transform: translateX(-50%) translateY(120px); 
+                            width: calc(100% - 32px); max-width: 480px; 
+                            background: rgba(255, 255, 255, 0.95); 
+                            backdrop-filter: blur(12px); 
+                            border: 1.5px solid rgba(239, 68, 68, 0.35); 
+                            border-radius: 16px; padding: 14px 20px; 
+                            box-shadow: 0 10px 35px rgba(239, 68, 68, 0.15), 0 5px 15px rgba(0,0,0,0.08); 
+                            z-index: 99999; display: flex; align-items: center; gap: 12px; 
+                            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
+                            opacity: 0; box-sizing: border-box; font-family: inherit;
+                        `;
+                        banner.innerHTML = `
+                            <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="ph-fill ph-warning-octagon" style="font-size: 1.4rem;"></i></div>
+                            <div style="flex: 1; text-align: left;">
+                                <div style="font-size: 0.88rem; font-weight: 800; color: #ef4444; margin-bottom: 2px;">Chưa chọn cấu hình RAM & SSD</div>
+                                <div style="font-size: 0.78rem; font-weight: 600; color: #64748b;">Vui lòng chọn cấu hình ở trên để nhận báo giá & mua hàng!</div>
+                            </div>
+                            <button id="nudge-banner-btn" style="background: var(--primary, #003366); border: none; border-radius: 8px; color: white; padding: 8px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; white-space: nowrap; transition: 0.2s;">Chọn ngay</button>
+                        `;
+                        document.body.appendChild(banner);
+                        
+                        banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+                            const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                            if (selectorBlock) {
+                                selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                displays.forEach(d => {
+                                    d.style.transition = 'all 0.3s';
+                                    d.style.borderColor = '#ef4444';
+                                    d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                    setTimeout(() => {
+                                        d.style.borderColor = '';
+                                        d.style.boxShadow = '';
+                                    }, 1500);
+                                });
+                            }
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        banner.style.transform = 'translateX(-50%) translateY(0)';
+                        banner.style.opacity = '1';
+                        if (!isAlreadyVisible) {
+                            banner.classList.add('nudge-shake-active');
+                            setTimeout(() => {
+                                banner.classList.remove('nudge-shake-active');
+                            }, 2200);
+                        }
+                    }, 100);
+                }
+                
+                function hideNudgeBanner() {
+                    const banner = document.getElementById('ram-ssd-nudge-banner');
+                    if (banner) {
+                        banner.style.transform = 'translateX(-50%) translateY(120px)';
+                        banner.style.opacity = '0';
+                    }
                 }
 
                 window.adjustQty = function(amount) {
@@ -2654,6 +2759,9 @@
                     
                     toggleStickyBar(); // Check immediately on load
                     
+                    // Call checkRAMSSDPrompt on load
+                    setTimeout(checkRAMSSDPrompt, 100);
+                    
                     document.querySelectorAll('.nava-dropdown-display').forEach(display => {
                         display.addEventListener('click', function(e) {
                             e.preventDefault();
@@ -2689,20 +2797,96 @@
 
                     window.triggerAddToCart = (e) => {
                         if (e) e.preventDefault();
-                        if (window.innerWidth <= 768 && !isBsOpen) {
-                            openBottomSheet();
+                        
+                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                        
+                        if (isDefaultRam || isDefaultSsd) {
+                            if (window.innerWidth <= 768) {
+                                openBottomSheet();
+                                const bs = document.getElementById('nava-bottom-sheet');
+                                if (bs) {
+                                    bs.classList.remove('bs-shake-active');
+                                    void bs.offsetWidth; // Reflow
+                                    bs.classList.add('bs-shake-active');
+                                }
+                            } else {
+                                showNudgeBanner();
+                                const banner = document.getElementById('ram-ssd-nudge-banner');
+                                if (banner) {
+                                    banner.style.transform = 'translateX(-50%) translateY(0)';
+                                    banner.style.opacity = '1';
+                                    banner.classList.add('nudge-shake-active');
+                                    setTimeout(() => {
+                                        banner.classList.remove('nudge-shake-active');
+                                    }, 2200);
+                                }
+                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                                if (selectorBlock) {
+                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                    displays.forEach(d => {
+                                        d.style.transition = 'all 0.3s';
+                                        d.style.borderColor = '#ef4444';
+                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                        setTimeout(() => {
+                                            d.style.borderColor = '';
+                                            d.style.boxShadow = '';
+                                        }, 1500);
+                                    });
+                                }
+                            }
                             return;
                         }
+                        
                         closeBottomSheet();
                         triggerCartOpen(e);
                     };
 
                     window.triggerCheckout = (e) => {
                         if (e) e.preventDefault();
-                        if (window.innerWidth <= 768 && !isBsOpen) {
-                            openBottomSheet();
+                        
+                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                        
+                        if (isDefaultRam || isDefaultSsd) {
+                            if (window.innerWidth <= 768) {
+                                openBottomSheet();
+                                const bs = document.getElementById('nava-bottom-sheet');
+                                if (bs) {
+                                    bs.classList.remove('bs-shake-active');
+                                    void bs.offsetWidth; // Reflow
+                                    bs.classList.add('bs-shake-active');
+                                }
+                            } else {
+                                showNudgeBanner();
+                                const banner = document.getElementById('ram-ssd-nudge-banner');
+                                if (banner) {
+                                    banner.style.transform = 'translateX(-50%) translateY(0)';
+                                    banner.style.opacity = '1';
+                                    banner.classList.add('nudge-shake-active');
+                                    setTimeout(() => {
+                                        banner.classList.remove('nudge-shake-active');
+                                    }, 2200);
+                                }
+                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                                if (selectorBlock) {
+                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                    displays.forEach(d => {
+                                        d.style.transition = 'all 0.3s';
+                                        d.style.borderColor = '#ef4444';
+                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                        setTimeout(() => {
+                                            d.style.borderColor = '';
+                                            d.style.boxShadow = '';
+                                        }, 1500);
+                                    });
+                                }
+                            }
                             return;
                         }
+                        
                         window.location.href = 'demo_checkout.html';
                     };
 
@@ -3467,21 +3651,31 @@
         
         let html = '';
         for (let i = 0; i < 2; i++) {
+            if (i > 0) {
+                html += `
+                    <div style="display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; background: var(--primary); font-size: 0.75rem; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0 -5px; z-index: 2; align-self: center; flex-shrink: 0; user-select: none;">VS</div>
+                `;
+            }
             if (i < compareList.length) {
                 const p = compareList[i];
+                let displayPrice = p.price;
+                if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+                    displayPrice = 'Liên hệ';
+                }
+                const escapedNameForAttr = p.name.replace(/"/g, '&quot;');
                 html += `
-                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; max-width: 380px; min-width: 0; position: relative; font-family: inherit; box-sizing: border-box;">
                         <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <div style="flex: 1; min-width: 0; text-align: left;">
-                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
-                            <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
+                            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;" title="${escapedNameForAttr}">${p.name}</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${displayPrice}</div>
                         </div>
                         <button onclick="removeCompare('${p.name}')" style="background: none; border: none; color: var(--text-gray); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-x"></i></button>
                     </div>
                 `;
             } else {
                 html += `
-                    <div class="compare-slot-item" onclick="showCompareSelectDropdown(event, this)" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit; cursor: pointer;">
+                    <div class="compare-slot-item" onclick="showCompareSelectDropdown(event, this)" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; max-width: 380px; min-width: 0; color: var(--text-gray); font-size: 0.95rem; font-family: inherit; cursor: pointer; box-sizing: border-box;">
                         <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                         Thêm sản phẩm
                     </div>
@@ -3537,12 +3731,15 @@
         // Filter out products already in compare list
         let available = allProductsForCompare.filter(p => !compareList.some(item => item.name === p.name));
         
+        let displayList = available;
         if (query) {
-            available = available.filter(p => p.name.toLowerCase().includes(query));
+            displayList = available.filter(p => p.name.toLowerCase().includes(query));
+        } else {
+            displayList = available.slice(0, 6);
         }
         
         let html = '';
-        available.forEach(p => {
+        displayList.forEach(p => {
             html += `
                 <div onclick="selectProductForCompare('${p.name}', '${p.img}', '${p.price}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.background='transparent';">
                     <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white;">

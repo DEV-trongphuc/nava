@@ -1,0 +1,528 @@
+ {%- assign result_per_page = settings.search_result_per_page | default: 12 -%}
+ 
+ <style>
+    .breadcrumbs {
+        display: none !important;
+    }
+    :root {
+         --search-primary: #003366;
+         --search-primary-glow: rgba(0, 51, 102, 0.15);
+         --search-gradient-start: rgba(14, 165, 233, 0.1);
+         --search-gradient-end: rgba(15, 23, 42, 0.02);
+     }
+     [data-theme="dark"] :root {
+         --search-primary: #38bdf8;
+         --search-primary-glow: rgba(56, 189, 248, 0.2);
+         --search-gradient-start: rgba(56, 189, 248, 0.15);
+         --search-gradient-end: rgba(15, 23, 42, 0.6);
+     }
+ 
+     .nava-search-container {
+        max-width: 1600px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin: 20px auto 80px !important;
+        padding: 0 30px !important;
+    }
+    @media (max-width: 575px) {
+        .nava-search-container {
+            padding: 0 10px 80px !important;
+            margin-top: 10px !important;
+        }
+    }
+    
+    .search-hero {
+        background: linear-gradient(135deg, var(--search-gradient-start) 0%, var(--search-gradient-end) 100%);
+        border-radius: var(--radius-lg, 16px);
+        padding: 40px 50px;
+        margin-bottom: 40px;
+        border: 1px solid var(--border-color, #e2e8f0);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    @media (max-width: 768px) {
+        .search-hero {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 25px 30px;
+            gap: 20px;
+        }
+        .search-hero img {
+            max-width: 180px !important;
+        }
+    }
+    
+    .search-hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .search-hero h1 {
+        font-size: 2.4rem;
+        font-weight: 900;
+        margin-bottom: 12px;
+        color: var(--text-dark, #0f172a);
+        letter-spacing: -0.5px;
+    }
+    
+    .search-hero p {
+        color: var(--text-gray, #64748b);
+        font-size: 1.05rem;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .search-control-center {
+        background: var(--bg-white, #ffffff);
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: var(--radius-lg, 16px);
+        padding: 30px;
+        margin-bottom: 40px;
+        box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+    }
+    @media (max-width: 575px) {
+        .search-control-center {
+            padding: 20px 15px;
+            margin-bottom: 25px;
+        }
+    }
+
+    .search-input-box-wrapper {
+        display: flex;
+        background: var(--bg-white, #fff);
+        border: 2px solid var(--border-color, #e2e8f0);
+        border-radius: 50px;
+        padding: 6px 8px 6px 24px;
+        gap: 12px;
+        max-width: 700px;
+        margin: 0 auto;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.25s ease;
+        position: relative;
+    }
+    .search-input-box-wrapper:focus-within {
+        border-color: var(--search-primary);
+        box-shadow: 0 0 0 4px var(--search-primary-glow);
+    }
+    .search-input-box-wrapper input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 1.05rem;
+        color: var(--text-color, #1e293b);
+        font-weight: 500;
+        min-width: 0;
+    }
+    .search-input-box-wrapper button {
+        background: var(--search-primary);
+        border: none;
+        color: white;
+        padding: 10px 28px;
+        border-radius: 40px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .search-input-box-wrapper button:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+    }
+    .search-input-box-wrapper button:active {
+        transform: translateY(0);
+    }
+
+    .trending-keywords {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .trending-label {
+        font-size: 0.9rem;
+        color: var(--text-gray, #64748b);
+        font-weight: 600;
+    }
+    .keyword-pill {
+        display: inline-flex;
+        align-items: center;
+        background: var(--bg-gray, #f8fafc);
+        border: 1px solid var(--border-color, #e2e8f0);
+        color: var(--text-dark, #0f172a);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .keyword-pill:hover {
+        border-color: var(--search-primary);
+        color: var(--search-primary);
+        background: var(--search-primary-glow);
+        transform: translateY(-1px);
+    }
+
+    .search-toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+    }
+    @media (max-width: 575px) {
+        .search-toolbar {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+    .toolbar-title {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--text-dark, #0f172a);
+        margin: 0;
+    }
+
+    /* Sort Dropdown styles */
+    .sort-container {
+        position: relative;
+    }
+    .sort-pill-btn {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-white, #fff);
+        border: 1px solid var(--border-color, #e2e8f0);
+        color: var(--text-dark, #0f172a);
+        padding: 10px 18px;
+        border-radius: 40px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.2s;
+    }
+    .sort-pill-btn:hover {
+        border-color: var(--search-primary);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+    }
+    .sort-drop-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: var(--bg-white, #fff);
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 12px;
+        padding: 6px 0;
+        min-width: 190px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        display: none;
+        z-index: 999;
+    }
+    .sort-drop-menu.show {
+        display: block;
+    }
+    .sort-drop-menu a {
+        display: block;
+        padding: 10px 18px;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.88rem;
+        transition: all 0.15s;
+    }
+    .sort-drop-menu a:hover {
+        background: var(--bg-gray);
+        color: var(--search-primary);
+    }
+
+    .product-grid { 
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
+        width: 100%;
+    }
+    @media (max-width: 1199px) {
+        .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
+    }
+    @media (max-width: 991px) {
+        .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+    }
+    @media (max-width: 575px) {
+        .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 8px !important; }
+    }
+
+    .empty-search-card {
+        background: var(--bg-white, #ffffff);
+        border-radius: 20px;
+        border: 1px solid var(--border-color, #e2e8f0);
+        padding: 60px 40px;
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        max-width: 650px;
+        margin: 40px auto;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .empty-search-card h2 {
+        font-size: 1.5rem;
+        font-weight: 850;
+        color: var(--text-dark, #0f172a);
+        margin: 25px 0 12px;
+    }
+    
+    .empty-search-card p {
+        color: var(--text-gray, #64748b);
+        font-size: 0.98rem;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .countdown-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(239, 68, 68, 0.06);
+        color: #ef4444;
+        padding: 10px 20px;
+        border-radius: 30px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        border: 1px solid rgba(239, 68, 68, 0.15);
+        margin-top: 25px;
+        box-shadow: 0 4px 10px rgba(239, 68, 68, 0.05);
+        transition: all 0.3s ease;
+    }
+    .countdown-badge.paused {
+        background: rgba(100, 116, 139, 0.06);
+        color: var(--text-gray);
+        border-color: rgba(100, 116, 139, 0.15);
+        box-shadow: none;
+    }
+</style>
+
+<section class="nava-search-container">
+    {%- if search.performed -%}     
+        {%- paginate search.results by result_per_page -%}        
+            
+            {%- assign has_products = false -%}
+            {%- for product in search.results -%}
+                {%- if product.object_type == 'product' -%}
+                    {%- assign has_products = true -%}
+                {%- endif -%}
+            {%- endfor -%}
+
+            {%- if has_products == false -%}
+                <!-- No Results State -->
+                <div class="empty-search-card">
+                    <div style="width: 90px; height: 90px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: rgba(100,116,139,0.06); border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
+                        {%- include 'noproduct_svg' -%}
+                    </div>
+                    <h2>{{ settings.search_no_result | default: 'Không tìm thấy sản phẩm nào phù hợp' }}</h2>
+                    <p>Hệ thống không tìm thấy sản phẩm nào khớp với từ khóa <strong>"{{ search.terms | escape }}"</strong>. Vui lòng nhập từ khóa khác hoặc tham khảo các gợi ý dưới đây.</p>
+                    
+                    <form action="/search" method="GET" class="search-input-box-wrapper" style="margin-bottom: 20px;">
+                        <input type="hidden" name="type" value="product">
+                        <input type="text" name="q" placeholder="Nhập tên sản phẩm khác..." id="emptySearchInput" required autocomplete="off">
+                        <button type="submit"><i class="ph ph-magnifying-glass"></i> Tìm kiếm</button>
+                    </form>
+
+                    <div class="trending-keywords" style="justify-content: center; margin-bottom: 25px;">
+                        <span class="trending-label">Gợi ý:</span>
+                        <a onclick="fillAndSearch('Mini PC')" class="keyword-pill">Mini PC</a>
+                        <a onclick="fillAndSearch('eGPU')" class="keyword-pill">eGPU</a>
+                        <a onclick="fillAndSearch('ASUS NUC')" class="keyword-pill">ASUS NUC</a>
+                        <a onclick="fillAndSearch('Beelink')" class="keyword-pill">Beelink</a>
+                        <a onclick="fillAndSearch('AMD Ryzen')" class="keyword-pill">Ryzen AI</a>
+                    </div>
+
+                    <div class="countdown-badge" id="countdown-badge-wrapper">
+                        <i class="ph-bold ph-hourglass-high" id="countdown-icon"></i>
+                        <span>Quay lại trang chủ sau <span id="countdown-timer">10</span> giây...</span>
+                    </div>
+                </div>
+                
+                <script>
+                    var timeleft = 10;
+                    var isTimerPaused = false;
+                    var downloadTimer = setInterval(function(){
+                        if (!isTimerPaused) {
+                            if(timeleft <= 1){
+                                clearInterval(downloadTimer);
+                                window.location.href = '/';
+                            }
+                            const el = document.getElementById('countdown-timer');
+                            if (el) el.innerHTML = timeleft;
+                            timeleft -= 1;
+                        }
+                    }, 1000);
+
+                    // Pause timer on input focus or typing
+                    const inputEl = document.getElementById('emptySearchInput');
+                    if (inputEl) {
+                        const pauseHandler = function() {
+                            isTimerPaused = true;
+                            const badge = document.getElementById('countdown-badge-wrapper');
+                            if (badge) {
+                                badge.classList.add('paused');
+                                badge.innerHTML = '<i class="ph-bold ph-sparkle"></i><span>Đang nhập tìm kiếm...</span>';
+                            }
+                        };
+                        inputEl.addEventListener('focus', pauseHandler);
+                        inputEl.addEventListener('input', pauseHandler);
+                    }
+
+                    function fillAndSearch(val) {
+                        if (inputEl) {
+                            inputEl.value = val;
+                            inputEl.form.submit();
+                        }
+                    }
+                </script>
+            {%- else -%}
+                <!-- Search Results Performed & Found -->
+                {%- capture search_count -%}{{ search.results_count }}{%- endcapture -%}
+                {%- capture search_keyword -%}{{ search.terms }}{%- endcapture -%}
+                
+                <div class="search-hero">
+                    <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--search-primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%; pointer-events: none;"></div>
+                    <div class="search-hero-content">
+                        <h1>Tìm kiếm: "{{ search_keyword }}"</h1>
+                        <p>Tìm thấy <strong>{{ search_count }}</strong> sản phẩm phù hợp với từ khóa của bạn.</p>
+                    </div>
+                    <div class="hero-image-wrap" style="position: relative; z-index: 2; opacity: 0.95;">
+                        <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png" alt="Nava Store Logo" style="max-width: 250px; max-height: 70px; object-fit: contain;">
+                    </div>
+                </div>
+
+                <!-- Modern Search Control Center -->
+                <div class="search-control-center">
+                    <form action="/search" method="GET" class="search-input-box-wrapper">
+                        <input type="hidden" name="type" value="product">
+                        <input type="text" name="q" id="searchBarInput" value="{{ search_keyword | escape }}" placeholder="Tìm kiếm sản phẩm khác..." required autocomplete="off">
+                        <button type="submit"><i class="ph ph-magnifying-glass"></i> Tìm lại</button>
+                    </form>
+                    
+                    <div class="trending-keywords">
+                        <span class="trending-label">Tìm kiếm phổ biến:</span>
+                        <a onclick="fillMainAndSearch('Mini PC')" class="keyword-pill">Mini PC</a>
+                        <a onclick="fillMainAndSearch('eGPU')" class="keyword-pill">eGPU</a>
+                        <a onclick="fillMainAndSearch('ASUS NUC')" class="keyword-pill">ASUS NUC</a>
+                        <a onclick="fillMainAndSearch('Beelink')" class="keyword-pill">Beelink</a>
+                        <a onclick="fillMainAndSearch('AMD Ryzen')" class="keyword-pill">Ryzen AI</a>
+                    </div>
+                </div>
+
+                <div class="search-toolbar">
+                    <h2 class="toolbar-title">Tất cả sản phẩm tìm thấy</h2>
+                    
+                    <!-- Sorting Dropdown -->
+                    <div class="sort-container">
+                        <button class="sort-pill-btn" id="sortToggleBtn" onclick="document.getElementById('sortDropMenu').classList.toggle('show'); event.stopPropagation();">
+                            <i class="ph ph-faders" style="color: var(--search-primary); font-size: 1.2rem;"></i>
+                            <span id="sortLabel">Sắp xếp</span>
+                            <i class="ph ph-caret-down" style="color:#94a3b8; font-size:0.8rem;"></i>
+                        </button>
+                        <div class="sort-drop-menu" id="sortDropMenu">
+                            <a href="javascript:;" onclick="applySearchSort('default')"><i class="ph ph-list-dashes" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Mặc định</a>
+                            <a href="javascript:;" onclick="applySearchSort('price_min:asc')"><i class="ph ph-sort-ascending" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Giá tăng dần</a>
+                            <a href="javascript:;" onclick="applySearchSort('price_min:desc')"><i class="ph ph-sort-descending" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Giá giảm dần</a>
+                            <a href="javascript:;" onclick="applySearchSort('created_on:desc')"><i class="ph ph-sparkle" style="margin-right:8px; font-size: 1.1em; vertical-align: middle;"></i> Mới nhất</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="product-grid">
+                    {%- for product in search.results -%}
+                        {%- if product.object_type == 'product' -%}
+                            {%- include 'product-grid-item' -%}         
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+
+                {%- if paginate.pages > 1 -%}
+                    <div style="margin-top: 40px;">
+                        {%- include 'paginate-pages' -%}
+                    </div>
+                {%- endif -%}
+
+                <script>
+                    function fillMainAndSearch(val) {
+                        const input = document.getElementById('searchBarInput');
+                        if (input) {
+                            input.value = val;
+                            input.form.submit();
+                        }
+                    }
+
+                    function applySearchSort(val) {
+                        let url = new URL(window.location.href);
+                        url.searchParams.set('sortby', val);
+                        window.location.href = url.toString();
+                    }
+
+                    // Set active sort label on page load
+                    document.addEventListener('DOMContentLoaded', function() {
+                        let url = new URL(window.location.href);
+                        let sortby = url.searchParams.get('sortby');
+                        let labelText = 'Mặc định';
+                        if (sortby === 'price_min:asc') labelText = 'Giá tăng dần';
+                        if (sortby === 'price_min:desc') labelText = 'Giá giảm dần';
+                        if (sortby === 'created_on:desc') labelText = 'Mới nhất';
+                        
+                        const labelEl = document.getElementById('sortLabel');
+                        if (labelEl) labelEl.textContent = labelText;
+                    });
+
+                    // Close dropdown on click outside
+                    document.addEventListener('click', function(e) {
+                        if (!e.target.closest('#sortToggleBtn') && !e.target.closest('#sortDropMenu')) {
+                            const menu = document.getElementById('sortDropMenu');
+                            if (menu) menu.classList.remove('show');
+                        }
+                    });
+                </script>
+            {%- endif -%}
+        {%- endpaginate -%}
+    {%- else -%}
+        <!-- Search Not Performed State -->
+        <div class="empty-search-card">
+            <div style="width: 90px; height: 90px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: rgba(100,116,139,0.06); border-radius: 50%; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);">
+                {%- include 'noproduct_svg' -%}
+            </div>
+            <h2>{{ settings.search_result_noti | default: 'Tìm kiếm sản phẩm' }}</h2>
+            <p>Vui lòng nhập tên sản phẩm, eGPU hoặc linh kiện bạn đang quan tâm vào ô tìm kiếm dưới đây để hệ thống hiển thị kết quả.</p>
+            
+            <form action="/search" method="GET" class="search-input-box-wrapper" style="margin: 20px auto 30px;">
+                <input type="hidden" name="type" value="product">
+                <input type="text" name="q" placeholder="Nhập từ khóa tìm kiếm..." required autocomplete="off">
+                <button type="submit"><i class="ph ph-magnifying-glass"></i> Tìm kiếm</button>
+            </form>
+
+            <div class="trending-keywords">
+                <span class="trending-label">Gợi ý tìm kiếm:</span>
+                <a onclick="const i = this.parentNode.parentNode.querySelector('input'); if(i) { i.value = 'Mini PC'; i.form.submit(); }" class="keyword-pill">Mini PC</a>
+                <a onclick="const i = this.parentNode.parentNode.querySelector('input'); if(i) { i.value = 'eGPU'; i.form.submit(); }" class="keyword-pill">eGPU</a>
+                <a onclick="const i = this.parentNode.parentNode.querySelector('input'); if(i) { i.value = 'ASUS NUC'; i.form.submit(); }" class="keyword-pill">ASUS NUC</a>
+            </div>
+        </div>
+    {%- endif -%}
+</section>

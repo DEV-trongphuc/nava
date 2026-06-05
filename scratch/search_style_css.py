@@ -1,12 +1,13 @@
-import sys
-import os
-sys.stdout.reconfigure(encoding='utf-8')
+import re
 
-style_css_path = r"f:\BAO_SAPO\sapo_new\assets\style.css"
-if os.path.exists(style_css_path):
-    with open(style_css_path, "r", encoding="utf-8") as f:
-        for i, line in enumerate(f, 1):
-            if "product-card" in line or "card-image-wrap" in line:
-                print(f"{i}: {line.strip()[:120]}")
-else:
-    print("style.css does not exist")
+file_path = 'f:/BAO_SAPO/sapo_new/assets/style.css'
+with open(file_path, 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# Let's find all rules containing product-img or hover on product-card
+lines = content.split('\n')
+print(f"Total lines in style.css: {len(lines)}")
+
+for idx, line in enumerate(lines, 1):
+    if 'product-img' in line or 'card-image-wrap' in line:
+        print(f"Line {idx}: {line.strip()}")

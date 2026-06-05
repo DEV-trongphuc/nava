@@ -1,8 +1,8 @@
-<div class="product-card" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='{{ product.url }}'">
+<div class="product-card" data-price="{{ product.price }}" data-vendor="{{ product.vendor }}" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='{{ product.url }}'">
     <div class="card-glow"></div>
     <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
-        <button class="compare-btn" data-name="{{ product.name | escape }}" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--border-color); color: var(--text-gray); z-index: 10; cursor: pointer; transition: all 0.2s;" onclick="event.stopPropagation(); toggleCompare(this, '{{ product.name | escape }}', '{{ product.featured_image.src | img_url: 'medium' }}', '{{ product.price | money }}')" onmouseover="this.style.color='var(--primary)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)';">
-            <i class="ph ph-git-diff" style="font-size: 1.1rem;"></i>
+        <button class="compare-btn" data-name="{{ product.name | escape }}" data-url="{{ product.url }}" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--border-color); color: var(--text-gray); z-index: 10; cursor: pointer; transition: all 0.2s;" onclick="event.stopPropagation(); toggleCompare(this, '{{ product.name | escape }}', '{%- if product.featured_image -%}{{ product.featured_image | img_url: 'medium' }}{%- else -%}{{ \'no_image.jpg\' | asset_url }}{%- endif -%}', '{%- if product.price == 0 -%}Liên hệ{%- else -%}{{ product.price | money }}{%- endif -%}')" onmouseover="this.style.color='var(--primary)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)';">
+            <i class="ph ph-arrows-left-right" style="font-size: 1.1rem;"></i>
         </button>
         
         {%- if product.compare_at_price > product.price -%}
@@ -13,12 +13,10 @@
         </span>
         {%- endif -%}
 
-        {%- if product.images.size > 1 -%}
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.name | escape }}" class="product-img" style="width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s;" loading="lazy">
-        <img src="{{ product.images[1].src | img_url: 'large' }}" alt="{{ product.name | escape }}" class="product-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1;" loading="lazy">
+        {%- if product.featured_image -%}
+        <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.name | escape }}" class="product-img" style="width: 100%; height: 100%; object-fit: contain;" loading="lazy">
         {%- else -%}
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.name | escape }}" class="product-img" style="width: 100%; height: 100%; object-fit: contain; transition: opacity 0.4s;" loading="lazy">
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.name | escape }}" class="product-img-hover" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 0.4s; z-index: 1;" loading="lazy">
+        <img src="{{ 'no_image.jpg' | asset_url }}" alt="{{ product.name | escape }}" class="product-img" style="width: 100%; height: 100%; object-fit: contain;" loading="lazy">
         {%- endif -%}
     </div>
     

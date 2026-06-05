@@ -1441,9 +1441,25 @@ if (shopeeList) {
 }
 });
 
-// =========================================================================
-// NAVA COMPARE SYSTEM GLOBAL FUNCTIONS
-// =========================================================================
+// Relocate compare elements to root documentElement to bypass body stacking context issues
+function relocateCompareElements() {
+    const cb = document.getElementById('compare-bar');
+    const cm = document.getElementById('compare-modal');
+    if (cb && cb.parentNode !== document.documentElement) {
+        document.documentElement.appendChild(cb);
+    }
+    if (cm && cm.parentNode !== document.documentElement) {
+        document.documentElement.appendChild(cm);
+    }
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', relocateCompareElements);
+} else {
+    relocateCompareElements();
+}
+// Run periodically as fallback for dynamically rendered templates
+setInterval(relocateCompareElements, 1000);
+
 window.compareList = [];
 
 window.toggleCompare = function(btn, name, img, price) {
@@ -1476,7 +1492,9 @@ window.toggleCompare = function(btn, name, img, price) {
             btn.style.background = 'var(--bg-white, #ffffff)';
             btn.style.color = 'var(--text-dark, #0f172a)';
             const icon = btn.querySelector('i');
-            if (icon) icon.className = 'ph ph-arrows-left-right';
+            if (icon) {
+                icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
+            }
         }
     } else {
         if (window.compareList.length >= 2) {
@@ -1492,6 +1510,13 @@ window.toggleCompare = function(btn, name, img, price) {
         }
     }
     window.updateCompareBar();
+    
+    // Auto-open compare search modal if on product page (compare-btn-wrap) and only 1 product compared
+    if (btn && btn.classList.contains('compare-btn-wrap') && window.compareList.length === 1) {
+        setTimeout(() => {
+            window.showCompareSelectDropdown(null);
+        }, 100);
+    }
 };
 
 window.removeCompare = function(name) {
@@ -1502,7 +1527,9 @@ window.removeCompare = function(name) {
             btn.style.background = 'var(--bg-white, #ffffff)';
             btn.style.color = 'var(--text-dark, #0f172a)';
             const icon = btn.querySelector('i');
-            if (icon) icon.className = 'ph ph-arrows-left-right';
+            if (icon) {
+                icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
+            }
         }
     });
     window.updateCompareBar();
@@ -1514,7 +1541,9 @@ window.clearCompare = function() {
         btn.style.background = 'var(--bg-white, #ffffff)';
         btn.style.color = 'var(--text-dark, #0f172a)';
         const icon = btn.querySelector('i');
-        if (icon) icon.className = 'ph ph-arrows-left-right';
+        if (icon) {
+            icon.className = btn.classList.contains('compare-btn-wrap') ? 'ph-bold ph-arrows-left-right' : 'ph ph-arrows-left-right';
+        }
     });
     window.updateCompareBar();
 };
@@ -1563,21 +1592,31 @@ window.updateCompareBar = function() {
     
     let html = '';
     for (let i = 0; i < 2; i++) {
+        if (i > 0) {
+            html += `
+                <div style="display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; background: var(--primary, #003366); font-size: 0.75rem; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0 -5px; z-index: 2; align-self: center; flex-shrink: 0; user-select: none;">VS</div>
+            `;
+        }
         if (i < window.compareList.length) {
             const p = window.compareList[i];
+            let displayPrice = p.price;
+            if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+                displayPrice = 'Liên hệ';
+            }
+            const escapedNameForAttr = p.name.replace(/"/g, '&quot;');
             html += `
-                <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray, #f8fafc); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color, #e2e8f0); flex: 1; position: relative; font-family: inherit;">
+                <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray, #f8fafc); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color, #e2e8f0); flex: 1; max-width: 380px; min-width: 0; position: relative; font-family: inherit; box-sizing: border-box;">
                     <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white, #ffffff); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <div style="flex: 1; min-width: 0;">
-                        <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
-                        <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary, #003366);">${p.price}</div>
+                    <div style="flex: 1; min-width: 0; text-align: left;">
+                        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;" title="${escapedNameForAttr}">${p.name}</div>
+                        <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
                     </div>
                     <button onclick="removeCompare('${p.name.replace(/'/g, "\\'")}')" style="background: none; border: none; color: var(--text-gray, #64748b); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray, #64748b)'"><i class="ph-bold ph-x"></i></button>
                 </div>
             `;
         } else {
             html += `
-                <div class="compare-slot-item" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color, #e2e8f0); flex: 1; color: var(--text-gray, #64748b); font-size: 0.95rem; font-family: inherit;">
+                <div class="compare-slot-item" onclick="window.showCompareSelectDropdown(event)" style="cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color, #e2e8f0); flex: 1; max-width: 380px; min-width: 0; color: var(--text-gray, #64748b); font-size: 0.95rem; font-family: inherit; box-sizing: border-box;">
                     <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray, #f8fafc); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                     Thêm sản phẩm
                 </div>
@@ -1625,22 +1664,32 @@ window.filterCompareProducts = function() {
     const listContainer = document.getElementById('compare-select-list');
     if (!listContainer) return;
     
-    const products = window.currentCollectionProducts || [];
-    let available = products.filter(p => !window.compareList.some(item => item.name === p.name));
+    const products = window.currentCollectionProducts || window.navaProducts || [];
+    let available = products.filter(p => p && p.name && !window.compareList.some(item => item && item.name === p.name));
     
+    let displayList = available;
     if (query) {
-        available = available.filter(p => p.name.toLowerCase().includes(query));
+        displayList = available.filter(p => p.name.toLowerCase().includes(query));
+    } else {
+        displayList = available.slice(0, 6);
     }
     
     let html = '';
-    available.forEach(p => {
+    displayList.forEach(p => {
+        if (!p || !p.name) return;
         const escapedName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        let displayPrice = p.price;
+        if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+            displayPrice = 'Liên hệ';
+        }
+        const imgUrl = p.img || '';
+        const urlStr = p.url || '#';
         html += `
-            <div onclick="selectProductForCompare('${escapedName}', '${p.img}', '${p.price}', '${p.url}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
-                <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
+            <div onclick="selectProductForCompare('${escapedName}', '${imgUrl}', '${p.price || 0}', '${urlStr}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray, #f8fafc)';" onmouseout="this.style.borderColor='var(--border-color, #e2e8f0)'; this.style.background='transparent';">
+                <img src="${imgUrl}" style="width: 40px; height: 40px; object-fit: contain; background: white; border-radius: 4px; padding: 2px;">
                 <div style="flex: 1; min-width: 0; text-align: left;">
-                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${p.name}</div>
-                    <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${p.price}</div>
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark, #0f172a); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapedName}">${p.name}</div>
+                    <div style="font-size: 0.9rem; font-weight: 800; color: var(--primary, #003366);">${displayPrice}</div>
                 </div>
             </div>
         `;
@@ -1727,17 +1776,24 @@ window.executeCompare = function(isFullScreen = false) {
     ]).then(([data1, data2]) => {
         if (loading) loading.style.display = 'none';
         
+        const formatPrice = (priceStr) => {
+            if (!priceStr || priceStr === 0 || priceStr === '0' || priceStr === '0đ' || priceStr === '0₫' || (typeof priceStr === 'string' && (priceStr.trim() === '0đ' || priceStr.trim() === '0₫' || priceStr.trim() === '0' || priceStr.trim().startsWith('0')))) {
+                return 'Liên hệ';
+            }
+            return priceStr;
+        };
+        
         let tableHtml = `
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                 <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
                     <img src="${data1.infor.thumbnail || p1.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
                     <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data1.infor.name || p1.name}</h4>
-                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${data1.infor.price || p1.price}</div>
+                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${formatPrice(data1.infor.price || p1.price)}</div>
                 </div>
                 <div style="text-align: center; padding: 20px; border: 1px solid var(--border-color, #e2e8f0); border-radius: 12px; background: var(--bg-gray, #f8fafc);">
                     <img src="${data2.infor.thumbnail || p2.img}" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 15px; background: var(--bg-white, #ffffff); border-radius: 8px; padding: 10px; border: 1px solid var(--border-color, #e2e8f0);">
                     <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4;">${data2.infor.name || p2.name}</h4>
-                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${data2.infor.price || p2.price}</div>
+                    <div style="color: var(--primary, #003366); font-weight: 800; font-size: 1.2rem;">${formatPrice(data2.infor.price || p2.price)}</div>
                 </div>
             </div>
             
@@ -1813,6 +1869,7 @@ window.executeCompare = function(isFullScreen = false) {
         if (result) {
             result.innerHTML = tableHtml;
             result.style.display = 'block';
+            colorMarkScoresToBrandBlue();
         }
     }).catch(err => {
         console.error('Specs fetch error:', err);
@@ -1839,6 +1896,21 @@ window.closeCompareModal = function() {
         modal.style.setProperty('display', 'none', 'important');
     }, 300);
 };
+
+function colorMarkScoresToBrandBlue() {
+    document.querySelectorAll('span, td, p, div, b, strong, th').forEach(el => {
+        if (el.children.length === 0 && /(CPU|G3D)\s+Mark/i.test(el.textContent)) {
+            el.style.setProperty('color', 'var(--primary, #003366)', 'important');
+        }
+    });
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', colorMarkScoresToBrandBlue);
+} else {
+    colorMarkScoresToBrandBlue();
+}
+setInterval(colorMarkScoresToBrandBlue, 1000);
+
 
 
 

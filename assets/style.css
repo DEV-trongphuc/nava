@@ -1032,9 +1032,10 @@ ul {
 }
 
 .product-card:hover .product-img {
-    transform: scale(1.1) translateY(-15px) rotate(2deg);
-    filter: drop-shadow(0 30px 40px rgba(0, 51, 102, 0.2));
+    transform: scale(1.05);
+    filter: drop-shadow(0 20px 30px rgba(0, 51, 102, 0.15));
 }
+
 
 /* --- ABOUT SECTION (DARK HIGH-TECH WOW) --- */
 .about-section {
@@ -7724,14 +7725,6 @@ lite-youtube:hover>.lty-playbtn {
     color: var(--primary);
 }
 
-.card-image-wrap:hover .product-img {
-    opacity: 0;
-}
-
-.card-image-wrap:hover .product-img-hover {
-    opacity: 1;
-}
-
 .compare-btn:hover {
     background: var(--primary) !important;
     color: white !important;
@@ -7747,11 +7740,17 @@ lite-youtube:hover>.lty-playbtn {
     }
 
     .nava-sidebar {
-        width: 260px;
+        width: 320px;
         flex-shrink: 0;
         position: sticky;
         top: 120px;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
     }
+    .nava-sidebar::-webkit-scrollbar {
+        display: none !important;
+    }
+
 
     .nava-main {
         flex: 1;

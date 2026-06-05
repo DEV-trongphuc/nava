@@ -3,6 +3,7 @@
 
 
 <style>
+    .breadcrumbs { display: none !important; }
     .nava-col-layout { padding: 24px; background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
     
     .product-grid { 
@@ -29,15 +30,11 @@
             top: 120px !important;
             max-height: calc(100vh - 140px) !important;
             overflow-y: auto !important;
-            scrollbar-width: thin !important;
-            scrollbar-color: var(--primary, #2563eb) transparent !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
         }
         .nava-sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-        .nava-sidebar::-webkit-scrollbar-thumb {
-            background: var(--primary, #2563eb) !important;
-            border-radius: 4px;
+            display: none !important;
         }
     }
 
@@ -105,15 +102,11 @@
         <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
         <div style="position: relative; z-index: 2;">
             <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
-                🏆 Partner Giao Diện Mới
+                🏆 Các sản phẩm
             </span>
             <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-dark); letter-spacing: -0.5px;">{{ collection.name }}</h1>
             <p style="color: var(--text-gray); max-width: 650px; font-size: 1.05rem; margin: 0; line-height: 1.6;">
-                {%- if collection.description != '' and collection.description != null -%}
-                    {{ collection.description | strip_html | truncate: 160 }}
-                {%- else -%}
-                    Hệ thống cung cấp các dòng sản phẩm {{ collection.name }} chính hãng với chất lượng dịch vụ bảo hành cao cấp nhất.
-                {%- endif -%}
+                Hệ thống cung cấp các dòng sản phẩm {{ collection.name }} chính hãng với chất lượng dịch vụ bảo hành cao cấp.
             </p>
         </div>
         <div style="position: relative; z-index: 2; opacity: 0.9;" class="hero-image-wrap">
@@ -242,7 +235,7 @@
                         {
                             name: {{ prod.name | json }},
                             price: "{%- if prod.price == 0 -%}Liên hệ{%- else -%}{{ prod.price | money }}{%- endif -%}",
-                            img: "{{ prod.featured_image.src | img_url: 'large' }}",
+                            img: "{%- if prod.featured_image -%}{{ prod.featured_image.src | img_url: 'large' }}{%- else -%}{%- endif -%}",
                             url: "{{ prod.url }}",
                             desc: {{ prod.description | strip_html | truncate: 150 | json }}
                         }{%- unless forloop.last -%},{%- endunless -%}
@@ -322,15 +315,147 @@
           }
       });
       
+      // Client-side filtering logic based on URL query parameters
+      function applyClientSideFilters() {
+          const url = new URL(window.location.href);
+          const priceQuery = url.searchParams.get('price');
+          const vendorQuery = url.searchParams.get('vendor');
+          const qQuery = url.searchParams.get('q');
+          
+          let hasPriceFilter = false;
+          let minPrice = 0;
+          let maxPrice = Infinity;
+          
+          if (priceQuery && priceQuery.includes('_')) {
+              const parts = priceQuery.split('_');
+              const minVal = parseInt(parts[0]);
+              const maxVal = parseInt(parts[1]);
+              if (!isNaN(minVal) && !isNaN(maxVal)) {
+                  minPrice = minVal;
+                  maxPrice = maxVal;
+                  hasPriceFilter = true;
+              }
+          }
+          
+          document.querySelectorAll('.product-grid .product-card').forEach(card => {
+              // Extract Name
+              const nameEl = card.querySelector('.card-title');
+              const name = nameEl ? nameEl.textContent.trim().toLowerCase() : '';
+
+              // Extract Price with self-healing fallback
+              let price = 0;
+              const priceAttr = card.getAttribute('data-price');
+              if (priceAttr) {
+                  price = parseInt(priceAttr);
+              } else {
+                  // Fallback: parse price from text content inside the card
+                  const priceEl = card.querySelector('span[style*="font-weight: 800"]') || card.querySelector('span[style*="color: var(--text-dark)"]');
+                  if (priceEl) {
+                      const text = priceEl.textContent.trim();
+                      if (!text.toLowerCase().includes('liên hệ')) {
+                          price = parseInt(text.replace(/[^\d]/g, '')) || 0;
+                      }
+                  }
+              }
+              
+              // Extract Vendor with self-healing fallback
+              const vendorAttr = card.getAttribute('data-vendor');
+              let vendor = vendorAttr ? vendorAttr.toLowerCase() : '';
+              if (!vendorAttr) {
+                  // Fallback: search for known brand names in product title
+                  const brands = ['asus', 'beelink', 'minisforum', 'gmktec', 'aoostar', 'beikong', 'msi', 'asrock', 'zotac', 'bmax'];
+                  for (const b of brands) {
+                      if (name.includes(b)) {
+                          vendor = b;
+                          break;
+                      }
+                  }
+              }
+              
+              let show = true;
+              
+              // Hide products with no price / "Liên hệ" (price === 0) always
+              if (price === 0) {
+                  show = false;
+              }
+              
+              // 1. Price Filter
+              if (show && hasPriceFilter) {
+                  if (price < minPrice || price > maxPrice) {
+                      show = false;
+                  }
+              }
+              
+              // 2. Vendor (Brand) Filter
+              if (show && vendorQuery) {
+                  if (vendor !== vendorQuery.toLowerCase()) {
+                      show = false;
+                  }
+              }
+              
+              // 3. Text Search Query Filter
+              if (show && qQuery) {
+                  const queryWords = qQuery.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+                  const matchesQuery = queryWords.every(word => name.includes(word));
+                  if (!matchesQuery) {
+                      show = false;
+                  }
+              }
+              
+              card.style.display = show ? 'flex' : 'none';
+          });
+      }
+
       // Handle quick filter tag click
       function applyFilterTag(label, filterVal) {
           if (label === 'Tất cả') {
               window.location.href = window.location.pathname;
               return;
           }
-          // Highlight active filter tag
+          
+          let url = new URL(window.location.href);
+          if (filterVal.includes('-')) {
+              const [min, max] = filterVal.split('-');
+              url.searchParams.set('price', min + '_' + max);
+              url.searchParams.delete('q'); // Clear search query when filtering by price
+          } else {
+              url.searchParams.set('q', filterVal);
+              url.searchParams.delete('price'); // Clear price range when filtering by brand/tag
+          }
+          window.location.href = url.toString();
+      }
+
+      // Run on page load
+      document.addEventListener('DOMContentLoaded', function() {
+          const url = new URL(window.location.href);
+          
+          // Set sort dropdown label on load
+          const sortby = url.searchParams.get('sortby');
+          let labelText = 'Mặc định';
+          if (sortby === 'price_min:asc') labelText = 'Giá tăng dần';
+          if (sortby === 'price_min:desc') labelText = 'Giá giảm dần';
+          if (sortby === 'created_on:desc') labelText = 'Mới nhất';
+          const sortLabelEl = document.getElementById('sortLabel');
+          if (sortLabelEl) sortLabelEl.textContent = labelText;
+          
+          // Highlight active quick filter pill on load
+          const activePrice = url.searchParams.get('price');
+          const activeQ = url.searchParams.get('q');
           document.querySelectorAll('.quick-filters button').forEach(btn => {
-              if (btn.innerText === label) {
+              const btnText = btn.innerText;
+              let isMatch = false;
+              if (btnText === 'Tất cả' && !activePrice && !activeQ) {
+                  isMatch = true;
+              } else if (btnText === 'Dưới 10 triệu' && activePrice === '0_10000000') {
+                  isMatch = true;
+              } else if (activeQ) {
+                  if (btnText === 'Core Ultra 9' && activeQ === 'Ultra 9') isMatch = true;
+                  if (btnText === 'Ryzen AI 9' && activeQ === 'Ryzen AI') isMatch = true;
+                  if (btnText === 'RAM 32GB' && activeQ === '32GB') isMatch = true;
+                  if (btnText === 'Máy bộ eGPU' && activeQ === 'eGPU') isMatch = true;
+              }
+              
+              if (isMatch) {
                   btn.style.background = 'var(--primary)';
                   btn.style.color = 'white';
                   btn.style.borderColor = 'var(--primary)';
@@ -341,29 +466,9 @@
               }
           });
           
-          if (filterVal.includes('-')) {
-              // Trigger price filter
-              const [min, max] = filterVal.split('-');
-              const minInput = document.getElementById('filter-khoanggia-tu');
-              const maxInput = document.getElementById('filter-khoanggia-den');
-              const applyBtn = document.querySelector('.js-filter-pricerange');
-              if (minInput && maxInput && applyBtn) {
-                  minInput.value = min;
-                  maxInput.value = max;
-                  applyBtn.click();
-              } else {
-                  // Fallback
-                  let url = new URL(window.location.href);
-                  url.searchParams.set('price', filterVal);
-                  window.location.href = url.toString();
-              }
-          } else {
-              // Trigger text search/filter
-              let url = new URL(window.location.href);
-              url.searchParams.set('q', filterVal);
-              window.location.href = url.toString();
-          }
-      }
+          // Apply client side filters on load
+          applyClientSideFilters();
+      });
       
       // AI Search Functionality
       (function() {
@@ -388,8 +493,8 @@
               list.style.display = 'none';
               header.textContent = '🤖 AI đang phân tích: "' + q + '"...';
               
-              // Call the local PHP proxy calling Google Gemini API
-              fetch('/gemini_proxy.php', {
+              // Call the PHP proxy hosted on ideas.edu.vn
+              fetch('https://automation.ideas.edu.vn/meta_report/gemini_proxy.php', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json'
@@ -420,25 +525,89 @@
                   // Render Recommended Products
                   var recommendedIndexes = data.recommended_indexes || [];
                   var html = '';
+                  var renderedCount = 0;
                   
-                  if (recommendedIndexes.length === 0) {
-                      html = '<div style="padding: 15px 20px; text-align: center; color: #64748b;">Không tìm thấy sản phẩm nào phù hợp trực tiếp.</div>';
-                  } else {
-                      recommendedIndexes.forEach(index => {
-                          var prod = navaProducts[index];
-                          if (prod) {
+                  recommendedIndexes.forEach(index => {
+                      var prod = navaProducts[index];
+                      if (prod && prod.name) {
+                          renderedCount++;
+                          var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                          var prodDesc = prod.desc || '';
+                          var prodPrice = prod.price || 'Liên hệ';
+                          html += `
+                              <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
+                                  <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                  <div class="ai-result-info">
+                                      <h5>${prod.name}</h5>
+                                      <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prodDesc}</div>
+                                      <div class="ai-result-price">${prodPrice}</div>
+                                  </div>
+                              </a>
+                          `;
+                      }
+                  });
+
+                  if (renderedCount === 0) {
+                      // Fallback: If no products rendered from AI indexes, do a keyword-based search on the query
+                      var queryWords = q.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+                      var matches = [];
+                      navaProducts.forEach((prod, index) => {
+                          if (prod && prod.name) {
+                              var score = 0;
+                              var nameLower = prod.name.toLowerCase();
+                              var descLower = (prod.desc || '').toLowerCase();
+                              if (queryWords.length === 0) {
+                                  if (nameLower.includes(q.toLowerCase())) score += 10;
+                              } else {
+                                  queryWords.forEach(word => {
+                                      if (nameLower.indexOf(word) !== -1) score += 10;
+                                      if (descLower.indexOf(word) !== -1) score += 2;
+                                  });
+                              }
+                              if (score > 0) {
+                                  matches.push({ prod: prod, score: score });
+                              }
+                          }
+                      });
+                      
+                      if (matches.length > 0) {
+                          matches.sort((a, b) => b.score - a.score);
+                          matches.slice(0, 3).forEach(m => {
+                              var prod = m.prod;
+                              var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                              var prodDesc = prod.desc || '';
+                              var prodPrice = prod.price || 'Liên hệ';
                               html += `
-                                  <a href="${prod.url}" class="ai-result-item">
-                                      <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
+                                  <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
+                                      <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
                                       <div class="ai-result-info">
                                           <h5>${prod.name}</h5>
-                                          <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prod.desc}</div>
-                                          <div class="ai-result-price">${prod.price}</div>
+                                          <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prodDesc}</div>
+                                          <div class="ai-result-price">${prodPrice}</div>
                                       </div>
                                   </a>
                               `;
-                          }
-                      });
+                          });
+                      } else {
+                          // absolute fallback: show first 3 products
+                          navaProducts.slice(0, 3).forEach(prod => {
+                              if (prod && prod.name) {
+                                  var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                                  var prodDesc = prod.desc || '';
+                                  var prodPrice = prod.price || 'Liên hệ';
+                                  html += `
+                                      <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
+                                          <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                          <div class="ai-result-info">
+                                              <h5>${prod.name}</h5>
+                                              <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prodDesc}</div>
+                                              <div class="ai-result-price">${prodPrice}</div>
+                                          </div>
+                                      </a>
+                                  `;
+                              }
+                          });
+                      }
                   }
                   filteredList.innerHTML = html;
               })
@@ -452,7 +621,7 @@
           function doLocalFallbackSearch(q) {
               loading.style.display = 'none';
               list.style.display = 'block';
-              header.textContent = '🔍 TÌM KIẾM ĐỊA PHƯƠNG (FALLBACK)';
+              header.textContent = '🔍 Tìm kiếm trong kho';
               
               var queryWords = q.toLowerCase().split(/\s+/).filter(w => w.length > 1);
               var matches = [];
@@ -511,9 +680,8 @@
               }
           };
           
-          aiSearchInput.addEventListener('input', function() { clearTimeout(timer); timer = setTimeout(doAISearch, 700); });
-          aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { clearTimeout(timer); doAISearch(); } });
-          btn.addEventListener('click', function() { clearTimeout(timer); doAISearch(); });
+          aiSearchInput.addEventListener('keypress', function(e) { if (e.key==='Enter') { doAISearch(); } });
+          btn.addEventListener('click', function() { doAISearch(); });
           document.addEventListener('click', function(e) { if (!document.getElementById('ai-search-widget').contains(e.target)) drop.classList.remove('active'); });
       })();
 

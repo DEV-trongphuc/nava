@@ -57,40 +57,54 @@
                 let activeRamName = 'NO RAM';
                 let activeSsdName = 'NO SSD';
                 
-                function selectVariantDropdown(element, type, price, name) {
-                    const wrapper = element.closest('.nava-dropdown-wrapper');
-                    const displayEl = wrapper.querySelector('.nava-dropdown-selected');
-                    if (displayEl) {
-                        displayEl.innerText = name;
-                    }
-
-                    const siblings = element.parentNode.querySelectorAll('.nava-dropdown-item');
-                    siblings.forEach(el => el.classList.remove('active'));
-                    element.classList.add('active');
-
-                    if (type === 'ram') {
-                        activeRamPrice = price;
-                        activeRamName = name;
-                        const displayEl = document.getElementById('ram-price-display');
+               function selectVariantDropdown(element, type, price, name) {
+                    // Sync all dropdowns of this type (main page and bottom sheet)
+                    const wrappers = document.querySelectorAll(`.nava-dropdown-wrapper[data-dropdown-type="${type}"]`);
+                    wrappers.forEach(wrapper => {
+                        const displayEl = wrapper.querySelector('.nava-dropdown-selected');
                         if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                            displayEl.innerText = name;
                         }
-                    }
-                    if (type === 'ssd') {
-                        activeSsdPrice = price;
-                        activeSsdName = name;
-                        const displayEl = document.getElementById('ssd-price-display');
-                        if (displayEl) {
-                            displayEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + '₫' : '+0₫';
+                        const displayPriceEl = wrapper.querySelector('.nava-dropdown-selected-price');
+                        if (displayPriceEl) {
+                            displayPriceEl.innerText = price > 0 ? '+' + price.toLocaleString('vi-VN') + 'đ' : '+0đ';
                         }
+                        
+                        const items = wrapper.querySelectorAll('.nava-dropdown-item');
+                        items.forEach(item => {
+                            const itemSpan = item.querySelector('span');
+                            const itemName = itemSpan ? itemSpan.innerText : item.innerText;
+                            if (itemName.trim() === name.trim()) {
+                                item.classList.add('active');
+                            } else {
+                                item.classList.remove('active');
+                            }
+                        });
+                        
+                        // Close dropdown
+                        wrapper.classList.remove('active');
+                    });
+                    
+                    if (type === 'ram') { 
+                        activeRamPrice = price; 
+                        activeRamName = name; 
                     }
-
+                    if (type === 'ssd') { 
+                        activeSsdPrice = price; 
+                        activeSsdName = name; 
+                    }
+                    warnedBarebone = false;
+                    warnedBareboneCart = false;
+                    
                     const total = basePrice + activeRamPrice + activeSsdPrice;
-
-                    document.getElementById('main-price').innerHTML = total.toLocaleString('vi-VN') + '₫';
-                    const stickyPrice = document.getElementById('sticky-price');
-                    if(stickyPrice) stickyPrice.innerHTML = total.toLocaleString('vi-VN') + '₫';
-
+                    
+                    if (total !== currentPrice) {
+                        animatePrice('main-price', currentPrice, total, 400);
+                        animatePrice('sticky-price', currentPrice, total, 400);
+                        animatePrice('bs-price', currentPrice, total, 400);
+                        currentPrice = total;
+                    }
+                    
                     const stickyTitle = document.querySelector('.sticky-title');
                     if(stickyTitle) {
                         let opts = [];
@@ -100,8 +114,115 @@
                         stickyTitle.innerHTML = 'ASUS NUC AI 350' + optString;
                     }
 
-                    // Close the dropdown after selection (for touch devices)
-                    wrapper.classList.remove('active');
+                    if (typeof checkRAMSSDPrompt === 'function') {
+                        checkRAMSSDPrompt();
+                    }
+                }
+
+                function checkRAMSSDPrompt() {
+                    let hasRam = true;
+                    let hasSsd = true;
+                    
+                    let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+                    let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+                    
+                    if (isDefaultRam || isDefaultSsd) {
+                        showNudgeBanner();
+                    } else {
+                        hideNudgeBanner();
+                    }
+                }
+                
+                function showNudgeBanner() {
+                    let banner = document.getElementById('ram-ssd-nudge-banner');
+                    let isAlreadyVisible = false;
+                    if (banner && banner.style.opacity === '1') {
+                        isAlreadyVisible = true;
+                    }
+                    
+                    if (!banner) {
+                        if (!document.getElementById('nudge-banner-style')) {
+                            const style = document.createElement('style');
+                            style.id = 'nudge-banner-style';
+                            style.innerHTML = `
+                                @keyframes nudge-shake {
+                                    0%, 100% { transform: translateX(-50%) translateY(0); }
+                                    15%, 45%, 75% { transform: translateX(-52%) translateY(-1px); }
+                                    30%, 60%, 90% { transform: translateX(-48%) translateY(1px); }
+                                }
+                                .nudge-shake-active {
+                                    animation: nudge-shake 0.7s ease-in-out 3;
+                                }
+                            `;
+                            document.head.appendChild(style);
+                        }
+                        
+                        banner = document.createElement('div');
+                        banner.id = 'ram-ssd-nudge-banner';
+                        banner.style.cssText = `
+                            position: fixed; bottom: 85px; left: 50%; 
+                            transform: translateX(-50%) translateY(120px); 
+                            width: calc(100% - 32px); max-width: 480px; 
+                            background: rgba(255, 255, 255, 0.95); 
+                            backdrop-filter: blur(12px); 
+                            border: 1.5px solid rgba(239, 68, 68, 0.35); 
+                            border-radius: 16px; padding: 14px 20px; 
+                            box-shadow: 0 10px 35px rgba(239, 68, 68, 0.15), 0 5px 15px rgba(0,0,0,0.08); 
+                            z-index: 99999; display: flex; align-items: center; gap: 12px; 
+                            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
+                            opacity: 0; box-sizing: border-box; font-family: inherit;
+                        `;
+                        banner.innerHTML = `
+                            <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="ph-fill ph-warning-octagon" style="font-size: 1.4rem;"></i></div>
+                            <div style="flex: 1; text-align: left;">
+                                <div style="font-size: 0.88rem; font-weight: 800; color: #ef4444; margin-bottom: 2px;">Chưa chọn cấu hình RAM & SSD</div>
+                                <div style="font-size: 0.78rem; font-weight: 600; color: #64748b;">Vui lòng chọn cấu hình ở trên để nhận báo giá & mua hàng!</div>
+                            </div>
+                            <button id="nudge-banner-btn" style="background: var(--primary, #003366); border: none; border-radius: 8px; color: white; padding: 8px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; white-space: nowrap; transition: 0.2s;">Chọn ngay</button>
+                        `;
+                        document.body.appendChild(banner);
+                        
+                        banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+                            if (window.innerWidth <= 768) {
+                                hideNudgeBanner();
+                                openBottomSheet();
+                            } else {
+                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+                                if (selectorBlock) {
+                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+                                    displays.forEach(d => {
+                                        d.style.transition = 'all 0.3s';
+                                        d.style.borderColor = '#ef4444';
+                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+                                        setTimeout(() => {
+                                            d.style.borderColor = '';
+                                            d.style.boxShadow = '';
+                                        }, 1500);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        banner.style.transform = 'translateX(-50%) translateY(0)';
+                        banner.style.opacity = '1';
+                        if (!isAlreadyVisible) {
+                            banner.classList.add('nudge-shake-active');
+                            setTimeout(() => {
+                                banner.classList.remove('nudge-shake-active');
+                            }, 2200);
+                        }
+                    }, 100);
+                }
+                
+                function hideNudgeBanner() {
+                    const banner = document.getElementById('ram-ssd-nudge-banner');
+                    if (banner) {
+                        banner.style.transform = 'translateX(-50%) translateY(120px)';
+                        banner.style.opacity = '0';
+                    }
                 }
 
                 // Show sticky bar on scroll
@@ -146,6 +267,9 @@
                         }
                     }
                     toggleStickyBar(); // Check immediately on load
+ 
+                    // Call checkRAMSSDPrompt on load
+                    setTimeout(checkRAMSSDPrompt, 100);
 
                     // Toggle dropdowns on click for mobile/touch
                     document.querySelectorAll('.nava-dropdown-display').forEach(display => {

@@ -177,21 +177,31 @@ sticky_html = """
         
         let html = '';
         for (let i = 0; i < 2; i++) {
+            if (i > 0) {
+                html += `
+                    <div style="display: flex; align-items: center; justify-content: center; font-weight: 800; color: white; background: var(--primary); font-size: 0.75rem; width: 26px; height: 26px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 0 -5px; z-index: 2; align-self: center; flex-shrink: 0; user-select: none;">VS</div>
+                `;
+            }
             if (i < compareList.length) {
                 const p = compareList[i];
+                let displayPrice = p.price;
+                if (!displayPrice || displayPrice === 0 || displayPrice === '0' || displayPrice === '0đ' || displayPrice === '0₫' || (typeof displayPrice === 'string' && (displayPrice.trim() === '0đ' || displayPrice.trim() === '0₫' || displayPrice.trim() === '0' || displayPrice.trim().startsWith('0')))) {
+                    displayPrice = 'Liên hệ';
+                }
+                const escapedNameForAttr = p.name.replace(/"/g, '&quot;');
                 html += `
-                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; position: relative; font-family: inherit;">
+                    <div class="compare-slot-item" style="display: flex; align-items: center; gap: 15px; background: var(--bg-gray); padding: 10px 15px; border-radius: 12px; border: 1px solid var(--border-color); flex: 1; max-width: 380px; min-width: 0; position: relative; font-family: inherit; box-sizing: border-box;">
                         <img src="${p.img}" style="width: 55px; height: 55px; object-fit: contain; background: var(--bg-white); border-radius: 6px; padding: 3px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                         <div style="flex: 1; min-width: 0; text-align: left;">
-                            <div style="font-size: 0.95rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;">${p.name}</div>
-                            <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${p.price}</div>
+                            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;" title="${escapedNameForAttr}">${p.name}</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: var(--primary);">${displayPrice}</div>
                         </div>
                         <button onclick="removeCompare('${p.name}')" style="background: none; border: none; color: var(--text-gray); cursor: pointer; padding: 5px; display: flex; font-size: 1.2rem; transition: color 0.2s;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='var(--text-gray)'"><i class="ph-bold ph-x"></i></button>
                     </div>
                 `;
             } else {
                 html += `
-                    <div class="compare-slot-item" onclick="showCompareSelectDropdown(event, this)" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; color: var(--text-gray); font-size: 0.95rem; font-family: inherit; cursor: pointer;">
+                    <div class="compare-slot-item" onclick="showCompareSelectDropdown(event, this)" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: transparent; padding: 10px 15px; border-radius: 12px; border: 1px dashed var(--border-color); flex: 1; max-width: 380px; min-width: 0; color: var(--text-gray); font-size: 0.95rem; font-family: inherit; cursor: pointer; box-sizing: border-box;">
                         <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--bg-gray); display: flex; align-items: center; justify-content: center;"><i class="ph ph-plus" style="font-size: 1.2rem;"></i></div>
                         Thêm sản phẩm
                     </div>
@@ -247,12 +257,15 @@ sticky_html = """
         // Filter out products already in compare list
         let available = allProductsForCompare.filter(p => !compareList.some(item => item.name === p.name));
         
+        let displayList = available;
         if (query) {
-            available = available.filter(p => p.name.toLowerCase().includes(query));
+            displayList = available.filter(p => p.name.toLowerCase().includes(query));
+        } else {
+            displayList = available.slice(0, 6);
         }
         
         let html = '';
-        available.forEach(p => {
+        displayList.forEach(p => {
             html += `
                 <div onclick="selectProductForCompare('${p.name}', '${p.img}', '${p.price}')" style="display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.background='var(--bg-gray)';" onmouseout="this.style.borderColor='var(--border-color)'; this.style.background='transparent';">
                     <img src="${p.img}" style="width: 40px; height: 40px; object-fit: contain; background: white;">

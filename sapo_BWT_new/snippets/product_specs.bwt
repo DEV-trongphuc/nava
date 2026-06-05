@@ -1,11 +1,12 @@
 {%-assign h6keyword = keyword | default: 'Thông số kỹ thuật' | handleize-%}
-{%-assign description_parts = product_specs | split: "<h6>"-%}
+{%-assign clean_specs = product_specs | replace: "<h3><strong>Thông số kỹ thuật chi tiết (Technical Specifications)</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết (Technical Specifications)</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật chi tiết</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4><strong>Thông số kỹ thuật</strong></h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4>Thông số kỹ thuật</h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5><strong>Thông số kỹ thuật</strong></h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5>Thông số kỹ thuật</h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h6><strong>Thông số kỹ thuật</strong></h6>", "<h6>Thông số kỹ thuật</h6>"-%}
+{%-assign description_parts = clean_specs | split: "<h6>"-%}
 {%-for part in description_parts-%}
 {%-assign tab_title = part | split: "</h6>" | first | downcase | handleize-%}
 {%-assign fp = part | append: " " | split: "</h6>" | last-%}
 {%-assign p = part | append: " " | split: "</h6>" | last | strip_html | replace: "&nbsp;", "" | replace: " ", "" | strip_newlines-%}
 {%-if p != "" or fp contains "<img" or fp contains "<iframe"-%}
-{%-if forloop.index0 != 0 and tab_title == h6keyword-%}
+{%-if forloop.index0 != 0 and tab_title contains h6keyword-%}
 <div class="rounded-10 modal-open spec-tables">
 	<div class="border rounded-10 small modal-open">
 		<h3 class="special-content_title font-weight-bold d-block w-100 mb-0 border-bottom">{{settings.compare_keyword}}</h3>
