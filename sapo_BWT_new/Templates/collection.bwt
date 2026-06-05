@@ -26,7 +26,12 @@
     @media (max-width: 1199px) {
         .product-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 15px !important; }
     }
+    #nava-col-container {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
     @media (max-width: 991px) {
+        #nava-col-container { margin-top: -58px !important; }
         .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
     }
     @media (max-width: 575px) {
@@ -107,9 +112,27 @@
         background: var(--primary) !important;
         color: #fff !important;
     }
+    
+    /* Card Buy Button mobile customization */
+    @media (max-width: 575px) {
+        .card-buy-btn {
+            padding: 0 !important;
+            width: 34px !important;
+            height: 34px !important;
+            border-radius: 50% !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 0 !important;
+            flex-shrink: 0 !important;
+        }
+        .card-buy-btn i {
+            font-size: 1.1rem !important;
+            margin: 0 !important;
+        }
+    }
 </style>
 
-<section class="collection-layout mt-3 mb-3" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin: 0 auto !important; padding: 10px 30px 80px;">
+<section class="collection-layout mt-3 mb-3" id="nava-col-container" style="max-width: 1600px !important; width: 100% !important; box-sizing: border-box !important; margin-left: auto !important; margin-right: auto !important; padding: 10px 30px 80px;">
     
     <!-- Techy Hero Banner -->
     <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
@@ -515,13 +538,15 @@
               const vendorLower = vendorQuery.toLowerCase().trim();
               const brandLogos = {
                   'asus': "{{ 'asus.png' | asset_url }}",
-                  'minisforum': "{{ 'minisforum.png' | asset_url }}",
-                  'beelink': "{{ 'beelink.png' | asset_url }}",
-                  'gmktec': "{{ 'gmktec.png' | asset_url }}",
+                  'minisforum': "https://bizweb.dktcdn.net/100/543/817/files/images.png?v=1770966569957",
+                  'beelink': "https://bizweb.dktcdn.net/100/543/817/files/beelink.png?v=1770949197367",
+                  'gmktec': "https://bizweb.dktcdn.net/100/543/817/files/logo-1-1536x297.png?v=1770948977823",
                   'aoostar': "{{ 'aoostar.png' | asset_url }}",
                   'beikong': "{{ 'beikong.png' | asset_url }}",
                   'msi': "{{ 'msi.png' | asset_url }}",
-                  'bmax': "{{ 'bmax.png' | asset_url }}"
+                  'bmax': "https://bizweb.dktcdn.net/100/543/817/files/bmax.png",
+                  'zotac': "https://bizweb.dktcdn.net/100/543/817/files/zotac.png?v=1770718398287",
+                  'asrock': "{{ 'asrock.png' | asset_url }}"
               };
               
               const logoUrl = brandLogos[vendorLower];

@@ -174,14 +174,14 @@
             
             <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
                 <img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
-                <img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" class="fab-cycle-img" width="50" height="50">
+                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.png" alt="Lazada" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" class="fab-cycle-img" width="50" height="50">
             </button>
             <div class="fab-menu" id="fabMenu">
                 <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width="44" height="44"></a>
-                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" width="44" height="44"></a>
+                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.png" alt="Lazada" width="44" height="44"></a>
                 <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" width="44" height="44"></a>
                 <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" width="44" height="44"></a>
                 <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" width="44" height="44"></a>
@@ -248,7 +248,7 @@
             }
             @media (max-width: 768px) {
                 .floating-social-wrapper {
-                    bottom: 20px !important;
+                    bottom: 85px !important;
                 }
                 /* Mobile Comparison Modal UI Optimizations */
                 #compare-modal-content {

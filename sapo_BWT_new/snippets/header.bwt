@@ -188,6 +188,26 @@
         font-weight: 800;
         color: var(--primary, #2563eb);
     }
+    @media (max-width: 991px) {
+        .top-actions .action-item .cart-icon-wrapper {
+            display: inline-block !important;
+        }
+        .header .search-box {
+            display: none !important;
+            grid-column: 1 / -1 !important;
+            grid-row: 2 !important;
+            width: 100% !important;
+            margin: 10px 0 0 0 !important;
+        }
+        .header .search-box.active {
+            display: flex !important;
+        }
+        .top-bar-container {
+            display: grid !important;
+            grid-template-columns: auto 1fr auto !important;
+            align-items: center !important;
+        }
+    }
 </style>
 
 <script>

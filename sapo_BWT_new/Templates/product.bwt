@@ -32,6 +32,11 @@
             margin-top: 20px !important;
             margin-bottom: 0 !important;
         }
+        @media (max-width: 991px) {
+            .breadcrumbs {
+                margin-top: -58px !important;
+            }
+        }
         .contentWarp .container.nava-product-container {
             max-width: 1400px !important;
             width: 100% !important;
@@ -1303,6 +1308,25 @@
             pointer-events: auto !important;
             transform: translateY(0) scale(1) !important;
         }
+
+        /* Contact/Out of Stock button layout override rules */
+        .global-product-contact-only #btn-add-to-cart,
+        .global-product-contact-only #btn-installment,
+        .global-product-contact-only .btn-add-cart-bs,
+        .global-product-contact-only button.tg-addcart,
+        .global-product-contact-only button.js-fbt-installment {
+            display: none !important;
+        }
+        
+        .global-product-contact-only #btn-buy-now,
+        .global-product-contact-only .bs-buy-btn,
+        .global-product-contact-only button.tg-buy-now {
+            flex: 1 !important;
+            width: 100% !important;
+            display: flex !important;
+            background: #334155 !important;
+            color: white !important;
+        }
     </style>
 
     <div class="container mt-3 mb-3 nava-product-container">
@@ -2052,6 +2076,7 @@
                 const labelText = customRow.querySelector('.nava-custom-fbt-label')?.textContent.trim() || '';
                 updateNavaCustomSelectDisplay(wrapper, labelText);
             }
+            syncSwatches();
         }
     });
 
@@ -2335,20 +2360,24 @@ function syncSwatches() {
 
             document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
                 const val = select.value;
+                const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+                const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
                 const parent = select.closest('[data-fbt-item]');
                 const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
                 const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
                 const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
                 
+                const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+
                 if (isRam) {
-                    if (val === 'no-select' || val === '') {
+                    if (isDefaultVal) {
                         isDefaultRam = true;
                     } else {
                         isDefaultRam = false;
                     }
                 }
                 if (isSsd) {
-                    if (val === 'no-select' || val === '') {
+                    if (isDefaultVal) {
                         isDefaultSsd = true;
                     } else {
                         isDefaultSsd = false;
@@ -2454,30 +2483,29 @@ function syncSwatches() {
         }
         
         // Priority price retrieval for Frequently Bought Together
+        let fbtPriceChecked = false;
         if (isFbtActive) {
             const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
             if (fbtTotalEl) {
-                const parsedFbtPrice = parsePrice(fbtTotalEl.textContent);
-                if (parsedFbtPrice > 0) {
-                    priceVal = parsedFbtPrice;
-                }
+                priceVal = parsePrice(fbtTotalEl.textContent);
+                fbtPriceChecked = true;
             }
         }
 
         // Fallback: If priceVal is still 0, check if we can retrieve it from #selected-variant-price
-        if (priceVal === 0) {
+        if (priceVal === 0 && !fbtPriceChecked) {
             const mainPriceText = document.getElementById('selected-variant-price')?.textContent;
             if (mainPriceText) {
                 priceVal = parsePrice(mainPriceText);
             }
         }
-        if (priceVal === 0) {
+        if (priceVal === 0 && !fbtPriceChecked) {
             const stickyPriceEl = document.getElementById('sticky-price')?.textContent;
             if (stickyPriceEl) {
                 priceVal = parsePrice(stickyPriceEl);
             }
         }
-        if (priceVal === 0) {
+        if (priceVal === 0 && !fbtPriceChecked) {
             const bsPriceEl = document.getElementById('bs-price')?.textContent;
             if (bsPriceEl) {
                 priceVal = parsePrice(bsPriceEl);
@@ -2493,6 +2521,11 @@ function syncSwatches() {
     const btnBuyNow = document.getElementById('btn-buy-now');
     const bsBuyBtn = document.querySelector('.bs-buy-btn');
     const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
+    
+    // Frequently Bought Together buttons
+    const fbtBuyNow = document.querySelector('frequently-buy-together button.tg-buy-now') || document.querySelector('.tg-buy-now');
+    const fbtInstallment = document.querySelector('frequently-buy-together button.js-fbt-installment') || document.querySelector('.js-fbt-installment');
+    const fbtAddCart = document.querySelector('frequently-buy-together button.tg-addcart') || document.querySelector('.tg-addcart');
 
     if (isSoldOut) {
         if (btnInStock) btnInStock.style.display = 'flex';
@@ -2533,6 +2566,25 @@ function syncSwatches() {
         if (bsAddCartBtn) {
             bsAddCartBtn.style.display = 'none';
         }
+        
+        // FBT elements when sold out
+        if (fbtAddCart) {
+            fbtAddCart.style.display = 'none';
+        }
+        if (fbtInstallment) {
+            fbtInstallment.style.display = 'none';
+        }
+        if (fbtBuyNow) {
+            fbtBuyNow.disabled = false;
+            fbtBuyNow.innerText = 'LIÊN HỆ';
+            fbtBuyNow.style.background = '#334155';
+            fbtBuyNow.style.color = 'white';
+            fbtBuyNow.style.opacity = '1';
+            fbtBuyNow.style.pointerEvents = 'auto';
+            fbtBuyNow.style.setProperty('flex', '1', 'important');
+            fbtBuyNow.style.setProperty('width', '100%', 'important');
+            fbtBuyNow.style.display = 'flex';
+        }
     } else {
         if (btnInStock) btnInStock.style.display = 'flex';
         if (btnOutStock) btnOutStock.style.display = 'none';
@@ -2562,20 +2614,10 @@ function syncSwatches() {
                 statusEl.style.color = '#003366';
             }
             if (btnAddToCart) {
-                btnAddToCart.disabled = true;
-                btnAddToCart.style.background = '#cbd5e1';
-                btnAddToCart.style.borderColor = '#cbd5e1';
-                btnAddToCart.style.color = '#94a3b8';
-                btnAddToCart.style.opacity = '1';
-                btnAddToCart.style.pointerEvents = 'none';
+                btnAddToCart.style.display = 'none';
             }
             if (btnInstallment) {
-                btnInstallment.disabled = true;
-                btnInstallment.style.background = '#cbd5e1';
-                btnInstallment.style.borderColor = '#cbd5e1';
-                btnInstallment.style.color = '#94a3b8';
-                btnInstallment.style.opacity = '1';
-                btnInstallment.style.pointerEvents = 'none';
+                btnInstallment.style.display = 'none';
             }
             if (btnBuyNow) {
                 btnBuyNow.disabled = false;
@@ -2584,7 +2626,9 @@ function syncSwatches() {
                 btnBuyNow.style.color = 'white';
                 btnBuyNow.style.opacity = '1';
                 btnBuyNow.style.pointerEvents = 'auto';
-                btnBuyNow.style.setProperty('flex', '1.5', 'important');
+                btnBuyNow.style.setProperty('flex', '1', 'important');
+                btnBuyNow.style.setProperty('width', '100%', 'important');
+                btnBuyNow.style.display = 'flex';
             }
             if (bsBuyBtn) {
                 bsBuyBtn.disabled = false;
@@ -2593,14 +2637,31 @@ function syncSwatches() {
                 bsBuyBtn.style.color = 'white';
                 bsBuyBtn.style.opacity = '1';
                 bsBuyBtn.style.pointerEvents = 'auto';
+                bsBuyBtn.style.setProperty('flex', '1', 'important');
+                bsBuyBtn.style.setProperty('width', '100%', 'important');
+                bsBuyBtn.style.display = 'flex';
             }
             if (bsAddCartBtn) {
-                bsAddCartBtn.disabled = true;
-                bsAddCartBtn.style.background = '#cbd5e1';
-                bsAddCartBtn.style.borderColor = '#cbd5e1';
-                bsAddCartBtn.style.color = '#94a3b8';
-                bsAddCartBtn.style.opacity = '1';
-                bsAddCartBtn.style.pointerEvents = 'none';
+                bsAddCartBtn.style.display = 'none';
+            }
+            
+            // FBT elements when price is 0
+            if (fbtAddCart) {
+                fbtAddCart.style.display = 'none';
+            }
+            if (fbtInstallment) {
+                fbtInstallment.style.display = 'none';
+            }
+            if (fbtBuyNow) {
+                fbtBuyNow.disabled = false;
+                fbtBuyNow.innerText = 'LIÊN HỆ';
+                fbtBuyNow.style.background = '#334155';
+                fbtBuyNow.style.color = 'white';
+                fbtBuyNow.style.opacity = '1';
+                fbtBuyNow.style.pointerEvents = 'auto';
+                fbtBuyNow.style.setProperty('flex', '1', 'important');
+                fbtBuyNow.style.setProperty('width', '100%', 'important');
+                fbtBuyNow.style.display = 'flex';
             }
         } else {
             if (statusEl) {
@@ -2648,6 +2709,36 @@ function syncSwatches() {
                 bsAddCartBtn.style.opacity = '';
                 bsAddCartBtn.style.pointerEvents = '';
             }
+            
+            // FBT elements when active
+            if (fbtAddCart) {
+                fbtAddCart.disabled = false;
+                fbtAddCart.style.display = '';
+                fbtAddCart.style.background = '';
+                fbtAddCart.style.borderColor = '';
+                fbtAddCart.style.color = '';
+                fbtAddCart.style.opacity = '';
+                fbtAddCart.style.pointerEvents = '';
+            }
+            if (fbtInstallment) {
+                fbtInstallment.disabled = false;
+                fbtInstallment.style.display = '';
+                fbtInstallment.style.background = '';
+                fbtInstallment.style.borderColor = '';
+                fbtInstallment.style.color = '';
+                fbtInstallment.style.opacity = '';
+                fbtInstallment.style.pointerEvents = '';
+            }
+            if (fbtBuyNow) {
+                fbtBuyNow.disabled = false;
+                fbtBuyNow.innerText = 'MUA NGAY';
+                fbtBuyNow.style.display = '';
+                fbtBuyNow.style.background = '';
+                fbtBuyNow.style.color = '';
+                fbtBuyNow.style.opacity = '';
+                fbtBuyNow.style.pointerEvents = '';
+                fbtBuyNow.style.setProperty('flex', '1.5', 'important');
+            }
         }
     }
     
@@ -2689,6 +2780,10 @@ function syncSwatches() {
         }
     }
     
+    // Toggle global product contact-only class to force hide buttons via CSS
+    const isContactMode = isSoldOut || (priceVal === 0);
+    document.body.classList.toggle('global-product-contact-only', isContactMode);
+
     // Check if we need to show the RAM/SSD configuration nudge
     if (typeof checkRAMSSDPrompt === 'function') {
         checkRAMSSDPrompt();
@@ -3121,20 +3216,24 @@ function initNavaProductEnforcement() {
             // 5. Check Frequently Bought Together select elements
             document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
                 const val = select.value;
+                const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+                const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
                 const parent = select.closest('[data-fbt-item]');
                 const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
                 const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
                 const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
                 
+                const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+
                 if (isRam) {
-                    if (val === 'no-select' || val === '') {
+                    if (isDefaultVal) {
                         isDefaultRam = true;
                     } else {
                         isDefaultRam = false;
                     }
                 }
                 if (isSsd) {
-                    if (val === 'no-select' || val === '') {
+                    if (isDefaultVal) {
                         isDefaultSsd = true;
                     } else {
                         isDefaultSsd = false;
@@ -3180,10 +3279,11 @@ function initNavaProductEnforcement() {
                 isContactPrice = true;
             }
             
-            if (isContactPrice) {
+            const btnText = btn.textContent.trim().toUpperCase();
+            if (isContactPrice || btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG') || btnText.includes('LIÊN HỆ')) {
                 e.preventDefault();
                 e.stopPropagation();
-                if (btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now')) {
+                if (btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now') || btn.classList.contains('tg-buy-now') || btn.classList.contains('js-buynow')) {
                     window.location.href = 'tel:0972178527';
                 }
                 return;
@@ -3215,9 +3315,62 @@ function initNavaProductEnforcement() {
                             void bs.offsetWidth; // Reflow
                             bs.classList.add('bs-shake-active');
                         }
+                        return; // Only return on mobile to block click event propagation
                     }
+                }
+            }
+
+            // 3. Desktop "MUA NGAY" loading feedback to prevent double clicks (for price > 0)
+            if (window.innerWidth >= 992 && btn.id === 'btn-buy-now') {
+                const btnText = btn.textContent.trim().toUpperCase();
+                if (btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.location.href = 'tel:0972178527';
                     return;
                 }
+
+                const originalMouseOver = btn.getAttribute('onmouseover');
+                const originalMouseOut = btn.getAttribute('onmouseout');
+                const originalText = btn.innerHTML;
+                const originalOpacity = btn.style.opacity;
+                const originalPointerEvents = btn.style.pointerEvents;
+
+                btn.removeAttribute('onmouseover');
+                btn.removeAttribute('onmouseout');
+                btn.style.opacity = '0.6';
+                btn.style.pointerEvents = 'none';
+
+                if (!document.getElementById('nava-spin-style')) {
+                    const style = document.createElement('style');
+                    style.id = 'nava-spin-style';
+                    style.textContent = `
+                        @keyframes navaSpin {
+                            0% { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                        }
+                        .nava-spinner {
+                            display: inline-block;
+                            animation: navaSpin 1s linear infinite;
+                            margin-right: 8px;
+                            font-size: 1.25rem;
+                            vertical-align: middle;
+                        }
+                    `;
+                    document.head.appendChild(style);
+                }
+
+                btn.innerHTML = `<i class="ph-bold ph-spinner nava-spinner"></i> ĐANG XỬ LÝ...`;
+
+                setTimeout(() => {
+                    if (btn) {
+                        if (originalMouseOver) btn.setAttribute('onmouseover', originalMouseOver);
+                        if (originalMouseOut) btn.setAttribute('onmouseout', originalMouseOut);
+                        btn.innerHTML = originalText;
+                        btn.style.opacity = originalOpacity || '';
+                        btn.style.pointerEvents = originalPointerEvents || '';
+                    }
+                }, 6000);
             }
         }
     }, true); // Capture phase is critical to run before other listeners
@@ -3257,6 +3410,7 @@ function initNavaProductEnforcement() {
     setTimeout(function() {
         initNavaCustomFbt();
         setupFbtMutationObserver();
+        syncSwatches();
     }, 150);
     
     // Setup price ticker observers initially and as fallback
@@ -3278,10 +3432,14 @@ function initNavaProductEnforcement() {
         if (fbt && typeof fbt.total !== 'undefined') {
             fbt.total;
         }
+        syncSwatches();
     }
     
     setTimeout(syncFbtCheckboxes, 250);
-    setTimeout(syncFbtCheckboxes, 1200);
+    setTimeout(function() {
+        syncFbtCheckboxes();
+        syncSwatches();
+    }, 1200);
 
     // Watch swatch radio and other variant selector changes
     document.addEventListener('change', function(e) {

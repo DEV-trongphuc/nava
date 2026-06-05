@@ -38,8 +38,11 @@
 
 	<!-- Custom Styles for Wow Tech Blog UI -->
 	<style>
-		.col2-right-layout .container {
+		.col2-right-layout .container,
+		.breadcrumbs .container {
 			max-width: 1150px !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
 		}
 		.aside-widget ul li a {
 			transition: all 0.2s ease;
@@ -426,7 +429,7 @@
 		</div>
 	</div>
 
-	<div class="container mb-5">
+	<div class="main container blogs mb-5">
 		<div class="row">
 			<!-- Left/Main Column: Article content -->
 			<div class="col-12 col-lg-8 col-xl-9 order-1">

@@ -62,8 +62,8 @@
                     {%- endif -%}
                 </span>
             </div>
-            <a href="{{ product.url }}" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-                <i class="ph ph-shopping-cart-simple"></i> Xem
+            <a href="{{ product.url }}" class="card-buy-btn" style="display:inline-flex;align-items:center;gap:6px;background:#1e3a8a;color:white;padding:7px 14px;border-radius:20px;font-size:0.82rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+                <i class="ph ph-shopping-cart-simple"></i><span class="d-none d-sm-inline"> Xem</span>
             </a>
         </div>
     </div>
