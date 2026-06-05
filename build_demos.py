@@ -2167,7 +2167,7 @@ def build_product(base_dir, header_part, footer_part):
                         height: 46px !important;
                         gap: 8px !important;
                     }
-                    .action-buttons-row #btn-cart-icon {
+                    .action-buttons-row #btn-add-to-cart-main {
                         width: 46px !important;
                         height: 46px !important;
                     }
@@ -2252,7 +2252,7 @@ def build_product(base_dir, header_part, footer_part):
                         <span>|</span>
                         <span>Đã bán: 85</span>
                         <span>|</span>
-                        <span style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
+                        <span id="main-stock-status" style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
                     </div>
                     
                     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 24px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
@@ -2361,12 +2361,12 @@ def build_product(base_dir, header_part, footer_part):
                         <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
                         <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
                             <!-- Icon Cart Button -->
-                            <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            <button id="btn-add-to-cart-main" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
                             </button>
                             
                             <!-- Trả góp 0% Button -->
-                            <button onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            <button id="btn-installment-main" onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 TRẢ GÓP 0%
                             </button>
                             
@@ -3767,99 +3767,99 @@ def build_product(base_dir, header_part, footer_part):
                     });
 
                     window.triggerAddToCart = (e) => {
-                        if (e) e.preventDefault();
-                        
-                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
-                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
-                        
-                        if (isDefaultRam || isDefaultSsd) {
-                            if (window.innerWidth <= 768) {
-                                openBottomSheet();
-                                const bs = document.getElementById('nava-bottom-sheet');
-                                if (bs) {
-                                    bs.classList.remove('bs-shake-active');
-                                    void bs.offsetWidth; // Reflow
-                                    bs.classList.add('bs-shake-active');
-                                }
-                            } else {
-                                showNudgeBanner();
-                                const banner = document.getElementById('ram-ssd-nudge-banner');
-                                if (banner) {
-                                    banner.style.transform = 'translateX(-50%) translateY(0)';
-                                    banner.style.opacity = '1';
-                                    banner.classList.add('nudge-shake-active');
-                                    setTimeout(() => {
-                                        banner.classList.remove('nudge-shake-active');
-                                    }, 2200);
-                                }
-                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
-                                if (selectorBlock) {
-                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
-                                    displays.forEach(d => {
-                                        d.style.transition = 'all 0.3s';
-                                        d.style.borderColor = '#ef4444';
-                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
-                                        setTimeout(() => {
-                                            d.style.borderColor = '';
-                                            d.style.boxShadow = '';
-                                        }, 1500);
-                                    });
-                                }
-                            }
-                            return;
-                        }
-                        
-                        closeBottomSheet();
-                        triggerCartOpen(e);
-                    };
+if (e) e.preventDefault();
 
-                    window.triggerCheckout = (e) => {
-                        if (e) e.preventDefault();
-                        
-                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
-                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
-                        
-                        if (isDefaultRam || isDefaultSsd) {
-                            if (window.innerWidth <= 768) {
-                                openBottomSheet();
-                                const bs = document.getElementById('nava-bottom-sheet');
-                                if (bs) {
-                                    bs.classList.remove('bs-shake-active');
-                                    void bs.offsetWidth; // Reflow
-                                    bs.classList.add('bs-shake-active');
-                                }
-                            } else {
-                                showNudgeBanner();
-                                const banner = document.getElementById('ram-ssd-nudge-banner');
-                                if (banner) {
-                                    banner.style.transform = 'translateX(-50%) translateY(0)';
-                                    banner.style.opacity = '1';
-                                    banner.classList.add('nudge-shake-active');
-                                    setTimeout(() => {
-                                        banner.classList.remove('nudge-shake-active');
-                                    }, 2200);
-                                }
-                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
-                                if (selectorBlock) {
-                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
-                                    displays.forEach(d => {
-                                        d.style.transition = 'all 0.3s';
-                                        d.style.borderColor = '#ef4444';
-                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
-                                        setTimeout(() => {
-                                            d.style.borderColor = '';
-                                            d.style.boxShadow = '';
-                                        }, 1500);
-                                    });
-                                }
-                            }
-                            return;
-                        }
-                        
-                        window.location.href = 'demo_checkout.html';
-                    };
+// 1. Check for contact price (if price is 0đ/Liên hệ, redirect directly)
+const total = basePrice + activeRamPrice + activeSsdPrice;
+if (total === 0) {
+window.location.href = 'tel:0972178527';
+return;
+}
+
+// 2. Check for configuration warning
+let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+
+if (isDefaultRam || isDefaultSsd) {
+if (window.innerWidth >= 992) {
+// On PC/desktop, scroll to options
+const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+if (selectorBlock) {
+selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+displays.forEach(d => {
+d.style.transition = 'all 0.3s';
+d.style.borderColor = '#ef4444';
+d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+setTimeout(() => {
+d.style.borderColor = '';
+d.style.boxShadow = '';
+}, 1500);
+});
+}
+} else {
+// On mobile, open bottom sheet
+openBottomSheet();
+const bs = document.getElementById('nava-bottom-sheet');
+if (bs) {
+bs.classList.remove('bs-shake-active');
+void bs.offsetWidth; // Reflow
+bs.classList.add('bs-shake-active');
+}
+}
+return;
+}
+
+closeBottomSheet();
+triggerCartOpen(e);
+};
+
+window.triggerCheckout = (e) => {
+if (e) e.preventDefault();
+
+// 1. Check for contact price (if price is 0đ/Liên hệ, redirect directly)
+const total = basePrice + activeRamPrice + activeSsdPrice;
+if (total === 0) {
+window.location.href = 'tel:0972178527';
+return;
+}
+
+// 2. Check for configuration warning
+let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+
+if (isDefaultRam || isDefaultSsd) {
+if (window.innerWidth >= 992) {
+// On PC/desktop, scroll to options
+const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+if (selectorBlock) {
+selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+displays.forEach(d => {
+d.style.transition = 'all 0.3s';
+d.style.borderColor = '#ef4444';
+d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+setTimeout(() => {
+d.style.borderColor = '';
+d.style.boxShadow = '';
+}, 1500);
+});
+}
+} else {
+// On mobile, open bottom sheet
+openBottomSheet();
+const bs = document.getElementById('nava-bottom-sheet');
+if (bs) {
+bs.classList.remove('bs-shake-active');
+void bs.offsetWidth; // Reflow
+bs.classList.add('bs-shake-active');
+}
+}
+return;
+}
+
+window.location.href = 'demo_checkout.html';
+};
 
                     const btnBuyNowMain = document.getElementById('btn-buy-now-main');
                     if (btnBuyNowMain) {
@@ -6534,6 +6534,197 @@ def build_policy_pages(base_dir, header_part, footer_part):
     with open(os.path.join(base_dir, "demo_policy.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
+def build_article_page(base_dir, header_part, footer_part):
+    sticky_stuff = ""
+    with open(os.path.join(base_dir, "index.bwt"), "r", encoding="utf-8") as f:
+        idx_content = f.read()
+        if "<!-- Mobile Sidebar Drawer -->" in idx_content:
+            sticky_stuff = idx_content[idx_content.find("<!-- Mobile Sidebar Drawer -->"):]
+            if "<!-- /MASTER SAPO ESCAPE WRAPPER -->" in sticky_stuff:
+                sticky_stuff = sticky_stuff.split("<!-- /MASTER SAPO ESCAPE WRAPPER -->")[0]
+                
+    local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
+
+    # Load BWT template
+    with open(os.path.join(base_dir, "sapo_BWT_new", "Templates", "article.bwt"), "r", encoding="utf-8") as f:
+        bwt_template = f.read()
+
+    # Load extracted real content
+    with open(os.path.join(base_dir, "scratch", "m_content_art.html"), "r", encoding="utf-8") as f:
+        real_content = f.read()
+
+    # Mock elements
+    mock_breadcrumb = """
+        <div class="breadcrumbs mt-3">
+            <div class="container">
+                <ul class="breadcrumb align-items-center m-0 pl-0 pr-0 small pt-2 pb-2" style="list-style: none; display: flex; gap: 8px; padding-left: 0;">
+                    <li class="home">
+                        <a href="index.html" title="Trang chủ" style="text-decoration: none; color: var(--text-gray);"><i class="ph ph-house"></i> Trang chủ</a>
+                        <span class="slash-divider ml-2 mr-2">/</span>
+                    </li>
+                    <li>
+                        <a href="demo_collection.html" title="Tin tức" style="text-decoration: none; color: var(--text-gray);">Tin tức</a>
+                        <span class="slash-divider ml-2 mr-2">/</span>
+                    </li>
+                    <li class="active" style="color: var(--primary); font-weight: 700;">NPU Và AI: Công Nghệ Cốt Lõi Tạo Nên Mini PC Asus Thế Hệ Mới</li>
+                </ul>
+            </div>
+        </div>
+    """
+
+    mock_aside_cate = """
+        <div class="aside-widget">
+            <h3 class="align-items-center d-flex font-weight-bold mb-3 pb-2 border-bottom" style="font-size: 1.15rem;">
+                <i class="ph ph-tag" style="color: var(--primary); margin-right: 8px;"></i>
+                Danh mục tin tức
+            </h3>
+            <ul class="list-unstyled" style="padding-left: 0; list-style: none; margin-bottom: 0;">
+                <li class="mb-2" style="margin-bottom: 8px;"><a href="#" style="color: var(--text-dark); font-weight: 600; text-decoration: none; font-size: 0.95rem;"><i class="ph ph-caret-right" style="font-size: 0.8rem; margin-right: 4px;"></i> Tin công nghệ (12)</a></li>
+                <li class="mb-2" style="margin-bottom: 8px;"><a href="#" style="color: var(--text-dark); font-weight: 600; text-decoration: none; font-size: 0.95rem;"><i class="ph ph-caret-right" style="font-size: 0.8rem; margin-right: 4px;"></i> Đánh giá chi tiết (8)</a></li>
+                <li class="mb-2" style="margin-bottom: 8px;"><a href="#" style="color: var(--text-dark); font-weight: 600; text-decoration: none; font-size: 0.95rem;"><i class="ph ph-caret-right" style="font-size: 0.8rem; margin-right: 4px;"></i> Hướng dẫn kỹ thuật (15)</a></li>
+                <li class="mb-2" style="margin-bottom: 8px;"><a href="#" style="color: var(--text-dark); font-weight: 600; text-decoration: none; font-size: 0.95rem;"><i class="ph ph-caret-right" style="font-size: 0.8rem; margin-right: 4px;"></i> Sự kiện & Khuyến mãi (5)</a></li>
+            </ul>
+        </div>
+        <div class="aside-widget">
+            <h3 class="align-items-center d-flex font-weight-bold mb-3 pb-2 border-bottom" style="font-size: 1.15rem; display: flex; align-items: center;">
+                <img alt="Chủ đề Hot" class="lazy mr-2" style="width: 20px; height: 20px;" data-src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/hot_ico.png?1780651888006" src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/placeholder_1x1.png?1780651888006"/>
+                Chủ đề Hot
+            </h3>
+            <ul class="list-unstyled mb-0" style="padding-left: 0; list-style: none;">
+                <li class="d-flex align-items-center mb-3" style="gap: 12px; margin-bottom: 15px;">
+                    <div class="image rounded-10 overflow-hidden" style="width: 70px; height: 55px; flex-shrink: 0; border: 1px solid var(--border-color);">
+                        <a href="#" class="d-block w-100 h-100">
+                            <img class="lazy w-100 h-100" style="object-fit: cover;" src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" alt="Đánh giá ASUS NUC 14 Pro">
+                        </a>
+                    </div>
+                    <div class="text" style="flex: 1; min-width: 0;">
+                        <h4 class="font-weight-bold mb-1" style="font-size: 0.9rem; line-height: 1.35; margin: 0 0 4px 0;">
+                            <a href="#" class="line_2 text-dark" style="text-decoration: none; color: var(--text-dark); transition: color 0.2s;">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a>
+                        </h4>
+                        <span class="d-block text-muted small" style="font-size: 0.78rem; color: var(--text-gray);">01/06/2026</span>
+                    </div>
+                </li>
+                <li class="d-flex align-items-center mb-3" style="gap: 12px; margin-bottom: 15px;">
+                    <div class="image rounded-10 overflow-hidden" style="width: 70px; height: 55px; flex-shrink: 0; border: 1px solid var(--border-color);">
+                        <a href="#" class="d-block w-100 h-100">
+                            <img class="lazy w-100 h-100" style="object-fit: cover;" src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Thế hệ Mini PC AI 2025">
+                        </a>
+                    </div>
+                    <div class="text" style="flex: 1; min-width: 0;">
+                        <h4 class="font-weight-bold mb-1" style="font-size: 0.9rem; line-height: 1.35; margin: 0 0 4px 0;">
+                            <a href="#" class="line_2 text-dark" style="text-decoration: none; color: var(--text-dark); transition: color 0.2s;">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a>
+                        </h4>
+                        <span class="d-block text-muted small" style="font-size: 0.78rem; color: var(--text-gray);">28/05/2026</span>
+                    </div>
+                </li>
+                <li class="d-flex align-items-center mb-3" style="gap: 12px; margin-bottom: 15px;">
+                    <div class="image rounded-10 overflow-hidden" style="width: 70px; height: 55px; flex-shrink: 0; border: 1px solid var(--border-color);">
+                        <a href="#" class="d-block w-100 h-100">
+                            <img class="lazy w-100 h-100" style="object-fit: cover;" src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="NPU vs GPU">
+                        </a>
+                    </div>
+                    <div class="text" style="flex: 1; min-width: 0;">
+                        <h4 class="font-weight-bold mb-1" style="font-size: 0.9rem; line-height: 1.35; margin: 0 0 4px 0;">
+                            <a href="#" class="line_2 text-dark" style="text-decoration: none; color: var(--text-dark); transition: color 0.2s;">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a>
+                        </h4>
+                        <span class="d-block text-muted small" style="font-size: 0.78rem; color: var(--text-gray);">20/05/2026</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    """
+
+    mock_blog_relate = """
+        <h3 class="font-weight-bold mb-4" style="font-size: 1.3rem; color: var(--text-dark); display: flex; align-items: center; gap: 10px;">
+            <i class="ph-fill ph-newspaper" style="color: var(--primary);"></i> Bài viết liên quan
+        </h3>
+        <div class="row">
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden; background: var(--bg-gray); border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%;">
+                    <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" class="card-img-top" style="height: 140px; width: 100%; object-fit: cover;">
+                    <div class="card-body p-3" style="padding: 15px;">
+                        <h5 class="card-title font-weight-bold mb-2" style="font-size: 0.92rem; line-height: 1.45; margin: 0 0 8px 0;"><a href="#" style="color: var(--text-dark); text-decoration: none; font-weight: 800;">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a></h5>
+                        <span class="text-muted small" style="color: var(--text-gray); font-size: 0.8rem;">01/06/2026</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden; background: var(--bg-gray); border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%;">
+                    <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" class="card-img-top" style="height: 140px; width: 100%; object-fit: cover;">
+                    <div class="card-body p-3" style="padding: 15px;">
+                        <h5 class="card-title font-weight-bold mb-2" style="font-size: 0.92rem; line-height: 1.45; margin: 0 0 8px 0;"><a href="#" style="color: var(--text-dark); text-decoration: none; font-weight: 800;">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a></h5>
+                        <span class="text-muted small" style="color: var(--text-gray); font-size: 0.8rem;">28/05/2026</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 mb-3">
+                <div class="card border-0 shadow-sm" style="border-radius: 12px; overflow: hidden; background: var(--bg-gray); border: 1px solid var(--border-color); display: flex; flex-direction: column; height: 100%;">
+                    <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" class="card-img-top" style="height: 140px; width: 100%; object-fit: cover;">
+                    <div class="card-body p-3" style="padding: 15px;">
+                        <h5 class="card-title font-weight-bold mb-2" style="font-size: 0.92rem; line-height: 1.45; margin: 0 0 8px 0;"><a href="#" style="color: var(--text-dark); text-decoration: none; font-weight: 800;">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a></h5>
+                        <span class="text-muted small" style="color: var(--text-gray); font-size: 0.8rem;">20/05/2026</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    """
+
+    mock_tags = """
+        <div class="tags-list" style="margin-top: 15px;"><strong>Tags:</strong> 
+            <span class="badge" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 8px; font-size: 0.82rem; font-weight: 600; color: var(--text-gray); margin-right: 6px;">ASUS NUC</span> 
+            <span class="badge" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 8px; font-size: 0.82rem; font-weight: 600; color: var(--text-gray); margin-right: 6px;">AI PC</span> 
+            <span class="badge" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 8px; font-size: 0.82rem; font-weight: 600; color: var(--text-gray);">NPU</span>
+        </div>
+    """
+
+    # Do compilation replacements
+    compiled = bwt_template
+    compiled = compiled.replace("{%- include 'breadcrumb' -%}", mock_breadcrumb)
+    compiled = compiled.replace("{{ article.title | replace: '\"', '&quot;' }}", "NPU Và AI: Công Nghệ Cốt Lõi Tạo Nên Mini PC Asus Thế Hệ Mới")
+    compiled = compiled.replace("{{ article.title }}", "NPU Và AI: Công Nghệ Cốt Lõi Tạo Nên Mini PC Asus Thế Hệ Mới")
+    compiled = compiled.replace("{{ article.image.src | img_url: '1024x1024' }}", "https://bizweb.dktcdn.net/thumb/grande/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080")
+    compiled = compiled.replace("{{ article.author }}", "Châu Bảo")
+    compiled = compiled.replace("{{ article.published_on | date:'dd/MM/yyyy' }}", "01/06/2026")
+    compiled = compiled.replace("{{ number_of_comments }}", "0")
+    compiled = compiled.replace("{{ article.summary }}", "Khám phá cách NPU và AI trở thành nền tảng cốt lõi của Mini PC Asus thế hệ mới. Hiệu năng mạnh mẽ, tiết kiệm năng lượng, hỗ trợ học tập, sáng tạo nội dung và nghiên cứu AI - Tất cả gói gọn trong thiết kế của máy tính mini thương hiệu Asus.")
+    compiled = compiled.replace("{%- include 'm_content_art' -%}", real_content)
+    compiled = compiled.replace("{% include 'aside-cate-blog' %}", mock_aside_cate)
+    compiled = compiled.replace("{%- include 'm_blog_relate' -%}", mock_blog_relate)
+    compiled = compiled.replace("{% include 'mew_tag_article' %}", mock_tags)
+    
+    # Author mock
+    compiled = compiled.replace("{{ avata | file_url }}", "https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1780651888006")
+    compiled = compiled.replace("{{ pages[author_handle].title | default: article.author }}", "Châu Bảo")
+    compiled = compiled.replace("{{ pages[author_handle].content | strip_html | truncate: 400 }}", "Châu Bảo là chuyên gia công nghệ và biên tập viên tại Nava Store, chuyên sâu về các dòng máy tính mini PC, linh kiện máy tính và các giải pháp eGPU cao cấp.")
+    compiled = compiled.replace("{{ pages[author_handle].url }}", "javascript:;")
+    
+    # Form mock
+    compiled = compiled.replace('{%- form "article_comments", article -%}', '<form action="javascript:;" onsubmit="alert(\'Bình luận của bạn đã được gửi thành công và đang chờ kiểm duyệt!\'); this.reset();">')
+    compiled = compiled.replace('{%- endform -%}', '</form>')
+    compiled = compiled.replace("{%- include 'form-errors-custom' -%}", '')
+    compiled = compiled.replace("{%- if form.posted_successfully -%}", "{% if false %}")
+    compiled = compiled.replace("{%- endif -%}", "{% endif %}")
+    
+    # Settings mock
+    compiled = compiled.replace("{{ settings.blog_write_comment }}", "Để lại bình luận của bạn")
+    compiled = compiled.replace("{{ settings.blog_comment_name }}", "Tên của bạn")
+    compiled = compiled.replace("{{ settings.blog_comment_mail }}", "Email của bạn")
+    compiled = compiled.replace("{{ settings.blog_comment_content }}", "Nhập nội dung bình luận")
+    compiled = compiled.replace("{{ settings.blog_comment_submit }}", "Gửi bình luận")
+    compiled = compiled.replace("{{ settings.blog_comment }}", "Bình luận nổi bật")
+    compiled = compiled.replace("{{ settings.blog_no_comment_noti }}", "Chưa có bình luận nào cho bài viết này. Hãy là người đầu tiên chia sẻ cảm nghĩ!")
+    
+    full_html = clean_liquid_tags(header_part + compiled + local_footer_part, 'article')
+    
+    full_html = inject_seo_metadata(
+        full_html,
+        title="NPU Và AI: Công Nghệ Cốt Lõi Tạo Nên Mini PC Asus Thế Hệ Mới - Nava Store",
+        description="Khám phá cách NPU và AI trở thành nền tảng cốt lõi của Mini PC Asus thế hệ mới. Hiệu năng mạnh mẽ, tiết kiệm năng lượng, hỗ trợ học tập, sáng tạo nội dung và nghiên cứu AI.",
+        keywords="npu, ai, asus mini pc, asus nuc, nava store"
+    )
+    with open(os.path.join(base_dir, "demo_article.html"), "w", encoding="utf-8") as f:
+        f.write(full_html)
+
 def build_all():
     base_dir = r"F:\BAO_SAPO\sapo_new"
     
@@ -6578,6 +6769,9 @@ def build_all():
     
     build_auth_pages(base_dir)
     print("Generated demo_login.html and demo_register.html successfully!")
+    
+    build_article_page(base_dir, header_part, footer_part)
+    print("Generated demo_article.html successfully!")
 
 if __name__ == "__main__":
     build_all()

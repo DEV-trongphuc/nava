@@ -162,11 +162,22 @@
         /* Custom Select for Swatches */
         .custom-select-wrapper.closed .custom-select-list,
         .nava-custom-select-wrapper.closed .nava-custom-select-list,
-        .nava-dropdown-wrapper.closed .nava-dropdown-list {
+        .nava-dropdown-wrapper.closed .nava-dropdown-list,
+        .custom-select-wrapper.closed:hover .custom-select-list,
+        .nava-custom-select-wrapper.closed:hover .nava-custom-select-list,
+        .nava-dropdown-wrapper.closed:hover .nava-dropdown-list {
             opacity: 0 !important;
             visibility: hidden !important;
             pointer-events: none !important;
             transform: translateY(8px) scale(0.97) !important;
+        }
+        .custom-select-wrapper.closed:hover .custom-select-display i,
+        .custom-select-wrapper.closed:hover .custom-select-display svg,
+        .nava-dropdown-wrapper.closed:hover .nava-dropdown-arrow {
+            transform: rotate(0deg) !important;
+        }
+        .nava-custom-select-wrapper.closed:hover .nava-custom-select-arrow {
+            transform: translateY(-50%) rotate(0deg) !important;
         }
         .custom-select-wrapper { position: relative; margin-bottom: 15px; width: 100%; }
         .custom-select-display {
@@ -1265,6 +1276,33 @@
             --glow-color: rgba(102, 163, 255, 0.25);
             --glow-border: #66a3ff;
         }
+        /* Mobile: Dropdowns inside bottom-sheet open upwards */
+        #nava-bottom-sheet .custom-select-list,
+        #nava-bottom-sheet .nava-custom-select-list,
+        #nava-bottom-sheet .nava-dropdown-list {
+            top: auto !important;
+            bottom: 100% !important;
+            margin-top: 0 !important;
+            margin-bottom: 8px !important;
+            transform-origin: bottom center !important;
+            transform: translateY(-8px) scale(0.97) !important;
+        }
+        #nava-bottom-sheet .custom-select-wrapper.closed .custom-select-list,
+        #nava-bottom-sheet .nava-custom-select-wrapper.closed .nava-custom-select-list,
+        #nava-bottom-sheet .nava-dropdown-wrapper.closed .nava-dropdown-list {
+            transform: translateY(-8px) scale(0.97) !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+        #nava-bottom-sheet .custom-select-wrapper.active .custom-select-list,
+        #nava-bottom-sheet .nava-custom-select-wrapper.active .nava-custom-select-list,
+        #nava-bottom-sheet .nava-dropdown-wrapper.active .nava-dropdown-list {
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: translateY(0) scale(1) !important;
+        }
     </style>
 
     <div class="container mt-3 mb-3 nava-product-container">
@@ -1884,6 +1922,7 @@
                     list.querySelectorAll('li').forEach(item => item.classList.remove('selected'));
                     li.classList.add('selected');
                     
+                    wrapper.classList.add('closed');
                     wrapper.classList.remove('active');
                     updateNavaCustomSelectDisplay(wrapper, labelText);
                     
@@ -2452,31 +2491,47 @@ function syncSwatches() {
     const btnAddToCart = document.getElementById('btn-add-to-cart');
     const btnInstallment = document.getElementById('btn-installment');
     const btnBuyNow = document.getElementById('btn-buy-now');
-    
+    const bsBuyBtn = document.querySelector('.bs-buy-btn');
+    const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
+
     if (isSoldOut) {
         if (btnInStock) btnInStock.style.display = 'flex';
         if (btnOutStock) btnOutStock.style.display = 'none';
-        
+
         if (statusEl) {
             statusEl.innerText = 'Hết hàng';
             statusEl.style.color = '#ef4444';
         }
         if (btnAddToCart) {
-            btnAddToCart.disabled = true;
-            btnAddToCart.style.opacity = '0.5';
-            btnAddToCart.style.pointerEvents = 'none';
+            btnAddToCart.style.display = 'none';
         }
         if (btnInstallment) {
-            btnInstallment.disabled = true;
-            btnInstallment.style.opacity = '0.5';
-            btnInstallment.style.pointerEvents = 'none';
+            btnInstallment.style.display = 'none';
         }
         if (btnBuyNow) {
-            btnBuyNow.disabled = true;
-            btnBuyNow.innerText = 'HẾT HÀNG';
-            btnBuyNow.style.opacity = '0.5';
-            btnBuyNow.style.pointerEvents = 'none';
-            btnBuyNow.style.setProperty('flex', '1.5', 'important');
+            btnBuyNow.disabled = false;
+            btnBuyNow.innerText = 'LIÊN HỆ';
+            btnBuyNow.style.background = '#334155';
+            btnBuyNow.style.color = 'white';
+            btnBuyNow.style.opacity = '1';
+            btnBuyNow.style.pointerEvents = 'auto';
+            btnBuyNow.style.setProperty('flex', '1', 'important');
+            btnBuyNow.style.setProperty('width', '100%', 'important');
+            btnBuyNow.style.display = 'flex';
+        }
+        if (bsBuyBtn) {
+            bsBuyBtn.disabled = false;
+            bsBuyBtn.innerText = 'LIÊN HỆ';
+            bsBuyBtn.style.background = '#334155';
+            bsBuyBtn.style.color = 'white';
+            bsBuyBtn.style.opacity = '1';
+            bsBuyBtn.style.pointerEvents = 'auto';
+            bsBuyBtn.style.setProperty('flex', '1', 'important');
+            bsBuyBtn.style.setProperty('width', '100%', 'important');
+            bsBuyBtn.style.display = 'flex';
+        }
+        if (bsAddCartBtn) {
+            bsAddCartBtn.style.display = 'none';
         }
     } else {
         if (btnInStock) btnInStock.style.display = 'flex';
@@ -2487,21 +2542,20 @@ function syncSwatches() {
             btnAddToCart.disabled = false;
             btnAddToCart.style.opacity = '';
             btnAddToCart.style.pointerEvents = '';
+            btnAddToCart.style.display = '';
         }
         if (btnInstallment) {
             btnInstallment.disabled = false;
             btnInstallment.style.opacity = '';
             btnInstallment.style.pointerEvents = '';
+            btnInstallment.style.display = '';
         }
         if (btnBuyNow) {
             btnBuyNow.disabled = false;
             btnBuyNow.style.opacity = '';
             btnBuyNow.style.pointerEvents = '';
+            btnBuyNow.style.display = '';
         }
-        
-        const bsBuyBtn = document.querySelector('.bs-buy-btn');
-        const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
-        
         if (priceVal === 0) {
             if (statusEl) {
                 statusEl.innerText = 'Liên hệ';
@@ -3148,27 +3202,12 @@ function initNavaProductEnforcement() {
             if (isUnconfigured && !isBsOpen) {
                 const isBsBtn = btn.classList.contains('btn-add-cart-bs') || btn.classList.contains('bs-buy-btn');
                 if (!isBsBtn) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    
                     if (window.innerWidth >= 992) {
-                        // On PC/desktop, highlight options and scroll to them instead of showing a modal
-                        const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
-                        if (selectorBlock) {
-                            selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
-                            displays.forEach(d => {
-                                d.style.transition = 'all 0.3s';
-                                d.style.borderColor = '#ef4444';
-                                d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
-                                setTimeout(() => {
-                                    d.style.borderColor = '';
-                                    d.style.boxShadow = '';
-                                }, 1500);
-                            });
-                        }
+                        // On PC/desktop, allow purchasing unconfigured RAM/SSD (0 0) directly if price > 0.
                     } else {
-                        // On mobile, show bottom sheet modal
+                        // On mobile, block click and show bottom sheet modal
+                        e.preventDefault();
+                        e.stopPropagation();
                         openBottomSheet();
                         const bs = document.getElementById('nava-bottom-sheet');
                         if (bs) {

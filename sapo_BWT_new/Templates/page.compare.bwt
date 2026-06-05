@@ -3,6 +3,19 @@
         .nava-compare-card { background: var(--bg-white, #ffffff); border-radius: 16px; border: 1px solid var(--border-color); padding: 25px; box-shadow: var(--shadow-sm); }
         .page_name { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
         
+        .com_info .page-title {
+            padding: 20px !important;
+        }
+        
+        /* Force compare price to brand blue */
+        .compare-price, 
+        .compare-price *,
+        .compare-row-item .text-primary,
+        .com_info b.text-primary,
+        #compare-modal-content .text-primary {
+            color: var(--primary, #003366) !important;
+        }
+
         /* Hide Sapo native elements */
         #compare-select, #compare-summary, #compare-detail {
             display: none !important;
@@ -134,7 +147,7 @@
                         <a href="${res.infor.url}" style="text-decoration: none; display: block; margin-bottom: 8px; flex: 1;">
                             <h4 style="margin: 0; font-size: 0.95rem; color: var(--text-dark, #0f172a); font-weight: 800; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.8em; line-height: 1.4; transition: color 0.2s;" onmouseover="this.style.color='var(--primary)';" onmouseout="this.style.color='var(--text-dark)';">${res.infor.name}</h4>
                         </a>
-                        <div style="color: var(--primary, #003366); font-weight: 900; font-size: 1.15rem; margin-bottom: 15px;">${formatPrice(res.infor.price)}</div>
+                        <div class="compare-price" style="color: var(--primary, #003366); font-weight: 900; font-size: 1.15rem; margin-bottom: 15px;">${formatPrice(res.infor.price)}</div>
                         <a href="${res.infor.url}" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 6px; padding: 10px; font-weight: 700; font-size: 0.85rem; border-radius: 8px; background: var(--primary, #003366); color: white; text-decoration: none; box-shadow: 0 4px 12px rgba(0,51,102,0.1); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';">
                             <i class="ph ph-shopping-cart-simple"></i> Xem chi tiết
                         </a>

@@ -1207,7 +1207,7 @@
                         height: 46px !important;
                         gap: 8px !important;
                     }
-                    .action-buttons-row #btn-cart-icon {
+                    .action-buttons-row #btn-add-to-cart-main {
                         width: 46px !important;
                         height: 46px !important;
                     }
@@ -1292,7 +1292,7 @@
                         <span>|</span>
                         <span>Đã bán: 85</span>
                         <span>|</span>
-                        <span style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
+                        <span id="main-stock-status" style="color: #059669; display: flex; align-items: center; gap: 4px;"><i class="ph-fill ph-check-circle"></i> Sẵn hàng</span>
                     </div>
                     
                     <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 24px; border-bottom: 1px dashed var(--border-color); padding-bottom: 15px;">
@@ -1401,12 +1401,12 @@
                         <!-- Row 2: Add-to-cart, Trả Góp 0%, MUA NGAY -->
                         <div class="action-buttons-row" style="display: flex; align-items: center; gap: 10px; width: 100%; height: 50px;">
                             <!-- Icon Cart Button -->
-                            <button id="btn-cart-icon" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            <button id="btn-add-to-cart-main" style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
                             </button>
                             
                             <!-- Trả góp 0% Button -->
-                            <button onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
+                            <button id="btn-installment-main" onclick="window.location.href='demo_checkout.html'" style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'">
                                 TRẢ GÓP 0%
                             </button>
                             
@@ -2461,6 +2461,9 @@
                 let isBsOpen = false;
                 
                 window.openBottomSheet = function() {
+                    if (window.innerWidth >= 992) {
+                        return; // Don't show bottom-sheet modal on PC/desktop
+                    }
                     const overlay = document.getElementById('nava-bs-overlay');
                     const bs = document.getElementById('nava-bottom-sheet');
                     const stickyBar = document.getElementById('sticky-cart-bar');
@@ -2478,6 +2481,14 @@
                         bs.classList.add('open');
                         document.body.style.overflow = 'hidden';
                         
+                        // Automatically open/expand the dropdown lists on mobile bottom sheet
+                        setTimeout(() => {
+                            const bsDropdowns = bs.querySelectorAll('.nava-dropdown-wrapper, .nava-custom-select-wrapper, .custom-select-wrapper');
+                            bsDropdowns.forEach(w => {
+                                w.classList.add('active');
+                            });
+                        }, 100);
+
                         // Hide compare bar when bottom sheet is open
                         if (typeof updateCompareBar === 'function') {
                             updateCompareBar();
@@ -2796,99 +2807,99 @@
                     });
 
                     window.triggerAddToCart = (e) => {
-                        if (e) e.preventDefault();
-                        
-                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
-                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
-                        
-                        if (isDefaultRam || isDefaultSsd) {
-                            if (window.innerWidth <= 768) {
-                                openBottomSheet();
-                                const bs = document.getElementById('nava-bottom-sheet');
-                                if (bs) {
-                                    bs.classList.remove('bs-shake-active');
-                                    void bs.offsetWidth; // Reflow
-                                    bs.classList.add('bs-shake-active');
-                                }
-                            } else {
-                                showNudgeBanner();
-                                const banner = document.getElementById('ram-ssd-nudge-banner');
-                                if (banner) {
-                                    banner.style.transform = 'translateX(-50%) translateY(0)';
-                                    banner.style.opacity = '1';
-                                    banner.classList.add('nudge-shake-active');
-                                    setTimeout(() => {
-                                        banner.classList.remove('nudge-shake-active');
-                                    }, 2200);
-                                }
-                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
-                                if (selectorBlock) {
-                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
-                                    displays.forEach(d => {
-                                        d.style.transition = 'all 0.3s';
-                                        d.style.borderColor = '#ef4444';
-                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
-                                        setTimeout(() => {
-                                            d.style.borderColor = '';
-                                            d.style.boxShadow = '';
-                                        }, 1500);
-                                    });
-                                }
-                            }
-                            return;
-                        }
-                        
-                        closeBottomSheet();
-                        triggerCartOpen(e);
-                    };
+if (e) e.preventDefault();
 
-                    window.triggerCheckout = (e) => {
-                        if (e) e.preventDefault();
-                        
-                        let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
-                        let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
-                        
-                        if (isDefaultRam || isDefaultSsd) {
-                            if (window.innerWidth <= 768) {
-                                openBottomSheet();
-                                const bs = document.getElementById('nava-bottom-sheet');
-                                if (bs) {
-                                    bs.classList.remove('bs-shake-active');
-                                    void bs.offsetWidth; // Reflow
-                                    bs.classList.add('bs-shake-active');
-                                }
-                            } else {
-                                showNudgeBanner();
-                                const banner = document.getElementById('ram-ssd-nudge-banner');
-                                if (banner) {
-                                    banner.style.transform = 'translateX(-50%) translateY(0)';
-                                    banner.style.opacity = '1';
-                                    banner.classList.add('nudge-shake-active');
-                                    setTimeout(() => {
-                                        banner.classList.remove('nudge-shake-active');
-                                    }, 2200);
-                                }
-                                const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
-                                if (selectorBlock) {
-                                    selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                    const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
-                                    displays.forEach(d => {
-                                        d.style.transition = 'all 0.3s';
-                                        d.style.borderColor = '#ef4444';
-                                        d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
-                                        setTimeout(() => {
-                                            d.style.borderColor = '';
-                                            d.style.boxShadow = '';
-                                        }, 1500);
-                                    });
-                                }
-                            }
-                            return;
-                        }
-                        
-                        window.location.href = 'demo_checkout.html';
-                    };
+// 1. Check for contact price (if price is 0đ/Liên hệ, redirect directly)
+const total = basePrice + activeRamPrice + activeSsdPrice;
+if (total === 0) {
+window.location.href = 'tel:0972178527';
+return;
+}
+
+// 2. Check for configuration warning
+let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+
+if (isDefaultRam || isDefaultSsd) {
+if (window.innerWidth >= 992) {
+// On PC/desktop, scroll to options
+const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+if (selectorBlock) {
+selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+displays.forEach(d => {
+d.style.transition = 'all 0.3s';
+d.style.borderColor = '#ef4444';
+d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+setTimeout(() => {
+d.style.borderColor = '';
+d.style.boxShadow = '';
+}, 1500);
+});
+}
+} else {
+// On mobile, open bottom sheet
+openBottomSheet();
+const bs = document.getElementById('nava-bottom-sheet');
+if (bs) {
+bs.classList.remove('bs-shake-active');
+void bs.offsetWidth; // Reflow
+bs.classList.add('bs-shake-active');
+}
+}
+return;
+}
+
+closeBottomSheet();
+triggerCartOpen(e);
+};
+
+window.triggerCheckout = (e) => {
+if (e) e.preventDefault();
+
+// 1. Check for contact price (if price is 0đ/Liên hệ, redirect directly)
+const total = basePrice + activeRamPrice + activeSsdPrice;
+if (total === 0) {
+window.location.href = 'tel:0972178527';
+return;
+}
+
+// 2. Check for configuration warning
+let isDefaultRam = (activeRamName === 'NO RAM' || activeRamName.toUpperCase().includes('TRỐNG') || activeRamName.toUpperCase().includes('0GB'));
+let isDefaultSsd = (activeSsdName === 'NO SSD' || activeSsdName.toUpperCase().includes('TRỐNG') || activeSsdName.toUpperCase().includes('0GB'));
+
+if (isDefaultRam || isDefaultSsd) {
+if (window.innerWidth >= 992) {
+// On PC/desktop, scroll to options
+const selectorBlock = document.querySelector('.product-control, [data-dropdown-type="ram"], .box-variant');
+if (selectorBlock) {
+selectorBlock.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const displays = document.querySelectorAll('.nava-dropdown-display, .swatch');
+displays.forEach(d => {
+d.style.transition = 'all 0.3s';
+d.style.borderColor = '#ef4444';
+d.style.boxShadow = '0 0 10px rgba(239,68,68,0.2)';
+setTimeout(() => {
+d.style.borderColor = '';
+d.style.boxShadow = '';
+}, 1500);
+});
+}
+} else {
+// On mobile, open bottom sheet
+openBottomSheet();
+const bs = document.getElementById('nava-bottom-sheet');
+if (bs) {
+bs.classList.remove('bs-shake-active');
+void bs.offsetWidth; // Reflow
+bs.classList.add('bs-shake-active');
+}
+}
+return;
+}
+
+window.location.href = 'demo_checkout.html';
+};
 
                     const btnBuyNowMain = document.getElementById('btn-buy-now-main');
                     if (btnBuyNowMain) {

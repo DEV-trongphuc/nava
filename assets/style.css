@@ -8460,3 +8460,17 @@ a.js-filter-pricerange:hover {
 [data-theme="dark"] .gallery-dot.active {
     background: var(--primary, #66a3ff) !important;
 }
+
+/* Custom Compare Page and Modal Price Overrides */
+.com_info .page-title {
+    padding: 20px !important;
+}
+
+.compare-price, 
+.compare-price *,
+.compare-row-item .text-primary,
+.com_info b.text-primary,
+#compare-modal-content .text-primary,
+.compare-prod-price {
+    color: var(--primary, #003366) !important;
+}

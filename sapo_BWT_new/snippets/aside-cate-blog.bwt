@@ -1,0 +1,48 @@
+{% if linklists[settings.blogs_all_menu].links.size > 0 %}
+<div class="aside-widget">
+	<h3>
+		<i class="ph ph-tag" style="color: var(--primary, #003366); margin-right: 8px;"></i>
+		{{ settings.blogs_all_title | default: 'Danh mục tin tức' }}
+	</h3>
+	<ul class="list-unstyled mb-0" style="padding-left: 0; list-style: none;">
+		{% for link in linklists[settings.blogs_all_menu].links %}
+		<li class="mb-2" style="margin-bottom: 8px;">
+			<a href="{{ link.url }}" title="{{ link.title }}" style="color: var(--text-gray, #475569); font-weight: 600; text-decoration: none; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s;">
+				<span><i class="ph ph-caret-right" style="font-size: 0.8rem; margin-right: 6px; color: var(--primary, #003366);"></i> {{ link.title }}</span>
+				<span class="badge badge-pill badge-light" style="font-size: 0.75rem; background: var(--bg-gray, #f1f5f9); color: var(--text-gray);">{{ link.object.articles_count }}</span>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}
+
+{% if blog.articles.size > 0 %}
+<div class="aside-widget">
+	<h3 style="display: flex; align-items: center;">
+		<img alt="Chủ đề Hot" class="lazy mr-2" style="width: 20px; height: 20px;" data-src="{{ 'hot_ico.png' | asset_url }}" src="{{ 'placeholder_1x1.png' | asset_url }}"/>
+		Chủ đề Hot
+	</h3>
+	<ul class="list-unstyled mb-0" style="padding-left: 0; list-style: none;">
+		{% for art in blog.articles limit: 5 %}
+		<li class="d-flex align-items-center mb-3" style="gap: 12px; margin-bottom: 15px;">
+			<div class="image rounded-10 overflow-hidden" style="width: 70px; height: 55px; flex-shrink: 0; border: 1px solid var(--border-color);">
+				<a href="{{ art.url }}" title="{{ art.title }}" class="d-block w-100 h-100">
+					{% if art.image != null %}
+					<img class="lazy w-100 h-100" style="object-fit: cover;" data-src="{{ art.image.src | img_url: 'small' }}" src="{{ 'placeholder_1x1.png' | asset_url }}" alt="{{ art.title }}">
+					{% else %}
+					<img class="lazy w-100 h-100" style="object-fit: cover;" data-src="{{ 'no_image.jpg' | asset_url }}" src="{{ 'placeholder_1x1.png' | asset_url }}" alt="{{ art.title }}">
+					{% endif %}
+				</a>
+			</div>
+			<div class="text" style="flex: 1; min-width: 0;">
+				<h4 class="font-weight-bold mb-1" style="font-size: 0.9rem; line-height: 1.35; margin: 0 0 4px 0;">
+					<a href="{{ art.url }}" title="{{ art.title }}" class="line_2 text-dark" style="text-decoration: none; color: var(--text-dark, #0f172a); transition: color 0.2s;">{{ art.title }}</a>
+				</h4>
+				<span class="d-block text-muted small" style="font-size: 0.78rem; color: var(--text-gray, #64748b);">{{ art.published_on | date: 'dd/MM/yyyy' }}</span>
+			</div>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}
