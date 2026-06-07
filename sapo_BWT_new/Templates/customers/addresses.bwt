@@ -3,6 +3,21 @@
     <style>
         .layout-address .modal-dialog {
             max-width: 600px !important;
+            margin: 1.75rem auto !important;
+            display: flex !important;
+            align-items: center !important;
+            min-height: calc(100vh - 3.5rem) !important;
+        }
+        @media (max-width: 768px) {
+            .layout-address .modal-dialog {
+                min-height: calc(100vh - 1rem) !important;
+                margin: 0.5rem auto !important;
+                max-width: 95% !important;
+            }
+        }
+        .modal_address.modal {
+            background: rgba(15, 23, 42, 0.6) !important;
+            backdrop-filter: blur(4px);
         }
         .layout-address .modal-content {
             border-radius: var(--radius-lg) !important;
@@ -129,6 +144,104 @@
         .select2-container--default .select2-selection--single .select2-selection--arrow {
             height: 46px !important;
         }
+        
+        .address-modal-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: rgba(15,23,42,0.5) !important;
+            z-index: 999999 !important;
+            display: none;
+            align-items: center !important;
+            justify-content: center !important;
+            backdrop-filter: blur(6px) !important;
+        }
+        .address-modal-overlay.active {
+            display: flex !important;
+        }
+        .address-modal-overlay .modal-content {
+            background: #fff !important;
+            width: 100% !important;
+            max-width: 460px !important;
+            border-radius: 24px !important;
+            overflow: hidden !important;
+            display: flex !important;
+            flex-direction: column !important;
+            max-height: 80vh !important;
+            box-shadow: 0 25px 60px -12px rgba(0,0,0,0.25) !important;
+            margin: 20px !important;
+            position: relative !important;
+        }
+        .address-modal-overlay .modal-header {
+            padding: 20px 25px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            background: #fff !important;
+            position: static !important;
+        }
+        .address-modal-overlay .modal-header h3 {
+            margin: 0 !important;
+            font-size: 1.15rem !important;
+            font-weight: 800 !important;
+            color: var(--text-dark) !important;
+        }
+        .address-modal-overlay .btn-close {
+            background: none !important;
+            border: none !important;
+            padding: 5px !important;
+            cursor: pointer !important;
+            font-size: 1.2rem !important;
+            color: var(--text-gray) !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .address-modal-overlay .modal-search {
+            padding: 15px 25px !important;
+            border-bottom: 1px solid var(--border-color) !important;
+        }
+        .address-modal-overlay .modal-search input {
+            width: 100% !important;
+            padding: 10px 15px !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: var(--radius-md) !important;
+            background: #f8fafc !important;
+            outline: none !important;
+            color: var(--text-dark) !important;
+        }
+        .address-modal-overlay .modal-body {
+            padding: 0 !important;
+            overflow-y: auto !important;
+            flex-grow: 1 !important;
+            background: #fff !important;
+        }
+        .address-modal-overlay .list-item {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            padding: 14px 25px !important;
+            border-bottom: 1px solid var(--border-color) !important;
+            cursor: pointer !important;
+            transition: 0.2s !important;
+            font-size: 0.95rem !important;
+            color: var(--text-dark) !important;
+            background: #fff !important;
+        }
+        .address-modal-overlay .list-item:hover {
+            background: #f8fafc !important;
+            color: var(--primary) !important;
+        }
+        .address-modal-overlay .modal-footer {
+            padding: 15px 25px !important;
+            border-top: 1px solid var(--border-color) !important;
+            background: #fff !important;
+            display: flex !important;
+            justify-content: flex-start !important;
+            position: static !important;
+        }
     </style>
     
     <div class="dashboard-container">
@@ -142,7 +255,7 @@
                             <i class="ph-fill ph-map-pin" style="color: var(--primary);"></i> 
                             {{settings.addresss_title}}
                         </h1>
-                        <button class="btn-add-addr btn-edit-addr btn-nava btn-nava-primary" type="button">
+                        <button class="btn-add-addr btn-edit-addr btn-nava btn-nava-primary" type="button" data-toggle="modal" data-target="#add_address">
                             <i class="ph-bold ph-plus"></i> {{settings.addresss_add}}
                         </button>
                     </div>
@@ -180,25 +293,35 @@
                                                     <input type="number" class="form-control" id="Phone" pattern="\d+" name="Phone" maxlength="12" value="{{form.phone}}">
                                                 </fieldset>
                                             </div>
-                                            <div class="field col-12 col-md-6">
+                                            <div class="field col-12">
                                                 <fieldset class="form-group">
                                                     <label>{{settings.account_infor_company}}</label>
-                                                    <input type="text" class="form-control" name="Company" value="{{form.company}}" >
+                                                    <input type="text" class="form-control" name="Company" value="{{form.company}}" placeholder="Nhập tên công ty (tùy chọn)">
                                                 </fieldset>
                                             </div>
-                                            <div class="field col-12 col-md-6">
-                                                <fieldset class="form-group">
-                                                    <label>{{settings.account_infor_address}}</label>
-                                                    <input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
-                                                </fieldset>
-                                            </div>
-                                            <div class="field col-12">
+                                            <!-- Hide Country Select -->
+                                            <div class="field col-12" style="display: none !important;">
                                                 <fieldset class="form-group select-field">
                                                     <label>{{settings.account_infor_country}}</label>
                                                     <select name="Country" class="form-control vn-fix add mySelect2" id="mySelect1" data-default="{{form.country | default: 'Vietnam'}}" >{{ country_option_tags }}</select>
                                                 </fieldset>
                                             </div>
-                                            <div class="group-country col-12">
+                                            <div class="field col-12">
+                                                <fieldset class="form-group">
+                                                    <label>Khu vực</label>
+                                                    <div class="nava-address-trigger form-control" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; background: #f8fafc; min-height: 48px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 15px; user-select: none;" data-zone="billing">
+                                                        <span class="nava-address-display" style="color: var(--text-gray); font-weight: 500;">Chọn Tỉnh/Thành, Quận/Huyện, Phường/Xã</span>
+                                                        <i class="ph-bold ph-caret-down" style="color: var(--text-gray);"></i>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                            <div class="field col-12">
+                                                <fieldset class="form-group">
+                                                    <label>Số nhà, tên đường cụ thể...</label>
+                                                    <input type="text" class="form-control" name="Address1" value="{{form.address1}}" placeholder="Nhập số nhà, tên đường cụ thể...">
+                                                </fieldset>
+                                            </div>
+                                            <div class="group-country col-12" style="display: none !important;">
                                                 <div class="row">
                                                     <fieldset class="form-group select-field not-vn col-12 col-md-4">
                                                         <label>{{settings.account_infor_city}}</label>
@@ -214,10 +337,11 @@
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                            <div class="field col-12">
+                                            <!-- Hide Zip Code -->
+                                            <div class="field col-12" style="display: none !important;">
                                                 <fieldset class="form-group">
                                                     <label>{{settings.account_infor_zip}}</label>
-                                                    <input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
+                                                    <input type="text" class="form-control" name="Zip" value="70000" >
                                                 </fieldset>
                                             </div>
                                         </div>
@@ -285,7 +409,7 @@
                                     </div>
                                 </div>
                                 <div id="tool_address_{{address.id}}" class="btn-address">
-                                    <button title="{{settings.addresss_edit}}" class="btn-edit-addr btn-edit" type="button" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
+                                    <button title="{{settings.addresss_edit}}" class="btn-edit-addr btn-edit" type="button" data-toggle="modal" data-target="#edit_address_{{address.id}}" data-form="edit_address_{{address.id}}" aria-controls="edit_address_{{address.id}}">
                                         {%-include 'svg_edit'-%}
                                     </button>
                                     <button title="{{settings.addresss_delete}}" class="{% if address.id == customer.default_address.id %}d-none {%else%}d-flex {% endif %}btn-delete" type="button" onclick="Bizweb.CustomerAddress.destroy({{address.id}});return false">
@@ -325,25 +449,39 @@
                                                         <input type="number" pattern="\d+" class="form-control" id="Phone" name="Phone" maxlength="12" value="{{form.phone}}">
                                                     </fieldset>    
                                                 </div>
-                                                <div class="field col-12 col-md-6">
+                                                <div class="field col-12">
                                                     <fieldset class="form-group">
                                                         <label>{{settings.account_infor_company}}</label>
-                                                        <input type="text" class="form-control" name="Company" value="{{form.company}}" >
+                                                        <input type="text" class="form-control" name="Company" value="{{form.company}}" placeholder="Nhập tên công ty (tùy chọn)">
                                                     </fieldset>
                                                 </div>
-                                                <div class="field col-12 col-md-6">
-                                                    <fieldset class="form-group">
-                                                        <label>{{settings.account_infor_address}}</label>
-                                                        <input type="text" class="form-control" name="Address1" value="{{form.address1}}" >
-                                                    </fieldset>
-                                                </div>
-                                                <div class="field col-12">
+                                                <!-- Hide Country Select -->
+                                                <div class="field col-12" style="display: none !important;">
                                                     <fieldset class="form-group select-field">
                                                         <label>{{settings.account_infor_country}}</label>
                                                         <select name="Country" class="form-control mySelect2" id="mySelect2_{{address.id}}" data-default="{{form.country}}" >{{form.country}}{{ country_option_tags }}</select>
                                                     </fieldset>
                                                 </div>
-                                                <div class="group-country col-12">
+                                                <div class="field col-12">
+                                                    <fieldset class="form-group">
+                                                        <label>Khu vực</label>
+                                                        <div class="nava-address-trigger form-control" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; background: #f8fafc; min-height: 48px; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 15px; user-select: none;" data-zone="{{address.id}}">
+                                                            <span class="nava-address-display" style="color: var(--text-dark); font-weight: 500;">
+                                                                {%- if address.province != null and address.province != "" -%}{{ address.province }}{%- endif -%}
+                                                                {%- if address.district != null and address.district != "" -%}, {{ address.district }}{%- endif -%}
+                                                                {%- if address.ward != null and address.ward != "" -%}, {{ address.ward }}{%- endif -%}
+                                                            </span>
+                                                            <i class="ph-bold ph-caret-down" style="color: var(--text-gray);"></i>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="field col-12">
+                                                    <fieldset class="form-group">
+                                                        <label>Số nhà, tên đường cụ thể...</label>
+                                                        <input type="text" class="form-control" name="Address1" value="{{form.address1}}" placeholder="Nhập số nhà, tên đường cụ thể...">
+                                                    </fieldset>
+                                                </div>
+                                                <div class="group-country col-12" style="display: none !important;">
                                                     <div class="row">
                                                         <fieldset class="form-group select-field not-vn col-12 col-md-4">
                                                             <label>{{settings.account_infor_city}}</label>
@@ -359,10 +497,11 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
-                                                <div class="field col-12">
+                                                <!-- Hide Zip Code -->
+                                                <div class="field col-12" style="display: none !important;">
                                                     <fieldset class="form-group">
                                                         <label>{{settings.account_infor_zip}}</label>
-                                                        <input type="text" class="form-control" name="Zip" value="{{form.zip}}" >
+                                                        <input type="text" class="form-control" name="Zip" value="70000" >
                                                     </fieldset>
                                                 </div>
                                             </div>
@@ -396,4 +535,201 @@
             </div>
         </div>
     </div>
+
+    <!-- Streamlined Address Selector Modal -->
+    <div id="nava-address-modal" class="address-modal-overlay" onclick="closeAddressModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="nava-modal-title">Chọn Tỉnh / Thành phố</h3>
+                <button class="btn-close" onclick="closeAddressModal()"><i class="ph-bold ph-x"></i></button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="address-search" placeholder="Tìm kiếm...">
+            </div>
+            <div class="modal-body" id="address-list">
+                <!-- Populated dynamically -->
+            </div>
+            <div class="modal-footer" id="nava-modal-footer" style="display: none;">
+                <button class="btn-back-step" onclick="goBackAddressStep()" style="display: flex; align-items: center; gap: 6px; background: #f1f5f9; border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; color: var(--text-dark); white-space: nowrap;"><i class="ph-bold ph-arrow-left"></i> Quay lại</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var locationData = null;
+            fetch("{{ 'ctiy.txt' | asset_url }}")
+                .then(function(res) { return res.json(); })
+                .then(function(data) { locationData = data; })
+                .catch(function(err) { console.error("Lỗi tải ctiy.txt", err); });
+
+            var activeZone = null;
+            var currentStep = 1; // 1: City, 2: District/Ward
+            var selectedCity = null;
+            
+            // Open modal when clicking custom trigger field
+            $(document).on('click', '.nava-address-trigger', function() {
+                activeZone = $(this).attr('data-zone');
+                currentStep = 1;
+                selectedCity = null;
+                $('#address-search').val('');
+                renderOptions();
+                $('#nava-address-modal').addClass('active');
+            });
+            
+            window.closeAddressModal = function() {
+                $('#nava-address-modal').removeClass('active');
+            };
+            
+            window.goBackAddressStep = function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    $('#address-search').val('');
+                    renderOptions();
+                }
+            };
+            
+            $('#address-search').on('input', function() {
+                renderOptions();
+            });
+            
+            function getCleanCityName(name) {
+                var match = name.match(/\[(.*?)\]/);
+                return match ? match[1] : name.replace(/\s*\(.*?\)\s*/g, '').trim();
+            }
+            
+            function waitForOptions(selectEl, callback) {
+                var checkCount = 0;
+                var interval = setInterval(function() {
+                    checkCount++;
+                    if (selectEl.find('option').length > 1 || checkCount > 40) {
+                        clearInterval(interval);
+                        callback();
+                    }
+                }, 50);
+            }
+            
+            function renderOptions() {
+                var listEl = $('#address-list');
+                listEl.empty();
+                
+                if (!locationData) {
+                    listEl.html('<div style="padding: 20px; text-align: center; color: var(--text-gray);">Đang tải dữ liệu khu vực...</div>');
+                    return;
+                }
+                
+                var query = $('#address-search').val().toLowerCase().trim();
+                
+                if (currentStep === 1) {
+                    $('#nava-modal-title').text('Chọn Tỉnh / Thành phố');
+                    $('#nava-modal-footer').hide();
+                    
+                    var filteredCities = locationData.cities.filter(function(c) {
+                        var clean = getCleanCityName(c.name).toLowerCase();
+                        var raw = c.name.toLowerCase();
+                        return clean.includes(query) || raw.includes(query);
+                    });
+                    
+                    if (filteredCities.length === 0) {
+                        listEl.html('<div style="padding: 20px; text-align: center; color: var(--text-gray);">Không tìm thấy</div>');
+                        return;
+                    }
+                    
+                    filteredCities.forEach(function(c) {
+                        var div = $('<div class="list-item"></div>');
+                        div.html('<span>' + getCleanCityName(c.name) + '</span> <i class="ph-bold ph-caret-right" style="color:var(--text-gray)"></i>');
+                        div.on('click', function() {
+                            selectedCity = c;
+                            currentStep = 2;
+                            $('#address-search').val('');
+                            renderOptions();
+                        });
+                        listEl.append(div);
+                    });
+                } else if (currentStep === 2) {
+                    $('#nava-modal-title').text('Chọn Quận / Huyện');
+                    $('#nava-modal-footer').show();
+                    
+                    var cleanCityName = getCleanCityName(selectedCity.name);
+                    var filteredWards = locationData.wards.filter(function(w) {
+                        return w.city === cleanCityName;
+                    });
+                    
+                    if (query) {
+                        filteredWards = filteredWards.filter(function(w) {
+                            return w.wnew.toLowerCase().includes(query) || (w.wold && w.wold.toLowerCase().includes(query));
+                        });
+                    }
+                    
+                    if (filteredWards.length === 0) {
+                        listEl.html('<div style="padding: 20px; text-align: center; color: var(--text-gray);">Không tìm thấy</div>');
+                        return;
+                    }
+                    
+                    filteredWards.forEach(function(w) {
+                        var div = $('<div class="list-item"></div>');
+                        div.html('<div><span>' + w.wnew + '</span>' + (w.wold && w.wold !== w.wnew ? '<div class="list-item-sub">(Cũ: ' + w.wold + ')</div>' : '') + '</div> <i class="ph-bold ph-check" style="color:transparent"></i>');
+                        div.on('click', function() {
+                            closeAddressModal();
+                            
+                            // 1. Select Province
+                            var provinceSelectId = activeZone === 'billing' ? 'mySelect2' : 'mySelect3_' + activeZone;
+                            var provinceSelect = $('#' + provinceSelectId);
+                            
+                            var foundProvinceVal = "";
+                            provinceSelect.find('option').each(function() {
+                                var optText = $(this).text().toLowerCase();
+                                if (optText.includes(cleanCityName.toLowerCase()) || cleanCityName.toLowerCase().includes(optText)) {
+                                    foundProvinceVal = $(this).val();
+                                }
+                            });
+                            
+                            if (foundProvinceVal) {
+                                provinceSelect.val(foundProvinceVal).trigger('change');
+                            }
+                            
+                            // 2. Select District
+                            var districtSelectId = activeZone === 'billing' ? 'mySelect3' : 'mySelect4_' + activeZone;
+                            var districtSelect = $('#' + districtSelectId);
+                            
+                            waitForOptions(districtSelect, function() {
+                                var foundDistrictVal = "";
+                                districtSelect.find('option').each(function() {
+                                    var optText = $(this).text().toLowerCase();
+                                    if (optText.includes(w.wnew.toLowerCase()) || w.wnew.toLowerCase().includes(optText)) {
+                                        foundDistrictVal = $(this).val();
+                                    }
+                                    // Fallback match check (e.g. "Quận X" vs "X")
+                                });
+                                
+                                if (foundDistrictVal) {
+                                    districtSelect.val(foundDistrictVal).trigger('change');
+                                } else {
+                                    var firstOpt = districtSelect.find('option').eq(1).val();
+                                    if (firstOpt) districtSelect.val(firstOpt).trigger('change');
+                                }
+                                
+                                // 3. Select Ward
+                                var wardSelectId = activeZone === 'billing' ? 'mySelect4' : 'mySelect5_' + activeZone;
+                                var wardSelect = $('#' + wardSelectId);
+                                
+                                waitForOptions(wardSelect, function() {
+                                    var firstWardOpt = wardSelect.find('option').eq(1).val();
+                                    if (firstWardOpt) {
+                                        wardSelect.val(firstWardOpt).trigger('change');
+                                    }
+                                });
+                            });
+                            
+                            var displayVal = cleanCityName + ', ' + w.wnew;
+                            $('.nava-address-trigger[data-zone="' + activeZone + '"] .nava-address-display')
+                                .text(displayVal)
+                                .css('color', 'var(--text-dark)');
+                        });
+                        listEl.append(div);
+                    });
+                }
+            }
+        });
+    </script>
 </section>
