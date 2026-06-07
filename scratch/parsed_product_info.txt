@@ -1,0 +1,56 @@
+Found product-selectors:
+ 12 12" class="icon-tick-bold">
+		<use href="#svg-tick" />
+	</svg>
+</div>	</div>
+</div>
+                            
+                            <div class="box-variant clearfix  d-none ">
+
+                                <fieldset class="form-group">
+                                    <select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
+                                        <option selected="selected" data-available="true" data-price="14890000" value="208064904">208064904 7600M - 14.890.000₫</option>
+                                        <option  data-available="true" data-price="17790000" value="208064905">208064905 7600XT - 17.790.000₫</option>
+                                    </select>
+                                </fieldset>
+                            </div>
+                            
+                            <div class="qty-price-row d-flex" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+                                    <div class="qty-selector custom-btn-number form-inline border-0 d-inline-flex align-items-cent
+
+Found 2 option tags.
+<option selected="selected" data-available="true" data-price="14890000" value="208064904">208064904 7600M - 14.890.000₫</option>
+
+<option  data-available="true" data-price="17790000" value="208064905">208064905 7600XT - 17.790.000₫</option>
+
+Found 41 swatch references.
+swatch_style.scss.css?1780672811309" type="text/css">
+<link rel="preload" as="style"  href="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/product_style.scss.css?1780672811309" type="text/css">
+<link href="//bizweb.dktcdn.net/100/543/817/theme
+swatch_style.scss.css?1780672811309" rel="stylesheet" type="text/css" media="all" />
+<link href="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/product_style.scss.css?1780672811309" rel="stylesheet" type="text/css" media="all" />
+
+
+
+
+<link rel
+swatch-element label {
+                background: #1e293b !important;
+                border-color: #334155 !important;
+                color: #cbd5e1 !important;
+            }
+            [data-theme="dark"] .swatch-element:hover label {
+          
+swatch-element:hover label {
+                border-color: #3385ff !important;
+                color: #3385ff !important;
+                background: rgba(51, 133, 255, 0.08) !important;
+            }
+            [data-theme="dark"] .swatch-element i
+swatch-element input:checked + label {
+                border-color: #3385ff !important;
+                color: #3385ff !important;
+                background: rgba(51, 133, 255, 0.15) !important;
+                box-shadow: 0 0 0 1px #3385ff !import

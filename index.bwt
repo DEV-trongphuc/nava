@@ -22,6 +22,20 @@
                 .mobile-break { display: block; }
                 .customer-card-title { font-size: 1.2rem; }
             }
+            /* Override homepage ecosystem card titles to be large and centered */
+            .product-section .product-card .card-title {
+                text-align: center !important;
+                font-size: 2rem !important;
+                font-weight: 800 !important;
+                height: auto !important;
+                max-height: none !important;
+                display: block !important;
+            }
+            @media (max-width: 991px) {
+                .product-section .product-card .card-title {
+                    font-size: 1.5rem !important;
+                }
+            }
         </style>
         <!-- SEO H1 -->
         <h1 style="position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0;">NAVA STORE - Mini PC & eGPU</h1>
@@ -34,7 +48,7 @@
                 width: 100%;
                 height: 100vh;
                 background: #0a0f1c;
-                z-index: 999999;
+                z-index: 2147483647 !important;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -1311,7 +1325,7 @@
         <!-- Main JS -->
         <!-- Mobile Sidebar Drawer -->
         <div class="sidebar-overlay"></div>
-        <div class="sidebar-drawer">
+        <div class="sidebar-drawer" data-lenis-prevent>
             <div class="sidebar-header"
                 style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 15px 20px; border-bottom: 1px solid var(--border-color);">
                 <div class="logo" style="flex-shrink: 0;">
@@ -1361,7 +1375,7 @@
 
         <!-- Cart Drawer -->
         <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
-        <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer" id="cart-drawer" data-lenis-prevent>
             <div class="cart-drawer-header">
                 <h2>Giỏ hàng của bạn</h2>
                 <button class="cart-close-btn" id="cart-close-btn" aria-label="Đóng giỏ hàng"><i class="ph ph-x"></i></button>

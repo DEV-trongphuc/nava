@@ -228,33 +228,50 @@
                 // Show sticky bar on scroll
                 // Show sticky bar on scroll
                 // Show sticky bar on scroll
+                let isStickyBarTicking = false;
+                let cachedStickyBar = null;
+                let cachedWrappers = null;
+
                 function toggleStickyBar(e) {
-                    const stickyBar = document.getElementById('sticky-cart-bar');
-                    if (!stickyBar) return;
-                    
-                    const threshold = window.innerWidth <= 768 ? 400 : 600;
-                    let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-                    
-                    // Fallback for Sapo themes using wrapper scrolling
-                    if (scrollY === 0) {
-                        const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main');
-                        for (let i=0; i<wrappers.length; i++) {
-                            if (wrappers[i].scrollTop > scrollY) scrollY = wrappers[i].scrollTop;
-                        }
-                    }
-                    
-                    // Trust event target if it's a large scrollable area
-                    if (e && e.target && e.target.scrollTop > scrollY) {
-                        if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
-                            scrollY = e.target.scrollTop;
-                        }
-                    }
-                    
-                    if (scrollY > threshold) {
-                        stickyBar.style.setProperty('transform', 'translateY(0)', 'important');
-                        stickyBar.style.setProperty('display', 'block', 'important');
-                    } else {
-                        stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                    if (!isStickyBarTicking) {
+                        window.requestAnimationFrame(() => {
+                            if (!cachedStickyBar) {
+                                cachedStickyBar = document.getElementById('sticky-cart-bar');
+                            }
+                            if (!cachedStickyBar) {
+                                isStickyBarTicking = false;
+                                return;
+                            }
+                            
+                            const threshold = window.innerWidth <= 768 ? 400 : 600;
+                            let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                            
+                            if (scrollY === 0) {
+                                if (!cachedWrappers) {
+                                    cachedWrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main');
+                                }
+                                for (let i = 0; i < cachedWrappers.length; i++) {
+                                    if (cachedWrappers[i].scrollTop > scrollY) {
+                                        scrollY = cachedWrappers[i].scrollTop;
+                                    }
+                                }
+                            }
+                            
+                            if (e && e.target && e.target.scrollTop > scrollY) {
+                                if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
+                                    scrollY = e.target.scrollTop;
+                                }
+                            }
+                            
+                            if (scrollY > threshold) {
+                                cachedStickyBar.style.setProperty('transform', 'translateY(0)', 'important');
+                                cachedStickyBar.style.setProperty('display', 'block', 'important');
+                            } else {
+                                cachedStickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                            }
+                            isStickyBarTicking = false;
+                        });
+                        isStickyBarTicking = true;
                     }
                 }
 

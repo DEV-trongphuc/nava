@@ -1,0 +1,315 @@
+function syncSwatches() {
+        if (isSyncing) return;
+        isSyncing = true;
+        
+        try {
+            const selectEl = document.querySelector('.box-variant #product-selectors');
+            const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+            
+            let isDefaultRam = false;
+            let isDefaultSsd = false;
+
+            const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+            if (ramDisplay) {
+                const text = ramDisplay.textContent.toUpperCase();
+                if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+                    isDefaultRam = true;
+                }
+            } else {
+                isDefaultRam = true;
+            }
+
+            const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+            if (ssdDisplay) {
+                const text = ssdDisplay.textContent.toUpperCase();
+                if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+                    isDefaultSsd = true;
+                }
+            } else {
+                isDefaultSsd = true;
+            }
+
+            // Also check Frequently Bought Together select elements
+            const isFbtActive = !!document.querySelector('frequently-buy-together');
+            if (isFbtActive) {
+                let hasFbtRam = false;
+                let hasFbtSsd = false;
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    if (labelText.includes('RAM') || labelText.includes('DRAM')) {
+                        hasFbtRam = true;
+                    }
+                    if (labelText.includes('SSD') || labelText.includes('NVME')) {
+                        hasFbtSsd = true;
+                    }
+                });
+
+                isDefaultRam = !hasFbtRam;
+                isDefaultSsd = !hasFbtSsd;
+
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const val = select.value;
+                    const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+                    const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+                    const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+                    
+                    const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+
+                    if (isRam) {
+                        if (isDefaultVal) {
+                            isDefaultRam = true;
+                        } else {
+                            isDefaultRam = false;
+                        }
+                    }
+                    if (isSsd) {
+                        if (isDefaultVal) {
+                            isDefaultSsd = true;
+                        } else {
+                            isDefaultSsd = false;
+                        }
+                    }
+                });
+            }
+
+            let isSoldOut = !window.mainProductAvailable;
+            if (!window.mainProductAvailable) {
+                // Main product is out of stock. If they configured at least one accessory, they can buy.
+                if (isDefaultRam && isDefaultSsd) {
+                    isSoldOut = true;
+                } else {
+                    isSoldOut = false;
+                }
+            }
+
+            let priceVal = 0;
+            
+            const swatchRows = document.querySelectorAll('.swatch');
+            if (swatchRows.length > 0) {
+                const selectedValues = [];
+                swatchRows.forEach(swatchRow => {
+                    const checkedInput = swatchRow.querySelector('input[type="radio"]:checked');
+                    if (checkedInput) {
+                        selectedValues.push(checkedInput.value.trim());
+                        const parent = checkedInput.closest('.swatch-element');
+                        if (parent && parent.classList.contains('soldout')) {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        }
+                    }
+                });
+                
+                if (selectEl) {
+                    const options = Array.from(selectEl.options);
+                    let matchedOption = null;
+                    
+                    options.forEach(opt => {
+                        const textParts = opt.text.split('-');
+                        let titlePart = textParts[0].trim();
+                        titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+                        
+                        const optValues = titlePart.split('/').map(v => v.trim());
+                        
+                        let isMatch = true;
+                        for (let i = 0; i < selectedValues.length; i++) {
+                            if (optValues[i] !== selectedValues[i]) {
+                                isMatch = false;
+                                break;
+                            }
+                        }
+                        if (isMatch) {
+                            matchedOption = opt;
+                        }
+                    });
+                    
+                    if (matchedOption) {
+                        if (selectEl.value !== matchedOption.value) {
+                            selectEl.value = matchedOption.value;
+                            selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        
+                        const isAvail = matchedOption.getAttribute('data-available');
+                        if (isAvail === 'false') {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        } else if (isAvail === 'true') {
+                            isSoldOut = false;
+                        }
+                        priceVal = parseInt(matchedOption.getAttribute('data-price') || '0', 10);
+                    }
+                }
+            } else {
+                // No swatch radio rows on page (fallback to standard dropdown)
+                if (selectEl) {
+                    const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+                    if (activeOption) {
+                        const isAvail = activeOption.getAttribute('data-available');
+                        if (isAvail === 'false') {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        } else if (isAvail === 'true') {
+                            isSoldOut = false;
+                        }
+                        priceVal = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+                    }
+                } else if (hiddenInput) {
+                    const isAvail = hiddenInput.getAttribute('data-available');
+                    if (isAvail === 'false') {
+                        if (window.mainProductAvailable) {
+                            isSoldOut = true;
+                        }
+                    } else if (isAvail === 'true') {
+                        isSoldOut = false;
+                    }
+                    priceVal = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+                }
+            }
+            
+            // Priority price retrieval for Frequently Bought Together
+            let fbtPriceChecked = false;
+            if (isFbtActive) {
+                const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+                if (fbtTotalEl) {
+                    priceVal = parsePrice(fbtTotalEl.textContent);
+                    fbtPriceChecked = true;
+                }
+            }
+
+            // Fallback: If priceVal is still 0, check if we can retrieve it from #selected-variant-price
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const mainPriceText = document.getElementById('selected-variant-price')?.textContent;
+                if (mainPriceText) {
+                    priceVal = parsePrice(mainPriceText);
+                }
+            }
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const stickyPriceEl = document.getElementById('sticky-price')?.textContent;
+                if (stickyPriceEl) {
+                    priceVal = parsePrice(stickyPriceEl);
+                }
+            }
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const bsPriceEl = document.getElementById('bs-price')?.textContent;
+                if (bsPriceEl) {
+                    priceVal = parsePrice(bsPriceEl);
+                }
+            }
+        
+        // Update Buy Button UI based on availability and price
+        const btnInStock = document.querySelector('.btn-group-instock');
+        const btnOutStock = document.querySelector('.btn-group-outstock');
+        const statusEl = document.getElementById('availability-status');
+        const btnAddToCart = document.getElementById('btn-add-to-cart');
+        const btnInstallment = document.getElementById('btn-installment-main');
+        const btnBuyNow = document.getElementById('btn-buy-now');
+        const bsBuyBtn = document.querySelector('.bs-buy-btn');
+        const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
+        
+        // Frequently Bought Together buttons
+        const fbtBuyNow = document.querySelector('frequently-buy-together button.tg-buy-now') || document.querySelector('.tg-buy-now');
+        const fbtInstallment = document.querySelector('frequently-buy-together button.js-fbt-installment') || document.querySelector('.js-fbt-installment');
+        const fbtAddCart = document.querySelector('frequently-buy-together button.tg-addcart') || document.querySelector('.tg-addcart');
+
+        if (isSoldOut) {
+            if (btnInStock) btnInStock.style.display = 'flex';
+            if (btnOutStock) btnOutStock.style.display = 'none';
+
+            if (statusEl) {
+                statusEl.innerText = 'Hết hàng';
+                statusEl.style.color = '#ef4444';
+            }
+            if (btnAddToCart) {
+                btnAddToCart.style.display = 'none';
+            }
+            if (btnInstallment) {
+                btnInstallment.style.display = 'none';
+            }
+            if (btnBuyNow) {
+                btnBuyNow.disabled = false;
+                btnBuyNow.innerText = 'LIÊN HỆ';
+                btnBuyNow.style.background = '#334155';
+                btnBuyNow.style.color = 'white';
+                btnBuyNow.style.opacity = '1';
+                btnBuyNow.style.pointerEvents = 'auto';
+                btnBuyNow.style.setProperty('flex', '1', 'important');
+                btnBuyNow.style.setProperty('width', '100%', 'important');
+                btnBuyNow.style.display = 'flex';
+            }
+            if (bsBuyBtn) {
+                bsBuyBtn.disabled = false;
+                bsBuyBtn.innerText = 'LIÊN HỆ';
+                bsBuyBtn.style.background = '#334155';
+                bsBuyBtn.style.color = 'white';
+                bsBuyBtn.style.opacity = '1';
+                bsBuyBtn.style.pointerEvents = 'auto';
+                bsBuyBtn.style.setProperty('flex', '1', 'important');
+                bsBuyBtn.style.setProperty('width', '100%', 'important');
+                bsBuyBtn.style.display = 'flex';
+            }
+            if (bsAddCartBtn) {
+                bsAddCartBtn.style.display = 'none';
+            }
+            
+            // FBT elements when sold out
+            if (fbtAddCart) {
+                fbtAddCart.style.display = 'none';
+            }
+            if (fbtInstallment) {
+                fbtInstallment.style.display = 'none';
+            }
+            if (fbtBuyNow) {
+                fbtBuyNow.disabled = false;
+                fbtBuyNow.innerText = 'LIÊN HỆ';
+                fbtBuyNow.style.background = '#334155';
+                fbtBuyNow.style.color = 'white';
+                fbtBuyNow.style.opacity = '1';
+                fbtBuyNow.style.pointerEvents = 'auto';
+                fbtBuyNow.style.setProperty('flex', '1', 'important');
+                fbtBuyNow.style.setProperty('width', '100%', 'important');
+                fbtBuyNow.style.display = 'flex';
+            }
+        } else {
+            if (btnInStock) btnInStock.style.display = 'flex';
+            if (btnOutStock) btnOutStock.style.display = 'none';
+            
+            // Reset disabled states and styles
+            if (btnAddToCart) {
+                btnAddToCart.disabled = false;
+                btnAddToCart.style.opacity = '';
+                btnAddToCart.style.pointerEvents = '';
+                btnAddToCart.style.display = '';
+            }
+            if (btnInstallment) {
+                btnInstallment.disabled = false;
+                btnInstallment.style.opacity = '';
+                btnInstallment.style.pointerEvents = '';
+                btnInstallment.style.display = '';
+            }
+            if (btnBuyNow) {
+                btnBuyNow.disabled = false;
+                btnBuyNow.style.opacity = '';
+                btnBuyNow.style.pointerEvents = '';
+                btnBuyNow.style.display = '';
+            }
+            if (priceVal === 0) {
+                if (statusEl) {
+                    statusEl.innerText = 'Liên hệ';
+                    statusEl.style.color = '#003366';
+                }
+                if (btnAddToCart) {
+                    btnAddToCart.style.display = 'none';
+                }
+                if (btnInstallment) {
+                    btnInstallment.style.display = 'none';
+                }
+                if (btnBuyNow) {
+                    btnBuyNow.disabled = false;
+                    btnBuyNow.innerText = 'LIÊN HỆ';
+                    btnBuyNow.style.background = 

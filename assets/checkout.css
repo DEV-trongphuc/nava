@@ -1,0 +1,859 @@
+/* ==========================================================================
+   NAVASTORE CUSTOM CHECKOUT STYLES - WOW PREMIUM
+   Targeting Sapo's BEM classes (double underscore) & custom local selectors
+   ========================================================================== */
+
+:root {
+    --primary: #003366;
+    --primary-light: #004c99;
+    --primary-dark: #001a33;
+    --secondary: #004c99;
+    --text-dark: #0f172a;
+    --text-gray: #475569;
+    --text-muted: #94a3b8;
+    --bg-white: #ffffff;
+    --bg-gray: #f8fafc;
+    --border-color: #e2e8f0;
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 0 4px rgba(0, 51, 102, 0.12);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- 1. Base Styles & Reset --- */
+body, input, select, textarea, button {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+}
+
+body {
+    background-color: var(--bg-gray) !important;
+    color: var(--text-dark) !important;
+    line-height: 1.6 !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* --- 2. Header & Banner --- */
+.banner, .checkout-header {
+    background-color: var(--bg-white) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    padding: 16px 0 !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.logo__image, .logo-image, .checkout-header img {
+    max-height: 48px !important;
+    width: auto !important;
+    object-fit: contain !important;
+}
+
+/* Hide duplicate header inside main body on desktop */
+.main__header {
+    display: none !important;
+}
+
+/* --- 3. Layout Grid & Wrapper --- */
+.wrap, .container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 15px !important;
+}
+
+.content, .checkout-grid {
+    padding-top: 10px !important;
+}
+
+/* Sapo structure using flex */
+.content > .wrap {
+    display: flex !important;
+    gap: 40px !important;
+    flex-wrap: nowrap !important;
+}
+
+.main {
+    flex: 0 0 62% !important; /* Fixed basis to prevent squeezing */
+    width: 62% !important;
+    max-width: 62% !important;
+    padding-right: 0 !important;
+    padding-top: 20px !important;
+    padding-bottom: 50px !important;
+    box-sizing: border-box !important;
+}
+
+.sidebar {
+    flex: 0 0 38% !important; /* Fixed basis to prevent squeezing */
+    width: 38% !important;
+    max-width: 38% !important;
+    background-color: var(--bg-white) !important;
+    border-left: 1px solid var(--border-color) !important;
+    padding: 20px 0 50px 30px !important;
+    box-shadow: inset 1px 0 0 var(--border-color) !important;
+    box-sizing: border-box !important;
+}
+
+/* Row wrapper inside main */
+.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+    box-sizing: border-box !important;
+}
+
+.col {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    box-sizing: border-box !important;
+}
+
+/* Force equal width grid columns inside main to prevent uneven flex squeezing */
+.col--two {
+    flex: 0 0 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 1199px) {
+    .col--two {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+/* --- 4. Cards & Panels (Sections) --- */
+.section, .checkout-card {
+    background: var(--bg-white) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-lg) !important;
+    padding: 24px !important;
+    margin-bottom: 24px !important;
+    box-shadow: var(--shadow-md) !important;
+    transition: var(--transition) !important;
+}
+
+.section:hover, .checkout-card:hover {
+    box-shadow: var(--shadow-lg) !important;
+    border-color: #cbd5e1 !important;
+}
+
+.section__header, .section-header {
+    margin-bottom: 20px !important;
+    border-bottom: 1px dashed var(--border-color) !important;
+    padding-bottom: 12px !important;
+}
+
+.section__title, .section-title {
+    font-size: 1.2rem !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    letter-spacing: -0.02em !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 0 !important;
+}
+
+.section__title i, .section__title svg {
+    color: var(--primary) !important;
+    font-size: 1.35rem !important;
+}
+
+/* Layout Flex for header sections (align title and login link) */
+.layout-flex {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+}
+
+.layout-flex__item--stretch {
+    flex-grow: 1 !important;
+}
+
+.layout-flex a {
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    transition: var(--transition) !important;
+}
+
+.layout-flex a:hover {
+    color: var(--primary-light) !important;
+}
+
+.layout-flex a i {
+    font-size: 1.15rem !important;
+    vertical-align: middle !important;
+}
+
+/* --- 5. Forms, Fields & Inputs --- */
+.fieldset {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.field {
+    margin-bottom: 18px !important;
+    padding: 0 !important;
+}
+
+.field__input, .field-input, .nava-input {
+    width: 100% !important;
+    height: 52px !important;
+    padding: 14px 16px !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background-color: var(--bg-gray) !important;
+    color: var(--text-dark) !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    transition: var(--transition) !important;
+    outline: none !important;
+    box-sizing: border-box !important;
+}
+
+.field__input:focus, .field-input:focus, .nava-input:focus {
+    background-color: var(--bg-white) !important;
+    border-color: var(--primary) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+/* Floating labels alignment in Sapo */
+.field__input-wrapper, .field-input-wrapper {
+    position: relative !important;
+}
+
+.field__label, .field-label {
+    position: absolute !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    color: var(--text-gray) !important;
+    font-weight: 500 !important;
+    font-size: 0.92rem !important;
+    transition: var(--transition) !important;
+    pointer-events: none !important;
+    margin: 0 !important;
+    z-index: 10 !important;
+}
+
+.field--show-floating-label .field__label,
+.field-input-show-floating-label .field-label {
+    top: 10px !important;
+    transform: none !important;
+    font-size: 0.75rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+}
+
+.field--show-floating-label .field__input,
+.field-input-show-floating-label .field-input {
+    padding-top: 20px !important;
+    padding-bottom: 4px !important;
+}
+
+/* Textarea input height auto-adjust */
+textarea.field__input, textarea.nava-input {
+    height: 90px !important;
+    padding-top: 12px !important;
+}
+
+/* Error validation states */
+.field--error .field__input, .field-error {
+    border-color: #ef4444 !important;
+    background-color: #fef2f2 !important;
+}
+
+.field__error-message, .field-error-message {
+    color: #ef4444 !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    margin-top: 6px !important;
+    display: block !important;
+}
+
+/* Custom placeholder */
+.field__input::placeholder, .field-input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.8 !important;
+}
+
+/* --- 5.1. Select2 Dropdowns (Province Selector overrides) --- */
+.select2-container {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: var(--bg-gray) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    height: 52px !important;
+    padding: 10px 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    outline: none !important;
+    transition: var(--transition) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: var(--text-dark) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    padding-left: 0 !important;
+    line-height: normal !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 50px !important;
+    right: 12px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: var(--text-dark) transparent transparent transparent !important;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single {
+    background-color: var(--bg-white) !important;
+    border-color: var(--primary) !important;
+    box-shadow: var(--shadow-glow) !important;
+}
+
+.select2-dropdown {
+    border-color: var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    box-shadow: var(--shadow-lg) !important;
+    overflow: hidden !important;
+    background-color: var(--bg-white) !important;
+}
+
+.select2-results__option {
+    padding: 12px 16px !important;
+    font-weight: 500 !important;
+    font-size: 0.9rem !important;
+    color: var(--text-dark) !important;
+}
+
+.select2-results__option--highlighted[aria-selected] {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+
+/* --- 6. Content Boxes & Checkbox/Radio Choices --- */
+.content-box {
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md) !important;
+    background-color: var(--bg-white) !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.content-box__row, .payment-method-wrapper {
+    padding: 16px 20px !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    transition: var(--transition) !important;
+}
+
+.content-box__row:last-child, .payment-method-wrapper:last-child {
+    border-bottom: none !important;
+}
+
+.content-box__row:hover, .radio-option:hover {
+    background-color: rgba(0, 51, 102, 0.02) !important;
+}
+
+.radio-wrapper, .radio-option {
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    width: 100% !important;
+    gap: 12px !important;
+}
+
+.radio__input, .checkbox__input {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.input-radio, .input-checkbox, .radio-option input[type="radio"] {
+    width: 20px !important;
+    height: 20px !important;
+    accent-color: var(--primary) !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Force Sapo labels to use full flex width and reset defaults */
+.radio__label, .checkbox__label, .radio-label {
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    color: var(--text-dark) !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+    float: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.radio__label__primary {
+    font-weight: 700 !important;
+    text-align: left !important;
+    flex: 1 1 auto !important;
+}
+
+.radio__label__accessory {
+    margin-left: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+}
+
+.payment-icon {
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    width: 38px !important;
+    height: 24px !important;
+    display: inline-block !important;
+}
+
+/* Payment detail panels when radio is active */
+.content-box__row__desc, .payment-details {
+    background-color: var(--bg-gray) !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 20px !important;
+    font-size: 0.9rem !important;
+    color: var(--text-gray) !important;
+    border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+}
+
+/* --- 7. Order Summary Sidebar --- */
+.sidebar__content, .order-summary {
+    background: transparent !important;
+}
+
+.sidebar__title {
+    font-size: 1.25rem !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    margin-bottom: 20px !important;
+}
+
+.product-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+}
+
+.product {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding-bottom: 20px !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px dashed var(--border-color) !important;
+}
+
+.product:last-child {
+    border-bottom: none !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.product__image {
+    padding: 0 !important;
+}
+
+.product-thumbnail {
+    width: 64px !important;
+    height: 64px !important;
+    position: relative !important;
+    flex-shrink: 0 !important;
+}
+
+.product-thumbnail__wrapper, .item-img-wrap {
+    border-radius: var(--radius-md) !important;
+    border: 1px solid var(--border-color) !important;
+    background-color: var(--bg-white) !important;
+    padding: 4px !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.product-thumbnail__image, .item-img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+}
+
+.product-thumbnail__quantity, .item-badge {
+    background-color: var(--primary) !important;
+    color: var(--bg-white) !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    position: absolute !important;
+    top: -6px !important;
+    right: -6px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 0.72rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 2px 6px rgba(0, 51, 102, 0.3) !important;
+    z-index: 100 !important;
+}
+
+.product__description, .item-info {
+    flex: 1 1 auto !important;
+    padding-left: 5px !important;
+    text-align: left !important;
+}
+
+.product__description__name, .item-title {
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+    color: var(--text-dark) !important;
+    margin: 0 0 4px 0 !important;
+    display: block !important;
+    line-height: 1.3 !important;
+}
+
+.product__description__property, .item-var {
+    font-size: 0.8rem !important;
+    color: var(--text-gray) !important;
+}
+
+.product__price, .item-price {
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+    font-size: 1rem !important;
+    text-align: right !important;
+    white-space: nowrap !important;
+}
+
+/* Discount Form */
+.order-summary__section--discount-code {
+    border-top: 1px solid var(--border-color) !important;
+    padding-top: 24px !important;
+    margin-top: 24px !important;
+}
+
+.field__input-btn-wrapper {
+    display: flex !important;
+    gap: 12px !important;
+}
+
+.field__input-btn-wrapper .field__input-wrapper {
+    flex-grow: 1 !important;
+}
+
+/* Premium Align for Coupon Button */
+.field__input-btn, .btn {
+    height: 52px !important;
+    padding: 0 24px !important;
+    border-radius: var(--radius-md) !important;
+    background-color: var(--primary) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 0.9rem !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.field__input-btn:hover, .btn:hover {
+    background-color: var(--primary-light) !important;
+    color: white !important;
+}
+
+.field__input-btn.btn--disabled {
+    background-color: #cbd5e1 !important;
+    color: var(--text-gray) !important;
+    cursor: not-allowed !important;
+}
+
+/* Price Lines */
+.order-summary__section--total-lines {
+    border-top: 1px solid var(--border-color) !important;
+    padding-top: 20px !important;
+    margin-top: 20px !important;
+}
+
+.total-line-table {
+    width: 100% !important;
+}
+
+.total-line {
+    display: flex !important;
+    justify-content: space-between !important;
+    margin-bottom: 12px !important;
+}
+
+.total-line__name, .summary-line span:first-child {
+    color: var(--text-gray) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+}
+
+.total-line__price, .summary-line span:last-child {
+    color: var(--text-dark) !important;
+    font-weight: 700 !important;
+    font-size: 0.95rem !important;
+}
+
+/* Final Total Price Section */
+.payment-due {
+    border-top: 2px dashed var(--border-color) !important;
+    padding-top: 20px !important;
+    margin-top: 20px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+.payment-due__label-total, .summary-total-label {
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+    color: var(--text-dark) !important;
+}
+
+.payment-due__price, .summary-total-val {
+    font-size: 1.6rem !important;
+    font-weight: 900 !important;
+    color: var(--primary) !important;
+    letter-spacing: -0.02em !important;
+}
+
+/* --- 8. Primary Buttons & Bottom Footer Actions --- */
+.btn-checkout, .btn-pay {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 54px !important;
+    padding: 16px 32px !important;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light)) !important;
+    color: white !important;
+    text-align: center !important;
+    border-radius: var(--radius-md) !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+}
+
+.btn-checkout:hover, .btn-pay:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 25px rgba(0, 51, 102, 0.3) !important;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary)) !important;
+}
+
+.btn-checkout:active, .btn-pay:active {
+    transform: translateY(0) !important;
+}
+
+.order-summary__nav {
+    margin-top: 30px !important;
+}
+
+/* Legal / Policy links at the bottom */
+.main__footer {
+    border-top: 1px solid var(--border-color) !important;
+    padding-top: 24px !important;
+    margin-top: 40px !important;
+}
+
+.main__policy {
+    display: flex !important;
+    gap: 20px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 0 15px 0 !important;
+    font-size: 0.88rem !important;
+}
+
+.main__policy a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+}
+
+.main__policy a:hover {
+    color: var(--primary-light) !important;
+}
+
+/* Agreement checkbox */
+#checkpolicy {
+    margin-right: 8px !important;
+    vertical-align: middle !important;
+}
+
+/* --- 9. Mobile Sticky Bottom Bar & Responsiveness --- */
+.mobile-sticky-bar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    border-top: 1px solid var(--border-color) !important;
+    padding: 12px 20px !important;
+    display: none;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 9999 !important;
+    box-shadow: 0 -5px 25px rgba(0,0,0,0.06) !important;
+}
+
+.mobile-sticky-bar .sticky-price-label {
+    font-size: 0.8rem !important;
+    color: var(--text-gray) !important;
+    margin-bottom: 2px !important;
+    font-weight: 600 !important;
+}
+
+.mobile-sticky-bar .sticky-price-val {
+    font-size: 1.35rem !important;
+    font-weight: 900 !important;
+    color: var(--primary) !important;
+}
+
+.mobile-sticky-bar .btn-sticky-pay {
+    background: var(--primary) !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    border-radius: var(--radius-md) !important;
+    font-weight: 800 !important;
+    font-size: 0.95rem !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2) !important;
+    text-transform: uppercase !important;
+}
+
+.mobile-sticky-bar .btn-sticky-pay:hover {
+    background: var(--primary-light) !important;
+}
+
+/* Tablet & Mobile Layout Shifts */
+@media (max-width: 991px) {
+    .content > .wrap {
+        flex-direction: column !important;
+        gap: 24px !important;
+    }
+    
+    .main {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+        order: 2 !important;
+    }
+    
+    .sidebar {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px !important;
+        border-left: none !important;
+        box-shadow: none !important;
+        background-color: var(--bg-white) !important;
+        border-radius: var(--radius-lg) !important;
+        border: 1px solid var(--border-color) !important;
+        order: 1 !important;
+    }
+
+    body {
+        padding-bottom: 90px !important; /* Make room for mobile sticky bar */
+    }
+
+    .mobile-sticky-bar {
+        display: flex !important;
+    }
+
+    .section, .checkout-card {
+        padding: 20px 15px !important;
+        margin-bottom: 20px !important;
+    }
+
+    .section__title, .section-title {
+        font-size: 1.15rem !important;
+        margin-bottom: 15px !important;
+    }
+
+    /* Forms on Mobile */
+    .field {
+        margin-bottom: 15px !important;
+    }
+
+    .field__input, .field-input, .nava-input {
+        padding: 12px 14px !important;
+        font-size: 0.9rem !important;
+    }
+
+    .radio-option {
+        padding: 14px 16px !important;
+    }
+    
+    .radio-label {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Extra media query for stacking middle columns on small desktop / tablet landscape */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .content > .wrap {
+        flex-direction: row !important;
+    }
+    
+    /* Make the two columns inside main stack vertically */
+    .col--two {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        margin-bottom: 20px !important;
+    }
+}

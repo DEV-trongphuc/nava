@@ -37,6 +37,20 @@
             }
             .page_name { font-size: 1.3rem !important; }
             .nava-compare-card { padding: 15px !important; }
+            .ai-compare-input-row {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 12px !important;
+            }
+            .ai-compare-input-row input {
+                width: 100% !important;
+                flex: none !important;
+            }
+            .ai-compare-input-row button {
+                width: 100% !important;
+                justify-content: center !important;
+                flex: none !important;
+            }
         }
         .com_info .container {
             max-width: 1200px !important;
@@ -194,7 +208,7 @@
                     <div style="font-weight: 800; font-size: 1.1rem; color: #ffffff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
                         <i class="ph-fill ph-sparkle" style="color: #38bdf8; font-size: 1.35rem;"></i> So Sánh & Tư Vấn Cấu Hình Bằng NAVA AI
                     </div>
-                    <div style="display: flex; gap: 12px; margin-bottom: 0; align-items: center;">
+                    <div class="ai-compare-input-row" style="display: flex; gap: 12px; margin-bottom: 0; align-items: center;">
                         <input type="text" id="aiCompareNeeds" placeholder="Nhập nhu cầu & ngân sách (Ví dụ: Chơi game Wukong, tầm 15 triệu)..." style="flex: 1; padding: 14px 22px; border: none; border-radius: 30px; font-size: 0.9rem; font-family: inherit; outline: none; background: #ffffff; color: #0f172a; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); width: 100%; height: 48px; box-sizing: border-box;">
                         <button onclick="window.runAICompareInline();" style="height: 48px; padding: 0 32px; background: linear-gradient(135deg, #38bdf8 0%, #0066ff 100%); color: #ffffff; border-radius: 30px; font-weight: 800; border: none; cursor: pointer; transition: all 0.25s ease; font-family: inherit; font-size: 0.95rem; white-space: nowrap; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(56,189,248,0.25); box-sizing: border-box;" onmouseover="this.style.transform='translateY(-1px)'; this.style.boxShadow='0 6px 20px rgba(56,189,248,0.4)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(56,189,248,0.25)';">
                             <i class="ph-bold ph-sparkles"></i> Phân tích

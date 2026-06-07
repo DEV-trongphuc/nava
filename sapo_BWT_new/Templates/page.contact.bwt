@@ -1,5 +1,4 @@
-{%- include 'breadcrumb' -%}
-<div class="com_info">
+<div class="com_info contact-page-wrapper">
 	<div class="container mt-3 mb-3">
 		<div class="rounded-10 p-3 p-md-4 bg-white col-main page-title">
 			<h1 class="font-weight-bold pt-2 pt-lg-0 mb-3 mt-0">
@@ -13,49 +12,98 @@
 							{{ page.content | default: settings.other_updating }}
 						</div>
 						{%- elsif settings.edit_contact_page == 'many_option' -%}
-						{%- for store_address in store.addresses -%}
-						{%- assign name = store_address.name -%}
-						{%- assign address = store_address.address -%}
-						{%- assign district = store_address.district -%}
-						{%- assign province = store_address.province -%}
-						<div class="margin-bottom-10 border-bottom pb-2 mb-2">
-							<p class="mb-1"><strong>{{store_address.name}}:</strong>
-								{%- if address != null and address != '' -%} {{ address }}{%- endif -%}{%- if district != null and district != ''-%}, {{ district }}{%- endif -%}{%- if province != null and province != '' -%}, {{ province }}{%- endif -%}</p>
-							{%- if store_address.phone != null -%}
-							<p class="mb-1">
-								<strong>Hotline:</strong> 
-								<a href="tel:{{store_address.phone|replace:' ',''}}" title="{{store_address.phone}}">{{store_address.phone}}</a>
-							</p>
-							{%- endif -%}
-							{%- if store_address.email != null -%}
-							<p class="mb-1">
-								<strong>Email:</strong> 
-								<a href="mailto:{{store_address.email|replace:' ',''}}" title="{{store_address.email}}">{{store_address.email}}</a>							
-							</p>
-							{%- endif -%}
+						<div class="contact-info-cards mb-4">
+							{%- for store_address in store.addresses -%}
+							{%- assign name = store_address.name -%}
+							{%- assign address = store_address.address -%}
+							{%- assign district = store_address.district -%}
+							{%- assign province = store_address.province -%}
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-buildings"></i></div>
+								<div class="card-content">
+									<h6>{{store_address.name}}</h6>
+									<p class="mb-1">
+										{%- if address != null and address != '' -%} {{ address }}{%- endif -%}{%- if district != null and district != ''-%}, {{ district }}{%- endif -%}{%- if province != null and province != '' -%}, {{ province }}{%- endif -%}
+									</p>
+									{%- if store_address.phone != null -%}
+									<p class="mb-1">
+										<strong>Hotline:</strong> 
+										<a href="tel:{{store_address.phone|replace:' ',''}}" title="{{store_address.phone}}">{{store_address.phone}}</a>
+									</p>
+									{%- endif -%}
+									{%- if store_address.email != null -%}
+									<p class="mb-0">
+										<strong>Email:</strong> 
+										<a href="mailto:{{store_address.email|replace:' ',''}}" title="{{store_address.email}}">{{store_address.email}}</a>							
+									</p>
+									{%- endif -%}
+								</div>
+							</div>
+							{%- endfor -%}
 						</div>
-						{%- endfor -%}
 						{%- elsif  settings.edit_contact_page == 'default_option' -%}
-						<address class="vcard mb-4">
+						<div class="contact-info-cards mb-4">
 							{%if settings.footer_address != null and settings.footer_address != ''%}
-							<p class="adr mb-1"><b>{{settings.contact_add}} </b>{{settings.footer_address}}</p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-map-pin"></i></div>
+								<div class="card-content">
+									<h6>Địa chỉ</h6>
+									<p>{{settings.footer_address}}</p>
+								</div>
+							</div>
 							{%else%}
-							<p class="adr mb-1"><b>{{settings.contact_add}} </b>{{store.address}}</p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-map-pin"></i></div>
+								<div class="card-content">
+									<h6>Địa chỉ</h6>
+									<p>{{store.address}}</p>
+								</div>
+							</div>
 							{%endif%}
 							{%if settings.footer_email != null and settings.footer_email != ''%}
-							<p class="mb-1"><b>Email: </b><a href="mailto:{{settings.footer_email}}" title="{{settings.footer_email}}">{{settings.footer_email}}</a></p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-envelope"></i></div>
+								<div class="card-content">
+									<h6>Email</h6>
+									<p><a href="mailto:{{settings.footer_email}}" title="{{settings.footer_email}}">{{settings.footer_email}}</a></p>
+								</div>
+							</div>
 							{%else%}
-							<p class="mb-1"><b>Email: </b><a href="mailto:{{store.customer_email}}" title="{{store.customer_email}}">{{store.customer_email}}</a></p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-envelope"></i></div>
+								<div class="card-content">
+									<h6>Email</h6>
+									<p><a href="mailto:{{store.customer_email}}" title="{{store.customer_email}}">{{store.customer_email}}</a></p>
+								</div>
+							</div>
 							{%endif%}
 							{%if settings.footer_phone != null and settings.footer_phone != ''%}
-							<p class="mb-1"><b>Hotline: </b><a href="tel:{{settings.footer_phone | remove: ' ' | remove: '.'}}" title="{{settings.footer_phone}}">{{settings.footer_phone}}</a></p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-phone"></i></div>
+								<div class="card-content">
+									<h6>Hotline</h6>
+									<p><a href="tel:{{settings.footer_phone | remove: ' ' | remove: '.'}}" title="{{settings.footer_phone}}">{{settings.footer_phone}}</a></p>
+								</div>
+							</div>
 							{%else%}
-							<p class="mb-1"><b>Hotline: </b><a href="tel:{{store.phone_number}}" title="{{store.phone_number}}">{{store.phone_number}}</a></p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-phone"></i></div>
+								<div class="card-content">
+									<h6>Hotline</h6>
+									<p><a href="tel:{{store.phone_number}}" title="{{store.phone_number}}">{{store.phone_number}}</a></p>
+								</div>
+							</div>
 							{%endif%}
 							{%if settings.mst != null and settings.mst != ''%}
-							<p class="mb-1">{{settings.mst}}</p>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-scroll"></i></div>
+								<div class="card-content">
+									<h6>Mã số thuế</h6>
+									<p>{{settings.mst}}</p>
+								</div>
+							</div>
 							{%endif%}
-						</address>
+						</div>
 						{%- endif -%}
 						<div class="mt-4">
 							<h3 class="font-weight-bold mb-3 small-title">Gửi thông tin liên hệ</h3>

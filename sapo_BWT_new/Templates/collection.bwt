@@ -138,9 +138,15 @@
     <div class="collection-hero" style="background: linear-gradient(135deg, rgba(14,165,233,0.1) 0%, rgba(15,23,42,0.02) 100%); border-radius: var(--radius-lg); padding: 40px 50px; margin-top: 25px; margin-bottom: 40px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 10px 30px rgba(0,0,0,0.02);">
         <div class="card-glow" style="position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); opacity: 0.08; top: -150px; right: -100px; border-radius: 50%;"></div>
         <div style="position: relative; z-index: 2;">
+            {%- if collection.alias == 'asus' or collection.name == 'ASUS' -%}
+            <span onclick="openAsusModal()" style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3); cursor: pointer; transition: all 0.2s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" title="Bấm để xem chứng nhận ASUS Gold Partner">
+                ⭐ ASUS Gold Partner
+            </span>
+            {%- else -%}
             <span style="display: inline-flex; align-items: center; gap: 6px; background: var(--primary); color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);">
                 🏆 Các sản phẩm
             </span>
+            {%- endif -%}
             <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 12px; color: var(--text-dark); letter-spacing: -0.5px;">{{ collection.name }}</h1>
             <p style="color: var(--text-gray); max-width: 650px; font-size: 1.05rem; margin: 0; line-height: 1.6;">
                 Hệ thống cung cấp các dòng sản phẩm {{ collection.name }} chính hãng với chất lượng dịch vụ bảo hành cao cấp.
@@ -159,7 +165,7 @@
 
     <div class="nava-collection-layout">
         <!-- Sidebar Filter -->
-        <div class="nava-sidebar">
+        <div class="nava-sidebar" data-lenis-prevent>
             <div class="filter-sidebar" style="background: var(--bg-white); padding: 25px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); box-sizing: border-box; width: 100%;">
                 {%- include 'sidebar-collection' -%}
             </div>
@@ -284,7 +290,7 @@
                                     <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; box-shadow: 0 4px 10px rgba(37,99,235,0.2);"><i class="ph-bold ph-robot"></i></div>
                                     <div>
                                         <div style="font-size: 0.9rem; color: #334155; line-height: 1.5;" id="aiSummaryText">
-                                            <strong>Phân tích:</strong> Đang xử lý yêu cầu...
+                                            <strong>NAVA AI:</strong> Đang xử lý yêu cầu...
                                         </div>
                                     </div>
                                 </div>
@@ -323,28 +329,100 @@
                 <style>.quick-filters::-webkit-scrollbar { display: none; }</style>
                 <button onclick="applyFilterTag('Tất cả', '')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--primary); background: var(--primary); color: white; font-weight: 600; font-size: 0.85rem; cursor: pointer;">Tất cả</button>
                 <button onclick="applyFilterTag('Dưới 10 triệu', '0-10000000')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Dưới 10 triệu</button>
+                <button onclick="applyFilterTag('10 - 20 triệu', '10000000-20000000')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">10 - 20 triệu</button>
+                <button onclick="applyFilterTag('20 - 50 triệu', '20000000-50000000')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">20 - 50 triệu</button>
+                <button onclick="applyFilterTag('Trên 50 triệu', '50000000-200000000')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Trên 50 triệu</button>
                 <button onclick="applyFilterTag('Core Ultra 9', 'Ultra 9')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Core Ultra 9</button>
-                <button onclick="applyFilterTag('Ryzen AI 9', 'Ryzen AI')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Ryzen AI 9</button>
+                <button onclick="applyFilterTag('Ryzen AI 9', 'Ryzen 9')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Ryzen AI 9</button>
                 <button onclick="applyFilterTag('RAM 32GB', '32GB')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">RAM 32GB</button>
                 <button onclick="applyFilterTag('Máy bộ eGPU', 'eGPU')" style="white-space: nowrap; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border-color); background: var(--bg-white); color: var(--text-dark); font-weight: 600; font-size: 0.85rem; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border-color)'">Máy bộ eGPU</button>
             </div>
             
             <!-- Collection list -->
             <div class="collection">
-                <script>
-                    window.navaProducts = [
-                        {%- for prod in collection.products -%}
+                {%- assign col_alias = collection.alias | default: 'all' -%}
+                {%- paginate collections[col_alias].products by 250 -%}
+                <script id="nava-products-data" type="application/json">
+                    [
+                        {%- assign count = 0 -%}
+                        {%- for prod in collections[col_alias].products -%}
                         {%- if prod.price > 0 -%}
+                        {%- if count > 0 -%},{%- endif -%}
                         {
-                            name: {{ prod.name | json }},
-                            price: "{{ prod.price | money }}",
-                            img: "{%- if prod.featured_image -%}{{ prod.featured_image.src | img_url: 'large' }}{%- else -%}{%- endif -%}",
-                            url: "{{ prod.url }}",
-                            desc: {{ prod.description | strip_html | truncate: 150 | json }}
-                        },
+                            "name": {{ prod.name | json }},
+                            "price": "{{ prod.price | money }}",
+                            "img": "{%- if prod.featured_image -%}{{ prod.featured_image.src | img_url: 'large' }}{%- else -%}https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png{%- endif -%}",
+                            "url": "{{ prod.url }}",
+                            "desc": {{ prod.description | strip_html | truncate: 150 | json }}
+                        }
+                        {%- assign count = count | plus: 1 -%}
                         {%- endif -%}
                         {%- endfor -%}
-                    ].slice(0, 40);
+                    ]
+                </script>
+                {%- endpaginate -%}
+
+                <script>
+                    (function() {
+                        var col_alias = "{{ col_alias }}";
+                        var cacheKey = "navaProducts_" + col_alias;
+                        var url = new URL(window.location.href);
+                        var hasFilter = url.searchParams.has('price') || url.searchParams.has('vendor') || url.searchParams.has('q');
+                        
+                        var liquidProds = [];
+                        try {
+                            var dataEl = document.getElementById('nava-products-data');
+                            if (dataEl) {
+                                liquidProds = JSON.parse(dataEl.textContent) || [];
+                            }
+                        } catch(e) {
+                            console.error("NAVA AI: Failed to parse initial products data", e);
+                        }
+                        
+                        if (!hasFilter) {
+                            window.navaProducts = liquidProds;
+                            try {
+                                sessionStorage.setItem(cacheKey, JSON.stringify(liquidProds));
+                            } catch(e) {}
+                        } else {
+                            var cached = null;
+                            try {
+                                cached = sessionStorage.getItem(cacheKey);
+                            } catch(e) {}
+                            
+                            if (cached) {
+                                try {
+                                    window.navaProducts = JSON.parse(cached);
+                                } catch(e) {
+                                    window.navaProducts = liquidProds;
+                                }
+                            } else {
+                                window.navaProducts = liquidProds;
+                                fetch(window.location.pathname)
+                                    .then(function(res) { return res.text(); })
+                                    .then(function(html) {
+                                        try {
+                                            var parser = new DOMParser();
+                                            var doc = parser.parseFromString(html, 'text/html');
+                                            var cleanDataEl = doc.getElementById('nava-products-data');
+                                            if (cleanDataEl) {
+                                                var fullProds = JSON.parse(cleanDataEl.textContent);
+                                                if (fullProds && fullProds.length > 0) {
+                                                    window.navaProducts = fullProds;
+                                                    sessionStorage.setItem(cacheKey, JSON.stringify(fullProds));
+                                                    console.log("NAVA AI: Background fetch successfully loaded unfiltered products list (" + fullProds.length + " products).");
+                                                }
+                                            }
+                                        } catch(e) {
+                                            console.error("NAVA AI: Failed to parse fetched clean data", e);
+                                        }
+                                    })
+                                    .catch(function(err) {
+                                        console.error("NAVA AI: Background fetch error", err);
+                                    });
+                            }
+                        }
+                    })();
                 </script>
                 {%- paginate collection.products by product_per_page -%}
                 <div class="category-products position-relative mt-3 mb-3">
@@ -393,6 +471,16 @@
           {%- endif -%}
       </div>
       {%- endif -%}
+
+      <!-- ASUS Gold Partner Certificate Modal -->
+      <div id="asusModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.65); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 99999; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+          <div class="asus-modal-content" style="background: var(--bg-white, #fff); border-radius: 24px; padding: 12px; max-width: 90%; max-height: 90%; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid var(--border-color, #e2e8f0); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; flex-direction: column; align-items: center;">
+              <button onclick="closeAsusModal()" style="position: absolute; top: -16px; right: -16px; width: 36px; height: 36px; border-radius: 50%; background: #ef4444; color: white; border: 2px solid white; font-size: 1.4rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                  &times;
+              </button>
+              <img src="https://bizweb.dktcdn.net/100/543/817/files/navatek-1.jpg?v=1756176390267" alt="ASUS Gold Partner Certificate" style="max-width: 100%; max-height: calc(90vh - 40px); object-fit: contain; border-radius: 16px;">
+          </div>
+      </div>
   </section>
 
   <script>
@@ -400,15 +488,79 @@
       var selectedViewData = 'data';
       var isFilterRange = {%if settings.filter_price_type == 'checkbox'%}false{%else%}true{%endif%};
       
+      let originalCardsOrder = [];
+
+      function sortProducts(sortType) {
+          const grid = document.querySelector('.product-grid');
+          if (!grid) return;
+          
+          // Initialize original order if not already done
+          if (originalCardsOrder.length === 0) {
+              originalCardsOrder = Array.from(grid.querySelectorAll('.product-card'));
+          }
+          
+          if (sortType === 'default' || sortType === 'created_on:desc' || !sortType) {
+              originalCardsOrder.forEach(card => grid.appendChild(card));
+              return;
+          }
+          
+          const cards = Array.from(grid.querySelectorAll('.product-card'));
+          cards.sort((a, b) => {
+              let priceA = 0;
+              const priceAttrA = a.getAttribute('data-price');
+              if (priceAttrA) {
+                  priceA = parseInt(priceAttrA);
+              } else {
+                  const priceElA = a.querySelector('span[style*="font-weight: 800"]') || a.querySelector('span[style*="color: var(--text-dark)"]');
+                  if (priceElA && !priceElA.textContent.toLowerCase().includes('liên hệ')) {
+                      priceA = parseInt(priceElA.textContent.replace(/[^\d]/g, '')) || 0;
+                  }
+              }
+
+              let priceB = 0;
+              const priceAttrB = b.getAttribute('data-price');
+              if (priceAttrB) {
+                  priceB = parseInt(priceAttrB);
+              } else {
+                  const priceElB = b.querySelector('span[style*="font-weight: 800"]') || b.querySelector('span[style*="color: var(--text-dark)"]');
+                  if (priceElB && !priceElB.textContent.toLowerCase().includes('liên hệ')) {
+                      priceB = parseInt(priceElB.textContent.replace(/[^\d]/g, '')) || 0;
+                  }
+              }
+              
+              if (priceA === 0) priceA = sortType === 'price_min:asc' ? Infinity : -Infinity;
+              if (priceB === 0) priceB = sortType === 'price_min:asc' ? Infinity : -Infinity;
+
+              if (sortType === 'price_min:asc') {
+                  return priceA - priceB;
+              } else if (sortType === 'price_min:desc') {
+                  return priceB - priceA;
+              }
+              return 0;
+          });
+          
+          cards.forEach(card => grid.appendChild(card));
+      }
+
       // Handle sort options
       function applySort(val) {
-          if (typeof doSearchSort === 'function') {
-              doSearchSort(val);
-          } else {
-              let url = new URL(window.location.href);
-              url.searchParams.set('sortby', val);
-              window.location.href = url.toString();
-          }
+          // Update URL without reload
+          let url = new URL(window.location.href);
+          url.searchParams.set('sortby', val);
+          window.history.pushState({}, '', url.toString());
+          
+          // Update Label
+          let labelText = 'Mặc định';
+          if (val === 'price_min:asc') labelText = 'Giá tăng dần';
+          if (val === 'price_min:desc') labelText = 'Giá giảm dần';
+          if (val === 'created_on:desc') labelText = 'Mới nhất';
+          const sortLabelEl = document.getElementById('sortLabel');
+          if (sortLabelEl) sortLabelEl.textContent = labelText;
+          
+          // Sort client-side
+          sortProducts(val);
+          
+          // Close menu
           document.getElementById('sortDropMenu').classList.remove('show');
       }
       
@@ -534,10 +686,15 @@
       document.addEventListener('DOMContentLoaded', function() {
           const url = new URL(window.location.href);
           
-          // Dynamic brand logo replacement in banner if filtered by vendor or if collection is asus
+          // Dynamic brand logo replacement in banner if filtered by vendor or if collection is a brand collection
           const vendorQuery = url.searchParams.get('vendor');
-          const isAsusCollection = {% if collection.alias == 'asus' or collection.name == 'ASUS' %}true{% else %}false{% endif %};
-          const activeVendor = vendorQuery || (isAsusCollection ? 'asus' : null);
+          let currentCollHandle = "{{ collection.alias }}".toLowerCase().trim();
+          if (!currentCollHandle || currentCollHandle === 'all') {
+              const pathParts = url.pathname.toLowerCase().split('/');
+              currentCollHandle = pathParts[pathParts.length - 1].trim();
+          }
+          const knownBrands = ['asus', 'beelink', 'minisforum', 'gmktec', 'aoostar', 'beikong', 'msi', 'asrock', 'zotac', 'bmax'];
+          const activeVendor = vendorQuery || (knownBrands.includes(currentCollHandle) ? currentCollHandle : null);
           if (activeVendor) {
               const vendorLower = activeVendor.toLowerCase().trim();
               const brandLogos = {
@@ -574,6 +731,17 @@
           const sortLabelEl = document.getElementById('sortLabel');
           if (sortLabelEl) sortLabelEl.textContent = labelText;
           
+          // Store original cards order
+          const grid = document.querySelector('.product-grid');
+          if (grid) {
+              originalCardsOrder = Array.from(grid.querySelectorAll('.product-card'));
+          }
+
+          // Apply sorting on load
+          if (sortby) {
+              sortProducts(sortby);
+          }
+          
           // Highlight active quick filter pill on load
           const activePrice = url.searchParams.get('price');
           const activeQ = url.searchParams.get('q');
@@ -584,9 +752,15 @@
                   isMatch = true;
               } else if (btnText === 'Dưới 10 triệu' && activePrice === '0_10000000') {
                   isMatch = true;
+              } else if (btnText === '10 - 20 triệu' && activePrice === '10000000_20000000') {
+                  isMatch = true;
+              } else if (btnText === '20 - 50 triệu' && activePrice === '20000000_50000000') {
+                  isMatch = true;
+              } else if (btnText === 'Trên 50 triệu' && activePrice === '50000000_200000000') {
+                  isMatch = true;
               } else if (activeQ) {
                   if (btnText === 'Core Ultra 9' && activeQ === 'Ultra 9') isMatch = true;
-                  if (btnText === 'Ryzen AI 9' && activeQ === 'Ryzen AI') isMatch = true;
+                  if (btnText === 'Ryzen AI 9' && activeQ === 'Ryzen 9') isMatch = true;
                   if (btnText === 'RAM 32GB' && activeQ === '32GB') isMatch = true;
                   if (btnText === 'Máy bộ eGPU' && activeQ === 'eGPU') isMatch = true;
               }
@@ -709,20 +883,55 @@
                   }
                   
                   // Render AI Summary
-                  summary.innerHTML = '<strong>Phân tích nhu cầu:</strong> ' + (data.explanation || 'Không có phân tích.');
+                  summary.innerHTML = '<strong>NAVA AI:</strong> ' + (data.explanation || 'Không có phân tích.');
                   
                   // Render Recommended Products
                   var recommendedIndexes = data.recommended_indexes || [];
                   var html = '';
                   var renderedCount = 0;
                   
+                  // Filter out valid products first
+                  var validProds = [];
                   recommendedIndexes.forEach(index => {
                       var prod = navaProducts[index];
                       if (prod && prod.name) {
-                          renderedCount++;
-                          var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
-                          var prodDesc = prod.desc || '';
-                          var prodPrice = prod.price || 'Liên hệ';
+                          validProds.push(prod);
+                      }
+                  });
+                  
+                  // Slice to maximum of 4 products
+                  var displayedProds = validProds.slice(0, 4);
+                  
+                  displayedProds.forEach((prod, i) => {
+                      var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                      var prodDesc = prod.desc || '';
+                      var prodPrice = prod.price || 'Liên hệ';
+                      
+                      if (i === 0) {
+                          // Top recommendation
+                          html += `
+                              <div style="padding: 15px 20px 5px; font-size: 0.8rem; color: #d97706; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                                  <i class="ph-fill ph-check-circle" style="font-size: 1.1rem;"></i> ĐỀ XUẤT PHÙ HỢP NHẤT
+                              </div>
+                              <a href="${prod.url || 'javascript:;'}" class="ai-result-item" style="background: rgba(217, 119, 6, 0.06); border-left: 3px solid #d97706; margin: 0 10px 10px; border-radius: 8px;">
+                                  <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                  <div class="ai-result-info" style="white-space: normal;">
+                                      <h5 style="white-space: nowrap;">${prod.name}</h5>
+                                      <div style="font-size: 0.8rem; color: #475569; margin: 4px 0 6px; line-height: 1.4;">${prodDesc}</div>
+                                      <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">${prodPrice}</div>
+                                  </div>
+                              </a>
+                          `;
+                          
+                          if (displayedProds.length > 1) {
+                              html += `
+                                  <div style="padding: 10px 20px 5px; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #f1f5f9;">
+                                      Các lựa chọn thay thế khác
+                                  </div>
+                              `;
+                          }
+                      } else {
+                          // Other recommendations
                           html += `
                               <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
                                   <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
@@ -734,6 +943,7 @@
                               </a>
                           `;
                       }
+                      renderedCount++;
                   });
 
                   if (renderedCount === 0) {
@@ -761,29 +971,35 @@
                       
                       if (matches.length > 0) {
                           matches.sort((a, b) => b.score - a.score);
-                          matches.slice(0, 3).forEach(m => {
+                          var displayedMatches = matches.slice(0, 4);
+                          displayedMatches.forEach((m, i) => {
                               var prod = m.prod;
                               var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
                               var prodDesc = prod.desc || '';
                               var prodPrice = prod.price || 'Liên hệ';
-                              html += `
-                                  <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
-                                      <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
-                                      <div class="ai-result-info">
-                                          <h5>${prod.name}</h5>
-                                          <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prodDesc}</div>
-                                          <div class="ai-result-price">${prodPrice}</div>
+                              
+                              if (i === 0) {
+                                  html += `
+                                      <div style="padding: 15px 20px 5px; font-size: 0.8rem; color: #d97706; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                                          <i class="ph-fill ph-check-circle" style="font-size: 1.1rem;"></i> ĐỀ XUẤT PHÙ HỢP NHẤT
                                       </div>
-                                  </a>
-                              `;
-                          });
-                      } else {
-                          // absolute fallback: show first 3 products
-                          navaProducts.slice(0, 3).forEach(prod => {
-                              if (prod && prod.name) {
-                                  var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
-                                  var prodDesc = prod.desc || '';
-                                  var prodPrice = prod.price || 'Liên hệ';
+                                      <a href="${prod.url || 'javascript:;'}" class="ai-result-item" style="background: rgba(217, 119, 6, 0.06); border-left: 3px solid #d97706; margin: 0 10px 10px; border-radius: 8px;">
+                                          <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                          <div class="ai-result-info" style="white-space: normal;">
+                                              <h5 style="white-space: nowrap;">${prod.name}</h5>
+                                              <div style="font-size: 0.8rem; color: #475569; margin: 4px 0 6px; line-height: 1.4;">${prodDesc}</div>
+                                              <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">${prodPrice}</div>
+                                          </div>
+                                      </a>
+                                  `;
+                                  if (displayedMatches.length > 1) {
+                                      html += `
+                                          <div style="padding: 10px 20px 5px; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #f1f5f9;">
+                                              Các lựa chọn thay thế khác
+                                          </div>
+                                      `;
+                                  }
+                              } else {
                                   html += `
                                       <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
                                           <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
@@ -794,6 +1010,50 @@
                                           </div>
                                       </a>
                                   `;
+                              }
+                          });
+                      } else {
+                          // absolute fallback: show first 4 products
+                          var displayedFallback = navaProducts.slice(0, 4);
+                          displayedFallback.forEach((prod, i) => {
+                              if (prod && prod.name) {
+                                  var prodImg = prod.img || 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/no-image.png';
+                                  var prodDesc = prod.desc || '';
+                                  var prodPrice = prod.price || 'Liên hệ';
+                                  
+                                  if (i === 0) {
+                                      html += `
+                                          <div style="padding: 15px 20px 5px; font-size: 0.8rem; color: #d97706; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                                              <i class="ph-fill ph-check-circle" style="font-size: 1.1rem;"></i> ĐỀ XUẤT PHÙ HỢP NHẤT
+                                          </div>
+                                          <a href="${prod.url || 'javascript:;'}" class="ai-result-item" style="background: rgba(217, 119, 6, 0.06); border-left: 3px solid #d97706; margin: 0 10px 10px; border-radius: 8px;">
+                                              <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                              <div class="ai-result-info" style="white-space: normal;">
+                                                  <h5 style="white-space: nowrap;">${prod.name}</h5>
+                                                  <div style="font-size: 0.8rem; color: #475569; margin: 4px 0 6px; line-height: 1.4;">${prodDesc}</div>
+                                                  <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">${prodPrice}</div>
+                                              </div>
+                                          </a>
+                                      `;
+                                      if (displayedFallback.length > 1) {
+                                          html += `
+                                              <div style="padding: 10px 20px 5px; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #f1f5f9;">
+                                                  Các lựa chọn thay thế khác
+                                              </div>
+                                          `;
+                                      }
+                                  } else {
+                                      html += `
+                                          <a href="${prod.url || 'javascript:;'}" class="ai-result-item">
+                                              <img src="${prodImg}" class="ai-result-img" alt="${prod.name}">
+                                              <div class="ai-result-info">
+                                                  <h5>${prod.name}</h5>
+                                                  <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prodDesc}</div>
+                                                  <div class="ai-result-price">${prodPrice}</div>
+                                              </div>
+                                          </a>
+                                      `;
+                                  }
                               }
                           });
                       }
@@ -896,19 +1156,43 @@
               if (matches.length === 0) {
                   html = '<div style="padding: 15px 20px; text-align: center; color: #64748b;">Không tìm thấy sản phẩm nào khớp với từ khóa của bạn.</div>';
               } else {
-                  // Show top 3 matches
-                  matches.slice(0, 3).forEach(match => {
+                  // Show top 4 matches, first one highlighted
+                  var displayedMatches = matches.slice(0, 4);
+                  displayedMatches.forEach((match, i) => {
                       var prod = navaProducts[match.index];
-                      html += `
-                          <a href="${prod.url}" class="ai-result-item">
-                              <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
-                              <div class="ai-result-info">
-                                  <h5>${prod.name}</h5>
-                                  <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prod.desc}</div>
-                                  <div class="ai-result-price">${prod.price}</div>
+                      if (i === 0) {
+                          html += `
+                              <div style="padding: 15px 20px 5px; font-size: 0.8rem; color: #d97706; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 6px;">
+                                  <i class="ph-fill ph-check-circle" style="font-size: 1.1rem;"></i> ĐỀ XUẤT PHÙ HỢP NHẤT
                               </div>
-                          </a>
-                      `;
+                              <a href="${prod.url || 'javascript:;'}" class="ai-result-item" style="background: rgba(217, 119, 6, 0.06); border-left: 3px solid #d97706; margin: 0 10px 10px; border-radius: 8px;">
+                                  <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
+                                  <div class="ai-result-info" style="white-space: normal;">
+                                      <h5 style="white-space: nowrap;">${prod.name}</h5>
+                                      <div style="font-size: 0.8rem; color: #475569; margin: 4px 0 6px; line-height: 1.4;">${prod.desc}</div>
+                                      <div class="ai-result-price" style="background: linear-gradient(135deg, #b45309, #d97706); box-shadow: 0 2px 6px rgba(217,119,6,0.2);">${prod.price}</div>
+                                  </div>
+                              </a>
+                          `;
+                          if (displayedMatches.length > 1) {
+                              html += `
+                                  <div style="padding: 10px 20px 5px; font-size: 0.75rem; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; border-top: 1px solid #f1f5f9;">
+                                      Các lựa chọn thay thế khác
+                                  </div>
+                              `;
+                          }
+                      } else {
+                          html += `
+                              <a href="${prod.url}" class="ai-result-item">
+                                  <img src="${prod.img}" class="ai-result-img" alt="${prod.name}">
+                                  <div class="ai-result-info">
+                                      <h5>${prod.name}</h5>
+                                      <div style="font-size: 0.8rem; color: #64748b; margin: 2px 0;">${prod.desc}</div>
+                                      <div class="ai-result-price">${prod.price}</div>
+                                  </div>
+                              </a>
+                          `;
+                      }
                   });
               }
               filteredList.innerHTML = html;
@@ -940,4 +1224,38 @@
               }
           }
       };
+
+      // ASUS Gold Partner Modal Control
+      window.openAsusModal = function() {
+          const modal = document.getElementById('asusModal');
+          if (modal) {
+              modal.style.display = 'flex';
+              // Force reflow
+              modal.offsetHeight;
+              modal.style.opacity = '1';
+              modal.querySelector('.asus-modal-content').style.transform = 'scale(1)';
+          }
+      };
+
+      window.closeAsusModal = function() {
+          const modal = document.getElementById('asusModal');
+          if (modal) {
+              modal.style.opacity = '0';
+              modal.querySelector('.asus-modal-content').style.transform = 'scale(0.9)';
+              setTimeout(function() {
+                  modal.style.display = 'none';
+              }, 300);
+          }
+      };
+      
+      document.addEventListener('DOMContentLoaded', function() {
+          const modal = document.getElementById('asusModal');
+          if (modal) {
+              modal.addEventListener('click', function(e) {
+                  if (e.target === modal) {
+                      closeAsusModal();
+                  }
+              });
+          }
+      });
   </script>

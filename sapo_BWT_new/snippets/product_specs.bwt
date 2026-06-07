@@ -10,7 +10,7 @@
 <div class="rounded-10 modal-open spec-tables">
 	<div class="border rounded-10 small modal-open">
 		<h3 class="special-content_title font-weight-bold d-block w-100 mb-0 border-bottom">{{settings.compare_keyword}}</h3>
-		<div class="special-content {%if forloop.index < 3%}h4-none{%endif%}">
+		<div class="specs-special-content {%if forloop.index < 3%}h4-none{%endif%}">
 			{{ part | split: "</h6>" | last | replace: "<div", "<span" | replace: "</div", "</span" }} 
 		</div>
 	</div>

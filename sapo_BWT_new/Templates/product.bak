@@ -89,7 +89,7 @@
         
         .thumbnail-list { 
             display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth;
-            padding: 5px 0 15px; margin-bottom: 25px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+            padding: 6px 6px 15px; margin-bottom: 25px; scrollbar-width: none; -webkit-overflow-scrolling: touch;
             max-width: 408px !important;
             margin-left: auto !important;
             margin-right: auto !important;

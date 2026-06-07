@@ -1,0 +1,43 @@
+                      {%- include 'm_frequently' -%}
+                    </div>
+                    {%- include 'm_list_tag_pr' -%}
+                    {%- else -%}
+                    <form action="/cart/add" method="post" enctype="multipart/form-data" id="nava-product-form">
+                        <input type="hidden" name="productAlias" value="{{ product.alias}}" />
+                        
+                        <div class="product-control w-100">
+                            {%-unless product.variants.size <= 1 and product.variants.first.title contains 'Default'-%}
+                            {%- if settings.product_swatch_enable and product.variants.size > 0 -%}
+                            {%- for option in product.options -%}
+                            {%- include 'swatch' with option -%}
+                            {%- endfor -%}
+                            {%- endif -%}
+                            {%-endunless-%}
+                            
+                            <div class="box-variant clearfix {% if settings.product_swatch_enable and product.variants.size > 0%} d-none {%endif%}">
+                                {%- if variantCount > 1 -%} 
+                                <fieldset class="form-group">
+                                    <select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
+                                        {%- for variant in product.variants -%}
+                                        <option {% if variant == selected_variant %}selected="selected"{% endif %} data-available="{% if variant.available %}true{% else %}false{% endif %}" data-price="{{ variant.price }}" value="{{ variant.id }}">{{ variant.id }} {{ variant.title }} - {{ variant.price | money }}</option>
+                                        {%- endfor -%}
+                                    </select>
+                                </fieldset>
+                                {%- else -%}
+                                <input type="hidden" name="variantId" value="{{ product.variants[0].id }}" data-available="{% if product.variants[0].available %}true{% else %}false{% endif %}" data-price="{{ product.variants[0].price }}" />
+                                {%- endif -%}
+                            </div>
+                            
+                            <div class="qty-price-row {% if contacts == true %}d-none{%else%}{%if product.available%}d-flex{%else%}{%if product.variants.size > 0%}d-flex{%else%}d-none{%endif%}{%endif%}{%endif%}" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; margin-top: 15px; margin-bottom: 20px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+                                    <div class="qty-selector custom-btn-number form-inline border-0 d-inline-flex align-items-center" style="border: 1px solid var(--border-color) !important; border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 32px;">
+                                        <button class="qty-btn" style="width: 32px; height: 100%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark);" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button"><i class="ph-bold ph-minus"></i></button>
+                                        <input type="number" name="quantity" min="1" value="1" class="form-control prd_quantity text-center border-0 qty-val" id="qtym" style="width: 36px; height: 100%; background: transparent; font-weight: 700; font-size: 0.95rem; color: var(--text-dark); outline: none; padding: 0; margin: 0; text-align: center;" readonly>
+                                        <button class="qty-btn" style="width: 32px; height: 100%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark);" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button"><i class="ph-bold ph-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="prod-price-wrap d-flex align-items-baseline gap-2" style="margin: 0;">
+                                    {%- if contacts == true -%}
+                                    <span class="prod-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin: 0;">{{settings.noPrice}}</span>
+                                    {

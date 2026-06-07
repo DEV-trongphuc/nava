@@ -4,16 +4,67 @@
     .sidebar-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary, #2563eb); border-radius: 2px; }
     
     .category-list { list-style: none; padding: 0; margin: 0; }
-    .category-list li { margin-bottom: 10px; }
-    .category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-dark, #0f172a); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+    .category-list li { margin-bottom: 12px; }
+    .category-list a { 
+        display: flex; 
+        align-items: center; 
+        width: 100%; 
+        color: var(--text-dark, #0f172a); 
+        text-decoration: none; 
+        font-weight: 600; 
+        font-size: 0.95rem; 
+        transition: color 0.2s; 
+    }
     .category-list a:hover { color: var(--primary, #2563eb); }
-    .category-list .count { margin-left: auto; color: var(--text-gray, #64748b); font-size: 0.85rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
+    .category-list .cat-name { flex: 1; margin-right: 10px; text-align: left; }
+    .category-list .count { 
+        background: #f1f5f9 !important; 
+        color: #64748b !important; 
+        font-size: 0.72rem !important; 
+        font-weight: 700 !important; 
+        padding: 2px 8px !important; 
+        border-radius: 12px !important; 
+        min-width: 22px !important; 
+        height: 18px !important; 
+        display: inline-flex !important; 
+        align-items: center !important; 
+        justify-content: center !important; 
+        box-sizing: border-box !important; 
+        line-height: 1 !important;
+        margin-left: 0 !important;
+        transition: all 0.2s !important;
+    }
+    .category-list a:hover .count {
+        background: rgba(37, 99, 235, 0.1) !important;
+        color: var(--primary, #2563eb) !important;
+    }
+    .parent-cat .caret-icon { 
+        margin-left: 6px; 
+        color: #94a3b8; 
+        transition: transform 0.2s, color 0.2s; 
+    }
+    .parent-cat:hover .caret-icon {
+        color: var(--primary, #2563eb);
+    }
     
     .category-list li.has-sub > a { position: relative; }
-    .sub-category-list { list-style: none; padding-left: 32px; margin-top: 5px; margin-bottom: 10px; }
+    .sub-category-list { list-style: none; padding-left: 24px; margin-top: 5px; margin-bottom: 10px; }
     .sub-category-list li { margin-bottom: 6px; }
-    .sub-category-list a { font-size: 0.88rem !important; font-weight: 500 !important; color: var(--text-gray, #64748b) !important; }
-    .sub-category-list a:hover, .sub-category-list a.active { color: var(--primary, #2563eb) !important; }
+    .sub-category-list a { 
+        font-size: 0.88rem !important; 
+        font-weight: 500 !important; 
+        color: var(--text-gray, #64748b) !important; 
+        padding: 5px 0 !important; 
+        background: transparent !important; 
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        display: block !important;
+    }
+    .sub-category-list a:hover, .sub-category-list a.active { 
+        color: var(--primary, #2563eb) !important; 
+        padding-left: 0 !important; 
+        background: transparent !important; 
+    }
     .parent-cat .caret-icon { transition: transform 0.2s; }
     .parent-cat.open .caret-icon { transform: rotate(180deg); }
 
@@ -35,13 +86,24 @@
 <div class="sidebar-block">
     <h4 class="sidebar-title">Danh mục sản phẩm</h4>
     <ul class="category-list">
+        <!-- Item 0: Tất cả sản phẩm -->
+        {%- assign cat_all = collections['all'] -%}
+        <li>
+            <a href="/tat-ca-san-pham" {% if collection.handle == 'all' or collection.handle == 'tat-ca-san-pham' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
+                <img src="{{ 'icon_dmenu_2.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Tất cả sản phẩm">
+                <span class="cat-name">Tất cả sản phẩm</span>
+                <span class="count">{{ cat_all.products_count | default: 229 }}</span>
+            </a>
+        </li>
+        
         <!-- Item 1: Mini PC -->
         {%- assign cat_minipc = collections['minipc'] | default: collections['mini-pc'] -%}
         <li class="has-sub">
             <a href="javascript:;" class="parent-cat" id="parent-minipc" onclick="toggleSubCategory(this)">
                 <img src="{{ 'icon_dmenu_3.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Mini PC">
-                Mini PC
-                <span class="count">({{ cat_minipc.products_count | default: 145 }}) <i class="ph-bold ph-caret-down caret-icon"></i></span>
+                <span class="cat-name">Mini PC</span>
+                <span class="count">{{ cat_minipc.products_count | default: 145 }}</span>
+                <i class="ph-bold ph-caret-down caret-icon"></i>
             </a>
             <ul class="sub-category-list" id="sub-minipc" style="display: none;">
                 <li><a href="/minipc" class="sub-cat-item">Tất cả Mini PC</a></li>
@@ -62,8 +124,9 @@
         <li class="has-sub">
             <a href="javascript:;" class="parent-cat" id="parent-egpu" onclick="toggleSubCategory(this)">
                 <img src="{{ 'icon_dmenu_4.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="eGPU">
-                eGPU
-                <span class="count">({{ cat_egpu.products_count | default: 14 }}) <i class="ph-bold ph-caret-down caret-icon"></i></span>
+                <span class="cat-name">eGPU</span>
+                <span class="count">{{ cat_egpu.products_count | default: 14 }}</span>
+                <i class="ph-bold ph-caret-down caret-icon"></i>
             </a>
             <ul class="sub-category-list" id="sub-egpu" style="display: none;">
                 <li><a href="/egpu" class="sub-cat-item">Tất cả eGPU</a></li>
@@ -77,8 +140,8 @@
         <li>
             <a href="/ram-ssd" {% if collection.handle == 'ram-ssd' or collection.handle == 'ram' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
                 <img src="{{ 'icon_dmenu_6.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="RAM/SSD">
-                RAM/SSD
-                <span class="count">({{ cat_ram.products_count | default: 11 }})</span>
+                <span class="cat-name">RAM/SSD</span>
+                <span class="count">{{ cat_ram.products_count | default: 11 }}</span>
             </a>
         </li>
         
@@ -87,8 +150,8 @@
         <li>
             <a href="/man-hinh" {% if collection.handle == 'man-hinh' or collection.handle == 'screen' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
                 <i class="ph-fill ph-monitor" style="font-size: 22px; color: #475569;"></i>
-                Màn hình
-                <span class="count">({{ cat_screen.products_count | default: 28 }})</span>
+                <span class="cat-name">Màn hình</span>
+                <span class="count">{{ cat_screen.products_count | default: 28 }}</span>
             </a>
         </li>
         
@@ -97,8 +160,8 @@
         <li>
             <a href="/phu-kien" {% if collection.handle == 'phu-kien' or collection.handle == 'accessories' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
                 <img src="{{ 'icon_dmenu_7.png' | asset_url }}" style="width:22px;height:22px;object-fit:contain;" alt="Phụ kiện">
-                Phụ kiện
-                <span class="count">({{ cat_accessory.products_count | default: 25 }})</span>
+                <span class="cat-name">Phụ kiện</span>
+                <span class="count">{{ cat_accessory.products_count | default: 25 }}</span>
             </a>
         </li>
         
@@ -107,8 +170,8 @@
         <li>
             <a href="/like-new" {% if collection.handle == 'like-new' %}style="color: var(--primary, #2563eb); font-weight: 700;"{% endif %}>
                 <i class="ph-fill ph-device-mobile" style="font-size: 22px; color: #475569;"></i>
-                Like new
-                <span class="count">({{ cat_likenew.products_count | default: 6 }})</span>
+                <span class="cat-name">Like new</span>
+                <span class="count">{{ cat_likenew.products_count | default: 6 }}</span>
             </a>
         </li>
     </ul>
@@ -151,7 +214,7 @@
         <div class="nava-brand-item" id="brand-bmax" onclick="toggleBrandFilter('BMAX')" title="BMAX">
             <img src="https://bizweb.dktcdn.net/100/543/817/files/bmax.png" alt="BMAX" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
-        <div class="nava-brand-item" id="brand-aostar" onclick="toggleBrandFilter('AOOSTAR')" title="AOOSTAR">
+        <div class="nava-brand-item" id="brand-aoostar" onclick="toggleBrandFilter('AOOSTAR')" title="AOOSTAR">
             <img src="{{ 'aoostar.png' | asset_url }}" alt="AOOSTAR" onerror="this.onerror=null; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:0.82rem;color:#475569;\'>' + this.alt + '</span>';" style="max-height: 22px; max-width: 85%; object-fit: contain;">
         </div>
         <div class="nava-brand-item" id="brand-gmktec" onclick="toggleBrandFilter('GMKTEC')" title="GMKTEC">
@@ -219,10 +282,46 @@
     }
 
     function toggleBrandFilter(brandName) {
-        let url = new URL(window.location.href);
-        let currentVendor = url.searchParams.get('vendor');
+        const brandPaths = {
+            'asus': '/asus',
+            'beelink': '/beelink',
+            'minisforum': '/minisforum',
+            'gmktec': '/gmktec',
+            'zotac': '/zotac'
+        };
         
-        if (currentVendor && currentVendor.toLowerCase() === brandName.toLowerCase()) {
+        let url = new URL(window.location.href);
+        let currentPath = url.pathname.toLowerCase().replace('/', '');
+        let targetBrandLower = brandName.toLowerCase();
+        
+        // List of all brand handles/names
+        const knownBrands = ['asus', 'beelink', 'minisforum', 'gmktec', 'aoostar', 'beikong', 'msi', 'asrock', 'zotac', 'bmax'];
+        
+        // Check if we are currently on a brand-specific page
+        let isOnBrandPage = knownBrands.includes(currentPath);
+        
+        if (isOnBrandPage) {
+            // If we clicked a different brand than the current page, redirect to the target brand's page/filter
+            if (currentPath !== targetBrandLower) {
+                let targetPath = brandPaths[targetBrandLower] || ('/minipc?vendor=' + brandName);
+                let targetUrl = new URL(targetPath, window.location.origin);
+                let priceParam = url.searchParams.get('price');
+                if (priceParam) {
+                    targetUrl.searchParams.set('price', priceParam);
+                }
+                window.location.href = targetUrl.toString();
+                return;
+            } else {
+                // Clicking the same brand as the current page -> reset vendor to show all products of the brand page
+                url.searchParams.delete('vendor');
+                window.location.href = url.toString();
+                return;
+            }
+        }
+        
+        // General category page (e.g. /minipc, /tat-ca-san-pham)
+        let currentVendor = url.searchParams.get('vendor');
+        if (currentVendor && currentVendor.toLowerCase() === targetBrandLower) {
             url.searchParams.delete('vendor');
         } else {
             url.searchParams.set('vendor', brandName);
@@ -236,8 +335,16 @@
         
         // Brand highlighting
         let currentVendor = url.searchParams.get('vendor');
-        if (currentVendor) {
-            let activeId = "brand-" + currentVendor.toLowerCase();
+        let currentPath = url.pathname.toLowerCase().replace('/', '');
+        const knownBrands = ['asus', 'beelink', 'minisforum', 'gmktec', 'aoostar', 'beikong', 'msi', 'asrock', 'zotac', 'bmax'];
+        
+        let activeBrand = currentVendor;
+        if (!activeBrand && knownBrands.includes(currentPath)) {
+            activeBrand = currentPath;
+        }
+        
+        if (activeBrand) {
+            let activeId = "brand-" + activeBrand.toLowerCase();
             let activeEl = document.getElementById(activeId);
             if (activeEl) {
                 activeEl.classList.add("active");

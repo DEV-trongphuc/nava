@@ -1,0 +1,27 @@
+ment.addEventListener('change', function(e) {
+            const sel = e.target;
+            if (sel.id === 'product-selectors') {
+                // Update prices dynamically
+                const activeOption = sel.selectedOptions[0] || sel.options[sel.selectedIndex];
+                const rawPrice = parseInt(activeOption?.getAttribute('data-price') || '0', 10);
+                const priceVal = activeOption?.text.split('-').pop().trim();
+                const priceEl = document.getElementById('selected-variant-price');
+                const stickyPriceEl = document.getElementById('sticky-price');
+                if (priceEl) {
+                    priceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                if (stickyPriceEl) {
+                    stickyPriceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                const bsPriceEl = document.getElementById('bs-price');
+                if (bsPriceEl) {
+                    bsPriceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                
+                // Sync buttons status and labels on variant change
+                syncSwatches();
+            }
+        });
+
+        function toggleDescription() {
+            const wrapper = document.getE

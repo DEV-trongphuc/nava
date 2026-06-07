@@ -262,11 +262,14 @@ def build_collection(base_dir, header_part, footer_part):
                 .sidebar-title::before { content: ''; display: block; width: 4px; height: 18px; background: var(--primary); border-radius: 2px; }
                 
                 .category-list { list-style: none; padding: 0; margin: 0; }
-                .category-list li { margin-bottom: 10px; }
-                .category-list a { display: flex; align-items: center; gap: 10px; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; padding: 8px 12px; border-radius: var(--radius-sm); }
-                .category-list a:hover, .category-list a.active { color: var(--primary); background: rgba(14, 165, 233, 0.05); padding-left: 15px; }
-                .category-list a img { flex-shrink: 0; }
-                .category-list .count { margin-left: auto; background: var(--bg-gray); padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; color: var(--text-gray); display: flex; align-items: center; gap: 4px; }
+                .category-list li { margin-bottom: 12px; }
+                .category-list a { display: flex; align-items: center; width: 100%; color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.2s; }
+                .category-list a:hover, .category-list a.active { color: var(--primary); }
+                .category-list .cat-name { flex: 1; margin-right: 10px; text-align: left; }
+                .category-list .count { background: #f1f5f9 !important; color: #64748b !important; font-size: 0.72rem !important; font-weight: 700 !important; padding: 2px 8px !important; border-radius: 12px !important; min-width: 22px !important; height: 18px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; line-height: 1 !important; margin-left: 0 !important; transition: all 0.2s !important; }
+                .category-list a:hover .count { background: rgba(37, 99, 235, 0.1) !important; color: var(--primary) !important; }
+                .parent-cat .caret-icon { margin-left: 6px; color: #94a3b8; transition: transform 0.2s, color 0.2s; }
+                .parent-cat:hover .caret-icon { color: var(--primary); }
                 
                 .price-filter-inputs { display: flex; gap: 10px; margin-bottom: 15px; }
                 .price-filter-inputs input { width: 50%; padding: 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: transparent; color: var(--text-dark); font-size: 0.9rem; transition: border-color 0.3s; }
@@ -416,18 +419,19 @@ def build_collection(base_dir, header_part, footer_part):
 
             <div class="nava-collection-layout">
                 <!-- Sidebar Filter -->
-                <div class="nava-sidebar">
+                <div class="nava-sidebar" data-lenis-prevent>
                     <div class="filter-sidebar" style="background: var(--bg-white); padding: 25px 20px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); box-sizing: border-box; width: 100%;">
                         
                         <div class="sidebar-block">
                             <h4 class="sidebar-title">DANH MỤC SẢN PHẨM</h4>
                             <ul class="category-list">
-                                <li><a href="#" style="color: var(--primary);"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> Mini PC <span class="count">(145) <i class="ph-bold ph-caret-down"></i></span></a></li>
-                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> eGPU <span class="count">(14)</span></a></li>
-                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> RAM/SSD <span class="count">(11)</span></a></li>
-                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> Màn hình <span class="count">(28)</span></a></li>
-                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> Phụ kiện <span class="count">(25)</span></a></li>
-                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> Like new <span class="count">(6)</span></a></li>
+                                <li><a href="demo_collection.html"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_2.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">Tất cả sản phẩm</span> <span class="count">229</span></a></li>
+                                <li><a href="#" style="color: var(--primary);"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_3.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">Mini PC</span> <span class="count">145</span> <i class="ph-bold ph-caret-down caret-icon"></i></a></li>
+                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_4.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">eGPU</span> <span class="count">14</span> <i class="ph-bold ph-caret-down caret-icon"></i></a></li>
+                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">RAM/SSD</span> <span class="count">11</span></a></li>
+                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_6.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">Màn hình</span> <span class="count">28</span></a></li>
+                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_7.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">Phụ kiện</span> <span class="count">25</span></a></li>
+                                <li><a href="#"><img src="//bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/icon_dmenu_8.png?1775454528082" style="width:22px;height:22px;object-fit:contain;"> <span class="cat-name">Like new</span> <span class="count">6</span></a></li>
                             </ul>
                         </div>
 
@@ -540,7 +544,7 @@ def build_collection(base_dir, header_part, footer_part):
                                             <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; box-shadow: 0 4px 10px rgba(37,99,235,0.2);"><i class="ph-bold ph-robot"></i></div>
                                             <div>
                                                 <div style="font-size: 0.9rem; color: #334155; line-height: 1.5;" id="aiSummaryText">
-                                                    <strong>Phân tích:</strong> Đang xử lý yêu cầu...
+                                                    <strong>NAVA AI:</strong> Đang xử lý yêu cầu...
                                                 </div>
                                             </div>
                                         </div>
@@ -589,7 +593,7 @@ def build_collection(base_dir, header_part, footer_part):
                                         header.textContent = '\uD83E\uDD16 AI đang phân tích: "' + q + '"...';
                                         
                                         // Cập nhật text mockup
-                                        summary.innerHTML = '<strong>Phân tích nhu cầu:</strong> Bạn đang tìm kiếm <em>"' + q + '"</em>. Dựa trên dữ liệu, AI ưu tiên đề xuất máy có GPU tích hợp mạnh, RAM tối thiểu 16GB và tản nhiệt tốt trong phân khúc.';
+                                        summary.innerHTML = '<strong>NAVA AI:</strong> Bạn đang tìm kiếm <em>"' + q + '"</em>. Dựa trên dữ liệu, AI ưu tiên đề xuất máy có GPU tích hợp mạnh, RAM tối thiểu 16GB và tản nhiệt tốt trong phân khúc.';
                                         
                                         setTimeout(function() {
                                             loading.style.display = 'none';
@@ -1399,6 +1403,46 @@ def build_product(base_dir, header_part, footer_part):
                     .nava-product-layout { flex-direction: row; align-items: flex-start; gap: 60px; padding: 40px; }
                     .nava-prod-gallery { width: 55%; position: sticky; top: 130px; }
                     .nava-prod-info { width: 45%; }
+                }
+                @media (max-width: 767px) {
+                    .container {
+                        padding-left: 12px !important;
+                        padding-right: 12px !important;
+                    }
+                    .nava-product-layout {
+                        padding: 15px !important;
+                        margin-left: 0 !important;
+                        margin-right: 0 !important;
+                        border-radius: 12px !important;
+                        width: 100% !important;
+                    }
+                    .ai-compare-input-row {
+                        flex-direction: column !important;
+                        align-items: stretch !important;
+                        gap: 12px !important;
+                    }
+                    .ai-compare-input-row input {
+                        width: 100% !important;
+                        flex: none !important;
+                    }
+                    .ai-compare-input-row button {
+                        width: 100% !important;
+                        justify-content: center !important;
+                        flex: none !important;
+                    }
+                }
+                @media (max-width: 991px) {
+                    .nava-spec-grid {
+                        max-height: 380px !important;
+                        overflow-y: auto !important;
+                        -webkit-overflow-scrolling: touch !important;
+                        padding-right: 8px;
+                        scrollbar-width: none;
+                        -ms-overflow-style: none;
+                    }
+                    .nava-spec-grid::-webkit-scrollbar {
+                        display: none;
+                    }
                 }
                 
                 /* Clean Gallery */
@@ -2474,6 +2518,7 @@ def build_product(base_dir, header_part, footer_part):
                         .nava-spec-grid {
                             max-height: calc(100vh - 280px);
                             overflow-y: auto;
+                            -webkit-overflow-scrolling: touch !important;
                             padding-right: 8px;
                         }
                         /* Scrollbar styling */
@@ -2489,6 +2534,19 @@ def build_product(base_dir, header_part, footer_part):
                         }
                         .nava-spec-grid::-webkit-scrollbar-thumb:hover {
                             background: #94a3b8;
+                        }
+                    }
+                    @media (max-width: 991px) {
+                        .nava-spec-grid {
+                            max-height: 380px !important;
+                            overflow-y: auto !important;
+                            -webkit-overflow-scrolling: touch !important;
+                            padding-right: 8px;
+                            scrollbar-width: none;
+                            -ms-overflow-style: none;
+                        }
+                        .nava-spec-grid::-webkit-scrollbar {
+                            display: none;
                         }
                     }
                 </style>
@@ -2911,79 +2969,83 @@ def build_product(base_dir, header_part, footer_part):
                             </button>
                         </div>
                         
-                        <div class="nava-spec-grid">
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Thương hiệu</div>
-                                <div class="nava-spec-value">Asus</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Model</div>
-                                <div class="nava-spec-value">NUC AI 350 (PN54)</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Tình trạng</div>
-                                <div class="nava-spec-value">Mới 100%</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Kích thước</div>
-                                <div class="nava-spec-value">130x130x34mm</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">CPU</div>
-                                <div class="nava-spec-value">AMD Ryzen AI 7 350 8C/16T max 5.0Ghz</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">CPU Mark</div>
-                                <div class="nava-spec-value">30.000</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">GPU</div>
-                                <div class="nava-spec-value">AMD Radeon™ 860M</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">G3D Mark</div>
-                                <div class="nava-spec-value">8.500</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Ram</div>
-                                <div class="nava-spec-value">2x DDR5 5600 tối đa 128GB</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">SSD</div>
-                                <div class="nava-spec-value">2x M.2 2280 NVMe</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Kết nối không dây</div>
-                                <div class="nava-spec-value">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Cổng IO</div>
-                                <div class="nava-spec-value" style="font-weight: 600; line-height: 1.6;">
-                                    1x USB 4<br>
-                                    1x USB 3.2 Gen2 Type A (10G)<br>
-                                    1x USB 2.0 Type A (5G)<br>
-                                    1x HDMI2.1(FRL6)<br>
-                                    2x DisplayPort 1.4<br>
-                                    1x 2.5G RJ45 LAN<br>
-                                    1x DC in
+                        <div class="specs-scroll-wrapper" style="position: relative;">
+                            <div class="nava-spec-grid" data-lenis-prevent>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Thương hiệu</div>
+                                    <div class="nava-spec-value">Asus</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Model</div>
+                                    <div class="nava-spec-value">NUC AI 350 (PN54)</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Tình trạng</div>
+                                    <div class="nava-spec-value">Mới 100%</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Kích thước</div>
+                                    <div class="nava-spec-value">130x130x34mm</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">CPU</div>
+                                    <div class="nava-spec-value">AMD Ryzen AI 7 350 8C/16T max 5.0Ghz</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">CPU Mark</div>
+                                    <div class="nava-spec-value">30.000</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">GPU</div>
+                                    <div class="nava-spec-value">AMD Radeon™ 860M</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">G3D Mark</div>
+                                    <div class="nava-spec-value">8.500</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Ram</div>
+                                    <div class="nava-spec-value">2x DDR5 5600 tối đa 128GB</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">SSD</div>
+                                    <div class="nava-spec-value">2x M.2 2280 NVMe</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Kết nối không dây</div>
+                                    <div class="nava-spec-value">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Cổng IO</div>
+                                    <div class="nava-spec-value" style="font-weight: 600; line-height: 1.6;">
+                                        1x USB 4<br>
+                                        1x USB 3.2 Gen2 Type A (10G)<br>
+                                        1x USB 2.0 Type A (5G)<br>
+                                        1x HDMI2.1(FRL6)<br>
+                                        2x DisplayPort 1.4<br>
+                                        1x 2.5G RJ45 LAN<br>
+                                        1x DC in
+                                    </div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Power</div>
+                                    <div class="nava-spec-value">DC 120W</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Tính năng đặc biệt</div>
+                                    <div class="nava-spec-value">Vân tay, Copilot+, lên đến 66 TOPS</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">OS</div>
+                                    <div class="nava-spec-value">Win 11 Pro, Office 2021</div>
+                                </div>
+                                <div class="nava-spec-row">
+                                    <div class="nava-spec-label">Bảo hành</div>
+                                    <div class="nava-spec-value">36 tháng</div>
                                 </div>
                             </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Power</div>
-                                <div class="nava-spec-value">DC 120W</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Tính năng đặc biệt</div>
-                                <div class="nava-spec-value">Vân tay, Copilot+, lên đến 66 TOPS</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">OS</div>
-                                <div class="nava-spec-value">Win 11 Pro, Office 2021</div>
-                            </div>
-                            <div class="nava-spec-row">
-                                <div class="nava-spec-label">Bảo hành</div>
-                                <div class="nava-spec-value">36 tháng</div>
-                            </div>
+                            <div class="specs-fade-overlay"></div>
+                            <div class="specs-scroll-arrow"><i class="ph-bold ph-mouse"></i></div>
                         </div>
                         
 
@@ -3031,9 +3093,9 @@ def build_product(base_dir, header_part, footer_part):
                     @media (max-width: 575px) { .related-product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
                     
                     .product-card {
-                        background: #fff;
+                        background: #ffffff !important;
                         border-radius: 16px;
-                        border: 1px solid var(--border-color);
+                        border: 1px solid var(--border-color) !important;
                         padding: 15px;
                         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                         position: relative;
@@ -3042,14 +3104,15 @@ def build_product(base_dir, header_part, footer_part):
                         height: 100%;
                         cursor: pointer;
                         overflow: hidden;
+                        box-shadow: none !important;
                     }
                     .product-card:hover {
-                        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
                         transform: translateY(-4px);
-                        border-color: var(--primary);
+                        border-color: var(--primary) !important;
+                        box-shadow: none !important;
                     }
-                    .card-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, transparent 70%); opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 1; }
-                    .product-card:hover .card-glow { opacity: 1; }
+                    .card-glow { display: none !important; }
+                    .product-card:hover .card-glow { display: none !important; }
                     
                     .card-image-wrap {
                         height: 180px; position: relative; background: transparent; padding: 0; z-index: 2;
@@ -3062,9 +3125,11 @@ def build_product(base_dir, header_part, footer_part):
                     }
                     .product-img {
                         object-fit: contain; width: 100%; height: 100%; transition: transform 0.4s ease;
+                        filter: none !important;
                     }
                     .product-card:hover .product-img {
                         transform: scale(1.05);
+                        filter: none !important;
                     }
                     .card-content {
                         padding: 15px 0 0 0; flex: 1; display: flex; flex-direction: column; z-index: 2;
@@ -3216,7 +3281,7 @@ def build_product(base_dir, header_part, footer_part):
             
             <!-- Bottom Sheet Overlay & Drawer for quick configuration -->
             <div id="nava-bs-overlay" onclick="closeBottomSheet()"></div>
-            <div id="nava-bottom-sheet">
+            <div id="nava-bottom-sheet" data-lenis-prevent>
                 <!-- Header: Thumbnail, Price, and Title -->
                 <div class="bs-header">
                     <img class="bs-thumb" src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC AI 350">
@@ -3680,31 +3745,50 @@ def build_product(base_dir, header_part, footer_part):
                     if (qtyInputBs) qtyInputBs.value = newVal;
                 };
 
+                let isStickyBarTicking = false;
+                let cachedStickyBar = null;
+                let cachedWrappers = null;
+
                 function toggleStickyBar(e) {
-                    const stickyBar = document.getElementById('sticky-cart-bar');
-                    if (!stickyBar) return;
-                    
-                    const threshold = window.innerWidth <= 768 ? 200 : 600;
-                    let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-                    
-                    if (scrollY === 0) {
-                        const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
-                        for (let i=0; i<wrappers.length; i++) {
-                            if (wrappers[i].scrollTop > scrollY) scrollY = wrappers[i].scrollTop;
-                        }
-                    }
-                    
-                    if (e && e.target && e.target.scrollTop > scrollY) {
-                        if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
-                            scrollY = e.target.scrollTop;
-                        }
-                    }
-                    
-                    if (scrollY > threshold && !isBsOpen) {
-                        stickyBar.style.setProperty('transform', 'translateY(0)', 'important');
-                        stickyBar.style.setProperty('display', 'block', 'important');
-                    } else {
-                        stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                    if (!isStickyBarTicking) {
+                        window.requestAnimationFrame(() => {
+                            if (!cachedStickyBar) {
+                                cachedStickyBar = document.getElementById('sticky-cart-bar');
+                            }
+                            if (!cachedStickyBar) {
+                                isStickyBarTicking = false;
+                                return;
+                            }
+                            
+                            const threshold = window.innerWidth <= 768 ? 200 : 600;
+                            let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                            
+                            if (scrollY === 0) {
+                                if (!cachedWrappers) {
+                                    cachedWrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
+                                }
+                                for (let i = 0; i < cachedWrappers.length; i++) {
+                                    if (cachedWrappers[i].scrollTop > scrollY) {
+                                        scrollY = cachedWrappers[i].scrollTop;
+                                    }
+                                }
+                            }
+                            
+                            if (e && e.target && e.target.scrollTop > scrollY) {
+                                if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
+                                    scrollY = e.target.scrollTop;
+                                }
+                            }
+                            
+                            if (scrollY > threshold && !isBsOpen) {
+                                cachedStickyBar.style.setProperty('transform', 'translateY(0)', 'important');
+                                cachedStickyBar.style.setProperty('display', 'block', 'important');
+                            } else {
+                                cachedStickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+                            }
+                            isStickyBarTicking = false;
+                        });
+                        isStickyBarTicking = true;
                     }
                 }
 
@@ -5531,117 +5615,8 @@ def build_checkout_page(base_dir):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css?v=2">
+    <link rel="stylesheet" href="assets/checkout.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <style>
-        body { margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-gray, #f8fafc); color: var(--text-dark); position: relative; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-        
-        .checkout-header { background: var(--bg-white); padding: 20px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        
-        .checkout-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; margin: 40px auto; }
-        
-        .section-title { font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
-        .section-title i { color: var(--primary); font-size: 1.5rem; }
-        
-        .checkout-card { background: var(--bg-white); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); margin-bottom: 30px; }
-        
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
-        .nava-input { width: 100%; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-gray); font-family: inherit; font-size: 0.95rem; color: var(--text-dark); transition: 0.3s; box-sizing: border-box; outline: none; }
-        .nava-input:focus { background: white; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.15); }
-        
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        
-        .payment-method-wrapper { margin-bottom: 12px; }
-        .radio-option { display: flex; align-items: center; padding: 16px; border: 1px solid var(--border-color); border-radius: var(--radius-md); cursor: pointer; transition: 0.3s; background: var(--bg-white); }
-        .radio-option:hover { border-color: var(--primary); background: rgba(0, 51, 102, 0.02) !important; }
-        .radio-option.active { border-color: var(--primary); background: rgba(0, 51, 102, 0.04) !important; }
-        .radio-option input[type="radio"] { width: 18px; height: 18px; accent-color: var(--primary); margin-right: 15px; cursor: pointer; }
-        .radio-label { font-weight: 600; color: var(--text-dark); font-size: 0.95rem; }
-        .payment-details { display: none; margin-top: 10px; padding: 0; animation: slideDown 0.3s ease-out; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .order-summary { position: sticky; top: 100px; background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: var(--radius-lg); padding: 30px; box-shadow: var(--shadow-md); border: 1px solid var(--border-color); }
-        
-        .order-item { display: flex; gap: 15px; align-items: center; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px dashed var(--border-color); }
-        .item-img-wrap { position: relative; width: 70px; height: 70px; border-radius: var(--radius-md); background: white; border: 1px solid var(--border-color); padding: 5px; }
-        .item-img { width: 100%; height: 100%; object-fit: contain; }
-        .item-badge { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; box-shadow: 0 2px 5px rgba(0, 51, 102, 0.4); }
-        .item-info { flex: 1; }
-        .item-title { font-weight: 700; font-size: 0.95rem; margin: 0 0 4px 0; color: var(--text-dark); }
-        .item-var { font-size: 0.8rem; color: var(--text-gray); }
-        .item-price { font-weight: 800; color: var(--text-dark); font-size: 1rem; }
-        
-        .summary-line { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-gray); font-weight: 500; }
-        .summary-total { display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 2px dashed var(--border-color); align-items: center; }
-        .summary-total-label { font-size: 1.1rem; font-weight: 800; color: var(--text-dark); }
-        .summary-total-val { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
-        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
-        
-        .btn-pay { display: block; width: 100%; padding: 18px; background: linear-gradient(90deg, var(--primary), var(--primary-light)); color: white; text-align: center; border-radius: var(--radius-md); font-weight: 800; font-size: 1.15rem; border: none; cursor: pointer; transition: all 0.3s; box-shadow: 0 10px 20px rgba(0, 51, 102, 0.25); margin-top: 30px; text-transform: uppercase; letter-spacing: 1px; }
-        .btn-pay:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 51, 102, 0.35); }
-        
-        /* Mobile Sticky Bottom Bar styles */
-        .mobile-sticky-bar {
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            width: 100% !important;
-            border-radius: 0 !important;
-            margin: 0 !important;
-            box-sizing: border-box !important;
-            background: rgba(255, 255, 255, 0.98) !important;
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-color) !important;
-            padding: 12px 20px !important;
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 9999 !important;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.08) !important;
-        }
-        .mobile-sticky-bar .sticky-price-label {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            margin-bottom: 2px;
-        }
-        .mobile-sticky-bar .sticky-price-val {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--primary);
-        }
-        .mobile-sticky-bar .btn-sticky-pay {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: var(--radius-md);
-            font-weight: 800;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 51, 102, 0.2);
-        }
-        
-        @media (max-width: 991px) {
-            .checkout-grid { grid-template-columns: 1fr; }
-            .order-summary { position: static; order: -1; margin-bottom: 20px; padding: 20px 15px !important; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 10px !important; }
-            .mobile-sticky-bar { display: flex !important; }
-            body { padding-bottom: 90px !important; }
-            .checkout-card { padding: 20px 15px !important; margin-bottom: 20px !important; }
-            .checkout-grid { margin: 20px auto !important; }
-            .section-title { font-size: 1.15rem !important; margin-bottom: 15px !important; }
-            
-            /* Tighter spacing & padding for forms on mobile */
-            .input-group { margin-bottom: 12px !important; }
-            .input-group label { font-size: 0.85rem !important; margin-bottom: 6px !important; }
-            .nava-input { padding: 10px 12px !important; font-size: 0.9rem !important; }
-            .radio-option { padding: 12px 14px !important; }
-            .radio-label { font-size: 0.9rem !important; }
-        }
-        
-    </style>
 </head>
 <body>
     <div class="bg-glow orb-1"></div>
@@ -6335,6 +6310,9 @@ def build_policy_pages(base_dir, header_part, footer_part):
                     border-left: none;
                     border-right: none;
                     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                    width: calc(100% + 30px);
+                    box-sizing: border-box;
+                    overflow: hidden;
                 }
                 .policy-sidebar h3 { display: none !important; }
                 .policy-menu {
@@ -6344,6 +6322,7 @@ def build_policy_pages(base_dir, header_part, footer_part):
                     gap: 8px;
                     padding-bottom: 5px;
                     scrollbar-width: none;
+                    width: 100%;
                 }
                 .policy-menu::-webkit-scrollbar { display: none; }
                 .policy-menu li { margin: 0; }
@@ -6385,7 +6364,7 @@ def build_policy_pages(base_dir, header_part, footer_part):
                 </div>
                 
                 <!-- Content Column with CTA -->
-                <div style="display: flex; flex-direction: column; gap: 25px;">
+                <div style="display: flex; flex-direction: column; gap: 25px; min-width: 0;">
                     <div class="policy-content" id="policy-main-content" style="margin-bottom: 0;">
                         <!-- Tab 1: Warranty -->
                         <div class="policy-tab-content active" id="policy-tab-warranty">
@@ -6532,6 +6511,108 @@ def build_policy_pages(base_dir, header_part, footer_part):
         keywords="chinh sach bao hanh, chinh sach van chuyen, dieu khoan dich vu, nava store"
     )
     with open(os.path.join(base_dir, "demo_policy.html"), "w", encoding="utf-8") as f:
+        f.write(full_html)
+
+def build_contact_page(base_dir, header_part, footer_part):
+    sticky_stuff = ""
+    with open(os.path.join(base_dir, "index.bwt"), "r", encoding="utf-8") as f:
+        idx_content = f.read()
+        if "<!-- Mobile Sidebar Drawer -->" in idx_content:
+            sticky_stuff = idx_content[idx_content.find("<!-- Mobile Sidebar Drawer -->"):]
+            if "<!-- /MASTER SAPO ESCAPE WRAPPER -->" in sticky_stuff:
+                sticky_stuff = sticky_stuff.split("<!-- /MASTER SAPO ESCAPE WRAPPER -->")[0]
+                
+    local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
+
+    # Load BWT template
+    with open(os.path.join(base_dir, "sapo_BWT_new", "Templates", "page.contact.bwt"), "r", encoding="utf-8") as f:
+        bwt_template = f.read()
+
+    # Do compilation replacements
+    compiled = bwt_template
+    compiled = compiled.replace("{%- include 'breadcrumb' -%}", """
+        <div class="breadcrumbs mt-3">
+            <div class="container">
+                <ul class="breadcrumb align-items-center m-0 pl-0 pr-0 small pt-2 pb-2" style="list-style: none; display: flex; gap: 8px; padding-left: 0;">					
+                    <li class="home">
+                        <a href="index.html" title="Trang chủ" style="text-decoration: none; color: var(--text-gray);"><i class="ph ph-house"></i> Trang chủ</a>
+                        <span class="slash-divider ml-2 mr-2">/</span>
+                    </li>
+                    <li class="active" style="color: var(--primary); font-weight: 700;">Liên hệ</li>
+                </ul>
+            </div>
+        </div>
+    """)
+    compiled = compiled.replace("{{page.title}}", "Liên hệ với NAVA STORE")
+    
+    # Replace dynamic contact info cards block
+    info_block_start = compiled.find("{%- if settings.edit_contact_page == 'page_option' -%}")
+    info_block_end = compiled.find('<div class="mt-4">')
+    if info_block_start != -1 and info_block_end != -1:
+        mock_info_html = """
+						<div class="contact-info-cards mb-4">
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-map-pin"></i></div>
+								<div class="card-content">
+									<h6>Địa chỉ</h6>
+									<p>702 Võ Nguyên Giáp, Hiệp Phú, Thủ Đức, Hồ Chí Minh</p>
+								</div>
+							</div>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-envelope"></i></div>
+								<div class="card-content">
+									<h6>Email</h6>
+									<p><a href="mailto:hi@navastore.vn" title="hi@navastore.vn">hi@navastore.vn</a></p>
+								</div>
+							</div>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-phone"></i></div>
+								<div class="card-content">
+									<h6>Hotline</h6>
+									<p><a href="tel:0972178527" title="0972178527">0972178527</a></p>
+								</div>
+							</div>
+							<div class="contact-info-card">
+								<div class="card-icon"><i class="ph-bold ph-scroll"></i></div>
+								<div class="card-content">
+									<h6>Mã số thuế</h6>
+									<p>MST: 8080980349-001</p>
+								</div>
+							</div>
+						</div>
+						
+"""
+        compiled = compiled[:info_block_start] + mock_info_html + compiled[info_block_end:]
+        
+    # Replace map block
+    map_block_start = compiled.find('<div class="google-map rounded-10 overflow-hidden border">')
+    map_block_end = compiled.find('</div>', map_block_start)
+    if map_block_start != -1 and map_block_end != -1:
+        map_block_end_full = compiled.find('</div>', map_block_end + 1)
+        mock_map_html = """<div class="google-map rounded-10 overflow-hidden border">
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d721.3317906792457!2d106.74626274648564!3d10.801656253942495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175275302646ec5%3A0x82d15ef590c22180!2sNAVA%20STORE!5e1!3m2!1svi!2s!4v1747503843870!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+						</div>"""
+        compiled = compiled[:map_block_start] + mock_map_html + compiled[map_block_end_full + 6:]
+
+    # Form mock
+    compiled = compiled.replace("{%- form 'contact' -%}", '<form action="javascript:;" onsubmit="alert(\'Gửi liên hệ thành công!\'); this.reset();">')
+    compiled = compiled.replace("{%- endform -%}", '</form>')
+    compiled = compiled.replace("{%- include 'form-errors-custom' -%}", '')
+    
+    compiled = compiled.replace("{{settings.form_contact_name | append: ' *'}}", "Họ & Tên *")
+    compiled = compiled.replace("{{settings.form_contact_mail | append: ' *'}}", "Địa chỉ email *")
+    compiled = compiled.replace("{{settings.form_contact_content | append: ' *'}}", "Nội dung *")
+    compiled = compiled.replace("{{settings.form_contact_require}}", "Thông tin bắt buộc")
+    compiled = compiled.replace("{{settings.form_contact_submit}}", "Gửi liên hệ")
+    
+    full_html = clean_liquid_tags(header_part + compiled + local_footer_part, 'page')
+    full_html = inject_seo_metadata(
+        full_html,
+        title="Liên Hệ - Nava Store",
+        description="Liên hệ với Nava Store - Địa chỉ cung cấp Mini PC & eGPU uy tín hàng đầu Việt Nam.",
+        keywords="lien he nava store, mini pc, egpu, thu duc"
+    )
+    with open(os.path.join(base_dir, "demo_contact.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
 def build_article_page(base_dir, header_part, footer_part):
@@ -6837,6 +6918,9 @@ def build_all():
     
     build_article_page(base_dir, header_part, footer_part)
     print("Generated demo_article.html successfully!")
+    
+    build_contact_page(base_dir, header_part, footer_part)
+    print("Generated demo_contact.html successfully!")
 
 if __name__ == "__main__":
     build_all()

@@ -147,7 +147,7 @@
                     <img alt="" aria-hidden="true" src="{{'to-top-arrow2.png' | asset_url}}" width="17" height="9">
                 </div>
                 {%-if template != 'product'-%}
-                {%-include 'mew_mobi_bar'-%}
+                {%comment%}{%-include 'mew_mobi_bar'-%}{%endcomment%}
                 {%-endif-%}
                 <div class="toast-container"></div>
                 {%-include 'footer_scripts'-%}

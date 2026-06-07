@@ -52,6 +52,9 @@
                 border-left: none;
                 border-right: none;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                width: calc(100% + 30px);
+                box-sizing: border-box;
+                overflow: hidden;
             }
             .policy-sidebar h3 { display: none !important; }
             .policy-menu {
@@ -61,6 +64,7 @@
                 gap: 8px;
                 padding-bottom: 5px;
                 scrollbar-width: none;
+                width: 100%;
             }
             .policy-menu::-webkit-scrollbar { display: none; }
             .policy-menu li { margin: 0; }
@@ -96,7 +100,7 @@
             </div>
             
             <!-- Content Column with CTA -->
-            <div style="display: flex; flex-direction: column; gap: 25px;">
+            <div style="display: flex; flex-direction: column; gap: 25px; min-width: 0;">
                 <div class="policy-content" id="policy-main-content" style="margin-bottom: 0;">
                     <!-- Tab 1: Warranty -->
                     <div class="policy-tab-content active" id="policy-tab-warranty">

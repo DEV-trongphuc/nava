@@ -1,0 +1,12 @@
+tacts == true -%}
+                                    <span class="prod-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); margin: 0;">{{settings.noPrice}}</span>
+                                    {%- else -%}
+                                    <span class="prod-price" id="selected-variant-price" style="font-size: 1.8rem; font-weight: 900; color: var(--primary); letter-spacing: -0.5px; margin: 0;">
+                                        {% if selected_variant.price == 0 %}
+                                            Liên hệ
+                                        {% else %}
+                                            {{ selected_variant.price | money }}
+                                        {% endif %}
+                                    </span>
+                                    {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                                    <del class="old-price" id="selected-variant-compare-price" style="color: var(--text-muted); font-size: 1.05rem; font-weight: 600; margin-left: 8px;">{{ selected_variant.comp

@@ -1,0 +1,97 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ product.name | escape }}",
+  "image": [
+    {%- for image in product.images -%}
+      "https:{{ image.src | img_url: 'grande' }}"{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "description": "{{ product.summary_or_content | strip_html | strip_newlines | escape | truncate: 1000, '' }}",
+  "sku": "{{ product.variants.first.sku | default: product.id }}",
+  "mpn": "{{ product.variants.first.barcode | default: product.id }}",
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ product.vendor | default: 'NAVA STORE' }}"
+  },
+  {%- if product.type != null -%}
+  "model": "{{ product.style }}",
+  {%- endif -%}
+  "offers": {
+    "@type": "{% if product.price_max > product.price_min %}AggregateOffer{% else %}Offer{% endif %}",
+    "priceCurrency": "{{ cart.currency.iso_code | default: store.currency | default: 'VND' }}",
+    {%- if product.price_max > product.price_min -%}
+      "lowPrice": "{{ product.price_min | round }}",
+      "highPrice": "{{ product.price_max | round }}",
+      "offerCount": "{{ product.variants.size }}",
+    {%- else -%}
+      "price": "{{ product.variants.first.price | round }}",
+      "priceValidUntil": "2099-12-31",
+      {%- if product.variants.first.compare_at_price > 0 -%}
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "price": "{{ product.variants.first.compare_at_price | round }}",
+        "priceCurrency": "{{ store.currency | default: 'VND' }}"
+      },
+      {%- endif -%}
+    {%- endif -%}
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "url": "https:{{ store.url }}{{ product.url }}",
+    "seller": {
+      "@type": "Organization",
+      "name": "{{ store.name | default: 'NAVA STORE' }}",
+      "url": "https:{{ store.url }}",
+      "logo": "https:{{ 'logo.png' | asset_url }}"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "{{ store.currency | default: 'VND' }}"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "VN"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": "0",
+          "maxValue": "1",
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": "1",
+          "maxValue": "5",
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "VN",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": "30",
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+    }
+  }
+  {%- if product.metafields.ratings.value -%}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.metafields.ratings.value }}",
+    "reviewCount": "{{ product.metafields.reviews_count.value | default: 1 }}"
+  }
+  {%- elsif product.metafields.bpr.votes -%}
+  ,"aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{{ product.metafields.bpr.rating | default: 5 }}",
+    "reviewCount": "{{ product.metafields.bpr.votes | default: 1 }}"
+  }
+  {%- endif -%}
+}
+</script>

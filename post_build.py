@@ -3,6 +3,14 @@ import os
 sticky_html = """
 <!-- Sticky Compare Bar -->
 <style>
+    :root {
+        --compare-cols: 140px 1fr 1fr;
+        --compare-gap: 20px;
+    }
+    #compare-modal,
+    #compare-modal * {
+        box-sizing: border-box !important;
+    }
     @media (max-width: 768px) {
         #compare-bar-inner { flex-direction: column !important; gap: 12px !important; }
         #compare-slots { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
@@ -10,6 +18,136 @@ sticky_html = """
         #compare-actions button { flex: 1 !important; justify-content: center !important; padding: 10px 15px !important; font-size: 0.95rem !important; }
         .compare-slot-item { padding: 8px 12px !important; }
         .compare-slot-item img { width: 40px !important; height: 40px !important; }
+        .ai-compare-input-row {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 12px !important;
+        }
+        .ai-compare-input-row input {
+            width: 100% !important;
+            flex: none !important;
+        }
+        .ai-compare-input-row button {
+            width: 100% !important;
+            justify-content: center !important;
+            flex: none !important;
+        }
+        .mew_mobi_bar {
+            display: none !important;
+        }
+
+        #compare-modal-content {
+            width: 95% !important;
+            max-width: 95% !important;
+            height: 90vh !important;
+            max-height: 90vh !important;
+            border-radius: 16px !important;
+        }
+
+        /* Responsive grid settings override */
+        #compare-modal {
+            --compare-cols: 100px 1fr 1fr !important;
+            --compare-gap: 8px !important;
+        }
+
+        .modal-compare-inner {
+            min-width: 550px !important;
+            padding-right: 16px !important;
+        }
+
+        /* Label / Key Cell Styles on Mobile (Not Sticky, Very Small Text) */
+        .compare-label-cell,
+        .compare-key-cell {
+            padding: 8px 6px !important;
+            font-size: 0.65rem !important;
+            font-weight: 800 !important;
+            color: var(--text-gray, #64748b) !important;
+            border-right: 1px solid var(--border-color) !important;
+            word-break: break-word !important;
+            min-width: 0 !important;
+        }
+
+        .compare-val-cell {
+            display: block !important;
+            padding: 8px 6px !important;
+            font-size: 0.8rem !important;
+            word-break: break-word !important;
+            min-width: 0 !important;
+        }
+
+        /* Card Sizing Override on Mobile */
+        .compare-top-row {
+            margin-bottom: 15px !important;
+            gap: 8px !important;
+        }
+
+        .compare-card {
+            padding: 10px 8px !important;
+            border-radius: 8px !important;
+        }
+
+        .compare-remove-btn {
+            width: 22px !important;
+            height: 22px !important;
+            font-size: 0.8rem !important;
+            top: 6px !important;
+            right: 6px !important;
+        }
+
+        .compare-thumb-link {
+            margin-bottom: 8px !important;
+        }
+
+        .compare-thumb {
+            width: 70px !important;
+            height: 70px !important;
+            padding: 4px !important;
+        }
+
+        .compare-title {
+            font-size: 0.8rem !important;
+            height: 2.6em !important;
+            line-height: 1.3 !important;
+            margin-bottom: 4px !important;
+        }
+
+        .compare-price-val {
+            font-size: 0.9rem !important;
+            margin-bottom: 8px !important;
+        }
+
+        .compare-btn {
+            padding: 6px !important;
+            font-size: 0.75rem !important;
+            border-radius: 6px !important;
+            gap: 4px !important;
+        }
+
+        /* Add Product Card Override */
+        .compare-add-card {
+            padding: 10px !important;
+            min-height: 150px !important;
+            gap: 8px !important;
+            border-radius: 8px !important;
+        }
+
+        .compare-add-card div {
+            width: 32px !important;
+            height: 32px !important;
+        }
+
+        .compare-add-card div i {
+            font-size: 1rem !important;
+        }
+
+        .compare-add-card span {
+            font-size: 0.8rem !important;
+        }
+    }
+    @media (max-width: 991px) {
+        .mew_mobi_bar {
+            display: none !important;
+        }
     }
 </style>
 <div id="compare-bar" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; z-index: 2147483647 !important; display: none; background: var(--bg-white) !important; box-shadow: 0 -10px 50px rgba(0,0,0,0.15) !important; border-top: 1px solid var(--border-color) !important; padding: 25px 0 !important;">
@@ -30,7 +168,7 @@ sticky_html = """
         </div>
         
         <!-- COMPARE PRODUCT SELECT MODAL -->
-        <div id="compare-select-modal" style="display: none; position: fixed !important; inset: 0 !important; z-index: 2147483648 !important; background: rgba(15, 23, 42, 0.6) !important; backdrop-filter: blur(4px) !important; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease;" onclick="if(event.target===this) hideCompareSelectDropdown()">
+        <div id="compare-select-modal" data-lenis-prevent style="display: none; position: fixed !important; inset: 0 !important; z-index: 2147483648 !important; background: rgba(15, 23, 42, 0.6) !important; backdrop-filter: blur(4px) !important; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s ease;" onclick="if(event.target===this) hideCompareSelectDropdown()">
             <div id="compare-select-dropdown" style="background: var(--bg-white, #ffffff); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); width: 90%; max-width: 850px; padding: 25px; box-sizing: border-box; font-family: inherit; position: relative; display: flex; flex-direction: column; transform: scale(0.95); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);">
                 <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <span>Chọn sản phẩm so sánh</span>
@@ -49,7 +187,7 @@ sticky_html = """
 </div>
 
 <!-- Comparison Modal -->
-<div id="compare-modal" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; background: rgba(15,23,42,0.8) !important; backdrop-filter: blur(8px) !important; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+<div id="compare-modal" data-lenis-prevent style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; --primary: #1e3a8a; --bg-white: #ffffff; --bg-gray: #f8fafc; --text-color: #0f172a; --text-gray: #64748b; --border-color: #e2e8f0; --radius-lg: 16px; position: fixed !important; inset: 0 !important; z-index: 2147483647 !important; background: rgba(15,23,42,0.8) !important; backdrop-filter: blur(8px) !important; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
     <div style="background: var(--bg-white); width: 95%; max-width: 1100px; max-height: 90vh; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: 0 25px 50px rgba(0,0,0,0.25); display: flex; flex-direction: column; overflow: hidden; position: relative; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);" id="compare-modal-content">
         <!-- Header -->
         <div style="padding: 25px 30px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; background: var(--bg-gray);">

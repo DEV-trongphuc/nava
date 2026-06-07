@@ -1,0 +1,181 @@
+{%- if template contains 'index' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ store.name | default: 'NAVA STORE' }}",
+  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "logo": "https:{{ 'logo.png' | asset_url }}",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "0972 178 527",
+    "contactType": "customer service",
+    "email": "info@navatek.vn",
+    "areaServed": "VN",
+    "availableLanguage": "Vietnamese"
+  },
+  "sameAs": [
+    "https://www.facebook.com/navastore",
+    "https://www.youtube.com/@NAVASTORE-VN",
+    "https://s.shopee.vn/60EMOS0MIK"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ store.name | default: 'NAVA STORE' }}",
+  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ store.url | default: 'https://navastore.vn' }}/search?query={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "{{ store.name | default: 'NAVA STORE' }}",
+  "image": "https:{{ 'logo.png' | asset_url }}",
+  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "telephone": "0972 178 527",
+  "priceRange": "$$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "270 đường Linh Trung, Phường Linh Trung",
+    "addressLocality": "Thủ Đức",
+    "addressRegion": "Hồ Chí Minh",
+    "addressCountry": "VN"
+  },
+  "hasMap": "https://www.google.com/maps/place/NAVA+STORE+-+Mini+PC+%26+eGPU/@10.843762,106.7716421,17z/data=!3m1!4b1!4m6!3m5!1s0x3175275302646ec5:0x82d15ef590c22180!8m2!3d10.843762!4d106.7716421",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "10.843762",
+    "longitude": "106.7716421"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "09:00",
+    "closes": "17:00"
+  }
+}
+</script>
+{%- endif -%}
+
+{%- unless template contains 'index' or template contains '404' -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Trang chủ",
+      "item": "https:{{ store.url }}"
+    }
+    {%- if template contains 'product' -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ product.name | escape }}",
+        "item": "https:{{ store.url }}/{{ product.alias }}"
+      }
+    {%- elsif template contains 'collection' and collection.alias -%}
+      {%- if collection.alias == 'all' -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ collection.name | escape }}",
+          "item": "https:{{ store.url }}/collections/all"
+        }
+      {%- else -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ collection.name | escape }}",
+          "item": "https:{{ store.url }}/{{ collection.alias }}"
+        }
+      {%- endif -%}
+      {%- if current_tags -%}
+        ,{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "{{ current_tags.first | escape }}",
+          "item": "https:{{ store.url }}/{% if collection.alias == 'all' %}collections/all{% else %}{{ collection.alias }}{% endif %}/{{ current_tags.first }}"
+        }
+      {%- endif -%}
+    {%- elsif template contains 'article' -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ blog.name | escape }}",
+        "item": "https:{{ store.url }}{{ blog.url }}"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ article.title | escape }}",
+        "item": "https:{{ store.url }}{{ article.url }}"
+      }
+    {%- elsif template == 'blog' -%}
+      {%- if current_url contains 'blogs/all' -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ blog.name | escape }}",
+          "item": "https:{{ store.url }}/blogs/all"
+        }
+      {%- else -%}
+        ,{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ blog.name | escape }}",
+          "item": "https:{{ store.url }}{{ blog.url }}"
+        }
+        {%- if current_tags -%}
+          ,{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{{ current_tags.first | escape }}",
+            "item": "https:{{ store.url }}{{ blog.url }}/{{ current_tags.first }}"
+          }
+        {%- endif -%}
+      {%- endif -%}
+    {%- elsif template contains 'page' -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ page.title | escape }}",
+        "item": "https:{{ store.url }}/{{ page.alias }}"
+      }
+    {%- elsif template contains 'cart' -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Giỏ hàng",
+        "item": "https:{{ store.url }}/cart"
+      }
+    {%- elsif template contains 'search' -%}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Tìm kiếm",
+        "item": "https:{{ store.url }}/search"
+      }
+    {%- endif -%}
+  ]
+}
+</script>
+{%- endunless -%}
