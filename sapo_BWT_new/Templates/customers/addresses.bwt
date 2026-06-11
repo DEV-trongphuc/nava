@@ -1,7 +1,7 @@
 {%- include 'breadcrumb' -%}
 <section class="layout-address pt-3 pb-3">
     <style>
-        .layout-address .modal-dialog {
+        .modal_address .modal-dialog {
             max-width: 600px !important;
             margin: 1.75rem auto !important;
             display: flex !important;
@@ -9,7 +9,7 @@
             min-height: calc(100vh - 3.5rem) !important;
         }
         @media (max-width: 768px) {
-            .layout-address .modal-dialog {
+            .modal_address .modal-dialog {
                 min-height: calc(100vh - 1rem) !important;
                 margin: 0.5rem auto !important;
                 max-width: 95% !important;
@@ -19,31 +19,31 @@
             background: rgba(15, 23, 42, 0.6) !important;
             backdrop-filter: blur(4px);
         }
-        .layout-address .modal-content {
+        .modal_address .modal-content {
             border-radius: var(--radius-lg) !important;
             border: none !important;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
         }
-        .layout-address .modal-header {
+        .modal_address .modal-header {
             padding: 20px 25px !important;
             border-bottom: 1px solid var(--border-color) !important;
         }
-        .layout-address .modal-title {
+        .modal_address .modal-title {
             font-size: 1.2rem !important;
             font-weight: 800 !important;
             margin: 0 !important;
         }
-        .layout-address .modal-body {
+        .modal_address .modal-body {
             padding: 25px !important;
         }
-        .layout-address .form-group label {
+        .modal_address .form-group label {
             display: block !important;
             font-size: 0.9rem !important;
             font-weight: 600 !important;
             margin-bottom: 8px !important;
             color: var(--text-dark) !important;
         }
-        .layout-address .form-control {
+        .modal_address .form-control {
             width: 100% !important;
             padding: 12px 15px !important;
             border: 1px solid var(--border-color) !important;
@@ -55,18 +55,18 @@
             transition: 0.3s !important;
             height: auto !important;
         }
-        .layout-address .form-control:focus {
+        .modal_address .form-control:focus {
             border-color: #0284c7 !important;
             box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15) !important;
             background: #fff !important;
         }
-        .layout-address .btn-row {
+        .modal_address .btn-row {
             display: flex !important;
             justify-content: flex-end !important;
             gap: 10px !important;
             margin-top: 20px !important;
         }
-        .layout-address .btn-submit {
+        .modal_address .btn-submit {
             background: linear-gradient(90deg, #0284c7, #2563eb) !important;
             color: white !important;
             border: none !important;
@@ -75,11 +75,11 @@
             font-weight: 600 !important;
             cursor: pointer !important;
         }
-        .layout-address .btn-submit:hover {
+        .modal_address .btn-submit:hover {
             transform: translateY(-2px) !important;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
         }
-        .layout-address .btn-close {
+        .modal_address .btn-close {
             background: #f1f5f9 !important;
             color: var(--text-dark) !important;
             border: 1px solid var(--border-color) !important;
@@ -121,13 +121,25 @@
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            color: var(--text-gray) !important;
+            color: #475569 !important;
             cursor: pointer !important;
             transition: 0.2s !important;
+        }
+        .layout-address .btn-address button svg,
+        .layout-address .btn-address button svg path {
+            fill: currentColor !important;
         }
         .layout-address .btn-address button:hover {
             background: var(--border-color) !important;
             color: var(--text-dark) !important;
+        }
+        .layout-address .btn-address button.btn-edit {
+            background: #f1f5f9 !important;
+            color: #475569 !important;
+        }
+        .layout-address .btn-address button.btn-edit:hover {
+            background: #e0f2fe !important;
+            color: #0284c7 !important;
         }
         .layout-address .btn-address button.btn-delete:hover {
             background: #fee2e2 !important;
@@ -215,6 +227,7 @@
         .address-modal-overlay .modal-body {
             padding: 0 !important;
             overflow-y: auto !important;
+            max-height: 350px !important;
             flex-grow: 1 !important;
             background: #fff !important;
         }
@@ -558,10 +571,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var locationData = null;
-            fetch("{{ 'ctiy.txt' | asset_url }}")
+            fetch("https://nava-one.vercel.app/assets/ctiy_min.json")
                 .then(function(res) { return res.json(); })
                 .then(function(data) { locationData = data; })
-                .catch(function(err) { console.error("Lỗi tải ctiy.txt", err); });
+                .catch(function(err) { console.error("Lỗi tải ctiy_min.json từ Vercel", err); });
 
             var activeZone = null;
             var currentStep = 1; // 1: City, 2: District/Ward

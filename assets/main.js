@@ -154,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lenisOptions.content = contentWrapper;
             }
 
+            /*
             const lenis = new Lenis(lenisOptions);
             window.lenis = lenis;
 
@@ -162,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 requestAnimationFrame(raf);
             }
             requestAnimationFrame(raf);
+            */
 
             // Trigger resize on window load and periodically to prevent page length bugs
             window.addEventListener('load', () => {

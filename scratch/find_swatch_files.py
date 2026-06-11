@@ -1,13 +1,10 @@
 import os
 
-base_dir = r"f:\BAO_SAPO\sapo_new"
+def list_all_files():
+    for root, dirs, files in os.walk('.'):
+        for file in files:
+            full_path = os.path.join(root, file)
+            if 'swatch' in file.lower() or 'swatch' in root.lower():
+                print(f"File matching swatch: {full_path}")
 
-matches = []
-for root, dirs, files in os.walk(base_dir):
-    for f_name in files:
-        if "swatch" in f_name.lower():
-            matches.append(os.path.join(root, f_name))
-
-print("Found files:")
-for m in matches:
-    print(m)
+list_all_files()

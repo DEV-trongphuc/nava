@@ -367,21 +367,21 @@
                             class="ph ph-arrow-right"></i></a>
                 </div>
                 <div class="product-grid">
-                    <!-- Card 1: Minisforum -->
+                    <!-- Card 1: ASUS NUC -->
                     <div class="product-card reveal">
                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <h2 class="card-title">Minisforum</h2>
-                            <p class="card-desc">Giải pháp máy tính nhỏ gọn nhưng mạnh mẽ, thiết kế cho game thủ và sáng
-                                tạo
-                                nội dung.</p>
+                            <h2 class="card-title">ASUS NUC</h2>
+                            <p class="card-desc">Giải pháp linh hoạt, bền bỉ đến từ ông lớn ASUS dành cho Doanh nghiệp
+                                và
+                                Chuyên gia.</p>
                         </div>
                         <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
-                                alt="Minisforum" class="product-img" loading="lazy" decoding="async" width="200" height="200">
+                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
+                                alt="ASUS NUC" class="product-img" loading="lazy" decoding="async" width="200" height="200">
                         </div>
                         <div class="card-actions">
-                            <a href="https://navastore.vn/minisforum" class="btn-pill btn-blue">Khám phá</a>
+                            <a href="https://navastore.vn/asus" class="btn-pill btn-blue">Khám phá</a>
                         </div>
                     </div>
 
@@ -402,26 +402,8 @@
                         </div>
                     </div>
 
-                    <!-- Card 3: GMKtec -->
+                    <!-- Card 3: Beelink -->
                     <div class="product-card reveal delay-2">
-                        <div class="card-glow"></div>
-                        <div class="card-content">
-                            <h2 class="card-title">GMKtec</h2>
-                            <p class="card-desc">Khả năng chạy offline mô hình DeepSeek V3 với dòng EVO Series chuyên
-                                biệt
-                                AI.</p>
-                        </div>
-                        <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/themes/1000289/assets/collec_img_3_1.png?1775454528082"
-                                alt="GMKtec" class="product-img" loading="lazy" decoding="async" width="200" height="200">
-                        </div>
-                        <div class="card-actions">
-                            <a href="https://navastore.vn/gmk" class="btn-pill btn-blue">Khám phá</a>
-                        </div>
-                    </div>
-
-                    <!-- Card 4: Beelink -->
-                    <div class="product-card reveal">
                         <div class="card-glow"></div>
                         <div class="card-content">
                             <h2 class="card-title">Beelink</h2>
@@ -438,21 +420,39 @@
                         </div>
                     </div>
 
-                    <!-- Card 5: ASUS NUC -->
+                    <!-- Card 4: GMKtec -->
+                    <div class="product-card reveal">
+                        <div class="card-glow"></div>
+                        <div class="card-content">
+                            <h2 class="card-title">GMKtec</h2>
+                            <p class="card-desc">Khả năng chạy offline mô hình DeepSeek V3 với dòng EVO Series chuyên
+                                biệt
+                                AI.</p>
+                        </div>
+                        <div class="card-image-wrap">
+                            <img src="//bizweb.dktcdn.net/thumb/medium/100/543/817/themes/1000289/assets/collec_img_3_1.png?1775454528082"
+                                alt="GMKtec" class="product-img" loading="lazy" decoding="async" width="200" height="200">
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://navastore.vn/gmk" class="btn-pill btn-blue">Khám phá</a>
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Minisforum -->
                     <div class="product-card reveal delay-1">
                         <div class="card-glow"></div>
                         <div class="card-content">
-                            <h2 class="card-title">ASUS NUC</h2>
-                            <p class="card-desc">Giải pháp linh hoạt, bền bỉ đến từ ông lớn ASUS dành cho Doanh nghiệp
-                                và
-                                Chuyên gia.</p>
+                            <h2 class="card-title">Minisforum</h2>
+                            <p class="card-desc">Giải pháp máy tính nhỏ gọn nhưng mạnh mẽ, thiết kế cho game thủ và sáng
+                                tạo
+                                nội dung.</p>
                         </div>
                         <div class="card-image-wrap">
-                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/themes/1000289/assets/collec_img_1_1.png?1775454528082"
-                                alt="ASUS NUC" class="product-img" loading="lazy" decoding="async" width="200" height="200">
+                            <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/themes/1000289/assets/collec_img_2_1.png?1775454528082"
+                                alt="Minisforum" class="product-img" loading="lazy" decoding="async" width="200" height="200">
                         </div>
                         <div class="card-actions">
-                            <a href="https://navastore.vn/asus" class="btn-pill btn-blue">Khám phá</a>
+                            <a href="https://navastore.vn/minisforum" class="btn-pill btn-blue">Khám phá</a>
                         </div>
                     </div>
 

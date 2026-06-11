@@ -176,10 +176,20 @@
                                 if (items.length > 0) {
                                     let html = '';
                                     items.forEach(item => {
-                                        const name = item.name || item.title || item;
-                                        const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
-                                        const price = item.price || 'Liên hệ';
-                                        const url = item.url || '#';
+                                        let name = '';
+                                        let url = '#';
+                                        let img = '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
+                                        const price = (item && typeof item === 'object') ? (item.price || 'Liên hệ') : 'Liên hệ';
+                                        
+                                        if (typeof item === 'string') {
+                                            url = item;
+                                            // Convert "/asus-nuc-14-pro" to "asus nuc 14 pro"
+                                            name = item.replace(/^\//, '').replace(/-/g, ' ');
+                                        } else if (item && typeof item === 'object') {
+                                            name = item.name || item.title || '';
+                                            url = item.url || '#';
+                                            img = item.img || item.image || img;
+                                        }
                                         
                                         html += `
                                             <div class="swiper-slide" style="height: auto;">
@@ -187,7 +197,7 @@
                                                     <a href="${url}" style="text-decoration: none; display: block; margin-bottom: 10px;">
                                                         <img src="${img}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
                                                     </a>
-                                                    <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${name}</a>
+                                                    <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35; text-transform: capitalize;">${name}</a>
                                                     <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${price}</div>
                                                     <a href="${url}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
                                                 </div>

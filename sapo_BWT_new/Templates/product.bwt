@@ -27,6 +27,7 @@
         {%- assign selected_variant = product.selected_or_first_available_variant | default: product.variants[0] -%}
         
         <style>
+            @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
             html, body { max-width: 100vw; overflow-x: hidden; }
             #btn-add-to-cart {
                 border-color: var(--primary) !important;
@@ -1159,7 +1160,7 @@
                 flex: 0 0 48px !important;
                 border-radius: 8px !important;
                 border: 1px solid var(--primary) !important;
-                background: transparent !important;
+                background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512' fill='%23003366'%3E%3Cpath d='M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20h44v44c0 11 9 20 20 20s20-9 20-20V180h44c11 0 20-9 20-20s-9-20-20-20H356V96c0-11-9-20-20-20s-20 9-20 20v44H272c-11 0-20 9-20 20z'/%3E%3C/svg%3E") no-repeat center/20px 20px !important;
                 color: var(--primary) !important;
                 font-size: 0 !important;
                 cursor: pointer !important;
@@ -1173,13 +1174,11 @@
                 overflow: hidden !important;
             }
             frequently-buy-together button.tg-addcart:hover {
-                background: rgba(0, 51, 102, 0.05) !important;
+                background-color: rgba(0, 51, 102, 0.05) !important;
                 border-color: var(--primary) !important;
             }
             frequently-buy-together button.tg-addcart svg {
-                width: 22px !important;
-                height: 22px !important;
-                margin: 0 !important;
+                display: none !important;
             }
             frequently-buy-together button.js-fbt-installment {
                 flex: 1 !important;
@@ -1459,6 +1458,15 @@
                 --glow-color: rgba(102, 163, 255, 0.25);
                 --glow-border: #66a3ff;
             }
+            [data-theme="dark"] frequently-buy-together button.tg-addcart {
+                border-color: #334155 !important;
+                background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512' fill='%23cbd5e1'%3E%3Cpath d='M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM252 160c0 11 9 20 20 20h44v44c0 11 9 20 20 20s20-9 20-20V180h44c11 0 20-9 20-20s-9-20-20-20H356V96c0-11-9-20-20-20s-20 9-20 20v44H272c-11 0-20 9-20 20z'/%3E%3C/svg%3E") no-repeat center/20px 20px !important;
+                color: #cbd5e1 !important;
+            }
+            [data-theme="dark"] frequently-buy-together button.tg-addcart:hover {
+                background-color: rgba(255, 255, 255, 0.05) !important;
+                border-color: #cbd5e1 !important;
+            }
             /* Mobile: Dropdowns inside bottom-sheet open upwards */
             #nava-bottom-sheet .custom-select-list,
             #nava-bottom-sheet .nava-custom-select-list,
@@ -1584,12 +1592,11 @@
                     <div style="border-bottom: 1px dashed var(--border-color); margin-bottom: 20px; padding-bottom: 10px;"></div>
 
                     {%- if fbt.size > 1 -%}
-                    <div class="mobile_open_box_swatch">
+                    <div class="mobile_open_box_swatch" style="margin-bottom: 30px;">
                         {%- include 'm_frequently' -%}
                     </div>
-                    {%- include 'm_list_tag_pr' -%}
                     {%- else -%}
-                    <form action="/cart/add" method="post" enctype="multipart/form-data" id="nava-product-form">
+                    <form action="/cart/add" method="post" enctype="multipart/form-data" id="nava-product-form" style="margin-bottom: 30px;">
                         <input type="hidden" name="productAlias" value="{{ product.alias}}" />
                         
                         <div class="product-control w-100">
@@ -1648,11 +1655,11 @@
                                 <!-- Icon Cart Button -->
                                 <button id="btn-add-to-cart" type="button" class="btn js-addToCart align-items-center justify-content-center" 
                                         {% if selected_variant.price == 0 %}disabled style="opacity: 1; pointer-events: none; width: 50px; height: 50px; border-radius: 8px; border: 1px solid #cbd5e1; background: #cbd5e1; color: #94a3b8; cursor: not-allowed; transition: all 0.2s; padding: 0; flex-shrink: 0;"{% else %}style="width: 50px; height: 50px; border-radius: 8px; border: 1px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; transition: all 0.2s; padding: 0; flex-shrink: 0;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'"{% endif %}>
-                                    <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+                                    <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
                                 </button>
                                 
                                 <!-- Trả góp 0% Button -->
-                                <a id="btn-installment-main" {% if selected_variant.price > 0 %}href="{{ settings.installment_url | default: '#' }}"{% endif %} class="btn align-items-center justify-content-center font-weight-bold" 
+                                <a id="btn-installment-main" {% if selected_variant.price > 0 %}href="/checkout"{% endif %} class="btn align-items-center justify-content-center font-weight-bold" 
                                         {% if selected_variant.price == 0 %}style="opacity: 1; pointer-events: none; flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid #cbd5e1; background: #cbd5e1; color: #94a3b8; font-family: inherit; font-size: 0.95rem; cursor: not-allowed; text-transform: uppercase; transition: all 0.2s; padding: 0; display: inline-flex; text-decoration: none;"{% else %}style="flex: 1; height: 50px; border-radius: 8px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); font-family: inherit; font-size: 0.95rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; padding: 0; display: inline-flex; text-decoration: none;" onmouseover="this.style.background='rgba(0, 51, 102, 0.05)'" onmouseout="this.style.background='transparent'"{% endif %}>
                                     TRẢ GÓP 0%
                                 </a>
@@ -1673,7 +1680,6 @@
                             </div>
                         </div>
                     </form>
-                    {%- include 'm_list_tag_pr' -%}
                     {%- endif -%}
 
                     {%-if shopee != ''-%}
@@ -1784,7 +1790,7 @@
             </div>
         </div>
         <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
-            <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="ph-bold ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
+            <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="fa-solid fa-cart-plus" style="font-size: 1.15rem;"></i></button>
             <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
         </div>
         {%- else -%}
@@ -1864,7 +1870,7 @@
                         style="flex: none !important; width: 60px; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; color: var(--primary); cursor: pointer;"
                         {% endif %}
                         title="Thêm vào giỏ">
-                    <i class="ph-bold ph-shopping-cart" style="font-size: 1.4rem;"></i>
+                    <i class="fa-solid fa-cart-plus" style="font-size: 1.2rem;"></i>
                 </button>
                 <button type="button" class="bs-buy-btn" 
                         {% if selected_variant.price == 0 %}
@@ -2192,6 +2198,21 @@
                 });
                 
                 row.appendChild(wrapper);
+                
+                // Set flex order based on option label
+                let order = 99;
+                const labelUpper = labelText.toUpperCase();
+                if (labelUpper.includes('CPU') || labelUpper.includes('VI XỬ LÝ') || labelUpper.includes('BỘ VI XỬ LÝ')) {
+                    order = 1;
+                } else if (labelUpper.includes('GPU') || labelUpper.includes('RTX') || labelUpper.includes('RADEON') || labelUpper.includes('ĐỒ HỌA') || labelUpper.includes('CARD')) {
+                    order = 2;
+                } else if (labelUpper.includes('RAM') || labelUpper.includes('MEMORY') || labelUpper.includes('DDR5')) {
+                    order = 3;
+                } else if (labelUpper.includes('SSD') || labelUpper.includes('NVME') || labelUpper.includes('Ổ CỨNG') || labelUpper.includes('STORAGE')) {
+                    order = 4;
+                }
+                row.style.order = order;
+
                 customContainer.appendChild(row);
                 
                 updateNavaCustomSelectDisplay(wrapper, labelText);
@@ -2408,7 +2429,35 @@
             }
         }
 
+        function reorderSwatches() {
+            const swatches = document.querySelectorAll('.swatch');
+            if (swatches.length === 0) return;
+            swatches.forEach(swatch => {
+                const header = swatch.querySelector('.header');
+                if (!header) return;
+                const title = header.textContent.trim().toUpperCase();
+                let order = 99;
+                if (title.includes('CPU') || title.includes('VI XỬ LÝ') || title.includes('BỘ VI XỬ LÝ')) {
+                    order = 1;
+                } else if (title.includes('GPU') || title.includes('RTX') || title.includes('RADEON') || title.includes('ĐỒ HỌA') || title.includes('CARD')) {
+                    order = 2;
+                } else if (title.includes('RAM') || title.includes('MEMORY') || title.includes('DDR5')) {
+                    order = 3;
+                } else if (title.includes('SSD') || title.includes('NVME') || title.includes('Ổ CỨNG') || title.includes('STORAGE')) {
+                    order = 4;
+                }
+                swatch.style.order = order;
+                const parent = swatch.parentNode;
+                if (parent) {
+                    parent.style.display = 'flex';
+                    parent.style.flexDirection = 'column';
+                }
+            });
+        }
+        window.addEventListener('load', reorderSwatches);
+
         document.addEventListener('DOMContentLoaded', function() {
+            reorderSwatches();
             // Handle bottom buy bar events
             document.addEventListener('click', function(e) {
                 if (e.target.closest('.bar-add-cart')) {
@@ -3109,7 +3158,7 @@
                         </div>
                     </div>
                     <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
-                        <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="ph-bold ph-shopping-cart-simple" style="font-size: 1.2rem;"></i></button>
+                        <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="fa-solid fa-cart-plus" style="font-size: 1.15rem;"></i></button>
                         <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
                     </div>
                 `;
@@ -3832,15 +3881,155 @@
     }
 
     // Handle click event for FBT Installment button
-    document.addEventListener('click', function(e) {
-        if (e.target.closest('.js-fbt-installment')) {
+    document.addEventListener('click', async function(e) {
+        if (!e.target.closest('.js-fbt-installment')) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        const instBtn = e.target.closest('.js-fbt-installment');
+        const originalText = instBtn.innerHTML;
+        instBtn.style.pointerEvents = 'none';
+        instBtn.style.opacity = '0.7';
+        instBtn.innerHTML = `<i class="ph-bold ph-spinner nava-spinner" style="animation: navaSpin 1s linear infinite; display: inline-block; margin-right: 6px;"></i> ĐANG XỬ LÝ...`;
+
+        try {
+            // Fetch current cart state
+            const cartRes = await fetch('/cart.js');
+            const cart = await cartRes.json();
+
+            // Collect all FBT variant IDs currently selected
+            const fbtEl = document.querySelector('frequently-buy-together');
+            const arrItem = fbtEl && fbtEl.trim ? fbtEl.trim() : (fbtEl && fbtEl.handleArray ? fbtEl.handleArray() : []);
+
+            let needAdd = false;
+            if (arrItem && arrItem.length > 0) {
+                for (const item of arrItem) {
+                    const vid = parseInt(item.variantId);
+                    const inCart = cart && cart.items && cart.items.some(ci => parseInt(ci.variant_id) === vid || parseInt(ci.id) === vid);
+                    if (!inCart) {
+                        needAdd = true;
+                        break;
+                    }
+                }
+            }
+
+            if (needAdd) {
+                // Add items via tg-addcart then redirect
+                const fbtAddBtn = document.querySelector('.tg-addcart');
+                if (fbtAddBtn) {
+                    fbtAddBtn.click();
+                    setTimeout(function() {
+                        window.location.href = '/checkout';
+                    }, 1200);
+                } else {
+                    window.location.href = '/checkout';
+                }
+            } else {
+                // All items already in cart – go straight to checkout
+                window.location.href = '/checkout';
+            }
+        } catch (err) {
+            console.error('FBT installment handler error:', err);
+            // Fallback: click add and redirect
+            const fbtAddBtn = document.querySelector('.tg-addcart');
+            if (fbtAddBtn) {
+                fbtAddBtn.click();
+                setTimeout(function() { window.location.href = '/checkout'; }, 1200);
+            } else {
+                window.location.href = '/checkout';
+            }
+        } finally {
+            setTimeout(function() {
+                if (instBtn) {
+                    instBtn.innerHTML = originalText;
+                    instBtn.style.pointerEvents = '';
+                    instBtn.style.opacity = '';
+                }
+            }, 2000);
+        }
+    });
+
+
+
+    // Handle click event for Main Installment button (fix to not add to cart again if already added)
+    document.addEventListener('click', async function(e) {
+        const btn = e.target.closest('#btn-installment-main');
+        if (btn) {
             e.preventDefault();
-            const fbtBtn = document.querySelector('.tg-addcart');
-            if (fbtBtn) {
-                fbtBtn.click();
-                setTimeout(function() {
-                    window.location.href = '{{settings.installment_url}}';
-                }, 1200);
+            e.stopPropagation();
+            
+            // Check if price is contact-only (Liên hệ)
+            let isContactPrice = false;
+            const priceEl = document.getElementById('selected-variant-price') || document.getElementById('sticky-price');
+            if (priceEl) {
+                const priceText = priceEl.textContent.trim().toLowerCase();
+                if (priceText.includes('liên hệ') || priceText.includes('contact')) {
+                    isContactPrice = true;
+                }
+            }
+            if (isContactPrice) {
+                window.location.href = 'tel:0972178527';
+                return;
+            }
+            
+            // Show processing status
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="ph-bold ph-spinner nava-spinner" style="animation: navaSpin 1s linear infinite; display: inline-block; margin-right: 8px;"></i> ĐANG XỬ LÝ...`;
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.7';
+            
+            try {
+                // Get selected variant ID
+                const variantIdInput = document.querySelector('#nava-product-form input[name="variantId"], #nava-product-form select[name="variantId"]');
+                const variantId = variantIdInput ? parseInt(variantIdInput.value) : null;
+                
+                // Get quantity
+                const qtyInput = document.getElementById('qtym');
+                const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+                
+                // Check if product variant is already in cart
+                const cartRes = await fetch('/cart.js');
+                const cart = await cartRes.json();
+                
+                let alreadyInCart = false;
+                if (cart && cart.items) {
+                    alreadyInCart = cart.items.some(item => parseInt(item.variant_id) === variantId || parseInt(item.id) === variantId);
+                }
+                
+                if (alreadyInCart) {
+                    // Already in cart: don't add again, go straight to checkout/payment
+                    window.location.href = '/checkout';
+                } else if (variantId) {
+                    // Not in cart: add it first, then go to checkout/payment
+                    const response = await fetch('/cart/add.js', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        },
+                        body: new URLSearchParams({
+                            variantId: variantId,
+                            quantity: quantity
+                        })
+                    });
+                    if (response.ok) {
+                        $(document).trigger('changeCart');
+                    }
+                    window.location.href = '/checkout';
+                } else {
+                    window.location.href = '/checkout';
+                }
+            } catch (err) {
+                console.error('Error in installment handler:', err);
+                window.location.href = '/checkout';
+            } finally {
+                // Reset styling after redirect starts
+                setTimeout(() => {
+                    if (btn) {
+                        btn.innerHTML = originalText;
+                        btn.style.pointerEvents = '';
+                        btn.style.opacity = '';
+                    }
+                }, 2000);
             }
         }
     });
@@ -4037,6 +4226,31 @@
             }
         }, { passive: true });
     }
+    // Recently Viewed Product Tracking
+    (function() {
+        var storageName = 'mewRecent';
+        var currentProduct = {
+            name: {{ product.name | json }},
+            img: {{ product.featured_image.src | img_url: 'large' | json }},
+            price: {% if product.price_min == 0 %}'Liên hệ'{% else %}{{ product.price_min | money | json }}{% endif %},
+            url: {{ product.url | json }}
+        };
+        
+        try {
+            var items = JSON.parse(localStorage.getItem(storageName)) || [];
+            items = items.filter(function(item) {
+                var url = typeof item === 'string' ? item : (item.url || '');
+                return url !== currentProduct.url;
+            });
+            items.unshift(currentProduct);
+            if (items.length > 24) {
+                items = items.slice(0, 24);
+            }
+            localStorage.setItem(storageName, JSON.stringify(items));
+        } catch(e) {
+            console.error("Lỗi lưu sản phẩm đã xem", e);
+        }
+    })();
 
     // Specs Scroll Indicator: Add fade overlay and animated bouncing arrow if table is scrollable
     function initSpecsScrollIndicator() {
