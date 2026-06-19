@@ -1,0 +1,22 @@
+iv class="box-variant clearfix  d-none ">
+
+							<fieldset class="form-group">
+								<select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
+									<option selected="selected" data-available="true" data-price="0" data-compare-price="0" value="208064851">208064851 0GB - 0₫</option>
+									<option  data-available="true" data-price="790000" data-compare-price="0" value="208064852">208064852 8GB 2400 - 790.000₫</option>
+									<option  data-available="true" data-price="810000" data-compare-price="0" value="208064853">208064853 8GB 2666 - 810.000₫</option>
+									<option  data-available="true" data-price="890000" data-compare-price="0" value="208064854">208064854 8GB 3200 - 890.000₫</option>
+									<option  data-available="true" data-price="1560000" data-compare-price="0" value="208064855">208064855 16GB 2400 - 1.560.000₫</option>
+									<option  data-available="true" data-price="1630000" data-compare-price="0" value="208064856">208064856 16GB 2666 - 1.630.000₫</option>
+									<option  data-available="true" data-price="1790000" data-compare-price="0" value="208064857">208064857 16GB 3200 - 1.790.000₫</option>
+									<option  data-available="true" data-price="3590000" data-compare-price="0" value="208064858">208064858 32GB 3200 - 3.590.000₫</option>
+								</select>
+							</fieldset>
+						</div>
+
+						<div class="qty-price-row d-none" style="display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; margin-top: 15px; margin-bottom: 20px;">
+							<div style="display: flex; align-items: center; gap: 10px;">
+								<span style="font-weight: 700; font-size: 0.95rem; color: var(--text-dark);"><span class="desktop-qty-label">Số lượng</span><span class="mobile-qty-label">SL</span></span>
+								<div class="qty-selector custom-btn-number form-inline border-0 d-inline-flex align-items-center" style="border: 1px solid var(--border-color) !important; border-radius: 8px; overflow: hidden; background: var(--bg-gray); height: 32px;">
+									<button class="qty-btn" style="width: 32px; height: 100%; border: none; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--text-dark);" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button"><i class="ph-bold ph-minus"></i></button>
+									<input type="number" name="quantity" min="1" value="1" class="form-control prd_quantity te

@@ -1,0 +1,3263 @@
+
+=========================================
+SCRIPT 1:
+=========================================
+
+=========================================
+SCRIPT 2:
+=========================================
+
+=========================================
+SCRIPT 3:
+=========================================
+
+=========================================
+SCRIPT 4:
+=========================================
+
+            const savedTheme = localStorage.getItem('nava-theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        
+=========================================
+SCRIPT 5:
+=========================================
+
+=========================================
+SCRIPT 6:
+=========================================
+
+	var Bizweb = Bizweb || {};
+	Bizweb.store = 'navastore68.mysapo.net';
+	Bizweb.id = 543817;
+	Bizweb.theme = {"id":1000289,"name":"Mew Mobile","role":"main"};
+	Bizweb.template = 'product';
+	if(!Bizweb.fbEventId)  Bizweb.fbEventId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+	var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});		
+
+=========================================
+SCRIPT 7:
+=========================================
+
+	(function () {
+		function asyncLoad() {
+			var urls = ["https://google-shopping-v2.sapoapps.vn/api/conversion-tracker/global-tag/4140?store=navastore68.mysapo.net","https://aff.sapoapps.vn/api/proxy/scripttag.js?store=navastore68.mysapo.net"];
+			for (var i = 0; i < urls.length; i++) {
+				var s = document.createElement('script');
+				s.type = 'text/javascript';
+				s.async = true;
+				s.src = urls[i];
+				var x = document.getElementsByTagName('script')[0];
+				x.parentNode.insertBefore(s, x);
+			}
+		};
+		window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad, false);
+	})();
+
+=========================================
+SCRIPT 8:
+=========================================
+
+	window.BizwebAnalytics = window.BizwebAnalytics || {};
+	window.BizwebAnalytics.meta = window.BizwebAnalytics.meta || {};
+	window.BizwebAnalytics.meta.currency = 'VND';
+	window.BizwebAnalytics.tracking_url = '/s';
+
+	var meta = {};
+	
+	meta.product = {"id": 42574899, "vendor": "Crucial", "name": "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+	"type": "SSD", "price": 0 };
+	
+	
+	for (var attr in meta) {
+	window.BizwebAnalytics.meta[attr] = meta[attr];
+	}
+
+=========================================
+SCRIPT 9:
+=========================================
+
+=========================================
+SCRIPT 10:
+=========================================
+
+=========================================
+SCRIPT 11:
+=========================================
+ window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-KPV4HGYRVZ'); 
+=========================================
+SCRIPT 12:
+=========================================
+
+
+	window.enabled_enhanced_ecommerce = false;
+
+
+=========================================
+SCRIPT 13:
+=========================================
+
+
+	try {
+		gtag('event', 'view_item', {
+			items: [
+				{
+					id: 42574899,
+					name: "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+					brand: "Crucial",
+					category: "SSD",
+					variant: "0GB",
+					price: '0'
+				}
+			]
+		});
+	} catch(e) { console.error('ga script error', e);}
+
+
+=========================================
+SCRIPT 14:
+=========================================
+
+	var eventsListenerScript = document.createElement('script');
+	eventsListenerScript.async = true;
+	
+	eventsListenerScript.src = "/dist/js/store_events_listener.min.js?v=1b795e9";
+	
+	document.getElementsByTagName('head')[0].appendChild(eventsListenerScript);
+
+=========================================
+SCRIPT 15:
+=========================================
+
+	(function () {
+		var iframe;
+		if(window.innerWidth <= 800){
+			setTimeout(init, 10000);
+		} else {
+			document.addEventListener('DOMContentLoaded', init);
+		}
+		function init() {
+			if (document.cookie.indexOf('one-click-social-login-google-one-tap-shown') >= 0) {
+                return;
+            }
+			iframe = document.createElement('iframe');
+			iframe.id = "iframe-google-one-tap";
+			iframe.src = 'https://store.mysapo.net/account/GoogleOneTap';
+			iframe.setAttribute('allowtransparency', 'true');
+			iframe.setAttribute('allow', 'identity-credentials-get');
+			iframe.frameBorder = 0;
+			iframe.height = '385px';
+			window.addEventListener('message', handlePostMessage, false);
+			document.body.appendChild(iframe); 
+		}
+		function handlePostMessage(e) {
+			var eventName = e.data[0];
+			var data = e.data[1];
+			switch (eventName) {
+				case 'setHeight':
+					iframe.height = data;
+					break;
+				case 'setTop':
+					if ((window.innerWidth <= 800)) {
+						iframe.style = "z-index: 9999999; position: fixed; bottom: 0px; right: 0px;";
+						iframe.width = '100%';
+					}
+					else {
+						iframe.style = "z-index: 9999999; position: fixed; top: 0px; right: 0px;";
+						iframe.width = '391px';
+					}
+					break;
+				case 'setRedirect':
+					location.href = data.url + '&ReturnUrl=' + location.href;
+					break;
+				case 'markClosedOneTap':
+					var date = new Date();
+					date.setTime(date.getTime() + (1*24*60*60*1000));
+					document.cookie = "one-click-social-login-google-one-tap-shown=1; expires=" + date.toUTCString() + "; path=/";
+					break;
+			}
+		}
+	}())
+
+=========================================
+SCRIPT 16:
+=========================================
+var ProductReviewsAppUtil=ProductReviewsAppUtil || {};ProductReviewsAppUtil.store={name: 'NAVA STORE - Mini PC & eGPU'};
+=========================================
+SCRIPT 17:
+=========================================
+
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Trang chủ",
+      "item": "https://navastore.vn"
+    }
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+        "item": "https://navastore.vn/ssd24"
+      }
+  ]
+}
+
+=========================================
+SCRIPT 18:
+=========================================
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PVC2Z8LJ');
+=========================================
+SCRIPT 19:
+=========================================
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const input = document.getElementById('header-search-input');
+        const dropdown = document.getElementById('header-search-autocomplete');
+        const resultsContainer = document.getElementById('header-search-results');
+        const loading = dropdown.querySelector('.autocomplete-loading');
+        const viewAll = document.getElementById('autocomplete-view-all');
+        let debounceTimer = null;
+
+        if (!input) return;
+
+        input.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            const q = input.value.trim();
+
+            if (q.length < 2) {
+                dropdown.style.display = 'none';
+                return;
+            }
+
+            // Show loading state
+            dropdown.style.display = 'flex';
+            loading.style.display = 'block';
+            resultsContainer.innerHTML = '';
+            viewAll.style.display = 'none';
+
+            debounceTimer = setTimeout(function() {
+                fetch('/search?q=' + encodeURIComponent(q) + '&type=product')
+                    .then(response => response.text())
+                    .then(html => {
+                        loading.style.display = 'none';
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        const cards = doc.querySelectorAll('.product-card');
+
+                        if (cards.length === 0) {
+                            resultsContainer.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-gray); font-size: 0.9rem; font-weight: 600;">Không tìm thấy sản phẩm phù hợp</div>';
+                            return;
+                        }
+
+                        let htmlContent = '';
+                        // Limit to 5 results for clean dropdown UI
+                        const limit = Math.min(cards.length, 5);
+                        for (let i = 0; i < limit; i++) {
+                            const card = cards[i];
+                            const titleEl = card.querySelector('.card-title');
+                            const imgEl = card.querySelector('.product-img');
+                            const priceEl = card.querySelector('.card-content span[style*="font-weight: 800"]') || card.querySelector('.card-content span:last-child');
+
+                            const title = titleEl ? titleEl.textContent.trim() : 'Sản phẩm';
+                            const img = imgEl ? imgEl.getAttribute('src') : '';
+                            const price = priceEl ? priceEl.textContent.trim() : 'Liên hệ';
+                            
+                            const onclickAttr = card.getAttribute('onclick') || '';
+                            const urlMatch = onclickAttr.match(/href='([^']+)'/) || onclickAttr.match(/href="([^"]+)"/);
+                            const url = urlMatch ? urlMatch[1] : '#';
+
+                            htmlContent += `
+                                <div class="autocomplete-item" onclick="window.location.href='${url}'">
+                                    <img src="${img}" class="autocomplete-item-img" alt="${title.replace(/"/g, '&quot;')}">
+                                    <div class="autocomplete-item-info">
+                                        <div class="autocomplete-item-title">${title}</div>
+                                        <div class="autocomplete-item-price">${price}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        resultsContainer.innerHTML = htmlContent;
+
+                        if (cards.length > 5) {
+                            viewAll.style.display = 'block';
+                            viewAll.onclick = function() {
+                                input.form.submit();
+                            };
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Autocomplete search failed:', err);
+                        loading.style.display = 'none';
+                        resultsContainer.innerHTML = '<div style="padding: 15px; text-align: center; color: var(--text-gray); font-size: 0.9rem;">Lỗi tìm kiếm</div>';
+                    });
+            }, 300); // 300ms debounce
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // Re-open dropdown on focus if input has value
+        input.addEventListener('focus', function() {
+            if (input.value.trim().length >= 2) {
+                dropdown.style.display = 'flex';
+            }
+        });
+    });
+
+=========================================
+SCRIPT 20:
+=========================================
+
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+  "image": [
+      "https://bizweb.dktcdn.net/thumb/grande/100/543/817/products/ssd-cau-hinh.jpg?v=1780285860933",      "https://bizweb.dktcdn.net/thumb/grande/100/543/817/products/ssd-crucial-p3-plus-1tb-pcie-4-0-3d-nand-ct1000p3pssd8-hinh-1.jpg?v=1780285860933"  ],
+  "description": "	T&#234;n th&#244;ng số	Gi&#225; trị	Model		CT4000P3PSSD8	Dung lượng ổ cứng	512GB đến &amp;nbsp;4TB	Form Factor	M.2 2280	Chuẩn kết nối		PCIe Gen 4.0 x4 NVMe	DRAM	-	NAND	NAND QLC	Tốc độ đọc tuần tự	4800 MB/s	Tốc độ ghi tuần tự	4100 MB/s	Tốc độ đọc ngẫu nhi&#234;n	650,000 IOPS	Tốc độ ghi ngẫu nhi&#234;n	690,000 IOPS	Độ bền (TBW)	800 TB	Thời gian bảo h&#224;nh	36 th&#225;ng hoặc trong giới hạn TBW (T&#249;y điều kiện n&#224;o đến trước)",
+  "sku": "SSD4-0",
+  "mpn": "42574899",
+  "brand": {
+    "@type": "Brand",
+    "name": "Crucial"
+  },
+  "model": "",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "VND",
+      "lowPrice": "0",
+      "highPrice": "4590000",
+      "offerCount": "8",
+    "availability": "https://schema.org/InStock",
+    "url": "https://navastore.vn/ssd24",
+    "seller": {
+      "@type": "Organization",
+      "name": "NAVA STORE - Mini PC & eGPU",
+      "url": "https://navastore.vn",
+      "logo": "https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo.png?1781682818161"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0",
+        "currency": "VND"
+      },
+      "shippingDestination": {
+        "@type": "DefinedRegion",
+        "addressCountry": "VN"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": "0",
+          "maxValue": "1",
+          "unitCode": "DAY"
+        },
+        "transitTime": {
+          "@type": "QuantitativeValue",
+          "minValue": "1",
+          "maxValue": "5",
+          "unitCode": "DAY"
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "VN",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": "30",
+      "returnFees": "https://schema.org/FreeReturn",
+      "returnMethod": "https://schema.org/ReturnByMail"
+    }
+  }
+}
+
+=========================================
+SCRIPT 21:
+=========================================
+
+        var productAlias = 'ssd24';
+        window.mainProductAvailable = true;
+
+        // Gallery images array for Lightbox
+        const galleryImages = [
+            "//bizweb.dktcdn.net/thumb/large/100/543/817/products/ssd-cau-hinh.jpg?v=1780285860933",            "//bizweb.dktcdn.net/thumb/large/100/543/817/products/ssd-crucial-p3-plus-1tb-pcie-4-0-3d-nand-ct1000p3pssd8-hinh-1.jpg?v=1780285860933"        ];
+        let currentLightboxIndex = 0;
+
+        window.openLightbox = function(e) {
+            if (e && e.stopPropagation) e.stopPropagation();
+            
+            // Don't open if video is active
+            const mainVideo = document.getElementById('main-product-video');
+            if (mainVideo && mainVideo.style.display !== 'none') return;
+            
+            let lightbox = document.getElementById('nava-lightbox');
+            if (!lightbox) {
+                lightbox = document.createElement('div');
+                lightbox.id = 'nava-lightbox';
+                lightbox.innerHTML = `
+                    <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2147483647; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s;">
+                        <button type="button" onclick="window.closeLightbox()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph ph-x"></i></button>
+                        <button type="button" onclick="if(event) event.stopPropagation(); window.navigateLightbox(-1)" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-left"></i></button>
+                        <img id="lightbox-img" src="" style="max-width: 90%; max-height: 90vh; object-fit: contain; transition: 0.3s; transform: scale(0.95); opacity: 0; position: relative; z-index: 1;" onclick="if(event) event.stopPropagation();">
+                        <button type="button" onclick="if(event) event.stopPropagation(); window.navigateLightbox(1)" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; transition: 0.2s; z-index: 2;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'"><i class="ph-bold ph-caret-right"></i></button>
+                        <div id="lightbox-counter" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 2px; z-index: 2;"></div>
+                    </div>
+                `;
+                lightbox.querySelector('div').onclick = window.closeLightbox;
+                document.body.appendChild(lightbox);
+            }
+            
+            const mainObj = document.getElementById('main-product-image');
+            if (mainObj) {
+                const currentSrc = mainObj.src || '';
+                const cleanSrc = (url) => url.split('?')[0].replace(/https?:/, '');
+                currentLightboxIndex = galleryImages.findIndex(src => cleanSrc(currentSrc).includes(cleanSrc(src)));
+                if(currentLightboxIndex === -1) currentLightboxIndex = 0;
+            }
+            
+            lightbox.style.display = 'block';
+            const lightboxDiv = lightbox.querySelector('div');
+            if (lightboxDiv) {
+                void lightboxDiv.offsetWidth; // trigger reflow
+                lightboxDiv.style.opacity = '1';
+            }
+            
+            window.updateLightboxImage();
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeLightbox = function() {
+            const lightbox = document.getElementById('nava-lightbox');
+            if (!lightbox) return;
+            const lightboxDiv = lightbox.querySelector('div');
+            if (lightboxDiv) lightboxDiv.style.opacity = '0';
+            setTimeout(() => {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        };
+
+        window.navigateLightbox = function(dir) {
+            currentLightboxIndex += dir;
+            if(currentLightboxIndex < 0) currentLightboxIndex = galleryImages.length - 1;
+            if(currentLightboxIndex >= galleryImages.length) currentLightboxIndex = 0;
+            window.updateLightboxImage();
+        };
+
+        window.updateLightboxImage = function() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            const counter = document.getElementById('lightbox-counter');
+            if (lightboxImg && counter) {
+                lightboxImg.style.opacity = '0';
+                lightboxImg.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    lightboxImg.src = galleryImages[currentLightboxIndex];
+                    counter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+                    lightboxImg.onload = () => {
+                        lightboxImg.style.opacity = '1';
+                        lightboxImg.style.transform = 'scale(1)';
+                    };
+                }, 200);
+            }
+        };
+
+        function initGalleryZoom() {
+            const mainImgContainer = document.querySelector('.main-image-container');
+            if (!mainImgContainer) return;
+            
+            // Add click listener for lightbox
+            mainImgContainer.addEventListener('click', window.openLightbox);
+            
+            // Magnifier hover zoom
+            mainImgContainer.addEventListener('mousemove', (e) => {
+                const mainVideo = document.getElementById('main-product-video');
+                if (mainVideo && mainVideo.style.display !== 'none') return; // Don't zoom video
+                
+                const mainImgObj = document.getElementById('main-product-image');
+                if (!mainImgObj || mainImgObj.style.display === 'none') return;
+                
+                if(window.innerWidth < 992) return; // Only zoom on desktop
+                const rect = mainImgContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+                
+                mainImgObj.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+                mainImgObj.style.transform = 'scale(2)';
+            });
+            
+            mainImgContainer.addEventListener('mouseleave', () => {
+                const mainImgObj = document.getElementById('main-product-image');
+                if (mainImgObj) {
+                    mainImgObj.style.transformOrigin = 'center center';
+                    mainImgObj.style.transform = 'scale(1)';
+                }
+            });
+            
+            mainImgContainer.addEventListener('mouseenter', () => {
+                const mainImgObj = document.getElementById('main-product-image');
+                if (mainImgObj) {
+                    mainImgObj.style.transition = 'opacity 0.3s ease, transform 0.1s ease-out';
+                }
+            });
+        }
+
+        window.clickGalleryDot = function(index) {
+            const thumbs = document.querySelectorAll('.thumbnail-item');
+            if (thumbs[index]) {
+                thumbs[index].click();
+            }
+        };
+
+        function switchMainMedia(thumb, type, url) {
+            // Toggle active class on thumbnails
+            document.querySelectorAll('.thumbnail-item').forEach(el => el.classList.remove('active'));
+            thumb.classList.add('active');
+            
+            // Update gallery dots active state
+            const thumbs = Array.from(document.querySelectorAll('.thumbnail-item'));
+            const activeIndex = thumbs.indexOf(thumb);
+            const dots = document.querySelectorAll('.gallery-dot');
+            dots.forEach((dot, idx) => {
+                if (idx === activeIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+            
+            const mainImg = document.getElementById('main-product-image');
+            const mainVideo = document.getElementById('main-product-video');
+            
+            // Find main container
+            const container = document.querySelector('.main-image-container');
+            
+            if (type === 'video') {
+                if (mainImg) mainImg.style.display = 'none';
+                if (mainVideo) {
+                    mainVideo.style.display = 'block';
+                } else {
+                    container.innerHTML = `
+                        <div class="box_video embed-responsive embed-responsive-16by9 w-100 h-100" id="main-product-video">
+                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/?rel=0&autoplay=1&mute=1" allow='autoplay; encrypted-media' allowfullscreen style="width: 100%; height: 100%; border: none; border-radius: 12px;"></iframe>
+                        </div>
+                    `;
+                }
+            } else {
+                if (mainVideo) mainVideo.style.display = 'none';
+                if (mainImg) {
+                    mainImg.src = url;
+                    mainImg.style.display = 'block';
+                } else {
+                    container.innerHTML = `<img id="main-product-image" src="${url}" alt="SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB">`;
+                }
+            }
+            
+            // Scroll thumbnail list to center the clicked item
+            const list = document.getElementById('thumbnail-list');
+            if (list) {
+                const listWidth = list.offsetWidth;
+                const itemLeft = thumb.offsetLeft;
+                const itemWidth = thumb.offsetWidth;
+                const scrollPos = itemLeft - (listWidth / 2) + (itemWidth / 2);
+                list.scrollTo({ left: scrollPos, behavior: 'smooth' });
+            }
+        }
+
+        // Custom FBT Rendering and Bidirectional Sync logic
+        function initNavaCustomFbt() {
+            const fbtEl = document.querySelector('frequently-buy-together');
+            if (!fbtEl) return;
+            
+            let customContainer = document.querySelector('.nava-custom-fbt-container');
+            if (customContainer) return;
+            
+            const nativeItems = Array.from(fbtEl.querySelectorAll('.item-child[data-fbt-item], [data-fbt-item]')).filter(item => {
+                const select = item.querySelector('select[data-fbt-item-id]');
+                return select && select.options.length > 1;
+            });
+            
+            if (nativeItems.length === 0) return;
+            
+            customContainer = document.createElement('div');
+            customContainer.className = 'nava-custom-fbt-container';
+            
+            nativeItems.forEach((nativeItem) => {
+                const select = nativeItem.querySelector('select[data-fbt-item-id]');
+                const checkbox = nativeItem.querySelector('input[type="checkbox"]');
+                const labelText = nativeItem.querySelector('label.f-item p')?.textContent.trim() || 'Tùy chọn';
+                
+                const row = document.createElement('div');
+                row.className = 'nava-custom-fbt-row';
+                
+                const label = document.createElement('div');
+                label.className = 'nava-custom-fbt-label';
+                label.textContent = labelText;
+                row.appendChild(label);
+                
+                const wrapper = document.createElement('div');
+                wrapper.className = 'nava-custom-select-wrapper';
+                
+                const display = document.createElement('div');
+                display.className = 'nava-custom-select-display';
+                
+                const displayText = document.createElement('span');
+                displayText.className = 'nava-custom-select-text';
+                display.appendChild(displayText);
+                
+                display.innerHTML += `<svg class="nava-custom-select-arrow" viewBox="0 0 10 6" width="10"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"></path></svg>`;
+                
+                wrapper.appendChild(display);
+                
+                const list = document.createElement('ul');
+                list.className = 'nava-custom-select-list';
+                list.setAttribute('data-lenis-prevent', '');
+                
+                Array.from(select.options).forEach(opt => {
+                    const li = document.createElement('li');
+                    li.dataset.value = opt.value;
+                    li.dataset.price = opt.dataset.price || '0';
+                    li.dataset.priceFormatted = opt.dataset.priceFormatted || '0đ';
+                    
+                    let name = opt.textContent.trim();
+                    if (opt.value === 'no-select' || /(^|[^0-9])0\s*gb/i.test(name) || name === 'NO RAM' || name === 'NO SSD') {
+                        if (labelText.toLowerCase().includes('ram')) name = 'NO RAM';
+                        else if (labelText.toLowerCase().includes('ssd')) name = 'NO SSD';
+                        else name = 'Bỏ chọn';
+                    }
+                    
+                    const priceVal = parseInt(li.dataset.price, 10);
+                    let priceText = '+0đ';
+                    if (priceVal > 0) {
+                        priceText = '+' + li.dataset.priceFormatted.replace('₫', 'đ');
+                    }
+                    
+                    li.innerHTML = `<span class="opt-name">${name}</span><span class="opt-price">${priceText}</span>`;
+                    
+                    if (opt.selected) {
+                        li.classList.add('selected');
+                    }
+                    
+                    li.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        
+                        list.querySelectorAll('li').forEach(item => item.classList.remove('selected'));
+                        li.classList.add('selected');
+                        
+                        wrapper.classList.add('closed');
+                        wrapper.classList.remove('active');
+                        updateNavaCustomSelectDisplay(wrapper, labelText);
+                        
+                        select.value = li.dataset.value;
+                        if (checkbox) {
+                            const isNoSelect = (li.dataset.value === 'no-select' || li.dataset.value === '');
+                            checkbox.checked = !isNoSelect;
+                            checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        select.dispatchEvent(new Event('change', { bubbles: true }));
+                    });
+                    
+                    list.appendChild(li);
+                });
+                
+                wrapper.appendChild(list);
+                
+                display.addEventListener('click', function(e) {
+                    if (window.innerWidth >= 992 && !wrapper.closest('#nava-bottom-sheet')) return;
+                    e.stopPropagation();
+                    wrapper.classList.remove('closed');
+                    const isActive = wrapper.classList.contains('active');
+                    
+                    document.querySelectorAll('.nava-custom-select-wrapper').forEach(w => {
+                        w.classList.remove('active');
+                    });
+                    
+                    if (!isActive) {
+                        wrapper.classList.add('active');
+                    }
+                });
+                
+                row.appendChild(wrapper);
+                
+                // Set flex order based on option label
+                let order = 99;
+                const labelUpper = labelText.toUpperCase();
+                if (labelUpper.includes('CPU') || labelUpper.includes('VI XỬ LÝ') || labelUpper.includes('BỘ VI XỬ LÝ')) {
+                    order = 1;
+                } else if (labelUpper.includes('GPU') || labelUpper.includes('RTX') || labelUpper.includes('RADEON') || labelUpper.includes('ĐỒ HỌA') || labelUpper.includes('CARD')) {
+                    order = 2;
+                } else if (labelUpper.includes('RAM') || labelUpper.includes('MEMORY') || labelUpper.includes('DDR5')) {
+                    order = 3;
+                } else if (labelUpper.includes('SSD') || labelUpper.includes('NVME') || labelUpper.includes('Ổ CỨNG') || labelUpper.includes('STORAGE')) {
+                    order = 4;
+                }
+                row.style.order = order;
+
+                customContainer.appendChild(row);
+                
+                updateNavaCustomSelectDisplay(wrapper, labelText);
+            });
+            
+            const pb3Row = fbtEl.querySelector('.pb-3');
+            if (pb3Row) {
+                fbtEl.insertBefore(customContainer, pb3Row);
+            } else {
+                fbtEl.appendChild(customContainer);
+            }
+        }
+
+        function updateNavaCustomSelectDisplay(wrapper, labelText) {
+            const selectedLi = wrapper.querySelector('.nava-custom-select-list li.selected') || wrapper.querySelector('.nava-custom-select-list li');
+            if (selectedLi) {
+                let name = selectedLi.querySelector('.opt-name')?.textContent.trim() || selectedLi.textContent.trim();
+                let priceVal = parseInt(selectedLi.dataset.price || '0', 10);
+                let priceText = '+0đ';
+                if (priceVal > 0) {
+                    priceText = '+' + (selectedLi.dataset.priceFormatted || '').trim().replace('₫', 'đ');
+                }
+                
+                const displaySpan = wrapper.querySelector('.nava-custom-select-text');
+                if (displaySpan) {
+                    displaySpan.innerHTML = `<span class="opt-name">${name}</span><span class="opt-price">${priceText}</span>`;
+                }
+            }
+        }
+
+        let fbtObserver = null;
+        function setupFbtMutationObserver() {
+            const fbtEl = document.querySelector('frequently-buy-together');
+            if (!fbtEl || fbtObserver) return;
+            
+            fbtObserver = new MutationObserver((mutations) => {
+                if (isBsOpen) return; // Ignore mutations while bottom sheet is open to prevent duplication and losing user state
+                
+                let shouldReinit = false;
+                for (const m of mutations) {
+                    const isCustom = m.target.closest('.nava-custom-fbt-container') || 
+                                    Array.from(m.addedNodes).some(n => n.classList && (n.classList.contains('nava-custom-fbt-container') || n.classList.contains('nava-custom-fbt-row'))) ||
+                                    Array.from(m.removedNodes).some(n => n.classList && (n.classList.contains('nava-custom-fbt-container') || n.classList.contains('nava-custom-fbt-row')));
+                    
+                    if (!isCustom) {
+                        const hasNativeChanges = (m.target.tagName === 'SELECT' && m.target.hasAttribute('data-fbt-item-id')) ||
+                                                Array.from(m.addedNodes).some(n => n.nodeType === 1 && (n.querySelector('select[data-fbt-item-id]') || n.matches('select[data-fbt-item-id]') || n.tagName === 'OPTION')) ||
+                                                Array.from(m.removedNodes).some(n => n.nodeType === 1 && (n.querySelector('select[data-fbt-item-id]') || n.matches('select[data-fbt-item-id]') || n.tagName === 'OPTION'));
+                        if (hasNativeChanges) {
+                            shouldReinit = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (shouldReinit) {
+                    fbtObserver.disconnect();
+                    const oldContainer = document.querySelector('.nava-custom-fbt-container');
+                    if (oldContainer) oldContainer.remove();
+                    initNavaCustomFbt();
+                    fbtObserver.observe(fbtEl, { childList: true, subtree: true });
+                }
+            });
+            
+            fbtObserver.observe(fbtEl, { childList: true, subtree: true });
+        }
+
+        // Bidirectional sync: when Sapo modifies select values, update custom selectors
+        document.addEventListener('change', function(e) {
+            const sel = e.target;
+            if (sel && sel.matches && sel.matches('select[data-fbt-item-id]')) {
+                const fbtEl = sel.closest('frequently-buy-together');
+                if (!fbtEl) return;
+                const customContainer = fbtEl.querySelector('.nava-custom-fbt-container');
+                if (!customContainer) return;
+                
+                const nativeItems = Array.from(fbtEl.querySelectorAll('.item-child[data-fbt-item], [data-fbt-item]')).filter(item => {
+                    const s = item.querySelector('select[data-fbt-item-id]');
+                    return s && s.options.length > 1;
+                });
+                const index = nativeItems.findIndex(item => item.contains(sel));
+                if (index === -1) return;
+                
+                const customRows = customContainer.querySelectorAll('.nava-custom-fbt-row');
+                const customRow = customRows[index];
+                if (!customRow) return;
+                
+                const wrapper = customRow.querySelector('.nava-custom-select-wrapper');
+                if (!wrapper) return;
+                
+                const li = wrapper.querySelector(`.nava-custom-select-list li[data-value="${sel.value}"]`);
+                if (li) {
+                    wrapper.querySelectorAll('.nava-custom-select-list li').forEach(item => item.classList.remove('selected'));
+                    li.classList.add('selected');
+                    const labelText = customRow.querySelector('.nava-custom-fbt-label')?.textContent.trim() || '';
+                    updateNavaCustomSelectDisplay(wrapper, labelText);
+                }
+                syncSwatches();
+            }
+        });
+
+        // Close custom selects on outside click
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nava-custom-select-wrapper')) {
+                document.querySelectorAll('.nava-custom-select-wrapper').forEach(w => {
+                    w.classList.remove('active');
+                });
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            const sel = e.target;
+            if (sel.id === 'product-selectors') {
+                // Update prices dynamically
+                const activeOption = sel.selectedOptions[0] || sel.options[sel.selectedIndex];
+                const rawPrice = parseInt(activeOption?.getAttribute('data-price') || '0', 10);
+                const priceVal = activeOption?.text.split('-').pop().trim();
+                const priceEl = document.getElementById('selected-variant-price');
+                const stickyPriceEl = document.getElementById('sticky-price');
+                if (priceEl) {
+                    priceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                if (stickyPriceEl) {
+                    stickyPriceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                const bsPriceEl = document.getElementById('bs-price');
+                if (bsPriceEl) {
+                    bsPriceEl.innerText = rawPrice === 0 ? 'Liên hệ' : priceVal;
+                }
+                
+                // Sync buttons status and labels on variant change
+                syncSwatches();
+            }
+        });
+
+        function toggleDescription() {
+            const wrapper = document.getElementById('desc-wrapper');
+            const btn = document.getElementById('btn-show-desc');
+            if (wrapper && btn) {
+                if (wrapper.classList.contains('expanded')) {
+                    wrapper.classList.remove('expanded');
+                    btn.innerHTML = 'Xem thêm <i class="ph-bold ph-caret-down"></i>';
+                    wrapper.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    wrapper.classList.add('expanded');
+                    btn.innerHTML = 'Thu gọn <i class="ph-bold ph-caret-up"></i>';
+                }
+            }
+        }
+
+        let isStickyBarTicking = false;
+        let cachedStickyBar = null;
+        let cachedPriceEl = null;
+        let cachedWrappers = null;
+
+        function toggleStickyBar(e) {
+            if (!isStickyBarTicking) {
+                window.requestAnimationFrame(() => {
+                    if (!cachedStickyBar) {
+                        cachedStickyBar = document.querySelector('.mobile-bottom-buybar');
+                    }
+                    if (!cachedStickyBar) {
+                        isStickyBarTicking = false;
+                        return;
+                    }
+                    
+                    if (typeof isBsOpen !== 'undefined' && isBsOpen) {
+                        cachedStickyBar.classList.remove('active');
+                        isStickyBarTicking = false;
+                        return;
+                    }
+                    
+                    let scrollY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+                    
+                    if (!cachedWrappers) {
+                        cachedWrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
+                    }
+                    for (let i = 0; i < cachedWrappers.length; i++) {
+                        const w = cachedWrappers[i];
+                        if (w.scrollTop > scrollY) {
+                            scrollY = w.scrollTop;
+                        }
+                    }
+                    
+                    if (e && e.target && e.target.scrollTop > scrollY) {
+                        if (e.target.clientHeight && e.target.clientHeight > window.innerHeight * 0.5) {
+                            scrollY = e.target.scrollTop;
+                        }
+                    }
+                    
+                    if (!cachedPriceEl) {
+                        cachedPriceEl = document.getElementById('selected-variant-price');
+                    }
+                    
+                    if (cachedPriceEl) {
+                        const rect = cachedPriceEl.getBoundingClientRect();
+                        const triggerShow = rect.bottom < 60 && (rect.bottom !== 0 || rect.top !== 0);
+                        if (triggerShow) {
+                            cachedStickyBar.classList.add('active');
+                            isStickyBarTicking = false;
+                            return;
+                        }
+                    }
+                    
+                    let threshold = window.innerWidth <= 768 ? 300 : 600;
+                    if (scrollY > threshold) {
+                        cachedStickyBar.classList.add('active');
+                    } else {
+                        cachedStickyBar.classList.remove('active');
+                    }
+                    isStickyBarTicking = false;
+                });
+                isStickyBarTicking = true;
+            }
+        }
+
+        function reorderSwatches() {
+            const swatches = document.querySelectorAll('.swatch');
+            if (swatches.length === 0) return;
+            swatches.forEach(swatch => {
+                const header = swatch.querySelector('.header');
+                if (!header) return;
+                const title = header.textContent.trim().toUpperCase();
+                let order = 99;
+                if (title.includes('CPU') || title.includes('VI XỬ LÝ') || title.includes('BỘ VI XỬ LÝ')) {
+                    order = 1;
+                } else if (title.includes('GPU') || title.includes('RTX') || title.includes('RADEON') || title.includes('ĐỒ HỌA') || title.includes('CARD')) {
+                    order = 2;
+                } else if (title.includes('RAM') || title.includes('MEMORY') || title.includes('DDR5')) {
+                    order = 3;
+                } else if (title.includes('SSD') || title.includes('NVME') || title.includes('Ổ CỨNG') || title.includes('STORAGE')) {
+                    order = 4;
+                }
+                swatch.style.order = order;
+                const parent = swatch.parentNode;
+                if (parent) {
+                    parent.style.display = 'flex';
+                    parent.style.flexDirection = 'column';
+                }
+            });
+        }
+        window.addEventListener('load', reorderSwatches);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            reorderSwatches();
+            // Handle bottom buy bar events
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.bar-add-cart')) {
+                    e.preventDefault();
+                    const fbtBtn = document.querySelector('.tg-addcart');
+                    if (fbtBtn) {
+                        fbtBtn.click();
+                    } else {
+                        const btn = document.querySelector('button.js-addToCart');
+                        if (btn) btn.click();
+                    }
+                }
+                if (e.target.closest('.bar-buy-now')) {
+                    e.preventDefault();
+                    const fbtBtn = document.querySelector('.tg-buy-now');
+                    if (fbtBtn) {
+                        fbtBtn.click();
+                    } else {
+                        const btn = document.querySelector('button.js-buynow');
+                        if (btn) btn.click();
+                    }
+                }
+            });
+            
+            // Register scroll events for mobile sticky buybar on all potential containers
+            const wrappers = document.querySelectorAll('.bodywrap, .wrapper, #wrapper, .page-body, main, #main, #nava-master-wrapper');
+            wrappers.forEach(w => {
+                w.addEventListener('scroll', toggleStickyBar, { passive: true });
+            });
+            window.addEventListener('scroll', toggleStickyBar, true);
+            
+            // Initial check
+            setTimeout(toggleStickyBar, 100);
+            
+            initNavaProductEnforcement();
+        });
+
+        // Helper functions for "price bump" (tiền nhảy) count-up animation
+        function parsePrice(str) {
+            if (!str) return 0;
+            const cleaned = str.replace(/[^\d]/g, '');
+            return parseInt(cleaned, 10) || 0;
+        }
+
+        function formatVietnameseCurrency(value) {
+            const formattedNum = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            return formattedNum + " đ";
+        }
+
+        function animatePrice(el, start, end, duration = 300) {
+            if (start === end) return;
+            
+            // Add visual pulse effect
+            el.classList.remove('price-bump');
+            // Trigger reflow
+            void el.offsetWidth;
+            el.classList.add('price-bump');
+            setTimeout(() => {
+                el.classList.remove('price-bump');
+            }, duration + 50);
+
+            const startTime = performance.now();
+            
+            // Disable observer temporarily while updating innerText
+            if (el._observer) {
+                el._observer.disconnect();
+            }
+            
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease out quad
+                const ease = progress * (2 - progress);
+                const current = Math.floor(start + (end - start) * ease);
+                
+                const formatted = formatVietnameseCurrency(current);
+                el.innerText = formatted;
+                
+                // Sync to bs-price as well if appropriate
+                const bsPriceEl = document.getElementById('bs-price');
+                if (bsPriceEl) {
+                    const isFbtActive = !!document.querySelector('frequently-buy-together');
+                    const isFbtTotalEl = el.matches('frequently-buy-together span[data-fbt-total]');
+                    const isMainPriceEl = el.id === 'selected-variant-price';
+                    
+                    if ((isFbtActive && isFbtTotalEl) || (!isFbtActive && isMainPriceEl)) {
+                        bsPriceEl.innerText = formatted;
+                    }
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = formatVietnameseCurrency(end);
+                    el.setAttribute('data-prev-price', end);
+                    
+                    // Reconnect observer
+                    if (el._observer) {
+                        el._observer.observe(el, { childList: true, characterData: true, subtree: true });
+                    }
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+
+        function setupPriceObservers() {
+            const targets = [
+                { selector: '#selected-variant-price' },
+                { selector: '#sticky-price' },
+                { selector: 'frequently-buy-together span[data-fbt-total]' }
+            ];
+
+            targets.forEach(t => {
+                const el = document.querySelector(t.selector);
+                if (!el) return;
+                if (el._observer) return; // Prevent double observer registration
+
+                // Initialize prev price
+                const currentVal = parsePrice(el.textContent);
+                el.setAttribute('data-prev-price', currentVal);
+
+                const observer = new MutationObserver((mutations) => {
+                    observer.disconnect();
+                    
+                    const text = el.textContent;
+                    const newVal = parsePrice(text);
+                    const prevVal = parseInt(el.getAttribute('data-prev-price') || '0', 10);
+                    
+                    if (newVal !== prevVal && newVal > 0) {
+                        animatePrice(el, prevVal, newVal, 300);
+                    } else {
+                        const bsPriceEl = document.getElementById('bs-price');
+                        if (bsPriceEl) {
+                            const isFbtActive = !!document.querySelector('frequently-buy-together');
+                            const isFbtTotalEl = el.matches('frequently-buy-together span[data-fbt-total]');
+                            const isMainPriceEl = el.id === 'selected-variant-price';
+                            
+                            if ((isFbtActive && isFbtTotalEl) || (!isFbtActive && isMainPriceEl)) {
+                                if (newVal === 0 || text.includes('liên hệ') || text.includes('contact')) {
+                                    bsPriceEl.innerText = 'Liên hệ';
+                                } else {
+                                    bsPriceEl.innerText = text.trim();
+                                }
+                            }
+                        }
+                        observer.observe(el, { childList: true, characterData: true, subtree: true });
+                    }
+                });
+
+                el._observer = observer;
+                observer.observe(el, { childList: true, characterData: true, subtree: true });
+            });
+        }
+    
+=========================================
+SCRIPT 22:
+=========================================
+
+    window.currentProductData = {
+        name: "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+        img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/ssd-cau-hinh.jpg?v=1780285860933",
+        price: "0₫",
+        url: "/ssd24"
+    };
+    window.currentCollectionProducts = [];
+            window.currentCollectionProducts.push({
+            name: "Mini PC ASUS NUC 14 Essential - Intel N150",
+            url: "/asus-nuc-14-essential-core-3-n150-mini-pc-sieu-ben-sieu-manh-cho-cong-viec-va-giai-tri",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-asus-nuc-14-essential-core-3-n150-n97-n355-van-phong-n150.jpg?v=1780285855550",
+            price: "4.490.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum AtomMan G7 PT - Ryzen 9 7945HX - Radeon RX 7600M",
+            url: "/atomman-g7-pt-mini-pc-gaming-amd-ai-r9-7945hx-radeon-rx-7600m-minisforum-ryzen-9",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-gaming-amd-ryzen-9-7-minisforum-atomman-g7-pt-rx-7600m-xt-r9-7945hx-wifi-7-nvme-5.jpg?v=1758623300077",
+            price: "33.290.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC ASUS NUC 14 Essential - Intel N355",
+            url: "/asus-nuc-14-essential-intel-n355-8c-8t-mini-pc-sieu-ben-sieu-manh-cho-cong-viec-va-giai-tri",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-asus-nuc-14-essential-core-3-n150-n97-n355-van-phong-n355.jpg?v=1763972887247",
+            price: "5.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC GMK EVO X1 - Ryzen AI 9 HX370 - 32GB",
+            url: "/mini-pc-gmk-evo-x1-chuyen-ket-hop-egpu-manh-me-em-ai-thiet-ke-doc-dao-ryzen-ai-9-hx370-890m",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-ai-9-hx370-gmktec-evo-x1-90bcb757-4661-4b7c-ab37-ca0d0b7436af.jpg?v=1759132919467",
+            price: "29.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC FIREBAT T2 - INTEL Twin Lake N150",
+            url: "/firebat-t2-mini-pc-n150-3-6ghz-intel-4k-uhd-16gb-ddr4-ram-512gb-m-2-ssd-pcie-intel-twin-lake-n150",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/firebat-t2-intel-n150-van-phong.jpg?v=1759223785123",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum AtomMan X7 Ti - Core Ultra 9 185H - INTEL Arc",
+            url: "/atomman-x7-ti-intel-core-ultra-9-185h-oculink-1080p-camera-wi-fi-7-usb4",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-intel-core-ultra-9-185h-minisforum-atomman-x7-ti.jpg?v=1780285863457",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Máy tính bảng Minisforum V3 SE - Ryzen 7 7735U",
+            url: "/tablet-minisforum-v3-se-amd-ryzen-7-7735u-may-tinh-bang-windows-3-trong-1",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/tablet-14-inch-minisforum-v3-se-r7-7735u-van-phong-do-hoa.jpg?v=1759223839747",
+            price: "22.290.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum HX99G - R9 6900HX",
+            url: "/minisforum-hx99g-amd-ryzen-r9-6900hx-6600m",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-gaming-amd-ryzen-9-6900hx-minisforum-hx99g.jpg?v=1780285863840",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC FEVM FN60G V2 - RTX 4060",
+            url: "/fn60g-mini-pc-lap-san-rtx-4060-rx-6600m-dung-chip-intel-12-den-14th-chay-duoc-mac-os-sang-trong-va-cao-cap-2",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/shopee-frame-12.jpg?v=1780285861287",
+            price: "23.290.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC AOOSTAR GOD X/Z/Y - Ryzen 7/9 - Radeon RX 6600LE/7600 XT",
+            url: "/aoostar-god-x-gaming-minii-pc-gpu-rx-6600le-ryzen-9-6900hx-do-hoa-cao-cap-cho-gamer-creator",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-9-7940hx-rx7600xt-aoostar-god-y-2f1aee77-9b5b-4652-bb61-7e3c70af27a7.jpg?v=1759046088900",
+            price: "14.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "eGPU Huawei Wiko Hi GT Cube - Radeon RX 7600M XT 8GB",
+            url: "/egpu-huawei-wiko-hi-gt-cube-rx-7600m-xt-8gb-card-do-hoa-thunderbolt-tang-toc-ai-gaming-render",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/egpu-huawei-wiko-hi-gt-cube-rx-7600m-xt-gaming.jpg?v=1759143508537",
+            price: "12.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "eGPU AOOSTAR XG76XT - USB4",
+            url: "/card-do-hoa-ngoai-aoostar-xg76xt-egpu-radeon-rx-7600xt-ket-noi-usb4-oculink-hieu-suat-cao",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/egpu-radeon-rx-7600xt-rx-7600m-aoostar-xg76-6b8ffa67-0ca7-45fd-bf87-de69a0ec120e.jpg?v=1759046270743",
+            price: "14.890.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum 790s7 - R9 7945HX - RTX 4060",
+            url: "/gaming-itx-minisforum-790s7-129i7-rtx-4060-r9-7940hx-i9-12900hk-may-tinh-pc-choi-game-aaa-3a-1",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-itx-minisforum-itx-795s7-r9-7945hx-rtx-5060-gaming.jpg?v=1760841209023",
+            price: "9.590.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Máy trạm Minisforum MS-01 - SFP+ 10Gbps",
+            url: "/nava-ms-01-mini-workstation-minisforum-bang-thong-10gbps-may-tram-nho-gon-toc-do-cao-co-khe-pcie",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-server-workstation-intel-minisforum-ms-01-i7-i5-i9-12600h-12900h-13900h-sfp-10gb-377b2380-94bf-4ace-bf9d-ae9f17c48e97.jpg?v=1758623193897",
+            price: "13.490.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Bo mạch chủ Minisforum BD790i - Ryzen 9 7945HX - PCIe 5.0",
+            url: "/minisforum-bd790i-motherboard-bo-mach-chu-amd-ryzen-9-7945hx-16c-32t-max-5-4ghz-pcie-5-0-bd790i",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/bd790i.jpg?v=1780285863400",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum UM890 Pro - Ryzen 9 8945HS - Radeon 780M",
+            url: "/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-3",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420",
+            price: "14.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum UM880 Pro - Ryzen 7 8845HS - Radeon 780M",
+            url: "/nava-mini-pc-gaming-um880-pro-minisforum-amd-ryzen-8845hs-radeon-780m-rdna3-may-tinh-r7-8000-2",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-minisforum-um880-pro-ai-r7-8845hs-gaming-do-hoa.jpg?v=1761015329600",
+            price: "12.190.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Bo mạch chủ Minisforum BD795i SE - Ryzen 9 7945HX - PCIe 4.0",
+            url: "/bd795i-se",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/main-board-itx-minisforum-795i-se-r9-7945hx-gaming.jpg?v=1780285860537",
+            price: "90.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC GMK Nucbox R9 - Ryzen 9 8945HS - OCuLink",
+            url: "/mini-pc-gmk-k11-ryzen-9-8945hs-oculink-may-tinh-amd-gaming-nucbox-r9-egpu-gmktec",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-9-8945hs-gmktec-nuc-box-k11-e562a576-0b53-4736-9631-e74b8e004253.jpg?v=1759132956953",
+            price: "13.490.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Morefine M600 - Ryzen 7 8845HS",
+            url: "/mini-pc-morefine-m600-amd-ryzen-7-8845hs",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/shopee-frame-34.jpg?v=1780285860720",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC FEVM FA880 - R7 8845HS - OCuLink",
+            url: "/fevm-fa880-amd-r7-8845hs-minipc-oculink-usb4",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-fevm-fa880-ai-amd-ai-ryzen-7-8845hs-gaming.jpg?v=1759223921343",
+            price: "11.790.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum UM790 PRO - Ryzen 9 7940HS - Radeon 780M",
+            url: "/um790-pro-mini-pc-ryzen-9-7940hs-radeon-780m-rdna3-may-tinh-minisforum-amd-nho-gon-nhe-manh-mat-em-cao-ca-p",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-minisforum-um790-pro-r9-7940hs-gaming-do-hoa.jpg?v=1761014480693",
+            price: "11.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Beelink SER 8 - Ryzen 8745HS - RADEON 780M",
+            url: "/ser-8-beelink-amd-ryzen-8845hs-radeon-780m-may-tinh-mini-pc-minisforum-r7-8000",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-beelink-ser8-r7-8745hs-ai-r7-8845hs-gaming-design-87.jpg?v=1759142647863",
+            price: "10.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC GMK NUCBOX K8 PLUS - Ryzen 7 8845HS - OCuLink",
+            url: "/nhan-ban-tu-gmk-k6-7840hs-k8-plus-ryzen-7-8845hs-may-tinh-amd-gaming-mini-pc-windows-11-pro-dual-lan-2-5gbps-the-he-8000",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-8845hs-gmktec-nuc-box-k8-plus-2e4f79f6-fa27-4299-93f5-08a1a127ab7f.jpg?v=1759132981953",
+            price: "11.590.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum 129i7 - RTX 5060",
+            url: "/gaming-itx-minisforum-129i7-rtx-4060-i9-12900hk-may-tinh-pc-choi-game-aaa-3a",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-itx-minisforum-itx-129i7-12900hk-rtx-5060-gaming.jpg?v=1759911918633",
+            price: "10.390.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC AOOSTAR GEM 12 MAX - R7 8745HS",
+            url: "/mini-pc-aoostar-gem-12-max-r7-8745hs-amd-readeon-780m",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-8745hs-aoostar-gem-12-max.jpg?v=1759046130497",
+            price: "9.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Máy tính All-in-One Morefine NUC1 - 16GB",
+            url: "/m11-n200",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-morefine-surface-nuc1-m11-intel-n150-7-inch-cam-ung-van-phong.jpg?v=1760840883810",
+            price: "8.490.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC Minisforum UM870 SLIM - Ryzen 7 8745H",
+            url: "/mini-pc-minisforum-um870-slim-may-tinh-gaming-amd-ryzen-7-8745h-780m",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-gaming-minisforum-um870-8745h-um760-slim-7640hs-1.jpg?v=1758623404530",
+            price: "9.990.000₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Bo mạch chủ Minisforum AR1290 - Core i9-12900HK",
+            url: "/minisforum-ar1290-intel-core-i9-12900hk-itx-motherboard-cpu",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/ar1290-i9-12900h.jpg?v=1780285862060",
+            price: "0₫"
+            });
+            window.currentCollectionProducts.push({
+            name: "Mini PC GMK M7 - Ryzen 7 6850H",
+            url: "/minipc-gmk-m7-manh-me-em-ai-thiet-ke-doc-dao-ryzen-7-6850h-680m",
+            img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-pro-6850h-gmktec-nuc-box-m7-2b29a4bc-f49b-4fbc-a171-fd51bbedab42.jpg?v=1759133020427",
+            price: "8.390.000₫"
+            });
+
+    let isSyncing = false;
+    function syncSwatches() {
+        if (isSyncing) return;
+        isSyncing = true;
+        
+        try {
+            const selectEl = document.querySelector('.box-variant #product-selectors');
+            const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+            
+            let isDefaultRam = false;
+            let isDefaultSsd = false;
+
+            const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+            if (ramDisplay) {
+                const text = ramDisplay.textContent.toUpperCase();
+                if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+                    isDefaultRam = true;
+                }
+            } else {
+                isDefaultRam = true;
+            }
+
+            const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+            if (ssdDisplay) {
+                const text = ssdDisplay.textContent.toUpperCase();
+                if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+                    isDefaultSsd = true;
+                }
+            } else {
+                isDefaultSsd = true;
+            }
+
+            // Also check Frequently Bought Together select elements
+            const isFbtActive = !!document.querySelector('frequently-buy-together');
+            if (isFbtActive) {
+                let hasFbtRam = false;
+                let hasFbtSsd = false;
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    if (labelText.includes('RAM') || labelText.includes('DRAM')) {
+                        hasFbtRam = true;
+                    }
+                    if (labelText.includes('SSD') || labelText.includes('NVME')) {
+                        hasFbtSsd = true;
+                    }
+                });
+
+                isDefaultRam = !hasFbtRam;
+                isDefaultSsd = !hasFbtSsd;
+
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const val = select.value;
+                    const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+                    const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+                    const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+                    
+                    const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+
+                    if (isRam) {
+                        if (isDefaultVal) {
+                            isDefaultRam = true;
+                        } else {
+                            isDefaultRam = false;
+                        }
+                    }
+                    if (isSsd) {
+                        if (isDefaultVal) {
+                            isDefaultSsd = true;
+                        } else {
+                            isDefaultSsd = false;
+                        }
+                    }
+                });
+            }
+
+            let isSoldOut = !window.mainProductAvailable;
+            if (!window.mainProductAvailable) {
+                // Main product is out of stock. If they configured at least one accessory, they can buy.
+                if (isDefaultRam && isDefaultSsd) {
+                    isSoldOut = true;
+                } else {
+                    isSoldOut = false;
+                }
+            }
+
+            let priceVal = 0;
+            let comparePriceVal = 0;
+            
+            const swatchRows = document.querySelectorAll('.swatch');
+            if (swatchRows.length > 0) {
+                const selectedValues = [];
+                swatchRows.forEach(swatchRow => {
+                    const checkedInput = swatchRow.querySelector('input[type="radio"]:checked');
+                    if (checkedInput) {
+                        selectedValues.push(checkedInput.value.trim());
+                        const parent = checkedInput.closest('.swatch-element');
+                        if (parent && parent.classList.contains('soldout')) {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        }
+                    }
+                });
+                
+                if (selectEl) {
+                    const options = Array.from(selectEl.options);
+                    let matchedOption = null;
+                    
+                    options.forEach(opt => {
+                        const textParts = opt.text.split('-');
+                        let titlePart = textParts.slice(0, -1).join('-').trim();
+                        titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+                        
+                        const optValues = titlePart.split('/').map(v => v.trim());
+                        
+                        let isMatch = true;
+                        for (let i = 0; i < selectedValues.length; i++) {
+                            if (optValues[i] !== selectedValues[i]) {
+                                isMatch = false;
+                                break;
+                            }
+                        }
+                        if (isMatch) {
+                            matchedOption = opt;
+                        }
+                    });
+                    
+                    if (matchedOption) {
+                        if (selectEl.value !== matchedOption.value) {
+                            selectEl.value = matchedOption.value;
+                            selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                        
+                        const isAvail = matchedOption.getAttribute('data-available');
+                        if (isAvail === 'false') {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        } else if (isAvail === 'true') {
+                            isSoldOut = false;
+                        }
+                        priceVal = parseInt(matchedOption.getAttribute('data-price') || '0', 10);
+                        comparePriceVal = parseInt(matchedOption.getAttribute('data-compare-price') || '0', 10);
+                    }
+                }
+            } else {
+                // No swatch radio rows on page (fallback to standard dropdown)
+                if (selectEl) {
+                    const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+                    if (activeOption) {
+                        const isAvail = activeOption.getAttribute('data-available');
+                        if (isAvail === 'false') {
+                            if (window.mainProductAvailable) {
+                                isSoldOut = true;
+                            }
+                        } else if (isAvail === 'true') {
+                            isSoldOut = false;
+                        }
+                        priceVal = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+                        comparePriceVal = parseInt(activeOption.getAttribute('data-compare-price') || '0', 10);
+                    }
+                } else if (hiddenInput) {
+                    const isAvail = hiddenInput.getAttribute('data-available');
+                    if (isAvail === 'false') {
+                        if (window.mainProductAvailable) {
+                            isSoldOut = true;
+                        }
+                    } else if (isAvail === 'true') {
+                        isSoldOut = false;
+                    }
+                    priceVal = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+                    comparePriceVal = parseInt(hiddenInput.getAttribute('data-compare-price') || '0', 10);
+                }
+            }
+            
+            // Priority price retrieval for Frequently Bought Together
+            let fbtPriceChecked = false;
+            if (isFbtActive) {
+                const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+                if (fbtTotalEl) {
+                    priceVal = parsePrice(fbtTotalEl.textContent);
+                    fbtPriceChecked = true;
+                }
+            }
+
+            // Fallback: If priceVal is still 0, check if we can retrieve it from #selected-variant-price
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const mainPriceText = document.getElementById('selected-variant-price')?.textContent;
+                if (mainPriceText) {
+                    priceVal = parsePrice(mainPriceText);
+                }
+            }
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const stickyPriceEl = document.getElementById('sticky-price')?.textContent;
+                if (stickyPriceEl) {
+                    priceVal = parsePrice(stickyPriceEl);
+                }
+            }
+            if (priceVal === 0 && !fbtPriceChecked) {
+                const bsPriceEl = document.getElementById('bs-price')?.textContent;
+                if (bsPriceEl) {
+                    priceVal = parsePrice(bsPriceEl);
+                }
+            }
+
+            const qtyInput = document.getElementById('qtym');
+            const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+
+            // Show/hide main page qty-price-row based on variant price
+            const qtyPriceRow = document.querySelector('form#nava-product-form .qty-price-row');
+            if (qtyPriceRow) {
+                if (priceVal > 0) {
+                    qtyPriceRow.classList.remove('d-none');
+                    qtyPriceRow.classList.add('d-flex');
+                } else {
+                    qtyPriceRow.classList.add('d-none');
+                    qtyPriceRow.classList.remove('d-flex');
+                }
+            }
+
+            // Update the main price and compare price display
+            const priceEl = document.getElementById('selected-variant-price');
+            if (priceEl) {
+                if (priceVal > 0) {
+                    priceEl.innerText = formatVietnameseCurrency(priceVal * quantity);
+                } else {
+                    priceEl.innerText = 'Liên hệ';
+                }
+            }
+            const comparePriceEl = document.getElementById('selected-variant-compare-price');
+            if (comparePriceEl) {
+                if (comparePriceVal > priceVal) {
+                    comparePriceEl.innerText = formatVietnameseCurrency(comparePriceVal * quantity);
+                    comparePriceEl.style.display = 'inline-block';
+                } else {
+                    comparePriceEl.style.display = 'none';
+                }
+            }
+        
+        // Update Buy Button UI based on availability and price
+        const btnInStock = document.querySelector('.btn-group-instock');
+        const btnOutStock = document.querySelector('.btn-group-outstock');
+        const statusEl = document.getElementById('availability-status');
+        const btnAddToCart = document.getElementById('btn-add-to-cart');
+        const btnInstallment = document.getElementById('btn-installment-main');
+        const btnBuyNow = document.getElementById('btn-buy-now');
+        const bsBuyBtn = document.querySelector('.bs-buy-btn');
+        const bsAddCartBtn = document.querySelector('.btn-add-cart-bs');
+        
+        // Frequently Bought Together buttons
+        const fbtBuyNow = document.querySelector('frequently-buy-together button.tg-buy-now') || document.querySelector('.tg-buy-now');
+        const fbtInstallment = document.querySelector('frequently-buy-together button.js-fbt-installment') || document.querySelector('.js-fbt-installment');
+        const fbtAddCart = document.querySelector('frequently-buy-together button.tg-addcart') || document.querySelector('.tg-addcart');
+
+        if (isSoldOut) {
+            if (btnInStock) btnInStock.style.display = 'flex';
+            if (btnOutStock) btnOutStock.style.display = 'none';
+
+            if (statusEl) {
+                statusEl.innerText = 'Hết hàng';
+                statusEl.style.color = '#ef4444';
+            }
+            if (btnAddToCart) {
+                btnAddToCart.style.display = 'none';
+            }
+            if (btnInstallment) {
+                btnInstallment.style.display = 'none';
+            }
+            if (btnBuyNow) {
+                btnBuyNow.disabled = false;
+                btnBuyNow.innerText = 'LIÊN HỆ: 0972.178.527';
+                btnBuyNow.style.background = '#334155';
+                btnBuyNow.style.color = 'white';
+                btnBuyNow.style.opacity = '1';
+                btnBuyNow.style.pointerEvents = 'auto';
+                btnBuyNow.style.setProperty('flex', '1', 'important');
+                btnBuyNow.style.setProperty('width', '100%', 'important');
+                btnBuyNow.style.display = 'flex';
+            }
+            if (bsBuyBtn) {
+                bsBuyBtn.disabled = false;
+                bsBuyBtn.innerText = 'LIÊN HỆ: 0972.178.527';
+                bsBuyBtn.style.background = '#334155';
+                bsBuyBtn.style.color = 'white';
+                bsBuyBtn.style.opacity = '1';
+                bsBuyBtn.style.pointerEvents = 'auto';
+                bsBuyBtn.style.setProperty('flex', '1', 'important');
+                bsBuyBtn.style.setProperty('width', '100%', 'important');
+                bsBuyBtn.style.display = 'flex';
+            }
+            if (bsAddCartBtn) {
+                bsAddCartBtn.style.display = 'none';
+            }
+            
+            // FBT elements when sold out
+            if (fbtAddCart) {
+                fbtAddCart.style.display = 'none';
+            }
+            if (fbtInstallment) {
+                fbtInstallment.style.display = 'none';
+            }
+            if (fbtBuyNow) {
+                fbtBuyNow.disabled = false;
+                fbtBuyNow.innerText = 'LIÊN HỆ: 0972.178.527';
+                fbtBuyNow.style.background = '#334155';
+                fbtBuyNow.style.color = 'white';
+                fbtBuyNow.style.opacity = '1';
+                fbtBuyNow.style.pointerEvents = 'auto';
+                fbtBuyNow.style.setProperty('flex', '1', 'important');
+                fbtBuyNow.style.setProperty('width', '100%', 'important');
+                fbtBuyNow.style.display = 'flex';
+            }
+        } else {
+            if (btnInStock) btnInStock.style.display = 'flex';
+            if (btnOutStock) btnOutStock.style.display = 'none';
+            
+            // Reset disabled states and styles
+            if (btnAddToCart) {
+                btnAddToCart.disabled = false;
+                btnAddToCart.style.opacity = '';
+                btnAddToCart.style.pointerEvents = '';
+                btnAddToCart.style.display = '';
+            }
+            if (btnInstallment) {
+                btnInstallment.disabled = false;
+                btnInstallment.style.opacity = '';
+                btnInstallment.style.pointerEvents = '';
+                btnInstallment.style.display = '';
+            }
+            if (btnBuyNow) {
+                btnBuyNow.disabled = false;
+                btnBuyNow.style.opacity = '';
+                btnBuyNow.style.pointerEvents = '';
+                btnBuyNow.style.display = '';
+            }
+            if (priceVal === 0) {
+                if (statusEl) {
+                    statusEl.innerText = 'Liên hệ';
+                    statusEl.style.color = '#003366';
+                }
+                if (btnAddToCart) {
+                    btnAddToCart.style.display = 'none';
+                }
+                if (btnInstallment) {
+                    btnInstallment.style.display = 'none';
+                }
+                if (btnBuyNow) {
+                    btnBuyNow.disabled = false;
+                    btnBuyNow.innerText = 'LIÊN HỆ: 0972.178.527';
+                    btnBuyNow.style.background = '#334155';
+                    btnBuyNow.style.color = 'white';
+                    btnBuyNow.style.opacity = '1';
+                    btnBuyNow.style.pointerEvents = 'auto';
+                    btnBuyNow.style.setProperty('flex', '1', 'important');
+                    btnBuyNow.style.setProperty('width', '100%', 'important');
+                    btnBuyNow.style.display = 'flex';
+                }
+                if (bsBuyBtn) {
+                    bsBuyBtn.disabled = false;
+                    bsBuyBtn.innerText = 'LIÊN HỆ: 0972.178.527';
+                    bsBuyBtn.style.background = '#334155';
+                    bsBuyBtn.style.color = 'white';
+                    bsBuyBtn.style.opacity = '1';
+                    bsBuyBtn.style.pointerEvents = 'auto';
+                    bsBuyBtn.style.setProperty('flex', '1', 'important');
+                    bsBuyBtn.style.setProperty('width', '100%', 'important');
+                    bsBuyBtn.style.display = 'flex';
+                }
+                if (bsAddCartBtn) {
+                    bsAddCartBtn.style.display = 'none';
+                }
+                
+                // FBT elements when price is 0
+                if (fbtAddCart) {
+                    fbtAddCart.style.display = 'none';
+                }
+                if (fbtInstallment) {
+                    fbtInstallment.style.display = 'none';
+                }
+                if (fbtBuyNow) {
+                    fbtBuyNow.disabled = false;
+                    fbtBuyNow.innerText = 'LIÊN HỆ: 0972.178.527';
+                    fbtBuyNow.style.background = '#334155';
+                    fbtBuyNow.style.color = 'white';
+                    fbtBuyNow.style.opacity = '1';
+                    fbtBuyNow.style.pointerEvents = 'auto';
+                    fbtBuyNow.style.setProperty('flex', '1', 'important');
+                    fbtBuyNow.style.setProperty('width', '100%', 'important');
+                    fbtBuyNow.style.display = 'flex';
+                }
+            } else {
+                if (statusEl) {
+                    statusEl.innerText = 'Còn hàng';
+                    statusEl.style.color = '#22c55e';
+                }
+                if (btnAddToCart) {
+                    btnAddToCart.disabled = false;
+                    btnAddToCart.style.background = 'transparent';
+                    btnAddToCart.style.borderColor = 'var(--primary)';
+                    btnAddToCart.style.color = 'var(--primary)';
+                    btnAddToCart.style.opacity = '';
+                    btnAddToCart.style.pointerEvents = '';
+                }
+                if (btnInstallment) {
+                    btnInstallment.disabled = false;
+                    btnInstallment.style.background = 'transparent';
+                    btnInstallment.style.borderColor = 'var(--primary)';
+                    btnInstallment.style.color = 'var(--primary)';
+                    btnInstallment.style.opacity = '';
+                    btnInstallment.style.pointerEvents = '';
+                }
+                if (btnBuyNow) {
+                    btnBuyNow.disabled = false;
+                    btnBuyNow.innerText = 'MUA NGAY';
+                    btnBuyNow.style.background = 'var(--primary)';
+                    btnBuyNow.style.color = 'white';
+                    btnBuyNow.style.opacity = '';
+                    btnBuyNow.style.pointerEvents = '';
+                    btnBuyNow.style.setProperty('flex', '1.5', 'important');
+                }
+                if (bsBuyBtn) {
+                    bsBuyBtn.disabled = false;
+                    bsBuyBtn.innerText = 'MUA NGAY';
+                    bsBuyBtn.style.background = 'linear-gradient(90deg, var(--primary), var(--secondary))';
+                    bsBuyBtn.style.color = 'white';
+                    bsBuyBtn.style.opacity = '';
+                    bsBuyBtn.style.pointerEvents = '';
+                }
+                if (bsAddCartBtn) {
+                    bsAddCartBtn.disabled = false;
+                    bsAddCartBtn.style.background = 'var(--bg-gray)';
+                    bsAddCartBtn.style.borderColor = 'var(--border-color)';
+                    bsAddCartBtn.style.color = 'var(--primary)';
+                    bsAddCartBtn.style.opacity = '';
+                    bsAddCartBtn.style.pointerEvents = '';
+                }
+                
+                // FBT elements when active
+                if (fbtAddCart) {
+                    fbtAddCart.disabled = false;
+                    fbtAddCart.style.display = '';
+                    fbtAddCart.style.background = '';
+                    fbtAddCart.style.borderColor = '';
+                    fbtAddCart.style.color = '';
+                    fbtAddCart.style.opacity = '';
+                    fbtAddCart.style.pointerEvents = '';
+                }
+                if (fbtInstallment) {
+                    fbtInstallment.disabled = false;
+                    fbtInstallment.style.display = '';
+                    fbtInstallment.style.background = '';
+                    fbtInstallment.style.borderColor = '';
+                    fbtInstallment.style.color = '';
+                    fbtInstallment.style.opacity = '';
+                    fbtInstallment.style.pointerEvents = '';
+                }
+                if (fbtBuyNow) {
+                    fbtBuyNow.disabled = false;
+                    fbtBuyNow.innerText = 'MUA NGAY';
+                    fbtBuyNow.style.display = '';
+                    fbtBuyNow.style.background = '';
+                    fbtBuyNow.style.color = '';
+                    fbtBuyNow.style.opacity = '';
+                    fbtBuyNow.style.pointerEvents = '';
+                    fbtBuyNow.style.setProperty('flex', '1.5', 'important');
+                }
+            }
+        }
+        
+        // Update bottom sheet price display
+        const bsPriceEl = document.getElementById('bs-price');
+        if (bsPriceEl) {
+            const isFbtActive = !!document.querySelector('frequently-buy-together');
+            if (isFbtActive) {
+                const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]');
+                if (fbtTotalEl) {
+                    bsPriceEl.innerText = fbtTotalEl.textContent.trim();
+                } else {
+                    bsPriceEl.innerText = priceVal === 0 ? 'Liên hệ' : formatVietnameseCurrency(priceVal * quantity);
+                }
+            } else {
+                bsPriceEl.innerText = priceVal === 0 ? 'Liên hệ' : formatVietnameseCurrency(priceVal * quantity);
+            }
+        }
+        
+        // Update mobile bottom sticky buy bar
+        const mobileBuyBar = document.querySelector('.mobile-bottom-buybar');
+        if (mobileBuyBar) {
+            if (isSoldOut) {
+                mobileBuyBar.innerHTML = `<a href="tel:0972178527" class="bar-buy-now text-center d-flex align-items-center justify-content-center font-weight-bold" style="width: 100%; height: 44px; background: var(--primary); border: none; border-radius: 8px; color: white !important; font-size: 0.88rem; text-decoration: none; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">LIÊN HỆ ĐẶT TRƯỚC: 0972.178.527</a>`;
+            } else if (priceVal === 0) {
+                mobileBuyBar.innerHTML = `<a href="tel:0972178527" class="bar-buy-now text-center d-flex align-items-center justify-content-center font-weight-bold" style="width: 100%; height: 44px; background: var(--primary); border: none; border-radius: 8px; color: white !important; font-size: 0.88rem; text-decoration: none; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">LIÊN HỆ: 0972.178.527</a>`;
+            } else {
+                let optString = '';
+                const selectEl = document.querySelector('.box-variant #product-selectors');
+                if (selectEl) {
+                    const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+                    if (activeOption) {
+                        const textParts = activeOption.text.split('-');
+                        let titlePart = textParts.slice(0, -1).join('-').trim();
+                        titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+                        const opts = titlePart.split('/').map(v => v.trim()).filter(v => v !== '' && v.toUpperCase() !== 'DEFAULT TITLE');
+                        if (opts.length > 0) {
+                            optString = ' - ' + opts.join(', ');
+                        }
+                    }
+                }
+                const activeImgEl = document.querySelector('.product-image-block img, .gallery-item img, #product-gallery img, .thumbnail-item img, .main-image-wrap img');
+                const imgSrc = activeImgEl ? activeImgEl.src : (window.currentProductData?.img || '');
+                const formattedPrice = formatVietnameseCurrency(priceVal);
+                
+                mobileBuyBar.innerHTML = `
+                    <div class="mobile-buybar-left" style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;">
+                        <div class="buybar-thumb-wrap" style="width: 44px; height: 44px; background: #fff; border-radius: 8px; border: 1px solid var(--border-color); padding: 4px; flex-shrink: 0;">
+                            <img id="sticky-avatar" src="${imgSrc}" alt="${(window.currentProductData?.name || '').replace(/"/g, '&quot;')}" style="width: 100%; height: 100%; object-fit: contain;">
+                        </div>
+                        <div style="display: flex; flex-direction: column; min-width: 0; flex: 1;">
+                            <span id="sticky-title" style="font-size: 0.72rem; color: var(--text-gray); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;">${window.currentProductData?.name || ''}${optString}</span>
+                            <span id="sticky-price" style="font-size: 1.05rem; font-weight: 900; color: var(--primary); margin-top: 1px;">${formattedPrice}</span>
+                        </div>
+                    </div>
+                    <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
+                        <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="fa-solid fa-cart-plus" style="font-size: 1.15rem;"></i></button>
+                        <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
+                    </div>
+                `;
+            }
+        }
+        
+        // Toggle global product contact-only class to force hide buttons via CSS
+        const isContactMode = isSoldOut || (priceVal === 0);
+        document.body.classList.toggle('global-product-contact-only', isContactMode);
+
+        const qtyPriceRow = document.querySelector('#nava-product-form .qty-price-row');
+        if (qtyPriceRow) {
+            if (isContactMode) {
+                qtyPriceRow.classList.add('d-none');
+                qtyPriceRow.classList.remove('d-flex');
+            } else {
+                qtyPriceRow.classList.remove('d-none');
+                qtyPriceRow.classList.add('d-flex');
+            }
+        }
+
+        // Check if we need to show the RAM/SSD configuration nudge
+        if (typeof checkRAMSSDPrompt === 'function') {
+            checkRAMSSDPrompt();
+        }
+        } finally {
+            isSyncing = false;
+        }
+    }
+
+    function checkRAMSSDPrompt() {
+        let hasRam = false;
+        let hasSsd = false;
+        
+        document.querySelectorAll('.swatch .header, .swatch-element, .single-option-selector, label, span').forEach(el => {
+            const text = el.textContent.toLowerCase();
+            if (text.includes('ram') || text.includes('dram')) hasRam = true;
+            if (text.includes('ssd') || text.includes('nvme')) hasSsd = true;
+        });
+        
+        if (document.querySelector('[data-dropdown-type="ram"]') || document.querySelector('#ram-selected-text')) hasRam = true;
+        if (document.querySelector('[data-dropdown-type="ssd"]') || document.querySelector('#ssd-selected-text')) hasSsd = true;
+        
+        if (!hasRam && !hasSsd) return;
+        
+        let isDefaultRam = false;
+        let isDefaultSsd = false;
+        
+        const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+        if (ramDisplay) {
+            const text = ramDisplay.textContent.toUpperCase();
+            if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+                isDefaultRam = true;
+            }
+        }
+        
+        const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+        if (ssdDisplay) {
+            const text = ssdDisplay.textContent.toUpperCase();
+            if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+                isDefaultSsd = true;
+            }
+        }
+        
+        const selectEl = document.querySelector('.box-variant #product-selectors');
+        if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+            const optText = selectEl.selectedOptions[0].text.toUpperCase();
+            if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+                isDefaultRam = true;
+                isDefaultSsd = true;
+            }
+        }
+        
+        if (isDefaultRam || isDefaultSsd) {
+            showNudgeBanner();
+        } else {
+            hideNudgeBanner();
+        }
+    }
+
+    function showNudgeBanner() {
+        let banner = document.getElementById('ram-ssd-nudge-banner');
+        let isAlreadyVisible = false;
+        if (banner && banner.style.opacity === '1') {
+            isAlreadyVisible = true;
+        }
+        
+        if (!banner) {
+            if (!document.getElementById('nudge-banner-style')) {
+                const style = document.createElement('style');
+                style.id = 'nudge-banner-style';
+                style.innerHTML = `
+                    @keyframes nudge-shake {
+                        0%, 100% { transform: translateX(-50%) translateY(0); }
+                        15%, 45%, 75% { transform: translateX(-52%) translateY(-1px); }
+                        30%, 60%, 90% { transform: translateX(-48%) translateY(1px); }
+                    }
+                    .nudge-shake-active {
+                        animation: nudge-shake 0.7s ease-in-out 3;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            banner = document.createElement('div');
+            banner.id = 'ram-ssd-nudge-banner';
+            banner.style.cssText = `
+                position: fixed; bottom: 85px; left: 50%; 
+                transform: translateX(-50%) translateY(120px); 
+                width: calc(100% - 32px); max-width: 480px; 
+                background: rgba(255, 255, 255, 0.95); 
+                backdrop-filter: blur(12px); 
+                border: 1.5px solid rgba(239, 68, 68, 0.35); 
+                border-radius: 16px; padding: 14px 20px; 
+                box-shadow: 0 10px 35px rgba(239, 68, 68, 0.15), 0 5px 15px rgba(0,0,0,0.08); 
+                z-index: 99999; display: flex; align-items: center; gap: 12px; 
+                transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
+                opacity: 0; box-sizing: border-box; font-family: inherit;
+            `;
+            banner.innerHTML = `
+                <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="ph-fill ph-warning-octagon" style="font-size: 1.4rem;"></i></div>
+                <div style="flex: 1; text-align: left;">
+                    <div style="font-size: 0.88rem; font-weight: 800; color: #ef4444; margin-bottom: 2px;">Chưa chọn cấu hình RAM & SSD</div>
+                    <div style="font-size: 0.78rem; font-weight: 600; color: #64748b;">Vui lòng chọn cấu hình ở trên để nhận báo giá & mua hàng!</div>
+                </div>
+                <button id="nudge-banner-btn" style="background: var(--primary, #003366); border: none; border-radius: 8px; color: white; padding: 8px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; white-space: nowrap; transition: 0.2s;">Chọn ngay</button>
+            `;
+            document.body.appendChild(banner);
+            
+            banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+                hideNudgeBanner();
+                openBottomSheet();
+            });
+        }
+        
+        setTimeout(() => {
+            banner.style.transform = 'translateX(-50%) translateY(0)';
+            banner.style.opacity = '1';
+            if (!isAlreadyVisible) {
+                banner.classList.add('nudge-shake-active');
+                setTimeout(() => {
+                    banner.classList.remove('nudge-shake-active');
+                }, 2200);
+            }
+        }, 100);
+    }
+
+    function hideNudgeBanner() {
+        const banner = document.getElementById('ram-ssd-nudge-banner');
+        if (banner) {
+            banner.style.transform = 'translateX(-50%) translateY(120px)';
+            banner.style.opacity = '0';
+        }
+    }
+
+    var isBsOpen = false;
+
+    function updateBottomSheetPrice() {
+        const bsPriceEl = document.getElementById('bs-price');
+        if (!bsPriceEl) return;
+        
+        let activePriceText = '';
+        const isFbtActive = !!document.querySelector('frequently-buy-together');
+        if (isFbtActive) {
+            const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]');
+            if (fbtTotalEl) {
+                activePriceText = fbtTotalEl.textContent.trim();
+            }
+        }
+        if (!activePriceText) {
+            const selectedVariantPriceEl = document.getElementById('selected-variant-price');
+            if (selectedVariantPriceEl) {
+                activePriceText = selectedVariantPriceEl.textContent.trim();
+            }
+        }
+        if (!activePriceText) {
+            const stickyPriceEl = document.getElementById('sticky-price');
+            if (stickyPriceEl) {
+                activePriceText = stickyPriceEl.textContent.trim();
+            }
+        }
+        
+        if (activePriceText) {
+            bsPriceEl.innerText = activePriceText;
+        }
+    }
+
+    function openBottomSheet() {
+        if (window.innerWidth >= 992) {
+            return; // Don't show bottom-sheet modal on PC/desktop
+        }
+        const overlay = document.getElementById('nava-bs-overlay');
+        const bs = document.getElementById('nava-bottom-sheet');
+        const optionsContainer = document.getElementById('nava-bs-options-container');
+        const stickyBar = document.querySelector('.mobile-bottom-buybar');
+        
+        if (overlay && bs && optionsContainer) {
+            isBsOpen = true;
+            
+            // Sync active price into bottom sheet on open
+            updateBottomSheetPrice();
+            
+            // Hide mobile sticky bottom bar when bottom sheet is open
+            if (stickyBar) {
+                stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+            }
+            
+            const isFbtActive = !!document.querySelector('frequently-buy-together');
+            if (isFbtActive) {
+                const fbtOptions = document.querySelector('.nava-custom-fbt-container');
+                if (fbtOptions) {
+                    optionsContainer.innerHTML = '';
+                    optionsContainer.appendChild(fbtOptions);
+                }
+                const fbtQty = document.querySelector('frequently-buy-together .custom-btn-number');
+                const bsQtyContainer = document.getElementById('nava-bs-qty-container');
+                if (fbtQty && bsQtyContainer) {
+                    bsQtyContainer.innerHTML = '';
+                    bsQtyContainer.appendChild(fbtQty);
+                }
+            } else {
+                const productControl = document.querySelector('.product-control');
+                if (productControl) {
+                    optionsContainer.innerHTML = '';
+                    optionsContainer.appendChild(productControl);
+                }
+                const qtySelector = document.querySelector('.qty-selector');
+                const bsQtyContainer = document.getElementById('nava-bs-qty-container');
+                if (qtySelector && bsQtyContainer) {
+                    bsQtyContainer.innerHTML = '';
+                    bsQtyContainer.appendChild(qtySelector);
+                }
+            }
+            
+            // Display bottom sheet
+            overlay.style.display = 'block';
+            bs.style.display = 'flex';
+            void overlay.offsetWidth;
+            void bs.offsetWidth;
+            overlay.style.opacity = '1';
+            bs.classList.add('open');
+            document.body.style.overflow = 'hidden';
+            
+            // Auto-open option dropdowns disabled to avoid cluttering mobile UI
+            
+            // Trigger glow animation for options
+            const displays = bs.querySelectorAll('.nava-custom-select-display, .swatch, .nava-dropdown-display');
+            displays.forEach(d => {
+                d.style.animation = 'none';
+                void d.offsetWidth; // Reflow
+                d.style.animation = 'bs-glow-attention 1.2s ease-in-out 3';
+            });
+        }
+    }
+
+    function restoreElementsToForm() {
+        const isFbtActive = !!document.querySelector('frequently-buy-together');
+        if (isFbtActive) {
+            const fbtOptions = document.querySelector('.nava-custom-fbt-container');
+            const fbtEl = document.querySelector('frequently-buy-together');
+            if (fbtOptions && fbtEl && !fbtEl.contains(fbtOptions)) {
+                const pb3Row = fbtEl.querySelector('.pb-3');
+                if (pb3Row) {
+                    fbtEl.insertBefore(fbtOptions, pb3Row);
+                } else {
+                    fbtEl.appendChild(fbtOptions);
+                }
+            }
+            const fbtQty = document.querySelector('.custom-btn-number');
+            const pb3Row = document.querySelector('frequently-buy-together .pb-3');
+            if (fbtQty && pb3Row && !pb3Row.contains(fbtQty)) {
+                pb3Row.insertBefore(fbtQty, pb3Row.firstChild);
+            }
+        } else {
+            const productControl = document.querySelector('.product-control');
+            const form = document.getElementById('nava-product-form');
+            const actionButtonsRow = form ? form.querySelector('.action-buttons-row') : null;
+            if (productControl && form && !form.contains(productControl)) {
+                if (actionButtonsRow) {
+                    form.insertBefore(productControl, actionButtonsRow);
+                } else {
+                    form.appendChild(productControl);
+                }
+            }
+            const qtySelector = document.querySelector('.qty-selector');
+            const qtyLabelWrap = document.querySelector('.qty-price-row > div:first-child');
+            if (qtySelector && qtyLabelWrap && !qtyLabelWrap.contains(qtySelector)) {
+                qtyLabelWrap.appendChild(qtySelector);
+            }
+        }
+    }
+
+    function closeBottomSheet() {
+        const overlay = document.getElementById('nava-bs-overlay');
+        const bs = document.getElementById('nava-bottom-sheet');
+        const stickyBar = document.querySelector('.mobile-bottom-buybar');
+        
+        if (overlay && bs) {
+            isBsOpen = false;
+            overlay.style.opacity = '0';
+            bs.classList.remove('open');
+            
+            // Show sticky bar again if scrolled past threshold
+            if (stickyBar) {
+                stickyBar.style.removeProperty('transform');
+                if (typeof toggleStickyBar === 'function') {
+                    toggleStickyBar();
+                }
+            }
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                bs.style.display = 'none';
+                document.body.style.overflow = '';
+                
+                restoreElementsToForm();
+            }, 300);
+        }
+    }
+
+    function initNavaProductEnforcement() {
+        // Handle bottom sheet quick configuration buttons click
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.btn-add-cart-bs')) {
+                e.preventDefault();
+                restoreElementsToForm();
+                const isFbtActive = !!document.querySelector('frequently-buy-together');
+                if (isFbtActive) {
+                    const realBtn = document.querySelector('frequently-buy-together button.tg-addcart');
+                    if (realBtn) {
+                        realBtn.click();
+                        closeBottomSheet();
+                    }
+                } else {
+                    const realBtn = document.getElementById('btn-add-to-cart');
+                    if (realBtn) {
+                        realBtn.click();
+                        closeBottomSheet();
+                    }
+                }
+            }
+            if (e.target.closest('.bs-buy-btn')) {
+                e.preventDefault();
+                restoreElementsToForm();
+                const isFbtActive = !!document.querySelector('frequently-buy-together');
+                if (isFbtActive) {
+                    const realBtn = document.querySelector('frequently-buy-together button.tg-buy-now');
+                    if (realBtn) {
+                        realBtn.click();
+                        closeBottomSheet();
+                    }
+                } else {
+                    const realBtn = document.getElementById('btn-buy-now');
+                    if (realBtn) {
+                        realBtn.click();
+                        closeBottomSheet();
+                    }
+                }
+            }
+        });
+
+        // Intercept checkout clicks in capture phase to validate options selection and contact price
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('#btn-add-to-cart, #btn-installment-main, #btn-buy-now, .bar-add-cart, .bar-buy-now, .js-addToCart, .js-buynow, .btn-add-cart-sticky, .btn-buy-now-sticky, .btn-add-cart-bs, .bs-buy-btn, .tg-addcart, .tg-buy-now, .buy_now');
+            if (btn) {
+                const selectEl = document.querySelector('.box-variant #product-selectors');
+                
+                let hasRamOption = false;
+                let hasSsdOption = false;
+                
+                if (document.querySelector('[data-dropdown-type="ram"]') || document.querySelector('#ram-selected-text')) {
+                    hasRamOption = true;
+                }
+                if (document.querySelector('[data-dropdown-type="ssd"]') || document.querySelector('#ssd-selected-text')) {
+                    hasSsdOption = true;
+                }
+                
+                document.querySelectorAll('.single-option-selector').forEach(select => {
+                    const val = select.value.toUpperCase();
+                    const label = select.closest('.selector-wrapper')?.querySelector('label')?.textContent.toUpperCase() || '';
+                    if (val.includes('RAM') || label.includes('RAM') || label.includes('DRAM')) hasRamOption = true;
+                    if (val.includes('SSD') || label.includes('SSD') || label.includes('NVME')) hasSsdOption = true;
+                });
+                
+                document.querySelectorAll('.swatch input[type="radio"]').forEach(radio => {
+                    const val = radio.value.toUpperCase();
+                    const name = radio.name.toUpperCase();
+                    if (name.includes('RAM') || val.includes('RAM')) hasRamOption = true;
+                    if (name.includes('SSD') || val.includes('SSD')) hasSsdOption = true;
+                });
+                
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    if (labelText.includes('RAM') || labelText.includes('DRAM')) hasRamOption = true;
+                    if (labelText.includes('SSD') || labelText.includes('NVME')) hasSsdOption = true;
+                });
+
+                let isDefaultRam = !hasRamOption;
+                let isDefaultSsd = !hasSsdOption;
+                
+                // 1. Check nava custom dropdowns
+                const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+                if (ramDisplay) {
+                    const text = ramDisplay.textContent.toUpperCase();
+                    if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+                        isDefaultRam = true;
+                    }
+                }
+                const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+                if (ssdDisplay) {
+                    const text = ssdDisplay.textContent.toUpperCase();
+                    if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+                        isDefaultSsd = true;
+                    }
+                }
+                
+                // 2. Check Sapo native/custom selectors
+                document.querySelectorAll('.single-option-selector').forEach(select => {
+                    const val = select.value.toUpperCase();
+                    const label = select.closest('.selector-wrapper')?.querySelector('label')?.textContent.toUpperCase() || '';
+                    const isRam = val.includes('RAM') || label.includes('RAM') || label.includes('DRAM');
+                    const isSsd = val.includes('SSD') || label.includes('SSD') || label.includes('NVME');
+                    
+                    if (isRam && (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+                        isDefaultRam = true;
+                    }
+                    if (isSsd && (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+                        isDefaultSsd = true;
+                    }
+                });
+                
+                // 3. Check Sapo native swatches
+                document.querySelectorAll('.swatch input[type="radio"]:checked').forEach(radio => {
+                    const val = radio.value.toUpperCase();
+                    const name = radio.name.toUpperCase();
+                    if (name.includes('RAM') || val.includes('RAM')) {
+                        if (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultRam = true;
+                    }
+                    if (name.includes('SSD') || val.includes('SSD')) {
+                        if (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultSsd = true;
+                    }
+                });
+                
+                // 4. Check global Sapo selectors state
+                if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+                    const optText = selectEl.selectedOptions[0].text.toUpperCase();
+                    if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+                        isDefaultRam = true;
+                        isDefaultSsd = true;
+                    }
+                }
+    
+                // 5. Check Frequently Bought Together select elements
+                document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+                    const val = select.value;
+                    const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+                    const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
+                    const parent = select.closest('[data-fbt-item]');
+                    const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+                    const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+                    const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+                    
+                    const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+
+                    if (isRam) {
+                        if (isDefaultVal) {
+                            isDefaultRam = true;
+                        } else {
+                            isDefaultRam = false;
+                        }
+                    }
+                    if (isSsd) {
+                        if (isDefaultVal) {
+                            isDefaultSsd = true;
+                        } else {
+                            isDefaultSsd = false;
+                        }
+                    }
+                });
+                
+                // 1. Block if price is contact-only (Liên hệ / 0) - check this FIRST!
+                let isContactPrice = false;
+                const priceEl = document.getElementById('selected-variant-price') || document.getElementById('bs-price') || document.getElementById('sticky-price');
+                if (priceEl) {
+                    const priceText = priceEl.textContent.trim().toLowerCase();
+                    const cleanPriceText = priceText.replace(/[^\d]/g, '');
+                    if (cleanPriceText === '0' || cleanPriceText === '' || priceText.includes('liên hệ') || priceText.includes('contact')) {
+                        isContactPrice = true;
+                    }
+                }
+                const fbtTotalEl = document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+                if (fbtTotalEl) {
+                    const fbtTotalText = fbtTotalEl.textContent.trim().toLowerCase();
+                    const cleanFbtText = fbtTotalText.replace(/[^\d]/g, '');
+                    if (cleanFbtText === '0' || cleanFbtText === '' || fbtTotalText.includes('liên hệ') || fbtTotalText.includes('contact')) {
+                        isContactPrice = true;
+                    }
+                }
+                if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+                    const activeOption = selectEl.selectedOptions[0];
+                    const rawPrice = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+                    if (rawPrice === 0) {
+                        isContactPrice = true;
+                    }
+                }
+                const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+                if (hiddenInput) {
+                    const rawPrice = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+                    if (rawPrice === 0) {
+                        isContactPrice = true;
+                    }
+                }
+                const basePriceVal = parseInt("0".replace(/[^\d]/g, ''), 10) || 0;
+                const productPriceVal = parseInt("0".replace(/[^\d]/g, ''), 10) || 0;
+                if (basePriceVal === 0 || productPriceVal === 0) {
+                    isContactPrice = true;
+                }
+                
+                const btnText = btn.textContent.trim().toUpperCase();
+                if (isContactPrice || btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG') || btnText.includes('LIÊN HỆ')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now') || btn.classList.contains('tg-buy-now') || btn.classList.contains('js-buynow')) {
+                        window.location.href = 'tel:0972178527';
+                    }
+                    return;
+                }
+
+                // 2. Only check for configuration warnings if it is NOT a contact price
+                // Determine if options are not configured
+                let isUnconfigured = false;
+                if (window.mainProductAvailable) {
+                    if (isDefaultRam || isDefaultSsd) isUnconfigured = true;
+                } else {
+                    if (isDefaultRam && isDefaultSsd) isUnconfigured = true;
+                }
+
+                // Only block and warn if it's the FIRST click (modal is closed)
+                if (isUnconfigured && !isBsOpen) {
+                    const isBsBtn = btn.classList.contains('btn-add-cart-bs') || btn.classList.contains('bs-buy-btn');
+                    if (!isBsBtn) {
+                        if (window.innerWidth >= 992) {
+                            // On PC/desktop, allow purchasing unconfigured RAM/SSD (0 0) directly if price > 0.
+                        } else {
+                            // On mobile, block click and show bottom sheet modal
+                            e.preventDefault();
+                            e.stopPropagation();
+                            openBottomSheet();
+                            const bs = document.getElementById('nava-bottom-sheet');
+                            if (bs) {
+                                bs.classList.remove('bs-shake-active');
+                                void bs.offsetWidth; // Reflow
+                                bs.classList.add('bs-shake-active');
+                            }
+                            return; // Only return on mobile to block click event propagation
+                        }
+                    }
+                }
+
+                // 3. "MUA NGAY" loading feedback to prevent double clicks (for price > 0)
+                const isBuyNow = btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now') || btn.classList.contains('btn-buy-now-sticky') || btn.classList.contains('tg-buy-now') || btn.textContent.trim().toUpperCase() === 'MUA NGAY';
+                if (isBuyNow) {
+                    const btnText = btn.textContent.trim().toUpperCase();
+                    if (btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG') || btnText.includes('LIÊN HỆ')) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.location.href = 'tel:0972178527';
+                        return;
+                    }
+
+                    if (!document.getElementById('nava-spin-style')) {
+                        const style = document.createElement('style');
+                        style.id = 'nava-spin-style';
+                        style.textContent = `
+                            @keyframes navaSpin {
+                                0% { transform: rotate(0deg); }
+                                100% { transform: rotate(360deg); }
+                            }
+                            .nava-spinner {
+                                display: inline-block;
+                                animation: navaSpin 1s linear infinite;
+                                margin-right: 8px;
+                                font-size: 1.25rem;
+                                vertical-align: middle;
+                            }
+                        `;
+                        document.head.appendChild(style);
+                    }
+
+                    const buyBtns = Array.from(document.querySelectorAll('button, a, div.bs-buy-btn, div.bar-buy-now, .btn-buy-now-sticky')).filter(el => {
+                        if (el.id === 'btn-buy-now' || 
+                            el.classList.contains('bar-buy-now') || 
+                            el.classList.contains('bs-buy-btn') || 
+                            el.classList.contains('btn-buy-now-sticky') || 
+                            el.classList.contains('tg-buy-now')) {
+                            return true;
+                        }
+                        const txt = el.textContent.trim().toUpperCase();
+                        return txt === 'MUA NGAY';
+                    });
+
+                    buyBtns.forEach(b => {
+                        if (b.getAttribute('data-is-loading') === 'true') return;
+                        
+                        const originalText = b.innerHTML;
+                        const originalOpacity = b.style.opacity;
+                        const originalPointerEvents = b.style.pointerEvents;
+                        const originalMouseOver = b.getAttribute('onmouseover');
+                        const originalMouseOut = b.getAttribute('onmouseout');
+
+                        b.setAttribute('data-is-loading', 'true');
+                        b.removeAttribute('onmouseover');
+                        b.removeAttribute('onmouseout');
+                        b.style.opacity = '0.6';
+                        b.style.pointerEvents = 'none';
+                        b.innerHTML = `<i class="ph-bold ph-spinner nava-spinner"></i> ĐANG XỬ LÝ...`;
+
+                        setTimeout(() => {
+                            if (b) {
+                                b.removeAttribute('data-is-loading');
+                                if (originalMouseOver) b.setAttribute('onmouseover', originalMouseOver);
+                                if (originalMouseOut) b.setAttribute('onmouseout', originalMouseOut);
+                                b.innerHTML = originalText;
+                                b.style.opacity = originalOpacity || '';
+                                b.style.pointerEvents = originalPointerEvents || '';
+                            }
+                        }, 6000);
+                    });
+                }
+            }
+        }, true); // Capture phase is critical to run before other listeners
+
+        // Close custom dropdowns on selecting an option (especially for desktop hover)
+        document.addEventListener('click', function(e) {
+            const li = e.target.closest('.custom-select-list li, .nava-custom-select-list li, .nava-dropdown-item');
+            if (li) {
+                const wrapper = li.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+                if (wrapper) {
+                    wrapper.classList.add('closed');
+                    wrapper.classList.remove('active'); // also remove active just in case
+                }
+            }
+            
+            // Fix: Remove closed class when clicking on a dropdown display box to reopen it
+            const display = e.target.closest('.custom-select-display, .nava-custom-select-display, .nava-dropdown-display');
+            if (display) {
+                const wrapper = display.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+                if (wrapper) {
+                    wrapper.classList.remove('closed');
+                }
+            }
+        });
+
+        // Remove closed class on mouseleave so hover can open it again next time
+        document.addEventListener('mouseover', function(e) {
+            const wrapper = e.target.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+            if (wrapper) {
+                if (!wrapper._hasMouseLeaveListener) {
+                    wrapper._hasMouseLeaveListener = true;
+                    wrapper.addEventListener('mouseleave', function() {
+                        this.classList.remove('closed');
+                    });
+                }
+            }
+        });
+
+        // Sync swatches on load
+        setTimeout(syncSwatches, 100);
+        
+        // Initialize gallery zoom and lightbox photo viewer
+        initGalleryZoom();
+        
+        // Render custom FBT instead of formatting native ones
+        setTimeout(function() {
+            initNavaCustomFbt();
+            setupFbtMutationObserver();
+            syncSwatches();
+        }, 150);
+        
+        // Setup price ticker observers initially and as fallback
+        setTimeout(setupPriceObservers, 200);
+        setTimeout(setupPriceObservers, 1000);
+        
+        // Periodically sync checkboxes initially (handles Sapo async upgrade)
+        function syncFbtCheckboxes() {
+            document.querySelectorAll('frequently-buy-together [data-fbt-item]').forEach(item => {
+                const select = item.querySelector('select[data-fbt-item-id]');
+                const checkbox = item.querySelector('.i-check') || item.querySelector('input[type="checkbox"]');
+                if (select && checkbox) {
+                    const isNoSelect = (select.value === 'no-select' || select.value === '');
+                    checkbox.checked = !isNoSelect;
+                }
+            });
+            // Let Sapo recalculate total
+            const fbt = document.querySelector('frequently-buy-together');
+            if (fbt && typeof fbt.total !== 'undefined') {
+                fbt.total;
+            }
+            syncSwatches();
+        }
+        
+        setTimeout(syncFbtCheckboxes, 250);
+        setTimeout(function() {
+            syncFbtCheckboxes();
+            syncSwatches();
+        }, 1200);
+
+        // Watch swatch radio and other variant selector changes
+        document.addEventListener('change', function(e) {
+            if (e.target.closest('.swatch-element input') || e.target.closest('.single-option-selector') || e.target.id === 'qtym' || e.target.classList.contains('qty-val')) {
+                syncSwatches();
+            }
+        });
+        document.addEventListener('input', function(e) {
+            if (e.target.id === 'qtym' || e.target.classList.contains('qty-val')) {
+                syncSwatches();
+            }
+        });
+
+        // Inject Trả góp 0% button inside FBT buttons row if not present
+        const fbt = document.querySelector('frequently-buy-together');
+        if (fbt) {
+            const btnRow = fbt.querySelector('.gap_6');
+            if (btnRow && !btnRow.querySelector('.js-fbt-installment')) {
+                const buyNowBtn = btnRow.querySelector('.tg-buy-now');
+                if (buyNowBtn) {
+                    const instBtn = document.createElement('button');
+                    instBtn.type = 'button';
+                    instBtn.className = 'btn js-fbt-installment font-weight-bold';
+                    instBtn.textContent = 'TRẢ GÓP 0%';
+                    btnRow.insertBefore(instBtn, buyNowBtn);
+                }
+            }
+        }
+    }
+
+    // Handle click event for FBT Installment button
+    document.addEventListener('click', async function(e) {
+        if (!e.target.closest('.js-fbt-installment')) return;
+        e.preventDefault();
+        e.stopPropagation();
+
+        const instBtn = e.target.closest('.js-fbt-installment');
+        const originalText = instBtn.innerHTML;
+        instBtn.style.pointerEvents = 'none';
+        instBtn.style.opacity = '0.7';
+        instBtn.innerHTML = `<i class="ph-bold ph-spinner nava-spinner" style="animation: navaSpin 1s linear infinite; display: inline-block; margin-right: 6px;"></i> ĐANG XỬ LÝ...`;
+
+        try {
+            // Fetch current cart state
+            const cartRes = await fetch('/cart.js');
+            const cart = await cartRes.json();
+
+            // Collect all FBT variant IDs currently selected
+            const fbtEl = document.querySelector('frequently-buy-together');
+            const arrItem = fbtEl && fbtEl.trim ? fbtEl.trim() : (fbtEl && fbtEl.handleArray ? fbtEl.handleArray() : []);
+
+            let needAdd = false;
+            if (arrItem && arrItem.length > 0) {
+                for (const item of arrItem) {
+                    const vid = parseInt(item.variantId);
+                    const inCart = cart && cart.items && cart.items.some(ci => parseInt(ci.variant_id) === vid || parseInt(ci.id) === vid);
+                    if (!inCart) {
+                        needAdd = true;
+                        break;
+                    }
+                }
+            }
+
+            if (needAdd) {
+                // Add items via tg-addcart then redirect
+                const fbtAddBtn = document.querySelector('.tg-addcart');
+                if (fbtAddBtn) {
+                    fbtAddBtn.click();
+                    setTimeout(function() {
+                        window.location.href = '/checkout';
+                    }, 1200);
+                } else {
+                    window.location.href = '/checkout';
+                }
+            } else {
+                // All items already in cart – go straight to checkout
+                window.location.href = '/checkout';
+            }
+        } catch (err) {
+            console.error('FBT installment handler error:', err);
+            // Fallback: click add and redirect
+            const fbtAddBtn = document.querySelector('.tg-addcart');
+            if (fbtAddBtn) {
+                fbtAddBtn.click();
+                setTimeout(function() { window.location.href = '/checkout'; }, 1200);
+            } else {
+                window.location.href = '/checkout';
+            }
+        } finally {
+            setTimeout(function() {
+                if (instBtn) {
+                    instBtn.innerHTML = originalText;
+                    instBtn.style.pointerEvents = '';
+                    instBtn.style.opacity = '';
+                }
+            }, 2000);
+        }
+    });
+
+
+
+    // Handle click event for Main Installment button (fix to not add to cart again if already added)
+    document.addEventListener('click', async function(e) {
+        const btn = e.target.closest('#btn-installment-main');
+        if (btn) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Check if price is contact-only (Liên hệ)
+            let isContactPrice = false;
+            const priceEl = document.getElementById('selected-variant-price') || document.getElementById('sticky-price');
+            if (priceEl) {
+                const priceText = priceEl.textContent.trim().toLowerCase();
+                if (priceText.includes('liên hệ') || priceText.includes('contact')) {
+                    isContactPrice = true;
+                }
+            }
+            if (isContactPrice) {
+                window.location.href = 'tel:0972178527';
+                return;
+            }
+            
+            // Show processing status
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="ph-bold ph-spinner nava-spinner" style="animation: navaSpin 1s linear infinite; display: inline-block; margin-right: 8px;"></i> ĐANG XỬ LÝ...`;
+            btn.style.pointerEvents = 'none';
+            btn.style.opacity = '0.7';
+            
+            try {
+                // Get selected variant ID
+                const variantIdInput = document.querySelector('#nava-product-form input[name="variantId"], #nava-product-form select[name="variantId"]');
+                const variantId = variantIdInput ? parseInt(variantIdInput.value) : null;
+                
+                // Get quantity
+                const qtyInput = document.getElementById('qtym');
+                const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+                
+                // Check if product variant is already in cart
+                const cartRes = await fetch('/cart.js');
+                const cart = await cartRes.json();
+                
+                let alreadyInCart = false;
+                if (cart && cart.items) {
+                    alreadyInCart = cart.items.some(item => parseInt(item.variant_id) === variantId || parseInt(item.id) === variantId);
+                }
+                
+                if (alreadyInCart) {
+                    // Already in cart: don't add again, go straight to checkout/payment
+                    window.location.href = '/checkout';
+                } else if (variantId) {
+                    // Not in cart: add it first, then go to checkout/payment
+                    const response = await fetch('/cart/add.js', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                        },
+                        body: new URLSearchParams({
+                            variantId: variantId,
+                            quantity: quantity
+                        })
+                    });
+                    if (response.ok) {
+                        $(document).trigger('changeCart');
+                    }
+                    window.location.href = '/checkout';
+                } else {
+                    window.location.href = '/checkout';
+                }
+            } catch (err) {
+                console.error('Error in installment handler:', err);
+                window.location.href = '/checkout';
+            } finally {
+                // Reset styling after redirect starts
+                setTimeout(() => {
+                    if (btn) {
+                        btn.innerHTML = originalText;
+                        btn.style.pointerEvents = '';
+                        btn.style.opacity = '';
+                    }
+                }, 2000);
+            }
+        }
+    });
+
+    // FBT Submission and cart adding logic
+    if (typeof jQuery !== 'undefined') {
+        jQuery(document).ready(function($) {
+            $('frequently-buy-together button:not(.not-submit)').on('click', async function (e) {
+                const $btn = $(e.currentTarget);
+                if ($btn.hasClass('js-fbt-installment')) return; // Skip installment button handling
+                
+                const parent = $btn.closest('frequently-buy-together');
+                const arrItem = parent[0].trim ? parent[0].trim() : (parent[0].handleArray ? parent[0].handleArray() : []);
+
+                if (!arrItem.length) {
+                    createToast('error', toastString.toastAddErrorTitle, 'Hãy chọn ít nhất 1 sản phẩm');
+                    return;
+                }
+
+                const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+                const isRetryable = (err) => {
+                    const status = err?.status || err?.response?.status;
+                    return (
+                        status === 429 ||
+                        (status >= 500 && status <= 599) ||
+                        /network|timeout|fetch/i.test(String(err?.message || err))
+                    );
+                };
+
+                const addItemWithRetry = async (variantId, quantity, maxRetry = 2) => {
+                    let attempt = 0;
+                    while (true) {
+                        try {
+                            return await mewService.addItem(variantId, quantity);
+                        } catch (err) {
+                            attempt++;
+                            if (attempt > maxRetry || !isRetryable(err)) throw err;
+
+                            const wait = 250 * Math.pow(2, attempt - 1) + Math.floor(Math.random() * 150);
+                            await sleep(wait);
+                        }
+                    }
+                };
+
+                try {
+                    $btn.addClass('loading');
+                    const isBuyNow = !!$btn.closest('.buy_now').length;
+
+                    if (isBuyNow) {
+                        await fetch('/cart/clear.js', { method: 'POST' });
+                        await sleep(150);
+                    }
+
+                    const successes = [];
+                    const failures = [];
+                    for (const item of arrItem) {
+                        try {
+                            await addItemWithRetry(item.variantId, item.quantity, 2);
+                            successes.push(item);
+                            await sleep(80);
+                        } catch (err) {
+                            failures.push({ item, err });
+                        }
+                    }
+
+                    if (successes.length > 0) {
+                        $(document).trigger('changeCart');
+
+                        if (isBuyNow) {
+                            await sleep(100);
+                            window.location.href = '/checkout';
+                        } else {
+                            animateFlyToCart();
+                            createToast('success', toastString.toastAddSuccessTitle,
+                                `Thêm ${successes.length}/${arrItem.length} sản phẩm vào giỏ hàng`);
+                        }
+                    }
+
+                    if (failures.length > 0) {
+                        const errorMessages = failures
+                            .map(f => f.err?.message || f.err)
+                            .join(', ');
+
+                        createToast('error', toastString.toastAddErrorTitle,
+                            `Thất bại khi thêm ${failures.length} sản phẩm: ${errorMessages}`);
+                    }
+
+                } catch (error) {
+                    createToast('error', toastString.toastAddErrorTitle, error.message || error);
+                } finally {
+                    $btn.removeClass('loading');
+                }
+            });
+        });
+    }
+
+    function animateFlyToCart() {
+        try {
+            const mainImg = document.querySelector('.product-image-block img, .gallery-item img, #product-gallery img, .thumbnail-item img, .main-image-wrap img, #sticky-avatar');
+            if (!mainImg) return;
+
+            const cartIcon = document.getElementById('header-cart-btn') || document.querySelector('.cart-btn, a[href="/cart"]');
+            if (!cartIcon) return;
+
+            const flyer = document.createElement('img');
+            flyer.src = mainImg.src;
+            
+            const mainImgRect = mainImg.getBoundingClientRect();
+            const cartIconRect = cartIcon.getBoundingClientRect();
+
+            flyer.style.position = 'fixed';
+            flyer.style.left = mainImgRect.left + 'px';
+            flyer.style.top = mainImgRect.top + 'px';
+            flyer.style.width = mainImgRect.width + 'px';
+            flyer.style.height = mainImgRect.height + 'px';
+            flyer.style.opacity = '1';
+            flyer.style.zIndex = '100000';
+            flyer.style.borderRadius = '50%';
+            flyer.style.objectFit = 'contain';
+            flyer.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+            flyer.style.pointerEvents = 'none';
+
+            document.body.appendChild(flyer);
+
+            // Force reflow
+            void flyer.offsetWidth;
+
+            flyer.style.left = (cartIconRect.left + cartIconRect.width / 2 - 15) + 'px';
+            flyer.style.top = (cartIconRect.top + cartIconRect.height / 2 - 15) + 'px';
+            flyer.style.width = '30px';
+            flyer.style.height = '30px';
+            flyer.style.opacity = '0.3';
+
+            setTimeout(() => {
+                flyer.remove();
+                cartIcon.classList.add('cart-animate-wiggle');
+                setTimeout(() => {
+                    cartIcon.classList.remove('cart-animate-wiggle');
+                }, 500);
+            }, 800);
+        } catch (e) {
+            console.error('Error in flyer animation:', e);
+        }
+    }
+
+    function makeElementSmoothScroll(el) {
+        if (!el || window.innerWidth < 992) return;
+        
+        let targetScrollTop = el.scrollTop;
+        let currentScrollTop = el.scrollTop;
+        let isAnimating = false;
+        const lerp = 0.1; // Smooth momentum factor
+        
+        el.addEventListener('wheel', (e) => {
+            if (window.innerWidth < 992) return;
+            
+            const maxScroll = el.scrollHeight - el.clientHeight;
+            if (maxScroll <= 0) return;
+            
+            const delta = e.deltaY;
+            let newTarget = targetScrollTop + delta;
+            newTarget = Math.max(0, Math.min(newTarget, maxScroll));
+            
+            // If trying to scroll up at the top, or down at the bottom, don't preventDefault to allow parent scroll
+            if ((delta < 0 && el.scrollTop <= 0) || (delta > 0 && el.scrollTop >= maxScroll)) {
+                return;
+            }
+            
+            e.preventDefault();
+            targetScrollTop = newTarget;
+            
+            if (!isAnimating) {
+                isAnimating = true;
+                function step() {
+                    const diff = targetScrollTop - currentScrollTop;
+                    if (Math.abs(diff) < 0.5) {
+                        currentScrollTop = targetScrollTop;
+                        el.scrollTop = currentScrollTop;
+                        isAnimating = false;
+                    } else {
+                        currentScrollTop += diff * lerp;
+                        el.scrollTop = currentScrollTop;
+                        requestAnimationFrame(step);
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+        }, { passive: false });
+        
+        el.addEventListener('scroll', () => {
+            if (!isAnimating) {
+                targetScrollTop = el.scrollTop;
+                currentScrollTop = el.scrollTop;
+            }
+        }, { passive: true });
+    }
+    // Recently Viewed Product Tracking
+    (function() {
+        var storageName = 'mewRecent';
+        var currentProduct = {
+            name: "SSD Crucial P3 Plus NVMe M.2 PCIe 4.0 512GB-4TB",
+            img: "//bizweb.dktcdn.net/thumb/large/100/543/817/products/ssd-cau-hinh.jpg?v=1780285860933",
+            price: 'Liên hệ',
+            url: "/ssd24"
+        };
+        
+        try {
+            var items = JSON.parse(localStorage.getItem(storageName)) || [];
+            items = items.filter(function(item) {
+                var url = typeof item === 'string' ? item : (item.url || '');
+                return url !== currentProduct.url;
+            });
+            items.unshift(currentProduct);
+            if (items.length > 24) {
+                items = items.slice(0, 24);
+            }
+            localStorage.setItem(storageName, JSON.stringify(items));
+        } catch(e) {
+            console.error("Lỗi lưu sản phẩm đã xem", e);
+        }
+    })();
+
+    // Specs Scroll Indicator: Add fade overlay and animated bouncing arrow if table is scrollable
+    function initSpecsScrollIndicator() {
+        const containers = document.querySelectorAll('.specs-content-scrollable, .nava-spec-grid');
+        containers.forEach(scrollContainer => {
+            makeElementSmoothScroll(scrollContainer);
+            const wrapper = scrollContainer.closest('.specs-scroll-wrapper');
+            if (!wrapper) return;
+            
+            const overlay = wrapper.querySelector('.specs-fade-overlay');
+            const arrow = wrapper.querySelector('.specs-scroll-arrow');
+            if (!overlay || !arrow) return;
+            
+            arrow.addEventListener('click', function(e) {
+                e.stopPropagation();
+                scrollContainer.scrollBy({
+                    top: 200,
+                    behavior: 'smooth'
+                });
+            });
+            
+            function updateIndicator() {
+                const scrollHeight = scrollContainer.scrollHeight;
+                const clientHeight = scrollContainer.clientHeight;
+                const scrollTop = scrollContainer.scrollTop;
+                
+                // Check if there is actual scroll overflow
+                if (scrollHeight > clientHeight + 5) {
+                    // Show overlay and arrow if not scrolled near the bottom
+                    const scrolledToBottom = scrollTop + clientHeight >= scrollHeight - 5;
+                    if (scrolledToBottom) {
+                        overlay.style.opacity = '0';
+                        arrow.style.opacity = '0';
+                    } else {
+                        overlay.style.opacity = '1';
+                        arrow.style.opacity = '1';
+                    }
+                } else {
+                    overlay.style.opacity = '0';
+                    arrow.style.opacity = '0';
+                }
+            }
+            
+            // Listen to scroll events on container
+            scrollContainer.addEventListener('scroll', updateIndicator);
+            
+            // Listen to resize on the container if ResizeObserver is supported
+            if (window.ResizeObserver) {
+                const ro = new ResizeObserver(updateIndicator);
+                ro.observe(scrollContainer);
+            }
+            
+            // Initial triggers
+            updateIndicator();
+            window.addEventListener('load', updateIndicator);
+            setTimeout(updateIndicator, 300);
+            setTimeout(updateIndicator, 1000);
+        });
+    }
+    document.addEventListener('DOMContentLoaded', initSpecsScrollIndicator);
+    if (document.readyState !== 'loading') {
+        initSpecsScrollIndicator();
+    }
+
+    function addLenisPreventToDropdowns() {
+        document.querySelectorAll('.nava-custom-select-list, .custom-select-list, .nava-dropdown-list').forEach(el => {
+            if (!el.hasAttribute('data-lenis-prevent')) {
+                el.setAttribute('data-lenis-prevent', '');
+            }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', addLenisPreventToDropdowns);
+    if (document.readyState !== 'loading') {
+        addLenisPreventToDropdowns();
+    }
+    setTimeout(addLenisPreventToDropdowns, 200);
+    setTimeout(addLenisPreventToDropdowns, 1000);
+
+    // Scroll to Top Logic handled globally by assets/main.js
+    
+=========================================
+SCRIPT 23:
+=========================================
+
+=========================================
+SCRIPT 24:
+=========================================
+
+=========================================
+SCRIPT 25:
+=========================================
+
+=========================================
+SCRIPT 26:
+=========================================
+
+	let use_quick_search_article = true;
+	let use_quick_search_page = true;
+
+=========================================
+SCRIPT 27:
+=========================================
+
+=========================================
+SCRIPT 28:
+=========================================
+
+=========================================
+SCRIPT 29:
+=========================================
+
+	window.cartStrings = {
+		error: 'Đã có lỗi xảy ra khi cập nhật số lượng. Vui lòng thử lại.',
+		quantityError: `You can only add [quantity] of this item to your cart.`,
+		delete: 'Xoá'
+	}
+	window.variantStrings = {
+		addToCart: 'Thêm vào giỏ',
+		soldOut: 'Cháy hàng',
+		avaiable: 'Còn hàng',
+		unAvailable: '',
+		allowBuyWhenSoldOut: 'Tạm hết hàng',
+		noPrice: 'Liên hệ',
+		giftPrice: 'Quà tặng'	
+	}
+	window.toastString = {
+		toastAddSuccessTitle: 'Thành công',
+		toastAddErrorTitle: 'Thất bại',
+		toastAddSuccessMessage: 'Sản phẩm đã được thêm vào giỏ hàng',
+		toastAddErrorMessage: 'Không thể thêm sản phẩm vào giỏ hàng',
+		toastInventoryExccedTitle: 'Cảnh báo',
+		toastInventoryExccedMessage: 'Sản phẩm đã đạt giới hạn tồn kho',
+		toastInventoryMaxTitle: 'Cảnh báo',
+		toastInventoryMaxMessage: 'Số lượng vượt quá giới hạn tồn kho',
+		toastInventoryUnavaiTitle: 'Cảnh báo',
+		toastInventoryUnavaiMessage: 'Sản phẩm không khả dụng',
+		toastValidatePhoneTitle: 'Lỗi',
+		toastValidatePhoneMessage: 'Số điện thoại không định dạng'
+	}
+
+=========================================
+SCRIPT 30:
+=========================================
+
+=========================================
+SCRIPT 31:
+=========================================
+const formatStoreCurrency = new Intl.NumberFormat(currencies['VND'], {style: 'currency', currency: 'VND'});
+=========================================
+SCRIPT 32:
+=========================================
+
+=========================================
+SCRIPT 33:
+=========================================
+
+=========================================
+SCRIPT 34:
+=========================================
+
+=========================================
+SCRIPT 35:
+=========================================
+
+=========================================
+SCRIPT 36:
+=========================================
+
+=========================================
+SCRIPT 37:
+=========================================
+
+=========================================
+SCRIPT 38:
+=========================================
+
+=========================================
+SCRIPT 39:
+=========================================
+
+=========================================
+SCRIPT 40:
+=========================================
+
+=========================================
+SCRIPT 41:
+=========================================
+
+=========================================
+SCRIPT 42:
+=========================================
+
+=========================================
+SCRIPT 43:
+=========================================
+
+	let compareSettings = {
+        searchDefaultUrl: '/so-sanh-san-pham',
+        searchPlaceholder: 'Tìm kiếm sản phẩm',
+        searchNoResult: 'Không có kết quả',
+        notifyAddTitle: 'Thêm vào so sánh',
+        notifyAddContent: 'Sản phẩm đã được thêm vào danh sách so sánh',
+        notifyRemoveTitle: 'Loại bỏ',
+        notifyRemoveContent: 'Đã xoá sản phẩm khỏi danh sách so sánh',
+        notifyMaxTitle: 'Cảnh báo',
+        notifyMaxContent: 'Chỉ có thể so sánh 02 sản phẩm 1 lúc',
+        notifyErrTitle: 'Lỗi',
+        notifyErrContent: 'Đã có lỗi xảy ra',
+        notifyCopyTitle: 'Đã sao chép',
+        notifyCopyContent: 'Liên kết đã được sao chép',
+        notifyCopyErrTitle: 'Lỗi',
+        notifyCopyErrContent: 'Bạn chưa so sánh sản phẩm nào',
+        notifyNotSameTypeContent: 'Sản phẩm không cùng loại, vẫn thêm?',
+        notifyNotExistTitle: 'Sản phẩm so sánh không tồn tại',
+        notifyNotExistContent: 'Sản phẩm bị ẩn/ xoá hoặc không tồn tại',
+        price: 'Giá',
+        vendor: 'Hãng',
+        type: 'Loại',
+		suggest: 'Gợi ý',
+		results: 'Kết quả tìm kiếm',
+        sameType: false
+    };
+	document.addEventListener("DOMContentLoaded", function() {
+		mewCompare.init();
+		let recentCompare = new RecentProducts({
+			className: 'js-suggestHistory',
+			storageName: 'mewRecent',
+			view: 'recent2',
+			limit: 7
+		}, function (wrapper) {
+		});
+		recentCompare.init();
+	});
+
+=========================================
+SCRIPT 44:
+=========================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cycle FAB images
+            setInterval(() => {
+                const imgs = document.querySelectorAll('.fab-cycle-img');
+                if (imgs.length > 0) {
+                    let activeIdx = -1;
+                    imgs.forEach((img, idx) => {
+                        if (img.classList.contains('active')) activeIdx = idx;
+                        img.classList.remove('active');
+                    });
+                    if (activeIdx !== -1) {
+                        const nextIdx = (activeIdx + 1) % imgs.length;
+                        imgs[nextIdx].classList.add('active');
+                    } else {
+                        imgs[0].classList.add('active');
+                    }
+                }
+            }, 2500);
+
+            // Toggle FAB menu
+            const fabMainBtn = document.getElementById('fabMainBtn');
+            if(fabMainBtn) {
+                fabMainBtn.addEventListener('click', function () {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.toggle('active');
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('.floating-social-wrapper')) {
+                    const fabMenu = document.getElementById('fabMenu');
+                    if(fabMenu) fabMenu.classList.remove('active');
+                }
+            });
+        });
+        
+=========================================
+SCRIPT 45:
+=========================================
+
+=========================================
+SCRIPT 46:
+=========================================
+
+=========================================
+SCRIPT 47:
+=========================================
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll("img").forEach(function (img) {
+                if (!img.hasAttribute("alt") || img.alt.trim() === "minipc navastore maytinh #miniPC phukien egpu Minisforum MINISFORUM eGPU Laptop NavaStore") {
+                    let fileName = img.src.split('/').pop().split('.')[0];
+                    img.alt = fileName.replace(/[-_]/g, ' ');
+                }
+            });
+
+            // Relocation fallback helper (ensures modals, sidebars, and social bubble are placed correctly inside the visible content wrapper)
+            function forceRelocateCompareAndSocial() {
+                const cb = document.getElementById('compare-bar');
+                const cm = document.getElementById('compare-modal');
+                const csm = document.getElementById('compare-select-modal');
+                const social = document.querySelector('.floating-social-wrapper');
+                const sbd = document.querySelector('.sidebar-drawer');
+                const sbo = document.querySelector('.sidebar-overlay');
+                const toast = document.querySelector('.toast-container');
+                const targetParent = document.getElementById('nava-master-wrapper') || document.body;
+                if (targetParent) {
+                    if (cb && cb.parentNode !== targetParent) targetParent.appendChild(cb);
+                    if (cm && cm.parentNode !== targetParent) targetParent.appendChild(cm);
+                    if (csm && csm.parentNode !== targetParent) targetParent.appendChild(csm);
+                    if (social && social.parentNode !== targetParent) targetParent.appendChild(social);
+                    if (sbd && sbd.parentNode !== targetParent) targetParent.appendChild(sbd);
+                    if (sbo && sbo.parentNode !== targetParent) targetParent.appendChild(sbo);
+                    if (toast && toast.parentNode !== targetParent) targetParent.appendChild(toast);
+                }
+            }
+            forceRelocateCompareAndSocial();
+            setInterval(forceRelocateCompareAndSocial, 500);
+            window.addEventListener('load', forceRelocateCompareAndSocial);
+        });
+    

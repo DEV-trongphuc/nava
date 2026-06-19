@@ -4,7 +4,7 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "{{ store.name | default: 'NAVA STORE' }}",
-  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "url": "https:{{ store.url | default: '//navastore.vn' }}",
   "logo": "https:{{ 'logo.png' | asset_url }}",
   "contactPoint": {
     "@type": "ContactPoint",
@@ -26,10 +26,10 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "{{ store.name | default: 'NAVA STORE' }}",
-  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "url": "https:{{ store.url | default: '//navastore.vn' }}",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "{{ store.url | default: 'https://navastore.vn' }}/search?query={search_term_string}",
+    "target": "https:{{ store.url | default: '//navastore.vn' }}/search?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -40,7 +40,7 @@
   "@type": "Store",
   "name": "{{ store.name | default: 'NAVA STORE' }}",
   "image": "https:{{ 'logo.png' | asset_url }}",
-  "url": "{{ store.url | default: 'https://navastore.vn' }}",
+  "url": "https:{{ store.url | default: '//navastore.vn' }}",
   "telephone": "0972 178 527",
   "priceRange": "$$$",
   "address": {

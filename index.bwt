@@ -1494,145 +1494,7 @@
             </div>
         </div>
          
-        
-        <!-- Floating Social Button -->
-        <div class="floating-social-wrapper">
-            <!-- Quick Compare FAB -->
-            <button class="fab-compare" id="fabCompareBtn" onclick="window.executeCompare()" title="So sánh sản phẩm" style="width: 50px !important; height: 50px !important; border-radius: 50% !important; border: 2px solid white !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important; cursor: pointer !important; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%) !important; color: white !important; display: none; align-items: center; justify-content: center; position: relative !important; margin-bottom: 12px; transition: transform 0.3s ease !important; outline: none; padding: 0;" onmouseover="this.style.transform='scale(1.08)';" onmouseout="this.style.transform='scale(1)';">
-                <i class="ph-bold ph-scales" style="font-size: 1.4rem;"></i>
-                <span id="fabCompareBadge" style="position: absolute !important; top: -5px !important; right: -5px !important; background: #ef4444 !important; color: white !important; border-radius: 50% !important; min-width: 20px !important; height: 20px !important; font-size: 0.75rem !important; font-weight: 700 !important; display: flex !important; align-items: center !important; justify-content: center !important; border: 2px solid white !important; box-sizing: border-box !important; padding: 0 2px !important;">0</span>
-            </button>
-            
-            <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
-                <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
-                <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" class="fab-cycle-img" width="50" height="50">
-                <img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok" class="fab-cycle-img" width="50" height="50">
-                <img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook" class="fab-cycle-img" width="50" height="50">
-                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube" class="fab-cycle-img" width="50" height="50">
-            </button>
-            <div class="fab-menu" id="fabMenu">
-                <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/shopee.png?1774552524367" alt="Shopee" width="44" height="44"></a>
-                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/themes/1000289/assets/lazada.jpg?1774552524367" alt="Lazada" width="44" height="44"></a>
-                <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="https://bizweb.dktcdn.net/thumb/small/100/543/817/files/tiktok_3247c513-7e3d-4fff-adec-fd98e4ee41c9.png?v=1774553003807" alt="TikTok" width="44" height="44"></a>
-                <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/files/facebook.png?v=1774555111103" alt="Facebook" width="44" height="44"></a>
-                <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/logo_head_2.png?1775454528082" alt="YouTube" width="44" height="44"></a>
-            </div>
-        </div>
-        <style>
-        .floating-social-wrapper {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            top: auto !important;
-            transform: none !important;
-            flex-direction: column !important;
-            z-index: 50;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .fab-main {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            cursor: pointer;
-            position: relative;
-            z-index: 51;
-            overflow: hidden;
-            padding: 0;
-            background: white;
-            transition: transform 0.3s ease;
-        }
-        .fab-main:hover {
-            transform: scale(1.05);
-        }
-        .fab-cycle-img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .fab-cycle-img.active {
-            opacity: 1;
-        }
-        .fab-menu {
-            position: absolute;
-            bottom: 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            pointer-events: none;
-        }
-        .fab-menu.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-        .fab-item {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            overflow: hidden;
-            border: 2px solid white;
-        }
-        .fab-item:hover {
-            transform: scale(1.1) translateY(-2px);
-        }
-        .fab-item img {
-            width: 100%; height: 100%; object-fit: cover;
-        }
-        </style>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Cycle FAB images
-            setInterval(() => {
-                const imgs = document.querySelectorAll('.fab-cycle-img');
-                if (imgs.length > 0) {
-                    let activeIdx = -1;
-                    imgs.forEach((img, idx) => {
-                        if (img.classList.contains('active')) activeIdx = idx;
-                        img.classList.remove('active');
-                    });
-                    if (activeIdx !== -1) {
-                        const nextIdx = (activeIdx + 1) % imgs.length;
-                        imgs[nextIdx].classList.add('active');
-                    } else {
-                        imgs[0].classList.add('active');
-                    }
-                }
-            }, 2500);
 
-            // Toggle FAB menu
-            const fabMainBtn = document.getElementById('fabMainBtn');
-            if(fabMainBtn) {
-                fabMainBtn.addEventListener('click', function () {
-                    const fabMenu = document.getElementById('fabMenu');
-                    if(fabMenu) fabMenu.classList.toggle('active');
-                });
-            }
-
-            document.addEventListener('click', function (e) {
-                if (!e.target.closest('.floating-social-wrapper')) {
-                    const fabMenu = document.getElementById('fabMenu');
-                    if(fabMenu) fabMenu.classList.remove('active');
-                }
-            });
-        });
-        </script>
 
 
         
@@ -1697,11 +1559,7 @@
 
         
 
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.floating-social-wrapper')) {
-                document.getElementById('fabMenu').classList.remove('active');
-            }
-        });
+
     </script>
         <!-- Dynamic 3D Tilt Script for Benefit Cards -->
         <script>

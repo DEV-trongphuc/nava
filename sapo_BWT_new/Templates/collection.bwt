@@ -483,6 +483,7 @@
       </div>
   </section>
 
+  {{ 'search_filter.js' | bizweb_asset_url | script_tag }}
   <script>
       var colId = {% if collection.id > 0 %}{{collection.id }}{% else %}0{% endif %};
       var selectedViewData = 'data';

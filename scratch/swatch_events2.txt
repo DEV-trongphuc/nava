@@ -1,0 +1,231 @@
+2350:                 const basePriceVal = parseInt("0".replace(/[^\d]/g, ''), 10) || 0;
+2351:                 const productPriceVal = parseInt("0".replace(/[^\d]/g, ''), 10) || 0;
+2352:                 if (basePriceVal === 0 || productPriceVal === 0) {
+2353:                     isContactPrice = true;
+2354:                 }
+2355:                 
+2356:                 const btnText = btn.textContent.trim().toUpperCase();
+2357:                 if (isContactPrice || btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG') || btnText.includes('LIÊN HỆ')) {
+2358:                     e.preventDefault();
+2359:                     e.stopPropagation();
+2360:                     if (btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now') || btn.classList.contains('tg-buy-now') || btn.classList.contains('js-buynow')) {
+2361:                         window.location.href = 'tel:0972178527';
+2362:                     }
+2363:                     return;
+2364:                 }
+2365: 
+2366:                 // 2. Only check for configuration warnings if it is NOT a contact price
+2367:                 // Determine if options are not configured
+2368:                 let isUnconfigured = false;
+2369:                 if (window.mainProductAvailable) {
+2370:                     if (isDefaultRam || isDefaultSsd) isUnconfigured = true;
+2371:                 } else {
+2372:                     if (isDefaultRam && isDefaultSsd) isUnconfigured = true;
+2373:                 }
+2374: 
+2375:                 // Only block and warn if it's the FIRST click (modal is closed)
+2376:                 if (isUnconfigured && !isBsOpen) {
+2377:                     const isBsBtn = btn.classList.contains('btn-add-cart-bs') || btn.classList.contains('bs-buy-btn');
+2378:                     if (!isBsBtn) {
+2379:                         if (window.innerWidth >= 992) {
+2380:                             // On PC/desktop, allow purchasing unconfigured RAM/SSD (0 0) directly if price > 0.
+2381:                         } else {
+2382:                             // On mobile, block click and show bottom sheet modal
+2383:                             e.preventDefault();
+2384:                             e.stopPropagation();
+2385:                             openBottomSheet();
+2386:                             const bs = document.getElementById('nava-bottom-sheet');
+2387:                             if (bs) {
+2388:                                 bs.classList.remove('bs-shake-active');
+2389:                                 void bs.offsetWidth; // Reflow
+2390:                                 bs.classList.add('bs-shake-active');
+2391:                             }
+2392:                             return; // Only return on mobile to block click event propagation
+2393:                         }
+2394:                     }
+2395:                 }
+2396: 
+2397:                 // 3. "MUA NGAY" loading feedback to prevent double clicks (for price > 0)
+2398:                 const isBuyNow = btn.id === 'btn-buy-now' || btn.classList.contains('bs-buy-btn') || btn.classList.contains('bar-buy-now') || btn.classList.contains('btn-buy-now-sticky') || btn.classList.contains('tg-buy-now') || btn.textContent.trim().toUpperCase() === 'MUA NGAY';
+2399:                 if (isBuyNow) {
+2400:                     const btnText = btn.textContent.trim().toUpperCase();
+2401:                     if (btnText === 'LIÊN HỆ' || btnText.includes('HẾT HÀNG') || btnText.includes('LIÊN HỆ')) {
+2402:                         e.preventDefault();
+2403:                         e.stopPropagation();
+2404:                         window.location.href = 'tel:0972178527';
+2405:                         return;
+2406:                     }
+2407: 
+2408:                     if (!document.getElementById('nava-spin-style')) {
+2409:                         const style = document.createElement('style');
+2410:                         style.id = 'nava-spin-style';
+2411:                         style.textContent = `
+2412:                             @keyframes navaSpin {
+2413:                                 0% { transform: rotate(0deg); }
+2414:                                 100% { transform: rotate(360deg); }
+2415:                             }
+2416:                             .nava-spinner {
+2417:                                 display: inline-block;
+2418:                                 animation: navaSpin 1s linear infinite;
+2419:                                 margin-right: 8px;
+2420:                                 font-size: 1.25rem;
+2421:                                 vertical-align: middle;
+2422:                             }
+2423:                         `;
+2424:                         document.head.appendChild(style);
+2425:                     }
+2426: 
+2427:                     const buyBtns = Array.from(document.querySelectorAll('button, a, div.bs-buy-btn, div.bar-buy-now, .btn-buy-now-sticky')).filter(el => {
+2428:                         if (el.id === 'btn-buy-now' || 
+2429:                             el.classList.contains('bar-buy-now') || 
+2430:                             el.classList.contains('bs-buy-btn') || 
+2431:                             el.classList.contains('btn-buy-now-sticky') || 
+2432:                             el.classList.contains('tg-buy-now')) {
+2433:                             return true;
+2434:                         }
+2435:                         const txt = el.textContent.trim().toUpperCase();
+2436:                         return txt === 'MUA NGAY';
+2437:                     });
+2438: 
+2439:                     buyBtns.forEach(b => {
+2440:                         if (b.getAttribute('data-is-loading') === 'true') return;
+2441:                         
+2442:                         const originalText = b.innerHTML;
+2443:                         const originalOpacity = b.style.opacity;
+2444:                         const originalPointerEvents = b.style.pointerEvents;
+2445:                         const originalMouseOver = b.getAttribute('onmouseover');
+2446:                         const originalMouseOut = b.getAttribute('onmouseout');
+2447: 
+2448:                         b.setAttribute('data-is-loading', 'true');
+2449:                         b.removeAttribute('onmouseover');
+2450:                         b.removeAttribute('onmouseout');
+2451:                         b.style.opacity = '0.6';
+2452:                         b.style.pointerEvents = 'none';
+2453:                         b.innerHTML = `<i class="ph-bold ph-spinner nava-spinner"></i> ĐANG XỬ LÝ...`;
+2454: 
+2455:                         setTimeout(() => {
+2456:                             if (b) {
+2457:                                 b.removeAttribute('data-is-loading');
+2458:                                 if (originalMouseOver) b.setAttribute('onmouseover', originalMouseOver);
+2459:                                 if (originalMouseOut) b.setAttribute('onmouseout', originalMouseOut);
+2460:                                 b.innerHTML = originalText;
+2461:                                 b.style.opacity = originalOpacity || '';
+2462:                                 b.style.pointerEvents = originalPointerEvents || '';
+2463:                             }
+2464:                         }, 6000);
+2465:                     });
+2466:                 }
+2467:             }
+2468:         }, true); // Capture phase is critical to run before other listeners
+2469: 
+2470:         // Close custom dropdowns on selecting an option (especially for desktop hover)
+2471:         document.addEventListener('click', function(e) {
+2472:             const li = e.target.closest('.custom-select-list li, .nava-custom-select-list li, .nava-dropdown-item');
+2473:             if (li) {
+2474:                 const wrapper = li.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+2475:                 if (wrapper) {
+2476:                     wrapper.classList.add('closed');
+2477:                     wrapper.classList.remove('active'); // also remove active just in case
+2478:                 }
+2479:             }
+2480:             
+2481:             // Fix: Remove closed class when clicking on a dropdown display box to reopen it
+2482:             const display = e.target.closest('.custom-select-display, .nava-custom-select-display, .nava-dropdown-display');
+2483:             if (display) {
+2484:                 const wrapper = display.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+2485:                 if (wrapper) {
+2486:                     wrapper.classList.remove('closed');
+2487:                 }
+2488:             }
+2489:         });
+2490: 
+2491:         // Remove closed class on mouseleave so hover can open it again next time
+2492:         document.addEventListener('mouseover', function(e) {
+2493:             const wrapper = e.target.closest('.custom-select-wrapper, .nava-custom-select-wrapper, .nava-dropdown-wrapper');
+2494:             if (wrapper) {
+2495:                 if (!wrapper._hasMouseLeaveListener) {
+2496:                     wrapper._hasMouseLeaveListener = true;
+2497:                     wrapper.addEventListener('mouseleave', function() {
+2498:                         this.classList.remove('closed');
+2499:                     });
+2500:                 }
+2501:             }
+2502:         });
+2503: 
+2504:         // Sync swatches on load
+2505:         setTimeout(syncSwatches, 100);
+2506:         
+2507:         // Initialize gallery zoom and lightbox photo viewer
+2508:         initGalleryZoom();
+2509:         
+2510:         // Render custom FBT instead of formatting native ones
+2511:         setTimeout(function() {
+2512:             initNavaCustomFbt();
+2513:             setupFbtMutationObserver();
+2514:             syncSwatches();
+2515:         }, 150);
+2516:         
+2517:         // Setup price ticker observers initially and as fallback
+2518:         setTimeout(setupPriceObservers, 200);
+2519:         setTimeout(setupPriceObservers, 1000);
+2520:         
+2521:         // Periodically sync checkboxes initially (handles Sapo async upgrade)
+2522:         function syncFbtCheckboxes() {
+2523:             document.querySelectorAll('frequently-buy-together [data-fbt-item]').forEach(item => {
+2524:                 const select = item.querySelector('select[data-fbt-item-id]');
+2525:                 const checkbox = item.querySelector('.i-check') || item.querySelector('input[type="checkbox"]');
+2526:                 if (select && checkbox) {
+2527:                     const isNoSelect = (select.value === 'no-select' || select.value === '');
+2528:                     checkbox.checked = !isNoSelect;
+2529:                 }
+2530:             });
+2531:             // Let Sapo recalculate total
+2532:             const fbt = document.querySelector('frequently-buy-together');
+2533:             if (fbt && typeof fbt.total !== 'undefined') {
+2534:                 fbt.total;
+2535:             }
+2536:             syncSwatches();
+2537:         }
+2538:         
+2539:         setTimeout(syncFbtCheckboxes, 250);
+2540:         setTimeout(function() {
+2541:             syncFbtCheckboxes();
+2542:             syncSwatches();
+2543:         }, 1200);
+2544: 
+2545:         // Watch swatch radio and other variant selector changes
+2546:         document.addEventListener('change', function(e) {
+2547:             if (e.target.closest('.swatch-element input') || e.target.closest('.single-option-selector') || e.target.id === 'qtym' || e.target.classList.contains('qty-val')) {
+2548:                 syncSwatches();
+2549:             }
+2550:         });
+2551:         document.addEventListener('input', function(e) {
+2552:             if (e.target.id === 'qtym' || e.target.classList.contains('qty-val')) {
+2553:                 syncSwatches();
+2554:             }
+2555:         });
+2556: 
+2557:         // Inject Trả góp 0% button inside FBT buttons row if not present
+2558:         const fbt = document.querySelector('frequently-buy-together');
+2559:         if (fbt) {
+2560:             const btnRow = fbt.querySelector('.gap_6');
+2561:             if (btnRow && !btnRow.querySelector('.js-fbt-installment')) {
+2562:                 const buyNowBtn = btnRow.querySelector('.tg-buy-now');
+2563:                 if (buyNowBtn) {
+2564:                     const instBtn = document.createElement('button');
+2565:                     instBtn.type = 'button';
+2566:                     instBtn.className = 'btn js-fbt-installment font-weight-bold';
+2567:                     instBtn.textContent = 'TRẢ GÓP 0%';
+2568:                     btnRow.insertBefore(instBtn, buyNowBtn);
+2569:                 }
+2570:             }
+2571:         }
+2572:     }
+2573: 
+2574:     // Handle click event for FBT Installment button
+2575:     document.addEventListener('click', async function(e) {
+2576:         if (!e.target.closest('.js-fbt-installment')) return;
+2577:         e.preventDefault();
+2578:         e.stopPropagation();
+2579: 
+2580:         const instBtn = e.target.closest('.js-fbt-installment');

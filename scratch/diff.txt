@@ -1,0 +1,101 @@
+diff --git a/sapo_BWT_new/Templates/product.bwt b/sapo_BWT_new/Templates/product.bwt
+index 3de1643..63f63e2 100644
+--- a/sapo_BWT_new/Templates/product.bwt
++++ b/sapo_BWT_new/Templates/product.bwt
+@@ -1,6 +1,7 @@
+ {%- include 'setup_price_pr' -%}
+ {%- assign variantCount = product.variants | size -%}
+-    {%-assign specs_content = product.content | replace: "<h3><strong>Thông số kỹ thuật chi tiết (Technical Specifications)</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết (Technical Specifications)</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật chi tiết</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4><strong>Thông số kỹ thuật</strong></h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4>Thông số kỹ thuật</h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5><strong>Thông số kỹ thuật</strong></h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5>Thông số kỹ thuật</h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h6><strong>Thông số kỹ thuật</strong></h6>", "<h6>Thông số kỹ thuật</h6>"-%}
++{%- assign productMain = product.content | split: "###" -%}
++{%- assign specs_content = productMain[0] | replace: "<h3><strong>Thông số kỹ thuật chi tiết (Technical Specifications)</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết (Technical Specifications)</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật chi tiết</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật chi tiết</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3><strong>Thông số kỹ thuật</strong></h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h3>Thông số kỹ thuật</h3>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4><strong>Thông số kỹ thuật</strong></h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h4>Thông số kỹ thuật</h4>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5><strong>Thông số kỹ thuật</strong></h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h5>Thông số kỹ thuật</h5>", "<h6>Thông số kỹ thuật</h6>" | replace: "<h6><strong>Thông số kỹ thuật</strong></h6>", "<h6>Thông số kỹ thuật</h6>"-%}
+ {%- assign productContent = specs_content | split: "<h6>" | first -%}
+ {%- include 'breadcrumb' -%}
+ {%- assign videos = '' -%}
+@@ -1723,10 +1724,7 @@
+ 					</div>
+ 				</div>
+ 			</div>
+-                
+-
+ 		</div>
+-
+ 		<!-- Down: Specs & Content -->
+ 		<div class="row mt-4">
+ 			<div class="col-12 col-lg-4 order-lg-2 mb-3 mb-lg-0 specs-column">
+@@ -1763,7 +1761,11 @@
+ 						<button type="button" class="btn-show-more" onclick="toggleDescription()" id="btn-show-desc">Xem thêm <i class="ph-bold ph-caret-down"></i></button>
+ 					</div>
+ 				</div>
+-                    
++				{%- if settings.section_product_faq_show -%}
++				{%- if productMain[1] != '' and productMain[1] != null -%}
++				{%- include 'section_product_faq' -%}
++				{%- endif -%}
++				{%- endif -%}
+ 				{%-if settings.product_review-%}
+ 				{% include 'product-reviews' %}
+ 				{%-endif-%}
+@@ -2198,21 +2200,6 @@
+ });
+ 
+ row.appendChild(wrapper);
+-                
+-                // Set flex order based on option label
+-                let order = 99;
+-                const labelUpper = labelText.toUpperCase();
+-                if (labelUpper.includes('CPU') || labelUpper.includes('VI XỬ LÝ') || labelUpper.includes('BỘ VI XỬ LÝ')) {
+-                    order = 1;
+-                } else if (labelUpper.includes('GPU') || labelUpper.includes('RTX') || labelUpper.includes('RADEON') || labelUpper.includes('ĐỒ HỌA') || labelUpper.includes('CARD')) {
+-                    order = 2;
+-                } else if (labelUpper.includes('RAM') || labelUpper.includes('MEMORY') || labelUpper.includes('DDR5')) {
+-                    order = 3;
+-                } else if (labelUpper.includes('SSD') || labelUpper.includes('NVME') || labelUpper.includes('Ổ CỨNG') || labelUpper.includes('STORAGE')) {
+-                    order = 4;
+-                }
+-                row.style.order = order;
+-
+ customContainer.appendChild(row);
+ 
+ updateNavaCustomSelectDisplay(wrapper, labelText);
+@@ -2429,35 +2416,7 @@
+ }
+ }
+ 
+-        function reorderSwatches() {
+-            const swatches = document.querySelectorAll('.swatch');
+-            if (swatches.length === 0) return;
+-            swatches.forEach(swatch => {
+-                const header = swatch.querySelector('.header');
+-                if (!header) return;
+-                const title = header.textContent.trim().toUpperCase();
+-                let order = 99;
+-                if (title.includes('CPU') || title.includes('VI XỬ LÝ') || title.includes('BỘ VI XỬ LÝ')) {
+-                    order = 1;
+-                } else if (title.includes('GPU') || title.includes('RTX') || title.includes('RADEON') || title.includes('ĐỒ HỌA') || title.includes('CARD')) {
+-                    order = 2;
+-                } else if (title.includes('RAM') || title.includes('MEMORY') || title.includes('DDR5')) {
+-                    order = 3;
+-                } else if (title.includes('SSD') || title.includes('NVME') || title.includes('Ổ CỨNG') || title.includes('STORAGE')) {
+-                    order = 4;
+-                }
+-                swatch.style.order = order;
+-                const parent = swatch.parentNode;
+-                if (parent) {
+-                    parent.style.display = 'flex';
+-                    parent.style.flexDirection = 'column';
+-                }
+-            });
+-        }
+-        window.addEventListener('load', reorderSwatches);
+-
+ document.addEventListener('DOMContentLoaded', function() {
+-            reorderSwatches();
+ // Handle bottom buy bar events
+ document.addEventListener('click', function(e) {
+ if (e.target.closest('.bar-add-cart')) {
+@@ -4317,4 +4276,3 @@
+ 
+ // Scroll to Top Logic handled globally by assets/main.js
+ </script>
+\ No newline at end of file
+-

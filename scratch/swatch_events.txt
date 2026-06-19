@@ -1,0 +1,251 @@
+2100:                     fbtEl.insertBefore(fbtOptions, pb3Row);
+2101:                 } else {
+2102:                     fbtEl.appendChild(fbtOptions);
+2103:                 }
+2104:             }
+2105:             const fbtQty = document.querySelector('.custom-btn-number');
+2106:             const pb3Row = document.querySelector('frequently-buy-together .pb-3');
+2107:             if (fbtQty && pb3Row && !pb3Row.contains(fbtQty)) {
+2108:                 pb3Row.insertBefore(fbtQty, pb3Row.firstChild);
+2109:             }
+2110:         } else {
+2111:             const productControl = document.querySelector('.product-control');
+2112:             const form = document.getElementById('nava-product-form');
+2113:             const actionButtonsRow = form ? form.querySelector('.action-buttons-row') : null;
+2114:             if (productControl && form && !form.contains(productControl)) {
+2115:                 if (actionButtonsRow) {
+2116:                     form.insertBefore(productControl, actionButtonsRow);
+2117:                 } else {
+2118:                     form.appendChild(productControl);
+2119:                 }
+2120:             }
+2121:             const qtySelector = document.querySelector('.qty-selector');
+2122:             const qtyLabelWrap = document.querySelector('.qty-price-row > div:first-child');
+2123:             if (qtySelector && qtyLabelWrap && !qtyLabelWrap.contains(qtySelector)) {
+2124:                 qtyLabelWrap.appendChild(qtySelector);
+2125:             }
+2126:         }
+2127:     }
+2128: 
+2129:     function closeBottomSheet() {
+2130:         const overlay = document.getElementById('nava-bs-overlay');
+2131:         const bs = document.getElementById('nava-bottom-sheet');
+2132:         const stickyBar = document.querySelector('.mobile-bottom-buybar');
+2133:         
+2134:         if (overlay && bs) {
+2135:             isBsOpen = false;
+2136:             overlay.style.opacity = '0';
+2137:             bs.classList.remove('open');
+2138:             
+2139:             // Show sticky bar again if scrolled past threshold
+2140:             if (stickyBar) {
+2141:                 stickyBar.style.removeProperty('transform');
+2142:                 if (typeof toggleStickyBar === 'function') {
+2143:                     toggleStickyBar();
+2144:                 }
+2145:             }
+2146:             
+2147:             setTimeout(() => {
+2148:                 overlay.style.display = 'none';
+2149:                 bs.style.display = 'none';
+2150:                 document.body.style.overflow = '';
+2151:                 
+2152:                 restoreElementsToForm();
+2153:             }, 300);
+2154:         }
+2155:     }
+2156: 
+2157:     function initNavaProductEnforcement() {
+2158:         // Handle bottom sheet quick configuration buttons click
+2159:         document.addEventListener('click', function(e) {
+2160:             if (e.target.closest('.btn-add-cart-bs')) {
+2161:                 e.preventDefault();
+2162:                 restoreElementsToForm();
+2163:                 const isFbtActive = !!document.querySelector('frequently-buy-together');
+2164:                 if (isFbtActive) {
+2165:                     const realBtn = document.querySelector('frequently-buy-together button.tg-addcart');
+2166:                     if (realBtn) {
+2167:                         realBtn.click();
+2168:                         closeBottomSheet();
+2169:                     }
+2170:                 } else {
+2171:                     const realBtn = document.getElementById('btn-add-to-cart');
+2172:                     if (realBtn) {
+2173:                         realBtn.click();
+2174:                         closeBottomSheet();
+2175:                     }
+2176:                 }
+2177:             }
+2178:             if (e.target.closest('.bs-buy-btn')) {
+2179:                 e.preventDefault();
+2180:                 restoreElementsToForm();
+2181:                 const isFbtActive = !!document.querySelector('frequently-buy-together');
+2182:                 if (isFbtActive) {
+2183:                     const realBtn = document.querySelector('frequently-buy-together button.tg-buy-now');
+2184:                     if (realBtn) {
+2185:                         realBtn.click();
+2186:                         closeBottomSheet();
+2187:                     }
+2188:                 } else {
+2189:                     const realBtn = document.getElementById('btn-buy-now');
+2190:                     if (realBtn) {
+2191:                         realBtn.click();
+2192:                         closeBottomSheet();
+2193:                     }
+2194:                 }
+2195:             }
+2196:         });
+2197: 
+2198:         // Intercept checkout clicks in capture phase to validate options selection and contact price
+2199:         document.addEventListener('click', function(e) {
+2200:             const btn = e.target.closest('#btn-add-to-cart, #btn-installment-main, #btn-buy-now, .bar-add-cart, .bar-buy-now, .js-addToCart, .js-buynow, .btn-add-cart-sticky, .btn-buy-now-sticky, .btn-add-cart-bs, .bs-buy-btn, .tg-addcart, .tg-buy-now, .buy_now');
+2201:             if (btn) {
+2202:                 const selectEl = document.querySelector('.box-variant #product-selectors');
+2203:                 
+2204:                 let hasRamOption = false;
+2205:                 let hasSsdOption = false;
+2206:                 
+2207:                 if (document.querySelector('[data-dropdown-type="ram"]') || document.querySelector('#ram-selected-text')) {
+2208:                     hasRamOption = true;
+2209:                 }
+2210:                 if (document.querySelector('[data-dropdown-type="ssd"]') || document.querySelector('#ssd-selected-text')) {
+2211:                     hasSsdOption = true;
+2212:                 }
+2213:                 
+2214:                 document.querySelectorAll('.single-option-selector').forEach(select => {
+2215:                     const val = select.value.toUpperCase();
+2216:                     const label = select.closest('.selector-wrapper')?.querySelector('label')?.textContent.toUpperCase() || '';
+2217:                     if (val.includes('RAM') || label.includes('RAM') || label.includes('DRAM')) hasRamOption = true;
+2218:                     if (val.includes('SSD') || label.includes('SSD') || label.includes('NVME')) hasSsdOption = true;
+2219:                 });
+2220:                 
+2221:                 document.querySelectorAll('.swatch input[type="radio"]').forEach(radio => {
+2222:                     const val = radio.value.toUpperCase();
+2223:                     const name = radio.name.toUpperCase();
+2224:                     if (name.includes('RAM') || val.includes('RAM')) hasRamOption = true;
+2225:                     if (name.includes('SSD') || val.includes('SSD')) hasSsdOption = true;
+2226:                 });
+2227:                 
+2228:                 document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+2229:                     const parent = select.closest('[data-fbt-item]');
+2230:                     const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+2231:                     if (labelText.includes('RAM') || labelText.includes('DRAM')) hasRamOption = true;
+2232:                     if (labelText.includes('SSD') || labelText.includes('NVME')) hasSsdOption = true;
+2233:                 });
+2234: 
+2235:                 let isDefaultRam = !hasRamOption;
+2236:                 let isDefaultSsd = !hasSsdOption;
+2237:                 
+2238:                 // 1. Check nava custom dropdowns
+2239:                 const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+2240:                 if (ramDisplay) {
+2241:                     const text = ramDisplay.textContent.toUpperCase();
+2242:                     if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2243:                         isDefaultRam = true;
+2244:                     }
+2245:                 }
+2246:                 const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+2247:                 if (ssdDisplay) {
+2248:                     const text = ssdDisplay.textContent.toUpperCase();
+2249:                     if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+2250:                         isDefaultSsd = true;
+2251:                     }
+2252:                 }
+2253:                 
+2254:                 // 2. Check Sapo native/custom selectors
+2255:                 document.querySelectorAll('.single-option-selector').forEach(select => {
+2256:                     const val = select.value.toUpperCase();
+2257:                     const label = select.closest('.selector-wrapper')?.querySelector('label')?.textContent.toUpperCase() || '';
+2258:                     const isRam = val.includes('RAM') || label.includes('RAM') || label.includes('DRAM');
+2259:                     const isSsd = val.includes('SSD') || label.includes('SSD') || label.includes('NVME');
+2260:                     
+2261:                     if (isRam && (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+2262:                         isDefaultRam = true;
+2263:                     }
+2264:                     if (isSsd && (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val) || val.includes('CHƯA CHỌN'))) {
+2265:                         isDefaultSsd = true;
+2266:                     }
+2267:                 });
+2268:                 
+2269:                 // 3. Check Sapo native swatches
+2270:                 document.querySelectorAll('.swatch input[type="radio"]:checked').forEach(radio => {
+2271:                     const val = radio.value.toUpperCase();
+2272:                     const name = radio.name.toUpperCase();
+2273:                     if (name.includes('RAM') || val.includes('RAM')) {
+2274:                         if (val.includes('NO RAM') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultRam = true;
+2275:                     }
+2276:                     if (name.includes('SSD') || val.includes('SSD')) {
+2277:                         if (val.includes('NO SSD') || val.includes('TRỐNG') || /(^|[^0-9])0\s*gb/i.test(val)) isDefaultSsd = true;
+2278:                     }
+2279:                 });
+2280:                 
+2281:                 // 4. Check global Sapo selectors state
+2282:                 if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+2283:                     const optText = selectEl.selectedOptions[0].text.toUpperCase();
+2284:                     if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+2285:                         isDefaultRam = true;
+2286:                         isDefaultSsd = true;
+2287:                     }
+2288:                 }
+2289:     
+2290:                 // 5. Check Frequently Bought Together select elements
+2291:                 document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+2292:                     const val = select.value;
+2293:                     const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+2294:                     const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
+2295:                     const parent = select.closest('[data-fbt-item]');
+2296:                     const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+2297:                     const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+2298:                     const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+2299:                     
+2300:                     const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+2301: 
+2302:                     if (isRam) {
+2303:                         if (isDefaultVal) {
+2304:                             isDefaultRam = true;
+2305:                         } else {
+2306:                             isDefaultRam = false;
+2307:                         }
+2308:                     }
+2309:                     if (isSsd) {
+2310:                         if (isDefaultVal) {
+2311:                             isDefaultSsd = true;
+2312:                         } else {
+2313:                             isDefaultSsd = false;
+2314:                         }
+2315:                     }
+2316:                 });
+2317:                 
+2318:                 // 1. Block if price is contact-only (Liên hệ / 0) - check this FIRST!
+2319:                 let isContactPrice = false;
+2320:                 const priceEl = document.getElementById('selected-variant-price') || document.getElementById('bs-price') || document.getElementById('sticky-price');
+2321:                 if (priceEl) {
+2322:                     const priceText = priceEl.textContent.trim().toLowerCase();
+2323:                     const cleanPriceText = priceText.replace(/[^\d]/g, '');
+2324:                     if (cleanPriceText === '0' || cleanPriceText === '' || priceText.includes('liên hệ') || priceText.includes('contact')) {
+2325:                         isContactPrice = true;
+2326:                     }
+2327:                 }
+2328:                 const fbtTotalEl = document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+2329:                 if (fbtTotalEl) {
+2330:                     const fbtTotalText = fbtTotalEl.textContent.trim().toLowerCase();
+2331:                     const cleanFbtText = fbtTotalText.replace(/[^\d]/g, '');
+2332:                     if (cleanFbtText === '0' || cleanFbtText === '' || fbtTotalText.includes('liên hệ') || fbtTotalText.includes('contact')) {
+2333:                         isContactPrice = true;
+2334:                     }
+2335:                 }
+2336:                 if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+2337:                     const activeOption = selectEl.selectedOptions[0];
+2338:                     const rawPrice = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+2339:                     if (rawPrice === 0) {
+2340:                         isContactPrice = true;
+2341:                     }
+2342:                 }
+2343:                 const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+2344:                 if (hiddenInput) {
+2345:                     const rawPrice = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+2346:                     if (rawPrice === 0) {
+2347:                         isContactPrice = true;
+2348:                     }
+2349:                 }
+2350:                 const basePriceVal = parseInt("0".replace(/[^\d]/g, ''), 10) || 0;

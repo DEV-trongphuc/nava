@@ -1,0 +1,706 @@
+=== JS Part 1 (Lines 4900 - 5200) ===
+4900:             });
+4901:             window.currentCollectionProducts.push({
+4902:             name: "Mini PC FEVM FA880 - R7 8845HS - OCuLink",
+4903:             url: "/fevm-fa880-amd-r7-8845hs-minipc-oculink-usb4",
+4904:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-fevm-fa880-ai-amd-ai-ryzen-7-8845hs-gaming.jpg?v=1759223921343",
+4905:             price: "11.790.000₫"
+4906:             });
+4907:             window.currentCollectionProducts.push({
+4908:             name: "Mini PC Minisforum UM790 PRO - Ryzen 9 7940HS - Radeon 780M",
+4909:             url: "/um790-pro-mini-pc-ryzen-9-7940hs-radeon-780m-rdna3-may-tinh-minisforum-amd-nho-gon-nhe-manh-mat-em-cao-ca-p",
+4910:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-minisforum-um790-pro-r9-7940hs-gaming-do-hoa.jpg?v=1761014480693",
+4911:             price: "11.990.000₫"
+4912:             });
+4913:             window.currentCollectionProducts.push({
+4914:             name: "Mini PC Beelink SER 8 - Ryzen 8745HS - RADEON 780M",
+4915:             url: "/ser-8-beelink-amd-ryzen-8845hs-radeon-780m-may-tinh-mini-pc-minisforum-r7-8000",
+4916:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-beelink-ser8-r7-8745hs-ai-r7-8845hs-gaming-design-87.jpg?v=1759142647863",
+4917:             price: "10.990.000₫"
+4918:             });
+4919:             window.currentCollectionProducts.push({
+4920:             name: "Mini PC GMK NUCBOX K8 PLUS - Ryzen 7 8845HS - OCuLink",
+4921:             url: "/nhan-ban-tu-gmk-k6-7840hs-k8-plus-ryzen-7-8845hs-may-tinh-amd-gaming-mini-pc-windows-11-pro-dual-lan-2-5gbps-the-he-8000",
+4922:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-8845hs-gmktec-nuc-box-k8-plus-2e4f79f6-fa27-4299-93f5-08a1a127ab7f.jpg?v=1759132981953",
+4923:             price: "11.590.000₫"
+4924:             });
+4925:             window.currentCollectionProducts.push({
+4926:             name: "Mini PC Minisforum 129i7 - RTX 5060",
+4927:             url: "/gaming-itx-minisforum-129i7-rtx-4060-i9-12900hk-may-tinh-pc-choi-game-aaa-3a",
+4928:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-itx-minisforum-itx-129i7-12900hk-rtx-5060-gaming.jpg?v=1759911918633",
+4929:             price: "10.390.000₫"
+4930:             });
+4931:             window.currentCollectionProducts.push({
+4932:             name: "Mini PC AOOSTAR GEM 12 MAX - R7 8745HS",
+4933:             url: "/mini-pc-aoostar-gem-12-max-r7-8745hs-amd-readeon-780m",
+4934:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-8745hs-aoostar-gem-12-max.jpg?v=1759046130497",
+4935:             price: "9.990.000₫"
+4936:             });
+4937:             window.currentCollectionProducts.push({
+4938:             name: "Máy tính All-in-One Morefine NUC1 - 16GB",
+4939:             url: "/m11-n200",
+4940:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-morefine-surface-nuc1-m11-intel-n150-7-inch-cam-ung-van-phong.jpg?v=1760840883810",
+4941:             price: "8.490.000₫"
+4942:             });
+4943:             window.currentCollectionProducts.push({
+4944:             name: "Mini PC Minisforum UM870 SLIM - Ryzen 7 8745H",
+4945:             url: "/mini-pc-minisforum-um870-slim-may-tinh-gaming-amd-ryzen-7-8745h-780m",
+4946:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-gaming-minisforum-um870-8745h-um760-slim-7640hs-1.jpg?v=1758623404530",
+4947:             price: "9.990.000₫"
+4948:             });
+4949:             window.currentCollectionProducts.push({
+4950:             name: "Bo mạch chủ Minisforum AR1290 - Core i9-12900HK",
+4951:             url: "/minisforum-ar1290-intel-core-i9-12900hk-itx-motherboard-cpu",
+4952:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/ar1290-i9-12900h.jpg?v=1780285862060",
+4953:             price: "0₫"
+4954:             });
+4955:             window.currentCollectionProducts.push({
+4956:             name: "Mini PC GMK M7 - Ryzen 7 6850H",
+4957:             url: "/minipc-gmk-m7-manh-me-em-ai-thiet-ke-doc-dao-ryzen-7-6850h-680m",
+4958:             img: "//bizweb.dktcdn.net/thumb/medium/100/543/817/products/mini-pc-amd-ryzen-7-pro-6850h-gmktec-nuc-box-m7-2b29a4bc-f49b-4fbc-a171-fd51bbedab42.jpg?v=1759133020427",
+4959:             price: "8.390.000₫"
+4960:             });
+4961: 
+4962:     let isSyncing = false;
+4963:     function syncSwatches() {
+4964:         if (isSyncing) return;
+4965:         isSyncing = true;
+4966:         
+4967:         try {
+4968:             const selectEl = document.querySelector('.box-variant #product-selectors');
+4969:             const hiddenInput = document.querySelector('.box-variant input[name="variantId"]');
+4970:             
+4971:             let isDefaultRam = false;
+4972:             let isDefaultSsd = false;
+4973: 
+4974:             const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+4975:             if (ramDisplay) {
+4976:                 const text = ramDisplay.textContent.toUpperCase();
+4977:                 if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+4978:                     isDefaultRam = true;
+4979:                 }
+4980:             } else {
+4981:                 isDefaultRam = true;
+4982:             }
+4983: 
+4984:             const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+4985:             if (ssdDisplay) {
+4986:                 const text = ssdDisplay.textContent.toUpperCase();
+4987:                 if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG') || text.includes('CHƯA CHỌN')) {
+4988:                     isDefaultSsd = true;
+4989:                 }
+4990:             } else {
+4991:                 isDefaultSsd = true;
+4992:             }
+4993: 
+4994:             // Also check Frequently Bought Together select elements
+4995:             const isFbtActive = !!document.querySelector('frequently-buy-together');
+4996:             if (isFbtActive) {
+4997:                 let hasFbtRam = false;
+4998:                 let hasFbtSsd = false;
+4999:                 document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+5000:                     const parent = select.closest('[data-fbt-item]');
+5001:                     const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+5002:                     if (labelText.includes('RAM') || labelText.includes('DRAM')) {
+5003:                         hasFbtRam = true;
+5004:                     }
+5005:                     if (labelText.includes('SSD') || labelText.includes('NVME')) {
+5006:                         hasFbtSsd = true;
+5007:                     }
+5008:                 });
+5009: 
+5010:                 isDefaultRam = !hasFbtRam;
+5011:                 isDefaultSsd = !hasFbtSsd;
+5012: 
+5013:                 document.querySelectorAll('frequently-buy-together select[data-fbt-item-id]').forEach(select => {
+5014:                     const val = select.value;
+5015:                     const activeOption = select.selectedOptions[0] || select.options[select.selectedIndex];
+5016:                     const optText = activeOption ? activeOption.textContent.toUpperCase() : '';
+5017:                     const parent = select.closest('[data-fbt-item]');
+5018:                     const labelText = parent ? parent.querySelector('label.f-item p')?.textContent.toUpperCase() || '' : '';
+5019:                     const isRam = labelText.includes('RAM') || labelText.includes('DRAM');
+5020:                     const isSsd = labelText.includes('SSD') || labelText.includes('NVME');
+5021:                     
+5022:                     const isDefaultVal = val === 'no-select' || val === '' || optText.includes('NO RAM') || optText.includes('NO SSD') || optText.includes('TRỐNG') || optText.includes('CHƯA CHỌN') || /(^|[^0-9])0\s*GB/i.test(optText);
+5023: 
+5024:                     if (isRam) {
+5025:                         if (isDefaultVal) {
+5026:                             isDefaultRam = true;
+5027:                         } else {
+5028:                             isDefaultRam = false;
+5029:                         }
+5030:                     }
+5031:                     if (isSsd) {
+5032:                         if (isDefaultVal) {
+5033:                             isDefaultSsd = true;
+5034:                         } else {
+5035:                             isDefaultSsd = false;
+5036:                         }
+5037:                     }
+5038:                 });
+5039:             }
+5040: 
+5041:             let isSoldOut = !window.mainProductAvailable;
+5042:             if (!window.mainProductAvailable) {
+5043:                 // Main product is out of stock. If they configured at least one accessory, they can buy.
+5044:                 if (isDefaultRam && isDefaultSsd) {
+5045:                     isSoldOut = true;
+5046:                 } else {
+5047:                     isSoldOut = false;
+5048:                 }
+5049:             }
+5050: 
+5051:             let priceVal = 0;
+5052:             let comparePriceVal = 0;
+5053:             
+5054:             const swatchRows = document.querySelectorAll('.swatch');
+5055:             if (swatchRows.length > 0) {
+5056:                 const selectedValues = [];
+5057:                 swatchRows.forEach(swatchRow => {
+5058:                     const checkedInput = swatchRow.querySelector('input[type="radio"]:checked');
+5059:                     if (checkedInput) {
+5060:                         selectedValues.push(checkedInput.value.trim());
+5061:                         const parent = checkedInput.closest('.swatch-element');
+5062:                         if (parent && parent.classList.contains('soldout')) {
+5063:                             if (window.mainProductAvailable) {
+5064:                                 isSoldOut = true;
+5065:                             }
+5066:                         }
+5067:                     }
+5068:                 });
+5069:                 
+5070:                 if (selectEl) {
+5071:                     const options = Array.from(selectEl.options);
+5072:                     let matchedOption = null;
+5073:                     
+5074:                     options.forEach(opt => {
+5075:                         const textParts = opt.text.split('-');
+5076:                         let titlePart = textParts.slice(0, -1).join('-').trim();
+5077:                         titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+5078:                         
+5079:                         const optValues = titlePart.split('/').map(v => v.trim());
+5080:                         
+5081:                         let isMatch = true;
+5082:                         for (let i = 0; i < selectedValues.length; i++) {
+5083:                             if (optValues[i] !== selectedValues[i]) {
+5084:                                 isMatch = false;
+5085:                                 break;
+5086:                             }
+5087:                         }
+5088:                         if (isMatch) {
+5089:                             matchedOption = opt;
+5090:                         }
+5091:                     });
+5092:                     
+5093:                     if (matchedOption) {
+5094:                         if (selectEl.value !== matchedOption.value) {
+5095:                             selectEl.value = matchedOption.value;
+5096:                             selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+5097:                         }
+5098:                         
+5099:                         const isAvail = matchedOption.getAttribute('data-available');
+5100:                         if (isAvail === 'false') {
+5101:                             if (window.mainProductAvailable) {
+5102:                                 isSoldOut = true;
+5103:                             }
+5104:                         } else if (isAvail === 'true') {
+5105:                             isSoldOut = false;
+5106:                         }
+5107:                         priceVal = parseInt(matchedOption.getAttribute('data-price') || '0', 10);
+5108:                         comparePriceVal = parseInt(matchedOption.getAttribute('data-compare-price') || '0', 10);
+5109:                     }
+5110:                 }
+5111:             } else {
+5112:                 // No swatch radio rows on page (fallback to standard dropdown)
+5113:                 if (selectEl) {
+5114:                     const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+5115:                     if (activeOption) {
+5116:                         const isAvail = activeOption.getAttribute('data-available');
+5117:                         if (isAvail === 'false') {
+5118:                             if (window.mainProductAvailable) {
+5119:                                 isSoldOut = true;
+5120:                             }
+5121:                         } else if (isAvail === 'true') {
+5122:                             isSoldOut = false;
+5123:                         }
+5124:                         priceVal = parseInt(activeOption.getAttribute('data-price') || '0', 10);
+5125:                         comparePriceVal = parseInt(activeOption.getAttribute('data-compare-price') || '0', 10);
+5126:                     }
+5127:                 } else if (hiddenInput) {
+5128:                     const isAvail = hiddenInput.getAttribute('data-available');
+5129:                     if (isAvail === 'false') {
+5130:                         if (window.mainProductAvailable) {
+5131:                             isSoldOut = true;
+5132:                         }
+5133:                     } else if (isAvail === 'true') {
+5134:                         isSoldOut = false;
+5135:                     }
+5136:                     priceVal = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
+5137:                     comparePriceVal = parseInt(hiddenInput.getAttribute('data-compare-price') || '0', 10);
+5138:                 }
+5139:             }
+5140:             
+5141:             // Priority price retrieval for Frequently Bought Together
+5142:             let fbtPriceChecked = false;
+5143:             if (isFbtActive) {
+5144:                 const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]') || document.querySelector('.fbt-total-price');
+5145:                 if (fbtTotalEl) {
+5146:                     priceVal = parsePrice(fbtTotalEl.textContent);
+5147:                     fbtPriceChecked = true;
+5148:                 }
+5149:             }
+5150: 
+5151:             // Fallback: If priceVal is still 0, check if we can retrieve it from #selected-variant-price
+5152:             if (priceVal === 0 && !fbtPriceChecked) {
+5153:                 const mainPriceText = document.getElementById('selected-variant-price')?.textContent;
+5154:                 if (mainPriceText) {
+5155:                     priceVal = parsePrice(mainPriceText);
+5156:                 }
+5157:             }
+5158:             if (priceVal === 0 && !fbtPriceChecked) {
+5159:                 const stickyPriceEl = document.getElementById('sticky-price')?.textContent;
+5160:                 if (stickyPriceEl) {
+5161:                     priceVal = parsePrice(stickyPriceEl);
+5162:                 }
+5163:             }
+5164:             if (priceVal === 0 && !fbtPriceChecked) {
+5165:                 const bsPriceEl = document.getElementById('bs-price')?.textContent;
+5166:                 if (bsPriceEl) {
+5167:                     priceVal = parsePrice(bsPriceEl);
+5168:                 }
+5169:             }
+5170: 
+5171:             const qtyInput = document.getElementById('qtym');
+5172:             const quantity = qtyInput ? parseInt(qtyInput.value) || 1 : 1;
+5173: 
+5174:             // Show/hide main page qty-price-row based on variant price
+5175:             const qtyPriceRow = document.querySelector('form#nava-product-form .qty-price-row');
+5176:             if (qtyPriceRow) {
+5177:                 if (priceVal > 0) {
+5178:                     qtyPriceRow.classList.remove('d-none');
+5179:                     qtyPriceRow.classList.add('d-flex');
+5180:                 } else {
+5181:                     qtyPriceRow.classList.add('d-none');
+5182:                     qtyPriceRow.classList.remove('d-flex');
+5183:                 }
+5184:             }
+5185: 
+5186:             // Update the main price and compare price display
+5187:             const priceEl = document.getElementById('selected-variant-price');
+5188:             if (priceEl) {
+5189:                 if (priceVal > 0) {
+5190:                     priceEl.innerText = formatVietnameseCurrency(priceVal * quantity);
+5191:                 } else {
+5192:                     priceEl.innerText = 'Liên hệ';
+5193:                 }
+5194:             }
+5195:             const comparePriceEl = document.getElementById('selected-variant-compare-price');
+5196:             if (comparePriceEl) {
+5197:                 if (comparePriceVal > priceVal) {
+5198:                     comparePriceEl.innerText = formatVietnameseCurrency(comparePriceVal * quantity);
+5199:                     comparePriceEl.style.display = 'inline-block';
+5200:                 } else {
+
+
+=== JS Part 2 (Lines 5400 - 5800) ===
+5400:                     bsAddCartBtn.style.pointerEvents = '';
+5401:                 }
+5402:                 
+5403:                 // FBT elements when active
+5404:                 if (fbtAddCart) {
+5405:                     fbtAddCart.disabled = false;
+5406:                     fbtAddCart.style.display = '';
+5407:                     fbtAddCart.style.background = '';
+5408:                     fbtAddCart.style.borderColor = '';
+5409:                     fbtAddCart.style.color = '';
+5410:                     fbtAddCart.style.opacity = '';
+5411:                     fbtAddCart.style.pointerEvents = '';
+5412:                 }
+5413:                 if (fbtInstallment) {
+5414:                     fbtInstallment.disabled = false;
+5415:                     fbtInstallment.style.display = '';
+5416:                     fbtInstallment.style.background = '';
+5417:                     fbtInstallment.style.borderColor = '';
+5418:                     fbtInstallment.style.color = '';
+5419:                     fbtInstallment.style.opacity = '';
+5420:                     fbtInstallment.style.pointerEvents = '';
+5421:                 }
+5422:                 if (fbtBuyNow) {
+5423:                     fbtBuyNow.disabled = false;
+5424:                     fbtBuyNow.innerText = 'MUA NGAY';
+5425:                     fbtBuyNow.style.display = '';
+5426:                     fbtBuyNow.style.background = '';
+5427:                     fbtBuyNow.style.color = '';
+5428:                     fbtBuyNow.style.opacity = '';
+5429:                     fbtBuyNow.style.pointerEvents = '';
+5430:                     fbtBuyNow.style.setProperty('flex', '1.5', 'important');
+5431:                 }
+5432:             }
+5433:         }
+5434:         
+5435:         // Update bottom sheet price display
+5436:         const bsPriceEl = document.getElementById('bs-price');
+5437:         if (bsPriceEl) {
+5438:             const isFbtActive = !!document.querySelector('frequently-buy-together');
+5439:             if (isFbtActive) {
+5440:                 const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]');
+5441:                 if (fbtTotalEl) {
+5442:                     bsPriceEl.innerText = fbtTotalEl.textContent.trim();
+5443:                 } else {
+5444:                     bsPriceEl.innerText = priceVal === 0 ? 'Liên hệ' : formatVietnameseCurrency(priceVal * quantity);
+5445:                 }
+5446:             } else {
+5447:                 bsPriceEl.innerText = priceVal === 0 ? 'Liên hệ' : formatVietnameseCurrency(priceVal * quantity);
+5448:             }
+5449:         }
+5450:         
+5451:         // Update mobile bottom sticky buy bar
+5452:         const mobileBuyBar = document.querySelector('.mobile-bottom-buybar');
+5453:         if (mobileBuyBar) {
+5454:             if (isSoldOut) {
+5455:                 mobileBuyBar.innerHTML = `<a href="tel:0972178527" class="bar-buy-now text-center d-flex align-items-center justify-content-center font-weight-bold" style="width: 100%; height: 44px; background: var(--primary); border: none; border-radius: 8px; color: white !important; font-size: 0.88rem; text-decoration: none; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">LIÊN HỆ ĐẶT TRƯỚC: 0972.178.527</a>`;
+5456:             } else if (priceVal === 0) {
+5457:                 mobileBuyBar.innerHTML = `<a href="tel:0972178527" class="bar-buy-now text-center d-flex align-items-center justify-content-center font-weight-bold" style="width: 100%; height: 44px; background: var(--primary); border: none; border-radius: 8px; color: white !important; font-size: 0.88rem; text-decoration: none; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">LIÊN HỆ: 0972.178.527</a>`;
+5458:             } else {
+5459:                 let optString = '';
+5460:                 const selectEl = document.querySelector('.box-variant #product-selectors');
+5461:                 if (selectEl) {
+5462:                     const activeOption = selectEl.selectedOptions[0] || selectEl.options[selectEl.selectedIndex];
+5463:                     if (activeOption) {
+5464:                         const textParts = activeOption.text.split('-');
+5465:                         let titlePart = textParts.slice(0, -1).join('-').trim();
+5466:                         titlePart = titlePart.replace(/^\d+\s+/, '').trim();
+5467:                         const opts = titlePart.split('/').map(v => v.trim()).filter(v => v !== '' && v.toUpperCase() !== 'DEFAULT TITLE');
+5468:                         if (opts.length > 0) {
+5469:                             optString = ' - ' + opts.join(', ');
+5470:                         }
+5471:                     }
+5472:                 }
+5473:                 const activeImgEl = document.querySelector('.product-image-block img, .gallery-item img, #product-gallery img, .thumbnail-item img, .main-image-wrap img');
+5474:                 const imgSrc = activeImgEl ? activeImgEl.src : (window.currentProductData?.img || '');
+5475:                 const formattedPrice = formatVietnameseCurrency(priceVal);
+5476:                 
+5477:                 mobileBuyBar.innerHTML = `
+5478:                     <div class="mobile-buybar-left" style="display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0;">
+5479:                         <div class="buybar-thumb-wrap" style="width: 44px; height: 44px; background: #fff; border-radius: 8px; border: 1px solid var(--border-color); padding: 4px; flex-shrink: 0;">
+5480:                             <img id="sticky-avatar" src="${imgSrc}" alt="${(window.currentProductData?.name || '').replace(/"/g, '&quot;')}" style="width: 100%; height: 100%; object-fit: contain;">
+5481:                         </div>
+5482:                         <div style="display: flex; flex-direction: column; min-width: 0; flex: 1;">
+5483:                             <span id="sticky-title" style="font-size: 0.72rem; color: var(--text-gray); font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;">${window.currentProductData?.name || ''}${optString}</span>
+5484:                             <span id="sticky-price" style="font-size: 1.05rem; font-weight: 900; color: var(--primary); margin-top: 1px;">${formattedPrice}</span>
+5485:                         </div>
+5486:                     </div>
+5487:                     <div class="mobile-buybar-right" style="display: flex; gap: 8px; flex-shrink: 0;">
+5488:                         <button class="bar-add-cart" style="background: var(--bg-gray); border: 1px solid var(--border-color); border-radius: 8px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--primary);"><i class="fa-solid fa-cart-plus" style="font-size: 1.15rem;"></i></button>
+5489:                         <button class="bar-buy-now" style="background: var(--primary); border: none; border-radius: 8px; padding: 0 20px; height: 44px; font-weight: 800; font-size: 0.92rem; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(0,51,102,0.15);">Mua ngay</button>
+5490:                     </div>
+5491:                 `;
+5492:             }
+5493:         }
+5494:         
+5495:         // Toggle global product contact-only class to force hide buttons via CSS
+5496:         const isContactMode = isSoldOut || (priceVal === 0);
+5497:         document.body.classList.toggle('global-product-contact-only', isContactMode);
+5498: 
+5499:         const qtyPriceRow = document.querySelector('#nava-product-form .qty-price-row');
+5500:         if (qtyPriceRow) {
+5501:             if (isContactMode) {
+5502:                 qtyPriceRow.classList.add('d-none');
+5503:                 qtyPriceRow.classList.remove('d-flex');
+5504:             } else {
+5505:                 qtyPriceRow.classList.remove('d-none');
+5506:                 qtyPriceRow.classList.add('d-flex');
+5507:             }
+5508:         }
+5509: 
+5510:         // Check if we need to show the RAM/SSD configuration nudge
+5511:         if (typeof checkRAMSSDPrompt === 'function') {
+5512:             checkRAMSSDPrompt();
+5513:         }
+5514:         } finally {
+5515:             isSyncing = false;
+5516:         }
+5517:     }
+5518: 
+5519:     function checkRAMSSDPrompt() {
+5520:         let hasRam = false;
+5521:         let hasSsd = false;
+5522:         
+5523:         document.querySelectorAll('.swatch .header, .swatch-element, .single-option-selector, label, span').forEach(el => {
+5524:             const text = el.textContent.toLowerCase();
+5525:             if (text.includes('ram') || text.includes('dram')) hasRam = true;
+5526:             if (text.includes('ssd') || text.includes('nvme')) hasSsd = true;
+5527:         });
+5528:         
+5529:         if (document.querySelector('[data-dropdown-type="ram"]') || document.querySelector('#ram-selected-text')) hasRam = true;
+5530:         if (document.querySelector('[data-dropdown-type="ssd"]') || document.querySelector('#ssd-selected-text')) hasSsd = true;
+5531:         
+5532:         if (!hasRam && !hasSsd) return;
+5533:         
+5534:         let isDefaultRam = false;
+5535:         let isDefaultSsd = false;
+5536:         
+5537:         const ramDisplay = document.querySelector('[data-dropdown-type="ram"] .nava-dropdown-selected, #ram-selected-text');
+5538:         if (ramDisplay) {
+5539:             const text = ramDisplay.textContent.toUpperCase();
+5540:             if (text.includes('NO RAM') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+5541:                 isDefaultRam = true;
+5542:             }
+5543:         }
+5544:         
+5545:         const ssdDisplay = document.querySelector('[data-dropdown-type="ssd"] .nava-dropdown-selected, #ssd-selected-text');
+5546:         if (ssdDisplay) {
+5547:             const text = ssdDisplay.textContent.toUpperCase();
+5548:             if (text.includes('NO SSD') || /(^|[^0-9])0\s*gb/i.test(text) || text.includes('TRỐNG')) {
+5549:                 isDefaultSsd = true;
+5550:             }
+5551:         }
+5552:         
+5553:         const selectEl = document.querySelector('.box-variant #product-selectors');
+5554:         if (selectEl && selectEl.selectedOptions && selectEl.selectedOptions[0]) {
+5555:             const optText = selectEl.selectedOptions[0].text.toUpperCase();
+5556:             if (optText.includes('NO RAM') || optText.includes('NO SSD')) {
+5557:                 isDefaultRam = true;
+5558:                 isDefaultSsd = true;
+5559:             }
+5560:         }
+5561:         
+5562:         if (isDefaultRam || isDefaultSsd) {
+5563:             showNudgeBanner();
+5564:         } else {
+5565:             hideNudgeBanner();
+5566:         }
+5567:     }
+5568: 
+5569:     function showNudgeBanner() {
+5570:         let banner = document.getElementById('ram-ssd-nudge-banner');
+5571:         let isAlreadyVisible = false;
+5572:         if (banner && banner.style.opacity === '1') {
+5573:             isAlreadyVisible = true;
+5574:         }
+5575:         
+5576:         if (!banner) {
+5577:             if (!document.getElementById('nudge-banner-style')) {
+5578:                 const style = document.createElement('style');
+5579:                 style.id = 'nudge-banner-style';
+5580:                 style.innerHTML = `
+5581:                     @keyframes nudge-shake {
+5582:                         0%, 100% { transform: translateX(-50%) translateY(0); }
+5583:                         15%, 45%, 75% { transform: translateX(-52%) translateY(-1px); }
+5584:                         30%, 60%, 90% { transform: translateX(-48%) translateY(1px); }
+5585:                     }
+5586:                     .nudge-shake-active {
+5587:                         animation: nudge-shake 0.7s ease-in-out 3;
+5588:                     }
+5589:                 `;
+5590:                 document.head.appendChild(style);
+5591:             }
+5592:             
+5593:             banner = document.createElement('div');
+5594:             banner.id = 'ram-ssd-nudge-banner';
+5595:             banner.style.cssText = `
+5596:                 position: fixed; bottom: 85px; left: 50%; 
+5597:                 transform: translateX(-50%) translateY(120px); 
+5598:                 width: calc(100% - 32px); max-width: 480px; 
+5599:                 background: rgba(255, 255, 255, 0.95); 
+5600:                 backdrop-filter: blur(12px); 
+5601:                 border: 1.5px solid rgba(239, 68, 68, 0.35); 
+5602:                 border-radius: 16px; padding: 14px 20px; 
+5603:                 box-shadow: 0 10px 35px rgba(239, 68, 68, 0.15), 0 5px 15px rgba(0,0,0,0.08); 
+5604:                 z-index: 99999; display: flex; align-items: center; gap: 12px; 
+5605:                 transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s; 
+5606:                 opacity: 0; box-sizing: border-box; font-family: inherit;
+5607:             `;
+5608:             banner.innerHTML = `
+5609:                 <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="ph-fill ph-warning-octagon" style="font-size: 1.4rem;"></i></div>
+5610:                 <div style="flex: 1; text-align: left;">
+5611:                     <div style="font-size: 0.88rem; font-weight: 800; color: #ef4444; margin-bottom: 2px;">Chưa chọn cấu hình RAM & SSD</div>
+5612:                     <div style="font-size: 0.78rem; font-weight: 600; color: #64748b;">Vui lòng chọn cấu hình ở trên để nhận báo giá & mua hàng!</div>
+5613:                 </div>
+5614:                 <button id="nudge-banner-btn" style="background: var(--primary, #003366); border: none; border-radius: 8px; color: white; padding: 8px 14px; font-weight: 700; font-size: 0.78rem; cursor: pointer; white-space: nowrap; transition: 0.2s;">Chọn ngay</button>
+5615:             `;
+5616:             document.body.appendChild(banner);
+5617:             
+5618:             banner.querySelector('#nudge-banner-btn').addEventListener('click', function() {
+5619:                 hideNudgeBanner();
+5620:                 openBottomSheet();
+5621:             });
+5622:         }
+5623:         
+5624:         setTimeout(() => {
+5625:             banner.style.transform = 'translateX(-50%) translateY(0)';
+5626:             banner.style.opacity = '1';
+5627:             if (!isAlreadyVisible) {
+5628:                 banner.classList.add('nudge-shake-active');
+5629:                 setTimeout(() => {
+5630:                     banner.classList.remove('nudge-shake-active');
+5631:                 }, 2200);
+5632:             }
+5633:         }, 100);
+5634:     }
+5635: 
+5636:     function hideNudgeBanner() {
+5637:         const banner = document.getElementById('ram-ssd-nudge-banner');
+5638:         if (banner) {
+5639:             banner.style.transform = 'translateX(-50%) translateY(120px)';
+5640:             banner.style.opacity = '0';
+5641:         }
+5642:     }
+5643: 
+5644:     var isBsOpen = false;
+5645: 
+5646:     function updateBottomSheetPrice() {
+5647:         const bsPriceEl = document.getElementById('bs-price');
+5648:         if (!bsPriceEl) return;
+5649:         
+5650:         let activePriceText = '';
+5651:         const isFbtActive = !!document.querySelector('frequently-buy-together');
+5652:         if (isFbtActive) {
+5653:             const fbtTotalEl = document.querySelector('frequently-buy-together span[data-fbt-total]') || document.querySelector('frequently-buy-together [data-fbt-total]');
+5654:             if (fbtTotalEl) {
+5655:                 activePriceText = fbtTotalEl.textContent.trim();
+5656:             }
+5657:         }
+5658:         if (!activePriceText) {
+5659:             const selectedVariantPriceEl = document.getElementById('selected-variant-price');
+5660:             if (selectedVariantPriceEl) {
+5661:                 activePriceText = selectedVariantPriceEl.textContent.trim();
+5662:             }
+5663:         }
+5664:         if (!activePriceText) {
+5665:             const stickyPriceEl = document.getElementById('sticky-price');
+5666:             if (stickyPriceEl) {
+5667:                 activePriceText = stickyPriceEl.textContent.trim();
+5668:             }
+5669:         }
+5670:         
+5671:         if (activePriceText) {
+5672:             bsPriceEl.innerText = activePriceText;
+5673:         }
+5674:     }
+5675: 
+5676:     function openBottomSheet() {
+5677:         if (window.innerWidth >= 992) {
+5678:             return; // Don't show bottom-sheet modal on PC/desktop
+5679:         }
+5680:         const overlay = document.getElementById('nava-bs-overlay');
+5681:         const bs = document.getElementById('nava-bottom-sheet');
+5682:         const optionsContainer = document.getElementById('nava-bs-options-container');
+5683:         const stickyBar = document.querySelector('.mobile-bottom-buybar');
+5684:         
+5685:         if (overlay && bs && optionsContainer) {
+5686:             isBsOpen = true;
+5687:             
+5688:             // Sync active price into bottom sheet on open
+5689:             updateBottomSheetPrice();
+5690:             
+5691:             // Hide mobile sticky bottom bar when bottom sheet is open
+5692:             if (stickyBar) {
+5693:                 stickyBar.style.setProperty('transform', 'translateY(120%)', 'important');
+5694:             }
+5695:             
+5696:             const isFbtActive = !!document.querySelector('frequently-buy-together');
+5697:             if (isFbtActive) {
+5698:                 const fbtOptions = document.querySelector('.nava-custom-fbt-container');
+5699:                 if (fbtOptions) {
+5700:                     optionsContainer.innerHTML = '';
+5701:                     optionsContainer.appendChild(fbtOptions);
+5702:                 }
+5703:                 const fbtQty = document.querySelector('frequently-buy-together .custom-btn-number');
+5704:                 const bsQtyContainer = document.getElementById('nava-bs-qty-container');
+5705:                 if (fbtQty && bsQtyContainer) {
+5706:                     bsQtyContainer.innerHTML = '';
+5707:                     bsQtyContainer.appendChild(fbtQty);
+5708:                 }
+5709:             } else {
+5710:                 const productControl = document.querySelector('.product-control');
+5711:                 if (productControl) {
+5712:                     optionsContainer.innerHTML = '';
+5713:                     optionsContainer.appendChild(productControl);
+5714:                 }
+5715:                 const qtySelector = document.querySelector('.qty-selector');
+5716:                 const bsQtyContainer = document.getElementById('nava-bs-qty-container');
+5717:                 if (qtySelector && bsQtyContainer) {
+5718:                     bsQtyContainer.innerHTML = '';
+5719:                     bsQtyContainer.appendChild(qtySelector);
+5720:                 }
+5721:             }
+5722:             
+5723:             // Display bottom sheet
+5724:             overlay.style.display = 'block';
+5725:             bs.style.display = 'flex';
+5726:             void overlay.offsetWidth;
+5727:             void bs.offsetWidth;
+5728:             overlay.style.opacity = '1';
+5729:             bs.classList.add('open');
+5730:             document.body.style.overflow = 'hidden';
+5731:             
+5732:             // Auto-open option dropdowns disabled to avoid cluttering mobile UI
+5733:             
+5734:             // Trigger glow animation for options
+5735:             const displays = bs.querySelectorAll('.nava-custom-select-display, .swatch, .nava-dropdown-display');
+5736:             displays.forEach(d => {
+5737:                 d.style.animation = 'none';
+5738:                 void d.offsetWidth; // Reflow
+5739:                 d.style.animation = 'bs-glow-attention 1.2s ease-in-out 3';
+5740:             });
+5741:         }
+5742:     }
+5743: 
+5744:     function restoreElementsToForm() {
+5745:         const isFbtActive = !!document.querySelector('frequently-buy-together');
+5746:         if (isFbtActive) {
+5747:             const fbtOptions = document.querySelector('.nava-custom-fbt-container');
+5748:             const fbtEl = document.querySelector('frequently-buy-together');
+5749:             if (fbtOptions && fbtEl && !fbtEl.contains(fbtOptions)) {
+5750:                 const pb3Row = fbtEl.querySelector('.pb-3');
+5751:                 if (pb3Row) {
+5752:                     fbtEl.insertBefore(fbtOptions, pb3Row);
+5753:                 } else {
+5754:                     fbtEl.appendChild(fbtOptions);
+5755:                 }
+5756:             }
+5757:             const fbtQty = document.querySelector('.custom-btn-number');
+5758:             const pb3Row = document.querySelector('frequently-buy-together .pb-3');
+5759:             if (fbtQty && pb3Row && !pb3Row.contains(fbtQty)) {
+5760:                 pb3Row.insertBefore(fbtQty, pb3Row.firstChild);
+5761:             }
+5762:         } else {
+5763:             const productControl = document.querySelector('.product-control');
+5764:             const form = document.getElementById('nava-product-form');
+5765:             const actionButtonsRow = form ? form.querySelector('.action-buttons-row') : null;
+5766:             if (productControl && form && !form.contains(productControl)) {
+5767:                 if (actionButtonsRow) {
+5768:                     form.insertBefore(productControl, actionButtonsRow);
+5769:                 } else {
+5770:                     form.appendChild(productControl);
+5771:                 }
+5772:             }
+5773:             const qtySelector = document.querySelector('.qty-selector');
+5774:             const qtyLabelWrap = document.querySelector('.qty-price-row > div:first-child');
+5775:             if (qtySelector && qtyLabelWrap && !qtyLabelWrap.contains(qtySelector)) {
+5776:                 qtyLabelWrap.appendChild(qtySelector);
+5777:             }
+5778:         }
+5779:     }
+5780: 
+5781:     function closeBottomSheet() {
+5782:         const overlay = document.getElementById('nava-bs-overlay');
+5783:         const bs = document.getElementById('nava-bottom-sheet');
+5784:         const stickyBar = document.querySelector('.mobile-bottom-buybar');
+5785:         
+5786:         if (overlay && bs) {
+5787:             isBsOpen = false;
+5788:             overlay.style.opacity = '0';
+5789:             bs.classList.remove('open');
+5790:             
+5791:             // Show sticky bar again if scrolled past threshold
+5792:             if (stickyBar) {
+5793:                 stickyBar.style.removeProperty('transform');
+5794:                 if (typeof toggleStickyBar === 'function') {
+5795:                     toggleStickyBar();
+5796:                 }
+5797:             }
+5798:             
+5799:             setTimeout(() => {
+5800:                 overlay.style.display = 'none';

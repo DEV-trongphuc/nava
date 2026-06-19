@@ -157,22 +157,39 @@
                         </ul>
                     </div>
                     <div class="sidebar-footer"
-                        style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-top: 1px solid var(--border-color);">
-                        <div>
-                            <p style="margin: 0 0 5px 0; font-size: 0.85rem; color: var(--text-gray);">Hotline: <strong>0972 178 527</strong></p>
-                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-gray);">Email: info@navatek.vn</p>
+                        style="display: flex; flex-direction: column; gap: 12px; padding: 15px 20px; border-top: 1px solid var(--border-color); background: var(--bg-gray, #f8fafc);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="margin: 0 0 4px 0; font-size: 0.82rem; color: var(--text-gray, #64748b); line-height: 1.3;">Hotline: <strong>0972 178 527</strong></p>
+                                <p style="margin: 0; font-size: 0.82rem; color: var(--text-gray, #64748b); line-height: 1.3;">Email: info@navatek.vn</p>
+                            </div>
+                            <div style="display: flex; gap: 6px;">
+                                <a href="https://zalo.me/3182872871563786385" target="_blank" title="Chat Zalo" aria-label="Chat Zalo"
+                                    style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); background: white; transition: transform 0.2s;">
+                                    <img src="https://zalo-chat-static.zadn.vn/v1/favicon-96x96.v1.png" alt="Zalo" width="34" height="34"
+                                        style="width: 34px; height: 34px; object-fit: contain; border-radius: 50%;">
+                                </a>
+                                <a href="https://m.me/navastore" target="_blank" title="Messenger" aria-label="Messenger"
+                                    style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); background: white; transition: transform 0.2s;">
+                                    <img src="https://static.xx.fbcdn.net/rsrc.php/yb/r/M8rOX7S5AN3.svg" alt="Messenger" width="34" height="34"
+                                        style="width: 34px; height: 34px; object-fit: contain; border-radius: 50%;">
+                                </a>
+                            </div>
                         </div>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://zalo.me/3182872871563786385" target="_blank" title="Chat Zalo" aria-label="Chat Zalo"
-                                style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
-                                <img src="https://zalo-chat-static.zadn.vn/v1/favicon-96x96.v1.png" alt="Zalo" width="40" height="40"
-                                    style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
-                            </a>
-                            <a href="https://m.me/navastore" target="_blank" title="Messenger" aria-label="Messenger"
-                                style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); background: white; transition: transform 0.2s;">
-                                <img src="https://static.xx.fbcdn.net/rsrc.php/yb/r/M8rOX7S5AN3.svg" alt="Messenger" width="40" height="40"
-                                    style="width: 40px; height: 40px; object-fit: contain; border-radius: 50%;">
-                            </a>
+                        <div style="border-top: 1px dashed var(--border-color); padding-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+                            <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-gray, #64748b); white-space: nowrap;">Mạng xã hội:</span>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end;">
+                                <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee"
+                                    style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s;"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" style="width: 18px; height: 18px; object-fit: contain;"></a>
+                                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada"
+                                    style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s;"><img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" style="width: 18px; height: 18px; object-fit: contain;"></a>
+                                <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok"
+                                    style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s;"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" style="width: 18px; height: 18px; object-fit: contain;"></a>
+                                <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook"
+                                    style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s;"><img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" style="width: 18px; height: 18px; object-fit: contain;"></a>
+                                <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube"
+                                    style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--border-color); background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s;"><img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" style="width: 18px; height: 18px; object-fit: contain;"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -231,14 +248,14 @@
             
             <button class="fab-main" id="fabMainBtn" aria-label="Kênh liên hệ">
                 <img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" class="fab-cycle-img active" width="50" height="50">
-                <img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.png" alt="Lazada" class="fab-cycle-img" width="50" height="50">
+                <img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" class="fab-cycle-img" width="50" height="50">
                 <img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" class="fab-cycle-img" width="50" height="50">
             </button>
             <div class="fab-menu" id="fabMenu">
                 <a href="https://shopee.vn/navastore.vn" target="_blank" title="Shopee" class="fab-item"><img src="{{ 'shopee.png' | asset_url }}" alt="Shopee" width="44" height="44"></a>
-                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/lazada.png" alt="Lazada" width="44" height="44"></a>
+                <a href="https://www.lazada.vn/shop/nava-store" target="_blank" title="Lazada" class="fab-item"><img src="{{ 'lazada.png' | asset_url }}" alt="Lazada" width="44" height="44"></a>
                 <a href="https://www.tiktok.com/@navastore.vn" target="_blank" title="TikTok" class="fab-item"><img src="{{ 'tiktok.png' | asset_url }}" alt="TikTok" width="44" height="44"></a>
                 <a href="https://www.facebook.com/navastore.vn/" target="_blank" title="Facebook" class="fab-item"><img src="{{ 'facebook.png' | asset_url }}" alt="Facebook" width="44" height="44"></a>
                 <a href="https://www.youtube.com/@NAVASTORE-VN" target="_blank" title="YouTube" class="fab-item"><img src="{{ 'youtube.png' | asset_url }}" alt="YouTube" width="44" height="44"></a>
@@ -314,6 +331,10 @@
             @media (max-width: 768px) {
                 .floating-social-wrapper {
                     bottom: 85px !important;
+                }
+                .floating-social-wrapper .fab-main,
+                .floating-social-wrapper .fab-menu {
+                    display: none !important;
                 }
                 /* Mobile Comparison Modal UI Optimizations */
                 #compare-modal-content {
