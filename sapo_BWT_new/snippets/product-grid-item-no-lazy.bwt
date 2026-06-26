@@ -1,4 +1,16 @@
-<div class="product-card" data-price="{{ product.price }}" data-vendor="{{ product.vendor }}" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer;" onclick="window.location.href='{{ product.url }}'">
+{%- assign is_preorder = false -%}
+{%- for variant in product.variants -%}
+    {%- if variant.inventory_management == 'bizweb' and variant.inventory_policy == 'continue' and variant.inventory_quantity <= 0 -%}
+        {%- assign is_preorder = true -%}
+        {%- break -%}
+    {%- endif -%}
+{%- endfor -%}
+<div class="product-card" data-price="{{ product.price }}" data-vendor="{{ product.vendor }}" style="margin:0; height: 100%; display: flex; flex-direction: column; padding: 15px; cursor: pointer; position: relative; overflow: hidden;" onclick="window.location.href='{{ product.url }}'">
+    {%- if is_preorder -%}
+    <div style="position: absolute; top: 16px; left: -45px; width: 150px; transform: rotate(-45deg); background: linear-gradient(90deg, #f59e0b, #fbbf24); color: white; text-align: center; font-size: 0.65rem; font-weight: 800; padding: 4px 0; z-index: 20; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); pointer-events: none;">
+        Pre-order
+    </div>
+    {%- endif -%}
     <div class="card-glow"></div>
     <div class="card-image-wrap" style="height: 180px; position: relative; background: transparent; padding: 0;">
         <button class="compare-btn" data-name="{{ product.name | escape }}" data-url="{{ product.url }}" title="Thêm vào so sánh" style="position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid var(--border-color); color: var(--text-gray); z-index: 10; cursor: pointer; transition: all 0.2s;" onclick="event.stopPropagation(); toggleCompare(this, '{{ product.name | escape }}', '{%- if product.featured_image -%}{{ product.featured_image | img_url: 'medium' }}{%- else -%}{{ \'no_image.jpg\' | asset_url }}{%- endif -%}', '{%- if product.price == 0 -%}Liên hệ{%- else -%}{{ product.price | money }}{%- endif -%}')" onmouseover="this.style.color='var(--primary)'; this.style.borderColor='var(--primary)';" onmouseout="this.style.color='var(--text-gray)'; this.style.borderColor='var(--border-color)';">
@@ -18,6 +30,7 @@
         {%- else -%}
         <img src="{{ 'no_image.jpg' | asset_url }}" alt="{{ product.name | escape }}" class="product-img" style="width: 100%; height: 100%; object-fit: contain;">
         {%- endif -%}
+        
     </div>
     
     <div class="card-content" style="flex: 1; display: flex; flex-direction: column; margin-top: 15px;">

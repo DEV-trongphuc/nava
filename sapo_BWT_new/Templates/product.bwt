@@ -1578,11 +1578,19 @@
 					{%-if product.type != null and product.type != ""-%}
 					<div class="spec-pill"><i class="ph-bold ph-tag"></i> Loại: <span style="font-weight: 700; color: var(--primary, #003366);">{{ product.type }}</span></div>
 					{%-endif-%}
+					{%- assign current_variant = product.selected_or_first_available_variant -%}
+					{%- assign is_preorder = false -%}
+					{%- for variant in product.variants -%}
+						{%- if variant.inventory_management == 'bizweb' and variant.inventory_policy == 'continue' and variant.inventory_quantity <= 0 -%}
+							{%- assign is_preorder = true -%}
+							{%- break -%}
+						{%- endif -%}
+					{%- endfor -%}
 					<div class="spec-pill">
 						<i class="ph-bold ph-circle-wavy-check"></i> Tình trạng: 
-						<span id="availability-status" style="{% if product.available %}color: #22c55e;{% else %}color: #ef4444;{% endif %} font-weight: 700;">
+						<span id="availability-status" data-product-preorder="{{ is_preorder }}" style="{% if product.available %}{% if is_preorder %}color: #d97706;{% else %}color: #22c55e;{% endif %}{% else %}color: #ef4444;{% endif %} font-weight: 700;">
 							{% if product.available %}
-							{% if selected_variant.price == 0 %}Liên hệ{% else %}Còn hàng{% endif %}
+							{% if is_preorder %}Pre-order (7-9 ngày){% elsif current_variant.price == 0 %}Liên hệ{% else %}Còn hàng{% endif %}
 							{% else %}
 							Hết hàng
 							{% endif %}
@@ -1614,12 +1622,12 @@
 							<fieldset class="form-group">
 								<select id="product-selectors" class="custom-select form-control" name="variantId" style="display:none">
 									{%- for variant in product.variants -%}
-									<option {% if variant == selected_variant %}selected="selected"{% endif %} data-available="{% if variant.available %}true{% else %}false{% endif %}" data-price="{{ variant.price }}" data-compare-price="{% if variant.compare_at_price %}{{ variant.compare_at_price }}{% else %}0{% endif %}" value="{{ variant.id }}">{{ variant.id }} {{ variant.title }} - {{ variant.price | money }}</option>
+									<option {% if variant == selected_variant %}selected="selected"{% endif %} data-preorder="{% if variant.inventory_management == 'bizweb' and variant.inventory_policy == 'continue' and variant.inventory_quantity <= 0 %}true{% else %}false{% endif %}" data-available="{% if variant.available %}true{% else %}false{% endif %}" data-price="{{ variant.price }}" data-compare-price="{% if variant.compare_at_price %}{{ variant.compare_at_price }}{% else %}0{% endif %}" value="{{ variant.id }}">{{ variant.id }} {{ variant.title }} - {{ variant.price | money }}</option>
 									{%- endfor -%}
 								</select>
 							</fieldset>
 							{%- else -%}
-							<input type="hidden" name="variantId" value="{{ product.variants[0].id }}" data-available="{% if product.variants[0].available %}true{% else %}false{% endif %}" data-price="{{ product.variants[0].price }}" data-compare-price="{% if product.variants[0].compare_at_price %}{{ product.variants[0].compare_at_price }}{% else %}0{% endif %}" />
+							<input type="hidden" name="variantId" value="{{ product.variants[0].id }}" data-preorder="{% if product.variants[0].inventory_management == 'bizweb' and product.variants[0].inventory_policy == 'continue' and product.variants[0].inventory_quantity <= 0 %}true{% else %}false{% endif %}" data-available="{% if product.variants[0].available %}true{% else %}false{% endif %}" data-price="{{ product.variants[0].price }}" data-compare-price="{% if product.variants[0].compare_at_price %}{{ product.variants[0].compare_at_price }}{% else %}0{% endif %}" />
 							{%- endif -%}
 						</div>
 
@@ -2735,6 +2743,7 @@ observer.observe(el, { childList: true, characterData: true, subtree: true });
 					}
 
 					let isSoldOut = !window.mainProductAvailable;
+					let isPreorder = false;
 					if (!window.mainProductAvailable) {
 					// Main product is out of stock. If they configured at least one accessory, they can buy.
 					if (isDefaultRam && isDefaultSsd) {
@@ -2801,6 +2810,7 @@ observer.observe(el, { childList: true, characterData: true, subtree: true });
 			} else if (isAvail === 'true') {
 				isSoldOut = false;
 			}
+			isPreorder = window.productIsPreorder || (matchedOption.getAttribute('data-preorder') === 'true');
 			let optPrice = parseInt(matchedOption.getAttribute('data-price') || '0', 10);
 			if (optPrice === 0 && matchedOption.text) {
 				const parts = matchedOption.text.split('-');
@@ -2826,6 +2836,7 @@ observer.observe(el, { childList: true, characterData: true, subtree: true });
 				} else if (isAvail === 'true') {
 					isSoldOut = false;
 				}
+				isPreorder = window.productIsPreorder || (activeOption.getAttribute('data-preorder') === 'true');
 				let optPrice = parseInt(activeOption.getAttribute('data-price') || '0', 10);
 				if (optPrice === 0 && activeOption.text) {
 					const parts = activeOption.text.split('-');
@@ -2846,6 +2857,7 @@ observer.observe(el, { childList: true, characterData: true, subtree: true });
 			} else if (isAvail === 'true') {
 				isSoldOut = false;
 			}
+			isPreorder = window.productIsPreorder || (hiddenInput.getAttribute('data-preorder') === 'true');
 			priceVal = parseInt(hiddenInput.getAttribute('data-price') || '0', 10);
 			comparePriceVal = parseInt(hiddenInput.getAttribute('data-compare-price') || '0', 10);
 			hasExplicitPrice = true;
@@ -3057,8 +3069,14 @@ observer.observe(el, { childList: true, characterData: true, subtree: true });
 		}
 		} else {
 		if (statusEl) {
+		const isGlobalPreorder = statusEl.getAttribute('data-product-preorder') === 'true';
+		if (isPreorder || isGlobalPreorder) {
+		statusEl.innerText = 'Pre-order (7-9 ngày)';
+		statusEl.style.color = '#eab308';
+		} else {
 		statusEl.innerText = 'Còn hàng';
 		statusEl.style.color = '#22c55e';
+		}
 		}
 		if (btnAddToCart) {
 		btnAddToCart.disabled = false;

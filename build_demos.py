@@ -6871,6 +6871,373 @@ def build_article_page(base_dir, header_part, footer_part):
     with open(os.path.join(base_dir, "demo_article.html"), "w", encoding="utf-8") as f:
         f.write(full_html)
 
+def build_blog_page(base_dir, header_part, footer_part):
+    sticky_stuff = ""
+    with open(os.path.join(base_dir, "index.bwt"), "r", encoding="utf-8") as f:
+        idx_content = f.read()
+        if "<!-- Mobile Sidebar Drawer -->" in idx_content:
+            sticky_stuff = idx_content[idx_content.find("<!-- Mobile Sidebar Drawer -->"):]
+            if "<!-- /MASTER SAPO ESCAPE WRAPPER -->" in sticky_stuff:
+                sticky_stuff = sticky_stuff.split("<!-- /MASTER SAPO ESCAPE WRAPPER -->")[0]
+                
+    local_footer_part = sticky_stuff + '<script src="assets/main.js" defer></script>\n' + footer_part
+
+    # Load BWT template
+    with open(os.path.join(base_dir, "sapo_BWT_new", "Templates", "blog.bwt"), "r", encoding="utf-8") as f:
+        bwt_template = f.read()
+    compiled = bwt_template
+
+    # Mock breadcrumb
+    mock_breadcrumb = """
+        <div class="breadcrumbs mt-3">
+            <div class="container">
+                <ul class="breadcrumb align-items-center m-0 pl-0 pr-0 small pt-2 pb-2" style="list-style: none; display: flex; gap: 8px; padding-left: 0;">
+                    <li class="home">
+                        <a href="index.html" title="Trang chủ" style="text-decoration: none; color: var(--text-gray);"><i class="ph ph-house"></i> Trang chủ</a>
+                        <span class="slash-divider ml-2 mr-2">/</span>
+                    </li>
+                    <li class="active" style="color: var(--primary); font-weight: 700;">Tin tức công nghệ</li>
+                </ul>
+            </div>
+        </div>
+    """
+
+    # Mock elements
+    mock_featured = """
+				<div class="col-md-7 col-12">
+					<div class="large-article-wrapper position-relative modal-open mb-3 mb-md-0">
+						<img src="https://bizweb.dktcdn.net/thumb/grande/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" class="img-cover position-absolute" alt="Đánh giá ASUS NUC 14 Pro">
+						<div class="large-article-info">
+							<span class="tag-badge">Đánh giá</span>
+							<h3 class="title_blo font-weight-bold mt-2 mt-md-0 mb-0 mb-md-2">
+								<a class="line_2" href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a>
+							</h3>
+							<div class="meta-date">
+								<i class="ph ph-calendar"></i> 01/06/2026
+							</div>
+							<p class="desc line_2 d-none d-md-block">Khám phá ASUS NUC 14 Pro sở hữu vi xử lý Intel Core Ultra tích hợp NPU đầu tiên, mang lại hiệu năng xử lý tác vụ AI vượt trội cùng thiết kế nhỏ gọn, nâng cao năng suất làm việc.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-5">
+					<div class="sidebar-articles-list">
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Thế hệ Mini PC AI 2025" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Thế hệ Mini PC AI 2025">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 28/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="NPU vs GPU" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="NPU vs GPU">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 20/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Gemini Đổ Bộ Google TV" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/2d8b49e4ab1b128c52c8ffa44eeb7e7f.jpg?v=1759161126157" alt="Gemini Đổ Bộ Google TV">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới">Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 15/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Windows 11 SST Fix" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/03325267e248a4f5acaa4902ac15df08.jpg?v=1759162962320" alt="Windows 11 SST Fix">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh">Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 12/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/1000003603-asus-rog-nuc-2.jpg?v=1759229363977" alt="Đánh giá Asus ROG NUC 2025">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn">Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 08/05/2026
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+    """
+
+    mock_categories = """
+	<div class="container mt-3 mb-3">
+		<div class="blog-list b_mew_cate rounded-10 p-lg-3 pl-2 pr-2 bg-white">
+			<h3 class="align-items-center blog-name d-flex font-weight-bold pt-2 pt-lg-0">
+				<img class="lazy mr-2" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/hot_ico.png?1780651888006" alt="Chủ đề Hot"> 
+				Chủ đề Hot
+			</h3>
+			<ul class="d-flex b_item flex-wrap mobi_cate mb-0 p-0">
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Tin công nghệ">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Tin công nghệ">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Tin công nghệ">Tin công nghệ</a>
+						</h4>
+						<span>12 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Đánh giá chi tiết">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Đánh giá chi tiết">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Đánh giá chi tiết">Đánh giá chi tiết</a>
+						</h4>
+						<span>8 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Hướng dẫn kỹ thuật">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png" alt="Hướng dẫn kỹ thuật">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Hướng dẫn kỹ thuật">Hướng dẫn kỹ thuật</a>
+						</h4>
+						<span>15 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Sự kiện & Khuyến mãi">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_4_1.png" alt="Sự kiện & Khuyến mãi">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Sự kiện & Khuyến mãi">Sự kiện & Khuyến mãi</a>
+						</h4>
+						<span>5 bài viết</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+    """
+
+    mock_grid_feed = """
+			<article>
+				<div class="grid_article">
+					<div class="row" id="AjaxinateContainer">
+						
+						<!-- Item 1 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/grande/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" class="lazy d-block" alt="Đánh giá ASUS NUC 14 Pro">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 01/06/2026
+									</span>
+									<p class="sum">
+										Khám phá ASUS NUC 14 Pro sở hữu vi xử lý Intel Core Ultra tích hợp NPU đầu tiên, mang lại hiệu năng xử lý tác vụ AI vượt trội cùng thiết kế nhỏ gọn.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Đánh giá">Đánh giá</a>
+										<a class="item_tags badge-warning" href="#" title="ASUS NUC">ASUS NUC</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 2 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Thế hệ Mini PC AI 2025" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" class="lazy d-block" alt="Thế hệ Mini PC AI 2025">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 28/05/2026
+									</span>
+									<p class="sum">
+										Điểm danh những nâng cấp phần cứng đáng giá nhất trên các thế hệ máy tính mini PC trang bị vi xử lý Intel Core Ultra thế hệ mới nhất.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Mini PC">Mini PC</a>
+										<a class="item_tags badge-warning" href="#" title="AI PC">AI PC</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 3 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="NPU vs GPU" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" class="lazy d-block" alt="NPU vs GPU">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 20/05/2026
+									</span>
+									<p class="sum">
+										So sánh sự khác biệt trong kiến trúc và hiệu suất tính toán giữa NPU tích hợp và GPU rời khi xử lý các mô hình ngôn ngữ lớn LLM và sinh ảnh AI.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Công nghệ">Công nghệ</a>
+										<a class="item_tags badge-warning" href="#" title="AI">AI</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 4 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Gemini Đổ Bộ Google TV" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/2d8b49e4ab1b128c52c8ffa44eeb7e7f.jpg?v=1759161126157" class="lazy d-block" alt="Gemini Đổ Bộ Google TV">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới">Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 15/05/2026
+									</span>
+									<p class="sum">
+										Google TV cập nhật giao diện và tính năng trợ lý ảo Gemini, cho phép bạn tìm kiếm phim bằng giọng nói tự nhiên cực kỳ mượt mà.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Google TV">Google TV</a>
+										<a class="item_tags badge-warning" href="#" title="Gemini">Gemini</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 5 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Windows 11 SST Fix" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/03325267e248a4f5acaa4902ac15df08.jpg?v=1759162962320" class="lazy d-block" alt="Windows 11 SST Fix">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh">Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 12/05/2026
+									</span>
+									<p class="sum">
+										Bản cập nhật tích hợp driver mới từ Intel đã giải quyết triệt để lỗi xung đột giữa Windows 11 và driver âm thanh Intel SST cũ gây lỗi màn hình xanh.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Windows 11">Windows 11</a>
+										<a class="item_tags badge-warning" href="#" title="Fix Lỗi">Fix Lỗi</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 6 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/1000003603-asus-rog-nuc-2.jpg?v=1759229363977" class="lazy d-block" alt="Đánh giá Asus ROG NUC 2025">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn">Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 08/05/2026
+									</span>
+									<p class="sum">
+										Đánh giá chi tiết quái vật mini PC Asus ROG NUC thế hệ thứ 2 với GPU rời RTX 4070, chiến mượt mà các tựa game AAA nặng ở độ phân giải 2K.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="ROG NUC">ROG NUC</a>
+										<a class="item_tags badge-warning" href="#" title="Gaming">Gaming</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="AjaxinatePagination">
+						<a href="#" title="Xem thêm bài viết">
+							Xem thêm bài viết
+						</a>
+					</div>
+				</div>
+			</article>
+    """
+
+    compiled = compiled.replace("{{ blog.name | default: 'Tất cả tin tức' }}", "Tất cả tin tức")
+    compiled = compiled.replace("{% if blog.articles.size < 7 %}d-none{% endif %}", "")
+
+    # Regex replacements for Liquid loops
+    featured_block_regex = r"{%\s*if\s*blog\.articles\.size\s*>\s*0\s*%}.*?{%\s*endif\s*%}"
+    compiled = re.sub(featured_block_regex, mock_featured, compiled, flags=re.DOTALL)
+
+    category_block_regex = r"{%\s*if\s*linklists\[settings\.blogs_all_menu\]\.links\.size\s*>\s*0\s*%}.*?{%\s*endif\s*%}"
+    compiled = re.sub(category_block_regex, mock_categories, compiled, flags=re.DOTALL)
+
+    feed_block_regex = r"{%-\s*if\s*blog\.articles\.size\s*>\s*6\s*-%}.*?{%-\s*endif\s*-%}(?=\s*</div>\s*</div>)"
+    compiled = re.sub(feed_block_regex, mock_grid_feed, compiled, flags=re.DOTALL)
+
+    full_html = clean_liquid_tags(header_part + compiled + local_footer_part, 'blog')
+    
+    full_html = inject_seo_metadata(
+        full_html,
+        title="Tin Tức Công Nghệ & Đánh Giá Sản Phẩm - Nava Store",
+        description="Cập nhật tin tức công nghệ mới nhất, đánh giá chi tiết mini PC, linh kiện eGPU, hướng dẫn cài đặt và thủ thuật từ các chuyên gia Nava Store.",
+        keywords="tin tuc, cong nghe, danh gia mini pc, egpu, nava store"
+    )
+    with open(os.path.join(base_dir, "demo_blog.html"), "w", encoding="utf-8") as f:
+        f.write(full_html)
+
 def build_all():
     base_dir = r"F:\BAO_SAPO\sapo_new"
     
@@ -6918,6 +7285,9 @@ def build_all():
     
     build_article_page(base_dir, header_part, footer_part)
     print("Generated demo_article.html successfully!")
+    
+    build_blog_page(base_dir, header_part, footer_part)
+    print("Generated demo_blog.html successfully!")
     
     build_contact_page(base_dir, header_part, footer_part)
     print("Generated demo_contact.html successfully!")

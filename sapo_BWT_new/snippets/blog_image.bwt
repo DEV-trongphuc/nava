@@ -1,0 +1,12 @@
+{%- assign img_src = 'placeholder_1x1.png' | asset_url -%}
+{%- assign desc = blog_image | default: '' -%}
+{%- if desc != blank and desc contains '<img' -%}
+	{%- assign parts = desc | split: 'src="' -%}
+	{%- if parts.size > 1 -%}
+		{%- assign first_part = parts[1] | split: '"' | first -%}
+		{%- if first_part != blank -%}
+			{%- assign img_src = first_part -%}
+		{%- endif -%}
+	{%- endif -%}
+{%- endif -%}
+<img class="lazy" src="{{ 'placeholder_1x1.png' | asset_url }}" data-src="{{ img_src }}" alt="{{ alt | default: 'Tin tức Nava' }}">

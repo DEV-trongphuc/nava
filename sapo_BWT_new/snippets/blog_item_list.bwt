@@ -1,0 +1,17 @@
+<div class="mini-article-item">
+	<a href="{{ article.url }}" title="{{ article.title }}" class="thumb-link">
+		{%- if article.image != null -%}
+		<img src="{{ 'placeholder_1x1.png' | asset_url }}" data-src="{{ article.image.src | img_url: 'medium' }}" class="lazy" alt="{{ article.title }}">
+		{%- else -%}
+		<img src="{{ 'no_image.jpg' | asset_url }}" alt="{{ article.title }}" class="lazy">
+		{%- endif -%}
+	</a>
+	<div class="mini-article-info">
+		<h4 class="title">
+			<a class="line_2" href="{{ article.url }}" title="{{ article.title | replace: '"', '&quot;' }}">{{ article.title }}</a>
+		</h4>
+		<span class="date">
+			<i class="ph ph-calendar"></i> {{ article.created_on | date: 'dd-MM-yyyy' }}
+		</span>
+	</div>
+</div>

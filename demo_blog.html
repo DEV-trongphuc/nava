@@ -11,12 +11,12 @@
         <link rel="preconnect" href="https://bizweb.dktcdn.net" crossorigin>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">			
-        <title>So Sánh Sản Phẩm - Nava Store</title>
+        <title>Tin Tức Công Nghệ & Đánh Giá Sản Phẩm - Nava Store</title>
         <!-- ================= Page description ================== -->
         
           
-            <meta name="description" content="So sánh các sản phẩm Mini PC, eGPU để lựa chọn sản phẩm phù hợp nhất với nhu cầu của bạn.">
-    <meta name="keywords" content="so sanh san pham, mini pc, egpu, nava store">
+            <meta name="description" content="Cập nhật tin tức công nghệ mới nhất, đánh giá chi tiết mini PC, linh kiện eGPU, hướng dẫn cài đặt và thủ thuật từ các chuyên gia Nava Store.">
+    <meta name="keywords" content="tin tuc, cong nghe, danh gia mini pc, egpu, nava store">
           
         
         <!-- ================= Meta ================== -->
@@ -386,341 +386,858 @@
                 <div class="col-right position-relative">
                     <div class="contentWarp ">
                         
-        <style>
-            .compare-page { padding: 20px 15px; max-width: 1200px; margin: 10px auto; }
-            .compare-hero { text-align: center; margin-bottom: 40px; }
-            .compare-hero h1 { font-size: 2.5rem; font-weight: 800; color: var(--text-dark); margin-bottom: 10px; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-            .compare-hero p { color: var(--text-gray); font-size: 1.1rem; }
-            
-            .compare-grid-scroll-wrapper { width: 100%; }
-            .compare-grid { display: grid; grid-template-columns: 250px 1fr 1fr 1fr; background: var(--bg-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
-            
-            /* Header Row */
-            .compare-row-header { display: contents; }
-            .compare-cell-header { padding: 30px 20px; text-align: center; border-bottom: 2px solid var(--border-color); border-right: 1px solid var(--border-color); background: var(--bg-gray); position: relative; }
-            .compare-cell-header:last-child { border-right: none; }
-            .compare-cell-header.empty { background: var(--bg-white); border-right: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center;}
-            
-            .compare-prod-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 15px; mix-blend-mode: multiply; transition: transform 0.3s; }
-            .compare-prod-img:hover { transform: translateY(-5px); }
-            .compare-prod-title { font-weight: 800; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 8px; }
-            .compare-prod-price { font-weight: 900; font-size: 1.4rem; color: var(--primary); margin-bottom: 15px; }
-            
-            /* Data Rows */
-            .compare-row { display: contents; }
-            .compare-row:hover .compare-cell { background: rgba(14, 165, 233, 0.02); }
-            .compare-cell { padding: 20px; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-size: 0.95rem; color: var(--text-dark); display: flex; align-items: center; justify-content: center; text-align: center; }
-            .compare-cell:last-child { border-right: none; }
-            .compare-label { background: #f8fafc; font-weight: 700; color: var(--text-gray); justify-content: flex-start; text-align: left; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; }
-            
-            .highlight-cell { background: rgba(16, 185, 129, 0.05); color: #059669; font-weight: 700; }
-            .compare-row:hover .highlight-cell { background: rgba(16, 185, 129, 0.08); }
-            
-            .remove-btn { position: absolute; top: 15px; right: 15px; width: 30px; height: 30px; border-radius: 50%; background: #fee2e2; color: #ef4444; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; transition: all 0.2s; }
-            .remove-btn:hover { background: #ef4444; color: white; }
-            
-            @media (max-width: 768px) {
-                .compare-grid-scroll-wrapper {
-                    overflow-x: auto;
-                    width: 100%;
-                    -webkit-overflow-scrolling: touch;
-                    scrollbar-width: none;
-                    border-radius: var(--radius-lg);
-                    border: 1px solid var(--border-color);
-                }
-                .compare-grid-scroll-wrapper::-webkit-scrollbar {
-                    display: none;
-                }
-                .compare-grid {
-                    grid-template-columns: 120px 180px 180px 180px !important;
-                    width: max-content;
-                    border: none !important;
-                    border-radius: 0 !important;
-                }
-                .compare-label { font-size: 0.75rem; padding: 10px; }
-                .compare-cell { font-size: 0.8rem; padding: 10px; }
-                .compare-prod-img { width: 80px; height: 80px; }
-                .compare-prod-title { font-size: 0.9rem !important; }
-                .compare-prod-price { font-size: 1.05rem !important; }
-                .col-3-compare { display: flex !important; }
-            }
+<!-- Custom Styles for Wow Tech Blog Listing Page -->
+<style>
+	.blog-layout {
+		font-family: 'Inter', sans-serif;
+		color: var(--text-dark);
+		background-color: var(--bg-gray);
+		padding-bottom: 40px;
+	}
 
-            /* Dark Mode Styling Overrides */
-            [data-theme="dark"] .compare-grid {
-                background: #1e293b;
-                border-color: #334155;
-            }
-            [data-theme="dark"] .compare-cell-header {
-                background: #0f172a !important;
-                border-color: #334155 !important;
-            }
-            [data-theme="dark"] .compare-cell-header.empty {
-                background: #1e293b !important;
-                border-color: #334155 !important;
-            }
-            [data-theme="dark"] .compare-cell {
-                border-color: #334155 !important;
-                color: #e2e8f0 !important;
-            }
-            [data-theme="dark"] .compare-label {
-                background: #0f172a !important;
-                color: #94a3b8 !important;
-            }
-            [data-theme="dark"] .highlight-cell {
-                background: rgba(16, 185, 129, 0.15) !important;
-                color: #34d399 !important;
-            }
-            [data-theme="dark"] .compare-row:hover .compare-cell {
-                background: rgba(255, 255, 255, 0.02) !important;
-            }
-        </style>
-        
-        <div class="compare-page">
-            <div class="breadcrumb" style="background: transparent; padding: 0; margin-bottom: 20px; justify-content: center;">
-                <a href="/" style="color: var(--text-gray); text-decoration: none;"><i class="ph ph-house"></i> Trang chủ</a> 
-                <span style="margin: 0 10px; color: var(--text-gray);">/</span> 
-                <span style="color: var(--primary); font-weight: bold;">So sánh sản phẩm</span>
-            </div>
-            
-            <div class="compare-hero">
-                <h1>So Sánh Sản Phẩm</h1>
-            </div>
-            
-            <div class="compare-grid-scroll-wrapper">
-            <div class="compare-grid">
-                <!-- Header -->
-                <div class="compare-row-header">
-                    <div class="compare-cell-header empty">
-                        <button class="btn-pill" style="border: 2px dashed var(--border-color); background: transparent; color: var(--text-gray); border-radius: var(--radius-md); padding: 10px 15px; display: flex; align-items: center; gap: 5px; font-weight: 600; cursor: pointer;"><i class="ph-bold ph-plus"></i> Thêm SP</button>
-                    </div>
-                    <div class="compare-cell-header">
-                        <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973" alt="ASUS NUC" class="compare-prod-img">
-                        <div class="compare-prod-title">ASUS NUC AI 350 (PN54)</div>
-                        <div class="compare-prod-price">12.390.000đ</div>
-                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
-                    </div>
-                    <div class="compare-cell-header">
-                        <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
-                        <img src="//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420" alt="UM890 PRO" class="compare-prod-img">
-                        <div class="compare-prod-title">MINISFORUM UM890 Pro</div>
-                        <div class="compare-prod-price">14.990.000đ</div>
-                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
-                    </div>
-                    <div class="compare-cell-header col-3-compare">
-                        <button class="remove-btn" title="Xóa khỏi so sánh"><i class="ph-bold ph-x"></i></button>
-                        <img src="//bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Beelink SER8" class="compare-prod-img">
-                        <div class="compare-prod-title">BEELINK SER8 AI</div>
-                        <div class="compare-prod-price">15.490.000đ</div>
-                        <button class="btn-pill" style="width: 100%; border-radius: var(--radius-md); padding: 12px; font-weight: bold; background: rgba(14, 165, 233, 0.1); color: var(--primary); border: 2px solid var(--primary); cursor: pointer;">Mua ngay</button>
-                    </div>
-                </div>
-                
-                <!-- Specs -->
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Thương hiệu</div>
-                    <div class="compare-cell">Asus</div>
-                    <div class="compare-cell">Minisforum</div>
-                    <div class="compare-cell col-3-compare">Beelink</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Model</div>
-                    <div class="compare-cell">NUC AI 350 (PN54)</div>
-                    <div class="compare-cell">UM890 Pro</div>
-                    <div class="compare-cell col-3-compare">SER8 AI</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Tình trạng</div>
-                    <div class="compare-cell">Mới 100%</div>
-                    <div class="compare-cell">Mới 100%</div>
-                    <div class="compare-cell col-3-compare">Mới 100%</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Kích thước</div>
-                    <div class="compare-cell highlight-cell">130x130x34mm (Cực mỏng)</div>
-                    <div class="compare-cell">130x127x60mm</div>
-                    <div class="compare-cell col-3-compare">135x135x48mm</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Vi xử lý (CPU)</div>
-                    <div class="compare-cell">AMD Ryzen AI 7 350 (8C/16T, max 5.0Ghz)</div>
-                    <div class="compare-cell highlight-cell">AMD Ryzen 9 8945HS (8C/16T, max 5.2Ghz)</div>
-                    <div class="compare-cell col-3-compare">AMD Ryzen 7 8845HS (8C/16T, max 5.1Ghz)</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">CPU Mark (Hiệu năng)</div>
-                    <div class="compare-cell highlight-cell">~30.000 điểm</div>
-                    <div class="compare-cell">~29.500 điểm</div>
-                    <div class="compare-cell col-3-compare">~29.000 điểm</div>
-                </div>
-                
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Đồ họa (GPU)</div>
-                    <div class="compare-cell highlight-cell">AMD Radeon™ 860M</div>
-                    <div class="compare-cell">AMD Radeon™ 780M</div>
-                    <div class="compare-cell col-3-compare">AMD Radeon™ 780M</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">G3D Mark (Đồ họa)</div>
-                    <div class="compare-cell highlight-cell">~8.500 điểm</div>
-                    <div class="compare-cell">~7.200 điểm</div>
-                    <div class="compare-cell col-3-compare">~7.200 điểm</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Xử lý AI (NPU)</div>
-                    <div class="compare-cell highlight-cell">Lên đến 50 TOPS NPU (Tổng 66 TOPS)</div>
-                    <div class="compare-cell">Lên đến 16 TOPS NPU (Tổng 39 TOPS)</div>
-                    <div class="compare-cell col-3-compare">Lên đến 16 TOPS NPU (Tổng 38 TOPS)</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Hỗ trợ RAM</div>
-                    <div class="compare-cell highlight-cell">2x DDR5 5600 tối đa 128GB</div>
-                    <div class="compare-cell">2x DDR5 5600 tối đa 96GB</div>
-                    <div class="compare-cell col-3-compare">2x DDR5 5600 tối đa 64GB</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Lưu trữ (SSD)</div>
-                    <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
-                    <div class="compare-cell">2x M.2 2280 NVMe PCIe 4.0</div>
-                    <div class="compare-cell col-3-compare">2x M.2 2280 NVMe PCIe 4.0</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Kết nối không dây</div>
-                    <div class="compare-cell highlight-cell">Wi-Fi 6E (Gig+) 2x2 + Bluetooth® 5.4</div>
-                    <div class="compare-cell">Wi-Fi 6E + Bluetooth® 5.3</div>
-                    <div class="compare-cell col-3-compare">Wi-Fi 6 + Bluetooth® 5.2</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Cổng kết nối (IO)</div>
-                    <div class="compare-cell">1x USB4, 1x USB 3.2 Gen2 A, 1x USB 2.0, 1x HDMI 2.1, 2x DP 1.4, 1x 2.5G LAN</div>
-                    <div class="compare-cell highlight-cell">2x USB4, 4x USB 3.2 Gen2 A, 1x HDMI 2.1, 1x DP 1.4, 2x 2.5G LAN, 1x OCuLink</div>
-                    <div class="compare-cell col-3-compare">1x USB4, 3x USB 3.2, 1x Type-C, 1x HDMI, 1x DP, 1x 2.5G LAN</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Tính năng đặc biệt</div>
-                    <div class="compare-cell">Vân tay, phím Copilot+, hỗ trợ Copilot+ PC</div>
-                    <div class="compare-cell highlight-cell">Cổng OCuLink chuyên dụng gắn eGPU, tản nhiệt kim loại lỏng</div>
-                    <div class="compare-cell col-3-compare">Thân máy nhôm nguyên khối, tản nhiệt buồng hơi</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Hệ điều hành</div>
-                    <div class="compare-cell highlight-cell">Win 11 Pro + Office 2021 bản quyền</div>
-                    <div class="compare-cell">Win 11 Pro bản quyền</div>
-                    <div class="compare-cell col-3-compare">Win 11 Pro bản quyền</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Nguồn cấp điện</div>
-                    <div class="compare-cell">Adapter DC 120W</div>
-                    <div class="compare-cell highlight-cell">Adapter GaN 120W (Cực kỳ nhỏ gọn)</div>
-                    <div class="compare-cell col-3-compare">Adapter DC 120W</div>
-                </div>
- 
-                <div class="compare-row">
-                    <div class="compare-cell compare-label">Bảo hành</div>
-                    <div class="compare-cell highlight-cell"><i class="ph-fill ph-shield-check" style="margin-right: 5px;"></i> 36 tháng chính hãng ASUS Việt Nam</div>
-                    <div class="compare-cell">12 tháng cửa hàng (hỗ trợ gửi hãng 6 tháng đầu)</div>
-                    <div class="compare-cell col-3-compare">12 tháng cửa hàng</div>
-                </div>
-            </div>
-            </div>
-            
-            <!-- Recently Viewed Section -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
-            <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-            <div class="template-product mt-5" style="width: 100%; margin-top: 50px;">
-                <div class="box_product_1 rounded-10 bg-white py-3 px-2 p-lg-3" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-sm);">
-                    <div class="t1 align-items-center d-flex justify-content-between mb-3">
-                        <h3 class="special-content_title font-weight-bold position-relative m-0" style="font-size: 1.3rem; font-weight: 800; color: var(--text-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
-                            <i class="ph-fill ph-clock-counter-clockwise" style="color: var(--primary); font-size: 1.5rem;"></i>
-                            <span class="position-relative">Sản phẩm đã xem</span>
-                        </h3>
-                    </div>
-                    <div class="swiper js-recent-slider p-2 pb-3 pb-lg-2" style="position: relative; overflow: hidden; list-style: none; padding: 0; z-index: 1;">
-                        <div class="swiper-wrapper js-recent-container" id="recent-products-wrapper">
-                            <!-- Dynamic cards -->
-                        </div>
-                        <!-- Navigation -->
-                        <div class="swiper-button-prev recent-prev" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
-                        <div class="swiper-button-next recent-next" style="color: var(--primary); width: 35px; height: 35px; background: white; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid var(--border-color); --swiper-navigation-size: 14px;"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const container = document.getElementById('recent-products-wrapper');
-                    if (container) {
-                        let items = [];
-                        try {
-                            items = JSON.parse(localStorage.getItem('mewRecent')) || [];
-                        } catch(e) {}
-                        
-                        if (items.length === 0) {
-                            items = [
-                                {
-                                    name: 'ASUS NUC AI 350 (PN54)',
-                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973',
-                                    price: '12.390.000đ',
-                                    url: 'demo_product.html'
-                                },
-                                {
-                                    name: 'MINISFORUM UM890 Pro',
-                                    img: '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-minisforum-um890-pro-ai-r9-8945hs-gaming-do-hoa.jpg?v=1761015394420',
-                                    price: '14.990.000đ',
-                                    url: 'demo_product.html'
-                                },
-                                {
-                                    name: 'GMKTEC NucBox K6 (Ryzen 7 7840HS)',
-                                    img: 'https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png',
-                                    price: '14.200.000đ',
-                                    url: 'demo_product.html'
-                                }
-                            ];
-                        }
-                        
-                        let html = '';
-                        items.forEach(item => {
-                            const name = item.name || item.title || item;
-                            const img = item.img || item.image || '//bizweb.dktcdn.net/thumb/large/100/543/817/products/mini-pc-asus-nuc-ai-350-pn54-ryzen-ai-7-350-gaming.jpg?v=1763971973973';
-                            const price = item.price || 'Liên hệ';
-                            const url = item.url || 'demo_product.html';
-                            
-                            html += `
-                                <div class="swiper-slide" style="height: auto;">
-                                    <div class="product-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 15px; background: white; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; box-sizing: border-box;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.05)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.boxShadow='none'">
-                                        <a href="${url}" style="text-decoration: none; display: block; margin-bottom: 10px;">
-                                            <img src="${img}" style="width: 100px; height: 100px; object-fit: contain; margin: 0 auto;">
-                                        </a>
-                                        <a href="${url}" style="text-decoration: none; color: var(--text-dark); font-weight: 700; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; height: 2.7em; margin-bottom: 8px; line-height: 1.35;">${name}</a>
-                                        <div style="color: var(--primary); font-weight: 800; font-size: 1rem; margin-bottom: 10px;">${price}</div>
-                                        <a href="${url}" class="btn-pill btn-blue" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; text-decoration: none; font-weight: 700; display: inline-block; box-shadow: none !important;">Xem chi tiết</a>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                    }
-                    updateRecentNavVisibility();
-                    swiperRecent.on('resize', updateRecentNavVisibility);
-                    swiperRecent.on('update', updateRecentNavVisibility);
-                }
-            });
-        </script>
-    </div>
-    <!-- Mobile Sidebar Drawer -->
+	/* Breadcrumb Custom */
+	.blog-layout .breadcrumbs {
+		background: transparent;
+		padding: 10px 0;
+	}
+
+	/* Layout Containers */
+	.blog-layout .container {
+		max-width: 1200px !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+
+	/* Featured Grid Box */
+	.lastest-articles > .rounded-10 {
+		background: var(--bg-white) !important;
+		border: 1px solid var(--border-color) !important;
+		box-shadow: var(--shadow-sm);
+		padding: 24px !important;
+		border-radius: 16px !important;
+	}
+
+	/* Large Featured Card (Left) */
+	.large-article-wrapper {
+		position: relative;
+		border-radius: 12px;
+		overflow: hidden;
+		height: 100%;
+		min-height: 420px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		box-shadow: var(--shadow-md);
+		border: 1px solid var(--border-color);
+	}
+
+	.large-article-wrapper .img-cover {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.large-article-wrapper:hover .img-cover {
+		transform: scale(1.05);
+	}
+
+	.large-article-wrapper::after {
+		content: '';
+		position: absolute;
+		top: 0; left: 0; right: 0; bottom: 0;
+		background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.6) 45%, rgba(15, 23, 42, 0.1) 100%);
+		z-index: 1;
+		transition: background 0.3s ease;
+	}
+
+	.large-article-wrapper:hover::after {
+		background: linear-gradient(to top, rgba(15, 23, 42, 0.98) 0%, rgba(15, 23, 42, 0.68) 50%, rgba(15, 23, 42, 0.15) 100%);
+	}
+
+	.large-article-info {
+		position: absolute;
+		bottom: 0; left: 0; right: 0;
+		padding: 28px !important;
+		z-index: 2;
+		color: #ffffff !important;
+	}
+
+	.large-article-info .tag-badge {
+		background: rgba(56, 189, 248, 0.2);
+		border: 1px solid rgba(56, 189, 248, 0.4);
+		color: #38bdf8;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.8px;
+		padding: 4px 10px;
+		border-radius: 20px;
+		margin-bottom: 12px;
+		display: inline-block;
+	}
+
+	.large-article-info .title_blo a {
+		color: #ffffff !important;
+		font-size: 1.55rem;
+		line-height: 1.35;
+		font-weight: 800;
+		text-decoration: none;
+		transition: color 0.2s ease;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.large-article-info .title_blo a:hover {
+		color: #38bdf8 !important;
+	}
+
+	.large-article-info .meta-date {
+		font-size: 0.82rem;
+		color: #cbd5e1;
+		margin-top: 8px;
+		margin-bottom: 10px;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.large-article-info .desc {
+		color: #cbd5e1;
+		font-size: 0.9rem;
+		line-height: 1.45;
+		margin-bottom: 0;
+	}
+
+	/* Sidebar Mini Article List (Right) */
+	.sidebar-articles-list {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		height: 100%;
+		justify-content: space-between;
+	}
+
+	.mini-article-item {
+		display: flex;
+		gap: 16px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid var(--border-color);
+		transition: transform 0.2s ease;
+	}
+
+	.mini-article-item:last-child {
+		border-bottom: none;
+		padding-bottom: 0;
+	}
+
+	.mini-article-item:hover {
+		transform: translateX(4px);
+	}
+
+	.mini-article-item .thumb-link {
+		width: 110px;
+		height: 75px;
+		flex-shrink: 0;
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid var(--border-color);
+		position: relative;
+	}
+
+	.mini-article-item .thumb-link img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.mini-article-item:hover .thumb-link img {
+		transform: scale(1.08);
+	}
+
+	.mini-article-info {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.mini-article-info .title {
+		font-size: 0.9rem;
+		line-height: 1.35;
+		font-weight: 700;
+		margin: 0 0 6px 0;
+	}
+
+	.mini-article-info .title a {
+		color: var(--text-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
+	.mini-article-info .title a:hover {
+		color: var(--primary);
+	}
+
+	.mini-article-info .date {
+		font-size: 0.78rem;
+		color: var(--text-gray);
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	/* Category List Widget */
+	.b_mew_cate {
+		border: 1px solid var(--border-color) !important;
+		background: var(--bg-white) !important;
+		box-shadow: var(--shadow-sm);
+		padding: 24px !important;
+		border-radius: 16px !important;
+	}
+
+	.b_mew_cate .blog-name {
+		font-size: 1.25rem !important;
+		font-weight: 800 !important;
+		border-bottom: 2px solid var(--primary);
+		padding-bottom: 8px;
+		margin-bottom: 20px;
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--text-dark);
+	}
+
+	.b_mew_cate ul.b_item {
+		display: grid !important;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 16px;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.b_mew_cate ul.b_item li {
+		display: flex;
+		align-items: center;
+		padding: 12px 16px !important;
+		border-radius: 10px;
+		background: var(--bg-gray);
+		border: 1px solid var(--border-color);
+		transition: all 0.2s ease;
+	}
+
+	.b_mew_cate ul.b_item li:hover {
+		transform: translateY(-2px);
+		border-color: var(--primary);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.b_mew_cate ul.b_item li .image {
+		width: 44px;
+		height: 44px;
+		border-radius: 8px;
+		overflow: hidden;
+		margin-right: 12px !important;
+		border: 1px solid var(--border-color);
+		flex-shrink: 0;
+	}
+
+	.b_mew_cate ul.b_item li .image img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.b_mew_cate ul.b_item li .text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.b_mew_cate ul.b_item li .text h4 {
+		font-size: 0.9rem;
+		font-weight: 700;
+		margin: 0 0 2px 0;
+		line-height: 1.3;
+	}
+
+	.b_mew_cate ul.b_item li .text h4 a {
+		color: var(--text-dark);
+		text-decoration: none;
+		transition: color 0.2s ease;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.b_mew_cate ul.b_item li .text h4 a:hover {
+		color: var(--primary);
+	}
+
+	.b_mew_cate ul.b_item li .text span {
+		font-size: 0.78rem;
+		color: var(--text-gray);
+	}
+
+	/* Main Listing Grid */
+	.grid_article .its {
+		margin-bottom: 28px;
+	}
+
+	.col-main {
+		background: var(--bg-white) !important;
+		border: 1px solid var(--border-color) !important;
+		box-shadow: var(--shadow-sm);
+		padding: 28px !important;
+		border-radius: 16px !important;
+	}
+
+	.col-main .blog-name {
+		font-size: 1.45rem !important;
+		font-weight: 800 !important;
+		margin-bottom: 24px;
+		border-bottom: 1px solid var(--border-color);
+		padding-bottom: 12px !important;
+		color: var(--text-dark);
+	}
+
+	.grid_article .custom-article-item {
+		border-radius: 12px !important;
+		overflow: hidden !important;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		background: var(--bg-white) !important;
+		border: 1px solid var(--border-color) !important;
+		box-shadow: var(--shadow-sm) !important;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+	}
+
+	.grid_article .custom-article-item:hover {
+		transform: translateY(-5px) !important;
+		box-shadow: var(--shadow-md) !important;
+		border-color: rgba(51, 133, 255, 0.3) !important;
+	}
+
+	.grid_article .custom-article-item .effect-ming {
+		position: relative;
+		display: block;
+		width: 100%;
+		aspect-ratio: 3/2;
+		overflow: hidden;
+	}
+
+	.grid_article .custom-article-item .effect-ming img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.4s ease;
+	}
+
+	.grid_article .custom-article-item:hover .effect-ming img {
+		transform: scale(1.05);
+	}
+
+	.grid_article .custom-article-item_info {
+		padding: 20px !important;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.grid_article .custom-article-item_info .tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-bottom: 10px !important;
+	}
+
+	.grid_article .custom-article-item_info .item_tags {
+		color: #ffffff !important;
+		font-size: 0.72rem !important;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		padding: 3px 8px !important;
+		text-decoration: none;
+		border-radius: 4px;
+	}
+
+	.grid_article .custom-article-item_info .title_blo {
+		font-size: 1.05rem;
+		line-height: 1.4;
+		font-weight: 700;
+		margin: 0 0 8px 0 !important;
+	}
+
+	.grid_article .custom-article-item_info .title_blo a {
+		color: var(--text-dark) !important;
+		text-decoration: none;
+		transition: color 0.2s ease !important;
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		height: 2.8em;
+	}
+
+	.grid_article .custom-article-item_info .title_blo a:hover {
+		color: var(--primary) !important;
+	}
+
+	.grid_article .custom-article-item_info .meta-date {
+		font-size: 0.78rem;
+		color: var(--text-gray);
+		margin-bottom: 12px;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.grid_article .custom-article-item_info .sum {
+		font-size: 0.86rem;
+		line-height: 1.5;
+		color: var(--text-gray);
+		text-align: justify;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		height: 4.5em;
+		margin-bottom: 0;
+	}
+
+	/* Load More / Pagination Buttons */
+	#AjaxinatePagination {
+		margin-top: 30px;
+		text-align: center;
+	}
+
+	#AjaxinatePagination a {
+		background: var(--bg-white);
+		border: 1.5px solid var(--primary);
+		color: var(--primary);
+		padding: 10px 32px !important;
+		border-radius: 30px !important;
+		transition: all 0.2s ease;
+		font-size: 0.92rem;
+		font-weight: 700;
+		text-decoration: none;
+		display: inline-block;
+		box-shadow: var(--shadow-sm);
+	}
+
+	#AjaxinatePagination a:hover {
+		background: var(--primary);
+		color: #ffffff !important;
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	/* Responsive tweaks */
+	@media (max-width: 767.98px) {
+		.large-article-wrapper {
+			min-height: 300px;
+		}
+		.large-article-info {
+			padding: 20px !important;
+		}
+		.large-article-info .title_blo a {
+			font-size: 1.25rem;
+		}
+		.sidebar-articles-list {
+			margin-top: 20px;
+			gap: 16px;
+		}
+		.b_mew_cate ul.b_item {
+			grid-template-columns: 1fr;
+		}
+		.grid_article .custom-article-item_info .title_blo a {
+			height: auto;
+		}
+		.grid_article .custom-article-item_info .sum {
+			height: auto;
+		}
+	}
+</style>
+
+<section class="blog-layout" itemscope itemtype="http://schema.org/Blog">
+	<meta itemprop="name" content="">
+	<meta itemprop="description" content="">
+
+	<div class="container mt-3 mb-3 lastest-articles">
+		<div class="rounded-10 p-3 bg-white">
+			<div class="row">
+				
+				<div class="col-md-7 col-12">
+					<div class="large-article-wrapper position-relative modal-open mb-3 mb-md-0">
+						<img src="https://bizweb.dktcdn.net/thumb/grande/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" class="img-cover position-absolute" alt="Đánh giá ASUS NUC 14 Pro">
+						<div class="large-article-info">
+							<span class="tag-badge">Đánh giá</span>
+							<h3 class="title_blo font-weight-bold mt-2 mt-md-0 mb-0 mb-md-2">
+								<a class="line_2" href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a>
+							</h3>
+							<div class="meta-date">
+								<i class="ph ph-calendar"></i> 01/06/2026
+							</div>
+							<p class="desc line_2 d-none d-md-block">Khám phá ASUS NUC 14 Pro sở hữu vi xử lý Intel Core Ultra tích hợp NPU đầu tiên, mang lại hiệu năng xử lý tác vụ AI vượt trội cùng thiết kế nhỏ gọn, nâng cao năng suất làm việc.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-5">
+					<div class="sidebar-articles-list">
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Thế hệ Mini PC AI 2025" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Thế hệ Mini PC AI 2025">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 28/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="NPU vs GPU" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="NPU vs GPU">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 20/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Gemini Đổ Bộ Google TV" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/2d8b49e4ab1b128c52c8ffa44eeb7e7f.jpg?v=1759161126157" alt="Gemini Đổ Bộ Google TV">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới">Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 15/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Windows 11 SST Fix" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/03325267e248a4f5acaa4902ac15df08.jpg?v=1759162962320" alt="Windows 11 SST Fix">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh">Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 12/05/2026
+								</span>
+							</div>
+						</div>
+						<div class="mini-article-item">
+							<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025" class="thumb-link">
+								<img src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/1000003603-asus-rog-nuc-2.jpg?v=1759229363977" alt="Đánh giá Asus ROG NUC 2025">
+							</a>
+							<div class="mini-article-info">
+								<h4 class="title">
+									<a class="line_2" href="demo_article.html" title="Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn">Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn</a>
+								</h4>
+								<span class="date">
+									<i class="ph ph-calendar"></i> 08/05/2026
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+    
+							<h3 class="title_blo font-weight-bold mt-2 mt-md-0 mb-0 mb-md-2">
+								<a class="line_2" href="" title=""></a>
+							</h3>
+							<div class="meta-date">
+								<i class="ph ph-calendar"></i> 
+							</div>
+							<p class="desc line_2 d-none d-md-block"></p>
+						</div>
+					</div>
+					
+				</div>
+				<div class="col-12 col-md-5">
+					<div class="sidebar-articles-list">
+						
+						
+						
+					</div>
+				</div>
+				
+				<div class="col-12">
+					<p class="text-center alert alert-warning mb-0">Chưa có bài viết nào trong mục này.</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="container mt-3 mb-3">
+		<div class="blog-list b_mew_cate rounded-10 p-lg-3 pl-2 pr-2 bg-white">
+			<h3 class="align-items-center blog-name d-flex font-weight-bold pt-2 pt-lg-0">
+				<img class="lazy mr-2" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/hot_ico.png?1780651888006" alt="Chủ đề Hot"> 
+				Chủ đề Hot
+			</h3>
+			<ul class="d-flex b_item flex-wrap mobi_cate mb-0 p-0">
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Tin công nghệ">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" alt="Tin công nghệ">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Tin công nghệ">Tin công nghệ</a>
+						</h4>
+						<span>12 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Đánh giá chi tiết">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" alt="Đánh giá chi tiết">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Đánh giá chi tiết">Đánh giá chi tiết</a>
+						</h4>
+						<span>8 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Hướng dẫn kỹ thuật">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_1_1.png" alt="Hướng dẫn kỹ thuật">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Hướng dẫn kỹ thuật">Hướng dẫn kỹ thuật</a>
+						</h4>
+						<span>15 bài viết</span>
+					</div>
+				</li>
+				<li class="d-flex align-items-center position-relative">
+					<div class="image">
+						<a href="#" title="Sự kiện & Khuyến mãi">
+							<img class="lazy" src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_4_1.png" alt="Sự kiện & Khuyến mãi">
+						</a>
+					</div>
+					<div class="text">
+						<h4 class="font-weight-bold">
+							<a href="#" title="Sự kiện & Khuyến mãi">Sự kiện & Khuyến mãi</a>
+						</h4>
+						<span>5 bài viết</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+    
+
+	<div class="container mt-3 mb-3 ">
+		<div class="col-main rounded-10 m_white_bg_module p-lg-3 pl-2 pr-2 pt-3 pb-3 bg-white">
+			<h1 class="blog-name font-weight-bold pb-3 pt-2 pt-lg-0">Tất cả tin tức</h1>
+			
+			<article>
+				<div class="grid_article">
+					<div class="row" id="AjaxinateContainer">
+						
+						<!-- Item 1 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/grande/100/543/817/articles/64063744dd568fdbb2011743919ea563.jpg?v=1759158346080" class="lazy d-block" alt="Đánh giá ASUS NUC 14 Pro">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn">Đánh giá ASUS NUC 14 Pro: Sức mạnh AI trong thân máy siêu nhỏ gọn</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 01/06/2026
+									</span>
+									<p class="sum">
+										Khám phá ASUS NUC 14 Pro sở hữu vi xử lý Intel Core Ultra tích hợp NPU đầu tiên, mang lại hiệu năng xử lý tác vụ AI vượt trội cùng thiết kế nhỏ gọn.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Đánh giá">Đánh giá</a>
+										<a class="item_tags badge-warning" href="#" title="ASUS NUC">ASUS NUC</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 2 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Thế hệ Mini PC AI 2025" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_3_1.png" class="lazy d-block" alt="Thế hệ Mini PC AI 2025">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra">Thế hệ Mini PC AI 2025: Những cải tiến đột phá từ chip Intel Core Ultra</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 28/05/2026
+									</span>
+									<p class="sum">
+										Điểm danh những nâng cấp phần cứng đáng giá nhất trên các thế hệ máy tính mini PC trang bị vi xử lý Intel Core Ultra thế hệ mới nhất.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Mini PC">Mini PC</a>
+										<a class="item_tags badge-warning" href="#" title="AI PC">AI PC</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 3 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="NPU vs GPU" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/100/543/817/themes/1000289/assets/collec_img_2_1.png" class="lazy d-block" alt="NPU vs GPU">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?">NPU vs GPU: Chọn cấu hình nào để học tập và làm việc với AI hiệu quả?</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 20/05/2026
+									</span>
+									<p class="sum">
+										So sánh sự khác biệt trong kiến trúc và hiệu suất tính toán giữa NPU tích hợp và GPU rời khi xử lý các mô hình ngôn ngữ lớn LLM và sinh ảnh AI.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Công nghệ">Công nghệ</a>
+										<a class="item_tags badge-warning" href="#" title="AI">AI</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 4 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Gemini Đổ Bộ Google TV" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/2d8b49e4ab1b128c52c8ffa44eeb7e7f.jpg?v=1759161126157" class="lazy d-block" alt="Gemini Đổ Bộ Google TV">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới">Nói Chuyện Với TV: Gemini Đổ Bộ Trực Tiếp Lên Google TV Thế Hệ Mới</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 15/05/2026
+									</span>
+									<p class="sum">
+										Google TV cập nhật giao diện và tính năng trợ lý ảo Gemini, cho phép bạn tìm kiếm phim bằng giọng nói tự nhiên cực kỳ mượt mà.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Google TV">Google TV</a>
+										<a class="item_tags badge-warning" href="#" title="Gemini">Gemini</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 5 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Windows 11 SST Fix" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/03325267e248a4f5acaa4902ac15df08.jpg?v=1759162962320" class="lazy d-block" alt="Windows 11 SST Fix">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh">Windows 11 SST Fix: Intel Smart Sound Technology Được Vá Lỗi Khóa Màn Hình Xanh</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 12/05/2026
+									</span>
+									<p class="sum">
+										Bản cập nhật tích hợp driver mới từ Intel đã giải quyết triệt để lỗi xung đột giữa Windows 11 và driver âm thanh Intel SST cũ gây lỗi màn hình xanh.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="Windows 11">Windows 11</a>
+										<a class="item_tags badge-warning" href="#" title="Fix Lỗi">Fix Lỗi</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Item 6 -->
+						<div class="col-12 col-sm-6 col-md-6 col-lg-4 its">
+							<div class="custom-article-item mb-4 overflow-hidden">
+								<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025" class="effect-ming">
+									<img src="assets/placeholder_1x1.png" data-src="https://bizweb.dktcdn.net/thumb/large/100/543/817/articles/1000003603-asus-rog-nuc-2.jpg?v=1759229363977" class="lazy d-block" alt="Đánh giá Asus ROG NUC 2025">
+								</a>
+								<div class="custom-article-item_info">
+									<h3 class="title_blo font-weight-bold">
+										<a href="demo_article.html" title="Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn">Đánh giá Asus ROG NUC 2025: Sức mạnh Gaming trong khung máy siêu gọn</a>
+									</h3>
+									<span class="meta-date">
+										<i class="ph ph-calendar"></i> 08/05/2026
+									</span>
+									<p class="sum">
+										Đánh giá chi tiết quái vật mini PC Asus ROG NUC thế hệ thứ 2 với GPU rời RTX 4070, chiến mượt mà các tựa game AAA nặng ở độ phân giải 2K.
+									</p>
+									<div class="tags mt-2">
+										<a class="item_tags badge-warning" href="#" title="ROG NUC">ROG NUC</a>
+										<a class="item_tags badge-warning" href="#" title="Gaming">Gaming</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div id="AjaxinatePagination">
+						<a href="#" title="Xem thêm bài viết">
+							Xem thêm bài viết
+						</a>
+					</div>
+				</div>
+			</article>
+    
+		</div>
+	</div>
+</section>
+
+<script src="assets/ajaxinate.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		if (typeof Ajaxinate === 'function') {
+			var endlessScroll = new Ajaxinate({    
+				container: '#AjaxinateContainer',    
+				pagination: '#AjaxinatePagination',    
+				method: 'click',    
+				offset: 1000,
+				loadingText: 'Đang tải...',
+				callback: function(){
+					document.querySelectorAll('.lazy').forEach((v) => {
+						if (typeof io !== 'undefined') io.observe(v);
+					})
+				}
+			});
+		}
+	})
+</script><!-- Mobile Sidebar Drawer -->
         <div class="sidebar-overlay"></div>
         <div class="sidebar-drawer" data-lenis-prevent>
             <div class="sidebar-header"
