@@ -857,3 +857,138 @@ textarea.field__input, textarea.nava-input {
         margin-bottom: 20px !important;
     }
 }
+
+/* --- 10. Comprehensive Brand Recolor Overrides (Recolor Sapo default blue to Navy/Royal Blue) --- */
+
+/* All links on the page */
+a, 
+.previous-link, 
+.previous-link *,
+.previous-link:hover,
+.previous-link:active,
+.previous-link:focus,
+.main__policy a, 
+.main__policy a:hover,
+.policy-list a,
+.policy-list a:hover,
+.policy-list__item a,
+.policy-list__item a:hover,
+.step__footer a,
+.step__footer a:hover,
+.layout-flex a,
+.layout-flex a:hover,
+.layout-flex a * {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+    transition: var(--transition) !important;
+}
+
+a:hover, 
+.previous-link:hover *,
+.main__policy a:hover,
+.policy-list a:hover,
+.policy-list__item a:hover,
+.step__footer a:hover,
+.layout-flex a:hover,
+.layout-flex a:hover * {
+    color: var(--primary-light) !important;
+}
+
+/* Coupon Apply Button */
+.field__input-btn,
+.field__input-btn-wrapper button,
+.btn {
+    background: var(--primary) !important;
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    transition: var(--transition) !important;
+}
+
+.field__input-btn:hover,
+.field__input-btn-wrapper button:hover,
+.btn:hover {
+    background: var(--primary-light) !important;
+    background-color: var(--primary-light) !important;
+    border-color: var(--primary-light) !important;
+    color: white !important;
+}
+
+/* Coupon Disabled State */
+.field__input-btn.btn--disabled,
+.field__input-btn:disabled,
+.btn:disabled,
+.btn--disabled,
+.btn[disabled],
+button:disabled,
+button[disabled] {
+    background: #cbd5e1 !important;
+    background-color: #cbd5e1 !important;
+    border-color: #cbd5e1 !important;
+    color: var(--text-gray) !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+/* Place Order / Payment Submit Button */
+.btn-checkout,
+.btn-pay,
+.btn-submit,
+button[type="submit"],
+input[type="submit"] {
+    background: linear-gradient(90deg, var(--primary), var(--primary-light)) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    border-radius: var(--radius-md) !important;
+    height: 54px !important;
+    border: none !important;
+    cursor: pointer !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 8px 20px rgba(0, 51, 102, 0.2) !important;
+}
+
+.btn-checkout:hover,
+.btn-pay:hover,
+.btn-submit:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover {
+    transform: translateY(-2px) !important;
+    background: linear-gradient(90deg, var(--primary-light), var(--primary)) !important;
+    box-shadow: 0 12px 25px rgba(0, 51, 102, 0.3) !important;
+}
+
+.btn-checkout:active,
+.btn-pay:active,
+button[type="submit"]:active {
+    transform: translateY(0) !important;
+}
+
+/* Checkboxes and Radios */
+input[type="checkbox"],
+input[type="radio"],
+.input-checkbox,
+.input-radio,
+.checkbox__input input,
+#checkpolicy {
+    accent-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Sapo Info Alert box ("Vui lòng nhập thông tin giao hàng") */
+.alert.alert--info,
+.alert-info,
+.field__message--info,
+.alert.alert-info {
+    background-color: rgba(0, 76, 153, 0.06) !important;
+    border: 1px solid var(--primary-light) !important;
+    color: var(--primary) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 14px 18px !important;
+    font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    margin-bottom: 20px !important;
+}
+
